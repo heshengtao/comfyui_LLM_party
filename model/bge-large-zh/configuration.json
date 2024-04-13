@@ -1,7 +1,0 @@
-{
-    "framework": "pytorch",
-    "task": "sentence-embedding",
-    "pipeline": {
-        "type": "sentence-embedding"
-    }
-}
