@@ -1,0 +1,11 @@
+beautifulsoup4 
+docx2txt 
+langchain 
+langchain_community 
+langchain_text_splitters 
+openai
+openpyxl
+pandas
+pytz
+Requestsxlrd
+
