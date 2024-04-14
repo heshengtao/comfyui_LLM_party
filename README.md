@@ -53,6 +53,11 @@ Configure the APIKEY using one of the following methods:
 2. Create a new Large Language Model (LLM) node and directly enter your `openai_api_key` and `base_url` in the node.
 3. Create a new Google Search Tool (google_tool) node and directly enter your `google_api_key` and `cse_id` in the node.
 
+## Next Steps Plan:
+1. More common utility nodes, such as: code interpreters, text-to-speech output, recognition of text information in images, etc.
+2. Allow LLM to internally call an LLM that is subsidiary to it, giving the assistant its own assistant.
+3. New nodes that can connect with the numerous SD nodes in comfyui, expanding the possibilities for LLM and SD, and providing related workflows.
+
 ## If my work has helped you, please buy me a coffee~~
 <div style="display:flex; justify-content:space-between;">
     <img src="img/zhifubao.jpg" style="width: 48%;" />
