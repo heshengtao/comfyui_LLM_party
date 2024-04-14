@@ -21,7 +21,7 @@
 5. 支持谷歌搜索和对单一网页的搜索，让LLM可以联网查询
 
 ## 下载
-[百度云下载](https://pan.baidu.com/s/1j6xI45V1icpfBpOyPfPjew?pwd=54co) 
+[百度云下载](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) 
 
 或使用以下方法之一安装
 ### 方法一：
