@@ -26,6 +26,8 @@
 ## 下载
 [百度云下载](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) 
 
+（推荐！包含一个环境配置完毕且包含本项目的comfyui文件夹和一个本项目文件夹，前者下载完就可以用！）
+
 或使用以下方法之一安装
 ### 方法一：
 1. 导航到 ComfyUI 根文件夹中下的`custom_nodes`子文件夹
