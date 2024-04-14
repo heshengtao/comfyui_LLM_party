@@ -53,6 +53,11 @@
 2. 新建大语言模型（LLM）节点，在节点中直接输入你的`openai_api_key`、`base_url`
 3. 新建谷歌搜索工具（google_tool）节点，在节点中直接输入你的`google_api_key`、`cse_id`
 
+## 下一步计划：
+1. 更多的常用工具节点，比如：代码解释器、文字转语音输出、识别图中文字信息等等
+2. 让LLM可以内部调用一个附属于它的LLM，让助手也有自己的助手。
+3. 更多可以与comfyui中的大量SD节点进行连接的新节点，让LLM与SD有更多的可能，并提供相关的工作流
+
 ## 如果我的工作帮助到了你，请帮我买杯咖啡吧~~
 <div style="display:flex; justify-content:space-between;">
     <img src="img/zhifubao.jpg" style="width: 48%;" />
