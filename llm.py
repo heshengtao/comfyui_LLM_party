@@ -6,7 +6,7 @@ import sys
 import time
 import traceback
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import FAISS 
+from langchain_community.vectorstores import FAISS
 import openai
 from .config import config_path,current_dir_path,load_api_keys,bge_embeddings
 from .tools.load_file import load_file
@@ -16,6 +16,7 @@ from .tools.get_weather import get_weather,weather_tool
 from .tools.search_web import search_web,google_tool
 from .tools.check_web import check_web,check_web_tool
 from .tools.file_conbine import file_conbine,file_conbine_plus
+from .tools.dialog import start_dialog,end_dialog
 
 
 _TOOL_HOOKS=[
@@ -222,6 +223,8 @@ NODE_CLASS_MAPPINGS = {
     "check_web_tool":check_web_tool,
     "file_conbine":file_conbine,
     "file_conbine_plus":file_conbine_plus,
+    "start_dialog":start_dialog,
+    "end_dialog":end_dialog,
 }
 
 
@@ -236,6 +239,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "check_web_tool":"检视网页工具(check_web_tool)",
     "file_conbine":"文件组合（file_conbine）",
     "file_conbine_plus":"超大文件组合（file_conbine_plus）",
+    "start_dialog":"开始对话（start_dialog）",
+    "end_dialog":"结束对话（end_dialog）",
 }
 
 if __name__ == '__main__':
