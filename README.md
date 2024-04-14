@@ -18,7 +18,7 @@
    - “start_dialog”: “Start Dialogue”
    - “end_dialog”: “End Dialogue”
 2. Supports OpenAI API driving and custom base_url, allowing the use of a proxy API to drive LLM nodes.
-3. Supports importing various file types into LLM nodes. With RAG technology, LLM can answer questions based on file content. Currently supported file types include: .docx, .xlsx, .csv, .txt, “.py”, “.js”, “.java”, “.c”, “.cpp”, “.html”, “.css”, “.sql”, “.r”, “.swift”
+3. Supports importing various file types into LLM nodes. With RAG technology, LLM can answer questions based on file content. Currently supported file types include: .docx, .xlsx, .csv, .txt, .py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
 4. The tool combine node allows multiple tools to be passed into the LLM node, and the file combine node allows multiple files to be passed into the LLM node.
 5. Supports Google search and single web page search, enabling LLM to perform online queries.
 6. Through the start_dialog node and the end_dialog node, a loopback link can be established between two LLMs, meaning the two LLMs act as each other’s input and output!
