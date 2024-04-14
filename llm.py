@@ -230,7 +230,7 @@ NODE_CLASS_MAPPINGS = {
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "LLM": "大语言模型（LLM）",
-    "load_file": "从LLM/file加载文件（load_file from LLM/file）",
+    "load_file": "从comfyui_LLM_party/file加载文件（load_file from comfyui_LLM_party/file）",
     "tool_conbine":"工具组合（tool_conbine）",
     "tool_conbine_plus":"超大工具组合（tool_conbine_plus）",
     "time_tool": "时间工具（time_tool）",
