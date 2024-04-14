@@ -51,6 +51,6 @@
 
 ## 如果我的工作帮助到了你，请帮我买杯咖啡吧~~
 <div style="display:flex; justify-content:space-between;">
-    <img src="img/wechat.jpg" style="width: 48%;" />
     <img src="img/zhifubao.jpg" style="width: 48%;" />
+    <img src="img/wechat.jpg" style="width: 48%;" />
 </div>
