@@ -39,6 +39,7 @@ Or install using one of the following methods:
 ## Environment Deployment
 1. Navigate to the `comfyui_LLM_party` project folder.
 2. Enter `pip install -r requirements.txt` in the terminal to deploy the third-party libraries required by the project into the comfyui environment. Please ensure you are installing within the comfyui environment and pay attention to any `pip` errors in the terminal.
+3. If you are using the comfyui launcher, you need to enter `path_in_launcher_configuration\python_embeded\python.exe path_in_launcher_configuration\python_embeded\Scripts\pip.exe install -r requirements.txt` in the terminal to install. The `python_embeded` folder is usually at the same level as your `ComfyUI` folder.
 
 ## Configuration
 Configure the APIKEY using one of the following methods:
