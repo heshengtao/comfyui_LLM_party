@@ -54,7 +54,9 @@ class check_web_tool:
                 
             },
             "optional": {
+                "web_url": ("STRING",{
 
+                }),
             }
         }
     
@@ -69,23 +71,42 @@ class check_web_tool:
 
 
 
-    def read_web(self):   
-        output = [{
-    "type": "function",
-    "function": {
-        "name": "check_web",
-        "description": "通过关键词搜索一个给定url的网页上的信息。",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "url": {"type": "string", "description": "要被搜索的网页的URL"},
-                "keyword": {"type": "string", "description": "需要搜索的关键词，可以是多个词语，多个词语之间用空格隔开"},
+    def read_web(self,web_url=None):   
+        if web_url is None and web_url !="":
+            output = [{
+        "type": "function",
+        "function": {
+            "name": "check_web",
+            "description": "通过关键词搜索一个给定url的网页上的信息。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "url": {"type": "string", "description": "要被搜索的网页的URL，默认网址为"+web_url},
+                    "keyword": {"type": "string", "description": "需要搜索的关键词，可以是多个词语，多个词语之间用空格隔开"},
 
-            },
-            "required": ["url","keyword"]
+                },
+                "required": ["url","keyword"]
+            }
         }
-    }
-}]
+    }]
+            
+        else:
+            output = [{
+        "type": "function",
+        "function": {
+            "name": "check_web",
+            "description": "通过关键词搜索一个给定url的网页上的信息。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "url": {"type": "string", "description": "要被搜索的网页的URL"},
+                    "keyword": {"type": "string", "description": "需要搜索的关键词，可以是多个词语，多个词语之间用空格隔开"},
+
+                },
+                "required": ["url","keyword"]
+            }
+        }
+    }]
 
         out=json.dumps(output, ensure_ascii=False)
         return (out,)
