@@ -18,7 +18,7 @@
    -  "start_dialog":"开始对话（start_dialog）"
    -  "end_dialog":"结束对话（end_dialog）"
 2. 支持openai的API驱动，并支持自定义base_url，可以使用中转API驱动LLM节点
-3. 支持多种类型的文件类型导入LLM节点，通过RAG技术让LLM可以针对文件内容作答，目前支持以下文件类型：.docx、.xlsx、.csv、.txt、".py", ".js", ".java", ".c", ".cpp", ".html", ".css", ".sql", ".r", ".swift"
+3. 支持多种类型的文件类型导入LLM节点，通过RAG技术让LLM可以针对文件内容作答，目前支持以下文件类型：.docx、.xlsx、.csv、.txt、.py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
 4. 通过工具组合节点可以将多个工具传入LLM节点，通过文件组合节点可以将多个文件传入LLM节点
 5. 支持谷歌搜索和对单一网页的搜索，让LLM可以联网查询
 6. 可以通过start_dialog节点和end_dialog节点，实现两个LLM之间的回环链接，即两个LLM互相为对方的输入和输出！
