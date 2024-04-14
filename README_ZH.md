@@ -59,7 +59,7 @@
 2. 让LLM可以内部调用一个附属于它的LLM，让助手也有自己的助手。
 3. 更多可以与comfyui中的大量SD节点进行连接的新节点，让LLM与SD有更多的可能，并提供相关的工作流
 
-## 如果我的工作帮助到了你，请帮我买杯咖啡吧~~
+## 如果我的工作给您带来了价值，请考虑请我喝一杯咖啡吧！您的支持不仅为项目注入活力，也温暖了创作者的心。☕💖 每一杯都有意义！
 <div style="display:flex; justify-content:space-between;">
     <img src="img/zhifubao.jpg" style="width: 48%;" />
     <img src="img/wechat.jpg" style="width: 48%;" />
