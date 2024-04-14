@@ -15,10 +15,16 @@ if not os.path.exists(embeddings_dir):
 
 # 如果模型不存在，则克隆GitHub仓库
 if not os.listdir(embeddings_path):
-    print("正在从GitHub克隆模型...")
-    model_git_url = "https://github.com/jsonzhuwei/bge-large-zh.git"  # 模型的GitHub仓库链接
-    subprocess.run(["git", "clone", model_git_url, embeddings_path])
-    print("模型克隆完成。")
+    try:
+        print("正在从GitHub克隆模型...")
+        model_git_url = "https://github.com/jsonzhuwei/bge-large-zh.git"  # 模型的GitHub仓库链接
+        subprocess.run(["git", "clone", model_git_url, embeddings_path])
+        print("模型克隆完成。")
+    except:
+        print("正在从modelscope克隆模型...")
+        model_git_url = "https://www.modelscope.cn/AI-ModelScope/bge-large-zh.git"
+        subprocess.run(["git", "clone", model_git_url, embeddings_path])
+        print("模型克隆完成。")
 else:
     print("模型已存在。")
 
