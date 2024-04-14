@@ -4,7 +4,9 @@
 [comfyui](https://github.com/comfyanonymous/ComfyUI)是一个极为简约的UI界面，主要用于AI绘图等基于SD模型的工作流搭建。本项目希望基于comfyui开发一套完整的用于LLM工作流搭建的节点库。可以让用户更便捷快速地搭建自己的LLM工作流，并且更方便地接入自己的SD工作流中。
 
 ## 下载
-可以使用以下方法之一安装
+[百度云下载](https://pan.baidu.com/s/1j6xI45V1icpfBpOyPfPjew?pwd=54co) 
+
+或使用以下方法之一安装
 ### 方法一：
 1. 导航到 ComfyUI 根文件夹中下的`custom_nodes`子文件夹
 2. 使用克隆此存储库。`git clone https://github.com/heshengtao/comfyui_LLM_party.git`
