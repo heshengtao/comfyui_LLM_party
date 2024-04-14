@@ -21,5 +21,10 @@
 可以使用以下方法之一配置APIKEY
 ### 方法一：
 1. 打开`comfyui_LLM_party`的项目文件夹下的`config.ini`文件
-2. 在`config.ini`填入你的`openai_api_key`、`base_url`
-3. 如果你要使用谷歌搜索工具，在`config.ini`填入你的`google_api_key`、`cse_id`
+2. 在`config.ini`输入你的`openai_api_key`、`base_url`
+3. 如果你要使用谷歌搜索工具，在`config.ini`输入你的`google_api_key`、`cse_id`
+
+### 方法二：
+1. 打开comfyui
+2. 新建大语言模型（LLM）节点，在节点中直接输入你的`openai_api_key`、`base_url`
+3. 新建谷歌搜索工具（google_tool）节点，在节点中直接输入你的`google_api_key`、`cse_id`
