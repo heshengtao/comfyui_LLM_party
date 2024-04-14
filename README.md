@@ -6,7 +6,7 @@
 ## Features
 1. This project includes the following nodes:
    - “LLM”: “Large Language Model (LLM)”
-   - “load_file”: “Load files from LLM/file”
+   - “load_file”: “Load files from comfyui_LLM_party/file”
    - “tool_combine”: “Tool Combine”
    - “tool_combine_plus”: “Super Tool Combine”
    - “time_tool”: “Time Tool”
