@@ -5,5 +5,10 @@
 ## 下载
 可以使用以下方法之一安装
 ### 方式一：
-1.导航到 ComfyUI 根文件夹中下的custom_nodes子文件夹。
-2.使用 克隆此存储库。git clone https://github.com/heshengtao/comfyui_LLM_party.git
+1.导航到 ComfyUI 根文件夹中下的`custom_nodes`子文件夹。
+2.使用克隆此存储库。`git clone https://github.com/heshengtao/comfyui_LLM_party.git`
+
+### 方式二：
+1.点击右上角的`CODE`
+2.点击`download zip`
+3.将下载的压缩包解压到ComfyUI 根文件夹中下的`custom_nodes`子文件夹中。
