@@ -51,4 +51,4 @@
 
 ## 如果我的工作帮助到了你，请帮我买杯咖啡吧~~
 ![图片](img/wechat.jpg) 
-![图片](img/zhifuabao.jpg)
+![图片](img/zhifubao.jpg)
