@@ -51,6 +51,6 @@
 
 ## 如果我的工作帮助到了你，请帮我买杯咖啡吧~~
 <center class="half">
-    <img src="img/wechat.jpg" width="50%"/>
-    <img src="img/zhifubao.jpg" width="50%"/>
+    <img src="img/wechat.jpg" width="40%"/>
+    <img src="img/zhifubao.jpg" width="40%"/>
 </center>
