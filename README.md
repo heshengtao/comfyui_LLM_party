@@ -48,3 +48,6 @@
 1. 打开comfyui界面
 2. 新建大语言模型（LLM）节点，在节点中直接输入你的`openai_api_key`、`base_url`
 3. 新建谷歌搜索工具（google_tool）节点，在节点中直接输入你的`google_api_key`、`cse_id`
+
+## 如果我的工作帮助到了你，请帮我买杯咖啡吧~~
+
