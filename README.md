@@ -35,7 +35,7 @@
 
 ## 环境部署
 1. 导航到`comfyui_LLM_party`的项目文件夹
-2. 在终端输入`pip install -r requirements.txt`将本项目需要的第三方库部署到comfyui的环境中
+2. 在终端输入`pip install -r requirements.txt`将本项目需要的第三方库部署到comfyui的环境中。请注意你是否在comfyui的环境进行安装，并关注终端中的`pip`报错
 
 ## 配置
 可以使用以下方法之一配置APIKEY
