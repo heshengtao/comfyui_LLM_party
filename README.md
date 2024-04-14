@@ -50,5 +50,7 @@
 3. 新建谷歌搜索工具（google_tool）节点，在节点中直接输入你的`google_api_key`、`cse_id`
 
 ## 如果我的工作帮助到了你，请帮我买杯咖啡吧~~
-![图片](img/wechat.jpg) 
-![图片](img/zhifubao.jpg)
+<center class="half">
+    <img src="img/wechat.jpg" width="50%"/>
+    <img src="img/zhifubao.jpg" width="50%"/>
+</center>
