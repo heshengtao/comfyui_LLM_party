@@ -24,9 +24,7 @@
 6. 可以通过start_dialog节点和end_dialog节点，实现两个LLM之间的回环链接，即两个LLM互相为对方的输入和输出！
 
 ## 下载
-[百度云下载](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) 
-
-（推荐！包含一个环境配置完毕且包含本项目的comfyui文件夹和一个本项目文件夹，前者下载完就可以用！）
+[百度云下载](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) （推荐！包含一个环境配置完毕且包含本项目的comfyui文件夹和一个本项目文件夹，前者下载完就可以用！）
 
 或使用以下方法之一安装
 ### 方法一：
