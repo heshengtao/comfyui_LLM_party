@@ -24,7 +24,7 @@
 6. Through the start_dialog node and the end_dialog node, a loopback link can be established between two LLMs, meaning the two LLMs act as each other’s input and output!
 
 ## Download
-[Baidu Cloud Download](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) 
+[Baidu Cloud Download](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) (Recommended! Includes a ‘comfyui’ folder with a complete environment setup and a project folder for this project, the former can be used immediately after download!)
 
 Or install using one of the following methods:
 ### Method One:
