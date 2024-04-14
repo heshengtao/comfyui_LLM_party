@@ -59,7 +59,7 @@ Configure the APIKEY using one of the following methods:
 2. Allow LLM to internally call an LLM that is subsidiary to it, giving the assistant its own assistant.
 3. New nodes that can connect with the numerous SD nodes in comfyui, expanding the possibilities for LLM and SD, and providing related workflows.
 
-## If my work has helped you, please buy me a coffee~~
+## If my work has brought value to your day, consider fueling it with a coffee! Your support not only energizes the project but also warms the heart of the creator. ☕💖 Every cup makes a difference!
 <div style="display:flex; justify-content:space-between;">
     <img src="img/zhifubao.jpg" style="width: 48%;" />
     <img src="img/wechat.jpg" style="width: 48%;" />
