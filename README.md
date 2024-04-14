@@ -5,17 +5,20 @@
 
 ## 特征
 1. 本项目包含如下节点
-   -  "LLM": "大语言模型（LLM）",
-   -  "load_file": "从LLM/file加载文件（load_file from LLM/file）",
-   -  "tool_conbine":"工具组合（tool_conbine）",
-   -  "tool_conbine_plus":"超大工具组合（tool_conbine_plus）",
-   -  "time_tool": "时间工具（time_tool）",
-   -  "weather_tool":"天气工具（weather_tool）",
-   -  "google_tool":"谷歌搜索工具（google_tool）",
-   -  "check_web_tool":"检视网页工具(check_web_tool)",
-   -  "file_conbine":"文件组合（file_conbine）",
-   -  "file_conbine_plus":"超大文件组合（file_conbine_plus）",
-3. 支持openai的API驱动，并支持自定义base_url，可以使用中转API驱动LLM节点
+   -  "LLM": "大语言模型（LLM）"
+   -  "load_file": "从LLM/file加载文件（load_file from LLM/file）"
+   -  "tool_conbine":"工具组合（tool_conbine）"
+   -  "tool_conbine_plus":"超大工具组合（tool_conbine_plus）"
+   -  "time_tool": "时间工具（time_tool）"
+   -  "weather_tool":"天气工具（weather_tool）"
+   -  "google_tool":"谷歌搜索工具（google_tool）"
+   -  "check_web_tool":"检视网页工具(check_web_tool)"
+   -  "file_conbine":"文件组合（file_conbine）"
+   -  "file_conbine_plus":"超大文件组合（file_conbine_plus）"
+2. 支持openai的API驱动，并支持自定义base_url，可以使用中转API驱动LLM节点
+3. 支持多种类型的文件类型导入LLM节点，目前支持以下文件类型：.docx、.xlsx、.csv、.txt、".py", ".js", ".java", ".c", ".cpp", ".html", ".css", ".sql", ".r", ".swift"，通过RAG技术让LLM可以针对文件内容作答
+4. 通过工具组合节点可以将多个工具传入LLM节点，通过文件组合节点可以将多个文件传入LLM节点
+5. 支持谷歌搜索和对单一网页的搜索，让LLM可以联网查询
 
 ## 下载
 [百度云下载](https://pan.baidu.com/s/1j6xI45V1icpfBpOyPfPjew?pwd=54co) 
