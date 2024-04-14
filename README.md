@@ -3,6 +3,20 @@
 ## 简介
 [comfyui](https://github.com/comfyanonymous/ComfyUI)是一个极为简约的UI界面，主要用于AI绘图等基于SD模型的工作流搭建。本项目希望基于comfyui开发一套完整的用于LLM工作流搭建的节点库。可以让用户更便捷快速地搭建自己的LLM工作流，并且更方便地接入自己的SD工作流中。
 
+## 特征
+1. 本项目包含如下节点
+   -  "LLM": "大语言模型（LLM）",
+   -  "load_file": "从LLM/file加载文件（load_file from LLM/file）",
+   -  "tool_conbine":"工具组合（tool_conbine）",
+   -  "tool_conbine_plus":"超大工具组合（tool_conbine_plus）",
+   -  "time_tool": "时间工具（time_tool）",
+   -  "weather_tool":"天气工具（weather_tool）",
+   -  "google_tool":"谷歌搜索工具（google_tool）",
+   -  "check_web_tool":"检视网页工具(check_web_tool)",
+   -  "file_conbine":"文件组合（file_conbine）",
+   -  "file_conbine_plus":"超大文件组合（file_conbine_plus）",
+3. 支持openai的API驱动，并支持自定义base_url，可以使用中转API驱动LLM节点
+
 ## 下载
 [百度云下载](https://pan.baidu.com/s/1j6xI45V1icpfBpOyPfPjew?pwd=54co) 
 
