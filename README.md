@@ -14,5 +14,6 @@
 3. 将下载的压缩包解压到ComfyUI 根文件夹中下的`custom_nodes`子文件夹中。
 
 ## 环境部署
-导航到`comfyui_LLM_party`的项目文件夹，在终端输入`pip install -r requirements.txt`将本项目需要的第三方库部署到comfyui的环境中。
+1. 导航到`comfyui_LLM_party`的项目文件夹
+2. 在终端输入`pip install -r requirements.txt`将本项目需要的第三方库部署到comfyui的环境中。
 
