@@ -5,7 +5,7 @@
 
 ## 使用说明
 1. [【ComfyUI×LLM】手把手教你如何搭建积木化智能体（超简单！）](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
-2. [怎么使用节点](how_to_use_nodes_ZH)
+2. [怎么使用节点](how_to_use_nodes_ZH.md)
 ## 特征
 1. 本项目包含如下节点，你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到这些节点
    -  "LLM": "大语言模型（LLM）"
