@@ -24,10 +24,10 @@
 1. 用于查询时间和天气，time_tool节点可以更改查询的默认时区，weather_tool节点未来也会增加改变默认地区的选项
 2. 未来会有更多的像这样的实用节点加入到本项目中
 
-#load_file from comfyui_LLM_party/file节点
+## load_file from comfyui_LLM_party/file节点
 1. 读取文件的路径在comfyui_LLM_party/file，可以将你要读取的文件放倒这个路径下，然后把文件名填入该节点即可
 2. 输出是一个字符串，包含了文件中所有的文字信息
 
-# file_conbine节点和tool_conbine节点
+## file_conbine节点和tool_conbine节点
 1. 用于将多个文件节点或者多个工具节点结合成一个，再输入到大模型中
 2. 这些combine节点可以套娃使用，但是tool_conbine和file_conbine不能混用，tool节点的输出都是一个特定格式的json。
