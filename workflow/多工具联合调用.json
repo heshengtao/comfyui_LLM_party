@@ -1,0 +1,440 @@
+{
+  "last_node_id": 77,
+  "last_link_id": 95,
+  "nodes": [
+    {
+      "id": 50,
+      "type": "LLM",
+      "pos": [
+        700,
+        330
+      ],
+      "size": [
+        400,
+        290
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 92,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            66
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "label": "history"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的智能助手",
+        "请帮我查一下现在的时间、北京的天气",
+        "gpt-3.5-turbo-1106",
+        0.7,
+        "disable",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 73,
+      "type": "tool_conbine_plus",
+      "pos": [
+        330,
+        340
+      ],
+      "size": [
+        315,
+        274
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tool1",
+          "type": "STRING",
+          "link": 90,
+          "widget": {
+            "name": "tool1"
+          }
+        },
+        {
+          "name": "tool2",
+          "type": "STRING",
+          "link": 91,
+          "widget": {
+            "name": "tool2"
+          }
+        },
+        {
+          "name": "tool3",
+          "type": "STRING",
+          "link": 93,
+          "widget": {
+            "name": "tool3"
+          }
+        },
+        {
+          "name": "tool4",
+          "type": "STRING",
+          "link": 94,
+          "widget": {
+            "name": "tool4"
+          }
+        },
+        {
+          "name": "tool5",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tool5"
+          }
+        },
+        {
+          "name": "tool6",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tool6"
+          }
+        },
+        {
+          "name": "tool7",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tool7"
+          }
+        },
+        {
+          "name": "tool8",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tool8"
+          }
+        },
+        {
+          "name": "tool9",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tool9"
+          }
+        },
+        {
+          "name": "tool10",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tool10"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            92
+          ],
+          "shape": 3,
+          "label": "tools",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "tool_conbine_plus"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 15,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1140,
+        330
+      ],
+      "size": [
+        400,
+        280
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 66,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "北京市的天气预报如下：\n- 今天（2024年4月15日）：白天晴，夜晚晴，最高气温24℃，最低气温10℃，西北风1-3级。\n- 明天（2024年4月16日）：白天晴，夜晚晴，最高气温26℃，最低气温13℃，西南风1-3级。\n- 后天（2024年4月17日）：白天晴，夜晚晴，最高气温27℃，最低气温14℃，南风1-3级。\n- 大后天（2024年4月18日）：白天晴，夜晚多云，最高气温25℃，最低气温12℃，东南风1-3级。"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 69,
+      "type": "google_tool",
+      "pos": [
+        -80,
+        240
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            90
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "google_tool"
+      },
+      "widgets_values": [
+        "",
+        ""
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 74,
+      "type": "time_tool",
+      "pos": [
+        -90,
+        380
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            91
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "time_tool"
+      },
+      "widgets_values": [
+        "Asia/Shanghai"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 75,
+      "type": "check_web_tool",
+      "pos": [
+        -90,
+        490
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            93
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "check_web_tool"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 76,
+      "type": "weather_tool",
+      "pos": [
+        0,
+        600
+      ],
+      "size": {
+        "0": 210,
+        "1": 26
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            94
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "weather_tool"
+      },
+      "color": "#332922",
+      "bgcolor": "#593930"
+    }
+  ],
+  "links": [
+    [
+      66,
+      50,
+      0,
+      15,
+      0,
+      "STRING"
+    ],
+    [
+      90,
+      69,
+      0,
+      73,
+      0,
+      "STRING"
+    ],
+    [
+      91,
+      74,
+      0,
+      73,
+      1,
+      "STRING"
+    ],
+    [
+      92,
+      73,
+      0,
+      50,
+      0,
+      "STRING"
+    ],
+    [
+      93,
+      75,
+      0,
+      73,
+      2,
+      "STRING"
+    ],
+    [
+      94,
+      76,
+      0,
+      73,
+      3,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

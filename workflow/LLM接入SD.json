@@ -1,0 +1,197 @@
+{
+  "last_node_id": 80,
+  "last_link_id": 98,
+  "nodes": [
+    {
+      "id": 15,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1140,
+        330
+      ],
+      "size": {
+        "0": 400,
+        "1": 280
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 66,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            98
+          ],
+          "shape": 6,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "best quality, masterpiece, ultra-detailed, illustration, detailed light, an extremely delicate and beautiful, a girl, beautiful detailed eyes, stars in the eyes, messy floating hair, colored inner hair, Starry sky adorns hair, depth of field, wearing a pink hat, white hair, holding a lollipop"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 80,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1590,
+        340
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null,
+          "label": "CLIP",
+          "slot_index": 0
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 98,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 50,
+      "type": "LLM",
+      "pos": [
+        700,
+        330
+      ],
+      "size": {
+        "0": 400,
+        "1": 290
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            66
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "label": "history"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的智能助手，你可以为用户生成类似于以下格式的图片生成提示词：{{best quality}}, {{masterpiece}}, {{ultra-detailed}}, {illustration}, {detailed light}, {an extremely delicate and beautiful}, a girl, {beautiful detailed eyes}, stars in the eyes, messy floating hair, colored inner hair, Starry sky adorns hair, depth of field\n为了保证图片生成的高质量，一般以{{best quality}}, {{masterpiece}}, {{ultra-detailed}}开头",
+        "请帮我写一个图片提示词，我要画一个戴粉色帽子的白发美少女拿着一个棒棒糖",
+        "gpt-3.5-turbo-1106",
+        0.7,
+        "disable",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    }
+  ],
+  "links": [
+    [
+      66,
+      50,
+      0,
+      15,
+      0,
+      "STRING"
+    ],
+    [
+      98,
+      15,
+      0,
+      80,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
