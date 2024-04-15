@@ -7,7 +7,7 @@
 [Building a Modular AI with ComfyUI×LLM: A Step-by-Step Tutorial (Super Easy!)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
 
 ## Features
-1. This project includes the following nodes:
+1. This project contains the following nodes. You can right-click in the ComfyUI interface and select `llm` from the context menu to find these nodes:
    - “LLM”: “Large Language Model (LLM)”
    - “load_file”: “Load files from comfyui_LLM_party/file”
    - “tool_combine”: “Tool Combine”
