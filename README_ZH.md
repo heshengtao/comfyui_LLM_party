@@ -7,7 +7,7 @@
 [【ComfyUI×LLM】手把手教你如何搭建积木化智能体（超简单！）](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
 
 ## 特征
-1. 本项目包含如下节点
+1. 本项目包含如下节点，你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到这些节点
    -  "LLM": "大语言模型（LLM）"
    -  "load_file": "从comfyui_LLM_party/file加载文件（load_file from comfyui_LLM_party/file）"
    -  "tool_conbine":"工具组合（tool_conbine）"
