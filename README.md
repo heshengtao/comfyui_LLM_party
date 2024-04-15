@@ -5,6 +5,7 @@
 
 # User Guide
 [Building a Modular AI with ComfyUI×LLM: A Step-by-Step Tutorial (Super Easy!)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
+[how to use nodes](how_to_use_nodes.md)
 
 ## Features
 1. This project contains the following nodes. You can right-click in the ComfyUI interface and select `llm` from the context menu to find these nodes:
