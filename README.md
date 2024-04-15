@@ -4,8 +4,8 @@
 [comfyui](https://github.com/comfyanonymous/ComfyUI)is an extremely minimalist UI interface, primarily used for AI drawing and other workflows based on the SD model. This project aims to develop a complete set of nodes for LLM workflow construction based on comfyui. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.
 
 # User Guide
-[Building a Modular AI with ComfyUI×LLM: A Step-by-Step Tutorial (Super Easy!)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
-[how to use nodes](how_to_use_nodes.md)
+1. [Building a Modular AI with ComfyUI×LLM: A Step-by-Step Tutorial (Super Easy!)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
+2. [how to use nodes](how_to_use_nodes.md)
 
 ## Features
 1. This project contains the following nodes. You can right-click in the ComfyUI interface and select `llm` from the context menu to find these nodes:
