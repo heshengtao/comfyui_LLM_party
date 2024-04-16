@@ -25,7 +25,7 @@
 2. 未来会有更多的像这样的实用节点加入到本项目中
 
 ## load_file from comfyui_LLM_party/file节点
-1. 读取文件的路径在comfyui_LLM_party/file，可以将你要读取的文件放倒这个路径下，然后把文件名填入该节点即可
+1. 读取文件的路径在comfyui_LLM_party/file，可以将你要读取的文件放到这个路径下，然后把文件名填入该节点即可
 2. 输出是一个字符串，包含了文件中所有的文字信息
 
 ## file_conbine节点和tool_conbine节点
