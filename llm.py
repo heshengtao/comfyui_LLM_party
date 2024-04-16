@@ -10,13 +10,14 @@ from langchain_community.vectorstores import FAISS
 import openai
 from .config import config_path,current_dir_path,load_api_keys,bge_embeddings
 from .tools.load_file import load_file
-from .tools.tool_conbine import tool_conbine,tool_conbine_plus
+from .tools.tool_combine import tool_combine,tool_combine_plus
 from .tools.get_time import get_time,time_tool
 from .tools.get_weather import get_weather,weather_tool
 from .tools.search_web import search_web,google_tool
 from .tools.check_web import check_web,check_web_tool
-from .tools.file_conbine import file_conbine,file_conbine_plus
+from .tools.file_combine import file_combine,file_combine_plus
 from .tools.dialog import start_dialog,end_dialog
+from .tools.interpreter import interpreter,interpreter_tool
 
 
 _TOOL_HOOKS=[
@@ -24,6 +25,7 @@ _TOOL_HOOKS=[
     "get_weather",
     "search_web",
     "check_web",
+    "interpreter",
 ]
 
 def dispatch_tool(tool_name: str, tool_params: dict) -> str:
@@ -215,32 +217,34 @@ class LLM:
 NODE_CLASS_MAPPINGS = {
     "LLM": LLM,
     "load_file":load_file,
-    "tool_conbine":tool_conbine,
-    "tool_conbine_plus":tool_conbine_plus,
+    "tool_combine":tool_combine,
+    "tool_combine_plus":tool_combine_plus,
     "time_tool": time_tool,
     "weather_tool":weather_tool,
     "google_tool":google_tool,
     "check_web_tool":check_web_tool,
-    "file_conbine":file_conbine,
-    "file_conbine_plus":file_conbine_plus,
+    "file_combine":file_combine,
+    "file_combine_plus":file_combine_plus,
     "start_dialog":start_dialog,
     "end_dialog":end_dialog,
+    "interpreter_tool":interpreter_tool,
 }
 
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "LLM": "大语言模型（LLM）",
     "load_file": "从comfyui_LLM_party/file加载文件（load_file from comfyui_LLM_party/file）",
-    "tool_conbine":"工具组合（tool_conbine）",
-    "tool_conbine_plus":"超大工具组合（tool_conbine_plus）",
+    "tool_combine":"工具组合（tool_combine）",
+    "tool_combine_plus":"超大工具组合（tool_combine_plus）",
     "time_tool": "时间工具（time_tool）",
     "weather_tool":"天气工具（weather_tool）",
     "google_tool":"谷歌搜索工具（google_tool）",
     "check_web_tool":"检视网页工具(check_web_tool)",
-    "file_conbine":"文件组合（file_conbine）",
-    "file_conbine_plus":"超大文件组合（file_conbine_plus）",
+    "file_combine":"文件组合（file_combine）",
+    "file_combine_plus":"超大文件组合（file_combine_plus）",
     "start_dialog":"开始对话（start_dialog）",
     "end_dialog":"结束对话（end_dialog）",
+    "interpreter_tool":"解释器工具（interpreter_tool）",
 }
 
 if __name__ == '__main__':
