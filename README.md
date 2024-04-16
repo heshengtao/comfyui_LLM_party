@@ -9,11 +9,12 @@
 ## Features
 1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
 2. Supports OpenAI API driving and custom base_url, allowing the use of a proxy API to drive LLM nodes.If you are using other large model interfaces, you can convert them to the OpenAI API format using [openai-style-api](https://github.com/tian-minghui/openai-style-api). If you are using local large models, you can run `python3 openai_api.py` or `python3 api_server.py` in the project folder of those models to convert them to the OpenAI API format.Attention! Some local large models (such as GLM3) do not have the ‘tools’ parameter. You need to switch the ‘is_tools_in_sys_prompt’ of the LLM node to enable, so that ‘tools’ will be directly entered into the system prompt.
-3. Supports importing various file types into LLM nodes. With RAG technology, LLM can answer questions based on file content. Currently supported file types include: .docx, .xlsx, .csv, .txt, .py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
-4. The tool combine node allows multiple tools to be passed into the LLM node, and the file combine node allows multiple files to be passed into the LLM node.
-5. Supports Google search and single web page search, enabling LLM to perform online queries.
-6. Through the start_dialog node and the end_dialog node, a loopback link can be established between two LLMs, meaning the two LLMs act as each other’s input and output!
-7. It is recommended to use the show_text node from [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts) in conjunction with the LLM node for output display.
+3. The base_url must end with `/v1/`.
+4. Supports importing various file types into LLM nodes. With RAG technology, LLM can answer questions based on file content. Currently supported file types include: .docx, .xlsx, .csv, .txt, .py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
+5. The tool combine node allows multiple tools to be passed into the LLM node, and the file combine node allows multiple files to be passed into the LLM node.
+6. Supports Google search and single web page search, enabling LLM to perform online queries.
+7. Through the start_dialog node and the end_dialog node, a loopback link can be established between two LLMs, meaning the two LLMs act as each other’s input and output!
+8. It is recommended to use the show_text node from [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts) in conjunction with the LLM node for output display.
 
 ## Download
 [Baidu Cloud Download](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) (Recommended! Includes a compressed package of comfyui with the environment setup completed, and a folder for this project. After downloading the former, there’s no need for further environment configuration!)
