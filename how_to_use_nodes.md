@@ -1,7 +1,7 @@
 # **Node Usage Instructions**
 
-## Large Model Nodes
-1. Large model nodes allow customization of model name, temperature, API_KEY, and base_url. Currently, they only support OpenAI-type API calls.
+## LLM Nodes
+1. LLM nodes allow customization of model name, temperature, API_KEY, and base_url. Currently, they only support OpenAI-type API calls.
 2. You can directly input system prompts and user prompts on the node, or convert these two small components into inputs for the node, accepting string-type input.
 3. Large model nodes can also accept output from tool nodes and receive string-formatted input from the file_content interface. These inputs are treated as the model's knowledge base, using word vector similarity to search for relevant content to input into the model.
 4. The `is_memory` parameter of large model nodes determines whether the model has memory. You can set `is_memory` to "disable," and then run the node. In this case, the model will clear the previous conversation history. Switching back to "enable" will allow the model to retain your conversation history in subsequent runs.
