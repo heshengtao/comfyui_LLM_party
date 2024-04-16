@@ -8,7 +8,7 @@
 
 ## 特征
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)
-2. 支持openai的API驱动，并支持自定义base_url，可以使用中转API驱动LLM节点。如果你使用的是其他的大模型接口，可以使用[openai-style-api](https://github.com/tian-minghui/openai-style-api)转化成openai接口格式。如果你是使用本地大模型，可以在这些大模型的项目文件夹下运行`python3 openai_api.py`，将本地大模型转化成openai接口格式。
+2. 支持openai的API驱动，并支持自定义base_url，可以使用中转API驱动LLM节点。如果你使用的是其他的大模型接口，可以使用[openai-style-api](https://github.com/tian-minghui/openai-style-api)转化成openai接口格式。如果你是使用本地大模型，可以在这些大模型的项目文件夹下运行`python3 openai_api.py`或者`python3 api_server.py`，将本地大模型转化成openai接口格式。注意！有些本地大模型（例如GLM3）没有tools这个参数，需要你将LLM节点的is_tools_in_sys_prompt切换到enable，这样tools会直接输入到系统提示词中。
 3. 支持多种类型的文件类型导入LLM节点，通过RAG技术让LLM可以针对文件内容作答，目前支持以下文件类型：.docx、.xlsx、.csv、.txt、.py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
 4. 通过工具组合节点可以将多个工具传入LLM节点，通过文件组合节点可以将多个文件传入LLM节点
 5. 支持谷歌搜索和对单一网页的搜索，让LLM可以联网查询
