@@ -5,22 +5,9 @@
 
 # User Guide
 1. [Building a Modular AI with ComfyUI×LLM: A Step-by-Step Tutorial (Super Easy!)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
-2. [how to use nodes](how_to_use_nodes.md)
 
 ## Features
-1. This project contains the following nodes. You can right-click in the ComfyUI interface and select `llm` from the context menu to find these nodes:
-   - “LLM”: “Large Language Model (LLM)”
-   - “load_file”: “Load files from comfyui_LLM_party/file”
-   - “tool_combine”: “Tool Combine”
-   - “tool_combine_plus”: “Super Tool Combine”
-   - “time_tool”: “Time Tool”
-   - “weather_tool”: “Weather Tool”
-   - “google_tool”: “Google Search Tool”
-   - “check_web_tool”: “Check Web Tool”
-   - “file_combine”: “File Combine”
-   - “file_combine_plus”: “Super File Combine”
-   - “start_dialog”: “Start Dialogue”
-   - “end_dialog”: “End Dialogue”
+1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
 2. Supports OpenAI API driving and custom base_url, allowing the use of a proxy API to drive LLM nodes.If you are using other large model interfaces, you can convert them to the OpenAI API format using [openai-style-api](https://github.com/tian-minghui/openai-style-api). If you are using local large models, you can run `python3 openai_api.py` in the project folder of those models to convert them to the OpenAI API format.
 3. Supports importing various file types into LLM nodes. With RAG technology, LLM can answer questions based on file content. Currently supported file types include: .docx, .xlsx, .csv, .txt, .py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
 4. The tool combine node allows multiple tools to be passed into the LLM node, and the file combine node allows multiple files to be passed into the LLM node.
