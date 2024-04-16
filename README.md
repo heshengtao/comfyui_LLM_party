@@ -21,7 +21,7 @@
    - “file_combine_plus”: “Super File Combine”
    - “start_dialog”: “Start Dialogue”
    - “end_dialog”: “End Dialogue”
-2. Supports OpenAI API driving and custom base_url, allowing the use of a proxy API to drive LLM nodes.
+2. Supports OpenAI API driving and custom base_url, allowing the use of a proxy API to drive LLM nodes.If you are using other large model interfaces, you can convert them to the OpenAI API format using [openai-style-api](https://github.com/tian-minghui/openai-style-api). If you are using local large models, you can run `python3 openai_api.py` in the project folder of those models to convert them to the OpenAI API format.
 3. Supports importing various file types into LLM nodes. With RAG technology, LLM can answer questions based on file content. Currently supported file types include: .docx, .xlsx, .csv, .txt, .py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
 4. The tool combine node allows multiple tools to be passed into the LLM node, and the file combine node allows multiple files to be passed into the LLM node.
 5. Supports Google search and single web page search, enabling LLM to perform online queries.
