@@ -15,7 +15,10 @@ class time_tool:
             "required": {
                 "timezone": ("STRING", {
                     "default": "Asia/Shanghai"
-                })
+                }),
+                "is_enable": (["enable", "disable"],{
+                    "default":"enable"
+                }),  
             }
         }
     
@@ -30,7 +33,9 @@ class time_tool:
 
 
 
-    def time(self, timezone):
+    def time(self, timezone,is_enable="enable"):
+        if is_enable=="disable":
+            return (None,)        
         output=    [{
         "type": "function",
         "function": {

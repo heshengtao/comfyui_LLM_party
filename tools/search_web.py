@@ -10,8 +10,6 @@ def search_web(keywords,paper_num,url=None):
     global g_api_key,g_CSE_ID
     num_results=10
     start=num_results*(int(paper_num)-1)+1
-    if int(paper_num) >3:
-        return "页码已超出最大值，请根据现有信息回复"
     try:
         base_url = "https://www.googleapis.com/customsearch/v1"
         params = {
@@ -53,7 +51,9 @@ class google_tool:
     def INPUT_TYPES(s):
         return {
             "required": {
-                
+                "is_enable": (["enable", "disable"],{
+                    "default":"enable"
+                }),
             },
             "optional": {
                 "google_api_key":("STRING", {
@@ -76,7 +76,9 @@ class google_tool:
 
 
 
-    def web(self,google_api_key=None,google_CSE_ID=None):   
+    def web(self,google_api_key=None,google_CSE_ID=None,is_enable="enable"):   
+        if is_enable=="disable":
+            return (None,)
         global g_api_key,g_CSE_ID
         if google_api_key is not None and google_api_key!="":
             g_api_key=google_api_key
@@ -95,7 +97,7 @@ class google_tool:
             "type": "object",
             "properties": {
                 "keywords": {"type": "string", "description": "需要搜索的关键词，可以是多个词语，多个词语之间用空格隔开"},
-                "paper_num": {"type": "string", "description": "谷歌搜索的页码，可以改变paper_num用于翻页，paper_num必须是整数且不能大于3"}
+                "paper_num": {"type": "string", "description": "谷歌搜索的页码，可以改变paper_num用于翻页"}
             },
             "required": ["keywords", "paper_num"]
         }

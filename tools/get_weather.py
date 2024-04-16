@@ -30,7 +30,12 @@ class weather_tool:
     def INPUT_TYPES(s):
         return {
             "required": {
-
+                "city": ("STRING", {
+                    "default": "上海市"
+                }),
+                "is_enable": (["enable", "disable"],{
+                    "default":"enable"
+                }),  
             }
         }
     
@@ -45,7 +50,9 @@ class weather_tool:
 
 
 
-    def weather(self):
+    def weather(self,city,is_enable="enable"):
+        if is_enable=="disable":
+            return (None,)   
         output=    [{
         "type": "function",
         "function": {
@@ -56,7 +63,7 @@ class weather_tool:
                 "properties": {
                     "city": {
                         "type": "string",
-                        "description": "用户询问的目标区域，例如：长沙市，默认为长沙市"
+                        "description": "用户询问的目标区域，例如：长沙市，默认查询"+city
                     },
                     "extensions": {
                         "type": "string",

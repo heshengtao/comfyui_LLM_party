@@ -25,7 +25,7 @@ class start_dialog:
         }
     
     RETURN_TYPES = ("STRING","STRING",)
-    RETURN_NAMES = ("user_prompt","dialog_id",)
+    RETURN_NAMES = ("dialog_id","user_prompt",)
 
     FUNCTION = "dialog"
 

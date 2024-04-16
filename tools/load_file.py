@@ -53,6 +53,9 @@ class load_file:
                 "path": ("STRING", {
                     "default": "test.txt"
                 }),
+                "is_enable": (["enable", "disable"],{
+                    "default":"enable"
+                }), 
             },
             "optional": {
 
@@ -70,7 +73,9 @@ class load_file:
 
 
 
-    def file(self,path):
+    def file(self,path,is_enable="enable"):
+        if is_enable=="disable":
+            return (None,)
         path = os.path.join(file_path, path)
         out=read_one(path)
         return (out,)
