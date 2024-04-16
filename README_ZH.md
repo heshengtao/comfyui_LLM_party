@@ -5,21 +5,9 @@
 
 ## 使用说明
 1. [【ComfyUI×LLM】手把手教你如何搭建积木化智能体（超简单！）](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
-2. [怎么使用节点](how_to_use_nodes_ZH.md)
+
 ## 特征
-1. 本项目包含如下节点，你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到这些节点
-   -  "LLM": "大语言模型（LLM）"
-   -  "load_file": "从comfyui_LLM_party/file加载文件（load_file from comfyui_LLM_party/file）"
-   -  "tool_combine":"工具组合（tool_combine）"
-   -  "tool_combine_plus":"超大工具组合（tool_combine_plus）"
-   -  "time_tool": "时间工具（time_tool）"
-   -  "weather_tool":"天气工具（weather_tool）"
-   -  "google_tool":"谷歌搜索工具（google_tool）"
-   -  "check_web_tool":"检视网页工具(check_web_tool)"
-   -  "file_combine":"文件组合（file_combine）"
-   -  "file_combine_plus":"超大文件组合（file_combine_plus）"
-   -  "start_dialog":"开始对话（start_dialog）"
-   -  "end_dialog":"结束对话（end_dialog）"
+1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)
 2. 支持openai的API驱动，并支持自定义base_url，可以使用中转API驱动LLM节点。如果你使用的是其他的大模型接口，可以使用[openai-style-api](https://github.com/tian-minghui/openai-style-api)转化成openai接口格式。如果你是使用本地大模型，可以在这些大模型的项目文件夹下运行`python3 openai_api.py`，将本地大模型转化成openai接口格式。
 3. 支持多种类型的文件类型导入LLM节点，通过RAG技术让LLM可以针对文件内容作答，目前支持以下文件类型：.docx、.xlsx、.csv、.txt、.py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
 4. 通过工具组合节点可以将多个工具传入LLM节点，通过文件组合节点可以将多个文件传入LLM节点
