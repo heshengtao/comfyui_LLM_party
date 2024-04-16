@@ -8,4 +8,5 @@ openpyxl
 pandas
 pytz
 Requestsxlrd
+faiss-cpu
 
