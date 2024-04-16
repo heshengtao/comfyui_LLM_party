@@ -24,6 +24,10 @@
 1. 用于查询时间和天气，time_tool节点可以更改查询的默认时区，weather_tool节点未来也会增加改变默认地区的选项
 2. 未来会有更多的像这样的实用节点加入到本项目中
 
+## interpreter节点
+1. 可以让大模型生成Python代码后自动运行，并获得代码的运行结果
+2. 暂时只支持Python代码
+
 ## load_file from comfyui_LLM_party/file节点
 1. 读取文件的路径在comfyui_LLM_party/file，可以将你要读取的文件放到这个路径下，然后把文件名填入该节点即可
 2. 输出是一个字符串，包含了文件中所有的文字信息
