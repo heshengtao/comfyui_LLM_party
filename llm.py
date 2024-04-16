@@ -71,6 +71,19 @@ class Chat:
                     messages=self.messages,
                     tools=self.tools
                     )
+                while response.choices[0].message.function_call:
+                    assistant_message = response.choices[0].message
+                    function_call = assistant_message.function_call
+                    function_name = function_call.name
+                    function_arguments = json.loads(function_call.arguments)
+                    results = dispatch_tool(function_name, function_arguments)
+                    self.messages.append({"role": assistant_message.role, "content": str(function_call)})
+                    self.messages.append({"role": "function", "name": function_name, "content": results})
+                    response = openai.chat.completions.create(
+                        model=self.model_name,
+                        messages=self.messages,
+                        tools=self.tools
+                    )
             else:
                 response = openai.chat.completions.create(
                     model=self.model_name,
@@ -122,6 +135,9 @@ class LLM:
                 "is_memory": (["enable", "disable"],{
                     "default":"enable"
                 }),
+                "is_tools_in_sys_prompt": (["enable", "disable"],{
+                    "default":"disable"
+                }),
             },
             "optional": {
                 "tools": ("STRING", {
@@ -130,12 +146,12 @@ class LLM:
                 "file_content": ("STRING", {
                     "forceInput": True
                 }),
+                "base_url": ("STRING", {
+                    "default": "",
+                }),
                 "api_key": ("STRING", {
                     "default": "",
                 }),
-                "base_url": ("STRING", {
-                    "default": "",
-                })
             }
         }
 
@@ -148,7 +164,7 @@ class LLM:
 
     CATEGORY = "llm"
 
-    def chatbot(self, user_prompt, system_prompt,model_name,temperature,is_memory,tools=None,file_content=None,api_key=None,base_url=None):
+    def chatbot(self, user_prompt, system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,tools=None,file_content=None,api_key=None,base_url=None):
         if user_prompt=="#清空":
             with open(self.prompt_path, 'w', encoding='utf-8') as f:
                 json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
@@ -177,10 +193,23 @@ class LLM:
                 # 读取prompt.json文件
                 with open(self.prompt_path, 'r', encoding='utf-8') as f:
                     history = json.load(f)
+                tool_list=[]
+                if is_tools_in_sys_prompt=="enable":
+                    if tools is not None:
+                        tools_dis=json.loads(tools)
+                        for tool_dis in tools_dis:
+                            tool_list.append(tool_dis["function"])
+                        system_prompt=system_prompt+"\n"+"你可以使用以下工具："
+                else:
+                    tool_list=[]
 
                 for message in history:
                     if message['role'] == 'system':
                         message['content'] = system_prompt
+                        if tool_list!=[]:
+                            message['tools']=tool_list
+                        else:
+                            message['tools']=None
                 
                 if tools is not None:
                     print(tools)
