@@ -11,17 +11,23 @@ embeddings_path = os.path.join(embeddings_dir, 'bge-large-zh')
 if not os.path.exists(embeddings_dir):
     os.makedirs(embeddings_dir)
 
+print(embeddings_path)
 # 如果模型不存在，则克隆GitHub仓库
-if not os.listdir(embeddings_path):
+if not os.path.exists(embeddings_path):
     try:
         print("正在从GitHub克隆模型...")
         model_git_url = "https://github.com/jsonzhuwei/bge-large-zh.git"  # 模型的GitHub仓库链接
         subprocess.run(["git", "clone", model_git_url, embeddings_path])
         print("模型克隆完成。")
-    except:
+    except subprocess.CalledProcessError as e:
+        print(f"模型克隆失败：{e}")
+if not os.path.exists(embeddings_path):
+    try:
         print("正在从modelscope克隆模型...")
         model_git_url = "https://www.modelscope.cn/AI-ModelScope/bge-large-zh.git"
         subprocess.run(["git", "clone", model_git_url, embeddings_path])
         print("模型克隆完成。")
+    except subprocess.CalledProcessError as e:
+        print(f"模型克隆失败：{e}")
 else:
     print("模型已存在。")
