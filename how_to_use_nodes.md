@@ -7,7 +7,7 @@
 4. The `is_memory` parameter of large model nodes determines whether the model has memory. You can set `is_memory` to "disable," and then run the node. In this case, the model will clear the previous conversation history. Switching back to "enable" will allow the model to retain your conversation history in subsequent runs.
 5. You can use `assistant_response` to view the model's reply in the current round of conversation, or use `history` to review the history of multi-turn dialogues.
 6. Even if external parameters remain unchanged, large model nodes always run because they provide different answers to the same question.
-7. The ‘is_tools_in_sys_prompt’ determines whether the information of ‘tools’ will be entered into the system prompt.
+7. The `is_tools_in_sys_prompt` determines whether the information of ‘tools’ will be entered into the system prompt.
 
 ## start_dialog and end_dialog Nodes
 1. These two nodes have a `dialog_id`. Connecting dialog IDs creates an archive point for the conversation. When you need to loop two large models, although it cannot be directly implemented in ComfyUI, you can save the output of the second model locally and pass it to the first model in the next run. You can use the ComfyUI API in other frontends to call ComfyUI, creating an infinite self-dialogue loop between the two models.
