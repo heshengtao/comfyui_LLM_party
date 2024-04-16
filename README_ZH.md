@@ -9,11 +9,12 @@
 ## 特征
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)
 2. 支持openai的API驱动，并支持自定义base_url，可以使用中转API驱动LLM节点。如果你使用的是其他的大模型接口，可以使用[openai-style-api](https://github.com/tian-minghui/openai-style-api)转化成openai接口格式。如果你是使用本地大模型，可以在这些大模型的项目文件夹下运行`python3 openai_api.py`或者`python3 api_server.py`，将本地大模型转化成openai接口格式。注意！有些本地大模型（例如GLM3）没有tools这个参数，需要你将LLM节点的is_tools_in_sys_prompt切换到enable，这样tools会直接输入到系统提示词中。
-3. 支持多种类型的文件类型导入LLM节点，通过RAG技术让LLM可以针对文件内容作答，目前支持以下文件类型：.docx、.xlsx、.csv、.txt、.py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
-4. 通过工具组合节点可以将多个工具传入LLM节点，通过文件组合节点可以将多个文件传入LLM节点
-5. 支持谷歌搜索和对单一网页的搜索，让LLM可以联网查询
-6. 可以通过start_dialog节点和end_dialog节点，实现两个LLM之间的回环链接，即两个LLM互相为对方的输入和输出！
-7. 推荐配合[ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)的show_text节点，作为LLM节点的输出显示
+3. base_url必须是以`/v1/`结尾
+4. 支持多种类型的文件类型导入LLM节点，通过RAG技术让LLM可以针对文件内容作答，目前支持以下文件类型：.docx、.xlsx、.csv、.txt、.py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
+5. 通过工具组合节点可以将多个工具传入LLM节点，通过文件组合节点可以将多个文件传入LLM节点
+6. 支持谷歌搜索和对单一网页的搜索，让LLM可以联网查询
+7. 可以通过start_dialog节点和end_dialog节点，实现两个LLM之间的回环链接，即两个LLM互相为对方的输入和输出！
+8. 推荐配合[ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)的show_text节点，作为LLM节点的输出显示
 
 ## 下载
 [百度云下载](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) （推荐！包含一个环境配置完毕且包含本项目的comfyui压缩包和一个本项目文件夹，前者下载完后不用再配置环境！）
