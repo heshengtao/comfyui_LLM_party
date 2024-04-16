@@ -24,6 +24,10 @@
 1. Used for querying time and weather. The `time_tool` node can change the default time zone for queries, and the `weather_tool` node will eventually add options to change the default location.
 2. More practical nodes like these will be added to this project in the future.
 
+## interpreter node
+1. It allows the large model to generate Python code, execute it automatically, and obtain the execution results of the code.
+2. Currently, it only supports Python code.
+
 ## load_file from comfyui_LLM_party/file Node
 1. The file path for reading files is in `comfyui_LLM_party/file`. You can place the file you want to read in this directory and fill in the filename in this node.
 2. The output is a string containing all the text information from the file.
