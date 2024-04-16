@@ -10,14 +10,14 @@
 1. 本项目包含如下节点，你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到这些节点
    -  "LLM": "大语言模型（LLM）"
    -  "load_file": "从comfyui_LLM_party/file加载文件（load_file from comfyui_LLM_party/file）"
-   -  "tool_conbine":"工具组合（tool_conbine）"
-   -  "tool_conbine_plus":"超大工具组合（tool_conbine_plus）"
+   -  "tool_combine":"工具组合（tool_combine）"
+   -  "tool_combine_plus":"超大工具组合（tool_combine_plus）"
    -  "time_tool": "时间工具（time_tool）"
    -  "weather_tool":"天气工具（weather_tool）"
    -  "google_tool":"谷歌搜索工具（google_tool）"
    -  "check_web_tool":"检视网页工具(check_web_tool)"
-   -  "file_conbine":"文件组合（file_conbine）"
-   -  "file_conbine_plus":"超大文件组合（file_conbine_plus）"
+   -  "file_combine":"文件组合（file_combine）"
+   -  "file_combine_plus":"超大文件组合（file_combine_plus）"
    -  "start_dialog":"开始对话（start_dialog）"
    -  "end_dialog":"结束对话（end_dialog）"
 2. 支持openai的API驱动，并支持自定义base_url，可以使用中转API驱动LLM节点。如果你使用的是其他的大模型接口，可以使用[openai-style-api](https://github.com/tian-minghui/openai-style-api)转化成openai接口格式。如果你是使用本地大模型，可以在这些大模型的项目文件夹下运行`python3 openai_api.py`，将本地大模型转化成openai接口格式。
