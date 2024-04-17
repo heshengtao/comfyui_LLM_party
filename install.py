@@ -6,7 +6,7 @@ from tqdm import tqdm  # Import the tqdm library for progress bar
 
 def download_model_with_progress(model_url, local_path):
     try:
-        response = requests.get(model_url, stream=True, timeout=10)
+        response = requests.get(model_url, stream=True)
         if response.status_code == 200:
             total_size = int(response.headers.get("content-length", 0))
             block_size = 8192  # Chunk size for updating the progress bar
@@ -45,16 +45,17 @@ if not os.path.exists(embeddings_path):
 
 else:
     print("模型已存在。")
-if not os.path.exists(embeddings_path):
-    print("正在从modelscope克隆模型...")
-    model_git_url = "https://www.modelscope.cn/AI-ModelScope/bge-large-zh.git"
-    try:
-        subprocess.run(["git", "clone", model_git_url, embeddings_path], timeout=300)  # 设置超时时间为300秒
-    except subprocess.TimeoutExpired:
-        print("modelscope命令执行超时。")
-else:
-    print("模型已存在。")
-model_url = "https://www.modelscope.cn/api/v1/models/AI-ModelScope/bge-large-zh/repo?Revision=master&FilePath=pytorch_model.bin"
+
 custom_path = os.path.join(embeddings_dir, "bge-large-zh", "pytorch_model.bin")
 if not os.path.exists(custom_path):
-    download_model_with_progress(model_url, custom_path)
+    model_url = "https://www.modelscope.cn/api/v1/models/AI-ModelScope/bge-large-zh/repo?Revision=master&FilePath=pytorch_model.bin"
+    try:
+        download_model_with_progress(model_url, custom_path)
+    except Exception as e:
+        print(f"Error downloading the model: {str(e)}")
+if not os.path.exists(custom_path):
+    model_url = "https://huggingface.co/BAAI/bge-large-zh-v1.5/resolve/main/pytorch_model.bin?download=true"
+    try:
+        download_model_with_progress(model_url, custom_path)
+    except Exception as e:
+        print(f"Error downloading the model: {str(e)}")
