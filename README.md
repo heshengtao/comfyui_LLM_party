@@ -22,7 +22,7 @@
 Or install using one of the following methods:
 ### Method 1:
 1. Search for comfyui_LLM_party in the [comfyui manager](https://github.com/ltdrdata/ComfyUI-Manager) and install it with one click.
-2. Restart comfyui. During the first restart, it will take some time to download the word embedding model used for RAG.
+2. Restart comfyui. During the first restart, it will take some time to download the embedding model used for RAG.
 
 ### Method 2:
 1. Navigate to the `custom_nodes` subfolder under the ComfyUI root folder.
