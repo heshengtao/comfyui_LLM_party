@@ -21,7 +21,7 @@
 
 或使用以下方法之一安装
 ###方法一：
-1. 在comfyui管理器中搜索`comfyui_LLM_party`，一键安装
+1. 在[comfyui管理器](https://github.com/ltdrdata/ComfyUI-Manager)中搜索`comfyui_LLM_party`，一键安装
 2. 重启comfyui，在第一次重启时，会消耗一些时间来下载用于RAG的词嵌入模型
 
 ### 方法二：
