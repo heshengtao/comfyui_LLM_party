@@ -27,7 +27,7 @@ class file_combine:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "llm/combine"
+    CATEGORY = "llm/组合（combine）"
 
 
 
@@ -93,7 +93,7 @@ class file_combine_plus:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "llm/combine"
+    CATEGORY = "llm/组合（combine）"
 
 
 

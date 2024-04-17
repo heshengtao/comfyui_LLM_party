@@ -31,7 +31,7 @@ class tool_combine:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "llm/combine"
+    CATEGORY = "llm/组合（combine）"
 
 
 
@@ -102,7 +102,7 @@ class tool_combine_plus:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "llm/combine"
+    CATEGORY = "llm/组合（combine）"
 
 
 

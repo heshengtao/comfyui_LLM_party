@@ -29,7 +29,7 @@ class time_tool:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "llm"
+    CATEGORY = "llm/工具（tools）"
 
 
 
