@@ -14,7 +14,7 @@ class FreeApi:
             return None
 
 
-def get_weather(city="长沙市",extensions="all"):
+def get_weather(city,extensions="all"):
     api = FreeApi('https://tools.mgtv100.com/external/v1/weathers/query?city='+city+'&extensions='+extensions+'&output=JSON')
     result = api.get_result()
     if result:
@@ -70,7 +70,7 @@ class weather_tool:
                         "description": "可选值：base/all base:返回实况天气 all:返回预报天气，默认为all "
                     }
                 },
-                "required": []
+                "required": ["city"]
             }
         }
     }]

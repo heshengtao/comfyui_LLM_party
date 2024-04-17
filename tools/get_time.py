@@ -46,10 +46,10 @@ class time_tool:
                 "properties": {
                     "timezone": {
                         "type": "string",
-                        "description": "需要查询的时区，例如：Asia/Shanghai，缺省时默认查询"+str(timezone)
+                        "description": "需要查询的时区，例如：Asia/Shanghai，默认查询"+str(timezone)
                     }
                 },
-                "required": []
+                "required": ["timezone"]
             }
         }
     }]
