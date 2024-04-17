@@ -3,7 +3,8 @@
 import os
 import subprocess
 import requests
-from tqdm import tqdm  # Import the tqdm library for progress bar
+import sys
+import time
 
 def download_model_with_progress(model_url, local_path):
     # 初始化已下载的大小
@@ -24,18 +25,29 @@ def download_model_with_progress(model_url, local_path):
         with requests.get(model_url, headers=headers, stream=True, timeout=50) as r:
             r.raise_for_status()
             block_size = 8192  # Chunk size for updating the progress bar
+
+            # 自定义进度条的显示函数
+            def show_progress(progress):
+                bar_length = 50  # 进度条的长度
+                block = int(round(bar_length * progress))
+                text = "\rProgress: [{0}] {1}%".format(
+                    "#" * block + "-" * (bar_length - block), round(progress * 100, 2)
+                )
+                sys.stdout.write(text)
+                sys.stdout.flush()
+
             with open(local_path, "ab") as f:
-                # 使用tqdm创建进度条
-                progress = tqdm(initial=downloaded, total=total_size, unit='B', unit_scale=True, desc='Downloading')
                 for data in r.iter_content(block_size):
                     f.write(data)
-                    # 更新进度条
-                    progress.update(len(data))
-                # 关闭进度条
-                progress.close()
+                    # 计算当前进度
+                    progress = (downloaded + f.tell()) / total_size
+                    # 显示进度条
+                    show_progress(progress)
+                # 进度条完成后换行
+                sys.stdout.write("\n")
+
         print(f"Model downloaded successfully to {local_path}")
     except requests.exceptions.RequestException as e:
-        # 如果发生请求异常，打印错误信息
         print(f"Error downloading the model: {str(e)}")
 # 检查模型是否已经下载
 current_dir_path = os.path.dirname(os.path.realpath(__file__))
