@@ -20,11 +20,15 @@
 [Baidu Cloud Download](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) (Recommended! Includes a compressed package of comfyui with the environment setup completed, and a folder for this project. After downloading the former, there’s no need for further environment configuration!)
 
 Or install using one of the following methods:
-### Method One:
+### Method 1:
+1. Search for comfyui_LLM_party in the [comfyui manager](https://github.com/ltdrdata/ComfyUI-Manager) and install it with one click.
+2. Restart comfyui. During the first restart, it will take some time to download the word embedding model used for RAG.
+
+### Method 2:
 1. Navigate to the `custom_nodes` subfolder under the ComfyUI root folder.
 2. Clone this repository with `git clone https://github.com/heshengtao/comfyui_LLM_party.git`.
 
-### Method Two:
+### Method 3:
 1. Click `CODE` in the upper right corner.
 2. Click `download zip`.
 3. Unzip the downloaded package into the `custom_nodes` subfolder under the ComfyUI root folder.
