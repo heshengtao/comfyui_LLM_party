@@ -20,11 +20,15 @@
 [百度云下载](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) （推荐！包含一个环境配置完毕且包含本项目的comfyui压缩包和一个本项目文件夹，前者下载完后不用再配置环境！）
 
 或使用以下方法之一安装
-### 方法一：
+###方法一：
+1. 在comfyui管理器中搜索`comfyui_LLM_party`，一键安装
+2. 重启comfyui，在第一次重启时，会消耗一些时间来下载用于RAG的词嵌入模型
+
+### 方法二：
 1. 导航到 ComfyUI 根文件夹中下的`custom_nodes`子文件夹
 2. 使用克隆此存储库。`git clone https://github.com/heshengtao/comfyui_LLM_party.git`
 
-### 方法二：
+### 方法三：
 1. 点击右上角的`CODE`
 2. 点击`download zip`
 3. 将下载的压缩包解压到ComfyUI 根文件夹中下的`custom_nodes`子文件夹中
