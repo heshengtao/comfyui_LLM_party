@@ -84,6 +84,26 @@ class Chat:
                         messages=self.messages,
                         tools=self.tools
                     )
+                response_content = response.choices[0].message.content
+                start_pattern = "interpreter\n ```python\n"
+                end_pattern = "\n```"
+                while response_content.startswith(start_pattern):
+                    start_index = response_content.find(start_pattern)
+                    end_index = response_content.find(end_pattern)
+                    if start_index != -1 and end_index != -1:
+                        # 提取代码部分
+                        code = response_content[start_index + len(start_pattern):end_index]
+                        code = code.strip()  # 去除首尾空白字符
+                    else:
+                        code = ""
+                    results =interpreter(code)
+                    self.messages.append({"role": "function", "name": "interpreter", "content": results})
+                    response = openai.chat.completions.create(
+                        model=self.model_name,
+                        messages=self.messages,
+                        tools=self.tools
+                    )
+                    response_content = response.choices[0].message.content
             else:
                 response = openai.chat.completions.create(
                     model=self.model_name,
@@ -138,6 +158,9 @@ class LLM:
                 "is_tools_in_sys_prompt": (["enable", "disable"],{
                     "default":"disable"
                 }),
+                "is_locked": (["enable", "disable"],{
+                    "default":"disable"
+                }),
             },
             "optional": {
                 "tools": ("STRING", {
@@ -164,7 +187,7 @@ class LLM:
 
     CATEGORY = "llm"
 
-    def chatbot(self, user_prompt, system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,tools=None,file_content=None,api_key=None,base_url=None):
+    def chatbot(self, user_prompt, system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None,api_key=None,base_url=None):
         if user_prompt=="#清空":
             with open(self.prompt_path, 'w', encoding='utf-8') as f:
                 json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
@@ -193,6 +216,9 @@ class LLM:
                 # 读取prompt.json文件
                 with open(self.prompt_path, 'r', encoding='utf-8') as f:
                     history = json.load(f)
+                if is_locked=="enable":
+                    #返回对话历史中，最后一个content
+                    return (history[-1]['content'],str(history),)
                 tool_list=[]
                 if is_tools_in_sys_prompt=="enable":
                     if tools is not None:
@@ -209,7 +235,9 @@ class LLM:
                         if tool_list!=[]:
                             message['tools']=tool_list
                         else:
-                            message['tools']=None
+                            if 'tools' in message:
+                                # 如果存在，移除 'tools' 键值对
+                                message.pop('tools')
                 
                 if tools is not None:
                     print(tools)
@@ -262,7 +290,7 @@ NODE_CLASS_MAPPINGS = {
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "LLM": "大语言模型（LLM）",
-    "load_file": "从comfyui_LLM_party/file加载文件（load_file from comfyui_LLM_party/file）",
+    "load_file": "加载文件（load_file）",
     "tool_combine":"工具组合（tool_combine）",
     "tool_combine_plus":"超大工具组合（tool_combine_plus）",
     "time_tool": "时间工具（time_tool）",
