@@ -24,31 +24,34 @@ def download_model_with_progress(model_url, local_path):
         # 请求服务器，从上次下载的地方继续下载
         with requests.get(model_url, headers=headers, stream=True, timeout=50) as r:
             r.raise_for_status()
-            block_size = 8192  # Chunk size for updating the progress bar
+            block_size = 8192  # 每次更新进度条的数据块大小
 
             # 自定义进度条的显示函数
             def show_progress(progress):
                 bar_length = 50  # 进度条的长度
                 block = int(round(bar_length * progress))
-                text = "\rProgress: [{0}] {1}%".format(
+                text = "\r进度: [{0}] {1}%".format(
                     "#" * block + "-" * (bar_length - block), round(progress * 100, 2)
                 )
                 sys.stdout.write(text)
                 sys.stdout.flush()
 
             with open(local_path, "ab") as f:
+                i=0
                 for data in r.iter_content(block_size):
+                    i+=1
                     f.write(data)
                     # 计算当前进度
                     progress = (downloaded + f.tell()) / total_size
-                    # 显示进度条
-                    show_progress(progress)
+                    # 显示进度条，每500次更新一次
+                    if i % 500 == 0:
+                        show_progress(progress)
                 # 进度条完成后换行
                 sys.stdout.write("\n")
 
-        print(f"Model downloaded successfully to {local_path}")
+        print(f"模型已成功下载到 {local_path}")
     except requests.exceptions.RequestException as e:
-        print(f"Error downloading the model: {str(e)}")
+        print(f"下载模型时出错: {str(e)}")
 # 检查模型是否已经下载
 current_dir_path = os.path.dirname(os.path.realpath(__file__))
 embeddings_dir = os.path.join(current_dir_path, "model")
