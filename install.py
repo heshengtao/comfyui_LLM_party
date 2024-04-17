@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 import os
 import subprocess
@@ -5,24 +6,36 @@ import requests
 from tqdm import tqdm  # Import the tqdm library for progress bar
 
 def download_model_with_progress(model_url, local_path):
+    # 初始化已下载的大小
+    downloaded = 0
     try:
-        response = requests.get(model_url, stream=True)
-        if response.status_code == 200:
-            total_size = int(response.headers.get("content-length", 0))
+        # 获取文件的总大小
+        with requests.get(model_url, stream=True) as r:
+            total_size = int(r.headers.get('content-length', 0))
+
+        # 如果本地文件已存在，获取已下载的文件大小
+        if os.path.exists(local_path):
+            downloaded = os.path.getsize(local_path)
+
+        # 设置请求头，告诉服务器我们想从哪个字节开始下载
+        headers = {'Range': f'bytes={downloaded}-'}
+
+        # 请求服务器，从上次下载的地方继续下载
+        with requests.get(model_url, headers=headers, stream=True, timeout=50) as r:
+            r.raise_for_status()
             block_size = 8192  # Chunk size for updating the progress bar
-            with open(local_path, "wb") as f:
+            with open(local_path, "ab") as f:
                 # 使用tqdm创建进度条
-                progress = tqdm(total=total_size, unit='B', unit_scale=True, desc='Downloading')
-                for data in response.iter_content(block_size):
+                progress = tqdm(initial=downloaded, total=total_size, unit='B', unit_scale=True, desc='Downloading')
+                for data in r.iter_content(block_size):
                     f.write(data)
                     # 更新进度条
                     progress.update(len(data))
                 # 关闭进度条
                 progress.close()
-            print(f"Model downloaded successfully to {local_path}")
-        else:
-            print(f"Failed to download the model. Status code: {response.status_code}")
-    except Exception as e:
+        print(f"Model downloaded successfully to {local_path}")
+    except requests.exceptions.RequestException as e:
+        # 如果发生请求异常，打印错误信息
         print(f"Error downloading the model: {str(e)}")
 # 检查模型是否已经下载
 current_dir_path = os.path.dirname(os.path.realpath(__file__))
