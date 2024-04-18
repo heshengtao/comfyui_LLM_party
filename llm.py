@@ -1,13 +1,16 @@
+import gc
 import hashlib
 import importlib
 import json
 import os
+import re
 import sys
 import time
 import traceback
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 import openai
+import torch
 from .config import config_path,current_dir_path,load_api_keys,bge_embeddings
 from .tools.load_file import load_file
 from .tools.tool_combine import tool_combine,tool_combine_plus
@@ -18,8 +21,11 @@ from .tools.check_web import check_web,check_web_tool
 from .tools.file_combine import file_combine,file_combine_plus
 from .tools.dialog import start_dialog,end_dialog
 from .tools.interpreter import interpreter,interpreter_tool
-
-
+from transformers import AutoTokenizer, AutoModel, AutoModelForCausalLM
+glm_tokenizer=""
+glm_model=""
+llama_tokenizer=""
+llama_model=""
 _TOOL_HOOKS=[
     "get_time",
     "get_weather",
@@ -149,7 +155,7 @@ class LLM:
                 "temperature": ("FLOAT", {
                     "default": 0.7,
                     "min": 0.0,
-                    "max": 2.0,
+                    "max": 1.0,
                     "step": 0.1
                 }),
                 "is_memory": (["enable", "disable"],{
@@ -160,6 +166,9 @@ class LLM:
                 }),
                 "is_locked": (["enable", "disable"],{
                     "default":"disable"
+                }),
+                "is_RAG": (["enable", "disable"],{
+                    "default":"enable"
                 }),
             },
             "optional": {
@@ -187,13 +196,19 @@ class LLM:
 
     CATEGORY = "llm"
 
-    def chatbot(self, user_prompt, system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None,api_key=None,base_url=None):
+    def chatbot(self, user_prompt, system_prompt,model_name,temperature,is_RAG,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None,api_key=None,base_url=None):
         if user_prompt=="#清空":
             with open(self.prompt_path, 'w', encoding='utf-8') as f:
                 json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
             return ("已清空历史记录",)
         else:
             try:
+                # 读取prompt.json文件
+                with open(self.prompt_path, 'r', encoding='utf-8') as f:
+                    history = json.load(f)
+                if is_locked=="enable":
+                    #返回对话历史中，最后一个content
+                    return (history[-1]['content'],str(history),)
                 if is_memory=="disable":
                     with open(self.prompt_path, 'w', encoding='utf-8') as f:
                         json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
@@ -216,9 +231,6 @@ class LLM:
                 # 读取prompt.json文件
                 with open(self.prompt_path, 'r', encoding='utf-8') as f:
                     history = json.load(f)
-                if is_locked=="enable":
-                    #返回对话历史中，最后一个content
-                    return (history[-1]['content'],str(history),)
                 tool_list=[]
                 if is_tools_in_sys_prompt=="enable":
                     if tools is not None:
@@ -245,15 +257,18 @@ class LLM:
                 chat=Chat(history,model_name,temperature,tools)
                 
                 if file_content is not None:
-                    text_splitter0 = RecursiveCharacterTextSplitter(
-                        chunk_size = 200,
-                        chunk_overlap = 50,
-                        ) 
-                    chunks0 = text_splitter0.split_text(file_content)
-                    knowledge_base0 = FAISS.from_texts(chunks0, bge_embeddings)
-                    docs = knowledge_base0.similarity_search(user_prompt, k=5)
-                    combined_content = ''.join(doc.page_content + "\n" for doc in docs)
-                    user_prompt="文件中相关内容："+combined_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
+                    if is_RAG=="enable":
+                        text_splitter0 = RecursiveCharacterTextSplitter(
+                            chunk_size = 200,
+                            chunk_overlap = 50,
+                            ) 
+                        chunks0 = text_splitter0.split_text(file_content)
+                        knowledge_base0 = FAISS.from_texts(chunks0, bge_embeddings)
+                        docs = knowledge_base0.similarity_search(user_prompt, k=5)
+                        combined_content = ''.join(doc.page_content + "\n" for doc in docs)
+                        user_prompt="文件中相关内容："+combined_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
+                    else:
+                        user_prompt="文件中相关内容："+file_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
                 response,history= chat.send(user_prompt)
                 print(response)
                 #修改prompt.json文件
@@ -270,9 +285,246 @@ class LLM:
         current_time = str(time.time())
         return hashlib.sha256(current_time.encode()).hexdigest()
 
+class LLM_local:
+    def __init__(self):
+        #生成一个hash值作为id
+        self.id=hash(str(self))
+        # 构建prompt.json的绝对路径
+        self.prompt_path = os.path.join(current_dir_path,"temp", str(self.id)+'.json')
+        # 如果文件不存在，创建prompt.json文件，存在就覆盖文件
+        if not os.path.exists(self.prompt_path):
+            with open(self.prompt_path, 'w', encoding='utf-8') as f:
+                json.dump([{"role": "system","content": "你是一个强大的人工智能助手。"}], f, indent=4, ensure_ascii=False)
+
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "system_prompt": ("STRING", {
+                    "multiline": True,
+                    "default": "你一个强大的人工智能助手。"
+                }),
+                "user_prompt": ("STRING", {
+                    "multiline": True,
+                    "default": "你好",
+                }),
+                "model_type": (["GLM", "llama"], {
+                    "default": "GLM",
+                }),
+                "model_path": ("STRING", {
+                    "default": ".bin",
+                }),
+                "tokenizer_path": ("STRING", {
+                    "default": ".tokenizer",
+                }),
+                "temperature": ("FLOAT", {
+                    "default": 0.7,
+                    "min": 0.0,
+                    "max": 1.0,
+                    "step": 0.1
+                }),
+                "is_memory": (["enable", "disable"],{
+                    "default":"enable"
+                }),
+                "is_tools_in_sys_prompt": (["enable", "disable"],{
+                    "default":"disable"
+                }),
+                "is_locked": (["enable", "disable"],{
+                    "default":"disable"
+                }),
+                "is_RAG": (["enable", "disable"],{
+                    "default":"enable"
+                }),
+                "is_reload": (["enable", "disable"],{
+                    "default":"disable"
+                }),
+                "device": (["cuda","cuda-float16","cuda-int8","cuda-int4","cpu"], {
+                    "default": "cuda" if torch.cuda.is_available() else "cpu",
+                }),
+                "max_length": ("INT", {
+                    "default": 512,
+                    "min": 256,
+                    "step": 256
+                })
+            },
+            "optional": {
+                "tools": ("STRING", {
+                    "forceInput": True
+                }),
+                "file_content": ("STRING", {
+                    "forceInput": True
+                })
+            }
+        }
+
+    RETURN_TYPES = ("STRING","STRING",)
+    RETURN_NAMES = ("assistant_response","history",)
+
+    FUNCTION = "chatbot"
+
+    #OUTPUT_NODE = False
+
+    CATEGORY = "llm"
+
+    def chatbot(self, user_prompt, system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_RAG,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None):
+        if user_prompt=="#清空":
+            with open(self.prompt_path, 'w', encoding='utf-8') as f:
+                json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
+            return ("已清空历史记录",)
+        else:
+            try:
+                # 读取prompt.json文件
+                with open(self.prompt_path, 'r', encoding='utf-8') as f:
+                    history = json.load(f)
+                if is_locked=="enable":
+                    #返回对话历史中，最后一个content
+                    return (history[-1]['content'],str(history),)
+                if is_memory=="disable":
+                    with open(self.prompt_path, 'w', encoding='utf-8') as f:
+                        json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
+                
+                # 读取prompt.json文件
+                with open(self.prompt_path, 'r', encoding='utf-8') as f:
+                    history = json.load(f)
+                tool_list=[]
+                if is_tools_in_sys_prompt=="enable" or model_type=="GLM" or model_type=="llama":
+                    if tools is not None:
+                        tools_dis=json.loads(tools)
+                        for tool_dis in tools_dis:
+                            tool_list.append(tool_dis["function"])
+                        system_prompt=system_prompt+"\n"+"你可以使用以下工具："
+                else:
+                    tool_list=[]
+
+                for message in history:
+                    if message['role'] == 'system':
+                        message['content'] = system_prompt
+                        if tool_list!=[]:
+                            message['tools']=tool_list
+                        else:
+                            if 'tools' in message:
+                                # 如果存在，移除 'tools' 键值对
+                                message.pop('tools')
+                
+                if tools is not None:
+                    print(tools)
+                    tools=json.loads(tools)
+
+                
+                if file_content is not None:
+                    if is_RAG=="enable":
+                        text_splitter0 = RecursiveCharacterTextSplitter(
+                            chunk_size = 200,
+                            chunk_overlap = 50,
+                            ) 
+                        chunks0 = text_splitter0.split_text(file_content)
+                        knowledge_base0 = FAISS.from_texts(chunks0, bge_embeddings)
+                        docs = knowledge_base0.similarity_search(user_prompt, k=5)
+                        combined_content = ''.join(doc.page_content + "\n" for doc in docs)
+                        user_prompt="文件中相关内容："+combined_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
+                    else:
+                        user_prompt="文件中相关内容："+file_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
+                global glm_tokenizer, glm_model, llama_tokenizer, llama_model
+                if model_type=="GLM":
+                    if glm_tokenizer=="":
+                        glm_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
+                    if glm_model=="":
+                        if device=="cuda":
+                            glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).cuda()
+                        elif device=="cuda-float16":
+                            glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().cuda()
+                        elif device=="cuda-int8":
+                            glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().quantize(8).cuda()
+                        elif device=="cuda-int4":
+                            glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().quantize(4).cuda()
+                        else:
+                            glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).float()
+                        glm_model = glm_model.eval()
+                    response, history= glm_model.chat(glm_tokenizer, user_prompt,history,temperature=temperature,max_length=max_length,role="user")
+                    while type(response) == dict:
+                        if response['name']=="interpreter":
+                            result =interpreter(str(response['content']))
+                            response, history = glm_model.chat(glm_tokenizer, result, history=history, role="observation")
+                        else:
+                            result = dispatch_tool(response['name'],response['parameters'])
+                            print(result)
+                            response, history = glm_model.chat(glm_tokenizer, result, history=history, role="observation")
+                elif model_type=="llama":
+                    if llama_tokenizer=="":
+                        llama_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+                    if llama_model=="":
+                        if device=="cuda":
+                            llama_model = AutoModelForCausalLM.from_pretrained(model_path).cuda()
+                        elif device=="cuda-float16":
+                            llama_model = AutoModelForCausalLM.from_pretrained(model_path).half().cuda()
+                        elif device=="cuda-int8":
+                            llama_model = AutoModelForCausalLM.from_pretrained(model_path).half().cuda()
+                        elif device=="cuda-int4":
+                            llama_model = AutoModelForCausalLM.from_pretrained(model_path).half().cuda()
+                        else:
+                            llama_model = AutoModelForCausalLM.from_pretrained(model_path).float()
+                        llama_model = llama_model.eval()
+                    llama_device = "cuda" if torch.cuda.is_available() else "cpu"
+                    B_FUNC, E_FUNC = "<FUNCTIONS>", "</FUNCTIONS>\n\n"
+                    B_INST, E_INST = "[INST] ", " [/INST]" #Llama style
+                    B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
+                    tool_list=json.dumps(tool_list,ensure_ascii=False,indent=4)
+                    # Format your prompt template
+                    prompt = f"{B_INST}{B_SYS}{system_prompt.strip()}{E_SYS}"
+                    history.append({"role": "user", "content": user_prompt.strip()})
+                    for i, pro in enumerate(history):
+                        if pro['role']=="user":
+                            if i==2:
+                                prompt+=f"{pro['content'].strip()}{E_INST}\n\n"
+                            else:
+                                prompt+=f"{B_INST}{user_prompt.strip()}{E_INST}\n\n"
+                        if pro['role']=="assistant":
+                            prompt+=f"{pro['content'].strip()}\n\n"
+                    inputs = llama_tokenizer(prompt, return_tensors="pt").to(llama_device)
+
+                    # Generate
+                    generate_ids = llama_model.generate(inputs.input_ids, max_length=max_length).to('cpu')
+                    text=llama_tokenizer.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
+                    print(text)
+                    response = text.rsplit("[/INST]\n\n", 1)[-1]
+                    print(response)
+                    history.append({"role":"assistant","content":response})
+                print(response)
+                #修改prompt.json文件
+                with open(self.prompt_path, 'w', encoding='utf-8') as f:
+                    json.dump(history, f, indent=4, ensure_ascii=False)
+                history=str(history)
+                if is_reload=="enable":
+                    del glm_model
+                    del glm_tokenizer
+                    del llama_model
+                    del llama_tokenizer
+                    torch.cuda.empty_cache()
+                    gc.collect() 
+                    glm_tokenizer=""
+                    glm_model=""
+                    llama_tokenizer=""
+                    llama_model=""
+                return (response,history,)
+            except Exception as ex:
+                print(ex)
+                return (str(ex),str(ex),)
+    @classmethod
+    def IS_CHANGED(s):
+        # 返回当前时间的哈希值，确保每次都不同
+        current_time = str(time.time())
+        return hashlib.sha256(current_time.encode()).hexdigest()
+
+
+
+
+
+
 
 NODE_CLASS_MAPPINGS = {
     "LLM": LLM,
+    "LLM_local": LLM_local,
     "load_file":load_file,
     "tool_combine":tool_combine,
     "tool_combine_plus":tool_combine_plus,
@@ -289,7 +541,8 @@ NODE_CLASS_MAPPINGS = {
 
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "LLM": "大语言模型（LLM）",
+    "LLM": "大语言模型api（LLM_api）",
+    "LLM_local":"本地大语言模型（LLM_local）",
     "load_file": "加载文件（load_file）",
     "tool_combine":"工具组合（tool_combine）",
     "tool_combine_plus":"超大工具组合（tool_combine_plus）",
