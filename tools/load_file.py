@@ -55,7 +55,10 @@ class load_file:
                 }),
                 "is_enable": (["enable", "disable"],{
                     "default":"enable"
-                }), 
+                }),
+                "path_type":(["Absolute_Path","Relative_Path"],{
+                    "default":"Relative_Path"
+                })
             },
             "optional": {
 
@@ -73,9 +76,12 @@ class load_file:
 
 
 
-    def file(self,path,is_enable="enable"):
+    def file(self,path,path_type,is_enable="enable"):
         if is_enable=="disable":
             return (None,)
-        path = os.path.join(file_path, path)
+        if path_type=="Absolute_Path":
+            path = path
+        else:
+            path = os.path.join(file_path, path)
         out=read_one(path)
         return (out,)
