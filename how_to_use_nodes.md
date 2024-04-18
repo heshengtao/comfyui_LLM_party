@@ -8,10 +8,14 @@
 5. You can use `assistant_response` to view the model's reply in the current round of conversation, or use `history` to review the history of multi-turn dialogues.
 6. Even if external parameters remain unchanged, large model nodes always run because they provide different answers to the same question.
 7. The `is_tools_in_sys_prompt` determines whether the information of ‘tools’ will be entered into the system prompt.
+8. `is_locked` can lock the results of the previous conversation, allowing the large model to directly return the answer from the previous turn. This helps maintain continuity in the conversation and allows valuable human resources to handle more complex questions.
 
 ## start_dialog and end_dialog Nodes
 1. These two nodes have a `dialog_id`. Connecting dialog IDs creates an archive point for the conversation. When you need to loop two large models, although it cannot be directly implemented in ComfyUI, you can save the output of the second model locally and pass it to the first model in the next run. You can use the ComfyUI API in other frontends to call ComfyUI, creating an infinite self-dialogue loop between the two models.
 2. The `start_dialog` node has a `start_dialog` interface, which can serve as a user-provided prompt at the beginning of a conversation, guiding the large model to discuss topics based on the user's input.
+
+## Common Characteristics of Tool Nodes
+1. is_enable determines whether the tool is enabled, making it convenient for users to quickly change the tools connected to the model.
 
 ## google_tool Node
 1. You can input your Google API key and CSE ID to use this node.
