@@ -2,7 +2,7 @@
 
 ## Latest Updates
 1. Added a local large model node, currently compatible with GLM and LLM. However, LLM cannot be used for tool invocations because the native LLM does not include this functionality. Please provide the absolute paths to the tokenizer and model folders in the node to load LLM locally.
-2. Introduced an interpreter tool.
+2. Introduced a code interpreter tool.
 3. Enabled file loading with the option to input absolute paths.
 4. Expanded the components available for the large model node, giving you more choices.
 
