@@ -16,7 +16,7 @@
 
 ## Features
 1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
-2. Supports OpenAI API driving and custom base_url, allowing the use of a proxy API to drive LLM nodes.If you are using other large model interfaces, you can convert them to the OpenAI API format using [openai-style-api](https://github.com/tian-minghui/openai-style-api). Please select the local large model node for local deployment. Currently, both GLM and LLAMA have been adapted, but LLAMA cannot be used for tool invocations because the native LLAMA does not include this functionality12
+2. Supports OpenAI API driving and custom base_url, allowing the use of a proxy API to drive LLM nodes.If you are using other large model interfaces, you can convert them to the OpenAI API format using [openai-style-api](https://github.com/tian-minghui/openai-style-api). Please select the LLM_local node for local deployment. Currently, both GLM and LLAMA have been adapted, but LLAMA cannot be used for tool invocations because the native LLAMA does not include this functionality12
 3. The base_url must end with `/v1/`.
 4. Supports importing various file types into LLM nodes. With RAG technology, LLM can answer questions based on file content. Currently supported file types include: .docx, .xlsx, .csv, .txt, .py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
 5. The tool combine node allows multiple tools to be passed into the LLM node, and the file combine node allows multiple files to be passed into the LLM node.
