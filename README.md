@@ -1,3 +1,5 @@
+[简体中文](README_ZH.md)
+
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI** 
 
 ## Introduction
