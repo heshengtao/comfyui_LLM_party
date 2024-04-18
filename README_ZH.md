@@ -1,3 +1,9 @@
+## 最新更新
+1. 新增了本地大模型节点，目前适配了GLM和llama，但是llama不能使用工具调用，因为原生llama并不包含这个功能。请将分词器和模型的文件夹绝对路径贴到节点中，就可以本地加载LLM了
+2. 新增了解释器工具。
+3. 新增了文件加载可以选择绝对路径输入。
+4. 新增了大模型节点更多的组件，你拥有了更多的选择。
+
 # **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库** 
 
 ## 简介
@@ -8,7 +14,7 @@
 
 ## 特征
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)
-2. 支持openai的API驱动，并支持自定义base_url，可以使用中转API驱动LLM节点。如果你使用的是其他的大模型接口，可以使用[openai-style-api](https://github.com/tian-minghui/openai-style-api)转化成openai接口格式。如果你是使用本地大模型，可以在这些大模型的项目文件夹下运行`python3 openai_api.py`或者`python3 api_server.py`，将本地大模型转化成openai接口格式。注意！有些本地大模型（例如GLM3）没有tools这个参数，需要你将LLM节点的is_tools_in_sys_prompt切换到enable，这样tools会直接输入到系统提示词中。
+2. 支持openai的API驱动，并支持自定义base_url，可以使用中转API驱动LLM节点。如果你使用的是其他的大模型接口，可以使用[openai-style-api](https://github.com/tian-minghui/openai-style-api)转化成openai接口格式。本地大模型请选择本地大模型节点，目前适配了GLM和llama，但是llama不能使用工具调用，因为原生llama并不包含这个功能
 3. base_url必须是以`/v1/`结尾
 4. 支持多种类型的文件类型导入LLM节点，通过RAG技术让LLM可以针对文件内容作答，目前支持以下文件类型：.docx、.xlsx、.csv、.txt、.py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
 5. 通过工具组合节点可以将多个工具传入LLM节点，通过文件组合节点可以将多个文件传入LLM节点
