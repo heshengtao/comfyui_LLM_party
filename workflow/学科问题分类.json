@@ -1,0 +1,424 @@
+{
+  "last_node_id": 169,
+  "last_link_id": 156,
+  "nodes": [
+    {
+      "id": 165,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1950,
+        110
+      ],
+      "size": {
+        "0": 370,
+        "1": 250
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 149,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "鲁迅有哪些名人名言？\n"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 166,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1950,
+        430
+      ],
+      "size": {
+        "0": 360,
+        "1": 210
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 150,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "123*234等于多少？\n"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 169,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1950,
+        720
+      ],
+      "size": {
+        "0": 360,
+        "1": 210
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 156,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "将我想和你在一起用英语翻译一下？"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 162,
+      "type": "classify_function",
+      "pos": [
+        1480,
+        210
+      ],
+      "size": {
+        "0": 315,
+        "1": 122
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 155,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "response1",
+          "type": "STRING",
+          "links": [
+            149
+          ],
+          "shape": 3,
+          "label": "response1",
+          "slot_index": 0
+        },
+        {
+          "name": "response2",
+          "type": "STRING",
+          "links": [
+            150
+          ],
+          "shape": 3,
+          "label": "response2",
+          "slot_index": 1
+        },
+        {
+          "name": "response3",
+          "type": "STRING",
+          "links": [
+            156
+          ],
+          "shape": 3,
+          "label": "response3",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "classify_function"
+      },
+      "widgets_values": [
+        "enable",
+        ""
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 164,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1460,
+        470
+      ],
+      "size": {
+        "0": 370,
+        "1": 290
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 153,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "**1:** 鲁迅有哪些名人名言？\n**2:** 123*234等于多少？\n**3:** 将我想和你在一起用英语翻译一下？"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 154,
+      "type": "classify_persona",
+      "pos": [
+        520,
+        140
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            152
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "classify_persona"
+      },
+      "widgets_values": [
+        "enable",
+        "语文相关的问题",
+        "数学相关的问题",
+        "英语相关的问题"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 149,
+      "type": "LLM",
+      "pos": [
+        970,
+        210
+      ],
+      "size": {
+        "0": 400,
+        "1": 342
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "link": 152,
+          "widget": {
+            "name": "system_prompt"
+          },
+          "label": "system_prompt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            153,
+            155
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "鲁迅有哪些名人名言？\n123*234等于多少？\n将我想和你在一起用英语翻译一下？\n",
+        "gpt-4",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    }
+  ],
+  "links": [
+    [
+      149,
+      162,
+      0,
+      165,
+      0,
+      "STRING"
+    ],
+    [
+      150,
+      162,
+      1,
+      166,
+      0,
+      "STRING"
+    ],
+    [
+      152,
+      154,
+      0,
+      149,
+      2,
+      "STRING"
+    ],
+    [
+      153,
+      149,
+      0,
+      164,
+      0,
+      "STRING"
+    ],
+    [
+      155,
+      149,
+      0,
+      162,
+      0,
+      "STRING"
+    ],
+    [
+      156,
+      162,
+      2,
+      169,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
