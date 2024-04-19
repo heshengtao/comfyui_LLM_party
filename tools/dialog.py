@@ -31,7 +31,7 @@ class start_dialog:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "llm"
+    CATEGORY = "大模型派对（llm_party）/面具和函数（persona&function）"
 
 
 
@@ -67,7 +67,7 @@ class end_dialog:
 
     OUTPUT_NODE = False
 
-    CATEGORY = "llm"
+    CATEGORY = "大模型派对（llm_party）/面具和函数（persona&function）"
 
 
 

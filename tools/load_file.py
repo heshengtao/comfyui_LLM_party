@@ -72,7 +72,7 @@ class load_file:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "llm"
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
 
 

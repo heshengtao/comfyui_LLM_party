@@ -32,13 +32,14 @@ class classify_persona:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "llm"
+    CATEGORY = "大模型派对（llm_party）/面具和函数（persona&function）"
 
 
 
     def condition(self,text1=None,text2=None,text3=None,is_enable="enable",file_content=None):
         if is_enable=="disable":
             return (None,)
+        text =""
         if file_content is not None:
             text = "##背景知识：\n"+file_content+"\n\n"
         sys_prompt=text+f"""

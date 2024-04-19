@@ -46,7 +46,7 @@ class weather_tool:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "llm/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
 
 
