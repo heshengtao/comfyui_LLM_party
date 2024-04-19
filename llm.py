@@ -21,6 +21,9 @@ from .tools.check_web import check_web,check_web_tool
 from .tools.file_combine import file_combine,file_combine_plus
 from .tools.dialog import start_dialog,end_dialog
 from .tools.interpreter import interpreter,interpreter_tool
+from .tools.load_persona import load_persona
+from .tools.classify_persona import classify_persona
+from .tools.classify_function import classify_function
 from transformers import AutoTokenizer, AutoModel, AutoModelForCausalLM
 glm_tokenizer=""
 glm_model=""
@@ -526,6 +529,9 @@ NODE_CLASS_MAPPINGS = {
     "LLM": LLM,
     "LLM_local": LLM_local,
     "load_file":load_file,
+    "load_persona":load_persona,
+    "classify_persona":classify_persona,
+    "classify_function":classify_function,
     "tool_combine":tool_combine,
     "tool_combine_plus":tool_combine_plus,
     "time_tool": time_tool,
@@ -544,6 +550,9 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "LLM": "大语言模型api（LLM_api）",
     "LLM_local":"本地大语言模型（LLM_local）",
     "load_file": "加载文件（load_file）",
+    "load_persona": "加载人格面具（load_persona）",
+    "classify_persona": "分类器面具（classify_persona）",
+    "classify_function": "分类器函数（classify_function）",
     "tool_combine":"工具组合（tool_combine）",
     "tool_combine_plus":"超大工具组合（tool_combine_plus）",
     "time_tool": "时间工具（time_tool）",
