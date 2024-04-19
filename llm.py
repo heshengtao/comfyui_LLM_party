@@ -11,7 +11,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 import openai
 import torch
-from .config import config_path,current_dir_path,load_api_keys,bge_embeddings
+from .config import config_path,current_dir_path,load_api_keys
 from .tools.load_file import load_file
 from .tools.tool_combine import tool_combine,tool_combine_plus
 from .tools.get_time import get_time,time_tool
@@ -24,6 +24,7 @@ from .tools.interpreter import interpreter,interpreter_tool
 from .tools.load_persona import load_persona
 from .tools.classify_persona import classify_persona
 from .tools.classify_function import classify_function
+from .tools.load_ebd import ebd_tool,data_base
 from transformers import AutoTokenizer, AutoModel, AutoModelForCausalLM
 glm_tokenizer=""
 glm_model=""
@@ -35,6 +36,7 @@ _TOOL_HOOKS=[
     "search_web",
     "check_web",
     "interpreter",
+    "data_base"
 ]
 
 def dispatch_tool(tool_name: str, tool_params: dict) -> str:
@@ -170,9 +172,6 @@ class LLM:
                 "is_locked": (["enable", "disable"],{
                     "default":"disable"
                 }),
-                "is_RAG": (["enable", "disable"],{
-                    "default":"enable"
-                }),
             },
             "optional": {
                 "tools": ("STRING", {
@@ -199,7 +198,7 @@ class LLM:
 
     CATEGORY = "llm"
 
-    def chatbot(self, user_prompt, system_prompt,model_name,temperature,is_RAG,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None,api_key=None,base_url=None):
+    def chatbot(self, user_prompt, system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None,api_key=None,base_url=None):
         if user_prompt=="#清空":
             with open(self.prompt_path, 'w', encoding='utf-8') as f:
                 json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
@@ -260,18 +259,7 @@ class LLM:
                 chat=Chat(history,model_name,temperature,tools)
                 
                 if file_content is not None:
-                    if is_RAG=="enable":
-                        text_splitter0 = RecursiveCharacterTextSplitter(
-                            chunk_size = 200,
-                            chunk_overlap = 50,
-                            ) 
-                        chunks0 = text_splitter0.split_text(file_content)
-                        knowledge_base0 = FAISS.from_texts(chunks0, bge_embeddings)
-                        docs = knowledge_base0.similarity_search(user_prompt, k=5)
-                        combined_content = ''.join(doc.page_content + "\n" for doc in docs)
-                        user_prompt="文件中相关内容："+combined_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
-                    else:
-                        user_prompt="文件中相关内容："+file_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
+                    user_prompt="文件中相关内容："+file_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
                 response,history= chat.send(user_prompt)
                 print(response)
                 #修改prompt.json文件
@@ -316,10 +304,10 @@ class LLM_local:
                     "default": "GLM",
                 }),
                 "model_path": ("STRING", {
-                    "default": ".bin",
+                    "default": None,
                 }),
                 "tokenizer_path": ("STRING", {
-                    "default": ".tokenizer",
+                    "default": None,
                 }),
                 "temperature": ("FLOAT", {
                     "default": 0.7,
@@ -335,9 +323,6 @@ class LLM_local:
                 }),
                 "is_locked": (["enable", "disable"],{
                     "default":"disable"
-                }),
-                "is_RAG": (["enable", "disable"],{
-                    "default":"enable"
                 }),
                 "is_reload": (["enable", "disable"],{
                     "default":"disable"
@@ -370,7 +355,7 @@ class LLM_local:
 
     CATEGORY = "llm"
 
-    def chatbot(self, user_prompt, system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_RAG,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None):
+    def chatbot(self, user_prompt, system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None):
         if user_prompt=="#清空":
             with open(self.prompt_path, 'w', encoding='utf-8') as f:
                 json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
@@ -416,18 +401,7 @@ class LLM_local:
 
                 
                 if file_content is not None:
-                    if is_RAG=="enable":
-                        text_splitter0 = RecursiveCharacterTextSplitter(
-                            chunk_size = 200,
-                            chunk_overlap = 50,
-                            ) 
-                        chunks0 = text_splitter0.split_text(file_content)
-                        knowledge_base0 = FAISS.from_texts(chunks0, bge_embeddings)
-                        docs = knowledge_base0.similarity_search(user_prompt, k=5)
-                        combined_content = ''.join(doc.page_content + "\n" for doc in docs)
-                        user_prompt="文件中相关内容："+combined_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
-                    else:
-                        user_prompt="文件中相关内容："+file_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
+                    user_prompt="文件中相关内容："+file_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
                 global glm_tokenizer, glm_model, llama_tokenizer, llama_model
                 if model_type=="GLM":
                     if glm_tokenizer=="":
@@ -543,6 +517,7 @@ NODE_CLASS_MAPPINGS = {
     "start_dialog":start_dialog,
     "end_dialog":end_dialog,
     "interpreter_tool":interpreter_tool,
+    "ebd_tool":ebd_tool,
 }
 
 
@@ -564,6 +539,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "start_dialog":"开始对话（start_dialog）",
     "end_dialog":"结束对话（end_dialog）",
     "interpreter_tool":"解释器工具（interpreter_tool）",
+    "ebd_tool":"词嵌入模型工具（embeddings_tool）",
 }
 
 if __name__ == '__main__':
