@@ -1,4 +1,6 @@
-[简体中文](README_ZH.md)
+<p align="right">
+   <a href="./README_ZH.md">中文</a> |  <strong>English</strong> 
+</p>
 
 ## Latest Updates
 1. Added a local large model node, currently compatible with GLM and LLM. However, LLM cannot be used for tool invocations because the native LLM does not include this functionality. Please provide the absolute paths to the tokenizer and model folders in the node to load LLM locally.
