@@ -17,7 +17,9 @@ class load_persona:
                 })
             },
             "optional": {
-
+                "file_content": ("STRING", {
+                    "forceInput": True
+                }),
             }
         }
     
@@ -32,11 +34,14 @@ class load_persona:
 
 
 
-    def persona(self,persona_name,is_enable="enable"):
+    def persona(self,persona_name,is_enable="enable",file_content=None):
         if is_enable=="disable":
             return (None,)
         per_path = os.path.join(persona_path, persona_name + '.txt')
         text=""
-        with open(per_path, 'r', encoding='utf-8') as f:
-            text += f.read()
+        if file_content is not None:
+            text += "##背景知识：\n"+file_content+"\n\n"
+        if os.path.exists(per_path):
+            with open(per_path, 'r', encoding='utf-8') as f:
+                text += f.read()
         return (text,)

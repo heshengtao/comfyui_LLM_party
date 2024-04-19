@@ -10,6 +10,9 @@ class classify_persona:
                 })
             },
             "optional": {
+                "file_content": ("STRING", {
+                    "forceInput": True
+                }),
                 "text1": ("STRING", {
 
                 }),
@@ -33,10 +36,12 @@ class classify_persona:
 
 
 
-    def condition(self,text1=None,text2=None,text3=None,is_enable="enable"):
+    def condition(self,text1=None,text2=None,text3=None,is_enable="enable",file_content=None):
         if is_enable=="disable":
             return (None,)
-        sys_prompt=f"""
+        if file_content is not None:
+            text = "##背景知识：\n"+file_content+"\n\n"
+        sys_prompt=text+f"""
             # 文本分类助理
             你是一个文本分类助理。
             ## 任务

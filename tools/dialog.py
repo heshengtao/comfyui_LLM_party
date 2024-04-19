@@ -1,5 +1,5 @@
 import os
-from ..config import config_path,current_dir_path,load_api_keys,bge_embeddings
+from ..config import config_path,current_dir_path,load_api_keys
 
 class start_dialog:
     def __init__(self):
