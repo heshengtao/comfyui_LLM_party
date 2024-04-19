@@ -196,7 +196,7 @@ class LLM:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "llm"
+    CATEGORY = "大模型派对（llm_party）"
 
     def chatbot(self, user_prompt, system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None,api_key=None,base_url=None):
         if user_prompt=="#清空":
@@ -353,7 +353,7 @@ class LLM_local:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "llm"
+    CATEGORY = "大模型派对（llm_party）"
 
     def chatbot(self, user_prompt, system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None):
         if user_prompt=="#清空":
