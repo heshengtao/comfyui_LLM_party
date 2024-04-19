@@ -1,3 +1,7 @@
+<p align="right">
+   <strong>中文</strong> | <a href="./README.md">English</a>
+</p>
+
 ## 最新更新
 1. 新增了本地大模型节点，目前适配了GLM和llama，但是llama不能使用工具调用，因为原生llama并不包含这个功能。请将分词器和模型的文件夹绝对路径贴到节点中，就可以本地加载LLM了
 2. 新增了代码解释器工具。
