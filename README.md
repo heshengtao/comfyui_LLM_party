@@ -33,6 +33,7 @@ Or install using one of the following methods:
 ### Method 1:
 1. Search for comfyui_LLM_party in the [comfyui manager](https://github.com/ltdrdata/ComfyUI-Manager) and install it with one click.
 2. Restart comfyui. During the first restart, it will take some time to download the embedding model used for RAG.
+3. If the word embedding model fails to download, the nodes for this project will not be found in the right-click menu of comfyui. You can manually copy the word embedding model to the model folder. [click the link](https://huggingface.co/BAAI/bge-large-zh/tree/main) to download the model.
 
 ### Method 2:
 1. Navigate to the `custom_nodes` subfolder under the ComfyUI root folder.
