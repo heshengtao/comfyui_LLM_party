@@ -1,0 +1,567 @@
+{
+  "last_node_id": 168,
+  "last_link_id": 151,
+  "nodes": [
+    {
+      "id": 150,
+      "type": "load_persona",
+      "pos": [
+        46,
+        223
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            138
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "图片提示词生成器",
+        "enable"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 154,
+      "type": "classify_persona",
+      "pos": [
+        614,
+        8
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            142
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "classify_persona"
+      },
+      "widgets_values": [
+        "enable",
+        "Positive Prompt",
+        "Negative Prompt",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 163,
+      "type": "ShowText|pysssss",
+      "pos": [
+        960,
+        700
+      ],
+      "size": {
+        "0": 350,
+        "1": 320
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 147,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "### Positive Prompt:\n(best quality,4k,8k,highres,masterpiece:1.2),ultra-detailed,(realistic,photorealistic,photo-realistic:1.37),beautiful woman with a red hat,holding a lollipop,striking pose,expressive eyes with long eyelashes,smooth skin,glossy lips,street fashion,urban background,sunny day,soft shadows,high color saturation,vibrant colors,casual clothing,modern look,playful mood,eye-catching,close-up portrait,stylized photography,clear sky\n\n### Negative Prompt:\nnsfw,(low quality,normal quality,worst quality,jpeg artifacts),cropped,monochrome,lowres,low saturation,((watermark)),(white letters),skin spots,acnes,skin blemishes,age spot,mutated hands,mutated fingers,deformed,bad anatomy,disfigured,poorly drawn face,extra limb,ugly,poorly drawn hands,missing limb,floating limbs,disconnected limbs,out of focus,long neck,long body,extra fingers,fewer fingers,,(multi nipples),bad hands,signature,username,bad feet,blurry,bad body"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 165,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1950,
+        110
+      ],
+      "size": [
+        370,
+        250
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 149,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "best quality,4k,8k,highres,masterpiece:1.2,ultra-detailed,realistic,photorealistic,photo-realistic,beautiful woman with a red hat,holding a lollipop,striking pose,expressive eyes with long eyelashes,smooth skin,glossy lips,street fashion,urban background,sunny day,soft shadows,high color saturation,vibrant colors,casual clothing,modern look,playful mood,eye-catching,close-up portrait,stylized photography,clear sky\n**2:** nsfw,low quality,normal quality,worst quality,jpeg artifacts,cropped,monochrome,lowres,low saturation,watermark,white letters,skin spots,acnes,skin blemishes,age spot,mutated hands,mutated fingers,deformed,bad anatomy,disfigured,poorly drawn face,extra limb,ugly,poorly drawn hands,missing limb,floating limbs,disconnected limbs,out of focus,long neck,long body,extra fingers,fewer fingers,multi nipples,bad hands,signature,username,bad feet,blurry,bad body\n**3:**"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 166,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1950,
+        430
+      ],
+      "size": [
+        360,
+        210
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 150,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "nsfw,low quality,normal quality,worst quality,jpeg artifacts,cropped,monochrome,lowres,low saturation,watermark,white letters,skin spots,acnes,skin blemishes,age spot,mutated hands,mutated fingers,deformed,bad anatomy,disfigured,poorly drawn face,extra limb,ugly,poorly drawn hands,missing limb,floating limbs,disconnected limbs,out of focus,long neck,long body,extra fingers,fewer fingers,multi nipples,bad hands,signature,username,bad feet,blurry,bad body\n**3:**"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 162,
+      "type": "classify_function",
+      "pos": [
+        1480,
+        210
+      ],
+      "size": {
+        "0": 315,
+        "1": 122
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 146,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "response1",
+          "type": "STRING",
+          "links": [
+            149
+          ],
+          "shape": 3,
+          "label": "response1",
+          "slot_index": 0
+        },
+        {
+          "name": "response2",
+          "type": "STRING",
+          "links": [
+            150
+          ],
+          "shape": 3,
+          "label": "response2",
+          "slot_index": 1
+        },
+        {
+          "name": "response3",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "label": "response3",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "classify_function"
+      },
+      "widgets_values": [
+        "enable",
+        ""
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 149,
+      "type": "LLM",
+      "pos": [
+        460,
+        210
+      ],
+      "size": {
+        "0": 400,
+        "1": 342
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "link": 138,
+          "widget": {
+            "name": "system_prompt"
+          },
+          "label": "system_prompt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            141,
+            147
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "你好，我想要一个大美女，戴着红色的帽子，手里拿着棒棒糖",
+        "gpt-4",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 153,
+      "type": "LLM",
+      "pos": [
+        980,
+        210
+      ],
+      "size": {
+        "0": 400,
+        "1": 342
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "link": 142,
+          "widget": {
+            "name": "system_prompt"
+          },
+          "label": "system_prompt"
+        },
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "link": 141,
+          "widget": {
+            "name": "user_prompt"
+          },
+          "label": "user_prompt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            146,
+            148
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "label": "history",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "你好，我想要一个大美女，戴着红色的帽子，手里拿着棒棒糖",
+        "gpt-4",
+        0.7000000000000001,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 164,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1500,
+        470
+      ],
+      "size": [
+        370,
+        290
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 148,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "**1:** best quality,4k,8k,highres,masterpiece:1.2,ultra-detailed,realistic,photorealistic,photo-realistic,beautiful woman with a red hat,holding a lollipop,striking pose,expressive eyes with long eyelashes,smooth skin,glossy lips,street fashion,urban background,sunny day,soft shadows,high color saturation,vibrant colors,casual clothing,modern look,playful mood,eye-catching,close-up portrait,stylized photography,clear sky\n**2:** nsfw,low quality,normal quality,worst quality,jpeg artifacts,cropped,monochrome,lowres,low saturation,watermark,white letters,skin spots,acnes,skin blemishes,age spot,mutated hands,mutated fingers,deformed,bad anatomy,disfigured,poorly drawn face,extra limb,ugly,poorly drawn hands,missing limb,floating limbs,disconnected limbs,out of focus,long neck,long body,extra fingers,fewer fingers,multi nipples,bad hands,signature,username,bad feet,blurry,bad body\n**3:**"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    }
+  ],
+  "links": [
+    [
+      138,
+      150,
+      0,
+      149,
+      2,
+      "STRING"
+    ],
+    [
+      141,
+      149,
+      0,
+      153,
+      3,
+      "STRING"
+    ],
+    [
+      142,
+      154,
+      0,
+      153,
+      2,
+      "STRING"
+    ],
+    [
+      146,
+      153,
+      0,
+      162,
+      0,
+      "STRING"
+    ],
+    [
+      147,
+      149,
+      0,
+      163,
+      0,
+      "STRING"
+    ],
+    [
+      148,
+      153,
+      0,
+      164,
+      0,
+      "STRING"
+    ],
+    [
+      149,
+      162,
+      0,
+      165,
+      0,
+      "STRING"
+    ],
+    [
+      150,
+      162,
+      1,
+      166,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
