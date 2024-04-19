@@ -32,19 +32,16 @@
 或使用以下方法之一安装
 ### 方法一：
 1. 在[comfyui管理器](https://github.com/ltdrdata/ComfyUI-Manager)中搜索`comfyui_LLM_party`，一键安装
-2. 重启comfyui，在第一次重启时，会消耗一些时间来下载用于RAG的词嵌入模型
-3. 如果词嵌入模型下载失败，comfyui中的右键菜单中将找不到本项目的节点，可以将词嵌入模型手动复制到`model`文件夹下，[点击链接](https://modelscope.cn/models/AI-ModelScope/bge-large-zh/files)下载模型。
+2. 重启comfyui。
 
 ### 方法二：
 1. 导航到 ComfyUI 根文件夹中下的`custom_nodes`子文件夹
 2. 使用克隆此存储库。`git clone https://github.com/heshengtao/comfyui_LLM_party.git`
-3. 将词嵌入模型复制到`model`文件夹下，[点击链接](https://modelscope.cn/models/AI-ModelScope/bge-large-zh/files)下载模型。
 
 ### 方法三：
 1. 点击右上角的`CODE`
 2. 点击`download zip`
 3. 将下载的压缩包解压到ComfyUI 根文件夹中下的`custom_nodes`子文件夹中
-4. 将词嵌入模型复制到`model`文件夹下，[点击链接](https://modelscope.cn/models/AI-ModelScope/bge-large-zh/files)下载模型。
 
 ## 环境部署
 1. 导航到`comfyui_LLM_party`的项目文件夹
