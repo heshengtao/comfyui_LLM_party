@@ -1,3 +1,6 @@
+import re
+
+
 class classify_function:
     @classmethod
     def INPUT_TYPES(s):
@@ -29,13 +32,13 @@ class classify_function:
     def condition(self,text,is_enable="enable"):
         if is_enable=="disable":
             return (None,)
-        # 定义一个安全的分割函数
-        def safe_split(s, delimiter):
-            return s.split(delimiter)[1] if delimiter in s else ''
+        # 使用正则表达式分割字符串
+        parts = re.split(r'\*\*[0-9]:\*\* ', text)
 
-        # 提取不同部分的文本
-        response1 = safe_split(text, '**1:** ').split(' **2:**')[0]
-        response2 = safe_split(text, '**2:** ').split(' **3:**')[0]
-        response3 = safe_split(text, '**3:** ')
+        # 移除列表中的空字符串
+        parts = [part for part in parts if part]
+
+        # 根据分割后的部分数量，赋值给response变量
+        response1, response2, response3 = (parts + ["", "", ""])[:3]
 
         return (response1,response2,response3,)
