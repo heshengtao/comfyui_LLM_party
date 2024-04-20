@@ -9,7 +9,19 @@
 6. Even if external parameters remain unchanged, large model nodes always run because they provide different answers to the same question.
 7. The `is_tools_in_sys_prompt` determines whether the information of ‘tools’ will be entered into the system prompt.
 8. `is_locked` can lock the results of the previous conversation, allowing the large model to directly return the answer from the previous turn. This helps maintain continuity in the conversation and allows valuable human resources to handle more complex questions.
-9. `is_RAG` determines whether to use RAG for file content. If disabled, all file content will be input into the model, which may exceed the context window.
+
+## Local Large Model
+1. For model_type, you can currently choose between `GLM` and `llama` formats.
+2. For `model_path` and `tokenizer_path`, simply fill in the local model folder and local tokenizer folder respectively.
+3. `is_reload` determines whether the local model will be unloaded after the node runs. If enabled, the model will be reloaded each time, ensuring that video memory is not occupied. If disabled, the model will not be reloaded repeatedly, shortening inference time.
+4. `device` determines whether to run on `cuda` or `cpu`, as well as whether to use `float16/int8/int4` quantization.
+5. Other parameters are consistent with the `LLM_api` node.
+
+## Node Overview
+1. The nodes in this project can be divided into LLM nodes, tool nodes, function nodes, mask nodes, and loader nodes.
+2. Tool nodes are nodes that are attached to the model’s tools interface and are called internally within the model. For tool nodes, is_enable determines whether the tool is enabled, allowing users to quickly change the tools attached to the model.
+3. Mask nodes and function nodes usually appear in pairs; mask nodes are customizable prompt word templates, attached to the model’s system_prompt or user_prompt interface. Large models with attached mask nodes have a specific output format, which can stably call the corresponding external function nodes.
+4. Loader nodes can quickly load local files or personality masks.
 
 ## start_dialog and end_dialog Nodes
 1. These two nodes have a `dialog_id`. Connecting dialog IDs creates an archive point for the conversation. When you need to loop two large models, although it cannot be directly implemented in ComfyUI, you can save the output of the second model locally and pass it to the first model in the next run. You can use the ComfyUI API in other frontends to call ComfyUI, creating an infinite self-dialogue loop between the two models.
