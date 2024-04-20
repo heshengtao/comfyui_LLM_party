@@ -1,5 +1,11 @@
 # **Node Usage Instructions**
 
+## Node Overview
+1. The nodes in this project can be divided into LLM nodes, tool nodes, function nodes, mask nodes, and loader nodes.
+2. Tool nodes are nodes that are attached to the model’s tools interface and are called internally within the model. For tool nodes, is_enable determines whether the tool is enabled, allowing users to quickly change the tools attached to the model.
+3. Mask nodes and function nodes usually appear in pairs; mask nodes are customizable prompt word templates, attached to the model’s system_prompt or user_prompt interface. Large models with attached mask nodes have a specific output format, which can stably call the corresponding external function nodes.
+4. Loader nodes can quickly load local files or personality masks.
+
 ## LLM Nodes
 1. LLM nodes allow customization of model name, temperature, API_KEY, and base_url. Currently, they only support OpenAI-type API calls.
 2. You can directly input system prompts and user prompts on the node, or convert these two small components into inputs for the node, accepting string-type input.
@@ -16,12 +22,6 @@
 3. `is_reload` determines whether the local model will be unloaded after the node runs. If enabled, the model will be reloaded each time, ensuring that video memory is not occupied. If disabled, the model will not be reloaded repeatedly, shortening inference time.
 4. `device` determines whether to run on `cuda` or `cpu`, as well as whether to use `float16/int8/int4` quantization.
 5. Other parameters are consistent with the `LLM_api` node.
-
-## Node Overview
-1. The nodes in this project can be divided into LLM nodes, tool nodes, function nodes, mask nodes, and loader nodes.
-2. Tool nodes are nodes that are attached to the model’s tools interface and are called internally within the model. For tool nodes, is_enable determines whether the tool is enabled, allowing users to quickly change the tools attached to the model.
-3. Mask nodes and function nodes usually appear in pairs; mask nodes are customizable prompt word templates, attached to the model’s system_prompt or user_prompt interface. Large models with attached mask nodes have a specific output format, which can stably call the corresponding external function nodes.
-4. Loader nodes can quickly load local files or personality masks.
 
 ## start_dialog and end_dialog Nodes
 1. These two nodes have a `dialog_id`. Connecting dialog IDs creates an archive point for the conversation. When you need to loop two large models, although it cannot be directly implemented in ComfyUI, you can save the output of the second model locally and pass it to the first model in the next run. You can use the ComfyUI API in other frontends to call ComfyUI, creating an infinite self-dialogue loop between the two models.
