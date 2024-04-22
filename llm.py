@@ -25,11 +25,14 @@ from .tools.load_persona import load_persona
 from .tools.classify_persona import classify_persona
 from .tools.classify_function import classify_function
 from .tools.load_ebd import ebd_tool,data_base
-from transformers import AutoTokenizer, AutoModel, AutoModelForCausalLM
+from .tools.custom_persona import custom_persona
+from transformers import AutoTokenizer, AutoModel, Qwen2Tokenizer, Qwen2ForCausalLM, AutoModelForCausalLM
 glm_tokenizer=""
 glm_model=""
 llama_tokenizer=""
 llama_model=""
+qwen_tokenizer=""
+qwen_model=""
 _TOOL_HOOKS=[
     "get_time",
     "get_weather",
@@ -376,19 +379,15 @@ class LLM_local:
                 with open(self.prompt_path, 'r', encoding='utf-8') as f:
                     history = json.load(f)
                 tool_list=[]
-                if is_tools_in_sys_prompt=="enable" or model_type=="GLM" or model_type=="llama":
-                    if tools is not None:
-                        tools_dis=json.loads(tools)
-                        for tool_dis in tools_dis:
-                            tool_list.append(tool_dis["function"])
-                        system_prompt=system_prompt+"\n"+"你可以使用以下工具："
-                else:
-                    tool_list=[]
-
+                if tools is not None:
+                    tools_dis=json.loads(tools)
+                    for tool_dis in tools_dis:
+                        tool_list.append(tool_dis["function"])
+                    system_prompt=system_prompt+"\n"+"你可以使用以下工具："
                 for message in history:
                     if message['role'] == 'system':
                         message['content'] = system_prompt
-                        if tool_list!=[]:
+                        if tool_list!=[] and model_type=="GLM":
                             message['tools']=tool_list
                         else:
                             if 'tools' in message:
@@ -402,7 +401,7 @@ class LLM_local:
                 
                 if file_content is not None:
                     user_prompt="文件中相关内容："+file_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
-                global glm_tokenizer, glm_model, llama_tokenizer, llama_model
+                global glm_tokenizer, glm_model, llama_tokenizer, llama_model,qwen_tokenizer, qwen_model
                 if model_type=="GLM":
                     if glm_tokenizer=="":
                         glm_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
@@ -428,45 +427,66 @@ class LLM_local:
                             print(result)
                             response, history = glm_model.chat(glm_tokenizer, result, history=history, role="observation")
                 elif model_type=="llama":
+                    llama_device = "cuda" if torch.cuda.is_available() else "cpu"
                     if llama_tokenizer=="":
                         llama_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
                     if llama_model=="":
                         if device=="cuda":
-                            llama_model = AutoModelForCausalLM.from_pretrained(model_path).cuda()
-                        elif device=="cuda-float16":
-                            llama_model = AutoModelForCausalLM.from_pretrained(model_path).half().cuda()
-                        elif device=="cuda-int8":
-                            llama_model = AutoModelForCausalLM.from_pretrained(model_path).half().cuda()
-                        elif device=="cuda-int4":
-                            llama_model = AutoModelForCausalLM.from_pretrained(model_path).half().cuda()
-                        else:
+                            llama_model = AutoModelForCausalLM.from_pretrained(model_path,device_map="cuda")
+                        elif device=="cpu":
                             llama_model = AutoModelForCausalLM.from_pretrained(model_path).float()
+                        else:
+                            llama_model = AutoModelForCausalLM.from_pretrained(model_path).half().cuda()
                         llama_model = llama_model.eval()
-                    llama_device = "cuda" if torch.cuda.is_available() else "cpu"
-                    B_FUNC, E_FUNC = "<FUNCTIONS>", "</FUNCTIONS>\n\n"
-                    B_INST, E_INST = "[INST] ", " [/INST]" #Llama style
-                    B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
-                    tool_list=json.dumps(tool_list,ensure_ascii=False,indent=4)
-                    # Format your prompt template
-                    prompt = f"{B_INST}{B_SYS}{system_prompt.strip()}{E_SYS}"
                     history.append({"role": "user", "content": user_prompt.strip()})
-                    for i, pro in enumerate(history):
-                        if pro['role']=="user":
-                            if i==2:
-                                prompt+=f"{pro['content'].strip()}{E_INST}\n\n"
-                            else:
-                                prompt+=f"{B_INST}{user_prompt.strip()}{E_INST}\n\n"
-                        if pro['role']=="assistant":
-                            prompt+=f"{pro['content'].strip()}\n\n"
-                    inputs = llama_tokenizer(prompt, return_tensors="pt").to(llama_device)
+                    text = llama_tokenizer.apply_chat_template(
+                        history,
+                        tokenize=False,
+                        add_generation_prompt=True
+                    )
+                    model_inputs = llama_tokenizer([text], return_tensors="pt").to(llama_device)
 
-                    # Generate
-                    generate_ids = llama_model.generate(inputs.input_ids, max_length=max_length).to('cpu')
-                    text=llama_tokenizer.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
-                    print(text)
-                    response = text.rsplit("[/INST]\n\n", 1)[-1]
-                    print(response)
+                    generated_ids = llama_model.generate(
+                        model_inputs.input_ids,
+                        max_new_tokens=max_length,
+                    )
+                    generated_ids = [
+                        output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
+                    ]
+
+                    response = llama_tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
                     history.append({"role":"assistant","content":response})
+                elif model_type=="Qwen":
+                    qwen_device = "cuda" if torch.cuda.is_available() else "cpu"
+                    if qwen_tokenizer=="":
+                        qwen_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+                    if qwen_model=="":
+                        if device=="cuda":
+                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path,device_map="cuda")
+                            qwen_model = qwen_model.half().cuda()
+
+                        elif device=="cpu":
+                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path).float()
+                        else:
+                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path).half().cuda()
+                        qwen_model.eval()
+                    history.append({"role": "user", "content": user_prompt.strip()})
+                    text = qwen_tokenizer.apply_chat_template(
+                        history,
+                        tokenize=False,
+                        add_generation_prompt=True
+                    )
+                    model_inputs = qwen_tokenizer([text], return_tensors="pt").to(qwen_device)
+
+                    generated_ids = qwen_model.generate(
+                        model_inputs.input_ids,
+                        max_new_tokens=max_length,
+                    )
+                    generated_ids = [
+                        output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
+                    ]
+
+                    response = qwen_tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
                 print(response)
                 #修改prompt.json文件
                 with open(self.prompt_path, 'w', encoding='utf-8') as f:
@@ -477,12 +497,16 @@ class LLM_local:
                     del glm_tokenizer
                     del llama_model
                     del llama_tokenizer
+                    del qwen_model
+                    del qwen_tokenizer
                     torch.cuda.empty_cache()
                     gc.collect() 
                     glm_tokenizer=""
                     glm_model=""
                     llama_tokenizer=""
                     llama_model=""
+                    qwen_tokenizer=""
+                    qwen_model=""
                 return (response,history,)
             except Exception as ex:
                 print(ex)
@@ -518,6 +542,7 @@ NODE_CLASS_MAPPINGS = {
     "end_dialog":end_dialog,
     "interpreter_tool":interpreter_tool,
     "ebd_tool":ebd_tool,
+    "custom_persona":custom_persona,
 }
 
 
@@ -540,6 +565,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "end_dialog":"结束对话（end_dialog）",
     "interpreter_tool":"解释器工具（interpreter_tool）",
     "ebd_tool":"词嵌入模型工具（embeddings_tool）",
+    "custom_persona":"自定义面具（custom_persona）",
 }
 
 if __name__ == '__main__':
