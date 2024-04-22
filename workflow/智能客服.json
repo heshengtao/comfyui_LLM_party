@@ -40,43 +40,6 @@
       "bgcolor": "#653"
     },
     {
-      "id": 184,
-      "type": "load_file",
-      "pos": [
-        1594,
-        887
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "links": [
-            185
-          ],
-          "shape": 3,
-          "label": "file_content",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_file"
-      },
-      "widgets_values": [
-        "how_to_use_nodes_ZH.txt",
-        "enable",
-        "Relative_Path"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
       "id": 185,
       "type": "file_combine",
       "pos": [
@@ -181,7 +144,8 @@
         "Node name for S&R": "ShowText|pysssss"
       },
       "widgets_values": [
-        ""
+        "",
+        "```\n# 安装comfyui_llm_party项目的方法：\n1. 在[comfyui管理器](https://github.com/ltdrdata/ComfyUI-Manager)中搜索`comfyui_LLM_party`，然后一键安装。\n2. 重启comfyui，第一次重启时会下载用于RAG的词嵌入模型。\n```"
       ],
       "color": "#233",
       "bgcolor": "#355"
@@ -431,8 +395,7 @@
         "Node name for S&R": "ShowText|pysssss"
       },
       "widgets_values": [
-        "",
-        "Hello! If you have any questions related to the comfyui_llm_party project, feel free to ask."
+        ""
       ],
       "color": "#233",
       "bgcolor": "#355"
@@ -476,142 +439,10 @@
       },
       "widgets_values": [
         "",
-        "\n\nHello! If you have any questions related to the comfyui_llm_party project, feel free to ask.\n"
+        "\n```\n# 安装comfyui_llm_party项目的方法：\n1. 在[comfyui管理器](https://github.com/ltdrdata/ComfyUI-Manager)中搜索`comfyui_LLM_party`，然后一键安装。\n2. 重启comfyui，第一次重启时会下载用于RAG的词嵌入模型。\n```\n\n"
       ],
       "color": "#233",
       "bgcolor": "#355"
-    },
-    {
-      "id": 194,
-      "type": "LLM",
-      "pos": [
-        1075,
-        838
-      ],
-      "size": {
-        "0": 399.0189514160156,
-        "1": 354.3806457519531
-      },
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          },
-          "label": "tools"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        },
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "link": 181,
-          "widget": {
-            "name": "system_prompt"
-          },
-          "label": "system_prompt"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            182,
-            195
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。",
-        "你好",
-        "gpt-3.5-turbo-1106",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 178,
-      "type": "classify_persona",
-      "pos": [
-        720,
-        602
-      ],
-      "size": {
-        "0": 315,
-        "1": 154
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "links": [
-            181
-          ],
-          "shape": 3,
-          "label": "system_prompt",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "classify_persona"
-      },
-      "widgets_values": [
-        "enable",
-        "",
-        "comfyui_llm_party项目节点怎么使用的问题",
-        "comfyui_llm_party项目怎么安装和部署的问题",
-        "其他"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
     },
     {
       "id": 202,
@@ -652,7 +483,7 @@
       },
       "widgets_values": [
         "",
-        "**1:** empty\n**2:** empty\n**3:** 你好"
+        "**1:** empty\n**2:** comfyui_llm_party项目怎么安装啊\n**3:** empty"
       ],
       "color": "#233",
       "bgcolor": "#355"
@@ -850,6 +681,175 @@
       ],
       "color": "#223",
       "bgcolor": "#335"
+    },
+    {
+      "id": 178,
+      "type": "classify_persona",
+      "pos": [
+        720,
+        602
+      ],
+      "size": {
+        "0": 315,
+        "1": 154
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            181
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "classify_persona"
+      },
+      "widgets_values": [
+        "enable",
+        "",
+        "comfyui_llm_party项目节点怎么使用的问题",
+        "comfyui_llm_party项目怎么安装和部署的问题",
+        "其他"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 194,
+      "type": "LLM",
+      "pos": [
+        1075,
+        838
+      ],
+      "size": {
+        "0": 399.0189514160156,
+        "1": 354.3806457519531
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "link": 181,
+          "widget": {
+            "name": "system_prompt"
+          },
+          "label": "system_prompt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            182,
+            195
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "comfyui_llm_party项目怎么安装啊",
+        "gpt-3.5-turbo-1106",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 184,
+      "type": "load_file",
+      "pos": [
+        1594,
+        887
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": [
+            185
+          ],
+          "shape": 3,
+          "label": "file_content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_file"
+      },
+      "widgets_values": [
+        "README_ZH.txt",
+        "enable",
+        "Relative_Path"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
     }
   ],
   "links": [
