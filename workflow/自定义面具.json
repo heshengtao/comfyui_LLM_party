@@ -1,0 +1,205 @@
+{
+  "last_node_id": 176,
+  "last_link_id": 160,
+  "nodes": [
+    {
+      "id": 175,
+      "type": "custom_persona",
+      "pos": [
+        660,
+        410
+      ],
+      "size": {
+        "0": 306.919921875,
+        "1": 215.1111297607422
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            159
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "custom_persona"
+      },
+      "widgets_values": [
+        "enable",
+        "帮我给一个自媒体取名字，我的自媒体主要是{text}内容，我频道的观众大部分都是{person}，想要一个可以在B站爆火的频道名",
+        "{\n\"person\":\"程序员\"\n}",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 176,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1530,
+        410
+      ],
+      "size": {
+        "0": 360,
+        "1": 240
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 160,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "根据您提供的规则，我为您自媒体取名为\"人工智能助手\"。\n\n替换后的文本为：\"人工智能助手是一个专注于人工智能领域的自媒体频道，我们的内容涵盖了机器学习、深度学习、自然语言处理等多个领域。我们的观众大部分都是程序员，希望通过我们的内容帮助他们更好地学习和了解人工智能技术。\"\n\n如果您有其他需要帮助的地方，请随时告诉我。"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 174,
+      "type": "LLM_local",
+      "pos": [
+        1056.7067953186036,
+        408.75369714355475
+      ],
+      "size": {
+        "0": 400,
+        "1": 390
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "link": 159,
+          "widget": {
+            "name": "system_prompt"
+          },
+          "label": "system_prompt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            160
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "人工智能",
+        "GLM",
+        "D:\\AI\\mychat\\model\\chatglm3-6b",
+        "D:\\AI\\mychat\\model\\chatglm3-6b",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "disable",
+        "cuda-float16",
+        512,
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    }
+  ],
+  "links": [
+    [
+      159,
+      175,
+      0,
+      174,
+      2,
+      "STRING"
+    ],
+    [
+      160,
+      174,
+      0,
+      176,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
