@@ -38,7 +38,7 @@
 
 ### 方法二：
 1. 导航到 ComfyUI 根文件夹中下的`custom_nodes`子文件夹
-2. 使用克隆此存储库。`git clone https://github.com/heshengtao/comfyui_LLM_party.git`
+2. 使用`git clone https://github.com/heshengtao/comfyui_LLM_party.git`克隆此存储库。
 
 ### 方法三：
 1. 点击右上角的`CODE`
