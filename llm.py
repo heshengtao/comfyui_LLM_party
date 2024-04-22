@@ -205,7 +205,14 @@ class LLM:
         if user_prompt=="#清空":
             with open(self.prompt_path, 'w', encoding='utf-8') as f:
                 json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
-            return ("已清空历史记录",)
+                            
+            with open(self.prompt_path, 'r', encoding='utf-8') as f:
+                history = json.load(f)
+            return ("已清空历史记录",str(history),)
+        elif user_prompt is None or user_prompt.strip()=="empty":
+            with open(self.prompt_path, 'r', encoding='utf-8') as f:
+                history = json.load(f)
+            return ("",str(history),)
         else:
             try:
                 # 读取prompt.json文件
@@ -303,7 +310,7 @@ class LLM_local:
                     "multiline": True,
                     "default": "你好",
                 }),
-                "model_type": (["GLM", "llama"], {
+                "model_type": (["GLM", "llama","Qwen"], {
                     "default": "GLM",
                 }),
                 "model_path": ("STRING", {
@@ -362,7 +369,14 @@ class LLM_local:
         if user_prompt=="#清空":
             with open(self.prompt_path, 'w', encoding='utf-8') as f:
                 json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
-            return ("已清空历史记录",)
+                            
+            with open(self.prompt_path, 'r', encoding='utf-8') as f:
+                history = json.load(f)
+            return ("已清空历史记录",str(history),)
+        elif user_prompt is None or user_prompt.strip()=="empty":
+            with open(self.prompt_path, 'r', encoding='utf-8') as f:
+                history = json.load(f)
+            return ("",str(history),)
         else:
             try:
                 # 读取prompt.json文件
