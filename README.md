@@ -3,10 +3,10 @@
 </p>
 
 ## Latest Updates
-1. Added a local large model node, currently compatible with GLM and LLM. However, LLM cannot be used for tool invocations because the native LLM does not include this functionality. Please provide the absolute paths to the tokenizer and model folders in the node to load LLM locally.
-2. Introduced a code interpreter tool.
-3. Enabled file loading with the option to input absolute paths.
-4. Expanded the components available for the large model node, giving you more choices.
+1. Supports GPT-4’s visual features, can read images in ComfyUI, but requires the free image hosting service imgbb to implement this feature.
+2. Added mask nodes, you can quickly enable your set system words, or use custom masks to quickly adjust prompt word templates.
+3. Implemented conditional statements in ComfyUI, allowing the large model to output to different interfaces after judgment.
+4. Added more example workflows, welcome everyone to use directly!
 
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI** 
 
@@ -21,11 +21,13 @@
 ## Features
 1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
 2. Supports OpenAI API driving and custom base_url, allowing the use of a proxy API to drive LLM nodes.If you are using other large model interfaces, you can convert them to the OpenAI API format using [openai-style-api](https://github.com/tian-minghui/openai-style-api). Please select the LLM_local node for local deployment. Currently, both GLM and LLAMA have been adapted, but LLAMA cannot be used for tool invocations because the native LLAMA does not include this functionality.
-3. The base_url must end with `/v1/`.
-4. Supports importing various file types into LLM nodes. With RAG technology, LLM can answer questions based on file content. Currently supported file types include: .docx, .xlsx, .csv, .txt, .py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
-5. The tool combine node allows multiple tools to be passed into the LLM node, and the file combine node allows multiple files to be passed into the LLM node.
-6. Supports Google search and single web page search, enabling LLM to perform online queries.
-7. Through the start_dialog node and the end_dialog node, a loopback link can be established between two LLMs, meaning the two LLMs act as each other’s input and output!
+1. Local knowledge base access, supports RAG.
+2. Can invoke a code interpreter.
+3. Can perform online queries, supports Google search.
+4. Can implement conditional statements in comfyui, can classify user questions and then provide targeted responses.
+5. Supports loopback links for large models, allowing two large models to have a debate.
+6. Supports attaching any personality mask, can customize prompt word templates.
+7. Supports multiple tool invocations; currently developed tools include weather check, time check, knowledge base, code execution, online search, search on a single webpage, and more tools are under development.
 8. It is recommended to use the show_text node from [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts) in conjunction with the LLM node for output display.
 
 ## Download
