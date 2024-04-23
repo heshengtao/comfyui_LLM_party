@@ -5,16 +5,12 @@ from langchain_community.vectorstores import FAISS
 ebd_model=""
 bge_embeddings=""
 files_load=""
+c_size=200
+c_overlap=50
+knowledge_base=""
 def data_base(question):
-    global bge_embeddings,files_load    
-    text_splitter0 = RecursiveCharacterTextSplitter(
-        chunk_size = 200,
-        chunk_overlap = 50,
-        ) 
-    chunks0 = text_splitter0.split_text(files_load)
-
-    knowledge_base0 = FAISS.from_texts(chunks0, bge_embeddings)
-    docs = knowledge_base0.similarity_search(question, k=5)
+    global knowledge_base   
+    docs = knowledge_base.similarity_search(question, k=5)
     combined_content = ''.join(doc.page_content + "\n" for doc in docs)
     return "文件中的相关信息如下：\n"+combined_content
 
@@ -34,7 +30,16 @@ class ebd_tool:
                 }),
                 "device": (["cuda", "cpu"], {
                     "default": "cuda"
-                })
+                }),
+                "chunk_size":("INT",{
+                    "default":200
+                }),
+                "chunk_overlap":("INT",{
+                    "default":50
+                }),
+                "is_locked": (["enable", "disable"],{
+                    "default":"disable"
+                }),
             },
             "optional": {
 
@@ -52,10 +57,12 @@ class ebd_tool:
 
 
 
-    def file(self,path,file_content,is_enable="enable",device="cuda"):
+    def file(self,path,file_content,chunk_size,chunk_overlap,is_locked,is_enable="enable",device="cuda"):
         if is_enable=="disable":
             return (None,)
-        global ebd_model,files_load,bge_embeddings
+        global ebd_model,files_load,bge_embeddings,c_size,c_overlap,knowledge_base   
+        c_size=chunk_size
+        c_overlap=chunk_overlap
         files_load=file_content
         if ebd_model=="":
             model_kwargs = {'device': device}  # 如果您有GPU，可以设置为 'cuda'，否则使用 'cpu'
@@ -66,6 +73,13 @@ class ebd_tool:
                 model_kwargs=model_kwargs,
                 encode_kwargs=encode_kwargs
             )
+        if knowledge_base=="" or is_locked==False:
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size = c_size,
+                chunk_overlap = c_overlap,
+                ) 
+            chunks = text_splitter.split_text(files_load)
+            knowledge_base = FAISS.from_texts(chunks, bge_embeddings)
         output=[    {
     "type": "function",
   "function": {
