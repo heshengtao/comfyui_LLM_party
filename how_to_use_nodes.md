@@ -27,8 +27,9 @@
 1. These two nodes have a `dialog_id`. Connecting dialog IDs creates an archive point for the conversation. When you need to loop two large models, although it cannot be directly implemented in ComfyUI, you can save the output of the second model locally and pass it to the first model in the next run. You can use the ComfyUI API in other frontends to call ComfyUI, creating an infinite self-dialogue loop between the two models.
 2. The `start_dialog` node has a `start_dialog` interface, which can serve as a user-provided prompt at the beginning of a conversation, guiding the large model to discuss topics based on the user's input.
 
-## Common Characteristics of Tool Nodes
-1. is_enable determines whether the tool is enabled, making it convenient for users to quickly change the tools connected to the model.
+## ebd_tool node
+1. Enter the absolute path of your word embedding model and attach this node as a tool to the LLM node.
+2. Attach the files you need to search to the ebd_tool node. When the LLM model runs, it will perform RAG on these files.
 
 ## google_tool Node
 1. You can input your Google API key and CSE ID to use this node.
@@ -46,9 +47,10 @@
 1. It allows the large model to generate Python code, execute it automatically, and obtain the execution results of the code.
 2. Currently, it only supports Python code.
 
-## load_file from comfyui_LLM_party/file Node
-1. The file path for reading files is in `comfyui_LLM_party/file`. You can place the file you want to read in this directory and fill in the filename in this node.
-2. The output is a string containing all the text information from the file.
+## load_file node
+1. The path for reading files is in comfyui_LLM_party/file. You can place the file you want to read in this path, and then enter the file name into this node.
+2. You can choose Absolute_Path and enter the absolute path of the file for it to be loaded correctly.
+3. The output is a string that contains all the text information from the file.
 
 ## file_conbine and tool_conbine Nodes
 1. Used to combine multiple file nodes or multiple tool nodes into one input for the large model.
