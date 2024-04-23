@@ -1,0 +1,197 @@
+{
+  "last_node_id": 78,
+  "last_link_id": 99,
+  "nodes": [
+    {
+      "id": 15,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1160,
+        330
+      ],
+      "size": {
+        "0": 400,
+        "1": 310
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 98,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "这是一幅描绘着一位年轻女性的动画风格的插画。她有着银白色的短发和蓝色的眼睛，穿着一件有着暗蓝和白色调的服装，服装设计中包含了星星和月亮的图案，这可能暗示着她与天体或夜晚有关。她周围有金色的装饰品和碎片环绕着，给人一种魔法和幻想的氛围。她的姿势显得自信，微笑着，手放在腰间，这表现了一种乐观和友好的态度。整体上，这幅图展现了一种充满想象力的场景。"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 77,
+      "type": "LLM",
+      "pos": [
+        730,
+        330
+      ],
+      "size": {
+        "0": 400,
+        "1": 382
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 99,
+          "label": "images",
+          "slot_index": 0
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            98
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "图里画了什么",
+        "gpt-4-all",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        2048,
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 78,
+      "type": "LoadImage",
+      "pos": [
+        360,
+        340
+      ],
+      "size": [
+        320,
+        310
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            99
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "a4053c5b9b6c7a4383fbad42c94d411.jpg",
+        "image"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      98,
+      77,
+      0,
+      15,
+      0,
+      "STRING"
+    ],
+    [
+      99,
+      78,
+      0,
+      77,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
