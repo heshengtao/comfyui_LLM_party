@@ -52,12 +52,12 @@ Or install using one of the following methods:
 
 ## Configuration
 Configure the APIKEY using one of the following methods:
-### Method One:
+### Method 1:
 1. Open the `config.ini` file in the `comfyui_LLM_party` project folder.
 2. Enter your `openai_api_key` and `base_url` in `config.ini`.
 3. If you want to use the Google search tool, enter your `google_api_key` and `cse_id` in `config.ini`.
 
-### Method Two:
+### Method 2:
 1. Open the comfyui interface.
 2. Create a new Large Language Model (LLM) node and directly enter your `openai_api_key` and `base_url` in the node.
 3. Create a new Google Search Tool (google_tool) node and directly enter your `google_api_key` and `cse_id` in the node.
