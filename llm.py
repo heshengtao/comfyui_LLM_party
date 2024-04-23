@@ -5,11 +5,16 @@ import json
 import os
 import re
 import sys
+import base64
+from PIL import Image
+import numpy as np
+import io
 import time
 import traceback
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 import openai
+import requests
 import torch
 from .config import config_path,current_dir_path,load_api_keys
 from .tools.load_file import load_file
@@ -56,11 +61,12 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
 
 
 class Chat:
-    def __init__(self, history, model_name, temperature,tools=None) -> None:
+    def __init__(self, history, model_name, temperature,max_length,tools=None) -> None:
         self.messages = history
         self.model_name = model_name
         self.temperature = temperature
         self.tools = tools
+        self.max_tokens=max_length
 
     def send(self, user_prompt):
         try:
@@ -72,7 +78,8 @@ class Chat:
                     model=self.model_name,
                     messages=self.messages,
                     temperature=self.temperature,
-                    tools=self.tools
+                    tools=self.tools,
+                    max_tokens=self.max_tokens
                 )
                 while response.choices[0].message.tool_calls:
                     assistant_message=response.choices[0].message
@@ -83,7 +90,8 @@ class Chat:
                     response = openai.chat.completions.create(
                     model=self.model_name,  
                     messages=self.messages,
-                    tools=self.tools
+                    tools=self.tools,
+                    max_tokens=self.max_tokens
                     )
                 while response.choices[0].message.function_call:
                     assistant_message = response.choices[0].message
@@ -96,7 +104,8 @@ class Chat:
                     response = openai.chat.completions.create(
                         model=self.model_name,
                         messages=self.messages,
-                        tools=self.tools
+                        tools=self.tools,
+                        max_tokens=self.max_tokens
                     )
                 response_content = response.choices[0].message.content
                 start_pattern = "interpreter\n ```python\n"
@@ -115,14 +124,16 @@ class Chat:
                     response = openai.chat.completions.create(
                         model=self.model_name,
                         messages=self.messages,
-                        tools=self.tools
+                        tools=self.tools,
+                        max_tokens=self.max_tokens
                     )
                     response_content = response.choices[0].message.content
             else:
                 response = openai.chat.completions.create(
                     model=self.model_name,
                     messages=self.messages,
-                    temperature=self.temperature
+                    temperature=self.temperature,
+                    max_tokens=self.max_tokens
                 )
             print(response)
             response_content = response.choices[0].message.content
@@ -175,6 +186,11 @@ class LLM:
                 "is_locked": (["enable", "disable"],{
                     "default":"disable"
                 }),
+                "max_length": ("INT", {
+                    "default": 2048,
+                    "min": 256,
+                    "step": 256
+                })
             },
             "optional": {
                 "tools": ("STRING", {
@@ -189,6 +205,12 @@ class LLM:
                 "api_key": ("STRING", {
                     "default": "",
                 }),
+                "images": ("IMAGE", {
+                    "forceInput": True
+                }),
+                "imgbb_api_key": ("STRING", {
+                    "default": "",
+                }),
             }
         }
 
@@ -201,7 +223,7 @@ class LLM:
 
     CATEGORY = "大模型派对（llm_party）"
 
-    def chatbot(self, user_prompt, system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None,api_key=None,base_url=None):
+    def chatbot(self, user_prompt, system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,tools=None,file_content=None,api_key=None,base_url=None,images=None,imgbb_api_key=None):
         if user_prompt=="#清空":
             with open(self.prompt_path, 'w', encoding='utf-8') as f:
                 json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
@@ -266,10 +288,46 @@ class LLM:
                 if tools is not None:
                     print(tools)
                     tools=json.loads(tools)
-                chat=Chat(history,model_name,temperature,tools)
+                chat=Chat(history, model_name, temperature,max_length,tools)
                 
                 if file_content is not None:
                     user_prompt="文件中相关内容："+file_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
+                
+                if images is not None:
+                    if imgbb_api_key=="" or imgbb_api_key is None:
+                        imgbb_api_key=api_keys.get('imgbb_api')
+                    i = 255. * images[0].cpu().numpy()
+                    img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))         
+                    # 将图片保存到缓冲区
+                    buffered = io.BytesIO()
+                    img.save(buffered, format="PNG")                   
+                    # 将图片编码为base64
+                    img_str = base64.b64encode(buffered.getvalue()).decode('utf-8')
+                    url = "https://api.imgbb.com/1/upload"
+                    payload = {
+    'key': imgbb_api_key,
+    'image': img_str
+}
+                    # 向API发送POST请求
+                    response = requests.post(url, data=payload)
+                    # 检查请求是否成功
+                    if response.status_code == 200:
+                        # 解析响应以获取图片URL
+                        result = response.json()
+                        img_url=result['data']['url']
+                    else:
+                        return "Error: " + response.text
+                    img_json=[
+    {"type": "text", "text": user_prompt},
+    {
+        "type": "image_url",
+        "image_url": {
+        "url": img_url,
+        },
+    },
+    ]
+                    user_prompt=json.dumps(img_json,ensure_ascii=False,indent=4)
+
                 response,history= chat.send(user_prompt)
                 print(response)
                 #修改prompt.json文件
