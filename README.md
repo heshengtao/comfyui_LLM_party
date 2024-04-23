@@ -4,7 +4,7 @@
 
 ## Latest Updates
 1. Supports GPT-4’s visual features, can read images in ComfyUI, but requires the free image hosting service imgbb to implement this feature.
-2. Added mask nodes, you can quickly enable your set system prompts, or use custom masks to quickly adjust prompt word templates.
+2. Added persona nodes, you can quickly enable your set system prompts, or use custom persona to quickly adjust prompt word templates.
 3. Implemented conditional statements in ComfyUI, allowing the large model to output to different interfaces after judgment.
 4. Added more example workflows, welcome everyone to use directly!
 
