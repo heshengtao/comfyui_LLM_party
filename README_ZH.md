@@ -11,7 +11,7 @@
 # **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库** 
 
 ## 简介
-[comfyui](https://github.com/comfyanonymous/ComfyUI)是一个极为简约的UI界面，主要用于AI绘图等基于SD模型的工作流搭建。本项目希望基于comfyui开发一套完整的用于LLM工作流搭建的节点库。可以让用户更便捷快速地搭建自己的LLM工作流，并且更方便地接入自己的SD工作流中。（图为由本项目节点搭建的智能客服工作流。更多示例工作流请在[workflow](workflows/)文件夹中查看。）
+[comfyui](https://github.com/comfyanonymous/ComfyUI)是一个极为简约的UI界面，主要用于AI绘图等基于SD模型的工作流搭建。本项目希望基于comfyui开发一套完整的用于LLM工作流搭建的节点库。可以让用户更便捷快速地搭建自己的LLM工作流，并且更方便地接入自己的SD工作流中。（图为由本项目节点搭建的智能客服工作流。更多示例工作流请在[workflow](workflow/)文件夹中查看。）
 
 ![图片](img/智能助手.png)
 
