@@ -3,10 +3,10 @@
 </p>
 
 ## 最新更新
-1. 新增了本地大模型节点，目前适配了GLM和llama，但是llama不能使用工具调用，因为原生llama并不包含这个功能。请将分词器和模型的文件夹绝对路径贴到节点中，就可以本地加载LLM了
-2. 新增了代码解释器工具。
-3. 新增了文件加载可以选择绝对路径输入。
-4. 新增了大模型节点更多的组件，你拥有了更多的选择。
+1. 支持GPT4的视觉功能，可以读取comfyui中的图片，但需要配合免费的图片托管服务imgbb实现这一功能。
+2. 新增了面具节点，你可以快速启用你设定好的系统词，或者使用自定义面具，快速调整提示词模板
+3. 实现了在comfyui中的条件语句，可以让大模型在判断后输出给后续不同的接口
+4. 增加了更多的示例工作流，欢迎大家直接使用！
 
 # **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库** 
 
@@ -21,12 +21,14 @@
 ## 特征
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)
 2. 支持openai的API驱动，并支持自定义base_url，可以使用中转API驱动LLM节点。如果你使用的是其他的大模型接口，可以使用[openai-style-api](https://github.com/tian-minghui/openai-style-api)转化成openai接口格式。本地大模型请选择本地大模型节点，目前适配了GLM和llama，但是llama不能使用工具调用，因为原生llama并不包含这个功能
-3. base_url必须是以`/v1/`结尾
-4. 支持多种类型的文件类型导入LLM节点，通过RAG技术让LLM可以针对文件内容作答，目前支持以下文件类型：.docx、.xlsx、.csv、.txt、.py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
-5. 通过工具组合节点可以将多个工具传入LLM节点，通过文件组合节点可以将多个文件传入LLM节点
-6. 支持谷歌搜索和对单一网页的搜索，让LLM可以联网查询
-7. 可以通过start_dialog节点和end_dialog节点，实现两个LLM之间的回环链接，即两个LLM互相为对方的输入和输出！
-8. 推荐配合[ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)的show_text节点，作为LLM节点的输出显示
+3. 本地知识库接入，支持RAG
+4. 可以调用代码解释器
+5. 可以联网查询，支持谷歌搜索
+6. 可以在comfyui中实现条件语句，可以对用户提问进行分类后再针对性回复
+7. 支持大模型的回环链接，可以让两个大模型打辩论赛
+8. 支持挂接任意人格面具，可以自定义提示词模板
+9. 支持多种工具调用，目前开发了查天气、查时间、知识库、代码执行、联网搜索、对单一网页进行搜索等功能，未来还有更多的工具在开发中
+10. 推荐配合[ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)的show_text节点，作为LLM节点的输出显示
 
 ## 下载
 [百度云下载](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) （推荐！包含一个环境配置完毕且包含本项目的comfyui压缩包和一个本项目文件夹，前者下载完后不用再配置环境！）
