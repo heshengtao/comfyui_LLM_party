@@ -33,6 +33,8 @@ You can use the test drawing app workflow to test the process. Please ensure tha
 7. Supports multiple tool invocations; currently developed tools include weather check, time check, knowledge base, code execution, online search, search on a single webpage, and more tools are under development.
 8. It is recommended to use the show_text node from [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts) in conjunction with the LLM node for output display.
 
+![图片](img/画画应用.png)
+
 ## Download
 [Baidu Cloud Download](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) (Recommended! Includes a compressed package of comfyui with the environment setup completed, and a folder for this project. After downloading the former, there’s no need for further environment configuration!)
 
