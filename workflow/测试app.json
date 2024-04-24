@@ -1,0 +1,31 @@
+{
+  "18": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "text": [
+        "19",
+        2
+      ],
+      "images": [
+        "19",
+        1
+      ]
+    },
+    "class_type": "end_workflow",
+    "_meta": {
+      "title": "结束工作流（end_workflow）"
+    }
+  },
+  "19": {
+    "inputs": {
+      "file_path": "",
+      "img_path": "",
+      "system_prompt": "你是一个强大的智能助手",
+      "user_prompt": "你好"
+    },
+    "class_type": "start_workflow",
+    "_meta": {
+      "title": "开始工作流（start_workflow）"
+    }
+  }
+}
