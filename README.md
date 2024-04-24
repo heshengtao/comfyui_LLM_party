@@ -3,10 +3,13 @@
 </p>
 
 ## Latest Updates
-1. Supports GPT-4’s visual features, can read images in ComfyUI, but requires the free image hosting service imgbb to implement this feature.
-2. Added persona nodes, you can quickly enable your set system prompts, or use custom persona to quickly adjust prompt word templates.
-3. Implemented conditional statements in ComfyUI, allowing the large model to output to different interfaces after judgment.
-4. Added more example workflows, welcome everyone to use directly!
+1. New `start_workflow` and `end_workflow` nodes have been added. You can use these two nodes to define the start and end points of your workflow. Place your workflow in the `workflow` subfolder under this project folder. Then, click on `setup_streamlit_app.bat` in the project folder. In the Streamlit interface, click on `settings` and replace it with your workflow.
+**Congratulations, you have built an intelligent application!**
+You can use the test drawing app workflow to test the process. Please ensure that all models in the workflow are functioning properly before testing.
+3. Supports GPT-4’s visual features, can read images in ComfyUI, but requires the free image hosting service imgbb to implement this feature.
+4. Added persona nodes, you can quickly enable your set system prompts, or use custom persona to quickly adjust prompt word templates.
+5. Implemented conditional statements in ComfyUI, allowing the large model to output to different interfaces after judgment.
+6. Added more example workflows, welcome everyone to use directly!
 
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI** 
 
