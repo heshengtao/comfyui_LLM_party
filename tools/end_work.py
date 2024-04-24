@@ -63,7 +63,7 @@ class end_workflow:
             all_results["images"]=results
         text_results=list()
         # 文件命名
-        if text is not None and text !="empty":
+        if text is not None:
             #对保存的文件命名，和图片同名
             file = f"{filename_prefix}_.txt"
             # 保存文本
