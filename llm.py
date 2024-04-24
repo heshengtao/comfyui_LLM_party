@@ -17,7 +17,7 @@ import openai
 import requests
 import torch
 from .config import config_path,current_dir_path,load_api_keys
-from .tools.load_file import load_file
+from .tools.load_file import load_file,start_workflow
 from .tools.tool_combine import tool_combine,tool_combine_plus
 from .tools.get_time import get_time,time_tool
 from .tools.get_weather import get_weather,weather_tool
@@ -31,6 +31,7 @@ from .tools.classify_persona import classify_persona
 from .tools.classify_function import classify_function
 from .tools.load_ebd import ebd_tool,data_base
 from .tools.custom_persona import custom_persona
+from .tools.end_work import end_workflow
 from transformers import AutoTokenizer, AutoModel, Qwen2Tokenizer, Qwen2ForCausalLM, AutoModelForCausalLM
 glm_tokenizer=""
 glm_model=""
@@ -615,6 +616,8 @@ NODE_CLASS_MAPPINGS = {
     "interpreter_tool":interpreter_tool,
     "ebd_tool":ebd_tool,
     "custom_persona":custom_persona,
+    "start_workflow":start_workflow,
+    "end_workflow":end_workflow,
 }
 
 
@@ -638,6 +641,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "interpreter_tool":"解释器工具（interpreter_tool）",
     "ebd_tool":"词嵌入模型工具（embeddings_tool）",
     "custom_persona":"自定义面具（custom_persona）",
+    "start_workflow":"开始工作流（start_workflow）",
+    "end_workflow":"结束工作流（end_workflow）",
 }
 
 if __name__ == '__main__':
