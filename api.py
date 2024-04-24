@@ -149,7 +149,7 @@ language_mapping = {
 }
 #如果没有'wf_path'就创造
 if 'wf_path' not in st.session_state:
-    st.session_state['wf_path'] ="测试app.json"
+    st.session_state['wf_path'] ="测试画画app.json"
 #如果没有'system_prompt'就创造
 if 'system_prompt' not in st.session_state:
     st.session_state['system_prompt'] ="你是一个强大的智能助手"
