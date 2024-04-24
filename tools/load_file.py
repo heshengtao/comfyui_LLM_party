@@ -1,7 +1,9 @@
 import json
 import os
 from ..config import current_dir_path
-
+import numpy as np
+from PIL import Image, ImageOps, ImageSequence
+import torch
 import docx2txt
 import openpyxl
 import pandas as pd
@@ -85,3 +87,79 @@ class load_file:
             path = os.path.join(file_path, path)
         out=read_one(path)
         return (out,)
+    
+
+
+
+# 定义一个函数，将图片路径转换为与 save_images 函数兼容的格式
+def convert_image_to_compatible_format(image_path):
+    # 从给定路径加载图片
+    img = Image.open(image_path).convert('RGB')
+    
+    # 将图片转换为numpy数组并归一化
+    img_array = np.asarray(img) / 255.
+    
+    # 将numpy数组转换为torch张量
+    img_tensor = torch.tensor(img_array).permute(2, 0, 1).unsqueeze(0)  # 调整维度顺序并添加批次维度
+    
+    # 返回预期格式的张量
+    return img_tensor
+
+
+
+class start_workflow:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+
+            },
+            "optional": {
+                "file_path": ("STRING", {
+                    "default": None
+                }),
+                "img_path": ("STRING", {
+                    "default": None,
+                    "image_upload": True
+                }),
+                "system_prompt": ("STRING", {
+                    "default": "你是一个强大的智能助手"
+                }),
+                "user_prompt": ("STRING", {
+                    "default": "你好"
+                }),
+            }
+        }
+    
+    RETURN_TYPES = ("STRING","IMAGE","STRING","STRING",)
+    RETURN_NAMES = ("file_content","image","system_prompt","user_prompt",)
+
+    FUNCTION = "load_all"
+
+    #OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/API"
+
+
+
+    def load_all(self,file_path=None,img_path=None,system_prompt="你是一个强大的智能助手",user_prompt="你好"):
+        file_out=""
+        if file_path is not None and file_path !="":
+            path = os.path.join(file_path, path)
+            file_out=read_one(path)
+        img_out = []
+        if img_path is not None and img_path !="":
+            img = Image.open(img_path)
+            for i in ImageSequence.Iterator(img):
+                i = ImageOps.exif_transpose(i)
+                if i.mode == 'I':
+                    i = i.point(lambda i: i * (1 / 255))
+                image = i.convert("RGB")
+                image = np.array(image).astype(np.float32) / 255.0
+                image = torch.from_numpy(image)[None,]
+                img_out.append(image)
+            if len(img_out) > 1:
+                img_out= torch.cat(img_out, dim=0)
+            else:
+                img_out = img_out[0]
+        return (file_out,img_out,system_prompt,user_prompt,)
