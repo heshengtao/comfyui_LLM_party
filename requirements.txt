@@ -10,4 +10,4 @@ pytz
 Requests
 xlrd
 faiss-cpu
-
+websocket
