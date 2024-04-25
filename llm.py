@@ -45,9 +45,57 @@ _TOOL_HOOKS=[
     "search_web",
     "check_web",
     "interpreter",
-    "data_base"
+    "data_base",
+    "another_llm",
 ]
+instances=[]
+def another_llm(id,type,question):
+    print(id,type,question)
+    global instances
+    if type=="api":
+        try:
+            llm = next((instance for instance in instances if str(instance.id).strip() == str(id).strip()), None)
+        except:
+            print("找不到对应的智能助手")
+            return "找不到对应的智能助手"
+        if llm is None:
+            print("找不到对应的智能助手")
+            return "找不到对应的智能助手"
+        main_brain,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,tools,file_content,api_key,base_url,images,imgbb_api_key=llm.list
+        res,_,_=llm.chatbot(question,main_brain,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,tools,file_content,api_key,base_url,images,imgbb_api_key)
+    elif type=="local":
+        try:
+            llm = next((instance for instance in instances if str(instance.id).strip() == str(id).strip()), None)
+        except:
+            print("找不到对应的智能助手")
+            return "找不到对应的智能助手"
+        if llm is None:
+            print("找不到对应的智能助手")
+            return "找不到对应的智能助手"
+        main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools,file_content=llm.list
+        res,_,_=llm.chatbot(question,main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools,file_content)
+    else:
+        return "type参数错误，请使用api或local"
+    print(res)
+    return "你调用的智能助手的问答是："+res+"\n用户的问题是："+question+"\n请根据以上回答，回答用户的问题。"
 
+llm_tools_list=[]
+llm_tools=[{
+    "type": "function",
+    "function": {
+        "name": "another_llm",
+        "description": "使用llm_tools可以调用其他的智能助手解决你的问题。请根据以下列表中的system_prompt选择你需要的智能助手："+json.dumps(llm_tools_list,ensure_ascii=False,indent=4),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "description": "智能助手的id"},
+                "type": {"type": "string", "description": "智能助手的类型，目前支持api和local两种类型。"},
+                "question": {"type": "string", "description": "问题描述，代表你想要解决的问题。"},
+            },
+            "required": ["id","type","question"]
+        }
+    }
+}]
 def dispatch_tool(tool_name: str, tool_params: dict) -> str:
     if "multi_tool_use." in tool_name:
         tool_name=tool_name.replace("multi_tool_use.", "")
@@ -94,6 +142,7 @@ class Chat:
                     tools=self.tools,
                     max_tokens=self.max_tokens
                     )
+                    print(response)
                 while response.choices[0].message.function_call:
                     assistant_message = response.choices[0].message
                     function_call = assistant_message.function_call
@@ -109,6 +158,7 @@ class Chat:
                         max_tokens=self.max_tokens
                     )
                 response_content = response.choices[0].message.content
+                print(response)
                 start_pattern = "interpreter\n ```python\n"
                 end_pattern = "\n```"
                 while response_content.startswith(start_pattern):
@@ -136,7 +186,6 @@ class Chat:
                     temperature=self.temperature,
                     max_tokens=self.max_tokens
                 )
-            print(response)
             response_content = response.choices[0].message.content
             self.messages.append({"role": "assistant", "content": response_content})
         except Exception as ex:
@@ -146,17 +195,20 @@ class Chat:
 
 
 class LLM:
+    
     def __init__(self):
         #生成一个hash值作为id
         self.id=hash(str(self))
+        global instances
+        instances.append(self)
         # 构建prompt.json的绝对路径
         self.prompt_path = os.path.join(current_dir_path,"temp", str(self.id)+'.json')
         # 如果文件不存在，创建prompt.json文件，存在就覆盖文件
         if not os.path.exists(self.prompt_path):
             with open(self.prompt_path, 'w', encoding='utf-8') as f:
                 json.dump([{"role": "system","content": "你是一个强大的人工智能助手。"}], f, indent=4, ensure_ascii=False)
-
-
+        self.tool_data={"id":self.id,"system_prompt":"","type":"api"}
+        self.list=[]
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -187,6 +239,9 @@ class LLM:
                 "is_locked": (["enable", "disable"],{
                     "default":"disable"
                 }),
+                "main_brain": (["enable", "disable"],{
+                    "default":"enable"
+                }),
                 "max_length": ("INT", {
                     "default": 2048,
                     "min": 256,
@@ -215,8 +270,8 @@ class LLM:
             }
         }
 
-    RETURN_TYPES = ("STRING","STRING",)
-    RETURN_NAMES = ("assistant_response","history",)
+    RETURN_TYPES = ("STRING","STRING","STRING",)
+    RETURN_NAMES = ("assistant_response","history","tool",)
 
     FUNCTION = "chatbot"
 
@@ -224,18 +279,41 @@ class LLM:
 
     CATEGORY = "大模型派对（llm_party）"
 
-    def chatbot(self, user_prompt, system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,tools=None,file_content=None,api_key=None,base_url=None,images=None,imgbb_api_key=None):
+    def chatbot(self, user_prompt,main_brain ,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,tools=None,file_content=None,api_key=None,base_url=None,images=None,imgbb_api_key=None):
+        self.list=[main_brain,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,tools,file_content,api_key,base_url,images,imgbb_api_key]
+        self.tool_data["system_prompt"]=system_prompt
+        global llm_tools_list,llm_tools
+        if main_brain =="disable":
+            llm_tools_list.append(self.tool_data)
+        llm_tools=[{
+    "type": "function",
+    "function": {
+        "name": "another_llm",
+        "description": "使用llm_tools可以调用其他的智能助手解决你的问题。请根据以下列表中的system_prompt选择你需要的智能助手："+json.dumps(llm_tools_list,ensure_ascii=False,indent=4),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "description": "智能助手的id"},
+                "type": {"type": "string", "description": "智能助手的类型，目前支持api和local两种类型。"},
+                "question": {"type": "string", "description": "问题描述，代表你想要解决的问题。"},
+            },
+            "required": ["id","type","question"]
+        }
+    }
+}]
+        
+        llm_tools_json=json.dumps(llm_tools,ensure_ascii=False,indent=4)
         if user_prompt=="#清空":
             with open(self.prompt_path, 'w', encoding='utf-8') as f:
                 json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
                             
             with open(self.prompt_path, 'r', encoding='utf-8') as f:
                 history = json.load(f)
-            return ("已清空历史记录",str(history),)
+            return ("已清空历史记录",str(history),llm_tools_json,)
         elif user_prompt is None or user_prompt.strip()=="empty":
             with open(self.prompt_path, 'r', encoding='utf-8') as f:
                 history = json.load(f)
-            return ("",str(history),)
+            return ("",str(history),llm_tools_json,)
         else:
             try:
                 # 读取prompt.json文件
@@ -290,7 +368,7 @@ class LLM:
                     print(tools)
                     tools=json.loads(tools)
                 chat=Chat(history, model_name, temperature,max_length,tools)
-                
+
                 if file_content is not None:
                     user_prompt="文件中相关内容："+file_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
                 
@@ -335,10 +413,10 @@ class LLM:
                 with open(self.prompt_path, 'w', encoding='utf-8') as f:
                     json.dump(history, f, indent=4, ensure_ascii=False)
                 history=str(history)
-                return (response,history,)
+                return (response,history,llm_tools_json,)
             except Exception as ex:
                 print(ex)
-                return (str(ex),str(ex),)
+                return (str(ex),str(ex),llm_tools_json,)
     @classmethod
     def IS_CHANGED(s):
         # 返回当前时间的哈希值，确保每次都不同
@@ -349,14 +427,16 @@ class LLM_local:
     def __init__(self):
         #生成一个hash值作为id
         self.id=hash(str(self))
+        global instances
+        instances.append(self)
         # 构建prompt.json的绝对路径
         self.prompt_path = os.path.join(current_dir_path,"temp", str(self.id)+'.json')
         # 如果文件不存在，创建prompt.json文件，存在就覆盖文件
         if not os.path.exists(self.prompt_path):
             with open(self.prompt_path, 'w', encoding='utf-8') as f:
                 json.dump([{"role": "system","content": "你是一个强大的人工智能助手。"}], f, indent=4, ensure_ascii=False)
-
-
+        self.tool_data={"id":self.id,"system_prompt":"","type":"local"}
+        self.list=[]
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -396,6 +476,9 @@ class LLM_local:
                 "is_reload": (["enable", "disable"],{
                     "default":"disable"
                 }),
+                "main_brain": (["enable", "disable"],{
+                    "default":"enable"
+                }),
                 "device": (["cuda","cuda-float16","cuda-int8","cuda-int4","cpu"], {
                     "default": "cuda" if torch.cuda.is_available() else "cpu",
                 }),
@@ -415,8 +498,8 @@ class LLM_local:
             }
         }
 
-    RETURN_TYPES = ("STRING","STRING",)
-    RETURN_NAMES = ("assistant_response","history",)
+    RETURN_TYPES = ("STRING","STRING","STRING",)
+    RETURN_NAMES = ("assistant_response","history","tool",)
 
     FUNCTION = "chatbot"
 
@@ -424,18 +507,40 @@ class LLM_local:
 
     CATEGORY = "大模型派对（llm_party）"
 
-    def chatbot(self, user_prompt, system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None):
+    def chatbot(self, user_prompt, main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None):
+        self.list=[main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools,file_content]
+        self.tool_data["system_prompt"]=system_prompt
+        global llm_tools_list,llm_tools
+        if main_brain=="disable":
+            llm_tools_list.append(self.tool_data)
+        llm_tools=[{
+    "type": "function",
+    "function": {
+        "name": "another_llm",
+        "description": "使用llm_tools可以调用其他的智能助手解决你的问题。请根据以下列表中的system_prompt选择你需要的智能助手："+json.dumps(llm_tools_list,ensure_ascii=False,indent=4),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "description": "智能助手的id"},
+                "type": {"type": "string", "description": "智能助手的类型，目前支持api和local两种类型。"},
+                "question": {"type": "string", "description": "问题描述，代表你想要解决的问题。"},
+            },
+            "required": ["id","type","question"]
+        }
+    }
+}]
+        llm_tools_json=json.dumps(llm_tools,ensure_ascii=False,indent=4)
         if user_prompt=="#清空":
             with open(self.prompt_path, 'w', encoding='utf-8') as f:
                 json.dump([{"role": "system","content": system_prompt}], f, indent=4, ensure_ascii=False)
                             
             with open(self.prompt_path, 'r', encoding='utf-8') as f:
                 history = json.load(f)
-            return ("已清空历史记录",str(history),)
+            return ("已清空历史记录",str(history),llm_tools_json,)
         elif user_prompt is None or user_prompt.strip()=="empty":
             with open(self.prompt_path, 'r', encoding='utf-8') as f:
                 history = json.load(f)
-            return ("",str(history),)
+            return ("",str(history),llm_tools_json,)
         else:
             try:
                 # 读取prompt.json文件
@@ -580,10 +685,10 @@ class LLM_local:
                     llama_model=""
                     qwen_tokenizer=""
                     qwen_model=""
-                return (response,history,)
+                return (response,history,llm_tools_json,)
             except Exception as ex:
                 print(ex)
-                return (str(ex),str(ex),)
+                return (str(ex),str(ex),llm_tools_json,)
     @classmethod
     def IS_CHANGED(s):
         # 返回当前时间的哈希值，确保每次都不同
