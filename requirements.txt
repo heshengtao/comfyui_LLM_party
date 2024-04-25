@@ -11,3 +11,4 @@ Requests
 xlrd
 faiss-cpu
 websocket
+streamlit
