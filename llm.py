@@ -77,7 +77,7 @@ def another_llm(id,type,question):
     else:
         return "type参数错误，请使用api或local"
     print(res)
-    return "你调用的智能助手的问答是："+res+"\n用户的问题是："+question+"\n请根据以上回答，回答用户的问题。"
+    return "你调用的智能助手的问答是："+res+"\n请根据以上回答，回答用户的问题。"
 
 llm_tools_list=[]
 llm_tools=[{
