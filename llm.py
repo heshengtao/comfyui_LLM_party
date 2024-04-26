@@ -209,6 +209,7 @@ class LLM:
                 json.dump([{"role": "system","content": "你是一个强大的人工智能助手。"}], f, indent=4, ensure_ascii=False)
         self.tool_data={"id":self.id,"system_prompt":"","type":"api"}
         self.list=[]
+        self.added_to_list = False
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -284,7 +285,9 @@ class LLM:
         self.tool_data["system_prompt"]=system_prompt
         global llm_tools_list,llm_tools
         if main_brain =="disable":
-            llm_tools_list.append(self.tool_data)
+            if self.added_to_list == False:
+                llm_tools_list.append(self.tool_data)
+                self.added_to_list = True
         llm_tools=[{
     "type": "function",
     "function": {
@@ -437,6 +440,7 @@ class LLM_local:
                 json.dump([{"role": "system","content": "你是一个强大的人工智能助手。"}], f, indent=4, ensure_ascii=False)
         self.tool_data={"id":self.id,"system_prompt":"","type":"local"}
         self.list=[]
+        self.added_to_list = False
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -512,7 +516,9 @@ class LLM_local:
         self.tool_data["system_prompt"]=system_prompt
         global llm_tools_list,llm_tools
         if main_brain=="disable":
-            llm_tools_list.append(self.tool_data)
+            if not self.added_to_list:
+                llm_tools_list.append(self.tool_data)
+                self.added_to_list = True
         llm_tools=[{
     "type": "function",
     "function": {
