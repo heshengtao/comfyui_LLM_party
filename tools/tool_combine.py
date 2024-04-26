@@ -1,5 +1,13 @@
 import json
 
+def remove_duplicates(dicts):
+    name_to_dict = {}
+    for d in dicts:
+        if 'function' in d and 'name' in d['function']:
+            function_name = d['function']['name']
+            name_to_dict[function_name] = d
+
+    return list(name_to_dict.values())
 
 class tool_combine:
     @classmethod
@@ -45,11 +53,13 @@ class tool_combine:
                 tool=json.loads(tool)
                 output.extend(tool)
         if output!=[]:
+            output = remove_duplicates(output)
             out=json.dumps(output, ensure_ascii=False)
         else:
             out=None
         return (out,)
-    
+
+
 
 class tool_combine_plus:
     @classmethod
@@ -119,6 +129,7 @@ class tool_combine_plus:
                 except json.JSONDecodeError as e:
                     print(f"JSONDecodeError: {e}")
         if output!=[]:
+            output = remove_duplicates(output)
             out=json.dumps(output, ensure_ascii=False)
         else:
             out=None
