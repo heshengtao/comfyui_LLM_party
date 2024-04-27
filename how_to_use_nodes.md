@@ -54,7 +54,7 @@
 1. It allows the large model to generate Python code, execute it automatically, and obtain the execution results of the code.
 2. Currently, it only supports Python code.
 
-## new interpreter node 
+## omnipotent interpreter node 
 1. executes code within an isolated virtual environment.
 2. It automatically installs any missing third-party libraries before execution. Be cautious about the security of the executed code, as this tool can control your computer to perform any task!
 
