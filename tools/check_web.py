@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import requests
 from langchain_community.vectorstores import FAISS
+from ..config import bge_embeddings
 
 
 
@@ -32,6 +33,11 @@ def check_web(url, keyword):
         for p in paragraphs:
             text += p.text
 
+        # 查找包含关键词的文本
+        #chunks0 = text_splitter0.split_text(text)
+        #knowledge_base0 = FAISS.from_texts(chunks0, bge_embeddings)
+        #docs = knowledge_base0.similarity_search(keyword, k=5)
+        #combined_content = ''.join(doc.page_content + "\n" for doc in docs)
         combined_content =text
         return "该网页的相关信息为：" + str(combined_content)
 
