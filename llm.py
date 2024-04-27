@@ -757,7 +757,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "custom_persona":"自定义面具（custom_persona）",
     "start_workflow":"开始工作流（start_workflow）",
     "end_workflow":"结束工作流（end_workflow）",
-    "new_interpreter_tool":"新解释器工具（new_interpreter_tool）",
+    "new_interpreter_tool":"万能解释器工具（omnipotent_interpreter_tool）",
 }
 
 if __name__ == '__main__':
