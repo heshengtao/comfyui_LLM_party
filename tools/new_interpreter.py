@@ -123,7 +123,7 @@ class new_interpreter_tool:
         "type": "function",
         "function": {
             "name": "new_interpreter",
-            "description": "用于执行你生成的Python代码，并返回代码的执行结果",
+            "description": "用于执行你生成的Python代码，并返回代码的在控制台的输出，适用于执行复杂的Python代码。",
             "parameters": {
                 "type": "object",
                 "properties": {

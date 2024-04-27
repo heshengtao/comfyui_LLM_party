@@ -58,7 +58,7 @@ class interpreter_tool:
         "type": "function",
         "function": {
             "name": "interpreter",
-            "description": "用于执行你生成的Python代码，并返回代码的执行结果",
+            "description": "用于执行你生成的Python代码，并返回代码的执行结果，适用于执行简单的代码",
             "parameters": {
                 "type": "object",
                 "properties": {
