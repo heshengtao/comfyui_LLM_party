@@ -32,6 +32,7 @@ from .tools.classify_function import classify_function
 from .tools.load_ebd import ebd_tool,data_base
 from .tools.custom_persona import custom_persona
 from .tools.end_work import end_workflow
+from .tools.new_interpreter import new_interpreter,new_interpreter_tool
 from transformers import AutoTokenizer, AutoModel, Qwen2Tokenizer, Qwen2ForCausalLM, AutoModelForCausalLM
 glm_tokenizer=""
 glm_model=""
@@ -47,6 +48,7 @@ _TOOL_HOOKS=[
     "interpreter",
     "data_base",
     "another_llm",
+    "new_interpreter",
 ]
 instances=[]
 def another_llm(id,type,question):
@@ -729,6 +731,7 @@ NODE_CLASS_MAPPINGS = {
     "custom_persona":custom_persona,
     "start_workflow":start_workflow,
     "end_workflow":end_workflow,
+    "new_interpreter_tool":new_interpreter_tool,
 }
 
 
@@ -754,6 +757,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "custom_persona":"自定义面具（custom_persona）",
     "start_workflow":"开始工作流（start_workflow）",
     "end_workflow":"结束工作流（end_workflow）",
+    "new_interpreter_tool":"新解释器工具（new_interpreter_tool）",
 }
 
 if __name__ == '__main__':
