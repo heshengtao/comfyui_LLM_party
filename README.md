@@ -3,7 +3,7 @@
 </p>
 
 ## Latest Updates
-1. A new interpreter tool node has been added, which will execute all code in an isolated virtual environment. If any third-party libraries are missing, they will be automatically installed before execution. Please be cautious about the security of the code being executed, as this tool can control your computer to perform any task!
+1. A omnipotent interpreter tool node has been added, which will execute all code in an isolated virtual environment. If any third-party libraries are missing, they will be automatically installed before execution. Please be cautious about the security of the code being executed, as this tool can control your computer to perform any task!
 2.  Introduced a cool nesting feature for everyone. You need to `disable` the `main_brain` property of the LLM node, which allows you to use this LLM node as a tool. Link this node’s `tool` to another normal LLM, and you’ll find that the other LLM can call it like a tool!
 3. New `start_workflow` and `end_workflow` nodes have been added. You can use these two nodes to define the start and end points of your workflow. Place your workflow in the `workflow` subfolder under this project folder. Then, click on `setup_streamlit_app.bat` in the project folder. In the Streamlit interface, click on `settings` and replace it with your workflow.
 **Congratulations, you have built an intelligent application!**
