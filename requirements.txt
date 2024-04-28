@@ -15,4 +15,5 @@ streamlit
 virtualenv
 tiktoken
 transformers_stream_generator
-auto-gptq optimum
+auto-gptq 
+optimum
