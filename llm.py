@@ -33,7 +33,7 @@ from .tools.load_ebd import ebd_tool,data_base
 from .tools.custom_persona import custom_persona
 from .tools.end_work import end_workflow
 from .tools.new_interpreter import new_interpreter,new_interpreter_tool
-from transformers import AutoTokenizer, AutoModel, Qwen2Tokenizer, Qwen2ForCausalLM, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModel, Qwen2Tokenizer, Qwen2ForCausalLM, AutoModelForCausalLM, GenerationConfig
 glm_tokenizer=""
 glm_model=""
 llama_tokenizer=""
@@ -428,6 +428,30 @@ class LLM:
         current_time = str(time.time())
         return hashlib.sha256(current_time.encode()).hexdigest()
 
+
+def llm_chat(model,tokenizer,user_prompt,history,device,max_length,role="user"):
+    history.append({"role": role, "content": user_prompt.strip()})
+    text = tokenizer.apply_chat_template(
+        history,
+        tokenize=False,
+        add_generation_prompt=True
+    )
+    model_inputs = tokenizer([text], return_tensors="pt").to(device)
+
+    generated_ids = model.generate(
+        model_inputs.input_ids,
+        max_new_tokens=max_length,
+    )
+    generated_ids = [
+        output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
+    ]
+
+    response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
+    history.append({"role":"assistant","content":response})
+    return response,history
+
+
+
 class LLM_local:
     def __init__(self):
         #生成一个hash值作为id
@@ -564,17 +588,22 @@ class LLM_local:
                 # 读取prompt.json文件
                 with open(self.prompt_path, 'r', encoding='utf-8') as f:
                     history = json.load(f)
-                tool_list=[]
+                tools_list=[]
                 if tools is not None:
                     tools_dis=json.loads(tools)
                     for tool_dis in tools_dis:
-                        tool_list.append(tool_dis["function"])
-                    system_prompt=system_prompt+"\n"+"你可以使用以下工具："
+                        tools_list.append(tool_dis["function"])
                 for message in history:
                     if message['role'] == 'system':
                         message['content'] = system_prompt
-                        if tool_list!=[] and model_type=="GLM":
-                            message['tools']=tool_list
+                        if tools_list!=[]:
+                            if model_type=="GLM":
+                                message['content']+="\n"+"你可以使用以下工具："
+                                message['tools']=tools_list
+                            elif model_type=="llama":
+                                message['content']+="You can invoke the following tools by constructing a JSON object: " + json.dumps(tools_list, ensure_ascii=False) + "\n Tool usage instructions: You need to build a JSON object based on the names and parameters of these tools. For example, if you want to call a tool named 'tool_name' and need to pass parameters 'param1' and 'param2', you should construct a JSON object in the following format: {\"name\":\"tool_name\",\"parameters\":{\"param1\":\"value1\",\"param2\":\"value2\"}}\nWhen invoking tools, please construct a JSON object based on the names and parameters specified in the aforementioned tools. Avoid including any parameters not indicated in the tools, and ensure that you do not omit any required parameters explicitly mentioned by the tools. Additionally, refrain from outputting any content other than the JSON object when calling the tools."
+                            elif model_type=="Qwen":
+                                message['content']+="你可以通过构建一个JSON对象来调用以下工具：" + json.dumps(tools_list, ensure_ascii=False) + "\n工具使用说明：您需要根据这些工具的名称和参数构建一个JSON对象。例如，如果您想调用一个名为“tool_name”的工具，并且需要传递参数“param1”和“param2”，您应该按照以下格式构建一个JSON对象：{\"name\":\"tool_name\",\"parameters\":{\"param1\":\"value1\",\"param2\":\"value2\"}}\n在调用工具时，请根据上述工具中指定的名称和参数构建一个JSON对象。请避免包含工具中未指定的任何参数，并确保不要省略工具明确提到的任何必需参数。此外，在调用工具时，请不要输出除JSON对象之外的任何内容。"
                         else:
                             if 'tools' in message:
                                 # 如果存在，移除 'tools' 键值对
@@ -583,7 +612,12 @@ class LLM_local:
                 if tools is not None:
                     print(tools)
                     tools=json.loads(tools)
-
+                def is_valid_json(json_str):
+                    try:
+                        json.loads(json_str)
+                        return True
+                    except json.JSONDecodeError:
+                        return False
                 
                 if file_content is not None:
                     user_prompt="文件中相关内容："+file_content+"\n"+"用户提问："+user_prompt+"\n"+"请根据文件内容回答用户问题。\n"+"如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
@@ -615,64 +649,41 @@ class LLM_local:
                 elif model_type=="llama":
                     llama_device = "cuda" if torch.cuda.is_available() else "cpu"
                     if llama_tokenizer=="":
-                        llama_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+                        llama_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
                     if llama_model=="":
                         if device=="cuda":
-                            llama_model = AutoModelForCausalLM.from_pretrained(model_path,device_map="cuda")
+                            llama_model = AutoModelForCausalLM.from_pretrained(model_path,trust_remote_code=True,device_map="cuda")
                         elif device=="cpu":
-                            llama_model = AutoModelForCausalLM.from_pretrained(model_path).float()
+                            llama_model = AutoModelForCausalLM.from_pretrained(model_path,trust_remote_code=True).float()
                         else:
-                            llama_model = AutoModelForCausalLM.from_pretrained(model_path).half().cuda()
+                            llama_model = AutoModelForCausalLM.from_pretrained(model_path,trust_remote_code=True).half().cuda()
                         llama_model = llama_model.eval()
-                    history.append({"role": "user", "content": user_prompt.strip()})
-                    text = llama_tokenizer.apply_chat_template(
-                        history,
-                        tokenize=False,
-                        add_generation_prompt=True
-                    )
-                    model_inputs = llama_tokenizer([text], return_tensors="pt").to(llama_device)
-
-                    generated_ids = llama_model.generate(
-                        model_inputs.input_ids,
-                        max_new_tokens=max_length,
-                    )
-                    generated_ids = [
-                        output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
-                    ]
-
-                    response = llama_tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
-                    history.append({"role":"assistant","content":response})
+                    response, history = llm_chat(llama_model,llama_tokenizer,user_prompt,history,llama_device,max_length)
+                    while is_valid_json(response):
+                        response = json.loads(response)
+                        result = dispatch_tool(response['name'],response['parameters'])
+                        print(result)
+                        response, history = llm_chat(qwen_model,qwen_tokenizer,user_prompt,history,qwen_device,max_length,role="observation")
                 elif model_type=="Qwen":
                     qwen_device = "cuda" if torch.cuda.is_available() else "cpu"
                     if qwen_tokenizer=="":
-                        qwen_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+                        qwen_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, revision='master', trust_remote_code=True)
                     if qwen_model=="":
                         if device=="cuda":
-                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path,device_map="cuda")
-                            qwen_model = qwen_model.half().cuda()
-
+                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path, device_map="cuda", trust_remote_code=True, fp32=True,fp16=False,bf16=False).eval()
                         elif device=="cpu":
-                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path).float()
+                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path, device_map="cpu", trust_remote_code=True, fp32=True,fp16=False,bf16=False).eval()
                         else:
-                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path).half().cuda()
+                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path, device_map="cuda", trust_remote_code=True, fp16=True,fp32=False,bf16=False).eval()
                         qwen_model.eval()
-                    history.append({"role": "user", "content": user_prompt.strip()})
-                    text = qwen_tokenizer.apply_chat_template(
-                        history,
-                        tokenize=False,
-                        add_generation_prompt=True
-                    )
-                    model_inputs = qwen_tokenizer([text], return_tensors="pt").to(qwen_device)
-
-                    generated_ids = qwen_model.generate(
-                        model_inputs.input_ids,
-                        max_new_tokens=max_length,
-                    )
-                    generated_ids = [
-                        output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
-                    ]
-
-                    response = qwen_tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
+                    qwen_model.generation_config = GenerationConfig.from_pretrained(model_path, trust_remote_code=True)
+                    response, history = qwen_model.chat(qwen_tokenizer, user_prompt, history=history)
+                    while is_valid_json(response):
+                        print(response)
+                        response = json.loads(response)
+                        result = dispatch_tool(response['name'],response['parameters'])
+                        print(result)
+                        response, history = qwen_model.chat(qwen_tokenizer, user_prompt, history=history)
                 print(response)
                 #修改prompt.json文件
                 with open(self.prompt_path, 'w', encoding='utf-8') as f:

@@ -13,3 +13,6 @@ faiss-cpu
 websocket
 streamlit
 virtualenv
+tiktoken
+transformers_stream_generator
+auto-gptq optimum
