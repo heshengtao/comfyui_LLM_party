@@ -54,6 +54,7 @@ def execute_code(env_name, code):
         result = subprocess.run([python_path, temp_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         # 获取标准输出
         output = result.stdout.strip()
+        print(output)
         # 清理：删除临时文件
         os.remove(temp_file)
         return output
@@ -76,6 +77,7 @@ def execute_code(env_name, code):
         result = subprocess.run([python_path, temp_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         # 获取标准输出
         output = result.stdout.strip()
+        print(output)
         # 清理：删除临时文件
         os.remove(temp_file)
         return output
