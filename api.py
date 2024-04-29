@@ -221,13 +221,14 @@ if get_current_page() == 'chat':
                 # 调用API函数
                 images, response = api(file_path, img_path,st.session_state['system_prompt'], user_input,workflow_path=str(st.session_state['wf_path']))
                 # 更新对话记录
-                for node_id in images:
-                    for image_data in images[node_id]:
-                        image = Image.open(io.BytesIO(image_data))
-                        st.session_state['chat_history'].append({"role": "image", "content": image})
-                st.session_state['chat_history'].append({"role": "assistant", "content": response})
-                
-                # 更新对话记录容器
+                if response is not None and response !="" and response !="empty":           
+                    st.session_state['chat_history'].append({"role": "assistant", "content": response})
+                else:    
+                    # 更新对话记录
+                    for node_id in images:
+                        for image_data in images[node_id]:
+                            image = Image.open(io.BytesIO(image_data))
+                            st.session_state['chat_history'].append({"role": "image", "content": image})
                 display_chat_history()
 
         with col4: 
