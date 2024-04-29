@@ -17,8 +17,6 @@
 ## 使用说明
 [【ComfyUI×LLM】手把手教你如何搭建积木化智能体（超简单！）](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
 
-![图片](img/画画应用.png)
-
 ## 特征
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)
 2. 支持API接入或者本地大模型接入。模块化实现工具调用功能
@@ -33,6 +31,8 @@
 11. 支持通过API+streamlit快速开发自己的web应用
 12. 新增了危险的万能解释器节点，可以让大模型做任何事情
 13. 推荐配合[ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)的show_text节点，作为LLM节点的输出显示
+
+![图片](img/画画应用.png)
 
 ## 下载
 [百度云下载](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) （推荐！包含一个环境配置完毕且包含本项目的comfyui压缩包和一个本项目文件夹，前者下载完后不用再配置环境！）
