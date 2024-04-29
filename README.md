@@ -3,7 +3,7 @@
 </p>
 
 ## Latest Updates
-1. Added a universal interpreter node that allows the large model to execute any task. The large model operates within a virtual environment, downloading necessary third-party libraries and executing generated code. Please use this tool with caution, as the large model gains the ability to control your computer for any task!
+1. Added a omnipotent interpreter node that allows the large model to execute any task. The large model operates within a virtual environment, downloading necessary third-party libraries and executing generated code. Please use this tool with caution, as the large model gains the ability to control your computer for any task!
 2. Introducing a cool "Matryoshka" feature: Disable the `main_brain` attribute of an LLM node to use it as a tool. Link this node's tool to another regular LLM node, and you'll find that the second LLM can call it like a tool!
 3. New `start_workflow` and `end_workflow` nodes allow you to define the starting and ending points of a workflow. Place your workflow in the `workflow` subfolder of this project, then run `setup_streamlit_app.bat` in the project folder. In the Streamlit interface, click "Settings" and replace it with your workflow.
 
@@ -29,7 +29,7 @@
 9. Supports various tool invocations, including weather lookup, time lookup, knowledge base, code execution, web search, and single-page search.
 10. Use LLM as a tool node.
 11. Rapidly develop your own web applications using API + Streamlit.
-12. Added a dangerous universal interpreter node that allows the large model to perform any task.
+12. Added a dangerous omnipotent interpreter node that allows the large model to perform any task.
 13. It is recommended to use the show_text node from [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts) in conjunction with the LLM node for output display.
 
 ![图片](img/画画应用.png)
