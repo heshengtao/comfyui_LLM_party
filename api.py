@@ -224,7 +224,7 @@ if get_current_page() == 'chat':
                 # 更新对话记录
                 if response is not None and response !="" and response !="empty":           
                     st.session_state['chat_history'].append({"role": "assistant", "content": response})
-                else:    
+                if images is not None:    
                     # 更新对话记录
                     for node_id in images:
                         for image_data in images[node_id]:
