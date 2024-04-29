@@ -14,7 +14,7 @@
       "is_enable": "enable",
       "text1": "Positive Prompt",
       "text2": "Negative Prompt",
-      "text3": "其他"
+      "text3": "智能助手对用户的回复，不属于生成图像Prompt的文本"
     },
     "class_type": "classify_persona",
     "_meta": {
@@ -107,7 +107,7 @@
       "file_path": "",
       "img_path": "",
       "system_prompt": "你是一个强大的智能助手",
-      "user_prompt": "我要一个大美女，手里拿着棒棒糖"
+      "user_prompt": "你好"
     },
     "class_type": "start_workflow",
     "_meta": {
@@ -209,7 +209,7 @@
   },
   "182": {
     "inputs": {
-      "seed": 264384504526444,
+      "seed": 745868785285997,
       "steps": 20,
       "cfg": 8,
       "sampler_name": "euler",
