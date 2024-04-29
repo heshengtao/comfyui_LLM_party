@@ -1,0 +1,240 @@
+{
+  "150": {
+    "inputs": {
+      "persona_name": "图片提示词生成器",
+      "is_enable": "enable"
+    },
+    "class_type": "load_persona",
+    "_meta": {
+      "title": "加载人格面具（load_persona）"
+    }
+  },
+  "154": {
+    "inputs": {
+      "is_enable": "enable",
+      "text1": "Positive Prompt",
+      "text2": "Negative Prompt",
+      "text3": "智能助手对用户的回复，不属于生成图像Prompt的文本"
+    },
+    "class_type": "classify_persona",
+    "_meta": {
+      "title": "分类器面具（classify_persona）"
+    }
+  },
+  "162": {
+    "inputs": {
+      "is_enable": "enable",
+      "text": [
+        "179",
+        0
+      ]
+    },
+    "class_type": "classify_function",
+    "_meta": {
+      "title": "分类器函数（classify_function）"
+    }
+  },
+  "169": {
+    "inputs": {
+      "ckpt_name": "CounterfeitV30_v30.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint加载器(简易)"
+    }
+  },
+  "170": {
+    "inputs": {
+      "text": [
+        "162",
+        0
+      ],
+      "clip": [
+        "169",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "171": {
+    "inputs": {
+      "text": [
+        "162",
+        1
+      ],
+      "clip": [
+        "169",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "174": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent"
+    }
+  },
+  "175": {
+    "inputs": {
+      "samples": [
+        "182",
+        0
+      ],
+      "vae": [
+        "169",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "176": {
+    "inputs": {
+      "file_path": "",
+      "img_path": "",
+      "system_prompt": "你是一个强大的智能助手",
+      "user_prompt": "你好"
+    },
+    "class_type": "start_workflow",
+    "_meta": {
+      "title": "开始工作流（start_workflow）"
+    }
+  },
+  "177": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "text": [
+        "162",
+        2
+      ],
+      "images": [
+        "175",
+        0
+      ]
+    },
+    "class_type": "end_workflow",
+    "_meta": {
+      "title": "结束工作流（end_workflow）"
+    }
+  },
+  "178": {
+    "inputs": {
+      "system_prompt": [
+        "150",
+        0
+      ],
+      "user_prompt": [
+        "176",
+        3
+      ],
+      "model_name": "gpt-4",
+      "temperature": 0.7000000000000001,
+      "is_memory": "disable",
+      "is_tools_in_sys_prompt": "disable",
+      "is_locked": "disable",
+      "main_brain": "enable",
+      "max_length": 2048,
+      "base_url": "",
+      "api_key": "",
+      "imgbb_api_key": ""
+    },
+    "class_type": "LLM",
+    "_meta": {
+      "title": "大语言模型api（LLM_api）"
+    }
+  },
+  "179": {
+    "inputs": {
+      "system_prompt": [
+        "154",
+        0
+      ],
+      "user_prompt": [
+        "178",
+        0
+      ],
+      "model_name": "gpt-4",
+      "temperature": 0.7000000000000001,
+      "is_memory": "disable",
+      "is_tools_in_sys_prompt": "disable",
+      "is_locked": "disable",
+      "main_brain": "enable",
+      "max_length": 2048,
+      "base_url": "",
+      "api_key": "",
+      "imgbb_api_key": ""
+    },
+    "class_type": "LLM",
+    "_meta": {
+      "title": "大语言模型api（LLM_api）"
+    }
+  },
+  "180": {
+    "inputs": {
+      "text": [
+        "162",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "展示文本"
+    }
+  },
+  "181": {
+    "inputs": {
+      "text": [
+        "162",
+        1
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "展示文本"
+    }
+  },
+  "182": {
+    "inputs": {
+      "seed": 745868785285997,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "169",
+        0
+      ],
+      "positive": [
+        "170",
+        0
+      ],
+      "negative": [
+        "171",
+        0
+      ],
+      "latent_image": [
+        "174",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  }
+}
