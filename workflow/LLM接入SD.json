@@ -46,7 +46,7 @@
       },
       "widgets_values": [
         "",
-        "best quality, masterpiece, ultra-detailed, illustration, detailed light, an extremely delicate and beautiful, a girl, beautiful detailed eyes, stars in the eyes, messy floating hair, colored inner hair, Starry sky adorns hair, depth of field, wearing a pink hat, white hair, holding a lollipop"
+        "{{best quality}} An ethereal masterpiece: A stunning white-haired beauty donning a pastel pink hat, delicately holding a lollipop. Experience the intricate details of her mesmerizing gaze and the whimsical charm of her flowing locks, adorned with stars reminiscent of a starry sky. Every stroke captures the depth of her character, from the colored inner strands of her hair to the stars twinkling in her eyes. This illustration exudes a sense of enchantment and wonder, inviting viewers into a world of imagination and beauty."
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
@@ -108,10 +108,10 @@
         700,
         330
       ],
-      "size": {
-        "0": 400,
-        "1": 290
-      },
+      "size": [
+        400,
+        540
+      ],
       "flags": {},
       "order": 0,
       "mode": 0,
@@ -152,6 +152,13 @@
           "links": [],
           "shape": 3,
           "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
         }
       ],
       "properties": {
@@ -163,6 +170,11 @@
         "gpt-3.5-turbo-1106",
         0.7,
         "disable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
         "",
         "",
         "",
