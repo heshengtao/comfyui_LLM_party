@@ -3,10 +3,9 @@
 </p>
 
 ## Latest Updates
-1. Added a local large model node, currently compatible with GLM and LLM. However, LLM cannot be used for tool invocations because the native LLM does not include this functionality. Please provide the absolute paths to the tokenizer and model folders in the node to load LLM locally.
-2. Introduced a code interpreter tool.
-3. Enabled file loading with the option to input absolute paths.
-4. Expanded the components available for the large model node, giving you more choices.
+1. Added a universal interpreter node that allows the large model to execute any task. The large model operates within a virtual environment, downloading necessary third-party libraries and executing generated code. Please use this tool with caution, as the large model gains the ability to control your computer for any task!
+2. Introducing a cool "Matryoshka" feature: Disable the `main_brain` attribute of an LLM node to use it as a tool. Link this node's tool to another regular LLM node, and you'll find that the second LLM can call it like a tool!
+3. New `start_workflow` and `end_workflow` nodes allow you to define the starting and ending points of a workflow. Place your workflow in the `workflow` subfolder of this project, then run `setup_streamlit_app.bat` in the project folder. In the Streamlit interface, click "Settings" and replace it with your workflow.
 
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI** 
 
@@ -18,13 +17,18 @@
 
 ## Features
 1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
-2. Supports OpenAI API driving and custom base_url, allowing the use of a proxy API to drive LLM nodes.If you are using other large model interfaces, you can convert them to the OpenAI API format using [openai-style-api](https://github.com/tian-minghui/openai-style-api). Please select the LLM_local node for local deployment. Currently, both GLM and LLAMA have been adapted, but LLAMA cannot be used for tool invocations because the native LLAMA does not include this functionality12
-3. The base_url must end with `/v1/`.
-4. Supports importing various file types into LLM nodes. With RAG technology, LLM can answer questions based on file content. Currently supported file types include: .docx, .xlsx, .csv, .txt, .py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift
-5. The tool combine node allows multiple tools to be passed into the LLM node, and the file combine node allows multiple files to be passed into the LLM node.
-6. Supports Google search and single web page search, enabling LLM to perform online queries.
-7. Through the start_dialog node and the end_dialog node, a loopback link can be established between two LLMs, meaning the two LLMs act as each other’s input and output!
-8. It is recommended to use the show_text node from [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts) in conjunction with the LLM node for output display.
+2. Supports API integration or local large model integration. Modular implementation for tool invocation.
+3. Local knowledge base integration with RAG support.
+4. Ability to invoke code interpreters.
+5. Enables online queries, including Google search support.
+6. Implement conditional statements within ComfyUI to categorize user queries and provide targeted responses.
+7. Supports looping links for large models, allowing two large models to engage in debates.
+8. Attach any persona mask, customize prompt templates.
+9. Supports various tool invocations, including weather lookup, time lookup, knowledge base, code execution, web search, and single-page search.
+10. Use LLM as a tool node.
+11. Rapidly develop your own web applications using API + Streamlit.
+12. Added a dangerous universal interpreter node that allows the large model to perform any task.
+13. It is recommended to use the show_text node from [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts) in conjunction with the LLM node for output display.
 
 ## Download
 [Baidu Cloud Download](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) (Recommended! Includes a compressed package of comfyui with the environment setup completed, and a folder for this project. After downloading the former, there’s no need for further environment configuration!)
@@ -63,9 +67,8 @@ Configure the APIKEY using one of the following methods:
 3. Create a new Google Search Tool (google_tool) node and directly enter your `google_api_key` and `cse_id` in the node.
 
 ## Next Steps Plan:
-1. More common utility nodes, such as: code interpreters, text-to-speech output, recognition of text information in images, etc.
-2. Allow LLM to internally call an LLM that is subsidiary to it, giving the assistant its own assistant.
-3. New nodes that can connect with the numerous SD nodes in comfyui, expanding the possibilities for LLM and SD, and providing related workflows.
+1. Further adaptation for local large models.
+2. Multi-modal adaptation.
 
 ## If my work has brought value to your day, consider fueling it with a coffee! Your support not only energizes the project but also warms the heart of the creator. ☕💖 Every cup makes a difference!
 <div style="display:flex; justify-content:space-between;">
