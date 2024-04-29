@@ -64,7 +64,7 @@ def get_all(ws, prompt):
 
     return output_images,output_text
 
-def api(file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="",workflow_path="API.json"):
+def api(file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="",workflow_path="测试画画api.json"):
     current_dir_path = os.path.dirname(os.path.realpath(__file__))
     workflow_path=workflow_path
     WF_path=os.path.join(current_dir_path,"workflow", workflow_path)
@@ -173,8 +173,8 @@ if 'chat_history' not in st.session_state:
     st.session_state['chat_history'] = []
 # 使用函数来访问 'current_page'
 if get_current_page() == 'chat':
-    response='你好哇，很高兴能和你聊天哦~'
-    st.markdown(f"智能体: 你好哇，很高兴能和你聊天哦~")
+    response='你好哇~我会为说的每一句话都做一幅画！'
+    st.markdown(f"智能体: 你好哇~我会为说的每一句话都做一幅画！")
     chat_history_container = st.container()  # Use a container to hold the chat history
     # 更新对话记录容器
     chat_history_container.empty()
@@ -184,11 +184,13 @@ if get_current_page() == 'chat':
         with chat_history_container:
             for message in st.session_state['chat_history']:
                 if message["role"] == "assistant":
-                    st.markdown(f"智能体: {message['content']}")
+                    if message['content'] is not None and message['content'] !="" and message['content'] !="empty":
+                        st.markdown(f"智能体: {message['content']}")
                 elif message["role"] == "user":
                     st.markdown(f"你: {message['content']}")
                 elif message["role"] == "image":
-                    st.image(message['content'])
+                    if message['content'] is not None:
+                        st.image(message['content'])
     with st.form("Question",clear_on_submit=True):
         # 用户输入
         user_input = st.text_area("", height=100,placeholder="让我们开始聊天吧...")
@@ -217,7 +219,7 @@ if get_current_page() == 'chat':
                         file_path = os.path.join(current_dir_path,"file", uploaded_file.name)
                         img_path = ""
                 # 调用API函数
-                images, response = api(file_path, img_path,st.session_state['system_prompt'], user_input,workflow_path=st.session_state['wf_path'])
+                images, response = api(file_path, img_path,st.session_state['system_prompt'], user_input,workflow_path=str(st.session_state['wf_path']))
                 # 更新对话记录
                 for node_id in images:
                     for image_data in images[node_id]:
