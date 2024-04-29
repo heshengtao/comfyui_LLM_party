@@ -8,6 +8,7 @@ import docx2txt
 import openpyxl
 import pandas as pd
 import xlrd
+import pdfplumber
 
 programming_languages_extensions = [
     ".py", ".js", ".java", ".c", ".cpp", ".html", ".css", ".sql", ".r", ".swift"
@@ -17,6 +18,10 @@ def read_one(path):
     text=""
     if path.endswith(".docx"):
         text += docx2txt.process(path)
+    elif path.endswith(".pdf"):
+        with pdfplumber.open(path) as pdf:
+            for page in pdf.pages:
+                text += page.extract_text()
     elif path.endswith(".xlsx"):
         workbook = openpyxl.load_workbook(path)
         for sheet in workbook:
