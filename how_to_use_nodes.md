@@ -1,6 +1,6 @@
 # **Node Usage Instructions**
 
-## LLM Nodes
+## API LLM Nodes
 1. LLM nodes allow customization of model name, temperature, API_KEY, and base_url. Currently, they only support OpenAI-type API calls.
 2. You can directly input system prompts and user prompts on the node, or convert these two small components into inputs for the node, accepting string-type input.
 3. Large model nodes can also accept output from tool nodes and receive string-formatted input from the file_content interface. These inputs are treated as the model's knowledge base, using word vector similarity to search for relevant content to input into the model.
@@ -9,7 +9,19 @@
 6. Even if external parameters remain unchanged, large model nodes always run because they provide different answers to the same question.
 7. The `is_tools_in_sys_prompt` determines whether the information of ‘tools’ will be entered into the system prompt.
 8. `is_locked` can lock the results of the previous conversation, allowing the large model to directly return the answer from the previous turn. This helps maintain continuity in the conversation and allows valuable human resources to handle more complex questions.
-9. `is_RAG` determines whether to use RAG for file content. If disabled, all file content will be input into the model, which may exceed the context window.
+9. The `main_brain` determines whether the large model interfaces with the user. When disabled, an LLM node can serve as a tool for another LLM node.
+10. The `imgbb_api_key` can be set to the imgbb API key, allowing LLM to adapt GPT-4's visual capabilities.
+
+## Local LLM Nodes
+1. Currently supports GLM/Llama/Qwen, but only GLM's tool invocation is perfectly compatible. The other two require large parameter versions for normal tool invocation.
+2. `is_reload` determines whether the local model will be unloaded after node execution. It is disabled by default to prevent redundant loading of large models and increase runtime. Enable it when GPU memory cannot support simultaneous LLM and SD execution.
+3. Fill in `model_path` and `tokenizer_path` with the project folder containing the model. It adapts to any transformer-compatible model.
+4. Other parameters are consistent with the API LLM node.
+
+## start_workflow and end_workflow Nodes
+1. You can use these two nodes to define the starting and ending points of a workflow. Place your workflow in the `workflow` subfolder of this project.
+2. Run `setup_streamlit_app.bat` in the project folder. In the Streamlit interface, click "Settings" and replace it with your workflow.
+3. This way, you've quickly built an AI application with Streamlit as the frontend.
 
 ## start_dialog and end_dialog Nodes
 1. These two nodes have a `dialog_id`. Connecting dialog IDs creates an archive point for the conversation. When you need to loop two large models, although it cannot be directly implemented in ComfyUI, you can save the output of the second model locally and pass it to the first model in the next run. You can use the ComfyUI API in other frontends to call ComfyUI, creating an infinite self-dialogue loop between the two models.
@@ -33,6 +45,10 @@
 ## interpreter node
 1. It allows the large model to generate Python code, execute it automatically, and obtain the execution results of the code.
 2. Currently, it only supports Python code.
+
+## omnipotent Interpreter Node
+1. Enables the large model to execute any task. The large model operates within a virtual environment, downloading necessary third-party libraries and executing generated code.
+2. Use this tool with caution, as the large model gains the ability to control your computer for any task!
 
 ## load_file from comfyui_LLM_party/file Node
 1. The file path for reading files is in `comfyui_LLM_party/file`. You can place the file you want to read in this directory and fill in the filename in this node.
