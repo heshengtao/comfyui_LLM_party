@@ -190,6 +190,7 @@ if get_current_page() == 'chat':
                     st.markdown(f"你: {message['content']}")
                 elif message["role"] == "image":
                     if message['content'] is not None:
+                        st.markdown(f"智能体:")
                         st.image(message['content'])
     with st.form("Question",clear_on_submit=True):
         # 用户输入
