@@ -67,7 +67,7 @@ def get_all(ws, prompt):
 def api(file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="",workflow_path="测试画画api.json"):
     current_dir_path = os.path.dirname(os.path.realpath(__file__))
     workflow_path=workflow_path
-    WF_path=os.path.join(current_dir_path,"workflow", workflow_path)
+    WF_path=os.path.join(current_dir_path,"workflow_api", workflow_path)
     with open(WF_path, 'r', encoding='utf-8') as f:
         prompt_text = f.read()
 
@@ -246,7 +246,7 @@ if get_current_page() == 'settings':
     path1=st.session_state['wf_path']
     # 添加下拉菜单，选项为WF_path=os.path.join(current_dir_path,"workflow")文件夹下的json文件
     st.markdown(f"当前工作流文件（workflow）:{path1}")
-    _path = st.selectbox("选择一个包含start_workflow & end_workflow的工作流文件", [f for f in os.listdir(os.path.join(current_dir_path,"workflow")) if f.endswith('.json')])
+    _path = st.selectbox("选择一个包含start_workflow & end_workflow的工作流文件", [f for f in os.listdir(os.path.join(current_dir_path,"workflow_api")) if f.endswith('.json')])
     #保存按钮
     if st.button("保存"):
         #保存_path到session_state
