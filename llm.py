@@ -316,7 +316,7 @@ class LLM:
             with open(self.prompt_path, 'r', encoding='utf-8') as f:
                 history = json.load(f)
             return ("已清空历史记录",str(history),llm_tools_json,)
-        elif user_prompt is None or user_prompt.strip()=="empty":
+        elif user_prompt is None or user_prompt.strip()=="":
             with open(self.prompt_path, 'r', encoding='utf-8') as f:
                 history = json.load(f)
             return ("",str(history),llm_tools_json,)
@@ -570,7 +570,7 @@ class LLM_local:
             with open(self.prompt_path, 'r', encoding='utf-8') as f:
                 history = json.load(f)
             return ("已清空历史记录",str(history),llm_tools_json,)
-        elif user_prompt is None or user_prompt.strip()=="empty":
+        elif user_prompt is None or user_prompt.strip()=="":
             with open(self.prompt_path, 'r', encoding='utf-8') as f:
                 history = json.load(f)
             return ("",str(history),llm_tools_json,)
