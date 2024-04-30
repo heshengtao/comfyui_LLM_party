@@ -10,7 +10,7 @@
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI** 
 
 ## Introduction
-[comfyui](https://github.com/comfyanonymous/ComfyUI) is an extremely minimalist UI interface, primarily used for AI drawing and other workflows based on the SD model. This project aims to develop a complete set of nodes for LLM workflow construction based on comfyui. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.
+[comfyui](https://github.com/comfyanonymous/ComfyUI) is an extremely minimalist UI interface, primarily used for AI drawing and other workflows based on the SD model. This project aims to develop a complete set of nodes for LLM workflow construction based on comfyui. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.The image is a workflow of an intelligent customer service, for more workflows please refer to the [workflow](workflow) folder.
 
 ![图片](img/智能助手.png)
 
@@ -28,7 +28,7 @@
 8. Attach any persona mask, customize prompt templates.
 9. Supports various tool invocations, including weather lookup, time lookup, knowledge base, code execution, web search, and single-page search.
 10. Use LLM as a tool node.
-11. Rapidly develop your own web applications using API + Streamlit.
+11. Rapidly develop your own web applications using API + Streamlit.The picture below is an example of a drawing application.
 12. Added a dangerous omnipotent interpreter node that allows the large model to perform any task.
 13. It is recommended to use the show_text node from [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts) in conjunction with the LLM node for output display.
 
