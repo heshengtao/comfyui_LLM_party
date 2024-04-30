@@ -34,6 +34,7 @@ from .tools.custom_persona import custom_persona
 from .tools.end_work import end_workflow
 from .tools.new_interpreter import new_interpreter,new_interpreter_tool
 from .tools.image import CLIPTextEncode_party,KSampler_party,VAEDecode_party
+from .tools.logic import string_logic
 from transformers import AutoTokenizer, AutoModel, Qwen2Tokenizer, Qwen2ForCausalLM, AutoModelForCausalLM, GenerationConfig
 glm_tokenizer=""
 glm_model=""
@@ -747,6 +748,7 @@ NODE_CLASS_MAPPINGS = {
     "CLIPTextEncode_party":CLIPTextEncode_party,
     "KSampler_party":KSampler_party,
     "VAEDecode_party":VAEDecode_party,
+    "string_logic":string_logic,
 }
 
 
@@ -776,6 +778,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CLIPTextEncode_party":"CLIP文本编码器（CLIPTextEncode_party）",
     "KSampler_party":"KSampler采样器（KSampler_party）",
     "VAEDecode_party":"VAEDecode解码器（VAEDecode_party）",
+    "string_logic":"字符串逻辑（string_logic）",
 }
 
 if __name__ == '__main__':
