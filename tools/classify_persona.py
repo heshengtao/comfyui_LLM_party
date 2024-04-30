@@ -32,7 +32,7 @@ class classify_persona:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/面具和函数（persona&function）"
+    CATEGORY = "大模型派对（llm_party）/面具（persona）"
 
 
 
