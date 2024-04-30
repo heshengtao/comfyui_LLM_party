@@ -43,38 +43,6 @@
       "title": "Checkpoint加载器(简易)"
     }
   },
-  "170": {
-    "inputs": {
-      "text": [
-        "162",
-        0
-      ],
-      "clip": [
-        "169",
-        1
-      ]
-    },
-    "class_type": "CLIPTextEncode",
-    "_meta": {
-      "title": "CLIP文本编码器"
-    }
-  },
-  "171": {
-    "inputs": {
-      "text": [
-        "162",
-        1
-      ],
-      "clip": [
-        "169",
-        1
-      ]
-    },
-    "class_type": "CLIPTextEncode",
-    "_meta": {
-      "title": "CLIP文本编码器"
-    }
-  },
   "174": {
     "inputs": {
       "width": 512,
@@ -84,22 +52,6 @@
     "class_type": "EmptyLatentImage",
     "_meta": {
       "title": "空Latent"
-    }
-  },
-  "175": {
-    "inputs": {
-      "samples": [
-        "182",
-        0
-      ],
-      "vae": [
-        "169",
-        2
-      ]
-    },
-    "class_type": "VAEDecode",
-    "_meta": {
-      "title": "VAE解码"
     }
   },
   "176": {
@@ -122,7 +74,7 @@
         2
       ],
       "images": [
-        "175",
+        "198",
         0
       ]
     },
@@ -183,9 +135,41 @@
       "title": "大语言模型api（LLM_api）"
     }
   },
-  "182": {
+  "195": {
     "inputs": {
-      "seed": 745868785285997,
+      "text": [
+        "162",
+        0
+      ],
+      "clip": [
+        "169",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode_party",
+    "_meta": {
+      "title": "CLIP文本编码器（CLIPTextEncode_party）"
+    }
+  },
+  "196": {
+    "inputs": {
+      "text": [
+        "162",
+        1
+      ],
+      "clip": [
+        "169",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode_party",
+    "_meta": {
+      "title": "CLIP文本编码器（CLIPTextEncode_party）"
+    }
+  },
+  "197": {
+    "inputs": {
+      "seed": 750231815664258,
       "steps": 20,
       "cfg": 8,
       "sampler_name": "euler",
@@ -196,11 +180,11 @@
         0
       ],
       "positive": [
-        "170",
+        "195",
         0
       ],
       "negative": [
-        "171",
+        "196",
         0
       ],
       "latent_image": [
@@ -208,9 +192,25 @@
         0
       ]
     },
-    "class_type": "KSampler",
+    "class_type": "KSampler_party",
     "_meta": {
-      "title": "K采样器"
+      "title": "KSampler采样器（KSampler_party）"
+    }
+  },
+  "198": {
+    "inputs": {
+      "samples": [
+        "197",
+        0
+      ],
+      "vae": [
+        "169",
+        2
+      ]
+    },
+    "class_type": "VAEDecode_party",
+    "_meta": {
+      "title": "VAEDecode解码器（VAEDecode_party）"
     }
   }
 }
