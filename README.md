@@ -30,7 +30,7 @@
 10. Use LLM as a tool node.
 11. Rapidly develop your own web applications using API + Streamlit.The picture below is an example of a drawing application.
 12. Added a dangerous omnipotent interpreter node that allows the large model to perform any task.
-13. It is recommended to use the `show_text` node under the `function` subdirectory to display the output of the LLM node.
+13. It is recommended to use the `show_text` node under the `function` submenu of the right-click menu as the display output for the LLM node.
 
 ![图片](img/画画应用.png)
 
