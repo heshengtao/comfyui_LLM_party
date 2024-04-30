@@ -183,30 +183,6 @@
       "title": "大语言模型api（LLM_api）"
     }
   },
-  "180": {
-    "inputs": {
-      "text": [
-        "162",
-        0
-      ]
-    },
-    "class_type": "ShowText|pysssss",
-    "_meta": {
-      "title": "展示文本"
-    }
-  },
-  "181": {
-    "inputs": {
-      "text": [
-        "162",
-        1
-      ]
-    },
-    "class_type": "ShowText|pysssss",
-    "_meta": {
-      "title": "展示文本"
-    }
-  },
   "182": {
     "inputs": {
       "seed": 745868785285997,
