@@ -1,6 +1,6 @@
 {
-  "last_node_id": 10,
-  "last_link_id": 12,
+  "last_node_id": 11,
+  "last_link_id": 13,
   "nodes": [
     {
       "id": 3,
@@ -190,138 +190,6 @@
       "bgcolor": "#3f5159"
     },
     {
-      "id": 1,
-      "type": "LLM",
-      "pos": [
-        1730,
-        250
-      ],
-      "size": [
-        430,
-        460
-      ],
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 8,
-          "widget": {
-            "name": "tools"
-          },
-          "label": "tools"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            3
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。",
-        "你好，帮我查一下当前北京时间，和北京明天的天气",
-        "gpt-3.5-turbo-0125",
-        0.7,
-        "disable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 4,
-      "type": "ShowText|pysssss",
-      "pos": [
-        2210,
-        250
-      ],
-      "size": {
-        "0": 460,
-        "1": 330
-      },
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 3,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "当前北京时间是2024年4月26日 09:56:01，明天的天气预报为多云，气温最高为24℃，最低为16℃。之后几天的天气情况为多云、小雨、阴天，气温逐渐降低。记得随身带上衣物和雨具，谨防天气变化。"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
       "id": 9,
       "type": "weather_tool",
       "pos": [
@@ -440,17 +308,139 @@
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        2242,
+        280
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 13,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 1,
+      "type": "LLM",
+      "pos": [
+        1730,
+        250
+      ],
+      "size": {
+        "0": 430,
+        "1": 460
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 8,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "你好，帮我查一下当前北京时间，和北京明天的天气",
+        "gpt-3.5-turbo-0125",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
     }
   ],
   "links": [
-    [
-      3,
-      1,
-      0,
-      4,
-      0,
-      "STRING"
-    ],
     [
       5,
       3,
@@ -488,6 +478,14 @@
       9,
       0,
       8,
+      0,
+      "STRING"
+    ],
+    [
+      13,
+      1,
+      0,
+      11,
       0,
       "STRING"
     ]

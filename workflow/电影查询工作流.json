@@ -1,6 +1,6 @@
 {
-  "last_node_id": 72,
-  "last_link_id": 89,
+  "last_node_id": 74,
+  "last_link_id": 91,
   "nodes": [
     {
       "id": 69,
@@ -11,7 +11,7 @@
       ],
       "size": {
         "0": 315,
-        "1": 82
+        "1": 106
       },
       "flags": {},
       "order": 0,
@@ -33,22 +33,101 @@
       },
       "widgets_values": [
         "",
+        "",
         ""
       ],
       "color": "#332922",
       "bgcolor": "#593930"
     },
     {
+      "id": 71,
+      "type": "check_web_tool",
+      "pos": [
+        300,
+        740
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            88
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "check_web_tool"
+      },
+      "widgets_values": [
+        "",
+        ""
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 73,
+      "type": "show_text_party",
+      "pos": [
+        1185,
+        366
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 90,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
       "id": 50,
       "type": "LLM",
       "pos": [
-        700,
-        330
+        705,
+        279
       ],
-      "size": [
-        400,
-        290
-      ],
+      "size": {
+        "0": 400,
+        "1": 406
+      },
       "flags": {},
       "order": 2,
       "mode": 0,
@@ -77,8 +156,8 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            66,
-            87
+            87,
+            90
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -90,6 +169,13 @@
           "links": [],
           "shape": 3,
           "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
         }
       ],
       "properties": {
@@ -104,137 +190,15 @@
         "",
         "",
         "",
+        "",
+        "",
+        "",
+        "",
+        "",
         ""
       ],
       "color": "#223",
       "bgcolor": "#335"
-    },
-    {
-      "id": 71,
-      "type": "check_web_tool",
-      "pos": [
-        300,
-        740
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            88
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "check_web_tool"
-      },
-      "widgets_values": [
-        ""
-      ],
-      "color": "#332922",
-      "bgcolor": "#593930"
-    },
-    {
-      "id": 15,
-      "type": "ShowText|pysssss",
-      "pos": [
-        1210,
-        330
-      ],
-      "size": [
-        400,
-        270
-      ],
-      "flags": {
-        "collapsed": false
-      },
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 66,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "我为您找到了关于\"周处除三害\"的一些信息：\n\n1. [周处除三害- 维基百科](https://zh.wikipedia.org/zh-hans/%E5%91%A8%E8%99%95%E9%99%A4%E4%B8%89%E5%AE%B3_(%E9%9B%BB%E5%BD%B1)): 《周处除三害》是一部2023年台湾犯罪剧情片，由香港导演黄精甫执导，阮经天主演。影片于2023年10月6日在台湾上映。\n   \n2. [周处除三害- 豆瓣](https://m.douban.com/movie/subject/36151692/): 通缉犯陈桂林在逃亡中得知自己生命只剩不到三个月，决定查出前两名通缉犯的下落并除掉他们。豆瓣评分为8.1分。\n\n3. [BBC中文报道《周处除三害》](https://www.bbc.com/zhongwen/simp/chinese-news-68542277): 影片讲述台北黑帮杀手陈桂林在得知自己患上肺癌末期后，决定除掉前两名通缉犯的故事。\n\n您可以点击链接查看更多关于\"周处除三害\"的信息。"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 72,
-      "type": "ShowText|pysssss",
-      "pos": [
-        1200,
-        750
-      ],
-      "size": [
-        400,
-        270
-      ],
-      "flags": {
-        "collapsed": false
-      },
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 89,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "根据维基百科提供的信息，《周处除三害》是一部2023年台湾犯罪剧情片，由香港导演黄精甫执导，阮经天主演。电影结合了黑帮复仇、犯罪动作和暴力美学元素，讲述了台北黑帮杀手陈桂林在得知自己患上肺癌末期后，决定除掉前两名通缉犯的故事。\n\n故事设定在晴朗的日子里，在黑道人马聚集的场合上，主人公陈桂林枪杀了大老“铁头哥”并逃脱警方追捕。4年后，陈桂林得知自己患有肺癌后，决定自首并成为除三害的周处。在追踪前两名通缉犯的过程中，他发现了一个新兴宗教团体“新心灵舍”，最终揭露了团体的欺骗和真相。\n\n电影在中国大陆上映时做了部分处理，例如避开血腥画面，删减了部分镜头，并省略了特定细节。《周处除三害》在中国大陆上映后取得了巨大成功，被观众称为“爽片”，受到了热烈欢迎。\n\n至于其他信息，如豆瓣评分为8.1分等内容，您可以点击[周处除三害- 豆瓣](https://m.douban.com/movie/subject/36151692/)链接查看更多。"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
     },
     {
       "id": 70,
@@ -243,12 +207,12 @@
         700,
         730
       ],
-      "size": [
-        400,
-        290
-      ],
+      "size": {
+        "0": 400,
+        "1": 356
+      },
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
       "inputs": [
         {
@@ -275,7 +239,8 @@
           "link": 87,
           "widget": {
             "name": "user_prompt"
-          }
+          },
+          "label": "user_prompt"
         }
       ],
       "outputs": [
@@ -283,7 +248,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            89
+            91
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -295,6 +260,13 @@
           "links": [],
           "shape": 3,
           "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
         }
       ],
       "properties": {
@@ -309,21 +281,60 @@
         "",
         "",
         "",
+        "",
+        "",
+        "",
+        "",
+        "",
         ""
       ],
       "color": "#223",
       "bgcolor": "#335"
+    },
+    {
+      "id": 74,
+      "type": "show_text_party",
+      "pos": [
+        1185,
+        758
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 91,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     }
   ],
   "links": [
-    [
-      66,
-      50,
-      0,
-      15,
-      0,
-      "STRING"
-    ],
     [
       86,
       69,
@@ -349,10 +360,18 @@
       "STRING"
     ],
     [
-      89,
+      90,
+      50,
+      0,
+      73,
+      0,
+      "STRING"
+    ],
+    [
+      91,
       70,
       0,
-      72,
+      74,
       0,
       "STRING"
     ]

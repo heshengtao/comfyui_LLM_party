@@ -1,6 +1,6 @@
 {
-  "last_node_id": 176,
-  "last_link_id": 160,
+  "last_node_id": 177,
+  "last_link_id": 161,
   "nodes": [
     {
       "id": 175,
@@ -52,50 +52,6 @@
       "bgcolor": "#000"
     },
     {
-      "id": 176,
-      "type": "ShowText|pysssss",
-      "pos": [
-        1530,
-        410
-      ],
-      "size": {
-        "0": 360,
-        "1": 240
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 160,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "根据您提供的规则，我为您自媒体取名为\"人工智能助手\"。\n\n替换后的文本为：\"人工智能助手是一个专注于人工智能领域的自媒体频道，我们的内容涵盖了机器学习、深度学习、自然语言处理等多个领域。我们的观众大部分都是程序员，希望通过我们的内容帮助他们更好地学习和了解人工智能技术。\"\n\n如果您有其他需要帮助的地方，请随时告诉我。"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
       "id": 174,
       "type": "LLM_local",
       "pos": [
@@ -143,7 +99,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            160
+            161
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -155,6 +111,13 @@
           "links": null,
           "shape": 3,
           "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
         }
       ],
       "properties": {
@@ -174,10 +137,51 @@
         "cuda-float16",
         512,
         "",
+        "",
         ""
       ],
       "color": "#223",
       "bgcolor": "#335"
+    },
+    {
+      "id": 177,
+      "type": "show_text_party",
+      "pos": [
+        1535,
+        416
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 161,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ]
     }
   ],
   "links": [
@@ -190,10 +194,10 @@
       "STRING"
     ],
     [
-      160,
+      161,
       174,
       0,
-      176,
+      177,
       0,
       "STRING"
     ]

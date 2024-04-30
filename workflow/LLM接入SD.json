@@ -1,56 +1,7 @@
 {
-  "last_node_id": 80,
-  "last_link_id": 98,
+  "last_node_id": 81,
+  "last_link_id": 100,
   "nodes": [
-    {
-      "id": 15,
-      "type": "ShowText|pysssss",
-      "pos": [
-        1140,
-        330
-      ],
-      "size": {
-        "0": 400,
-        "1": 280
-      },
-      "flags": {
-        "collapsed": false
-      },
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 66,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            98
-          ],
-          "shape": 6,
-          "label": "字符串",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "{{best quality}} An ethereal masterpiece: A stunning white-haired beauty donning a pastel pink hat, delicately holding a lollipop. Experience the intricate details of her mesmerizing gaze and the whimsical charm of her flowing locks, adorned with stars reminiscent of a starry sky. Every stroke captures the depth of her character, from the colored inner strands of her hair to the stars twinkling in her eyes. This illustration exudes a sense of enchantment and wonder, inviting viewers into a world of imagination and beauty."
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
     {
       "id": 80,
       "type": "CLIPTextEncode",
@@ -63,7 +14,7 @@
         "1": 200
       },
       "flags": {},
-      "order": 2,
+      "order": 1,
       "mode": 0,
       "inputs": [
         {
@@ -76,7 +27,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 98,
+          "link": 99,
           "widget": {
             "name": "text"
           },
@@ -102,16 +53,58 @@
       "bgcolor": "#353"
     },
     {
+      "id": 81,
+      "type": "show_text_party",
+      "pos": [
+        1594,
+        621
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 100,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
       "id": 50,
       "type": "LLM",
       "pos": [
         700,
         330
       ],
-      "size": [
-        400,
-        540
-      ],
+      "size": {
+        "0": 400,
+        "1": 540
+      },
       "flags": {},
       "order": 0,
       "mode": 0,
@@ -140,7 +133,8 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            66
+            99,
+            100
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -186,19 +180,19 @@
   ],
   "links": [
     [
-      66,
+      99,
       50,
-      0,
-      15,
-      0,
-      "STRING"
-    ],
-    [
-      98,
-      15,
       0,
       80,
       1,
+      "STRING"
+    ],
+    [
+      100,
+      50,
+      0,
+      81,
+      0,
       "STRING"
     ]
   ],

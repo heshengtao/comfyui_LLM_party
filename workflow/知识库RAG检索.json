@@ -1,123 +1,7 @@
 {
-  "last_node_id": 71,
-  "last_link_id": 90,
+  "last_node_id": 72,
+  "last_link_id": 91,
   "nodes": [
-    {
-      "id": 71,
-      "type": "LLM",
-      "pos": [
-        740,
-        330
-      ],
-      "size": [
-        400,
-        314
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 89,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            90
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。",
-        "在加州最幸福的事情是什么",
-        "gpt-3.5-turbo-1106",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 15,
-      "type": "ShowText|pysssss",
-      "pos": [
-        1160,
-        330
-      ],
-      "size": [
-        400,
-        310
-      ],
-      "flags": {
-        "collapsed": false
-      },
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 90,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "在加州最幸福的事情是在午后的长椅上喝杯咖啡。"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
     {
       "id": 69,
       "type": "ebd_tool",
@@ -125,10 +9,10 @@
         410,
         340
       ],
-      "size": [
-        315,
-        130
-      ],
+      "size": {
+        "0": 315,
+        "1": 178
+      },
       "flags": {},
       "order": 1,
       "mode": 0,
@@ -139,7 +23,8 @@
           "link": 87,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
@@ -161,7 +46,10 @@
         "D:\\AI\\AIhuitu\\Blender_ComfyUI\\Blender_ComfyUI_Mini\\ComfyUI\\custom_nodes\\comfyui_LLM_party\\model\\bge-large-zh\\",
         "enable",
         "",
-        "cuda"
+        "cuda",
+        200,
+        50,
+        "disable"
       ],
       "color": "#233",
       "bgcolor": "#355"
@@ -173,10 +61,10 @@
         80,
         340
       ],
-      "size": [
-        310,
-        130
-      ],
+      "size": {
+        "0": 310,
+        "1": 130
+      },
       "flags": {},
       "order": 0,
       "mode": 0,
@@ -202,6 +90,128 @@
       ],
       "color": "#432",
       "bgcolor": "#653"
+    },
+    {
+      "id": 72,
+      "type": "show_text_party",
+      "pos": [
+        1219,
+        343
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 91,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 71,
+      "type": "LLM",
+      "pos": [
+        740,
+        330
+      ],
+      "size": {
+        "0": 400,
+        "1": 406
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 89,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            91
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "在加州最幸福的事情是什么",
+        "gpt-3.5-turbo-1106",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
     }
   ],
   "links": [
@@ -222,10 +232,10 @@
       "STRING"
     ],
     [
-      90,
+      91,
       71,
       0,
-      15,
+      72,
       0,
       "STRING"
     ]

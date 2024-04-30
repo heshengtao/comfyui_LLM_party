@@ -1,6 +1,6 @@
 {
-  "last_node_id": 16,
-  "last_link_id": 18,
+  "last_node_id": 17,
+  "last_link_id": 19,
   "nodes": [
     {
       "id": 16,
@@ -38,16 +38,16 @@
       "bgcolor": "#535"
     },
     {
-      "id": 15,
-      "type": "ShowText|pysssss",
+      "id": 17,
+      "type": "show_text_party",
       "pos": [
-        1050,
-        300
+        1099,
+        295
       ],
-      "size": {
-        "0": 440,
-        "1": 400
-      },
+      "size": [
+        315,
+        58
+      ],
       "flags": {},
       "order": 2,
       "mode": 0,
@@ -55,11 +55,10 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 17,
+          "link": 19,
           "widget": {
             "name": "text"
-          },
-          "label": "文本"
+          }
         }
       ],
       "outputs": [
@@ -68,18 +67,15 @@
           "type": "STRING",
           "links": null,
           "shape": 6,
-          "label": "字符串"
+          "label": "STRING"
         }
       ],
       "properties": {
-        "Node name for S&R": "ShowText|pysssss"
+        "Node name for S&R": "show_text_party"
       },
       "widgets_values": [
-        "",
-        "维基百科上关于人工智能的内容如下：\nArtificial intelligence (AI), is intelligence demonstrated by machines, unlike the natural intelligence displayed by humans and animals. It is defined as the study of \"intelligent agents\": any device that perceives its environment and takes actions that maximize its chance of successfully achieving its goals. Colloquially, the term \"artificial intelligence\" is often used to describe machines (or computers) that mimic \"cognitive\" functions that humans associate with the human mind, such as \"learning\" and \"problem solving\"."
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
+        ""
+      ]
     },
     {
       "id": 13,
@@ -126,7 +122,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            17
+            19
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -172,19 +168,19 @@
   ],
   "links": [
     [
-      17,
-      13,
-      0,
-      15,
-      0,
-      "STRING"
-    ],
-    [
       18,
       16,
       0,
       13,
       1,
+      "STRING"
+    ],
+    [
+      19,
+      13,
+      0,
+      17,
+      0,
       "STRING"
     ]
   ],

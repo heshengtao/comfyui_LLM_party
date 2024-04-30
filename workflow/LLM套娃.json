@@ -1,51 +1,7 @@
 {
-  "last_node_id": 6,
-  "last_link_id": 7,
+  "last_node_id": 8,
+  "last_link_id": 9,
   "nodes": [
-    {
-      "id": 4,
-      "type": "ShowText|pysssss",
-      "pos": [
-        2410,
-        370
-      ],
-      "size": {
-        "0": 320,
-        "1": 140
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 3,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "当前北京时间是2024-04-25 22:29:39。如果您有其他问题需要帮助，请告诉我。"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
     {
       "id": 3,
       "type": "time_tool",
@@ -81,6 +37,178 @@
       ],
       "color": "#323",
       "bgcolor": "#535"
+    },
+    {
+      "id": 7,
+      "type": "show_text_party",
+      "pos": [
+        2236,
+        377
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 8,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 1,
+      "type": "LLM",
+      "pos": [
+        1757.5205054637358,
+        345.9390072088771
+      ],
+      "size": {
+        "0": 410,
+        "1": 406
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 6,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "你好，帮我查一下当前北京时间",
+        "gpt-3.5-turbo-1106",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 8,
+      "type": "show_text_party",
+      "pos": [
+        1790,
+        884
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 9,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
       "id": 6,
@@ -137,7 +265,7 @@
           "type": "STRING",
           "links": [
             6,
-            7
+            9
           ],
           "shape": 3,
           "label": "tool",
@@ -166,152 +294,10 @@
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
-    },
-    {
-      "id": 1,
-      "type": "LLM",
-      "pos": [
-        1757.5205054637358,
-        345.9390072088771
-      ],
-      "size": {
-        "0": 410,
-        "1": 406
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 6,
-          "widget": {
-            "name": "tools"
-          },
-          "label": "tools"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            3
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。",
-        "你好，帮我查一下当前北京时间",
-        "gpt-3.5-turbo-1106",
-        0.7,
-        "disable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 5,
-      "type": "ShowText|pysssss",
-      "pos": [
-        1750,
-        830
-      ],
-      "size": {
-        "0": 440,
-        "1": 400
-      },
-      "flags": {
-        "pinned": true
-      },
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 7,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "[\n    {\n        \"type\": \"function\",\n        \"function\": {\n            \"name\": \"another_llm\",\n            \"description\": \"使用llm_tools可以调用其他的智能助手解决你的问题。请根据以下列表中的system_prompt选择你需要的智能助手：[\\n    {\\n        \\\"id\\\": 245878348559424332,\\n        \\\"system_prompt\\\": \\\"你一个强大的人工智能助手。\\\",\\n        \\\"type\\\": \\\"local\\\"\\n    },\\n    {\\n        \\\"id\\\": 245878348559424332,\\n        \\\"system_prompt\\\": \\\"你一个强大的人工智能助手。\\\",\\n        \\\"type\\\": \\\"local\\\"\\n    },\\n    {\\n        \\\"id\\\": 245878348559424332,\\n        \\\"system_prompt\\\": \\\"你一个强大的人工智能助手。\\\",\\n        \\\"type\\\": \\\"local\\\"\\n    }\\n]\",\n            \"parameters\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"id\": {\n                        \"type\": \"string\",\n                        \"description\": \"智能助手的id\"\n                    },\n                    \"type\": {\n                        \"type\": \"string\",\n                        \"description\": \"智能助手的类型，目前支持api和local两种类型。\"\n                    },\n                    \"question\": {\n                        \"type\": \"string\",\n                        \"description\": \"问题描述，代表你想要解决的问题。\"\n                    }\n                },\n                \"required\": [\n                    \"id\",\n                    \"type\",\n                    \"question\"\n                ]\n            }\n        }\n    }\n]"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
     }
   ],
   "links": [
     [
-      3,
-      1,
-      0,
-      4,
-      0,
-      "STRING"
-    ],
-    [
       5,
       3,
       0,
@@ -328,10 +314,18 @@
       "STRING"
     ],
     [
+      8,
+      1,
+      0,
       7,
+      0,
+      "STRING"
+    ],
+    [
+      9,
       6,
       2,
-      5,
+      8,
       0,
       "STRING"
     ]

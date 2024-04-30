@@ -1,99 +1,7 @@
 {
-  "last_node_id": 83,
-  "last_link_id": 107,
+  "last_node_id": 85,
+  "last_link_id": 109,
   "nodes": [
-    {
-      "id": 81,
-      "type": "ShowText|pysssss",
-      "pos": [
-        1160,
-        710
-      ],
-      "size": {
-        "0": 400,
-        "1": 280
-      },
-      "flags": {
-        "collapsed": false
-      },
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 99,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "[{'role': 'system', 'content': '你一个强大的智能助手，你可以把代码输入到解释器中运行，以查看代码运行结果'}, {'role': 'user', 'content': '帮我计算一个20以内的所有质数之积\\n'}, {'role': 'assistant', 'content': '代码已运行。20以内所有质数的乘积为：9699690'}]"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 15,
-      "type": "ShowText|pysssss",
-      "pos": [
-        1140,
-        330
-      ],
-      "size": {
-        "0": 400,
-        "1": 280
-      },
-      "flags": {
-        "collapsed": false
-      },
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 66,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "代码已运行。20以内所有质数的乘积为：9699690"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
     {
       "id": 69,
       "type": "google_tool",
@@ -130,79 +38,6 @@
       ],
       "color": "#332922",
       "bgcolor": "#593930"
-    },
-    {
-      "id": 50,
-      "type": "LLM",
-      "pos": [
-        700,
-        300
-      ],
-      "size": {
-        "0": 400,
-        "1": 290
-      },
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 103,
-          "widget": {
-            "name": "tools"
-          },
-          "label": "tools"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            66
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": [
-            99
-          ],
-          "shape": 3,
-          "label": "history",
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的智能助手，你可以把代码输入到解释器中运行，以查看代码运行结果",
-        "帮我计算一个20以内的所有质数之积\n",
-        "gpt-3.5-turbo-1106",
-        0.7,
-        "disable",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
     },
     {
       "id": 74,
@@ -483,25 +318,179 @@
       ],
       "color": "#322",
       "bgcolor": "#533"
+    },
+    {
+      "id": 50,
+      "type": "LLM",
+      "pos": [
+        700,
+        300
+      ],
+      "size": {
+        "0": 400,
+        "1": 406
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 103,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            108
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [
+            109
+          ],
+          "shape": 3,
+          "label": "history",
+          "slot_index": 1
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的智能助手，你可以把代码输入到解释器中运行，以查看代码运行结果",
+        "帮我计算一个20以内的所有质数之积\n",
+        "gpt-3.5-turbo-1106",
+        0.7,
+        "disable",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 84,
+      "type": "show_text_party",
+      "pos": [
+        1188,
+        303
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 108,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 85,
+      "type": "show_text_party",
+      "pos": [
+        1202,
+        747
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 109,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     }
   ],
   "links": [
-    [
-      66,
-      50,
-      0,
-      15,
-      0,
-      "STRING"
-    ],
-    [
-      99,
-      50,
-      1,
-      81,
-      0,
-      "STRING"
-    ],
     [
       101,
       69,
@@ -548,6 +537,22 @@
       0,
       83,
       4,
+      "STRING"
+    ],
+    [
+      108,
+      50,
+      0,
+      84,
+      0,
+      "STRING"
+    ],
+    [
+      109,
+      50,
+      1,
+      85,
+      0,
       "STRING"
     ]
   ],

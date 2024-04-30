@@ -1,6 +1,6 @@
 {
-  "last_node_id": 203,
-  "last_link_id": 196,
+  "last_node_id": 204,
+  "last_link_id": 197,
   "nodes": [
     {
       "id": 182,
@@ -40,117 +40,6 @@
       "bgcolor": "#653"
     },
     {
-      "id": 185,
-      "type": "file_combine",
-      "pos": [
-        2640,
-        720
-      ],
-      "size": {
-        "0": 315,
-        "1": 130
-      },
-      "flags": {},
-      "order": 12,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file1",
-          "type": "STRING",
-          "link": 190,
-          "widget": {
-            "name": "file1"
-          },
-          "label": "file1"
-        },
-        {
-          "name": "file2",
-          "type": "STRING",
-          "link": 189,
-          "widget": {
-            "name": "file2"
-          },
-          "label": "file2"
-        },
-        {
-          "name": "file3",
-          "type": "STRING",
-          "link": 188,
-          "widget": {
-            "name": "file3"
-          },
-          "label": "file3"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "files",
-          "type": "STRING",
-          "links": [
-            191
-          ],
-          "shape": 3,
-          "label": "files",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "file_combine"
-      },
-      "widgets_values": [
-        "enable",
-        "",
-        "",
-        ""
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
-      "id": 199,
-      "type": "ShowText|pysssss",
-      "pos": [
-        2620,
-        980
-      ],
-      "size": {
-        "0": 340,
-        "1": 250
-      },
-      "flags": {},
-      "order": 11,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 192,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "```\n# 安装comfyui_llm_party项目的方法：\n1. 在[comfyui管理器](https://github.com/ltdrdata/ComfyUI-Manager)中搜索`comfyui_LLM_party`，然后一键安装。\n2. 重启comfyui，第一次重启时会下载用于RAG的词嵌入模型。\n```"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
       "id": 196,
       "type": "LLM",
       "pos": [
@@ -159,10 +48,10 @@
       ],
       "size": {
         "0": 399.0189514160156,
-        "1": 354.3806457519531
+        "1": 356
       },
       "flags": {},
-      "order": 8,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
@@ -198,8 +87,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            189,
-            192
+            189
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -211,6 +99,13 @@
           "links": null,
           "shape": 3,
           "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
         }
       ],
       "properties": {
@@ -227,53 +122,13 @@
         "",
         "",
         "",
+        "",
+        "",
+        "",
         ""
       ],
       "color": "#223",
       "bgcolor": "#335"
-    },
-    {
-      "id": 201,
-      "type": "ShowText|pysssss",
-      "pos": [
-        2630,
-        350
-      ],
-      "size": {
-        "0": 340,
-        "1": 250
-      },
-      "flags": {},
-      "order": 10,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 194,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        ""
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
     },
     {
       "id": 195,
@@ -284,10 +139,10 @@
       ],
       "size": {
         "0": 399.0189514160156,
-        "1": 354.3806457519531
+        "1": 356
       },
       "flags": {},
-      "order": 6,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
@@ -323,8 +178,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            190,
-            194
+            190
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -336,6 +190,13 @@
           "links": null,
           "shape": 3,
           "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
         }
       ],
       "properties": {
@@ -352,141 +213,13 @@
         "",
         "",
         "",
+        "",
+        "",
+        "",
         ""
       ],
       "color": "#223",
       "bgcolor": "#335"
-    },
-    {
-      "id": 200,
-      "type": "ShowText|pysssss",
-      "pos": [
-        2620,
-        1310
-      ],
-      "size": {
-        "0": 340,
-        "1": 250
-      },
-      "flags": {},
-      "order": 13,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 193,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        ""
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 198,
-      "type": "ShowText|pysssss",
-      "pos": [
-        3060,
-        710
-      ],
-      "size": {
-        "0": 340,
-        "1": 250
-      },
-      "flags": {},
-      "order": 14,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 191,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "\n```\n# 安装comfyui_llm_party项目的方法：\n1. 在[comfyui管理器](https://github.com/ltdrdata/ComfyUI-Manager)中搜索`comfyui_LLM_party`，然后一键安装。\n2. 重启comfyui，第一次重启时会下载用于RAG的词嵌入模型。\n```\n\n"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 202,
-      "type": "ShowText|pysssss",
-      "pos": [
-        1590,
-        1260
-      ],
-      "size": {
-        "0": 340,
-        "1": 250
-      },
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 195,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "**1:** empty\n**2:** comfyui_llm_party项目怎么安装啊\n**3:** empty"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
     },
     {
       "id": 181,
@@ -518,8 +251,7 @@
           "name": "response1",
           "type": "STRING",
           "links": [
-            184,
-            196
+            184
           ],
           "shape": 3,
           "label": "response1",
@@ -557,50 +289,6 @@
       "bgcolor": "#535"
     },
     {
-      "id": 203,
-      "type": "ShowText|pysssss",
-      "pos": [
-        2050,
-        20
-      ],
-      "size": {
-        "0": 340,
-        "1": 250
-      },
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 196,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "字符串"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "empty\n"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
       "id": 197,
       "type": "LLM",
       "pos": [
@@ -609,10 +297,10 @@
       ],
       "size": {
         "0": 399.0189514160156,
-        "1": 354.3806457519531
+        "1": 356
       },
       "flags": {},
-      "order": 9,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
@@ -648,8 +336,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            188,
-            193
+            188
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -661,6 +348,13 @@
           "links": null,
           "shape": 3,
           "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
         }
       ],
       "properties": {
@@ -674,6 +368,9 @@
         "enable",
         "disable",
         "disable",
+        "",
+        "",
+        "",
         "",
         "",
         "",
@@ -741,7 +438,7 @@
       ],
       "size": {
         "0": 399.0189514160156,
-        "1": 354.3806457519531
+        "1": 356
       },
       "flags": {},
       "order": 3,
@@ -780,8 +477,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            182,
-            195
+            182
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -793,6 +489,13 @@
           "links": null,
           "shape": 3,
           "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
         }
       ],
       "properties": {
@@ -806,6 +509,9 @@
         "enable",
         "disable",
         "disable",
+        "",
+        "",
+        "",
         "",
         "",
         "",
@@ -847,6 +553,113 @@
         "README_ZH.txt",
         "enable",
         "Relative_Path"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 204,
+      "type": "show_text_party",
+      "pos": [
+        3094,
+        741
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 197,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 185,
+      "type": "file_combine",
+      "pos": [
+        2640,
+        720
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file1",
+          "type": "STRING",
+          "link": 190,
+          "widget": {
+            "name": "file1"
+          },
+          "label": "file1"
+        },
+        {
+          "name": "file2",
+          "type": "STRING",
+          "link": 189,
+          "widget": {
+            "name": "file2"
+          },
+          "label": "file2"
+        },
+        {
+          "name": "file3",
+          "type": "STRING",
+          "link": 188,
+          "widget": {
+            "name": "file3"
+          },
+          "label": "file3"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "files",
+          "type": "STRING",
+          "links": [
+            197
+          ],
+          "shape": 3,
+          "label": "files",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "file_combine"
+      },
+      "widgets_values": [
+        "enable",
+        "",
+        "",
+        ""
       ],
       "color": "#432",
       "bgcolor": "#653"
@@ -934,50 +747,10 @@
       "STRING"
     ],
     [
-      191,
+      197,
       185,
       0,
-      198,
-      0,
-      "STRING"
-    ],
-    [
-      192,
-      196,
-      0,
-      199,
-      0,
-      "STRING"
-    ],
-    [
-      193,
-      197,
-      0,
-      200,
-      0,
-      "STRING"
-    ],
-    [
-      194,
-      195,
-      0,
-      201,
-      0,
-      "STRING"
-    ],
-    [
-      195,
-      194,
-      0,
-      202,
-      0,
-      "STRING"
-    ],
-    [
-      196,
-      181,
-      0,
-      203,
+      204,
       0,
       "STRING"
     ]
