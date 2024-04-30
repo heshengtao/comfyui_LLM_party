@@ -40,5 +40,10 @@ class classify_function:
 
         # 根据分割后的部分数量，赋值给response变量
         response1, response2, response3 = (parts + ["", "", ""])[:3]
-
+        if response1.strip() == "" or response1.strip() == "empty":
+            response1 = None
+        if response2.strip() == "" or response2.strip() == "empty":
+            response2 = None
+        if response3.strip() == "" or response3.strip() == "empty":
+            response3 = None
         return (response1,response2,response3,)
