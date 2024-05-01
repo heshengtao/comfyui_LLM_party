@@ -23,11 +23,6 @@ def check_web(url, keyword=None):
     """
     try:
         global bge_embeddings,c_size,c_overlap
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()  # 确保请求成功
-
-        # 设置响应内容的编码，确保文本不会出现编码问题
-        response.encoding = response.apparent_encoding
 
         jina="https://r.jina.ai/"
         url=jina+url
