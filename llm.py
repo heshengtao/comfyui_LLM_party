@@ -434,7 +434,10 @@ class LLM:
 
 
 def llm_chat(model,tokenizer,user_prompt,history,device,max_length,role="user"):
-    history.append({"role": role, "content": user_prompt.strip()})
+    if role=="observation":
+        history.append({"role": role, "content": "Observation: "+user_prompt.strip()})
+    else:
+        history.append({"role": role, "content": user_prompt.strip()})
     text = tokenizer.apply_chat_template(
         history,
         tokenize=False,
@@ -442,15 +445,23 @@ def llm_chat(model,tokenizer,user_prompt,history,device,max_length,role="user"):
     )
     model_inputs = tokenizer([text], return_tensors="pt").to(device)
 
+    stop_tokens = ["Observation:", "<|im_end|>"]  # 示例停止词
+    stop_token_ids = [tokenizer.encode(stop_token, add_special_tokens=False)[0] for stop_token in stop_tokens]
+
     generated_ids = model.generate(
         model_inputs.input_ids,
         max_new_tokens=max_length,
+        eos_token_id=stop_token_ids  # Add the eos_token_id parameter
     )
     generated_ids = [
         output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
     ]
 
     response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
+    if "Final Answer: " in response:
+        pattern_C = r"Final Answer: (.*)"
+        FinalAnswer = re.search(pattern_C, response).group(1)
+        response = FinalAnswer
     history.append({"role":"assistant","content":response})
     return response,history
 
@@ -593,10 +604,32 @@ class LLM_local:
                 with open(self.prompt_path, 'r', encoding='utf-8') as f:
                     history = json.load(f)
                 tools_list=[]
+                GPT_INSTRUCTION =""
                 if tools is not None:
                     tools_dis=json.loads(tools)
                     for tool_dis in tools_dis:
                         tools_list.append(tool_dis["function"])
+                    tools_instructions=""
+                    tools_instruction_list=[]
+                    for tool in tools_list:
+                        tools_instruction_list.append(tool["name"])
+                        tools_instructions+=str(tool["name"])+":"+"Call this tool to interact with the "+str(tool["name"])+" API. What is the "+str(tool["name"])+" API useful for? "+str(tool["description"])+". Parameters:"+str(tool["parameters"])+"\n"
+                    GPT_INSTRUCTION = f'''Answer the following questions as best you can. You have access to the following APIs:
+
+    {tools_instructions}
+
+    Use the following format:
+
+    Question: the input question you must answer
+    Thought: you should always think about what to do
+    Action: the action to take, should be one of {tools_instruction_list}
+    Action Input: the input to the action, which must include the parameters in required
+    Observation: the result of the action
+    ... (this Thought/Action/Action Input/Observation can be repeated zero or more times)
+    Thought: I now know the final answer
+    Final Answer: the final answer to the original input question
+
+    Begin!'''        
                 for message in history:
                     if message['role'] == 'system':
                         message['content'] = system_prompt
@@ -605,9 +638,9 @@ class LLM_local:
                                 message['content']+="\n"+"你可以使用以下工具："
                                 message['tools']=tools_list
                             elif model_type=="llama":
-                                message['content']+="You can invoke the following tools by constructing a JSON object: " + json.dumps(tools_list, ensure_ascii=False) + "\n Tool usage instructions: You need to build a JSON object based on the names and parameters of these tools. For example, if you want to call a tool named 'tool_name' and need to pass parameters 'param1' and 'param2', you should construct a JSON object in the following format: {\"name\":\"tool_name\",\"parameters\":{\"param1\":\"value1\",\"param2\":\"value2\"}}\nWhen invoking tools, please construct a JSON object based on the names and parameters specified in the aforementioned tools. Avoid including any parameters not indicated in the tools, and ensure that you do not omit any required parameters explicitly mentioned by the tools. Additionally, refrain from outputting any content other than the JSON object when calling the tools."
+                                message['content']+="\n"+GPT_INSTRUCTION+"\n"
                             elif model_type=="Qwen":
-                                message['content']+="你可以通过构建一个JSON对象来调用以下工具：" + json.dumps(tools_list, ensure_ascii=False) + "\n工具使用说明：您需要根据这些工具的名称和参数构建一个JSON对象。例如，如果您想调用一个名为“tool_name”的工具，并且需要传递参数“param1”和“param2”，您应该按照以下格式构建一个JSON对象：{\"name\":\"tool_name\",\"parameters\":{\"param1\":\"value1\",\"param2\":\"value2\"}}\n在调用工具时，请根据上述工具中指定的名称和参数构建一个JSON对象。请避免包含工具中未指定的任何参数，并确保不要省略工具明确提到的任何必需参数。此外，在调用工具时，请不要输出除JSON对象之外的任何内容。"
+                                message['content']+="\n"+GPT_INSTRUCTION+"\n"
                         else:
                             if 'tools' in message:
                                 # 如果存在，移除 'tools' 键值对
@@ -663,11 +696,17 @@ class LLM_local:
                             llama_model = AutoModelForCausalLM.from_pretrained(model_path,trust_remote_code=True).half().cuda()
                         llama_model = llama_model.eval()
                     response, history = llm_chat(llama_model,llama_tokenizer,user_prompt,history,llama_device,max_length)
-                    while is_valid_json(response):
-                        response = json.loads(response)
-                        result = dispatch_tool(response['name'],response['parameters'])
+                    while "Action Input:" in response:
+                        print(response)
+                        pattern_A = r"Action: (.*?)\n"
+                        pattern_B = r"Action Input: (.*?)\n"
+
+                        Action = re.search(pattern_A, response).group(1)
+                        ActionInput = re.search(pattern_B, response).group(1)
+                        ActionInput=json.loads(ActionInput.replace("'", '"'))
+                        result = dispatch_tool(Action,ActionInput)
                         print(result)
-                        response, history = llm_chat(llama_model,llama_tokenizer,user_prompt,history,llama_device,max_length,role="observation")
+                        response, history = llm_chat(llama_model,llama_tokenizer,result,history,llama_device,max_length,role="observation")
                 elif model_type=="Qwen":
                     qwen_device = "cuda" if torch.cuda.is_available() else "cpu"
                     if qwen_tokenizer=="":
@@ -682,12 +721,17 @@ class LLM_local:
                         qwen_model.eval()
                     qwen_model.generation_config = GenerationConfig.from_pretrained(model_path, trust_remote_code=True)
                     response, history = llm_chat(qwen_model,qwen_tokenizer,user_prompt,history,qwen_device,max_length)
-                    while is_valid_json(response):
+                    while "Action Input:" in response:
                         print(response)
-                        response = json.loads(response)
-                        result = dispatch_tool(response['name'],response['parameters'])
+                        pattern_A = r"Action: (.*?)\n"
+                        pattern_B = r"Action Input: (.*?)\n"
+
+                        Action = re.search(pattern_A, response).group(1)
+                        ActionInput = re.search(pattern_B, response).group(1)
+                        ActionInput=json.loads(ActionInput.replace("'", '"'))
+                        result = dispatch_tool(Action,ActionInput)
                         print(result)
-                        response, history = llm_chat(qwen_model,qwen_tokenizer,user_prompt,history,qwen_device,max_length,role="observation")
+                        response, history = llm_chat(qwen_model,qwen_tokenizer,result,history,qwen_device,max_length,role="observation")
                 print(response)
                 #修改prompt.json文件
                 with open(self.prompt_path, 'w', encoding='utf-8') as f:
