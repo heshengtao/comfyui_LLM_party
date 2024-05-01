@@ -667,7 +667,7 @@ class LLM_local:
                         response = json.loads(response)
                         result = dispatch_tool(response['name'],response['parameters'])
                         print(result)
-                        response, history = llm_chat(qwen_model,qwen_tokenizer,user_prompt,history,qwen_device,max_length,role="observation")
+                        response, history = llm_chat(llama_model,llama_tokenizer,user_prompt,history,llama_device,max_length,role="observation")
                 elif model_type=="Qwen":
                     qwen_device = "cuda" if torch.cuda.is_available() else "cpu"
                     if qwen_tokenizer=="":
@@ -681,13 +681,13 @@ class LLM_local:
                             qwen_model = AutoModelForCausalLM.from_pretrained(model_path, device_map="cuda", trust_remote_code=True, fp16=True,fp32=False,bf16=False).eval()
                         qwen_model.eval()
                     qwen_model.generation_config = GenerationConfig.from_pretrained(model_path, trust_remote_code=True)
-                    response, history = qwen_model.chat(qwen_tokenizer, user_prompt, history=history)
+                    response, history = llm_chat(qwen_model,qwen_tokenizer,user_prompt,history,qwen_device,max_length)
                     while is_valid_json(response):
                         print(response)
                         response = json.loads(response)
                         result = dispatch_tool(response['name'],response['parameters'])
                         print(result)
-                        response, history = qwen_model.chat(qwen_tokenizer, user_prompt, history=history)
+                        response, history = llm_chat(qwen_model,qwen_tokenizer,user_prompt,history,qwen_device,max_length,role="observation")
                 print(response)
                 #修改prompt.json文件
                 with open(self.prompt_path, 'w', encoding='utf-8') as f:
