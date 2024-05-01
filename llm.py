@@ -17,7 +17,7 @@ import openai
 import requests
 import torch
 from .config import config_path,current_dir_path,load_api_keys
-from .tools.load_file import load_file,start_workflow
+from .tools.load_file import load_file,start_workflow,load_url
 from .tools.tool_combine import tool_combine,tool_combine_plus
 from .tools.get_time import get_time,time_tool
 from .tools.get_weather import get_weather,weather_tool
@@ -798,6 +798,7 @@ NODE_CLASS_MAPPINGS = {
     "VAEDecode_party":VAEDecode_party,
     "string_logic":string_logic,
     "show_text_party":show_text_party,
+    "load_url":load_url,
 }
 
 
@@ -829,6 +830,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "VAEDecode_party":"VAEDecode解码器(VAEDecode_party)",
     "string_logic":"字符串逻辑(string_logic)",
     "show_text_party":"显示文本(show_text)",
+    "load_url":"加载网页内容(load_url_content)",
 }
 
 if __name__ == '__main__':
