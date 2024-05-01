@@ -284,7 +284,7 @@ class LLM:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）"
+    CATEGORY = "大模型派对（llm_party）/模型（model）"
 
     def chatbot(self, user_prompt,main_brain ,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,tools=None,file_content=None,api_key=None,base_url=None,images=None,imgbb_api_key=None):
         self.list=[main_brain,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,tools,file_content,api_key,base_url,images,imgbb_api_key]
@@ -550,7 +550,7 @@ class LLM_local:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）"
+    CATEGORY = "大模型派对（llm_party）/模型（model）"
 
     def chatbot(self, user_prompt, main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None):
         self.list=[main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools,file_content]
@@ -800,33 +800,33 @@ NODE_CLASS_MAPPINGS = {
 
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "LLM": "大语言模型api（LLM_api）",
-    "LLM_local":"本地大语言模型（LLM_local）",
-    "load_file": "加载文件（load_file）",
-    "load_persona": "加载人格面具（load_persona）",
-    "classify_persona": "分类器面具（classify_persona）",
-    "classify_function": "分类器函数（classify_function）",
-    "tool_combine":"工具组合（tool_combine）",
-    "tool_combine_plus":"超大工具组合（tool_combine_plus）",
-    "time_tool": "时间工具（time_tool）",
-    "weather_tool":"天气工具（weather_tool）",
-    "google_tool":"谷歌搜索工具（google_tool）",
+    "LLM": "大语言模型api(LLM_api)",
+    "LLM_local":"本地大语言模型(LLM_local)",
+    "load_file": "加载文件(load_file)",
+    "load_persona": "加载人格面具(load_persona)",
+    "classify_persona": "分类器面具(classify_persona)",
+    "classify_function": "分类器函数(classify_function)",
+    "tool_combine":"工具组合(tool_combine)",
+    "tool_combine_plus":"超大工具组合(tool_combine_plus)",
+    "time_tool": "时间工具(time_tool)",
+    "weather_tool":"天气工具(weather_tool)",
+    "google_tool":"谷歌搜索工具(google_tool)",
     "check_web_tool":"检视网页工具(check_web_tool)",
-    "file_combine":"文件组合（file_combine）",
-    "file_combine_plus":"超大文件组合（file_combine_plus）",
-    "start_dialog":"开始对话（start_dialog）",
-    "end_dialog":"结束对话（end_dialog）",
-    "interpreter_tool":"解释器工具（interpreter_tool）",
-    "ebd_tool":"词嵌入模型工具（embeddings_tool）",
-    "custom_persona":"自定义面具（custom_persona）",
-    "start_workflow":"开始工作流（start_workflow）",
-    "end_workflow":"结束工作流（end_workflow）",
-    "new_interpreter_tool":"(危险！)万能解释器工具(danger！)（omnipotent_interpreter_tool）",
-    "CLIPTextEncode_party":"CLIP文本编码器（CLIPTextEncode_party）",
-    "KSampler_party":"KSampler采样器（KSampler_party）",
-    "VAEDecode_party":"VAEDecode解码器（VAEDecode_party）",
-    "string_logic":"字符串逻辑（string_logic）",
-    "show_text_party":"显示文本（show_text）",
+    "file_combine":"文件组合(file_combine)",
+    "file_combine_plus":"超大文件组合(file_combine_plus)",
+    "start_dialog":"开始对话(start_dialog)",
+    "end_dialog":"结束对话(end_dialog)",
+    "interpreter_tool":"解释器工具(interpreter_tool)",
+    "ebd_tool":"词嵌入模型工具(embeddings_tool)",
+    "custom_persona":"自定义面具(custom_persona)",
+    "start_workflow":"开始工作流(start_workflow)",
+    "end_workflow":"结束工作流(end_workflow)",
+    "new_interpreter_tool":"(危险！)万能解释器工具(danger!)(omnipotent_interpreter_tool)",
+    "CLIPTextEncode_party":"CLIP文本编码器(CLIPTextEncode_party)",
+    "KSampler_party":"KSampler采样器(KSampler_party)",
+    "VAEDecode_party":"VAEDecode解码器(VAEDecode_party)",
+    "string_logic":"字符串逻辑(string_logic)",
+    "show_text_party":"显示文本(show_text)",
 }
 
 if __name__ == '__main__':
