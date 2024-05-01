@@ -140,6 +140,7 @@ class Chat:
                     assistant_message=response.choices[0].message
                     response_content = assistant_message.tool_calls[0].function
                     results = dispatch_tool(response_content.name,json.loads(response_content.arguments))
+                    print(results)
                     self.messages.append({"role": assistant_message.role, "content": str(response_content)})
                     self.messages.append({"role": "function", "tool_call_id": assistant_message.tool_calls[0].id, "name": response_content.name, "content": results})
                     response = openai.chat.completions.create(
@@ -155,6 +156,7 @@ class Chat:
                     function_name = function_call.name
                     function_arguments = json.loads(function_call.arguments)
                     results = dispatch_tool(function_name, function_arguments)
+                    print(results)
                     self.messages.append({"role": assistant_message.role, "content": str(function_call)})
                     self.messages.append({"role": "function", "name": function_name, "content": results})
                     response = openai.chat.completions.create(
