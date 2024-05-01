@@ -1,5 +1,7 @@
 import json
 import os
+
+import requests
 from ..config import current_dir_path
 import numpy as np
 from PIL import Image, ImageOps, ImageSequence
@@ -94,6 +96,52 @@ class load_file:
         return (out,)
     
 
+class load_url:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "url": ("STRING", {
+                    "default": "https://example.com"
+                }),
+                "is_enable": (["enable", "disable"],{
+                    "default":"enable"
+                }),
+            },
+            "optional": {
+
+            }
+        }
+    
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("file_content",)
+
+    FUNCTION = "file"
+
+    #OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+
+
+    def file(self,url,is_enable="enable"):
+        if is_enable=="disable":
+            return (None,)
+        try:
+
+            jina="https://r.jina.ai/"
+            url=jina+url
+
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()  # 确保请求成功
+
+            # 设置响应内容的编码，确保文本不会出现编码问题
+            response.encoding = response.apparent_encoding
+        except requests.exceptions.RequestException as e:
+            print(f"请求发生错误: {e}")
+            return (None,)
+        out=response.text
+        return (out,)
 
 
 # 定义一个函数，将图片路径转换为与 save_images 函数兼容的格式
