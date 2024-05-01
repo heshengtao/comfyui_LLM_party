@@ -1,13 +1,19 @@
-from datetime import date
+
 import json
-from bs4 import BeautifulSoup
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 import requests
+import json
+from langchain.embeddings import HuggingFaceBgeEmbeddings
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
+import torch
+ebd_model=""
+bge_embeddings=""
+files_load=""
+c_size=200
+c_overlap=50
+knowledge_base=""
 
-
-
-def check_web(url, keyword):
+def check_web(url, keyword=None):
     """
     获取网站页面上与关键词相关的文字信息。
 
@@ -15,26 +21,36 @@ def check_web(url, keyword):
     :param keyword: 搜索的关键词。
     :return: 与关键词相关的文本内容。
     """
-    text_splitter0 = RecursiveCharacterTextSplitter(
-        chunk_size = 200,
-        chunk_overlap = 50,
-    ) 
     try:
+        global bge_embeddings,c_size,c_overlap
         response = requests.get(url, timeout=10)
         response.raise_for_status()  # 确保请求成功
 
         # 设置响应内容的编码，确保文本不会出现编码问题
         response.encoding = response.apparent_encoding
 
-        soup = BeautifulSoup(response.content, "html.parser")
-        paragraphs = soup.find_all("p")
-        text = ""
-        for p in paragraphs:
-            text += p.text
+        jina="https://r.jina.ai/"
+        url=jina+url
 
-        combined_content =text
-        return "该网页的相关信息为：" + str(combined_content)
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()  # 确保请求成功
 
+        # 设置响应内容的编码，确保文本不会出现编码问题
+        response.encoding = response.apparent_encoding
+
+        if keyword==None or keyword=="" or bge_embeddings=="":
+            combined_content =str(response.text)
+            return "该网页的相关信息为：" + str(combined_content)
+        else:
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size = c_size,
+                chunk_overlap = c_overlap,
+                ) 
+            chunks = text_splitter.split_text(str(response.text))
+            url_base = FAISS.from_texts(chunks, bge_embeddings)
+            docs = url_base.similarity_search(keyword, k=5)
+            combined_content = ''.join(doc.page_content + "\n" for doc in docs)
+            return "该网页的相关信息为：" + str(combined_content)
     except requests.RequestException as e:
         return f"Error: {e}"
     except Exception as e:
@@ -47,11 +63,20 @@ class check_web_tool:
             "required": {
                 "is_enable": (["enable", "disable"],{
                     "default":"enable"
-                }),                
+                }),      
+                "chunk_size":("INT",{
+                    "default":200
+                }),
+                "chunk_overlap":("INT",{
+                    "default":50
+                }),          
             },
             "optional": {
                 "web_url": ("STRING",{
 
+                }),
+                "embedding_path": ("STRING", {
+                    "default": None
                 }),
             }
         }
@@ -67,10 +92,24 @@ class check_web_tool:
 
 
 
-    def read_web(self,is_enable="enable",web_url=None):   
+    def read_web(self,chunk_size,chunk_overlap,is_enable="enable",web_url=None,embedding_path=None):   
         if is_enable=="disable":
             return (None,)
-        if web_url is None and web_url !="":
+        global ebd_model,files_load,bge_embeddings,c_size,c_overlap,knowledge_base   
+        c_size=chunk_size
+        c_overlap=chunk_overlap
+        device="cuda" if torch.cuda.is_available() else "cpu"
+        if ebd_model=="":
+            model_kwargs = {'device': device}  # 如果您有GPU，可以设置为 'cuda'，否则使用 'cpu'
+            encode_kwargs = {'normalize_embeddings': True}  # 设置为 True 以计算余弦相似度
+        if bge_embeddings=="" and embedding_path is not None and embedding_path!="":
+            bge_embeddings = HuggingFaceBgeEmbeddings(
+                model_name=embedding_path,
+                model_kwargs=model_kwargs,
+                encode_kwargs=encode_kwargs
+            )
+
+        if web_url is not None and web_url !="":
             output = [{
         "type": "function",
         "function": {
@@ -80,10 +119,10 @@ class check_web_tool:
                 "type": "object",
                 "properties": {
                     "url": {"type": "string", "description": "要被搜索的网页的URL，默认网址为"+web_url},
-                    "keyword": {"type": "string", "description": "需要搜索的关键词，可以是多个词语，多个词语之间用空格隔开"},
+                    "keyword": {"type": "string", "description": "需要搜索的关键词，如果没有关键词，则搜索网页上的所有内容"},
 
                 },
-                "required": ["url","keyword"]
+                "required": ["url"]
             }
         }
     }]
@@ -98,7 +137,7 @@ class check_web_tool:
                 "type": "object",
                 "properties": {
                     "url": {"type": "string", "description": "要被搜索的网页的URL"},
-                    "keyword": {"type": "string", "description": "需要搜索的关键词，可以是多个词语，多个词语之间用空格隔开"},
+                    "keyword": {"type": "string", "description": "需要搜索的关键词，如果没有关键词，则搜索网页上的所有内容"},
 
                 },
                 "required": ["url","keyword"]
