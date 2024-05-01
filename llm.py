@@ -821,7 +821,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "custom_persona":"自定义面具（custom_persona）",
     "start_workflow":"开始工作流（start_workflow）",
     "end_workflow":"结束工作流（end_workflow）",
-    "new_interpreter_tool":"万能解释器工具（omnipotent_interpreter_tool）",
+    "new_interpreter_tool":"(危险！)万能解释器工具(danger！)（omnipotent_interpreter_tool）",
     "CLIPTextEncode_party":"CLIP文本编码器（CLIPTextEncode_party）",
     "KSampler_party":"KSampler采样器（KSampler_party）",
     "VAEDecode_party":"VAEDecode解码器（VAEDecode_party）",
