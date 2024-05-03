@@ -20,7 +20,7 @@ from .config import config_path,current_dir_path,load_api_keys
 from .tools.load_file import load_file,start_workflow,load_url,load_file_folder
 from .tools.tool_combine import tool_combine,tool_combine_plus
 from .tools.get_time import get_time,time_tool
-from .tools.get_weather import get_weather,weather_tool
+from .tools.get_weather import get_weather,weather_tool,accuweather_tool,get_accuweather
 from .tools.search_web import search_web,google_tool
 from .tools.check_web import check_web,check_web_tool
 from .tools.file_combine import file_combine,file_combine_plus
@@ -36,6 +36,7 @@ from .tools.new_interpreter import new_interpreter,new_interpreter_tool
 from .tools.image import CLIPTextEncode_party,KSampler_party,VAEDecode_party
 from .tools.logic import string_logic
 from .tools.show_text import show_text_party
+from .tools.api_tool import api_tool,use_api_tool
 from transformers import AutoTokenizer, AutoModel, Qwen2Tokenizer, Qwen2ForCausalLM, AutoModelForCausalLM, GenerationConfig
 
 glm_tokenizer=""
@@ -53,6 +54,8 @@ _TOOL_HOOKS=[
     "data_base",
     "another_llm",
     "new_interpreter",
+    "use_api_tool",
+    "get_accuweather",
 ]
 instances=[]
 def another_llm(id,type,question):
@@ -793,6 +796,7 @@ NODE_CLASS_MAPPINGS = {
     "tool_combine_plus":tool_combine_plus,
     "time_tool": time_tool,
     "weather_tool":weather_tool,
+    "accuweather_tool":accuweather_tool,
     "google_tool":google_tool,
     "check_web_tool":check_web_tool,
     "file_combine":file_combine,
@@ -813,6 +817,7 @@ NODE_CLASS_MAPPINGS = {
     "load_url":load_url,
     "load_embeddings":load_embeddings,
     "load_file_folder":load_file_folder,
+    "api_tool":api_tool,
 }
 
 
@@ -827,6 +832,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "tool_combine_plus":"超大工具组合(tool_combine_plus)",
     "time_tool": "时间工具(time_tool)",
     "weather_tool":"天气工具(weather_tool)",
+    "accuweather_tool":"accuweather工具(accuweather_tool)",
     "google_tool":"谷歌搜索工具(google_tool)",
     "check_web_tool":"检视网页工具(check_web_tool)",
     "file_combine":"文件组合(file_combine)",
@@ -847,6 +853,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "load_url":"加载网页内容(load_url_content)",
     "load_embeddings":"词嵌入模型(embeddings_model)",
     "load_file_folder":"加载文件夹(load_file_folder)",
+    "api_tool":"API工具(api_tool)",
 }
 
 if __name__ == '__main__':
