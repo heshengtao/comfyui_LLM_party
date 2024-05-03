@@ -95,6 +95,47 @@ class load_file:
         out=read_one(path)
         return (out,)
     
+class load_file_folder:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "folder_path": ("STRING", {
+                    "default": "C://Users/"
+                }),
+                "is_enable": (["enable", "disable"],{
+                    "default":"enable"
+                }),
+            },
+            "optional": {
+
+            }
+        }
+    
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("file_content",)
+
+    FUNCTION = "file"
+
+    #OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+
+
+    def file(self,folder_path,is_enable="enable"):
+        if is_enable=="disable":
+            return (None,)
+        # 获取文件夹中的所有文件，并读取到字符串中
+        out=""
+        for root, dirs, files in os.walk(folder_path):
+            for file in files:
+                file_path = os.path.join(root, file)
+                out+=read_one(file_path)
+        return (out,)
+
+
+
 
 class load_url:
     @classmethod
@@ -142,6 +183,9 @@ class load_url:
             return (None,)
         out=response.text
         return (out,)
+
+
+
 
 
 # 定义一个函数，将图片路径转换为与 save_images 函数兼容的格式

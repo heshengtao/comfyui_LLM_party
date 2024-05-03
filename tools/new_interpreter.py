@@ -38,7 +38,7 @@ def install_package(env_name, package):
 
 def execute_code(env_name, code):
     print("Executing code...")
-
+    print(code)
     # 创建一个临时文件来存储代码
     temp_file = os.path.join("aienv", "temp_code.py")
     with open(temp_file, "w", encoding="utf-8") as f:
@@ -91,8 +91,10 @@ def new_interpreter(code_str):
         create_virtual_env(env_name)
         activate_virtual_env(env_name)
         output = execute_code(env_name, code_to_run)
+        print(output)
         return "代码执行成功，控制台输出为：" + str(output)+"\n请根据该信息回答用户问题"
     except Exception as e:
+        print(f"Error: {e}")
         return "代码未执行成功，错误信息为：" + f"Error: {e}"
 
 
