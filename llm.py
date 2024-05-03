@@ -17,7 +17,7 @@ import openai
 import requests
 import torch
 from .config import config_path,current_dir_path,load_api_keys
-from .tools.load_file import load_file,start_workflow,load_url
+from .tools.load_file import load_file,start_workflow,load_url,load_file_folder
 from .tools.tool_combine import tool_combine,tool_combine_plus
 from .tools.get_time import get_time,time_tool
 from .tools.get_weather import get_weather,weather_tool
@@ -29,7 +29,7 @@ from .tools.interpreter import interpreter,interpreter_tool
 from .tools.load_persona import load_persona
 from .tools.classify_persona import classify_persona
 from .tools.classify_function import classify_function
-from .tools.load_ebd import ebd_tool,data_base
+from .tools.load_ebd import ebd_tool,data_base,load_embeddings
 from .tools.custom_persona import custom_persona
 from .tools.end_work import end_workflow
 from .tools.new_interpreter import new_interpreter,new_interpreter_tool
@@ -67,8 +67,8 @@ def another_llm(id,type,question):
         if llm is None:
             print("找不到对应的智能助手")
             return "找不到对应的智能助手"
-        main_brain,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,tools,file_content,api_key,base_url,images,imgbb_api_key=llm.list
-        res,_,_=llm.chatbot(question,main_brain,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,tools,file_content,api_key,base_url,images,imgbb_api_key)
+        main_brain,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,system_prompt_input,tools,file_content,api_key,base_url,images,imgbb_api_key=llm.list
+        res,_,_=llm.chatbot(question,main_brain,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,system_prompt_input,tools,file_content,api_key,base_url,images,imgbb_api_key)
     elif type=="local":
         try:
             llm = next((instance for instance in instances if str(instance.id).strip() == str(id).strip()), None)
@@ -78,8 +78,8 @@ def another_llm(id,type,question):
         if llm is None:
             print("找不到对应的智能助手")
             return "找不到对应的智能助手"
-        main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools,file_content=llm.list
-        res,_,_=llm.chatbot(question,main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools,file_content)
+        main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,system_prompt_input,tools,file_content=llm.list
+        res,_,_=llm.chatbot(question,main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,system_prompt_input,tools,file_content)
     else:
         return "type参数错误，请使用api或local"
     print(res)
@@ -139,6 +139,7 @@ class Chat:
                 while response.choices[0].message.tool_calls:
                     assistant_message=response.choices[0].message
                     response_content = assistant_message.tool_calls[0].function
+                    print("正在调用"+response_content.name+"工具")
                     results = dispatch_tool(response_content.name,json.loads(response_content.arguments))
                     print(results)
                     self.messages.append({"role": assistant_message.role, "content": str(response_content)})
@@ -155,6 +156,7 @@ class Chat:
                     function_call = assistant_message.function_call
                     function_name = function_call.name
                     function_arguments = json.loads(function_call.arguments)
+                    print("正在调用"+function_name+"工具")
                     results = dispatch_tool(function_name, function_arguments)
                     print(results)
                     self.messages.append({"role": assistant_message.role, "content": str(function_call)})
@@ -258,6 +260,9 @@ class LLM:
                 })
             },
             "optional": {
+                "system_prompt_input": ("STRING", {
+                    "forceInput": True
+                }),
                 "tools": ("STRING", {
                     "forceInput": True
                 }),
@@ -288,9 +293,11 @@ class LLM:
 
     CATEGORY = "大模型派对（llm_party）/模型（model）"
 
-    def chatbot(self, user_prompt,main_brain ,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,tools=None,file_content=None,api_key=None,base_url=None,images=None,imgbb_api_key=None):
-        self.list=[main_brain,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,tools,file_content,api_key,base_url,images,imgbb_api_key]
+    def chatbot(self, user_prompt,main_brain ,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,system_prompt_input="",tools=None,file_content=None,api_key=None,base_url=None,images=None,imgbb_api_key=None):
+        self.list=[main_brain,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,system_prompt_input,tools,file_content,api_key,base_url,images,imgbb_api_key]
         self.tool_data["system_prompt"]=system_prompt
+        if system_prompt_input is not None:
+            system_prompt=system_prompt+system_prompt_input
         global llm_tools_list,llm_tools
         if main_brain =="disable":
             if self.added_to_list == False:
@@ -536,6 +543,9 @@ class LLM_local:
                 })
             },
             "optional": {
+                "system_prompt_input": ("STRING", {
+                    "forceInput": True
+                }),
                 "tools": ("STRING", {
                     "forceInput": True
                 }),
@@ -554,9 +564,11 @@ class LLM_local:
 
     CATEGORY = "大模型派对（llm_party）/模型（model）"
 
-    def chatbot(self, user_prompt, main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools=None,file_content=None):
-        self.list=[main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,tools,file_content]
+    def chatbot(self, user_prompt, main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,system_prompt_input="",tools=None,file_content=None):
+        self.list=[main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,system_prompt_input,tools,file_content]
         self.tool_data["system_prompt"]=system_prompt
+        if system_prompt_input is not None:
+            system_prompt=system_prompt+system_prompt_input
         global llm_tools_list,llm_tools
         if main_brain=="disable":
             if not self.added_to_list:
@@ -799,6 +811,8 @@ NODE_CLASS_MAPPINGS = {
     "string_logic":string_logic,
     "show_text_party":show_text_party,
     "load_url":load_url,
+    "load_embeddings":load_embeddings,
+    "load_file_folder":load_file_folder,
 }
 
 
@@ -831,6 +845,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "string_logic":"字符串逻辑(string_logic)",
     "show_text_party":"显示文本(show_text)",
     "load_url":"加载网页内容(load_url_content)",
+    "load_embeddings":"词嵌入模型(embeddings_model)",
+    "load_file_folder":"加载文件夹(load_file_folder)",
 }
 
 if __name__ == '__main__':
