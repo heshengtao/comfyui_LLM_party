@@ -62,8 +62,8 @@ def get_all(ws, prompt):
 
     return output_images,output_text
 
-def api(file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="",workflow_path="测试画画api.json"):
-    current_dir_path = os.path.dirname(os.path.realpath(__file__))
+def api(file_content="",image_input=None,file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="",positive_prompt="",negative_prompt="",workflow_path="测试画画api.json"):
+    global current_dir_path
     workflow_path=workflow_path
     WF_path=os.path.join(current_dir_path,"workflow_api", workflow_path)
     with open(WF_path, 'r', encoding='utf-8') as f:
@@ -74,11 +74,16 @@ def api(file_path="", img_path="", system_prompt="你是一个强大的智能助
     for p in prompt:
         #如果p的class_type是start_workflow
         if prompt[p]['class_type'] == 'start_workflow':
+            if file_content != "":
+                prompt[p]['inputs']["file_content"] = file_content
+            if image_input is not None:
+                prompt[p]['inputs']["image_input"] = image_input
             prompt[p]['inputs']["file_path"] = file_path
             prompt[p]['inputs']["img_path"] = img_path
             prompt[p]['inputs']["system_prompt"] = system_prompt
             prompt[p]['inputs']["user_prompt"] = user_prompt
-
+            prompt[p]['inputs']["positive_prompt"] = positive_prompt
+            prompt[p]['inputs']["negative_prompt"] = negative_prompt
 
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
@@ -218,7 +223,7 @@ if get_current_page() == 'chat':
                         file_path = os.path.join(current_dir_path,"file", uploaded_file.name)
                         img_path = ""
                 # 调用API函数
-                images, response = api(file_path, img_path,st.session_state['system_prompt'], user_input,workflow_path=str(st.session_state['wf_path']))
+                images, response = api("",None,file_path, img_path,st.session_state['system_prompt'], user_input,positive_prompt="",negative_prompt="",workflow_path=str(st.session_state['wf_path']))
                 # 更新对话记录
                 if response is not None and response !="" and response !="empty":           
                     st.session_state['chat_history'].append({"role": "assistant", "content": response})
