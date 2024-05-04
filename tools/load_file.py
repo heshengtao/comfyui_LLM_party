@@ -62,9 +62,9 @@ class load_file:
                 "path": ("STRING", {
                     "default": "test.txt"
                 }),
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
-                }),
+                "is_enable": ("BOOLEAN", {
+                    "default": True
+                }),  
                 "path_type":(["Absolute_Path","Relative_Path"],{
                     "default":"Relative_Path"
                 })
@@ -85,8 +85,8 @@ class load_file:
 
 
 
-    def file(self,path,path_type,is_enable="enable"):
-        if is_enable=="disable":
+    def file(self,path,path_type,is_enable=True):
+        if is_enable==False:
             return (None,)
         if path_type=="Absolute_Path":
             path = path
@@ -103,9 +103,9 @@ class load_file_folder:
                 "folder_path": ("STRING", {
                     "default": "C://Users/"
                 }),
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
-                }),
+                "is_enable": ("BOOLEAN", {
+                    "default": True
+                }),  
             },
             "optional": {
 
@@ -123,8 +123,8 @@ class load_file_folder:
 
 
 
-    def file(self,folder_path,is_enable="enable"):
-        if is_enable=="disable":
+    def file(self,folder_path,is_enable=True):
+        if is_enable==False:
             return (None,)
         # 获取文件夹中的所有文件，并读取到字符串中
         out=""
@@ -145,9 +145,9 @@ class load_url:
                 "url": ("STRING", {
                     "default": "https://example.com"
                 }),
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
-                }),
+                "is_enable": ("BOOLEAN", {
+                    "default": True
+                }),  
             },
             "optional": {
 
@@ -165,8 +165,8 @@ class load_url:
 
 
 
-    def file(self,url,is_enable="enable"):
-        if is_enable=="disable":
+    def file(self,url,is_enable=True):
+        if is_enable==False:
             return (None,)
         try:
 
@@ -229,11 +229,17 @@ class start_workflow:
                 "user_prompt": ("STRING", {
                     "default": "你好"
                 }),
+                "positive_prompt": ("STRING", {
+                    "default": ""
+                }),
+                "negative_prompt": ("STRING", {
+                    "default": ""
+                }),
             }
         }
     
-    RETURN_TYPES = ("STRING","IMAGE","STRING","STRING",)
-    RETURN_NAMES = ("file_content","image","system_prompt","user_prompt",)
+    RETURN_TYPES = ("STRING","IMAGE","STRING","STRING","STRING","STRING",)
+    RETURN_NAMES = ("file_content","image","system_prompt","user_prompt","positive_prompt","negative_prompt",)
 
     FUNCTION = "load_all"
 
@@ -243,7 +249,7 @@ class start_workflow:
 
 
 
-    def load_all(self,file_content="",image_input=None,file_path=None,img_path=None,system_prompt="你是一个强大的智能助手",user_prompt="你好"):
+    def load_all(self,file_content="",image_input=None,file_path=None,img_path=None,system_prompt="你是一个强大的智能助手",user_prompt="你好",positive_prompt="",negative_prompt=""):
         file_out=""
         if file_content is not None and file_content !="":
             file_out+=file_content
@@ -290,4 +296,9 @@ class start_workflow:
             img_out = torch.cat(img_out, dim=0)
         elif img_out:
             img_out = img_out[0]
-        return (file_out,img_out,system_prompt,user_prompt,)
+
+        system_out = system_prompt
+        user_out = user_prompt
+        positive_out = positive_prompt
+        negative_out = negative_prompt
+        return (file_out,img_out,system_out,user_out,positive_out,negative_out,)

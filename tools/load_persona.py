@@ -12,9 +12,9 @@ class load_persona:
                 "persona_name": (txt_filenames, {
                     "default": None
                 }),
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
-                })
+                "is_enable": ("BOOLEAN", {
+                    "default": True
+                }),  
             },
             "optional": {
                 "file_content": ("STRING", {
@@ -34,8 +34,8 @@ class load_persona:
 
 
 
-    def persona(self,persona_name,is_enable="enable",file_content=None):
-        if is_enable=="disable":
+    def persona(self,persona_name,is_enable=True,file_content=None):
+        if is_enable==False:
             return (None,)
         per_path = os.path.join(persona_path, persona_name + '.txt')
         text=""

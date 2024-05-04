@@ -55,8 +55,8 @@ class check_web_tool:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
+                "is_enable": ("BOOLEAN", {
+                    "default": True
                 }),      
                 "chunk_size":("INT",{
                     "default":200
@@ -86,8 +86,8 @@ class check_web_tool:
 
 
 
-    def read_web(self,chunk_size,chunk_overlap,is_enable="enable",web_url=None,embedding_path=None):   
-        if is_enable=="disable":
+    def read_web(self,chunk_size,chunk_overlap,is_enable=True,web_url=None,embedding_path=None):   
+        if is_enable==False:
             return (None,)
         global ebd_model,files_load,bge_embeddings,c_size,c_overlap,knowledge_base   
         c_size=chunk_size

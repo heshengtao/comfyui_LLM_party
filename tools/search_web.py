@@ -51,9 +51,9 @@ class google_tool:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
-                }),
+                "is_enable": ("BOOLEAN", {
+                    "default": True
+                }),  
             },
             "optional": {
                 "google_api_key":("STRING", {
@@ -76,8 +76,8 @@ class google_tool:
 
 
 
-    def web(self,google_api_key=None,google_CSE_ID=None,is_enable="enable"):   
-        if is_enable=="disable":
+    def web(self,google_api_key=None,google_CSE_ID=None,is_enable=True):   
+        if is_enable==False:
             return (None,)
         global g_api_key,g_CSE_ID
         if google_api_key is not None and google_api_key!="":

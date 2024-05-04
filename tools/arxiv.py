@@ -29,9 +29,9 @@ class arxiv_tool:
                 "query": ("STRING", {
                     "default": "query"
                 }),
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
-                }),    
+                "is_enable": ("BOOLEAN", {
+                    "default": True
+                }),   
             },
         }
     
@@ -46,8 +46,8 @@ class arxiv_tool:
 
 
 
-    def arxiv(self, query,is_enable="enable"):
-        if is_enable=="disable":
+    def arxiv(self, query,is_enable=True):
+        if is_enable==False:
             return (None,)       
         output=    [{
         "type": "function",

@@ -26,9 +26,9 @@ class tool_combine:
                 "tool3": ("STRING", {
                     "forceInput": True
                 }),
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
-                }),
+                "is_enable": ("BOOLEAN", {
+                    "default": True
+                }),  
             }
         }
     
@@ -43,8 +43,8 @@ class tool_combine:
 
 
 
-    def combine(self,is_enable="enable",tool1=None,tool2=None,tool3=None):
-        if is_enable=="disable":
+    def combine(self,is_enable=True,tool1=None,tool2=None,tool3=None):
+        if is_enable==False:
             return (None,)
         output=[]
         tool_all=[tool1,tool2,tool3]
@@ -99,9 +99,9 @@ class tool_combine_plus:
                 "tool10": ("STRING", {
                     "forceInput": True
                 }),
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
-                }),
+                "is_enable": ("BOOLEAN", {
+                    "default": True
+                }),  
             }
         }
     
@@ -116,8 +116,8 @@ class tool_combine_plus:
 
 
 
-    def combine(self,is_enable="enable",tool1=None,tool2=None,tool3=None,tool4=None,tool5=None,tool6=None,tool7=None,tool8=None,tool9=None,tool10=None):
-        if is_enable=="disable":
+    def combine(self,is_enable=True,tool1=None,tool2=None,tool3=None,tool4=None,tool5=None,tool6=None,tool7=None,tool8=None,tool9=None,tool10=None):
+        if is_enable==False:
             return (None,)
         output=[]
         tool_all=[tool1,tool2,tool3,tool4,tool5,tool6,tool7,tool8,tool9,tool10]

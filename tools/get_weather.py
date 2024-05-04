@@ -33,8 +33,8 @@ class weather_tool:
                 "city": ("STRING", {
                     "default": "上海市"
                 }),
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
+                "is_enable": ("BOOLEAN", {
+                    "default": True
                 }),  
             }
         }
@@ -50,8 +50,8 @@ class weather_tool:
 
 
 
-    def weather(self,city,is_enable="enable"):
-        if is_enable=="disable":
+    def weather(self,city,is_enable=True):
+        if is_enable==False:
             return (None,)   
         output=    [{
         "type": "function",
@@ -116,8 +116,8 @@ class accuweather_tool:
                 "accuweather_key": ("STRING", {
                     "default": ""
                 }),
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
+                "is_enable": ("BOOLEAN", {
+                    "default": True
                 }),  
             }
         }
@@ -133,8 +133,8 @@ class accuweather_tool:
 
 
 
-    def weather(self,accuweather_key,city,is_enable="enable"):
-        if is_enable=="disable":
+    def weather(self,accuweather_key,city,is_enable=True):
+        if is_enable==False:
             return (None,)
         global accuweather_key_load
         accuweather_key_load=accuweather_key

@@ -3,8 +3,8 @@ class file_combine:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
+                "is_enable": ("BOOLEAN", {
+                    "default": True
                 }),  
             },
             "optional": {
@@ -31,8 +31,8 @@ class file_combine:
 
 
 
-    def combine(self,is_enable="enable",file1=None,file2=None,file3=None):
-        if is_enable=="disable":
+    def combine(self,is_enable=True,file1=None,file2=None,file3=None):
+        if is_enable==False:
             return (None,)
         output=""
         file_all=[file1,file2,file3]
@@ -48,8 +48,8 @@ class file_combine_plus:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
+                "is_enable": ("BOOLEAN", {
+                    "default": True
                 }),  
             },
             "optional": {
@@ -97,8 +97,8 @@ class file_combine_plus:
 
 
 
-    def combine(self,is_enable="enable",file1=None,file2=None,file3=None,file4=None,file5=None,file6=None,file7=None,file8=None,file9=None,file10=None):
-        if is_enable=="disable":
+    def combine(self,is_enable=True,file1=None,file2=None,file3=None,file4=None,file5=None,file6=None,file7=None,file8=None,file9=None,file10=None):
+        if is_enable==False:
             return (None,)
         output=""
         file_all=[file1,file2,file3,file4,file5,file6,file7,file8,file9,file10]

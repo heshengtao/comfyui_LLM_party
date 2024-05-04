@@ -18,8 +18,8 @@ class string_logic:
             }
         }
     
-    RETURN_TYPES = ("STRING","STRING","STRING",)
-    RETURN_NAMES = ("if","else","is_true",)
+    RETURN_TYPES = ("STRING","STRING","BOOLEAN","BOOLEAN",)
+    RETURN_NAMES = ("if","else","is_true","is_false",)
 
     FUNCTION = "str_logic"
 
@@ -54,9 +54,11 @@ class string_logic:
         if out:
             outif=stringA
             outelse=""
-            out="enable"
+            out=True
+            out2=False
         else:
             outif=""
             outelse=stringA
-            out="disable"
-        return (outif,outelse,out)
+            out=False
+            out2=True
+        return (outif,outelse,out,out2,)

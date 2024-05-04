@@ -6,9 +6,9 @@ class classify_function:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
-                }),
+                "is_enable": ("BOOLEAN", {
+                    "default": True
+                }),  
                 "text": ("STRING", {
                     "forceInput": True
                 }),
@@ -29,8 +29,8 @@ class classify_function:
 
 
 
-    def condition(self,text,is_enable="enable"):
-        if is_enable=="disable":
+    def condition(self,text,is_enable=True):
+        if is_enable==False:
             return (None,)
         # 使用正则表达式分割字符串
         parts = re.split(r'\*\*[0-9]:\*\* ', text)

@@ -6,9 +6,9 @@ class custom_persona:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
-                }),
+                "is_enable": ("BOOLEAN", {
+                    "default": True
+                }),  
                 "prompt": ("STRING", {
                     "multiline": True,
                 }),
@@ -34,8 +34,8 @@ class custom_persona:
 
 
 
-    def custom(self,prompt,prompt_template,is_enable="enable",file_content=None):
-        if is_enable=="disable":
+    def custom(self,prompt,prompt_template,is_enable=True,file_content=None):
+        if is_enable==False:
             return (None,)
         text =""
         if file_content is not None:

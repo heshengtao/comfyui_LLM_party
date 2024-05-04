@@ -31,8 +31,8 @@ class api_tool:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
+                "is_enable": ("BOOLEAN", {
+                    "default": True
                 }),      
                 "url": ("STRING",{
                     "default":"被请求的网址"
@@ -67,8 +67,8 @@ class api_tool:
 
 
 
-    def read_web(self,url,description,parameters,is_enable="enable"):   
-        if is_enable=="disable":
+    def read_web(self,url,description,parameters,is_enable=True):   
+        if is_enable==False:
             return (None,)
         global api_boxes
         api_boxes[str(self.id).strip()]=api_box(self.id,url)

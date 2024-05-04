@@ -111,9 +111,9 @@ class load_embeddings:
                 "question": ("STRING", {
                     "default": "question"
                 }),
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
-                }),
+                "is_enable": ("BOOLEAN", {
+                    "default": True
+                }),  
                 "file_content": ("STRING", {
                     "forceInput": True
                 }),
@@ -146,8 +146,8 @@ class load_embeddings:
 
 
 
-    def file(self,path,question,file_content,chunk_size,chunk_overlap,is_locked,is_enable="enable",device="cuda"):
-        if is_enable=="disable":
+    def file(self,path,question,file_content,chunk_size,chunk_overlap,is_locked,is_enable=True,device="cuda"):
+        if is_enable==False:
             return (None,)
         global ebd_model,files_load,bge_embeddings,c_size,c_overlap,knowledge_base   
         c_size=chunk_size

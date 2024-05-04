@@ -52,8 +52,8 @@ class wikipedia_tool:
                 "query": ("STRING", {
                     "default": "query"
                 }),
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
+                "is_enable": ("BOOLEAN", {
+                    "default": True
                 }),  
                 "chunk_size":("INT",{
                     "default":200
@@ -126,8 +126,8 @@ class load_wikipedia:
                 "query": ("STRING", {
                     "default": "query"
                 }),
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
+                "is_enable": ("BOOLEAN", {
+                    "default": True
                 }),  
             }
         }
@@ -143,8 +143,8 @@ class load_wikipedia:
 
 
 
-    def wikipedia(self, query,is_enable="enable"):
-        if is_enable=="disable":
+    def wikipedia(self, query,is_enable=True):
+        if is_enable==False:
             return (None,)        
         # 设置语言
         wikipedia.set_lang("zh")

@@ -70,7 +70,7 @@ def get_all(ws, prompt):
 
     return output_images,output_text
 
-def api(file_content="",image_input=None,file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="",workflow_path="测试画画api.json"):
+def api(file_content="",image_input=None,file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="",positive_prompt="",negative_prompt="",workflow_path="测试画画api.json"):
     global current_dir_path
     workflow_path=workflow_path
     WF_path=os.path.join(current_dir_path,"workflow_api", workflow_path)
@@ -90,7 +90,8 @@ def api(file_content="",image_input=None,file_path="", img_path="", system_promp
             prompt[p]['inputs']["img_path"] = img_path
             prompt[p]['inputs']["system_prompt"] = system_prompt
             prompt[p]['inputs']["user_prompt"] = user_prompt
-
+            prompt[p]['inputs']["positive_prompt"] = positive_prompt
+            prompt[p]['inputs']["negative_prompt"] = negative_prompt
 
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
@@ -128,8 +129,8 @@ class workflow_transfer:
 
         return {
             "required": {
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
+                "is_enable": ("BOOLEAN", {
+                    "default": True
                 }),  
             },
             "optional": {
@@ -141,6 +142,8 @@ class workflow_transfer:
                 "img_path": ("STRING", {}),
                 "system_prompt": ("STRING", {}),
                 "user_prompt": ("STRING", {}),
+                "positive_prompt": ("STRING", {}),
+                "negative_prompt": ("STRING", {}),
                 "workflow_path": (json_files , {}),
             }
         }
@@ -156,8 +159,8 @@ class workflow_transfer:
 
 
 
-    def transfer(self,file_content="",image_input=None,file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="",workflow_path="测试画画api.json",is_enable="enable"):
-        if is_enable=="disable":
+    def transfer(self,file_content="",image_input=None,file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="",positive_prompt="",negative_prompt="",workflow_path="测试画画api.json",is_enable=True):
+        if is_enable==False:
             return (None,)     
         # 获取当前Python解释器的路径
         interpreter = sys.executable
@@ -170,7 +173,7 @@ class workflow_transfer:
         command = f"cmd /c start cmd /k \"{interpreter} {root_path} --port 8189\""
         check_port_and_execute_bat(8189, command)
         
-        output_images,output_text=api(file_content,image_input,file_path, img_path, system_prompt, user_prompt,workflow_path)
+        output_images,output_text=api(file_content,image_input,file_path, img_path, system_prompt, user_prompt,positive_prompt,negative_prompt,workflow_path)
         img_out=[]
         if output_images =={}:
             output_images=None

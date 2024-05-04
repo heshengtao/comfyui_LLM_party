@@ -34,8 +34,8 @@ class interpreter_tool:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "is_enable": (["enable", "disable"],{
-                    "default":"enable"
+                "is_enable": ("BOOLEAN", {
+                    "default": True
                 }),  
             }
         }
@@ -51,8 +51,8 @@ class interpreter_tool:
 
 
 
-    def code(self, is_enable="enable"):
-        if is_enable=="disable":
+    def code(self, is_enable=True):
+        if is_enable==False:
             return (None,)        
         output=    [{
         "type": "function",
