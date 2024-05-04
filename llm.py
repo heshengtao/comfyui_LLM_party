@@ -37,6 +37,9 @@ from .tools.image import CLIPTextEncode_party,KSampler_party,VAEDecode_party
 from .tools.logic import string_logic
 from .tools.show_text import show_text_party
 from .tools.api_tool import api_tool,use_api_tool
+from .tools.wikipedia import wikipedia_tool,get_wikipedia,load_wikipedia
+from .tools.arxiv import arxiv_tool,get_arxiv
+from .tools.workflow import workflow_transfer
 from transformers import AutoTokenizer, AutoModel, Qwen2Tokenizer, Qwen2ForCausalLM, AutoModelForCausalLM, GenerationConfig
 
 glm_tokenizer=""
@@ -56,6 +59,8 @@ _TOOL_HOOKS=[
     "new_interpreter",
     "use_api_tool",
     "get_accuweather",
+    "get_wikipedia",
+    "get_arxiv",
 ]
 instances=[]
 def another_llm(id,type,question):
@@ -818,6 +823,10 @@ NODE_CLASS_MAPPINGS = {
     "load_embeddings":load_embeddings,
     "load_file_folder":load_file_folder,
     "api_tool":api_tool,
+    "wikipedia_tool":wikipedia_tool,
+    "load_wikipedia":load_wikipedia,
+    "arxiv_tool":arxiv_tool,
+    "workflow_transfer":workflow_transfer,
 }
 
 
@@ -854,6 +863,10 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "load_embeddings":"词嵌入模型(embeddings_model)",
     "load_file_folder":"加载文件夹(load_file_folder)",
     "api_tool":"API工具(api_tool)",
+    "wikipedia_tool":"维基百科工具(wikipedia_tool)",
+    "load_wikipedia":"加载维基百科(load_wikipedia)",
+    "arxiv_tool":"arxiv工具(arxiv_tool)",
+    "workflow_transfer":"工作流中转器(workflow_transfer)",
 }
 
 if __name__ == '__main__':
