@@ -1,6 +1,7 @@
 import io
 import os
 import sys
+import time
 import websocket #NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
 import uuid
 import json
@@ -101,7 +102,16 @@ def check_port_and_execute_bat(port, bat_command):
     result = sock.connect_ex(('localhost', port))
     if result != 0:
         print(f"端口 {port} 未被占用，正在执行bat命令...")
-        subprocess.run(bat_command, shell=True)
+        subprocess.Popen(bat_command)
+        while True:
+            result = sock.connect_ex(('localhost', port))
+            if result == 0:
+                print(f"端口 {port} 已经开放，可以正常访问。")
+                sock.close()
+                break
+            else:
+                print(f"端口 {port} 未开放，等待中...")
+                time.sleep(1)  # 等待1秒后再次检查端口状态
     else:
         print(f"端口 {port} 已被占用。")
     sock.close()
@@ -149,10 +159,15 @@ class workflow_transfer:
     def transfer(self,file_content="",image_input=None,file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="",workflow_path="测试画画api.json",is_enable="enable"):
         if is_enable=="disable":
             return (None,)     
-        # 使用示例
+        # 获取当前Python解释器的路径
         interpreter = sys.executable
+
+        # 获取main.py的绝对路径
         root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'main.py'))
-        command = f"{interpreter} -s {root_path} --windows-standalone-build --port 8189"
+
+        # 构建在新控制台窗口中执行main.py的命令
+        # 使用'cmd /c'在新窗口中执行命令，并且'cmd /k'保持窗口打开
+        command = f"cmd /c start cmd /k \"{interpreter} {root_path} --port 8189\""
         check_port_and_execute_bat(8189, command)
         
         output_images,output_text=api(file_content,image_input,file_path, img_path, system_prompt, user_prompt,workflow_path)
