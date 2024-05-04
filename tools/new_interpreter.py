@@ -1,4 +1,5 @@
 import json
+import re
 import subprocess
 import sys
 import os
@@ -50,18 +51,21 @@ def execute_code(env_name, code):
         activate_script = os.path.join(env_name, 'bin', 'activate')
     subprocess.check_call(activate_script, shell=True)
     python_path = os.path.join(env_name, 'Scripts', 'python.exe')
-    try:
-        result = subprocess.run([python_path, temp_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        # 获取标准输出
-        output = result.stdout.strip()
-        print(output)
-        # 清理：删除临时文件
+    result = subprocess.run([python_path, temp_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    # 获取标准输出
+    output = result.stdout.strip()
+    err=result.stderr.strip()
+    print(output+"\n"+err)
+    if err == '':
         os.remove(temp_file)
         return output
-    except Exception as e:
-        print(f"Error executing code: {e}")
-        # 安装缺少的库
-        missing_modules = e.split("'")[1:]
+    else:
+        missing_modules = []
+        # 使用正则表达式查找所有缺失的模块
+        matches = re.finditer(r"ModuleNotFoundError: No module named '(\S+)'", err)
+        # 遍历所有匹配项并将模块名添加到列表中
+        for match in matches:
+            missing_modules.append(match.group(1))
         for module in missing_modules:
             if module=='':
                 break
@@ -77,10 +81,14 @@ def execute_code(env_name, code):
         result = subprocess.run([python_path, temp_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         # 获取标准输出
         output = result.stdout.strip()
-        print(output)
+        err=result.stderr.strip()
+        print(output+"\n"+err)
         # 清理：删除临时文件
         os.remove(temp_file)
-        return output
+        if err == '':
+            return output
+        else:
+            return "代码未执行成功，错误信息为：" + err
 
 
 def new_interpreter(code_str):
