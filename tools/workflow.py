@@ -1,5 +1,6 @@
 import io
 import os
+import sys
 import websocket #NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
 import uuid
 import json
@@ -13,6 +14,8 @@ from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 from ..config import current_dir_path
 
+import socket
+import subprocess
 import numpy as np
 from PIL import Image, ImageOps, ImageSequence
 import torch
@@ -93,6 +96,19 @@ def api(file_content="",image_input=None,file_path="", img_path="", system_promp
     images, res = get_all(ws, prompt)
     return images, res
 
+def check_port_and_execute_bat(port, bat_command):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    result = sock.connect_ex(('localhost', port))
+    if result != 0:
+        print(f"端口 {port} 未被占用，正在执行bat命令...")
+        subprocess.run(bat_command, shell=True)
+    else:
+        print(f"端口 {port} 已被占用。")
+    sock.close()
+
+
+
+
 api_path=os.path.join(current_dir_path,"workflow_api")
 #获取apipath文件夹下的所有json文件名
 json_files = [f for f in os.listdir(api_path) if f.endswith('.json')]
@@ -133,6 +149,12 @@ class workflow_transfer:
     def transfer(self,file_content="",image_input=None,file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="",workflow_path="测试画画api.json",is_enable="enable"):
         if is_enable=="disable":
             return (None,)     
+        # 使用示例
+        interpreter = sys.executable
+        root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'main.py'))
+        command = f"{interpreter} -s {root_path} --windows-standalone-build --port 8189"
+        check_port_and_execute_bat(8189, command)
+        
         output_images,output_text=api(file_content,image_input,file_path, img_path, system_prompt, user_prompt,workflow_path)
         img_out=[]
         if output_images =={}:
