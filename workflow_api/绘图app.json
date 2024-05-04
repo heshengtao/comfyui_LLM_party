@@ -1,0 +1,127 @@
+{
+  "169": {
+    "inputs": {
+      "ckpt_name": "anything-v5-PrtRE.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint加载器(简易)"
+    }
+  },
+  "174": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent"
+    }
+  },
+  "176": {
+    "inputs": {
+      "file_path": "",
+      "img_path": "",
+      "system_prompt": "你是一个强大的智能助手",
+      "user_prompt": "你好",
+      "positive_prompt": "",
+      "negative_prompt": ""
+    },
+    "class_type": "start_workflow",
+    "_meta": {
+      "title": "开始工作流(start_workflow)"
+    }
+  },
+  "177": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "198",
+        0
+      ]
+    },
+    "class_type": "end_workflow",
+    "_meta": {
+      "title": "结束工作流(end_workflow)"
+    }
+  },
+  "195": {
+    "inputs": {
+      "text": [
+        "176",
+        4
+      ],
+      "clip": [
+        "169",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode_party",
+    "_meta": {
+      "title": "CLIP文本编码器(CLIPTextEncode_party)"
+    }
+  },
+  "196": {
+    "inputs": {
+      "text": [
+        "176",
+        5
+      ],
+      "clip": [
+        "169",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode_party",
+    "_meta": {
+      "title": "CLIP文本编码器(CLIPTextEncode_party)"
+    }
+  },
+  "197": {
+    "inputs": {
+      "seed": 519148138973913,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "169",
+        0
+      ],
+      "positive": [
+        "195",
+        0
+      ],
+      "negative": [
+        "196",
+        0
+      ],
+      "latent_image": [
+        "174",
+        0
+      ]
+    },
+    "class_type": "KSampler_party",
+    "_meta": {
+      "title": "KSampler采样器(KSampler_party)"
+    }
+  },
+  "198": {
+    "inputs": {
+      "samples": [
+        "197",
+        0
+      ],
+      "vae": [
+        "169",
+        2
+      ]
+    },
+    "class_type": "VAEDecode_party",
+    "_meta": {
+      "title": "VAEDecode解码器(VAEDecode_party)"
+    }
+  }
+}
