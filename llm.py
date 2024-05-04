@@ -304,8 +304,10 @@ class LLM:
     def chatbot(self, user_prompt,main_brain ,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,system_prompt_input="",tools=None,file_content=None,api_key=None,base_url=None,images=None,imgbb_api_key=None):
         self.list=[main_brain,system_prompt,model_name,temperature,is_memory,is_tools_in_sys_prompt,is_locked,max_length,system_prompt_input,tools,file_content,api_key,base_url,images,imgbb_api_key]
         self.tool_data["system_prompt"]=system_prompt
-        if system_prompt_input is not None:
+        if system_prompt_input is not None and system_prompt is not None:
             system_prompt=system_prompt+system_prompt_input
+        elif system_prompt is None:
+            system_prompt=system_prompt_input
         global llm_tools_list,llm_tools
         if main_brain =="disable":
             if self.added_to_list == False:
@@ -575,8 +577,10 @@ class LLM_local:
     def chatbot(self, user_prompt, main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,system_prompt_input="",tools=None,file_content=None):
         self.list=[main_brain,system_prompt,model_type,temperature,model_path,max_length,tokenizer_path,is_reload,device,is_memory,is_tools_in_sys_prompt,is_locked,system_prompt_input,tools,file_content]
         self.tool_data["system_prompt"]=system_prompt
-        if system_prompt_input is not None:
+        if system_prompt_input is not None and system_prompt is not None:
             system_prompt=system_prompt+system_prompt_input
+        elif system_prompt is None:
+            system_prompt=system_prompt_input
         global llm_tools_list,llm_tools
         if main_brain=="disable":
             if not self.added_to_list:
