@@ -212,6 +212,10 @@ class start_workflow:
 
             },
             "optional": {
+                "file_content": ("STRING", {
+                    "forceInput": True
+                }),
+                "image_input": ("IMAGE", {}),
                 "file_path": ("STRING", {
                     "default": None
                 }),
@@ -239,24 +243,51 @@ class start_workflow:
 
 
 
-    def load_all(self,file_path=None,img_path=None,system_prompt="你是一个强大的智能助手",user_prompt="你好"):
+    def load_all(self,file_content="",image_input=None,file_path=None,img_path=None,system_prompt="你是一个强大的智能助手",user_prompt="你好"):
         file_out=""
+        if file_content is not None and file_content !="":
+            file_out+=file_content
         if file_path is not None and file_path !="":
-            path = os.path.join(file_path, path)
-            file_out=read_one(path)
-        img_out = []
-        if img_path is not None and img_path !="":
-            img = Image.open(img_path)
-            for i in ImageSequence.Iterator(img):
-                i = ImageOps.exif_transpose(i)
-                if i.mode == 'I':
-                    i = i.point(lambda i: i * (1 / 255))
-                image = i.convert("RGB")
-                image = np.array(image).astype(np.float32) / 255.0
-                image = torch.from_numpy(image)[None,]
-                img_out.append(image)
-            if len(img_out) > 1:
-                img_out= torch.cat(img_out, dim=0)
+            if os.path.isdir(file_path):
+                for path in os.listdir(file_path):
+                    path = os.path.join(file_path, path)
+                    file_out+=read_one(path)+"/n/n"
             else:
-                img_out = img_out[0]
+                path = os.path.join(file_path, path)
+                file_out=read_one(path)
+        img_out = []
+        if image_input is not None:
+            for image in image_input:
+                img_out.append(image)
+        if img_path is not None and img_path != "":
+            # 检查img_path是否是一个目录
+            if os.path.isdir(img_path):
+                # 遍历目录中的所有文件
+                for filename in os.listdir(img_path):
+                    # 检查文件是否是图片
+                    if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')):
+                        img_full_path = os.path.join(img_path, filename)
+                        img = Image.open(img_full_path)
+                        img = ImageOps.exif_transpose(img)
+                        if img.mode == 'I':
+                            img = img.point(lambda i: i * (1 / 256)).convert('L')
+                        image = img.convert("RGB")
+                        image = np.array(image).astype(np.float32) / 255.0
+                        image = torch.from_numpy(image).unsqueeze(0)
+                        img_out.append(image)
+            else:
+                img = Image.open(img_path)
+                for i in ImageSequence.Iterator(img):
+                    i = ImageOps.exif_transpose(i)
+                    if i.mode == 'I':
+                        i = i.point(lambda i: i * (1 / 256)).convert('L')
+                    image = i.convert("RGB")
+                    image = np.array(image).astype(np.float32) / 255.0
+                    image = torch.from_numpy(image).unsqueeze(0)
+                    img_out.append(image)
+        
+        if len(img_out) > 1:
+            img_out = torch.cat(img_out, dim=0)
+        elif img_out:
+            img_out = img_out[0]
         return (file_out,img_out,system_prompt,user_prompt,)
