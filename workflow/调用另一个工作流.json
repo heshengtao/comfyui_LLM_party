@@ -1,0 +1,829 @@
+{
+  "last_node_id": 211,
+  "last_link_id": 49,
+  "nodes": [
+    {
+      "id": 154,
+      "type": "classify_persona",
+      "pos": [
+        562,
+        -116
+      ],
+      "size": {
+        "0": 315,
+        "1": 154
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "label": "system_prompt"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "classify_persona"
+      },
+      "widgets_values": [
+        "enable",
+        "",
+        "Positive Prompt",
+        "Negative Prompt",
+        "智能助手对用户的回复，不属于生成图像Prompt的文本"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 150,
+      "type": "load_persona",
+      "pos": [
+        97,
+        -93
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "label": "system_prompt"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "图片提示词生成器",
+        "enable",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 179,
+      "type": "LLM",
+      "pos": [
+        1015,
+        130
+      ],
+      "size": {
+        "0": 400,
+        "1": 410
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "link": 12,
+          "widget": {
+            "name": "system_prompt"
+          },
+          "label": "system_prompt"
+        },
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "link": 13,
+          "widget": {
+            "name": "user_prompt"
+          },
+          "label": "user_prompt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "你好",
+        "gpt-3.5-turbo",
+        0.7000000000000001,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 203,
+      "type": "workflow_transfer",
+      "pos": [
+        2293,
+        -26
+      ],
+      "size": {
+        "0": 315,
+        "1": 270
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_input",
+          "type": "IMAGE",
+          "link": null,
+          "label": "image_input"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "positive_prompt",
+          "type": "STRING",
+          "link": 45,
+          "widget": {
+            "name": "positive_prompt"
+          },
+          "label": "positive_prompt"
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "negative_prompt"
+          },
+          "label": "negative_prompt"
+        },
+        {
+          "name": "is_enable",
+          "type": "BOOLEAN",
+          "link": 43,
+          "widget": {
+            "name": "is_enable"
+          },
+          "label": "is_enable"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            41
+          ],
+          "shape": 3,
+          "label": "images",
+          "slot_index": 0
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "text"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "workflow_transfer"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "绘图app.json"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 162,
+      "type": "classify_function",
+      "pos": [
+        1515,
+        130
+      ],
+      "size": {
+        "0": 315,
+        "1": 122
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 1,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "response1",
+          "type": "STRING",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "label": "response1",
+          "slot_index": 0
+        },
+        {
+          "name": "response2",
+          "type": "STRING",
+          "links": [
+            39
+          ],
+          "shape": 3,
+          "label": "response2",
+          "slot_index": 1
+        },
+        {
+          "name": "response3",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "label": "response3",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "classify_function"
+      },
+      "widgets_values": [
+        "enable",
+        ""
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 206,
+      "type": "string_logic",
+      "pos": [
+        1883,
+        -134
+      ],
+      "size": {
+        "0": 315,
+        "1": 146
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "stringA",
+          "type": "STRING",
+          "link": 44,
+          "widget": {
+            "name": "stringA"
+          },
+          "label": "stringA"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "if",
+          "type": "STRING",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "label": "if",
+          "slot_index": 0
+        },
+        {
+          "name": "else",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "else"
+        },
+        {
+          "name": "is_true",
+          "type": "BOOLEAN",
+          "links": [
+            43
+          ],
+          "shape": 3,
+          "label": "is_true",
+          "slot_index": 2
+        },
+        {
+          "name": "is_false",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3,
+          "label": "is_false"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "string_logic"
+      },
+      "widgets_values": [
+        "A is not null",
+        "",
+        ""
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 178,
+      "type": "LLM",
+      "pos": [
+        515,
+        130
+      ],
+      "size": {
+        "0": 400,
+        "1": 410
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "link": 10,
+          "widget": {
+            "name": "system_prompt"
+          },
+          "label": "system_prompt"
+        },
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "link": 48,
+          "widget": {
+            "name": "user_prompt"
+          },
+          "label": "user_prompt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "你好",
+        "gpt-3.5-turbo",
+        0.7000000000000001,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 205,
+      "type": "end_workflow",
+      "pos": [
+        2860,
+        132
+      ],
+      "size": {
+        "0": 315,
+        "1": 290
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 41,
+          "label": "images"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 42,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "end_workflow"
+      },
+      "widgets_values": [
+        "ComfyUI",
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 208,
+      "type": "start_workflow",
+      "pos": [
+        18,
+        190
+      ],
+      "size": {
+        "0": 342.5999755859375,
+        "1": 302
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_input",
+          "type": "IMAGE",
+          "link": null,
+          "label": "image_input"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "file_content"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        },
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "system_prompt"
+        },
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "links": [
+            48
+          ],
+          "shape": 3,
+          "label": "user_prompt",
+          "slot_index": 3
+        },
+        {
+          "name": "positive_prompt",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "positive_prompt"
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "negative_prompt"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "start_workflow"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "",
+        "你是一个强大的智能助手",
+        "请帮我画一个星空吧",
+        "",
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 202,
+      "type": "show_text_party",
+      "pos": [
+        1885,
+        455
+      ],
+      "size": {
+        "0": 315,
+        "1": 76
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            42
+          ],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    }
+  ],
+  "links": [
+    [
+      1,
+      179,
+      0,
+      162,
+      0,
+      "STRING"
+    ],
+    [
+      10,
+      150,
+      0,
+      178,
+      3,
+      "STRING"
+    ],
+    [
+      12,
+      154,
+      0,
+      179,
+      3,
+      "STRING"
+    ],
+    [
+      13,
+      178,
+      0,
+      179,
+      4,
+      "STRING"
+    ],
+    [
+      37,
+      162,
+      2,
+      202,
+      0,
+      "STRING"
+    ],
+    [
+      39,
+      162,
+      1,
+      203,
+      3,
+      "STRING"
+    ],
+    [
+      41,
+      203,
+      0,
+      205,
+      0,
+      "IMAGE"
+    ],
+    [
+      42,
+      202,
+      0,
+      205,
+      1,
+      "STRING"
+    ],
+    [
+      43,
+      206,
+      2,
+      203,
+      4,
+      "BOOLEAN"
+    ],
+    [
+      44,
+      162,
+      0,
+      206,
+      0,
+      "STRING"
+    ],
+    [
+      45,
+      206,
+      0,
+      203,
+      2,
+      "STRING"
+    ],
+    [
+      48,
+      208,
+      3,
+      178,
+      4,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
