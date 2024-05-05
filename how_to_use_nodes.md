@@ -23,6 +23,11 @@
 2. Run `setup_streamlit_app.bat` in the project folder. In the Streamlit interface, click "Settings" and replace it with your workflow.
 3. This way, you've quickly built an AI application with Streamlit as the frontend.
 
+## workflow_transfer Node
+1. You need to add the start workflow and end workflow nodes at the beginning and end of the workflow to be embedded, and save this workflow as an API in the workflow_api folder of the comfyui_LLM_party project.
+2. Open another workflow, and use the workflow transfer node within this workflow, select the workflow you want to embed, and it’s done.
+3. The first time you use the workflow transfer node, another port 8189 will be opened, please do not close this new console.
+
 ## start_dialog and end_dialog Nodes
 1. These two nodes have a `dialog_id`. Connecting dialog IDs creates an archive point for the conversation. When you need to loop two large models, although it cannot be directly implemented in ComfyUI, you can save the output of the second model locally and pass it to the first model in the next run. You can use the ComfyUI API in other frontends to call ComfyUI, creating an infinite self-dialogue loop between the two models.
 2. The `start_dialog` node has a `start_dialog` interface, which can serve as a user-provided prompt at the beginning of a conversation, guiding the large model to discuss topics based on the user's input.
