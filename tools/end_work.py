@@ -30,7 +30,7 @@ class end_workflow:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/API"
+    CATEGORY = "大模型派对（llm_party）/工作流（workflow）"
 
     def save_all(self, images=None,text=None, filename_prefix="ComfyUI", prompt=None, extra_pnginfo=None):
         results = list()

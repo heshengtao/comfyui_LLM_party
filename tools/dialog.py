@@ -30,7 +30,7 @@ class start_dialog:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/工作流（workflow）"
 
 
 
@@ -66,7 +66,7 @@ class end_dialog:
 
     OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/工作流（workflow）"
 
 
 

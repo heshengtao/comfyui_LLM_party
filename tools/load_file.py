@@ -245,7 +245,7 @@ class start_workflow:
 
     #OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/API"
+    CATEGORY = "大模型派对（llm_party）/工作流（workflow）"
 
 
 
