@@ -51,11 +51,14 @@ def execute_code(env_name, code):
         activate_script = os.path.join(env_name, 'bin', 'activate')
     subprocess.check_call(activate_script, shell=True)
     python_path = os.path.join(env_name, 'Scripts', 'python.exe')
-    result = subprocess.run([python_path, temp_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    result = subprocess.run([python_path, temp_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,encoding='utf-8')
     # 获取标准输出
-    output = result.stdout.strip()
-    err=result.stderr.strip()
-    print(output+"\n"+err)
+    if result.stdout is not None:
+        output = result.stdout.strip()
+    else:
+        output = None
+    err=result.stderr
+    print(output+"\n"+str(err))
     if err == '':
         os.remove(temp_file)
         return output
