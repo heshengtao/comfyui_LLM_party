@@ -27,8 +27,8 @@ from .tools.file_combine import file_combine,file_combine_plus
 from .tools.dialog import start_dialog,end_dialog
 from .tools.interpreter import interpreter,interpreter_tool
 from .tools.load_persona import load_persona
-from .tools.classify_persona import classify_persona
-from .tools.classify_function import classify_function
+from .tools.classify_persona import classify_persona,classify_persona_plus
+from .tools.classify_function import classify_function,classify_function_plus
 from .tools.load_ebd import ebd_tool,data_base,load_embeddings
 from .tools.custom_persona import custom_persona
 from .tools.end_work import end_workflow
@@ -831,6 +831,8 @@ NODE_CLASS_MAPPINGS = {
     "load_wikipedia":load_wikipedia,
     "arxiv_tool":arxiv_tool,
     "workflow_transfer":workflow_transfer,
+    "classify_persona_plus":classify_persona_plus,
+    "classify_function_plus":classify_function_plus,
 }
 
 
@@ -871,6 +873,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "load_wikipedia":"加载维基百科(load_wikipedia)",
     "arxiv_tool":"arxiv工具(arxiv_tool)",
     "workflow_transfer":"工作流中转器(workflow_transfer)",
+    "classify_persona_plus":"超大分类器面具(classify_persona_plus)",
+    "classify_function_plus":"超大分类器函数(classify_function_plus)",
 }
 
 if __name__ == '__main__':
