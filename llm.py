@@ -40,7 +40,7 @@ from .tools.api_tool import api_tool,use_api_tool
 from .tools.wikipedia import wikipedia_tool,get_wikipedia,load_wikipedia
 from .tools.arxiv import arxiv_tool,get_arxiv
 from .tools.workflow import workflow_transfer
-from transformers import AutoTokenizer, AutoModel, Qwen2Tokenizer, Qwen2ForCausalLM, AutoModelForCausalLM, GenerationConfig
+from transformers import AutoTokenizer, AutoModel, AutoModelForCausalLM, GenerationConfig
 
 glm_tokenizer=""
 glm_model=""
@@ -739,11 +739,11 @@ class LLM_local:
                         qwen_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, revision='master', trust_remote_code=True)
                     if qwen_model=="":
                         if device=="cuda":
-                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path, device_map="cuda", trust_remote_code=True, fp32=True,fp16=False,bf16=False).eval()
+                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path,trust_remote_code=True,device_map="cuda")
                         elif device=="cpu":
-                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path, device_map="cpu", trust_remote_code=True, fp32=True,fp16=False,bf16=False).eval()
+                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).float()
                         else:
-                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path, device_map="cuda", trust_remote_code=True, fp16=True,fp32=False,bf16=False).eval()
+                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path,trust_remote_code=True).half().cuda()
                         qwen_model.eval()
                     qwen_model.generation_config = GenerationConfig.from_pretrained(model_path, trust_remote_code=True)
                     response, history = llm_chat(qwen_model,qwen_tokenizer,user_prompt,history,qwen_device,max_length)
