@@ -463,10 +463,15 @@ def llm_chat(model,tokenizer,user_prompt,history,device,max_length,role="user"):
         add_generation_prompt=True
     )
     model_inputs = tokenizer([text], return_tensors="pt").to(device)
-
-    stop_tokens = ["Observation:", "<|im_end|>","<|eot_id|>","</s>"]  # 示例停止词
+    stop_tokens_id = tokenizer.eos_token_id
+    stop_tokens = ["Observation:"]  # 示例停止词
     stop_token_ids = [tokenizer.encode(stop_token, add_special_tokens=False)[0] for stop_token in stop_tokens]
-
+    #将stop_tokens_id和stop_tokens_ids进行合并
+    #判断stop_tokens_id是否是int还是列表
+    if isinstance(stop_tokens_id, int):
+        stop_token_ids.append(stop_tokens_id)
+    elif isinstance(stop_tokens_id, list):
+        stop_token_ids.extend(stop_tokens_id)
     generated_ids = model.generate(
         model_inputs.input_ids,
         max_new_tokens=max_length,
