@@ -464,7 +464,7 @@ def llm_chat(model,tokenizer,user_prompt,history,device,max_length,role="user"):
     )
     model_inputs = tokenizer([text], return_tensors="pt").to(device)
 
-    stop_tokens = ["Observation:", "<|im_end|>","<|eot_id|>"]  # 示例停止词
+    stop_tokens = ["Observation:", "<|im_end|>","<|eot_id|>","</s>"]  # 示例停止词
     stop_token_ids = [tokenizer.encode(stop_token, add_special_tokens=False)[0] for stop_token in stop_tokens]
 
     generated_ids = model.generate(
