@@ -7,8 +7,8 @@
 2. 新增了万能解释器节点，可以让大模型执行任何事情，大模型将会在一个虚拟环境里下载所需的第三方库，然后执行生成的代码，请小心使用这个工具，因为大模型会获得控制你电脑做任何事的能力！
 3. 给大家带来了一个很酷的套娃功能，你需要将LLM节点的main_brain属性disable，就可以把这个LLM节点当作tool使用，将这个节点的tool链接到另一个正常的LLM上，就会发现，另一个LLM可以像工具一样调用它！
 4. 新增了start_workflow和end_workflow节点，你可以用这个两个节点来定义工作流的起点和终点，将你的工作流放到本项目文件夹下的workflow子文件夹，然后在本项目文件夹下点击setup_streamlit_app.bat，在streamlit的界面中，点击设置，替换为你的工作流。
-   
-# **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库** 
+
+# **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库**
 
 ## 简介
 [comfyui](https://github.com/comfyanonymous/ComfyUI)是一个极为简约的UI界面，主要用于AI绘图等基于SD模型的工作流搭建。本项目希望基于comfyui开发一套完整的用于LLM工作流搭建的节点库。可以让用户更便捷快速地搭建自己的LLM工作流，并且更方便地接入自己的SD工作流中。（图为一个智能客服的工作流，更多的工作流可以参考[workflow](workflow)文件夹）

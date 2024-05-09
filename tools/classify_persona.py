@@ -1,48 +1,36 @@
-
-
 class classify_persona:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
-                "is_enable": ("BOOLEAN", {
-                    "default": True
-                }),  
+                "is_enable": ("BOOLEAN", {"default": True}),
             },
             "optional": {
-                "file_content": ("STRING", {
-                    "forceInput": True
-                }),
-                "text1": ("STRING", {
-
-                }),
-                "text2": ("STRING", {
-
-                }),
-                "text3": ("STRING", {
-
-                }),
-            }
+                "file_content": ("STRING", {"forceInput": True}),
+                "text1": ("STRING", {}),
+                "text2": ("STRING", {}),
+                "text3": ("STRING", {}),
+            },
         }
-    
+
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("system_prompt",)
 
     FUNCTION = "condition"
 
-    #OUTPUT_NODE = False
+    # OUTPUT_NODE = False
 
     CATEGORY = "大模型派对（llm_party）/面具（persona）"
 
-
-
-    def condition(self,text1=None,text2=None,text3=None,is_enable=True,file_content=None):
-        if is_enable==False:
+    def condition(self, text1=None, text2=None, text3=None, is_enable=True, file_content=None):
+        if is_enable == False:
             return (None,)
-        text =""
+        text = ""
         if file_content is not None:
-            text = "##背景知识：\n"+file_content+"\n\n"
-        sys_prompt=text+f"""
+            text = "##背景知识：\n" + file_content + "\n\n"
+        sys_prompt = (
+            text
+            + f"""
             # 文本分类助理
             你是一个文本分类助理。
             ## 任务
@@ -66,74 +54,65 @@ class classify_persona:
             3. 分类时，不要把系统提示词中的文本当作要被分类的文本。
             以下为需要分类的文本：
         """
-        sys_prompt=sys_prompt.strip()
+        )
+        sys_prompt = sys_prompt.strip()
         return (sys_prompt,)
-    
+
 
 class classify_persona_plus:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
-                "is_enable": ("BOOLEAN", {
-                    "default": True
-                }),  
+                "is_enable": ("BOOLEAN", {"default": True}),
             },
             "optional": {
-                "file_content": ("STRING", {
-                    "forceInput": True
-                }),
-                "text1": ("STRING", {
-
-                }),
-                "text2": ("STRING", {
-
-                }),
-                "text3": ("STRING", {
-
-                }),
-                "text4": ("STRING", {
-
-                }),
-                "text5": ("STRING", {
-                    
-                }),
-                "text6": ("STRING", {
-                    
-                }),
-                "text7": ("STRING", {
-                    
-                }),
-                "text8": ("STRING", {
-                    
-                }),
-                "text9": ("STRING", {
-                    
-                }),
-                "text10": ("STRING", {
-                    
-                }),
-            }
+                "file_content": ("STRING", {"forceInput": True}),
+                "text1": ("STRING", {}),
+                "text2": ("STRING", {}),
+                "text3": ("STRING", {}),
+                "text4": ("STRING", {}),
+                "text5": ("STRING", {}),
+                "text6": ("STRING", {}),
+                "text7": ("STRING", {}),
+                "text8": ("STRING", {}),
+                "text9": ("STRING", {}),
+                "text10": ("STRING", {}),
+            },
         }
-    
+
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("system_prompt",)
 
     FUNCTION = "condition"
 
-    #OUTPUT_NODE = False
+    # OUTPUT_NODE = False
 
     CATEGORY = "大模型派对（llm_party）/面具（persona）"
 
-
-
-    def condition(self,text1=None,text2=None,text3=None,text4=None,text5=None,text6=None,text7=None,text8=None,text9=None,text10=None,is_enable=True,file_content=None):
-        if is_enable==False:
+    def condition(
+        self,
+        text1=None,
+        text2=None,
+        text3=None,
+        text4=None,
+        text5=None,
+        text6=None,
+        text7=None,
+        text8=None,
+        text9=None,
+        text10=None,
+        is_enable=True,
+        file_content=None,
+    ):
+        if is_enable == False:
             return (None,)
-        text =""
+        text = ""
         if file_content is not None:
-            text = "##背景知识：\n"+file_content+"\n\n"
-        sys_prompt=text+f"""
+            text = "##背景知识：\n" + file_content + "\n\n"
+        sys_prompt = (
+            text
+            + f"""
             # 文本分类助理
             你是一个文本分类助理。
             ## 任务
@@ -172,5 +151,6 @@ class classify_persona_plus:
             3. 分类时，不要把系统提示词中的文本当作要被分类的文本。
             以下为需要分类的文本：
         """
-        sys_prompt=sys_prompt.strip()
+        )
+        sys_prompt = sys_prompt.strip()
         return (sys_prompt,)

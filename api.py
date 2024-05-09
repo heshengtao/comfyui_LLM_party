@@ -1,25 +1,28 @@
 import io
-import os
-import websocket #NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
-import uuid
 import json
-import urllib.request
+import os
 import urllib.parse
-import streamlit as st
-from PIL import Image
+import urllib.request
+import uuid
+
 import pandas as pd
 import pygments
-from pygments.lexers import get_lexer_by_name
+import streamlit as st
+import websocket  # NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
+from PIL import Image
 from pygments.formatters import HtmlFormatter
+from pygments.lexers import get_lexer_by_name
 
 server_address = "127.0.0.1:8188"
 client_id = str(uuid.uuid4())
 
+
 def queue_prompt(prompt):
     p = {"prompt": prompt, "client_id": client_id}
-    data = json.dumps(p).encode('utf-8')
-    req =  urllib.request.Request("http://{}/prompt".format(server_address), data=data)
+    data = json.dumps(p).encode("utf-8")
+    req = urllib.request.Request("http://{}/prompt".format(server_address), data=data)
     return json.loads(urllib.request.urlopen(req).read())
+
 
 def get_image(filename, subfolder, folder_type):
     data = {"filename": filename, "subfolder": subfolder, "type": folder_type}
@@ -27,68 +30,81 @@ def get_image(filename, subfolder, folder_type):
     with urllib.request.urlopen("http://{}/view?{}".format(server_address, url_values)) as response:
         return response.read()
 
+
 def get_history(prompt_id):
     with urllib.request.urlopen("http://{}/history/{}".format(server_address, prompt_id)) as response:
         return json.loads(response.read())
 
+
 def get_all(ws, prompt):
-    prompt_id = queue_prompt(prompt)['prompt_id']
+    prompt_id = queue_prompt(prompt)["prompt_id"]
     output_images = {}
-    output_text=""
+    output_text = ""
     while True:
         out = ws.recv()
         if isinstance(out, str):
             message = json.loads(out)
-            if message['type'] == 'executing':
-                data = message['data']
-                if data['node'] is None and data['prompt_id'] == prompt_id:
-                    break #Execution is done
+            if message["type"] == "executing":
+                data = message["data"]
+                if data["node"] is None and data["prompt_id"] == prompt_id:
+                    break  # Execution is done
         else:
-            continue #previews are binary data
+            continue  # previews are binary data
 
     history = get_history(prompt_id)[prompt_id]
-    for o in history['outputs']:
-        for node_id in history['outputs']:
-            node_output = history['outputs'][node_id]
-            if 'images' in node_output:
+    for o in history["outputs"]:
+        for node_id in history["outputs"]:
+            node_output = history["outputs"][node_id]
+            if "images" in node_output:
                 images_output = []
-                for image in node_output['images']:
-                    image_data = get_image(image['filename'], image['subfolder'], image['type'])
+                for image in node_output["images"]:
+                    image_data = get_image(image["filename"], image["subfolder"], image["type"])
                     images_output.append(image_data)
                 output_images[node_id] = images_output
-            if 'response' in node_output:
-                output_text= node_output['response'][0]['content']
+            if "response" in node_output:
+                output_text = node_output["response"][0]["content"]
+
+    return output_images, output_text
 
 
-    return output_images,output_text
-
-def api(file_content="",image_input=None,file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="",positive_prompt="",negative_prompt="",workflow_path="测试画画api.json"):
+def api(
+    file_content="",
+    image_input=None,
+    file_path="",
+    img_path="",
+    system_prompt="你是一个强大的智能助手",
+    user_prompt="",
+    positive_prompt="",
+    negative_prompt="",
+    workflow_path="测试画画api.json",
+):
     global current_dir_path
-    workflow_path=workflow_path
-    WF_path=os.path.join(current_dir_path,"workflow_api", workflow_path)
-    with open(WF_path, 'r', encoding='utf-8') as f:
+    workflow_path = workflow_path
+    WF_path = os.path.join(current_dir_path, "workflow_api", workflow_path)
+    with open(WF_path, "r", encoding="utf-8") as f:
         prompt_text = f.read()
 
     prompt = json.loads(prompt_text)
-    
+
     for p in prompt:
-        #如果p的class_type是start_workflow
-        if prompt[p]['class_type'] == 'start_workflow':
+        # 如果p的class_type是start_workflow
+        if prompt[p]["class_type"] == "start_workflow":
             if file_content != "":
-                prompt[p]['inputs']["file_content"] = file_content
+                prompt[p]["inputs"]["file_content"] = file_content
             if image_input is not None:
-                prompt[p]['inputs']["image_input"] = image_input
-            prompt[p]['inputs']["file_path"] = file_path
-            prompt[p]['inputs']["img_path"] = img_path
-            prompt[p]['inputs']["system_prompt"] = system_prompt
-            prompt[p]['inputs']["user_prompt"] = user_prompt
-            prompt[p]['inputs']["positive_prompt"] = positive_prompt
-            prompt[p]['inputs']["negative_prompt"] = negative_prompt
+                prompt[p]["inputs"]["image_input"] = image_input
+            prompt[p]["inputs"]["file_path"] = file_path
+            prompt[p]["inputs"]["img_path"] = img_path
+            prompt[p]["inputs"]["system_prompt"] = system_prompt
+            prompt[p]["inputs"]["user_prompt"] = user_prompt
+            prompt[p]["inputs"]["positive_prompt"] = positive_prompt
+            prompt[p]["inputs"]["negative_prompt"] = negative_prompt
 
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
     images, res = get_all(ws, prompt)
     return images, res
+
 
 #####以下是UI界面部分代码，上面是API接口代码
 
@@ -136,7 +152,6 @@ div.stTextArea textarea:focus {
 st.markdown(button_style, unsafe_allow_html=True)
 
 
-
 language_mapping = {
     ".py": "python",
     ".js": "javascript",
@@ -150,111 +165,152 @@ language_mapping = {
     ".swift": "swift",
     # Add more mappings for other languages as needed
 }
-#如果没有'wf_path'就创造
-if 'wf_path' not in st.session_state:
-    st.session_state['wf_path'] ="测试画画app.json"
-#如果没有'system_prompt'就创造
-if 'system_prompt' not in st.session_state:
-    st.session_state['system_prompt'] ="你是一个强大的智能助手"
+# 如果没有'wf_path'就创造
+if "wf_path" not in st.session_state:
+    st.session_state["wf_path"] = "测试画画app.json"
+# 如果没有'system_prompt'就创造
+if "system_prompt" not in st.session_state:
+    st.session_state["system_prompt"] = "你是一个强大的智能助手"
+
+
 def get_current_page():
     # 安全地获取当前页面
-    return st.session_state.get('current_page', 'chat')  # 默认返回 'chat'
+    return st.session_state.get("current_page", "chat")  # 默认返回 'chat'
+
 
 def set_current_page(page_name):
     # 安全地设置当前页面
-    st.session_state['current_page'] = page_name
+    st.session_state["current_page"] = page_name
+
 
 # 初始化当前页面的会话状态（如果尚未设置）
 set_current_page(get_current_page())
 current_dir_path = os.path.dirname(os.path.realpath(__file__))
 # 创建侧边栏按钮
 if st.sidebar.button("聊天"):
-    set_current_page('chat')
+    set_current_page("chat")
 if st.sidebar.button("设置"):
-    set_current_page('settings')
-if 'chat_history' not in st.session_state:
-    st.session_state['chat_history'] = []
+    set_current_page("settings")
+if "chat_history" not in st.session_state:
+    st.session_state["chat_history"] = []
 # 使用函数来访问 'current_page'
-if get_current_page() == 'chat':
-    response='你好哇~今天你要画点什么吗？'
+if get_current_page() == "chat":
+    response = "你好哇~今天你要画点什么吗？"
     st.markdown(f"智能体: 你好哇~今天你要画点什么吗？")
     chat_history_container = st.container()  # Use a container to hold the chat history
     # 更新对话记录容器
     chat_history_container.empty()
+
     def display_chat_history():
         # 更新对话记录容器
         chat_history_container.empty()
         with chat_history_container:
-            for message in st.session_state['chat_history']:
+            for message in st.session_state["chat_history"]:
                 if message["role"] == "assistant":
-                    if message['content'] is not None and message['content'] !="" and message['content'] !="empty":
+                    if message["content"] is not None and message["content"] != "" and message["content"] != "empty":
                         st.markdown(f"智能体: {message['content']}")
                 elif message["role"] == "user":
                     st.markdown(f"你: {message['content']}")
                 elif message["role"] == "image":
-                    if message['content'] is not None:
+                    if message["content"] is not None:
                         st.markdown(f"智能体:")
-                        st.image(message['content'])
-    with st.form("Question",clear_on_submit=True):
+                        st.image(message["content"])
+
+    with st.form("Question", clear_on_submit=True):
         # 用户输入
-        user_input = st.text_area("", height=100,placeholder="让我们开始聊天吧...")
+        user_input = st.text_area("", height=100, placeholder="让我们开始聊天吧...")
         # 文件上传
-        uploaded_file = st.file_uploader("上传文件或图片", type=["png", "jpg", "jpeg", "txt", "docx", "doc", "pdf", "xlsx", "xls", 
-                                                          "csv", "py", "html", "css", "sql", "r", "swift","javascript","java","c","cpp"])
-        col3, col4= st.columns(2)
+        uploaded_file = st.file_uploader(
+            "上传文件或图片",
+            type=[
+                "png",
+                "jpg",
+                "jpeg",
+                "txt",
+                "docx",
+                "doc",
+                "pdf",
+                "xlsx",
+                "xls",
+                "csv",
+                "py",
+                "html",
+                "css",
+                "sql",
+                "r",
+                "swift",
+                "javascript",
+                "java",
+                "c",
+                "cpp",
+            ],
+        )
+        col3, col4 = st.columns(2)
         with col3:
             if st.form_submit_button("发送"):
-                st.session_state['chat_history'].append({"role": "user", "content": user_input})
+                st.session_state["chat_history"].append({"role": "user", "content": user_input})
                 file_path = ""
                 img_path = ""
                 if uploaded_file is not None:
-                    #如果上传的是照片，将文件路径传入image_path变量，否则传入file_path变量
-                    if uploaded_file.type.startswith('image'):
+                    # 如果上传的是照片，将文件路径传入image_path变量，否则传入file_path变量
+                    if uploaded_file.type.startswith("image"):
                         # 保存上传的文件
-                        with open(os.path.join(current_dir_path,"img", uploaded_file.name), "wb") as f:
+                        with open(os.path.join(current_dir_path, "img", uploaded_file.name), "wb") as f:
                             f.write(uploaded_file.getbuffer())
-                        img_path = os.path.join(current_dir_path,"img", uploaded_file.name)
+                        img_path = os.path.join(current_dir_path, "img", uploaded_file.name)
                         file_path = ""
-                        st.session_state['chat_history'].append({"role": "image", "content": uploaded_file})
+                        st.session_state["chat_history"].append({"role": "image", "content": uploaded_file})
                     else:
                         # 保存上传的文件
-                        with open(os.path.join(current_dir_path,"file", uploaded_file.name), "wb") as f:
+                        with open(os.path.join(current_dir_path, "file", uploaded_file.name), "wb") as f:
                             f.write(uploaded_file.getbuffer())
-                        file_path = os.path.join(current_dir_path,"file", uploaded_file.name)
+                        file_path = os.path.join(current_dir_path, "file", uploaded_file.name)
                         img_path = ""
                 # 调用API函数
-                images, response = api("",None,file_path, img_path,st.session_state['system_prompt'], user_input,positive_prompt="",negative_prompt="",workflow_path=str(st.session_state['wf_path']))
+                images, response = api(
+                    "",
+                    None,
+                    file_path,
+                    img_path,
+                    st.session_state["system_prompt"],
+                    user_input,
+                    positive_prompt="",
+                    negative_prompt="",
+                    workflow_path=str(st.session_state["wf_path"]),
+                )
                 # 更新对话记录
-                if response is not None and response !="" and response !="empty":           
-                    st.session_state['chat_history'].append({"role": "assistant", "content": response})
-                if images is not None:    
+                if response is not None and response != "" and response != "empty":
+                    st.session_state["chat_history"].append({"role": "assistant", "content": response})
+                if images is not None:
                     # 更新对话记录
                     for node_id in images:
                         for image_data in images[node_id]:
                             image = Image.open(io.BytesIO(image_data))
-                            st.session_state['chat_history'].append({"role": "image", "content": image})
+                            st.session_state["chat_history"].append({"role": "image", "content": image})
                 display_chat_history()
 
-        with col4: 
+        with col4:
             if st.form_submit_button("清空"):
-                st.session_state['chat_history']=[]
+                st.session_state["chat_history"] = []
                 # 更新对话记录容器
                 chat_history_container.empty()
-if get_current_page() == 'settings':
+if get_current_page() == "settings":
     st.title("设置")
     st.markdown("在这里可以设置你的设置。")
-    st.markdown("当前系统提示词（system_prompt）:"+st.session_state['system_prompt'])
-    #设置系统提示词system_prompt
-    system_prompt = st.text_area("系统提示词", height=100,placeholder="请输入你的系统提示词")
-    path1=st.session_state['wf_path']
+    st.markdown("当前系统提示词（system_prompt）:" + st.session_state["system_prompt"])
+    # 设置系统提示词system_prompt
+    system_prompt = st.text_area("系统提示词", height=100, placeholder="请输入你的系统提示词")
+    path1 = st.session_state["wf_path"]
     # 添加下拉菜单，选项为WF_path=os.path.join(current_dir_path,"workflow")文件夹下的json文件
     st.markdown(f"当前工作流文件（workflow）:{path1}")
-    _path = st.selectbox("选择一个包含start_workflow & end_workflow的工作流文件", [f for f in os.listdir(os.path.join(current_dir_path,"workflow_api")) if f.endswith('.json')])
-    #保存按钮
+    _path = st.selectbox(
+        "选择一个包含start_workflow & end_workflow的工作流文件",
+        [f for f in os.listdir(os.path.join(current_dir_path, "workflow_api")) if f.endswith(".json")],
+    )
+    # 保存按钮
     if st.button("保存"):
-        #保存_path到session_state
-        st.session_state['wf_path'] = _path
-        print(st.session_state['wf_path'])
-        #保存system_prompt到session_state
-        st.session_state['system_prompt'] = system_prompt
-        
+        # 保存_path到session_state
+        st.session_state["wf_path"] = _path
+        print(st.session_state["wf_path"])
+        # 保存system_prompt到session_state
+        st.session_state["system_prompt"] = system_prompt
