@@ -1,30 +1,34 @@
 import json
+
+import torch
 import wikipedia
 from langchain.embeddings import HuggingFaceBgeEmbeddings
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-import torch
-ebd_model=""
-bge_embeddings=""
-files_load=""
-c_size=200
-c_overlap=50
-knowledge_base=""
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+ebd_model = ""
+bge_embeddings = ""
+files_load = ""
+c_size = 200
+c_overlap = 50
+knowledge_base = ""
+
+
 def get_wikipedia(query):
-    global bge_embeddings,c_size,c_overlap
-    if bge_embeddings=="":     
+    global bge_embeddings, c_size, c_overlap
+    if bge_embeddings == "":
         # 设置语言
         wikipedia.set_lang("zh")
         # 获取特定页面的内容
         py_page = wikipedia.page(query)
-        res= py_page.content[:1000]
-        return "维基百科上的相关信息为：\n"+res
+        res = py_page.content[:1000]
+        return "维基百科上的相关信息为：\n" + res
     else:
         # 设置语言
         wikipedia.set_lang("zh")
         # 获取特定页面的内容
         py_page = wikipedia.page(query)
-        res= py_page.content
+        res = py_page.content
         # 创建一个文本分割器，将文本分割成多个段落
         text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=c_size,
@@ -41,114 +45,96 @@ def get_wikipedia(query):
         # 合并段落
         merged_text = "\n".join([document.page_content for document in similar_documents])
         # 返回合并后的文本
-        return "维基百科上的相关信息为：\n"+merged_text
-    
+        return "维基百科上的相关信息为：\n" + merged_text
+
 
 class wikipedia_tool:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
-                "query": ("STRING", {
-                    "default": "query"
-                }),
-                "is_enable": ("BOOLEAN", {
-                    "default": True
-                }),  
-                "chunk_size":("INT",{
-                    "default":200
-                }),
-                "chunk_overlap":("INT",{
-                    "default":50
-                }),      
+                "query": ("STRING", {"default": "query"}),
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "chunk_size": ("INT", {"default": 200}),
+                "chunk_overlap": ("INT", {"default": 50}),
             },
             "optional": {
-                "embedding_path": ("STRING", {
-                    "default": None
-                }),
-            }
+                "embedding_path": ("STRING", {"default": None}),
+            },
         }
-    
+
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("tool",)
 
     FUNCTION = "wikipedia"
 
-    #OUTPUT_NODE = False
+    # OUTPUT_NODE = False
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-
-
-    def wikipedia(self, query,embedding_path,chunk_size,chunk_overlap,is_enable="enable"):
-        if is_enable=="disable":
-            return (None,)        
-        global ebd_model,files_load,bge_embeddings,c_size,c_overlap,knowledge_base   
-        c_size=chunk_size
-        c_overlap=chunk_overlap
-        device="cuda" if torch.cuda.is_available() else "cpu"
-        if ebd_model=="":
-            model_kwargs = {'device': device}  # 如果您有GPU，可以设置为 'cuda'，否则使用 'cpu'
-            encode_kwargs = {'normalize_embeddings': True}  # 设置为 True 以计算余弦相似度
-        if bge_embeddings=="" and embedding_path is not None and embedding_path!="":
+    def wikipedia(self, query, embedding_path, chunk_size, chunk_overlap, is_enable="enable"):
+        if is_enable == "disable":
+            return (None,)
+        global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base
+        c_size = chunk_size
+        c_overlap = chunk_overlap
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        if ebd_model == "":
+            model_kwargs = {"device": device}  # 如果您有GPU，可以设置为 'cuda'，否则使用 'cpu'
+            encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度
+        if bge_embeddings == "" and embedding_path is not None and embedding_path != "":
             bge_embeddings = HuggingFaceBgeEmbeddings(
-                model_name=embedding_path,
-                model_kwargs=model_kwargs,
-                encode_kwargs=encode_kwargs
+                model_name=embedding_path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
             )
 
-        output=    [{
-        "type": "function",
-        "function": {
-            "name": "get_wikipedia",
-            "description": "用于查询维基百科上的相关内容",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "query": {
-                        "type": "string",
-                        "description": "需要查询的关键词，例如：python，默认查询"+str(query)
-                    }
+        output = [
+            {
+                "type": "function",
+                "function": {
+                    "name": "get_wikipedia",
+                    "description": "用于查询维基百科上的相关内容",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "query": {
+                                "type": "string",
+                                "description": "需要查询的关键词，例如：python，默认查询" + str(query),
+                            }
+                        },
+                        "required": ["query"],
+                    },
                 },
-                "required": ["query"]
             }
-        }
-    }]
-        out=json.dumps(output, ensure_ascii=False)
+        ]
+        out = json.dumps(output, ensure_ascii=False)
         return (out,)
-    
+
 
 class load_wikipedia:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
-                "query": ("STRING", {
-                    "default": "query"
-                }),
-                "is_enable": ("BOOLEAN", {
-                    "default": True
-                }),  
+                "query": ("STRING", {"default": "query"}),
+                "is_enable": ("BOOLEAN", {"default": True}),
             }
         }
-    
+
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("file_content",)
 
     FUNCTION = "wikipedia"
 
-    #OUTPUT_NODE = False
+    # OUTPUT_NODE = False
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-
-
-    def wikipedia(self, query,is_enable=True):
-        if is_enable==False:
-            return (None,)        
+    def wikipedia(self, query, is_enable=True):
+        if is_enable == False:
+            return (None,)
         # 设置语言
         wikipedia.set_lang("zh")
         # 获取特定页面的内容
         py_page = wikipedia.page(query)
-        out= py_page.content
+        out = py_page.content
         return (out,)
