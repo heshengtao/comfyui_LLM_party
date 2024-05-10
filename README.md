@@ -1,5 +1,5 @@
 <p align="right">
-   <a href="./README_ZH.md">中文</a> |  <strong>English</strong> 
+   <a href="./README_ZH.md">中文</a> |  <strong>English</strong>
 </p>
 
 ## Latest Updates
@@ -8,7 +8,7 @@
 3. Introducing a cool "Matryoshka" feature: Disable the `main_brain` attribute of an LLM node to use it as a tool. Link this node's tool to another regular LLM node, and you'll find that the second LLM can call it like a tool!
 4. New `start_workflow` and `end_workflow` nodes allow you to define the starting and ending points of a workflow. Place your workflow in the `workflow` subfolder of this project, then run `setup_streamlit_app.bat` in the project folder. In the Streamlit interface, click "Settings" and replace it with your workflow.
 
-# **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI** 
+# **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
 
 ## Introduction
 [comfyui](https://github.com/comfyanonymous/ComfyUI) is an extremely minimalist UI interface, primarily used for AI drawing and other workflows based on the SD model. This project aims to develop a complete set of nodes for LLM workflow construction based on comfyui. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.The image is a workflow of an intelligent customer service, for more workflows please refer to the [workflow](workflow) folder.
