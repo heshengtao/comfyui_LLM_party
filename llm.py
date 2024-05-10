@@ -343,13 +343,13 @@ class LLM:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "",
+                        "default": "https://api.openai.com/v1",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "",
+                        "default": "sk-XXXXX",
                     },
                 ),
                 "images": ("IMAGE", {"forceInput": True}),
