@@ -631,7 +631,9 @@ class LLM_local:
         self.id = hash(str(self))
         global instances
         instances.append(self)
-        # 构建prompt.json的绝对路径
+        # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
+        current_dir_path = os.path.dirname(os.path.abspath(__file__))
+        os.makedirs(os.path.join(current_dir_path, "temp"), exist_ok=True)
         self.prompt_path = os.path.join(current_dir_path, "temp", str(self.id) + ".json")
         # 如果文件不存在，创建prompt.json文件，存在就覆盖文件
         if not os.path.exists(self.prompt_path):
