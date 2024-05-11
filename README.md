@@ -15,7 +15,7 @@
 
 ![图片](img/智能助手.png)
 
-# User Guide
+## User Guide
 [Building a Modular AI with ComfyUI×LLM: A Step-by-Step Tutorial (Super Easy!)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
 
 ## Features
