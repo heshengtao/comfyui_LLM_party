@@ -80,7 +80,7 @@ class wikipedia_tool:
         c_overlap = chunk_overlap
         device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
         if ebd_model == "":
-            model_kwargs = {"device": device} 
+            model_kwargs = {"device": device}
             encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度
         if bge_embeddings == "" and embedding_path is not None and embedding_path != "":
             bge_embeddings = HuggingFaceBgeEmbeddings(

@@ -682,9 +682,13 @@ class LLM_local:
                 "is_reload": (["enable", "disable"], {"default": "disable"}),
                 "main_brain": (["enable", "disable"], {"default": "enable"}),
                 "device": (
-                    ["cuda", "cuda-fp16","mps", "cpu"],
+                    ["cuda", "cuda-fp16", "mps", "cpu"],
                     {
-                        "default": "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu"),
+                        "default": (
+                            "cuda"
+                            if torch.cuda.is_available()
+                            else ("mps" if torch.backends.mps.is_available() else "cpu")
+                        ),
                     },
                 ),
                 "max_length": ("INT", {"default": 512, "min": 256, "step": 256}),
@@ -938,7 +942,9 @@ class LLM_local:
                             ).float()
                         elif device == "cuda-fp16":
                             llama_device = "cuda"
-                            llama_model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).half().cuda()
+                            llama_model = (
+                                AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).half().cuda()
+                            )
                         elif device == "mps":
                             llama_device = "mps"
                             llama_model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).mps()
@@ -982,10 +988,8 @@ class LLM_local:
                             )
                         elif device == "mps":
                             qwen_device = "mps"
-                            qwen_model = (
-                                AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).mps()
-                            )
-                        qwen_model=qwen_model.eval()
+                            qwen_model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).mps()
+                        qwen_model = qwen_model.eval()
                     qwen_model.generation_config = GenerationConfig.from_pretrained(model_path, trust_remote_code=True)
                     response, history = llm_chat(
                         qwen_model, qwen_tokenizer, user_prompt, history, qwen_device, max_length

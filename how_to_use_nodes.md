@@ -42,7 +42,7 @@
 1. Can convert all web page content in a url into an md format output.
 2. The output is a string that contains all the text information on the web page.
 
-### Load_Wikipedia Node 
+### Load_Wikipedia Node
 1. Can return all content related to the question in Wikipedia.
 
 ### Load_Persona Node
