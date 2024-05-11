@@ -20,7 +20,7 @@
 
 ## Features
 1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
-2. Supports API integration or local large model integration. Modular implementation for tool invocation.
+2. Supports API integration or local large model integration. Modular implementation for tool invocation.When entering the base_url, please use a URL that ends with `/v1/`.
 3. Local knowledge base integration with RAG support.
 4. Ability to invoke code interpreters.
 5. Enables online queries, including Google search support.
