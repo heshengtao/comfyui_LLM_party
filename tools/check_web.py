@@ -83,9 +83,9 @@ class check_web_tool:
         global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base
         c_size = chunk_size
         c_overlap = chunk_overlap
-        device = "cuda" if torch.cuda.is_available() else "cpu"
+        device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
         if ebd_model == "":
-            model_kwargs = {"device": device}  # 如果您有GPU，可以设置为 'cuda'，否则使用 'cpu'
+            model_kwargs = {"device": device}  
             encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度
         if bge_embeddings == "" and embedding_path is not None and embedding_path != "":
             bge_embeddings = HuggingFaceBgeEmbeddings(

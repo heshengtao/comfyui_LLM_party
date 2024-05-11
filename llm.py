@@ -682,9 +682,9 @@ class LLM_local:
                 "is_reload": (["enable", "disable"], {"default": "disable"}),
                 "main_brain": (["enable", "disable"], {"default": "enable"}),
                 "device": (
-                    ["cuda", "cuda-float16", "cuda-int8", "cuda-int4", "cpu"],
+                    ["cuda", "cuda-fp16","mps", "cpu"],
                     {
-                        "default": "cuda" if torch.cuda.is_available() else "cpu",
+                        "default": "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu"),
                     },
                 ),
                 "max_length": ("INT", {"default": 512, "min": 256, "step": 256}),
@@ -900,18 +900,12 @@ class LLM_local:
                     if glm_model == "":
                         if device == "cuda":
                             glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).cuda()
-                        elif device == "cuda-float16":
+                        elif device == "cuda-fp16":
                             glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().cuda()
-                        elif device == "cuda-int8":
-                            glm_model = (
-                                AutoModel.from_pretrained(model_path, trust_remote_code=True).half().quantize(8).cuda()
-                            )
-                        elif device == "cuda-int4":
-                            glm_model = (
-                                AutoModel.from_pretrained(model_path, trust_remote_code=True).half().quantize(4).cuda()
-                            )
-                        else:
+                        elif device == "cpu":
                             glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).float()
+                        elif device == "mps":
+                            glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).mps()
                         glm_model = glm_model.eval()
                     response, history = glm_model.chat(
                         glm_tokenizer, user_prompt, history, temperature=temperature, max_length=max_length, role="user"
@@ -929,22 +923,25 @@ class LLM_local:
                                 glm_tokenizer, result, history=history, role="observation"
                             )
                 elif model_type == "llama":
-                    llama_device = "cuda" if torch.cuda.is_available() else "cpu"
                     if llama_tokenizer == "":
                         llama_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
                     if llama_model == "":
                         if device == "cuda":
+                            llama_device = "cuda"
                             llama_model = AutoModelForCausalLM.from_pretrained(
                                 model_path, trust_remote_code=True, device_map="cuda"
                             )
                         elif device == "cpu":
+                            llama_device = "cpu"
                             llama_model = AutoModelForCausalLM.from_pretrained(
                                 model_path, trust_remote_code=True
                             ).float()
-                        else:
-                            llama_model = (
-                                AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).half().cuda()
-                            )
+                        elif device == "cuda-fp16":
+                            llama_device = "cuda"
+                            llama_model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).half().cuda()
+                        elif device == "mps":
+                            llama_device = "mps"
+                            llama_model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).mps()
                         llama_model = llama_model.eval()
                     response, history = llm_chat(
                         llama_model, llama_tokenizer, user_prompt, history, llama_device, max_length
@@ -963,25 +960,32 @@ class LLM_local:
                             llama_model, llama_tokenizer, result, history, llama_device, max_length, role="observation"
                         )
                 elif model_type == "Qwen":
-                    qwen_device = "cuda" if torch.cuda.is_available() else "cpu"
                     if qwen_tokenizer == "":
                         qwen_tokenizer = AutoTokenizer.from_pretrained(
                             tokenizer_path, revision="master", trust_remote_code=True
                         )
                     if qwen_model == "":
                         if device == "cuda":
+                            qwen_device = "cuda"
                             qwen_model = AutoModelForCausalLM.from_pretrained(
                                 model_path, trust_remote_code=True, device_map="cuda"
                             )
                         elif device == "cpu":
+                            qwen_device = "cpu"
                             qwen_model = AutoModelForCausalLM.from_pretrained(
                                 model_path, trust_remote_code=True
                             ).float()
-                        else:
+                        elif device == "cuda-fp16":
+                            qwen_device = "cuda"
                             qwen_model = (
                                 AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).half().cuda()
                             )
-                        qwen_model.eval()
+                        elif device == "mps":
+                            qwen_device = "mps"
+                            qwen_model = (
+                                AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).mps()
+                            )
+                        qwen_model=qwen_model.eval()
                     qwen_model.generation_config = GenerationConfig.from_pretrained(model_path, trust_remote_code=True)
                     response, history = llm_chat(
                         qwen_model, qwen_tokenizer, user_prompt, history, qwen_device, max_length
@@ -1011,8 +1015,12 @@ class LLM_local:
                     del llama_tokenizer
                     del qwen_model
                     del qwen_tokenizer
-                    torch.cuda.empty_cache()
-                    gc.collect()
+                    if device == "cuda" or device == "cuda-fp16":
+                        torch.cuda.empty_cache()
+                        gc.collect()
+                    # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
+                    elif device == "cpu" or device == "mps":
+                        gc.collect()
                     glm_tokenizer = ""
                     glm_model = ""
                     llama_tokenizer = ""

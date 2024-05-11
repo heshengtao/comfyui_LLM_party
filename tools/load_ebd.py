@@ -4,6 +4,7 @@ import requests
 from langchain.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+import torch
 
 ebd_model = ""
 bge_embeddings = ""
@@ -28,7 +29,7 @@ class ebd_tool:
                 "path": ("STRING", {"default": None}),
                 "is_enable": (["enable", "disable"], {"default": "enable"}),
                 "file_content": ("STRING", {"forceInput": True}),
-                "device": (["cuda", "cpu"], {"default": "cuda"}),
+                "device": (["cuda","mps", "cpu"], {"default": "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")}),
                 "chunk_size": ("INT", {"default": 200}),
                 "chunk_overlap": ("INT", {"default": 50}),
                 "is_locked": (["enable", "disable"], {"default": "disable"}),
@@ -45,7 +46,7 @@ class ebd_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, path, file_content, chunk_size, chunk_overlap, is_locked, is_enable="enable", device="cuda"):
+    def file(self, path, file_content, chunk_size, chunk_overlap, is_locked,device, is_enable="enable"):
         if is_enable == "disable":
             return (None,)
         global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base
@@ -53,7 +54,7 @@ class ebd_tool:
         c_overlap = chunk_overlap
         files_load = file_content
         if ebd_model == "":
-            model_kwargs = {"device": device}  # 如果您有GPU，可以设置为 'cuda'，否则使用 'cpu'
+            model_kwargs = {"device": device}  
             encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度
         if bge_embeddings == "":
             bge_embeddings = HuggingFaceBgeEmbeddings(
@@ -95,7 +96,7 @@ class load_embeddings:
                 "question": ("STRING", {"default": "question"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "file_content": ("STRING", {"forceInput": True}),
-                "device": (["cuda", "cpu"], {"default": "cuda"}),
+                "device": (["cuda","mps","cpu"], {"default": "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")}),
                 "chunk_size": ("INT", {"default": 200}),
                 "chunk_overlap": ("INT", {"default": 50}),
                 "is_locked": (["enable", "disable"], {"default": "disable"}),
@@ -112,7 +113,7 @@ class load_embeddings:
 
     CATEGORY = "大模型派对（llm_party）/模型（model）"
 
-    def file(self, path, question, file_content, chunk_size, chunk_overlap, is_locked, is_enable=True, device="cuda"):
+    def file(self, path, question, file_content, chunk_size, chunk_overlap, is_locked,device, is_enable=True):
         if is_enable == False:
             return (None,)
         global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base
@@ -120,7 +121,7 @@ class load_embeddings:
         c_overlap = chunk_overlap
         files_load = file_content
         if ebd_model == "":
-            model_kwargs = {"device": device}  # 如果您有GPU，可以设置为 'cuda'，否则使用 'cpu'
+            model_kwargs = {"device": device}  
             encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度
         if bge_embeddings == "":
             bge_embeddings = HuggingFaceBgeEmbeddings(
