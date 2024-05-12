@@ -3,4 +3,4 @@ google_api_key = google_api_key_put_here
 cse_id = Google_cse_id_put_here
 openai_api_key = sk-XXXXX
 base_url = https://api.openai.com/v1/
-imgbb_api=XXXX
+imgbb_api=
