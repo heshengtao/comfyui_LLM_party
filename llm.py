@@ -946,24 +946,28 @@ class LLM_local:
                 elif model_type == "llama":
                     if llama_tokenizer == "":
                         llama_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
+                    if device == "cuda":
+                        llama_device = "cuda"
+                    elif device == "cuda-fp16":
+                        llama_device = "cuda"
+                    elif device == "cpu":
+                        llama_device = "cpu"
+                    elif device == "mps":
+                        llama_device = "mps"
                     if llama_model == "":
                         if device == "cuda":
-                            llama_device = "cuda"
                             llama_model = AutoModelForCausalLM.from_pretrained(
                                 model_path, trust_remote_code=True, device_map="cuda"
                             )
                         elif device == "cpu":
-                            llama_device = "cpu"
                             llama_model = AutoModelForCausalLM.from_pretrained(
                                 model_path, trust_remote_code=True
                             ).float()
                         elif device == "cuda-fp16":
-                            llama_device = "cuda"
                             llama_model = (
                                 AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).half().cuda()
                             )
                         elif device == "mps":
-                            llama_device = "mps"
                             llama_model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).mps()
                         llama_model = llama_model.eval()
                     response, history = llm_chat(
@@ -987,24 +991,28 @@ class LLM_local:
                         qwen_tokenizer = AutoTokenizer.from_pretrained(
                             tokenizer_path, revision="master", trust_remote_code=True
                         )
+                    if device == "cuda":
+                        qwen_device = "cuda"
+                    elif device == "cuda-fp16":
+                        qwen_device = "cuda"
+                    elif device == "cpu":
+                        qwen_device = "cpu"
+                    elif device == "mps":
+                        qwen_device = "mps"
                     if qwen_model == "":
                         if device == "cuda":
-                            qwen_device = "cuda"
                             qwen_model = AutoModelForCausalLM.from_pretrained(
                                 model_path, trust_remote_code=True, device_map="cuda"
                             )
                         elif device == "cpu":
-                            qwen_device = "cpu"
                             qwen_model = AutoModelForCausalLM.from_pretrained(
                                 model_path, trust_remote_code=True
                             ).float()
                         elif device == "cuda-fp16":
-                            qwen_device = "cuda"
                             qwen_model = (
                                 AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).half().cuda()
                             )
                         elif device == "mps":
-                            qwen_device = "mps"
                             qwen_model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).mps()
                         qwen_model = qwen_model.eval()
                     qwen_model.generation_config = GenerationConfig.from_pretrained(model_path, trust_remote_code=True)
