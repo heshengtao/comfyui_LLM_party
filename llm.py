@@ -553,7 +553,7 @@ class LLM:
                                 },
                             },
                         ]
-                        user_prompt = json.dumps(img_json, ensure_ascii=False, indent=4)
+                        user_prompt = img_json
                     else:
                         i = 255.0 * images[0].cpu().numpy()
                         img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
@@ -576,13 +576,13 @@ class LLM:
                         img_json = [
                             {"type": "text", "text": user_prompt},
                             {
-                                "type": "image_url",
-                                "image_url": {
-                                    "url": img_url,
-                                },
+                            "type": "image_url",
+                            "image_url": {
+                                "url": img_url,
+                            },
                             },
                         ]
-                        user_prompt = json.dumps(img_json, ensure_ascii=False, indent=4)
+                        user_prompt = img_json
 
                 response, history = chat.send(user_prompt)
                 print(response)
