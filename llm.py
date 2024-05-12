@@ -14,8 +14,6 @@ import numpy as np
 import openai
 import requests
 import torch
-from langchain_community.vectorstores import FAISS
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 from PIL import Image
 from transformers import (
     AutoModel,
