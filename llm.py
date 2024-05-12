@@ -536,34 +536,53 @@ class LLM:
                 if images is not None:
                     if imgbb_api_key == "" or imgbb_api_key is None:
                         imgbb_api_key = api_keys.get("imgbb_api")
-                    i = 255.0 * images[0].cpu().numpy()
-                    img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
-                    # 将图片保存到缓冲区
-                    buffered = io.BytesIO()
-                    img.save(buffered, format="PNG")
-                    # 将图片编码为base64
-                    img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
-                    url = "https://api.imgbb.com/1/upload"
-                    payload = {"key": imgbb_api_key, "image": img_str}
-                    # 向API发送POST请求
-                    response = requests.post(url, data=payload)
-                    # 检查请求是否成功
-                    if response.status_code == 200:
-                        # 解析响应以获取图片URL
-                        result = response.json()
-                        img_url = result["data"]["url"]
-                    else:
-                        return "Error: " + response.text
-                    img_json = [
-                        {"type": "text", "text": user_prompt},
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": img_url,
+                    if imgbb_api_key == "" or imgbb_api_key is None:
+                        i = 255.0 * images[0].cpu().numpy()
+                        img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+                        # 将图片保存到缓冲区
+                        buffered = io.BytesIO()
+                        img.save(buffered, format="PNG")
+                        # 将图片编码为base64
+                        img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+                        img_json = [
+                            {"type": "text", "text": user_prompt},
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": f"data:image/jpeg;base64,{img_str}"
+                                },
                             },
-                        },
-                    ]
-                    user_prompt = json.dumps(img_json, ensure_ascii=False, indent=4)
+                        ]
+                        user_prompt = json.dumps(img_json, ensure_ascii=False, indent=4)
+                    else:
+                        i = 255.0 * images[0].cpu().numpy()
+                        img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+                        # 将图片保存到缓冲区
+                        buffered = io.BytesIO()
+                        img.save(buffered, format="PNG")
+                        # 将图片编码为base64
+                        img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+                        url = "https://api.imgbb.com/1/upload"
+                        payload = {"key": imgbb_api_key, "image": img_str}
+                        # 向API发送POST请求
+                        response = requests.post(url, data=payload)
+                        # 检查请求是否成功
+                        if response.status_code == 200:
+                            # 解析响应以获取图片URL
+                            result = response.json()
+                            img_url = result["data"]["url"]
+                        else:
+                            return "Error: " + response.text
+                        img_json = [
+                            {"type": "text", "text": user_prompt},
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": img_url,
+                                },
+                            },
+                        ]
+                        user_prompt = json.dumps(img_json, ensure_ascii=False, indent=4)
 
                 response, history = chat.send(user_prompt)
                 print(response)
