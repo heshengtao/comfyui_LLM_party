@@ -5,7 +5,7 @@ import { ComfyWidgets } from "../../scripts/widgets.js";
 app.registerExtension({
 	name: "party.ShowText",
 	async beforeRegisterNodeDef(nodeType, nodeData, app) {
-		if (nodeData.name === "show_text_party") {
+		if (nodeData.name === "show_text_party" || nodeData.name === "About_us") {
 			function populate(text) {
 				if (this.widgets) {
 					for (let i = 1; i < this.widgets.length; i++) {

@@ -49,7 +49,7 @@ from .tools.load_persona import load_persona
 from .tools.logic import string_logic
 from .tools.new_interpreter import new_interpreter, new_interpreter_tool
 from .tools.search_web import google_tool, search_web
-from .tools.show_text import show_text_party
+from .tools.show_text import show_text_party,About_us
 from .tools.tool_combine import tool_combine, tool_combine_plus
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import workflow_transfer
@@ -1090,6 +1090,7 @@ NODE_CLASS_MAPPINGS = {
     "workflow_transfer": workflow_transfer,
     "classify_persona_plus": classify_persona_plus,
     "classify_function_plus": classify_function_plus,
+    "About_us":About_us,
 }
 
 
@@ -1132,6 +1133,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "workflow_transfer": "工作流中转器(workflow_transfer)",
     "classify_persona_plus": "超大分类器面具(classify_persona_plus)",
     "classify_function_plus": "超大分类器函数(classify_function_plus)",
+    "About_us": "关于我们(About_us)",
 }
 
 if __name__ == "__main__":

@@ -42,7 +42,6 @@ class About_us:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "text": ("STRING", {"forceInput": True}),
             },
             "hidden": {
                 "unique_id": "UNIQUE_ID",
@@ -56,9 +55,18 @@ class About_us:
     OUTPUT_NODE = True
     OUTPUT_IS_LIST = (True,)
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）"
 
-    def notify(self, text, unique_id=None, extra_pnginfo=None):
+    def notify(self, unique_id=None, extra_pnginfo=None):
+        text = [f'''
+This is an easter egg node of the project.
+Large Model Party (llm_party) 
+Project Initiator: heshengtao 
+Project URL: https://github.com/heshengtao/comfyui_LLM_party 
+Project Media Channel: https://space.bilibili.com/26978344?spm_id_from=333.1007.0.0
+Special thanks to the following project contributors: 
+1. Alexander Piskun: Thank you for your contributions to the project regarding cross-platform and GPU chip adaptation!
+        '''.strip()]
         if unique_id is not None and extra_pnginfo is not None:
             if not isinstance(extra_pnginfo, list):
                 print("Error: extra_pnginfo is not a list")
@@ -71,6 +79,6 @@ class About_us:
                     None,
                 )
                 if node:
+                    # 直接赋值，不进行转换
                     node["widgets_values"] = [text]
-
         return {"ui": {"text": text}, "result": (text,)}
