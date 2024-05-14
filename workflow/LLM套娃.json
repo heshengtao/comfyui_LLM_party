@@ -1,43 +1,7 @@
 {
-  "last_node_id": 11,
-  "last_link_id": 13,
+  "last_node_id": 15,
+  "last_link_id": 23,
   "nodes": [
-    {
-      "id": 3,
-      "type": "time_tool",
-      "pos": [
-        480,
-        250
-      ],
-      "size": {
-        "0": 315,
-        "1": 82
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            5
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "time_tool"
-      },
-      "widgets_values": [
-        "Asia/Shanghai",
-        "enable"
-      ],
-      "color": "#323",
-      "bgcolor": "#535"
-    },
     {
       "id": 7,
       "type": "tool_combine",
@@ -56,7 +20,7 @@
         {
           "name": "tool1",
           "type": "STRING",
-          "link": 9,
+          "link": 22,
           "widget": {
             "name": "tool1"
           },
@@ -65,7 +29,7 @@
         {
           "name": "tool2",
           "type": "STRING",
-          "link": 10,
+          "link": null,
           "widget": {
             "name": "tool2"
           },
@@ -74,7 +38,7 @@
         {
           "name": "tool3",
           "type": "STRING",
-          "link": null,
+          "link": 23,
           "widget": {
             "name": "tool3"
           },
@@ -106,40 +70,48 @@
       "bgcolor": "#593930"
     },
     {
-      "id": 9,
-      "type": "weather_tool",
+      "id": 11,
+      "type": "show_text_party",
       "pos": [
-        480,
-        780
+        2242,
+        280
       ],
       "size": {
-        "0": 315,
-        "1": 82
+        "0": 317.6808776855469,
+        "1": 96.57373809814453
       },
       "flags": {},
-      "order": 1,
+      "order": 6,
       "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 13,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
       "outputs": [
         {
-          "name": "tool",
+          "name": "STRING",
           "type": "STRING",
-          "links": [
-            11
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
         }
       ],
       "properties": {
-        "Node name for S&R": "weather_tool"
+        "Node name for S&R": "show_text_party"
       },
       "widgets_values": [
-        "上海市",
-        "enable"
+        "",
+        "当前北京时间为 2024 年 5 月 14 日 17 时 46 分 59 秒，明天北京的天气预报如下：\n- 白天天气：阴，气温 31°C，风向北风，风力等级4\n- 夜间天气：多云，气温 15°C，风向北风，风力等级4\n\n如有其他问题，欢迎继续提问。"
       ],
-      "color": "#323",
-      "bgcolor": "#535"
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
       "id": 1,
@@ -231,28 +203,115 @@
       "bgcolor": "#335"
     },
     {
-      "id": 6,
-      "type": "LLM_local",
+      "id": 3,
+      "type": "time_tool",
       "pos": [
-        840,
-        240
+        476,
+        250
       ],
       "size": {
-        "0": 410,
-        "1": 454
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "time_tool"
+      },
+      "widgets_values": [
+        "Asia/Shanghai",
+        "enable"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 9,
+      "type": "weather_tool",
+      "pos": [
+        480,
+        780
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "weather_tool"
+      },
+      "widgets_values": [
+        "上海市",
+        "enable"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 14,
+      "type": "LLM",
+      "pos": [
+        851,
+        229
+      ],
+      "size": {
+        "0": 434,
+        "1": 467.666748046875
       },
       "flags": {},
       "order": 2,
       "mode": 0,
       "inputs": [
         {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
           "name": "tools",
           "type": "STRING",
-          "link": 5,
+          "link": 18,
           "widget": {
             "name": "tools"
           },
           "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
         },
         {
           "name": "file_content",
@@ -268,7 +327,7 @@
         {
           "name": "assistant_response",
           "type": "STRING",
-          "links": null,
+          "links": [],
           "shape": 3,
           "label": "assistant_response",
           "slot_index": 0
@@ -284,7 +343,7 @@
           "name": "tool",
           "type": "STRING",
           "links": [
-            9
+            22
           ],
           "shape": 3,
           "label": "tool",
@@ -292,52 +351,66 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "LLM_local"
+        "Node name for S&R": "LLM"
       },
       "widgets_values": [
         "你一个强大的人工智能助手。用来查时间",
         "",
-        "GLM",
-        "D:\\AI\\mychat\\model\\chatglm3-6b\\",
-        "D:\\AI\\mychat\\model\\chatglm3-6b\\",
+        "gpt-3.5-turbo-0125",
         0.7,
         "disable",
         "disable",
         "disable",
         "disable",
-        "disable",
-        "cuda",
-        1024,
+        2048,
+        "",
+        "",
+        "",
         "",
         "",
         ""
       ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
+      "color": "#223",
+      "bgcolor": "#335"
     },
     {
-      "id": 8,
-      "type": "LLM_local",
+      "id": 15,
+      "type": "LLM",
       "pos": [
-        830,
-        770
+        854,
+        777
       ],
       "size": {
-        "0": 420,
-        "1": 454
+        "0": 432.3333740234375,
+        "1": 475.0001220703125
       },
       "flags": {},
       "order": 3,
       "mode": 0,
       "inputs": [
         {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
           "name": "tools",
           "type": "STRING",
-          "link": 11,
+          "link": 20,
           "widget": {
             "name": "tools"
           },
           "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
         },
         {
           "name": "file_content",
@@ -353,7 +426,7 @@
         {
           "name": "assistant_response",
           "type": "STRING",
-          "links": null,
+          "links": [],
           "shape": 3,
           "label": "assistant_response",
           "slot_index": 0
@@ -369,7 +442,7 @@
           "name": "tool",
           "type": "STRING",
           "links": [
-            10
+            23
           ],
           "shape": 3,
           "label": "tool",
@@ -377,113 +450,36 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "LLM_local"
+        "Node name for S&R": "LLM"
       },
       "widgets_values": [
         "你一个强大的人工智能助手。用来查天气",
         "",
-        "GLM",
-        "D:\\AI\\mychat\\model\\chatglm3-6b\\",
-        "D:\\AI\\mychat\\model\\chatglm3-6b\\",
+        "gpt-3.5-turbo-0125",
         0.7,
         "disable",
         "disable",
         "disable",
         "disable",
-        "disable",
-        "cuda",
-        1024,
+        2048,
+        "",
+        "",
+        "",
         "",
         "",
         ""
       ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 11,
-      "type": "show_text_party",
-      "pos": [
-        2242,
-        280
-      ],
-      "size": [
-        317.6808648227661,
-        96.5737376567746
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 13,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        "",
-        "根据查询结果，当前北京时间是2024-05-08 22:23:20.903164+08:00。明天北京的天气预报为多云，气温最高为30摄氏度，最低为16摄氏度。"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
+      "color": "#223",
+      "bgcolor": "#335"
     }
   ],
   "links": [
     [
-      5,
-      3,
-      0,
-      6,
-      0,
-      "STRING"
-    ],
-    [
       8,
       7,
       0,
       1,
       1,
-      "STRING"
-    ],
-    [
-      9,
-      6,
-      2,
-      7,
-      0,
-      "STRING"
-    ],
-    [
-      10,
-      8,
-      2,
-      7,
-      1,
-      "STRING"
-    ],
-    [
-      11,
-      9,
-      0,
-      8,
-      0,
       "STRING"
     ],
     [
@@ -492,6 +488,38 @@
       0,
       11,
       0,
+      "STRING"
+    ],
+    [
+      18,
+      3,
+      0,
+      14,
+      1,
+      "STRING"
+    ],
+    [
+      20,
+      9,
+      0,
+      15,
+      1,
+      "STRING"
+    ],
+    [
+      22,
+      14,
+      2,
+      7,
+      0,
+      "STRING"
+    ],
+    [
+      23,
+      15,
+      2,
+      7,
+      2,
       "STRING"
     ]
   ],
