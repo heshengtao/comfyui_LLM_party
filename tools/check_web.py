@@ -61,6 +61,14 @@ class check_web_tool:
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "chunk_size": ("INT", {"default": 200}),
                 "chunk_overlap": ("INT", {"default": 50}),
+                "device": (
+                    ["auto","cuda", "mps", "cpu"],
+                    {
+                        "default": (
+                            "auto"
+                        )
+                    },
+                ),
             },
             "optional": {
                 "web_url": ("STRING", {}),
@@ -77,13 +85,14 @@ class check_web_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def read_web(self, chunk_size, chunk_overlap, is_enable=True, web_url=None, embedding_path=None):
+    def read_web(self, chunk_size, chunk_overlap,device, is_enable=True, web_url=None, embedding_path=None):
         if is_enable == False:
             return (None,)
         global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base
         c_size = chunk_size
         c_overlap = chunk_overlap
-        device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
+        if device=="auto":
+            device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
         if ebd_model == "":
             model_kwargs = {"device": device}
             encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度

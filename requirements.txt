@@ -19,3 +19,5 @@ optimum
 pdfplumber
 wikipedia
 arxiv
+accelerate
+bitsandbytes

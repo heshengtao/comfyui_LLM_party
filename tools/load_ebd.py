@@ -30,12 +30,10 @@ class ebd_tool:
                 "is_enable": (["enable", "disable"], {"default": "enable"}),
                 "file_content": ("STRING", {"forceInput": True}),
                 "device": (
-                    ["cuda", "mps", "cpu"],
+                    ["auto","cuda", "mps", "cpu"],
                     {
                         "default": (
-                            "cuda"
-                            if torch.cuda.is_available()
-                            else ("mps" if torch.backends.mps.is_available() else "cpu")
+                            "auto"
                         )
                     },
                 ),
@@ -59,6 +57,8 @@ class ebd_tool:
         if is_enable == "disable":
             return (None,)
         global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base
+        if device == "auto":
+            device ="cuda"if torch.cuda.is_available()else ("mps" if torch.backends.mps.is_available() else "cpu")
         c_size = chunk_size
         c_overlap = chunk_overlap
         files_load = file_content
@@ -106,12 +106,10 @@ class load_embeddings:
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "file_content": ("STRING", {"forceInput": True}),
                 "device": (
-                    ["cuda", "mps", "cpu"],
+                    ["auto","cuda", "mps", "cpu"],
                     {
                         "default": (
-                            "cuda"
-                            if torch.cuda.is_available()
-                            else ("mps" if torch.backends.mps.is_available() else "cpu")
+                            "auto"
                         )
                     },
                 ),
@@ -135,6 +133,9 @@ class load_embeddings:
         if is_enable == False:
             return (None,)
         global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base
+        if device == "auto":
+            device ="cuda"if torch.cuda.is_available()else ("mps" if torch.backends.mps.is_available() else "cpu")
+        c_size = chunk_size
         c_size = chunk_size
         c_overlap = chunk_overlap
         files_load = file_content
