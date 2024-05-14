@@ -3,10 +3,11 @@
 </p>
 
 ## Latest Updates
-1. A new workflow intermediary has been added, which allows your workflow to call other workflows!
-2. Added a omnipotent interpreter node that allows the large model to execute any task. The large model operates within a virtual environment, downloading necessary third-party libraries and executing generated code. Please use this tool with caution, as the large model gains the ability to control your computer for any task!
-3. Introducing a cool "Matryoshka" feature: Disable the `main_brain` attribute of an LLM node to use it as a tool. Link this node's tool to another regular LLM node, and you'll find that the second LLM can call it like a tool!
-4. New `start_workflow` and `end_workflow` nodes allow you to define the starting and ending points of a workflow. Place your workflow in the `workflow` subfolder of this project, then run `setup_streamlit_app.bat` in the project folder. In the Streamlit interface, click "Settings" and replace it with your workflow.
+1. Supported the visual features of GPT-4O!
+2. A new workflow intermediary has been added, which allows your workflow to call other workflows!
+3. Added a omnipotent interpreter node that allows the large model to execute any task. The large model operates within a virtual environment, downloading necessary third-party libraries and executing generated code. Please use this tool with caution, as the large model gains the ability to control your computer for any task!
+4. Introducing a cool "Matryoshka" feature: Disable the `main_brain` attribute of an LLM node to use it as a tool. Link this node's tool to another regular LLM node, and you'll find that the second LLM can call it like a tool!
+5. New `start_workflow` and `end_workflow` nodes allow you to define the starting and ending points of a workflow. Place your workflow in the `workflow` subfolder of this project, then run `setup_streamlit_app.bat` in the project folder. In the Streamlit interface, click "Settings" and replace it with your workflow.
 
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
 
