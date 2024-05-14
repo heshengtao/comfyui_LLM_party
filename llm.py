@@ -489,7 +489,11 @@ class LLM:
                 else:
                     openai.api_key = os.environ.get("OPENAI_API_KEY")
                 if base_url != "":
-                    openai.base_url = base_url
+                    #如果以/结尾
+                    if base_url[-1] == "/":
+                        openai.base_url = base_url
+                    else:
+                        openai.base_url = base_url + "/"
                 elif api_keys.get("base_url") != "":
                     openai.base_url = api_keys.get("base_url")
                 else:

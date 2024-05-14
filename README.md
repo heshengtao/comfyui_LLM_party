@@ -51,13 +51,11 @@ Or install using one of the following methods:
 ### Method 2:
 1. Navigate to the `custom_nodes` subfolder under the ComfyUI root folder.
 2. Clone this repository with `git clone https://github.com/heshengtao/comfyui_LLM_party.git`.
-3. Copy the word embedding model to the model folder, [click the link](https://huggingface.co/BAAI/bge-large-zh/tree/main) to download the model.
 
 ### Method 3:
 1. Click `CODE` in the upper right corner.
 2. Click `download zip`.
 3. Unzip the downloaded package into the `custom_nodes` subfolder under the ComfyUI root folder.
-4. Copy the word embedding model to the model folder, [click the link](https://huggingface.co/BAAI/bge-large-zh/tree/main) to download the model.
 
 ## Environment Deployment
 1. Navigate to the `comfyui_LLM_party` project folder.
