@@ -12,7 +12,7 @@
 7. is_tools_in_sys_prompt determines whether the information of tools will be input into the system prompts.
 8. is_locked can lock the results of the previous round of conversation, allowing the large model to directly return the answer from the previous round of conversation.
 9. main_brain determines whether the large model is the model that interfaces with the user. If disabled, the LLM node can serve as a tool for another LLM node.
-10. imgbb_api_key can input imgbb's pi_key, and LLM will adapt to GPT4's visual capabilities.
+10. LLM is compatible with GPT-4’s visual features. The imgbb_api_key can be entered with imgbb’s API key. After filling it in, your image will be input into GPT in URL format. If not filled, it will be input in the form of image encoding.
 
 ### LLM_Local Node
 1. Currently supports GLM/Llama/Qwen, but only GLM's tool calling is perfectly adapted, the other two require a large parameter version to call tools normally.

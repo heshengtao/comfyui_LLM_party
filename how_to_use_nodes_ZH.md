@@ -12,7 +12,7 @@
 7. is_tools_in_sys_prompt决定了tools的信息是否会输入到系统提示词中。
 8. is_locked可以锁住上轮对话的结果，让大模型直接返回上轮对话中的回答。
 9. main_brain决定了大模型是不是与用户对接的模型，禁用后，LLM节点可以作为另一个LLM节点的一个工具。
-10. imgbb_api_key可以输入imgbb的pi_key，LLM将适配GPT4的视觉功能。
+10. LLM适配GPT4的视觉功能，imgbb_api_key可以输入imgbb的api_key，填入之后你的图片会以url格式传入GPT，如果不填，就是以图片编码的形式传入。
 
 ### 本地LLM节点
 1. 目前支持GLM/Llama/Qwen，不过只有GLM的工具调用是完美适配的，其他两个需要大参数版本才能正常工具调用
