@@ -41,9 +41,7 @@
 ![图片](img/画画应用.png)
 
 ## Download
-[Baidu Cloud Download](https://pan.baidu.com/s/13ogn1np6bHgxOJhS--QJmg?pwd=jppj) (Recommended! Includes a compressed package of comfyui with the environment setup completed, and a folder for this project. After downloading the former, there’s no need for further environment configuration!)
-
-Or install using one of the following methods:
+Install using one of the following methods:
 ### Method 1:
 1. Search for comfyui_LLM_party in the [comfyui manager](https://github.com/ltdrdata/ComfyUI-Manager) and install it with one click.
 2. Restart comfyui. During the first restart, it will take some time to download the embedding model used for RAG.
