@@ -8,6 +8,9 @@ class start_dialog:
         self.start = True
         # 生成一个hash值作为id
         self.id = hash(str(self))
+        #temp文件夹不存在就创建
+        if not os.path.exists(os.path.join(current_dir_path, "temp")):
+            os.makedirs(os.path.join(current_dir_path, "temp"))
         # 构建prompt.txt的绝对路径
         self.prompt_path = os.path.join(current_dir_path, "temp", str(self.id) + ".txt")
         # 如果文件不存在，创建prompt.txt文件，存在就覆盖文件
