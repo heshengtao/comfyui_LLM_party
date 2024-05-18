@@ -953,7 +953,7 @@ class LLM_local:
                     llama_model = ""
                     qwen_tokenizer = ""
                     qwen_model = ""
-                    self.model_type = model_type
+                self.model_type = model_type
                 if model_type == "GLM":
                     if glm_tokenizer == "":
                         glm_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
