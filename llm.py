@@ -669,6 +669,9 @@ class LLM_local:
         self.tool_data = {"id": self.id, "system_prompt": "", "type": "local"}
         self.list = []
         self.added_to_list = False
+        self.device=""
+        self.dtype=""
+        self.model_type=""
 
     @classmethod
     def INPUT_TYPES(s):
@@ -931,10 +934,40 @@ class LLM_local:
                 global glm_tokenizer, glm_model, llama_tokenizer, llama_model, qwen_tokenizer, qwen_model
                 if device == "auto":
                     device ="cuda"if torch.cuda.is_available()else ("mps" if torch.backends.mps.is_available() else "cpu")
+                if self.model_type!=model_type and self.model_type!="":
+                    del glm_model
+                    del glm_tokenizer
+                    del llama_model
+                    del llama_tokenizer
+                    del qwen_model
+                    del qwen_tokenizer
+                    if self.device == "cuda":
+                        torch.cuda.empty_cache()
+                        gc.collect()
+                    # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
+                    elif self.device == "cpu" or self.device == "mps":
+                        gc.collect()
+                    glm_tokenizer = ""
+                    glm_model = ""
+                    llama_tokenizer = ""
+                    llama_model = ""
+                    qwen_tokenizer = ""
+                    qwen_model = ""
                 if model_type == "GLM":
                     if glm_tokenizer == "":
                         glm_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
-                    if glm_model == "":
+                    if glm_model == "" or self.device != device or self.dtype!=dtype:
+                        if self.device != device or self.dtype!=dtype:
+                            del glm_model
+                            if self.device == "cuda":
+                                torch.cuda.empty_cache()
+                                gc.collect()
+                            # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
+                            elif self.device == "cpu" or self.device == "mps":
+                                gc.collect()
+                            glm_model = ""
+                        self.device = device
+                        self.dtype = dtype
                         if device == "cuda":
                             if dtype =="float32":
                                 glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).cuda()
@@ -981,7 +1014,18 @@ class LLM_local:
                 elif model_type == "llama":
                     if llama_tokenizer == "":
                         llama_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
-                    if llama_model == "":
+                    if llama_model == "" or self.device != device or self.dtype!=dtype:
+                        if self.device != device or self.dtype!=dtype:
+                            del llama_model
+                            if self.device == "cuda":
+                                torch.cuda.empty_cache()
+                                gc.collect()
+                            # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
+                            elif self.device == "cpu" or self.device == "mps":
+                                gc.collect()
+                            llama_model = ""
+                        self.device = device
+                        self.dtype = dtype
                         if device == "cuda":
                             if dtype =="float32":
                                 llama_model = AutoModelForCausalLM.from_pretrained(
@@ -1057,7 +1101,18 @@ class LLM_local:
                         qwen_tokenizer = AutoTokenizer.from_pretrained(
                             tokenizer_path, revision="master", trust_remote_code=True
                         )
-                    if qwen_model == "":
+                    if qwen_model == "" or self.device != device or self.dtype!=dtype:
+                        if self.device != device or self.dtype!=dtype:
+                            del qwen_model
+                            if device == "cuda":
+                                torch.cuda.empty_cache()
+                                gc.collect()
+                            # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
+                            elif device == "cpu" or device == "mps":
+                                gc.collect()
+                            qwen_model = ""
+                        self.device = device
+                        self.dtype = dtype
                         if device == "cuda":
                             if dtype =="float32":
                                 qwen_model = AutoModelForCausalLM.from_pretrained(
@@ -1141,7 +1196,7 @@ class LLM_local:
                     del llama_tokenizer
                     del qwen_model
                     del qwen_tokenizer
-                    if device == "cuda" or device == "cuda-fp16":
+                    if device == "cuda" :
                         torch.cuda.empty_cache()
                         gc.collect()
                     # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
