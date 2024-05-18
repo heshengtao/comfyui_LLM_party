@@ -339,7 +339,7 @@ class LLM:
                 "max_length": ("INT", {"default": 2048, "min": 256, "step": 256}),
             },
             "optional": {
-                "persona": ("STRING", {"forceInput": True}),
+                "system_prompt_input": ("STRING", {"forceInput": True}),
                 "tools": ("STRING", {"forceInput": True}),
                 "file_content": ("STRING", {"forceInput": True}),
                 "base_url": (
@@ -726,7 +726,7 @@ class LLM_local:
                 "max_length": ("INT", {"default": 512, "min": 256, "step": 256}),
             },
             "optional": {
-                "persona": ("STRING", {"forceInput": True}),
+                "system_prompt_input": ("STRING", {"forceInput": True}),
                 "tools": ("STRING", {"forceInput": True}),
                 "file_content": ("STRING", {"forceInput": True}),
             },
