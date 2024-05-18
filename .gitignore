@@ -161,3 +161,4 @@ cython_debug/
 
 config.ini
 temp/
+WeChat_temp/
