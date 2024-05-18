@@ -60,7 +60,7 @@ class About_us:
     def notify(self, unique_id=None, extra_pnginfo=None):
         text = [f'''
 This is an easter egg node of the project.
-Large Model Party (llm_party) 
+comfyui_LLM_party
 Project Initiator: heshengtao 
 Project URL: https://github.com/heshengtao/comfyui_LLM_party 
 Project Media Channel: https://space.bilibili.com/26978344?spm_id_from=333.1007.0.0
