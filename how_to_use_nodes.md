@@ -2,7 +2,7 @@
 
 ## Models
 
-### LLM_API Node
+### LLM_API Node and its loader node
 1. Large model nodes can customize model name, temperature, API_KEY, base_url, currently only supports openai type API interface calls.
 2. You can directly input system prompts and user prompts on the node, or right-click to convert these two widgets into node inputs, accepting string type inputs.
 3. Large model nodes can also accept outputs from tool nodes through the tools interface and accept string inputs from the file_content interface, which will be used as the model's knowledge base, searching for related content to input into the model based on word vector similarity.
@@ -14,7 +14,7 @@
 9. main_brain determines whether the large model is the model that interfaces with the user. If disabled, the LLM node can serve as a tool for another LLM node.
 10. LLM is compatible with GPT-4’s visual features. The imgbb_api_key can be entered with imgbb’s API key. After filling it in, your image will be input into GPT in URL format. If not filled, it will be input in the form of image encoding.
 
-### LLM_Local Node
+### LLM_Local Node and its loader node
 1. Currently supports GLM/Llama/Qwen, but only GLM's tool calling is perfectly adapted, the other two require a large parameter version to call tools normally.
 2. is_reload determines whether to unload the local model after the node runs. It is disabled by default to prevent reloading the large model and increasing running time. When the video memory cannot support running LLM and SD at the same time, it can be enabled.
 3. Input the model's project folder into model_path and tokenizer_path, compatible with all models that can be compatible with transformer.
