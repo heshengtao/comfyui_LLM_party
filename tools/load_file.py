@@ -187,12 +187,14 @@ class start_workflow:
                 "user_prompt": ("STRING", {"default": "你好"}),
                 "positive_prompt": ("STRING", {"default": ""}),
                 "negative_prompt": ("STRING", {"default": ""}),
+                "model_name": ("STRING", {"default": ""}),
             },
         }
 
     RETURN_TYPES = (
         "STRING",
         "IMAGE",
+        "STRING",
         "STRING",
         "STRING",
         "STRING",
@@ -205,6 +207,7 @@ class start_workflow:
         "user_prompt",
         "positive_prompt",
         "negative_prompt",
+        "model_name",
     )
 
     FUNCTION = "load_all"
@@ -223,6 +226,7 @@ class start_workflow:
         user_prompt="你好",
         positive_prompt="",
         negative_prompt="",
+        model_name=""
     ):
         file_out = ""
         if file_content is not None and file_content != "":
@@ -275,6 +279,7 @@ class start_workflow:
         user_out = user_prompt
         positive_out = positive_prompt
         negative_out = negative_prompt
+        model_name_out = model_name
         return (
             file_out,
             img_out,
@@ -282,4 +287,5 @@ class start_workflow:
             user_out,
             positive_out,
             negative_out,
+            model_name_out,
         )

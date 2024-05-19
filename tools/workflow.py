@@ -84,6 +84,7 @@ def api(
     user_prompt="",
     positive_prompt="",
     negative_prompt="",
+    model_name="",
     workflow_path="测试画画api.json",
 ):
     global current_dir_path
@@ -107,6 +108,7 @@ def api(
             prompt[p]["inputs"]["user_prompt"] = user_prompt
             prompt[p]["inputs"]["positive_prompt"] = positive_prompt
             prompt[p]["inputs"]["negative_prompt"] = negative_prompt
+            prompt[p]["inputs"]["model_name"] = model_name
 
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
@@ -156,6 +158,7 @@ class workflow_transfer:
                 "user_prompt": ("STRING", {}),
                 "positive_prompt": ("STRING", {}),
                 "negative_prompt": ("STRING", {}),
+                "model_name": ("STRING", {}),
                 "workflow_path": (json_files, {}),
             },
         }
@@ -185,6 +188,7 @@ class workflow_transfer:
         user_prompt="",
         positive_prompt="",
         negative_prompt="",
+        model_name="",
         workflow_path="测试画画api.json",
         is_enable=True,
     ):
@@ -210,6 +214,7 @@ class workflow_transfer:
             user_prompt,
             positive_prompt,
             negative_prompt,
+            model_name,
             workflow_path,
         )
         img_out = []

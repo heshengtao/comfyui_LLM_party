@@ -212,24 +212,22 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
 
 
 class Chat:
-    def __init__(self, history, model_name, temperature, max_length, tools=None) -> None:
-        self.messages = history
+    def __init__(self, model_name, temperature, max_length) -> None:
         self.model_name = model_name
         self.temperature = temperature
-        self.tools = tools
         self.max_tokens = max_length
 
-    def send(self, user_prompt):
+    def send(self, user_prompt, history, tools=None):
         try:
             new_message = {"role": "user", "content": user_prompt}
-            self.messages.append(new_message)
-            print(self.messages)
-            if self.tools is not None:
+            history.append(new_message)
+            print(history)
+            if tools is not None:
                 response = openai.chat.completions.create(
                     model=self.model_name,
-                    messages=self.messages,
+                    messages=history,
                     temperature=self.temperature,
-                    tools=self.tools,
+                    tools=tools,
                     max_tokens=self.max_tokens,
                 )
                 while response.choices[0].message.tool_calls:
@@ -238,8 +236,8 @@ class Chat:
                     print("正在调用" + response_content.name + "工具")
                     results = dispatch_tool(response_content.name, json.loads(response_content.arguments))
                     print(results)
-                    self.messages.append({"role": assistant_message.role, "content": str(response_content)})
-                    self.messages.append(
+                    history.append({"role": assistant_message.role, "content": str(response_content)})
+                    history.append(
                         {
                             "role": "function",
                             "tool_call_id": assistant_message.tool_calls[0].id,
@@ -248,7 +246,7 @@ class Chat:
                         }
                     )
                     response = openai.chat.completions.create(
-                        model=self.model_name, messages=self.messages, tools=self.tools, max_tokens=self.max_tokens
+                        model=self.model_name, messages=history, tools=tools, max_tokens=self.max_tokens
                     )
                     print(response)
                 while response.choices[0].message.function_call:
@@ -259,10 +257,10 @@ class Chat:
                     print("正在调用" + function_name + "工具")
                     results = dispatch_tool(function_name, function_arguments)
                     print(results)
-                    self.messages.append({"role": assistant_message.role, "content": str(function_call)})
-                    self.messages.append({"role": "function", "name": function_name, "content": results})
+                    history.append({"role": assistant_message.role, "content": str(function_call)})
+                    history.append({"role": "function", "name": function_name, "content": results})
                     response = openai.chat.completions.create(
-                        model=self.model_name, messages=self.messages, tools=self.tools, max_tokens=self.max_tokens
+                        model=self.model_name, messages=history, tools=tools, max_tokens=self.max_tokens
                     )
                 response_content = response.choices[0].message.content
                 print(response)
@@ -278,23 +276,23 @@ class Chat:
                     else:
                         code = ""
                     results = interpreter(code)
-                    self.messages.append({"role": "function", "name": "interpreter", "content": results})
+                    history.append({"role": "function", "name": "interpreter", "content": results})
                     response = openai.chat.completions.create(
-                        model=self.model_name, messages=self.messages, tools=self.tools, max_tokens=self.max_tokens
+                        model=self.model_name, messages=history, tools=tools, max_tokens=self.max_tokens
                     )
                     response_content = response.choices[0].message.content
             else:
                 response = openai.chat.completions.create(
                     model=self.model_name,
-                    messages=self.messages,
+                    messages=history,
                     temperature=self.temperature,
                     max_tokens=self.max_tokens,
                 )
             response_content = response.choices[0].message.content
-            self.messages.append({"role": "assistant", "content": response_content})
+            history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
             response_content = "这个话题聊太久了，我想聊点别的了：" + str(ex)
-        return response_content, self.messages
+        return response_content, history
 
 
 class LLM:
@@ -527,7 +525,9 @@ class LLM:
                 if tools is not None:
                     print(tools)
                     tools = json.loads(tools)
-                chat = Chat(history, model_name, temperature, max_length, tools)
+
+                max_length=int(max_length)
+                chat = Chat(model_name, temperature, max_length)
 
                 if file_content is not None:
                     user_prompt = (
@@ -592,7 +592,7 @@ class LLM:
                         ]
                         user_prompt = img_json
 
-                response, history = chat.send(user_prompt)
+                response, history = chat.send(user_prompt,history, tools)
                 print(response)
                 # 修改prompt.json文件
                 with open(self.prompt_path, "w", encoding="utf-8") as f:
@@ -919,7 +919,7 @@ class LLM_local:
                         return True
                     except json.JSONDecodeError:
                         return False
-
+                max_length=int(max_length)
                 if file_content is not None:
                     user_prompt = (
                         "文件中相关内容："
@@ -931,6 +931,7 @@ class LLM_local:
                         + "请根据文件内容回答用户问题。\n"
                         + "如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
                     )
+                
                 global glm_tokenizer, glm_model, llama_tokenizer, llama_model, qwen_tokenizer, qwen_model
                 if device == "auto":
                     device ="cuda"if torch.cuda.is_available()else ("mps" if torch.backends.mps.is_available() else "cpu")

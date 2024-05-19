@@ -76,6 +76,7 @@ def api(
     user_prompt="",
     positive_prompt="",
     negative_prompt="",
+    model_name="",
     workflow_path="测试画画api.json",
 ):
     global current_dir_path
@@ -99,6 +100,7 @@ def api(
             prompt[p]["inputs"]["user_prompt"] = user_prompt
             prompt[p]["inputs"]["positive_prompt"] = positive_prompt
             prompt[p]["inputs"]["negative_prompt"] = negative_prompt
+            prompt[p]["inputs"]["model_name"] = model_name
 
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
@@ -276,6 +278,7 @@ if get_current_page() == "chat":
                     user_input,
                     positive_prompt="",
                     negative_prompt="",
+                    model_name="",
                     workflow_path=str(st.session_state["wf_path"]),
                 )
                 # 更新对话记录
