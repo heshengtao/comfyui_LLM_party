@@ -1,4 +1,4 @@
 @echo off
 echo Starting Streamlit app...
-streamlit run %~dp0api.py
+..\..\..\python_embeded\python.exe -m streamlit run %~dp0api.py
 pause

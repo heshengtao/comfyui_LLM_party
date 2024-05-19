@@ -1,4 +1,5 @@
 import configparser
+import io
 import time
 
 import openai
@@ -121,6 +122,7 @@ def api(
 
 
 app = FastAPI()
+
 # 定义请求中的消息内容
 class MessageContent(BaseModel):
     type: str
@@ -143,17 +145,17 @@ class Message(BaseModel):
 class CompletionRequest(BaseModel):
     model: str
     messages: List[Message]
-    max_tokens: int
+    max_tokens: int = 150  # 添加了默认值
 
 # 中间件或依赖项来验证 API 密钥
 async def verify_api_key(request: Request):
     # 从请求头中获取 API 密钥
     api_key = request.headers.get("Authorization").split("Bearer ")[-1]
-
+    # 这里应该有验证api_key的逻辑
 
 # 创建路由处理函数
 @app.post("/v1/chat/completions")
-async def create_completion(request_data: CompletionRequest):
+async def create_completion(request_data: CompletionRequest, dependency=Depends(verify_api_key)):
     # 这里可以添加您的处理逻辑
     # 例如，解析文本和图片URL，并生成相应的响应
     try:
@@ -166,38 +168,44 @@ async def create_completion(request_data: CompletionRequest):
     return response
 
 # 异步函数来处理请求并生成响应
-async def process_request(request_data: CompletionRequest,dependency=Depends(verify_api_key)):
+async def process_request(request_data: CompletionRequest):
     model_name = request_data.model
-
+    print(model_name)
     base64_encoded_list=[]
     # 遍历消息
     for message in request_data.messages:
         # 检查 content 是否为字符串
         if isinstance(message.content, str):
-            user_prompt = message.content
+            if message.role == "system":
+                system_prompt = message.content
+            elif message.role == "user":
+                user_prompt = message.content
+            elif message.role == "assistant":
+                assistant_prompt = message.content
         # 如果 content 是列表，按原有逻辑处理
         elif isinstance(message.content, list):
             for content in message.content:
-                if content.type == "text":
-                    # 处理文本
-                    user_prompt = content.text
-                elif content.type == "image_url":
-                    if isinstance(content.image_url, str):
-                        # 检查URL是否为Base64编码的数据URI
-                        if content.image_url.startswith('data:image/jpeg;base64,'):
-                            # 提取Base64编码的图片数据
-                            base64_data = content.image_url.split('data:image/jpeg;base64,')[1]
-                            base64_encoded_list.append(base64_data)
-                        else:
-                            # 下载图片并转换为Base64编码
-                            async with httpx.AsyncClient() as client:
-                                response = await client.get(content.image_url)
-                                if response.status_code == 200:
-                                    image_bytes = BytesIO(response.content)
-                                    base64_encoded = base64.b64encode(image_bytes.read()).decode('utf-8')
-                                    base64_encoded_list.append(base64_encoded)
-                                else:
-                                    raise HTTPException(status_code=400, detail="Image could not be retrieved.")
+                if isinstance(content, dict) and 'type' in content:
+                    if content['type'] == "text":
+                        # 处理文本
+                        user_prompt = content['text']
+                    elif content['type'] == "image_url":
+                        if isinstance(content['image_url'], str):
+                            # 检查URL是否为Base64编码的数据URI
+                            if content['image_url'].startswith('data:image/jpeg;base64,'):
+                                # 提取Base64编码的图片数据
+                                base64_data = content['image_url'].split('data:image/jpeg;base64,')[1]
+                                base64_encoded_list.append(base64_data)
+                            else:
+                                # 下载图片并转换为Base64编码
+                                async with httpx.AsyncClient() as client:
+                                    response = await client.get(content['image_url'])
+                                    if response.status_code == 200:
+                                        image_bytes = BytesIO(response.content)
+                                        base64_encoded = base64.b64encode(image_bytes.read()).decode('utf-8')
+                                        base64_encoded_list.append(base64_encoded)
+                                    else:
+                                        raise HTTPException(status_code=400, detail="Image could not be retrieved.")
     img_out = []
     for base64_encoded in base64_encoded_list:
         image_bytes = BytesIO(base64.b64decode(base64_encoded))
@@ -226,7 +234,7 @@ async def process_request(request_data: CompletionRequest,dependency=Depends(ver
         img_out,
         "",
         "",
-        "",
+        system_prompt,
         user_prompt,
         "",
         "",
@@ -243,7 +251,7 @@ async def process_request(request_data: CompletionRequest,dependency=Depends(ver
             "system_fingerprint": "fp_0",
             "choices": [
                 {
-                    "message": {"content": response},
+                    "message": {"role": "assistant","content": response},
                     "index": 0,
                     "logprobs": None,
                     "finish_reason": "Stop"
@@ -258,22 +266,15 @@ async def process_request(request_data: CompletionRequest,dependency=Depends(ver
     else:
         base64_images = []  # 用于存储Base64编码的图像字符串
 
-        for image_tensor in img_out:
-            # 将张量转换为PIL图像
-            image_np = image_tensor.squeeze(0).permute(1, 2, 0).numpy()
-            image_np = (image_np * 255).astype(np.uint8)
-            img = Image.fromarray(image_np)
-
-            # 将PIL图像保存到字节流中
-            buffer = BytesIO()
-            img.save(buffer, format="JPEG")  # 您可以根据需要更改图像格式
-            buffer.seek(0)
-
-            # 将字节流编码为Base64
-            img_base64 = base64.b64encode(buffer.read()).decode('utf-8')
-
+        for node_id in images:
+            for image_data in images[node_id]:
+                #获得image的base64编码
+                img_base64 = base64.b64encode(image_data).decode('utf-8')
+                
+            global current_dir_path
             # 构建config.ini的绝对路径
             config_path = os.path.join(current_dir_path, "config.ini")
+            print(config_path)
             #从config.ini找到imgbb_key
             config = configparser.ConfigParser()
             config.read(config_path, encoding="utf-8")
@@ -282,6 +283,7 @@ async def process_request(request_data: CompletionRequest,dependency=Depends(ver
                 api_keys = config["API_KEYS"]
 
             imgbb_key=api_keys.get("imgbb_api")
+            print(imgbb_key)
 
             if imgbb_key is None or imgbb_key=="":
                 #返回imgbb_key缺失，需要在config.ini填入的报错
@@ -292,20 +294,23 @@ async def process_request(request_data: CompletionRequest,dependency=Depends(ver
             url = "https://api.imgbb.com/1/upload"
             payload = {"key": imgbb_key, "image": img_base64}
             # 向API发送POST请求
-            response = requests.post(url, data=payload)
+            response0 = requests.post(url, data=payload)
             # 检查请求是否成功
-            if response.status_code == 200:
+            if response0.status_code == 200:
                 # 解析响应以获取图片URL
-                result = response.json()
+                result = response0.json()
                 img_url = result["data"]["url"]
             else:
-                return "Error: " + response.text
+                return "Error: " + response0.text
+            print(img_url)
             base64_images.append(img_url)
-
+            print("1"+img_url)
+        if response is None:
+            response==""
         for img in base64_images:
             response_url=f"![image]({img})"
             response += "\n"+response_url+"\n"
-
+        print(response)
         # 构建响应数据
         response_data = {
             "id": "0",
@@ -315,9 +320,7 @@ async def process_request(request_data: CompletionRequest,dependency=Depends(ver
             "system_fingerprint": "fp_0",
             "choices": [
                 {
-                    "message": {
-                        "content": response,
-                        },
+                    "message": {"role": "assistant","content": response},
                     "index": 0,
                     "logprobs": None,
                     "finish_reason": "Stop"
