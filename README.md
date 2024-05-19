@@ -3,12 +3,11 @@
 </p>
 
 ## Latest Updates
-1. macOS and mps devices are now supported! Thanks to [bigcat88](https://github.com/bigcat88) for their contribution!
-2. Supported the visual features of GPT-4O!
-3. A new workflow intermediary has been added, which allows your workflow to call other workflows!
-4. Added a omnipotent interpreter node that allows the large model to execute any task. The large model operates within a virtual environment, downloading necessary third-party libraries and executing generated code. Please use this tool with caution, as the large model gains the ability to control your computer for any task!
-5. Introducing a cool "Matryoshka" feature: Disable the `main_brain` attribute of an LLM node to use it as a tool. Link this node's tool to another regular LLM node, and you'll find that the second LLM can call it like a tool!
-6. New `start_workflow` and `end_workflow` nodes allow you to define the starting and ending points of a workflow. Place your workflow in the `workflow` subfolder of this project, then run `setup_streamlit_app.bat` in the project folder. In the Streamlit interface, click "Settings" and replace it with your workflow.
+1. I wrote a `fastapi.py` file, and if you run it directly, you’ll get an OpenAI interface on `http://localhost:8817/v1/`. Any application that can call GPT can now invoke your comfyui workflow! I will create a tutorial to demonstrate the details on how to do this.
+2. I’ve separated the LLM loader and the LLM chain, dividing the model loading and model configuration. This allows for sharing models across different LLM nodes!
+3. macOS and mps devices are now supported! Thanks to [bigcat88](https://github.com/bigcat88) for their contribution!
+4. Supported the visual features of GPT-4O!
+5. A new workflow intermediary has been added, which allows your workflow to call other workflows!
 
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
 
