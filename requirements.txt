@@ -21,3 +21,4 @@ wikipedia
 arxiv
 accelerate
 bitsandbytes
+fastapi

@@ -100,7 +100,7 @@ def api(
         if prompt[p]["class_type"] == "start_workflow":
             if file_content != "":
                 prompt[p]["inputs"]["file_content"] = file_content
-            if image_input is not None:
+            if image_input is not None and image_input!=[]:
                 prompt[p]["inputs"]["image_input"] = image_input
             prompt[p]["inputs"]["file_path"] = file_path
             prompt[p]["inputs"]["img_path"] = img_path

@@ -1,0 +1,82 @@
+{
+  "11": {
+    "inputs": {
+      "text": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "show_text_party",
+    "_meta": {
+      "title": "显示文本(show_text)"
+    }
+  },
+  "21": {
+    "inputs": {
+      "system_prompt": "你一个强大的人工智能助手。",
+      "user_prompt": [
+        "24",
+        3
+      ],
+      "model_type": "GLM",
+      "temperature": 0.7000000000000001,
+      "max_length": 2048,
+      "is_memory": "enable",
+      "is_locked": "disable",
+      "main_brain": "enable",
+      "model": [
+        "22",
+        0
+      ],
+      "tokenizer": [
+        "22",
+        1
+      ]
+    },
+    "class_type": "LLM_local",
+    "_meta": {
+      "title": "本地大语言模型(LLM_local)"
+    }
+  },
+  "22": {
+    "inputs": {
+      "model_type": "GLM",
+      "model_path": "D:\\AI\\mychat\\model\\chatglm3-6b\\",
+      "tokenizer_path": "D:\\AI\\mychat\\model\\chatglm3-6b\\",
+      "device": "auto",
+      "dtype": "float32"
+    },
+    "class_type": "LLM_local_loader",
+    "_meta": {
+      "title": "本地大语言模型加载器(LLM_local_loader)"
+    }
+  },
+  "24": {
+    "inputs": {
+      "file_path": "",
+      "img_path": "",
+      "system_prompt": "你是一个强大的智能助手",
+      "user_prompt": "你好",
+      "positive_prompt": "",
+      "negative_prompt": "",
+      "model_name": ""
+    },
+    "class_type": "start_workflow",
+    "_meta": {
+      "title": "开始工作流(start_workflow)"
+    }
+  },
+  "25": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "text": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "end_workflow",
+    "_meta": {
+      "title": "结束工作流(end_workflow)"
+    }
+  }
+}
