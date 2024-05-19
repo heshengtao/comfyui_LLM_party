@@ -1,209 +1,7 @@
 {
-  "last_node_id": 211,
-  "last_link_id": 49,
+  "last_node_id": 214,
+  "last_link_id": 56,
   "nodes": [
-    {
-      "id": 154,
-      "type": "classify_persona",
-      "pos": [
-        562,
-        -116
-      ],
-      "size": {
-        "0": 315,
-        "1": 154
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "links": [
-            12
-          ],
-          "shape": 3,
-          "label": "system_prompt"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "classify_persona"
-      },
-      "widgets_values": [
-        "enable",
-        "",
-        "Positive Prompt",
-        "Negative Prompt",
-        "智能助手对用户的回复，不属于生成图像Prompt的文本"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 150,
-      "type": "load_persona",
-      "pos": [
-        97,
-        -93
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "links": [
-            10
-          ],
-          "shape": 3,
-          "label": "system_prompt"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_persona"
-      },
-      "widgets_values": [
-        "图片提示词生成器",
-        "enable",
-        ""
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 179,
-      "type": "LLM",
-      "pos": [
-        1015,
-        130
-      ],
-      "size": {
-        "0": 400,
-        "1": 410
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          },
-          "label": "tools"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        },
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "link": 12,
-          "widget": {
-            "name": "system_prompt"
-          },
-          "label": "system_prompt"
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 13,
-          "widget": {
-            "name": "user_prompt"
-          },
-          "label": "user_prompt"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            1
-          ],
-          "shape": 3,
-          "label": "assistant_response"
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。",
-        "你好",
-        "gpt-3.5-turbo",
-        0.7000000000000001,
-        "disable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
     {
       "id": 203,
       "type": "workflow_transfer",
@@ -216,7 +14,7 @@
         "1": 270
       },
       "flags": {},
-      "order": 8,
+      "order": 9,
       "mode": 0,
       "inputs": [
         {
@@ -293,7 +91,8 @@
         "",
         "",
         "",
-        "绘图app.json"
+        "绘图app.json",
+        "测试画画app.json"
       ],
       "color": "#223",
       "bgcolor": "#335"
@@ -310,13 +109,13 @@
         "1": 122
       },
       "flags": {},
-      "order": 5,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 1,
+          "link": 54,
           "widget": {
             "name": "text"
           },
@@ -377,7 +176,7 @@
         "1": 146
       },
       "flags": {},
-      "order": 6,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
@@ -438,112 +237,6 @@
       "bgcolor": "#593930"
     },
     {
-      "id": 178,
-      "type": "LLM",
-      "pos": [
-        515,
-        130
-      ],
-      "size": {
-        "0": 400,
-        "1": 410
-      },
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          },
-          "label": "tools"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        },
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "link": 10,
-          "widget": {
-            "name": "system_prompt"
-          },
-          "label": "system_prompt"
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 48,
-          "widget": {
-            "name": "user_prompt"
-          },
-          "label": "user_prompt"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            13
-          ],
-          "shape": 3,
-          "label": "assistant_response"
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。",
-        "你好",
-        "gpt-3.5-turbo",
-        0.7000000000000001,
-        "disable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
       "id": 205,
       "type": "end_workflow",
       "pos": [
@@ -555,7 +248,7 @@
         "1": 290
       },
       "flags": {},
-      "order": 9,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
@@ -585,15 +278,371 @@
       "bgcolor": "#355"
     },
     {
+      "id": 202,
+      "type": "show_text_party",
+      "pos": [
+        1885,
+        455
+      ],
+      "size": {
+        "0": 315,
+        "1": 76
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            42
+          ],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 150,
+      "type": "load_persona",
+      "pos": [
+        97,
+        -93
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            50
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "图片提示词生成器",
+        "enable",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 154,
+      "type": "classify_persona",
+      "pos": [
+        562,
+        -116
+      ],
+      "size": {
+        "0": 315,
+        "1": 154
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            52
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "classify_persona"
+      },
+      "widgets_values": [
+        "enable",
+        "",
+        "Positive Prompt",
+        "Negative Prompt",
+        "智能助手对用户的回复，不属于生成图像Prompt的文本"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 212,
+      "type": "LLM",
+      "pos": [
+        515,
+        130
+      ],
+      "size": [
+        400,
+        362
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 55,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 50,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        },
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "link": 51,
+          "widget": {
+            "name": "user_prompt"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            53
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "你好",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 213,
+      "type": "LLM",
+      "pos": [
+        1015,
+        130
+      ],
+      "size": [
+        400,
+        362
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 56,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 52,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        },
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "link": 53,
+          "widget": {
+            "name": "user_prompt"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            54
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "你好",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
       "id": 208,
       "type": "start_workflow",
       "pos": [
-        18,
-        190
+        69,
+        162
       ],
       "size": {
         "0": 342.5999755859375,
-        "1": 302
+        "1": 322
       },
       "flags": {},
       "order": 2,
@@ -641,7 +690,7 @@
           "name": "user_prompt",
           "type": "STRING",
           "links": [
-            48
+            51
           ],
           "shape": 3,
           "label": "user_prompt",
@@ -660,6 +709,13 @@
           "links": null,
           "shape": 3,
           "label": "negative_prompt"
+        },
+        {
+          "name": "model_name",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "model_name"
         }
       ],
       "properties": {
@@ -672,91 +728,52 @@
         "你是一个强大的智能助手",
         "请帮我画一个星空吧",
         "",
+        "",
         ""
       ],
       "color": "#233",
       "bgcolor": "#355"
     },
     {
-      "id": 202,
-      "type": "show_text_party",
+      "id": 214,
+      "type": "LLM_api_loader",
       "pos": [
-        1885,
-        455
+        86,
+        577
       ],
       "size": {
         "0": 315,
-        "1": 76
+        "1": 106
       },
       "flags": {},
-      "order": 7,
+      "order": 3,
       "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 37,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
       "outputs": [
         {
-          "name": "STRING",
-          "type": "STRING",
+          "name": "model",
+          "type": "CUSTOM",
           "links": [
-            42
+            55,
+            56
           ],
-          "shape": 6,
-          "label": "STRING",
+          "shape": 3,
+          "label": "model",
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "show_text_party"
+        "Node name for S&R": "LLM_api_loader"
       },
       "widgets_values": [
-        ""
+        "gpt-3.5-turbo-1106",
+        "https://api.openai.com/v1",
+        "sk-XXXXX"
       ],
-      "color": "#233",
-      "bgcolor": "#355"
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
     }
   ],
   "links": [
-    [
-      1,
-      179,
-      0,
-      162,
-      0,
-      "STRING"
-    ],
-    [
-      10,
-      150,
-      0,
-      178,
-      3,
-      "STRING"
-    ],
-    [
-      12,
-      154,
-      0,
-      179,
-      3,
-      "STRING"
-    ],
-    [
-      13,
-      178,
-      0,
-      179,
-      4,
-      "STRING"
-    ],
     [
       37,
       162,
@@ -814,12 +831,60 @@
       "STRING"
     ],
     [
-      48,
+      50,
+      150,
+      0,
+      212,
+      2,
+      "STRING"
+    ],
+    [
+      51,
       208,
       3,
-      178,
-      4,
+      212,
+      5,
       "STRING"
+    ],
+    [
+      52,
+      154,
+      0,
+      213,
+      2,
+      "STRING"
+    ],
+    [
+      53,
+      212,
+      0,
+      213,
+      5,
+      "STRING"
+    ],
+    [
+      54,
+      213,
+      0,
+      162,
+      0,
+      "STRING"
+    ],
+    [
+      55,
+      214,
+      0,
+      212,
+      0,
+      "CUSTOM"
+    ],
+    [
+      56,
+      214,
+      0,
+      213,
+      0,
+      "CUSTOM"
     ]
   ],
   "groups": [],

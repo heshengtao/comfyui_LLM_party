@@ -1,20 +1,20 @@
 {
-  "last_node_id": 81,
-  "last_link_id": 100,
+  "last_node_id": 85,
+  "last_link_id": 105,
   "nodes": [
     {
       "id": 80,
       "type": "CLIPTextEncode",
       "pos": [
-        1590,
-        340
+        1390,
+        323
       ],
       "size": {
         "0": 400,
         "1": 200
       },
       "flags": {},
-      "order": 1,
+      "order": 4,
       "mode": 0,
       "inputs": [
         {
@@ -27,7 +27,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 99,
+          "link": 102,
           "widget": {
             "name": "text"
           },
@@ -56,33 +56,37 @@
       "id": 81,
       "type": "show_text_party",
       "pos": [
-        1594,
-        621
+        1046,
+        337
       ],
-      "size": [
-        315,
-        58
-      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
       "flags": {},
-      "order": 2,
+      "order": 3,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 100,
+          "link": 103,
           "widget": {
             "name": "text"
-          }
+          },
+          "label": "text"
         }
       ],
       "outputs": [
         {
           "name": "STRING",
           "type": "STRING",
-          "links": null,
+          "links": [
+            102
+          ],
           "shape": 6,
-          "label": "STRING"
+          "label": "STRING",
+          "slot_index": 0
         }
       ],
       "properties": {
@@ -95,20 +99,41 @@
       "bgcolor": "#3f5159"
     },
     {
-      "id": 50,
+      "id": 82,
       "type": "LLM",
       "pos": [
-        700,
-        330
+        603,
+        314
       ],
       "size": {
         "0": 400,
-        "1": 540
+        "1": 374
       },
       "flags": {},
-      "order": 0,
+      "order": 2,
       "mode": 0,
       "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 104,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 105,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
         {
           "name": "tools",
           "type": "STRING",
@@ -133,8 +158,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            99,
-            100
+            103
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -143,7 +167,7 @@
         {
           "name": "history",
           "type": "STRING",
-          "links": [],
+          "links": null,
           "shape": 3,
           "label": "history"
         },
@@ -159,11 +183,10 @@
         "Node name for S&R": "LLM"
       },
       "widgets_values": [
-        "你一个强大的智能助手，你可以为用户生成类似于以下格式的图片生成提示词：{{best quality}}, {{masterpiece}}, {{ultra-detailed}}, {illustration}, {detailed light}, {an extremely delicate and beautiful}, a girl, {beautiful detailed eyes}, stars in the eyes, messy floating hair, colored inner hair, Starry sky adorns hair, depth of field\n为了保证图片生成的高质量，一般以{{best quality}}, {{masterpiece}}, {{ultra-detailed}}开头",
-        "请帮我写一个图片提示词，我要画一个戴粉色帽子的白发美少女拿着一个棒棒糖",
-        "gpt-3.5-turbo-1106",
+        "你一个强大的人工智能助手。",
+        "你好",
         0.7,
-        "disable",
+        "enable",
         "disable",
         "disable",
         "enable",
@@ -171,28 +194,127 @@
         "",
         "",
         "",
-        "",
         ""
       ],
       "color": "#223",
       "bgcolor": "#335"
+    },
+    {
+      "id": 83,
+      "type": "LLM_api_loader",
+      "pos": [
+        203,
+        237
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            104
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "https://api.openai.com/v1",
+        "sk-XXXXX"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 85,
+      "type": "load_persona",
+      "pos": [
+        205,
+        392
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            105
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "图片提示词生成器",
+        true,
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
     }
   ],
   "links": [
     [
-      99,
-      50,
+      102,
+      81,
       0,
       80,
       1,
       "STRING"
     ],
     [
-      100,
-      50,
+      103,
+      82,
       0,
       81,
       0,
+      "STRING"
+    ],
+    [
+      104,
+      83,
+      0,
+      82,
+      0,
+      "CUSTOM"
+    ],
+    [
+      105,
+      85,
+      0,
+      82,
+      2,
       "STRING"
     ]
   ],

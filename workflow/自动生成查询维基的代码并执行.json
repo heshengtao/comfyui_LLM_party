@@ -1,64 +1,30 @@
 {
-  "last_node_id": 17,
-  "last_link_id": 19,
+  "last_node_id": 19,
+  "last_link_id": 22,
   "nodes": [
     {
-      "id": 16,
-      "type": "new_interpreter_tool",
+      "id": 17,
+      "type": "show_text_party",
       "pos": [
-        260,
-        310
+        1108,
+        298
       ],
       "size": {
         "0": 315,
         "1": 58
       },
       "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            18
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "new_interpreter_tool"
-      },
-      "widgets_values": [
-        "enable"
-      ],
-      "color": "#323",
-      "bgcolor": "#535"
-    },
-    {
-      "id": 17,
-      "type": "show_text_party",
-      "pos": [
-        1099,
-        295
-      ],
-      "size": [
-        315,
-        58
-      ],
-      "flags": {},
-      "order": 2,
+      "order": 3,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 19,
+          "link": 21,
           "widget": {
             "name": "text"
-          }
+          },
+          "label": "text"
         }
       ],
       "outputs": [
@@ -75,23 +41,31 @@
       },
       "widgets_values": [
         ""
-      ]
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
-      "id": 13,
+      "id": 18,
       "type": "LLM",
       "pos": [
         610,
         290
       ],
-      "size": {
-        "0": 409.6693420410156,
-        "1": 430.2230529785156
-      },
+      "size": [
+        397.59446563720564,
+        381.1717468261711
+      ],
       "flags": {},
-      "order": 1,
+      "order": 2,
       "mode": 0,
       "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 22,
+          "label": "model"
+        },
         {
           "name": "images",
           "type": "IMAGE",
@@ -99,13 +73,20 @@
           "label": "images"
         },
         {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
           "name": "tools",
           "type": "STRING",
-          "link": 18,
+          "link": 20,
           "widget": {
             "name": "tools"
-          },
-          "label": "tools"
+          }
         },
         {
           "name": "file_content",
@@ -113,8 +94,7 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          },
-          "label": "file_content"
+          }
         }
       ],
       "outputs": [
@@ -122,7 +102,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            19
+            21
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -148,10 +128,9 @@
       },
       "widgets_values": [
         "你一个强大的人工智能助手。你可以调用new interpreter来执行代码，该解释器会自动安装要导入的第三方库",
-        "请请帮我写一个Python代码，有如下功能：查询维基百科上的人工智能相关的内容。然后执行这个代码",
-        "gpt-3.5-turbo-0125",
+        "请帮我写一个Python代码，有如下功能：查询维基百科上的人工智能相关的内容。然后执行这个代码",
         0.7,
-        "disable",
+        "enable",
         "disable",
         "disable",
         "enable",
@@ -159,29 +138,108 @@
         "",
         "",
         "",
-        "",
         ""
       ],
       "color": "#223",
       "bgcolor": "#335"
+    },
+    {
+      "id": 16,
+      "type": "new_interpreter_tool",
+      "pos": [
+        100,
+        343
+      ],
+      "size": {
+        "0": 420,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "new_interpreter_tool"
+      },
+      "widgets_values": [
+        "enable"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 19,
+      "type": "LLM_api_loader",
+      "pos": [
+        150,
+        167
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            22
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "https://api.openai.com/v1",
+        "sk-XXXXX"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
     }
   ],
   "links": [
     [
-      18,
+      20,
       16,
       0,
-      13,
-      1,
+      18,
+      3,
       "STRING"
     ],
     [
-      19,
-      13,
+      21,
+      18,
       0,
       17,
       0,
       "STRING"
+    ],
+    [
+      22,
+      19,
+      0,
+      18,
+      0,
+      "CUSTOM"
     ]
   ],
   "groups": [],

@@ -54,12 +54,7 @@ from .tools.tool_combine import tool_combine, tool_combine_plus
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import workflow_transfer
 
-glm_tokenizer = ""
-glm_model = ""
-llama_tokenizer = ""
-llama_model = ""
-qwen_tokenizer = ""
-qwen_model = ""
+
 _TOOL_HOOKS = [
     "get_time",
     "get_weather",
@@ -92,7 +87,7 @@ def another_llm(id, type, question):
         (
             main_brain,
             system_prompt,
-            model_name,
+            model,
             temperature,
             is_memory,
             is_tools_in_sys_prompt,
@@ -101,8 +96,6 @@ def another_llm(id, type, question):
             system_prompt_input,
             tools,
             file_content,
-            api_key,
-            base_url,
             images,
             imgbb_api_key,
         ) = llm.list
@@ -110,7 +103,7 @@ def another_llm(id, type, question):
             question,
             main_brain,
             system_prompt,
-            model_name,
+            model,
             temperature,
             is_memory,
             is_tools_in_sys_prompt,
@@ -119,8 +112,6 @@ def another_llm(id, type, question):
             system_prompt_input,
             tools,
             file_content,
-            api_key,
-            base_url,
             images,
             imgbb_api_key,
         )
@@ -137,15 +128,11 @@ def another_llm(id, type, question):
             main_brain,
             system_prompt,
             model_type,
+            model,
+            tokenizer,
             temperature,
-            model_path,
             max_length,
-            tokenizer_path,
-            is_reload,
-            device,
-            dtype,
             is_memory,
-            is_tools_in_sys_prompt,
             is_locked,
             system_prompt_input,
             tools,
@@ -156,15 +143,11 @@ def another_llm(id, type, question):
             main_brain,
             system_prompt,
             model_type,
+            model,
+            tokenizer,
             temperature,
-            model_path,
             max_length,
-            tokenizer_path,
-            is_reload,
-            device,
-            dtype,
             is_memory,
-            is_tools_in_sys_prompt,
             is_locked,
             system_prompt_input,
             tools,
@@ -212,13 +195,15 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
 
 
 class Chat:
-    def __init__(self, model_name, temperature, max_length) -> None:
+    def __init__(self, model_name,apikey,baseurl) -> None:
         self.model_name = model_name
-        self.temperature = temperature
-        self.max_tokens = max_length
+        self.apikey = apikey
+        self.baseurl = baseurl
 
-    def send(self, user_prompt, history, tools=None):
+    def send(self, user_prompt, temperature, max_length, history, tools=None):
         try:
+            openai.api_key = self.apikey
+            openai.base_url = self.baseurl
             new_message = {"role": "user", "content": user_prompt}
             history.append(new_message)
             print(history)
@@ -226,9 +211,9 @@ class Chat:
                 response = openai.chat.completions.create(
                     model=self.model_name,
                     messages=history,
-                    temperature=self.temperature,
+                    temperature=temperature,
                     tools=tools,
-                    max_tokens=self.max_tokens,
+                    max_tokens=max_length,
                 )
                 while response.choices[0].message.tool_calls:
                     assistant_message = response.choices[0].message
@@ -246,7 +231,11 @@ class Chat:
                         }
                     )
                     response = openai.chat.completions.create(
-                        model=self.model_name, messages=history, tools=tools, max_tokens=self.max_tokens
+                        model=self.model_name, 
+                        messages=history, 
+                        tools=tools,
+                        temperature=temperature, 
+                        max_tokens=max_length
                     )
                     print(response)
                 while response.choices[0].message.function_call:
@@ -260,7 +249,11 @@ class Chat:
                     history.append({"role": assistant_message.role, "content": str(function_call)})
                     history.append({"role": "function", "name": function_name, "content": results})
                     response = openai.chat.completions.create(
-                        model=self.model_name, messages=history, tools=tools, max_tokens=self.max_tokens
+                        model=self.model_name, 
+                        messages=history, 
+                        tools=tools,
+                        temperature=temperature, 
+                        max_tokens=max_length
                     )
                 response_content = response.choices[0].message.content
                 print(response)
@@ -278,21 +271,88 @@ class Chat:
                     results = interpreter(code)
                     history.append({"role": "function", "name": "interpreter", "content": results})
                     response = openai.chat.completions.create(
-                        model=self.model_name, messages=history, tools=tools, max_tokens=self.max_tokens
+                        model=self.model_name, 
+                        messages=history, 
+                        tools=tools,
+                        temperature=temperature, 
+                        max_tokens=max_length
                     )
                     response_content = response.choices[0].message.content
             else:
                 response = openai.chat.completions.create(
                     model=self.model_name,
                     messages=history,
-                    temperature=self.temperature,
-                    max_tokens=self.max_tokens,
+                    temperature=temperature,
+                    max_tokens=max_length,
                 )
             response_content = response.choices[0].message.content
             history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
             response_content = "这个话题聊太久了，我想聊点别的了：" + str(ex)
         return response_content, history
+
+class LLM_api_loader:
+    def __init__(self):
+        pass
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "model_name": ("STRING", {"default": "gpt-3.5-turbo-1106"}),
+
+            },
+            "optional": {
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": "https://api.openai.com/v1",
+                    },
+                ),
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": "sk-XXXXX",
+                    },
+                ),
+            }
+            }
+    RETURN_TYPES = (
+        "CUSTOM",
+    )
+    RETURN_NAMES = (
+        "model",
+    )
+
+    FUNCTION = "chatbot"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+    def chatbot(self, model_name,base_url=None,api_key=None):
+        api_keys = load_api_keys(config_path)
+        if api_key != "":
+            openai.api_key = api_key
+        elif api_keys.get("openai_api_key") != "":
+            openai.api_key = api_keys.get("openai_api_key")
+        else:
+            openai.api_key = os.environ.get("OPENAI_API_KEY")
+        if base_url != "":
+            #如果以/结尾
+            if base_url[-1] == "/":
+                openai.base_url = base_url
+            else:
+                openai.base_url = base_url + "/"
+        elif api_keys.get("base_url") != "":
+            openai.base_url = api_keys.get("base_url")
+        else:
+            openai.base_url = os.environ.get("OPENAI_API_BASE")
+        if openai.api_key == "":
+            return ("请输入API_KEY",)
+        chat = Chat(model_name,openai.api_key,openai.base_url)
+        return (chat,)
+
+            
 
 
 class LLM:
@@ -328,7 +388,7 @@ class LLM:
                         "default": "你好",
                     },
                 ),
-                "model_name": ("STRING", {"default": "gpt-3.5-turbo-1106"}),
+                "model": ("CUSTOM", {}),
                 "temperature": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0, "step": 0.1}),
                 "is_memory": (["enable", "disable"], {"default": "enable"}),
                 "is_tools_in_sys_prompt": (["enable", "disable"], {"default": "disable"}),
@@ -340,18 +400,7 @@ class LLM:
                 "system_prompt_input": ("STRING", {"forceInput": True}),
                 "tools": ("STRING", {"forceInput": True}),
                 "file_content": ("STRING", {"forceInput": True}),
-                "base_url": (
-                    "STRING",
-                    {
-                        "default": "https://api.openai.com/v1",
-                    },
-                ),
-                "api_key": (
-                    "STRING",
-                    {
-                        "default": "sk-XXXXX",
-                    },
-                ),
+
                 "images": ("IMAGE", {"forceInput": True}),
                 "imgbb_api_key": (
                     "STRING",
@@ -377,14 +426,14 @@ class LLM:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/模型（model）"
+    CATEGORY = "大模型派对（llm_party）/模型链（model_chain）"
 
     def chatbot(
         self,
         user_prompt,
         main_brain,
         system_prompt,
-        model_name,
+        model,
         temperature,
         is_memory,
         is_tools_in_sys_prompt,
@@ -393,15 +442,13 @@ class LLM:
         system_prompt_input="",
         tools=None,
         file_content=None,
-        api_key=None,
-        base_url=None,
         images=None,
         imgbb_api_key=None,
     ):
         self.list = [
             main_brain,
             system_prompt,
-            model_name,
+            model,
             temperature,
             is_memory,
             is_tools_in_sys_prompt,
@@ -410,8 +457,6 @@ class LLM:
             system_prompt_input,
             tools,
             file_content,
-            api_key,
-            base_url,
             images,
             imgbb_api_key,
         ]
@@ -446,18 +491,7 @@ class LLM:
         ]
 
         llm_tools_json = json.dumps(llm_tools, ensure_ascii=False, indent=4)
-        if user_prompt == "#清空":
-            with open(self.prompt_path, "w", encoding="utf-8") as f:
-                json.dump([{"role": "system", "content": system_prompt}], f, indent=4, ensure_ascii=False)
-
-            with open(self.prompt_path, "r", encoding="utf-8") as f:
-                history = json.load(f)
-            return (
-                "已清空历史记录",
-                str(history),
-                llm_tools_json,
-            )
-        elif user_prompt is None or user_prompt.strip() == "":
+        if user_prompt is None or user_prompt.strip() == "":
             with open(self.prompt_path, "r", encoding="utf-8") as f:
                 history = json.load(f)
             return (
@@ -480,24 +514,6 @@ class LLM:
                     with open(self.prompt_path, "w", encoding="utf-8") as f:
                         json.dump([{"role": "system", "content": system_prompt}], f, indent=4, ensure_ascii=False)
                 api_keys = load_api_keys(config_path)
-                if api_key != "":
-                    openai.api_key = api_key
-                elif api_keys.get("openai_api_key") != "":
-                    openai.api_key = api_keys.get("openai_api_key")
-                else:
-                    openai.api_key = os.environ.get("OPENAI_API_KEY")
-                if base_url != "":
-                    #如果以/结尾
-                    if base_url[-1] == "/":
-                        openai.base_url = base_url
-                    else:
-                        openai.base_url = base_url + "/"
-                elif api_keys.get("base_url") != "":
-                    openai.base_url = api_keys.get("base_url")
-                else:
-                    openai.base_url = os.environ.get("OPENAI_API_BASE")
-                if openai.api_key == "":
-                    return ("请输入API_KEY",)
 
                 # 读取prompt.json文件
                 with open(self.prompt_path, "r", encoding="utf-8") as f:
@@ -527,7 +543,7 @@ class LLM:
                     tools = json.loads(tools)
 
                 max_length=int(max_length)
-                chat = Chat(model_name, temperature, max_length)
+                
 
                 if file_content is not None:
                     user_prompt = (
@@ -592,7 +608,7 @@ class LLM:
                         ]
                         user_prompt = img_json
 
-                response, history = chat.send(user_prompt,history, tools)
+                response, history = model.send(user_prompt, temperature, max_length,history, tools)
                 print(response)
                 # 修改prompt.json文件
                 with open(self.prompt_path, "w", encoding="utf-8") as f:
@@ -649,6 +665,239 @@ def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="u
     history.append({"role": "assistant", "content": response})
     return response, history
 
+class LLM_local_loader:
+    def __init__(self):
+        self.id = hash(str(self))
+        self.device=""
+        self.dtype=""
+        self.model_type=""
+        self.model_path=""
+        self.tokenizer_path=""
+        self.model=""
+        self.tokenizer=""
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "model_type": (
+                    ["GLM", "llama", "Qwen"],
+                    {
+                        "default": "GLM",
+                    },
+                ),
+                "model_path": (
+                    "STRING",
+                    {
+                        "default": None,
+                    },
+                ),
+                "tokenizer_path": (
+                    "STRING",
+                    {
+                        "default": None,
+                    },
+                ),
+                "device":(
+                    ["auto","cuda", "cpu","mps"],
+                    {
+                        "default": "auto",
+                    }
+                ),
+                "dtype": (
+                    ["float32", "float16","int8","int4"],
+                    {
+                        "default": "float32",
+                    }
+                ),
+                
+            }}
+    RETURN_TYPES = (
+        "CUSTOM",
+        "CUSTOM",
+    )
+    RETURN_NAMES = (
+        "model",
+        "tokenizer",
+    )
+
+    FUNCTION = "chatbot"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+    def chatbot(self, model_type,model_path,tokenizer_path,device,dtype):
+        if device == "auto":
+            device ="cuda"if torch.cuda.is_available()else ("mps" if torch.backends.mps.is_available() else "cpu")
+        
+        if self.model_type!=model_type or self.device != device or self.dtype!=dtype or self.model_path!=model_path or self.tokenizer_path!=tokenizer_path:
+            del self.model
+            del self.tokenizer
+            if self.device == "cuda":
+                torch.cuda.empty_cache()
+                gc.collect()
+            # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
+            elif self.device == "cpu" or self.device == "mps":
+                gc.collect()
+            self.model = ""
+            self.tokenizer = ""
+        self.model_type = model_type
+        self.model_path = model_path
+        self.tokenizer_path = tokenizer_path
+        self.device=device
+        self.dtype=dtype
+        if model_type == "GLM":
+            if self.tokenizer == "":
+                self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
+            if self.model == "" :
+                if device == "cuda":
+                    if dtype =="float32":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).cuda()
+                    elif dtype =="float16":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().cuda()
+                    elif dtype =="int8":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().cuda()
+                    elif dtype =="int4":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().cuda()
+                elif device == "cpu":
+                    if dtype =="float32":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).float()
+                    elif dtype =="float16":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().float()
+                    elif dtype =="int8":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().float()
+                    elif dtype =="int4":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().float()
+                elif device == "mps":
+                    if dtype =="float32":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).to("mps")
+                    elif dtype =="float16":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().to("mps")
+                    elif dtype =="int8":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().to("mps")
+                    elif dtype =="int4":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().to("mps")
+                self.model = self.model.eval()
+            
+        elif model_type == "llama":
+            if self.tokenizer == "":
+                self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
+            if self.model == "" :
+                if device == "cuda":
+                    if dtype =="float32":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cuda"
+                        )
+                    elif dtype =="float16":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cuda"
+                        ).half()
+                    elif dtype =="int8":
+                        quantization_config = BitsAndBytesConfig(load_in_8bit=True,)
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cuda",quantization_config=quantization_config
+                        )
+                    elif dtype =="int4":
+                        quantization_config = BitsAndBytesConfig(load_in_4bit=True)
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cuda",quantization_config=quantization_config
+                        )
+                elif device == "cpu":
+                    if dtype =="float32":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cpu"
+                            )
+                    elif dtype =="float16":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cpu"
+                        ).half()
+                    elif dtype =="int8":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cpu"
+                        ).half()
+                    elif dtype =="int4":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cpu"
+                        ).half()
+                elif device == "mps":
+                    if dtype =="float32":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="mps"
+                    )
+                    elif dtype =="float16":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="mps"
+                    ).half()
+                    elif dtype =="int8":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="mps"
+                    ).half()
+                    elif dtype =="int4":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="mps"
+                    ).half()
+                self.model = self.model.eval()
+        elif model_type == "Qwen":
+            if self.tokenizer == "":
+                self.tokenizer = AutoTokenizer.from_pretrained(
+                    tokenizer_path, revision="master", trust_remote_code=True
+                )
+            if self.model == "":
+                if device == "cuda":
+                    if dtype =="float32":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cuda"
+                        )
+                    elif dtype =="float16":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cuda"
+                        ).half()
+                    elif dtype =="int8":
+                        quantization_config = BitsAndBytesConfig(load_in_8bit=True,)
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cuda",quantization_config=quantization_config
+                        )
+                    elif dtype =="int4":
+                        quantization_config = BitsAndBytesConfig(load_in_4bit=True)
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cuda",quantization_config=quantization_config
+                        )
+                elif device == "cpu":
+                    if dtype =="float32":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cpu"
+                        )
+                    elif dtype =="float16":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cpu"
+                        ).half()
+                    elif dtype =="int8":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cpu"
+                        ).half()
+                    elif dtype =="int4":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cpu"
+                        ).half()
+                elif device == "mps":
+                    if dtype =="float32":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="mps"
+                        )
+                    elif dtype =="float16":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="mps"
+                        ).half()
+                    elif dtype =="int8":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="mps"
+                        ).half()
+                    elif dtype =="int4":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="mps"
+                        ).half()
+                self.model = self.model.eval()
+        return (self.model, self.tokenizer,)
 
 class LLM_local:
     def __init__(self):
@@ -669,14 +918,13 @@ class LLM_local:
         self.tool_data = {"id": self.id, "system_prompt": "", "type": "local"}
         self.list = []
         self.added_to_list = False
-        self.device=""
-        self.dtype=""
-        self.model_type=""
 
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
+                "model": ("CUSTOM", {}),
+                "tokenizer":("CUSTOM",{}),
                 "system_prompt": ("STRING", {"multiline": True, "default": "你一个强大的人工智能助手。"}),
                 "user_prompt": (
                     "STRING",
@@ -691,39 +939,11 @@ class LLM_local:
                         "default": "GLM",
                     },
                 ),
-                "model_path": (
-                    "STRING",
-                    {
-                        "default": None,
-                    },
-                ),
-                "tokenizer_path": (
-                    "STRING",
-                    {
-                        "default": None,
-                    },
-                ),
                 "temperature": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0, "step": 0.1}),
-                "is_memory": (["enable", "disable"], {"default": "enable"}),
-                "is_tools_in_sys_prompt": (["enable", "disable"], {"default": "disable"}),
-                "is_locked": (["enable", "disable"], {"default": "disable"}),
-                "is_reload": (["enable", "disable"], {"default": "disable"}),
-                "main_brain": (["enable", "disable"], {"default": "enable"}),
-                "device": (
-                    ["auto", "cuda", "mps", "cpu"],
-                    {
-                        "default": (
-                            "auto"
-                        ),
-                    },
-                ),
-                "dtype": (
-                    ["float32", "float16","int8","int4"],
-                    {
-                        "default": "float32",
-                    }
-                ),
                 "max_length": ("FLOAT", {"default": 512, "min": 256, "max": 128000, "step": 256}),
+                "is_memory": (["enable", "disable"], {"default": "enable"}),
+                "is_locked": (["enable", "disable"], {"default": "disable"}),
+                "main_brain": (["enable", "disable"], {"default": "enable"}),
             },
             "optional": {
                 "system_prompt_input": ("STRING", {"forceInput": True}),
@@ -747,7 +967,7 @@ class LLM_local:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/模型（model）"
+    CATEGORY = "大模型派对（llm_party）/模型链（model_chain）"
 
     def chatbot(
         self,
@@ -755,15 +975,11 @@ class LLM_local:
         main_brain,
         system_prompt,
         model_type,
+        model,
+        tokenizer,
         temperature,
-        model_path,
         max_length,
-        tokenizer_path,
-        is_reload,
-        device,
-        dtype,
         is_memory,
-        is_tools_in_sys_prompt,
         is_locked,
         system_prompt_input="",
         tools=None,
@@ -773,15 +989,11 @@ class LLM_local:
             main_brain,
             system_prompt,
             model_type,
+            model,
+            tokenizer,
             temperature,
-            model_path,
             max_length,
-            tokenizer_path,
-            is_reload,
-            device,
-            dtype,
             is_memory,
-            is_tools_in_sys_prompt,
             is_locked,
             system_prompt_input,
             tools,
@@ -817,18 +1029,7 @@ class LLM_local:
             }
         ]
         llm_tools_json = json.dumps(llm_tools, ensure_ascii=False, indent=4)
-        if user_prompt == "#清空":
-            with open(self.prompt_path, "w", encoding="utf-8") as f:
-                json.dump([{"role": "system", "content": system_prompt}], f, indent=4, ensure_ascii=False)
-
-            with open(self.prompt_path, "r", encoding="utf-8") as f:
-                history = json.load(f)
-            return (
-                "已清空历史记录",
-                str(history),
-                llm_tools_json,
-            )
-        elif user_prompt is None or user_prompt.strip() == "":
+        if user_prompt is None or user_prompt.strip() == "":
             with open(self.prompt_path, "r", encoding="utf-8") as f:
                 history = json.load(f)
             return (
@@ -932,158 +1133,28 @@ class LLM_local:
                         + "如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
                     )
                 
-                global glm_tokenizer, glm_model, llama_tokenizer, llama_model, qwen_tokenizer, qwen_model
-                if device == "auto":
-                    device ="cuda"if torch.cuda.is_available()else ("mps" if torch.backends.mps.is_available() else "cpu")
-                if self.model_type!=model_type and self.model_type!="":
-                    del glm_model
-                    del glm_tokenizer
-                    del llama_model
-                    del llama_tokenizer
-                    del qwen_model
-                    del qwen_tokenizer
-                    if self.device == "cuda":
-                        torch.cuda.empty_cache()
-                        gc.collect()
-                    # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
-                    elif self.device == "cpu" or self.device == "mps":
-                        gc.collect()
-                    glm_tokenizer = ""
-                    glm_model = ""
-                    llama_tokenizer = ""
-                    llama_model = ""
-                    qwen_tokenizer = ""
-                    qwen_model = ""
-                self.model_type = model_type
+                
+                #获得model存放的设备
+                device = next(model.parameters()).device
                 if model_type == "GLM":
-                    if glm_tokenizer == "":
-                        glm_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
-                    if glm_model == "" or self.device != device or self.dtype!=dtype:
-                        if self.device != device or self.dtype!=dtype:
-                            del glm_model
-                            if self.device == "cuda":
-                                torch.cuda.empty_cache()
-                                gc.collect()
-                            # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
-                            elif self.device == "cpu" or self.device == "mps":
-                                gc.collect()
-                            glm_model = ""
-                        self.device = device
-                        self.dtype = dtype
-                        if device == "cuda":
-                            if dtype =="float32":
-                                glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).cuda()
-                            elif dtype =="float16":
-                                glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().cuda()
-                            elif dtype =="int8":
-                                glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().cuda()
-                            elif dtype =="int4":
-                                glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().cuda()
-                        elif device == "cpu":
-                            if dtype =="float32":
-                                glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).float()
-                            elif dtype =="float16":
-                                glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().float()
-                            elif dtype =="int8":
-                                glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().float()
-                            elif dtype =="int4":
-                                glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().float()
-                        elif device == "mps":
-                            if dtype =="float32":
-                                glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).to("mps")
-                            elif dtype =="float16":
-                                glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().to("mps")
-                            elif dtype =="int8":
-                                glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().to("mps")
-                            elif dtype =="int4":
-                                glm_model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().to("mps")
-                        glm_model = glm_model.eval()
-                    response, history = glm_model.chat(
-                        glm_tokenizer, user_prompt, history, temperature=temperature, max_length=max_length, role="user"
+                    response, history = model.chat(
+                        tokenizer, user_prompt, history, temperature=temperature, max_length=max_length, role="user"
                     )
                     while type(response) == dict:
                         if response["name"] == "interpreter":
                             result = interpreter(str(response["content"]))
-                            response, history = glm_model.chat(
-                                glm_tokenizer, result, history=history, role="observation"
+                            response, history = model.chat(
+                                tokenizer, result, history=history, role="observation"
                             )
                         else:
                             result = dispatch_tool(response["name"], response["parameters"])
                             print(result)
-                            response, history = glm_model.chat(
-                                glm_tokenizer, result, history=history, role="observation"
+                            response, history = model.chat(
+                                tokenizer, result, history=history, role="observation"
                             )
                 elif model_type == "llama":
-                    if llama_tokenizer == "":
-                        llama_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
-                    if llama_model == "" or self.device != device or self.dtype!=dtype:
-                        if self.device != device or self.dtype!=dtype:
-                            del llama_model
-                            if self.device == "cuda":
-                                torch.cuda.empty_cache()
-                                gc.collect()
-                            # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
-                            elif self.device == "cpu" or self.device == "mps":
-                                gc.collect()
-                            llama_model = ""
-                        self.device = device
-                        self.dtype = dtype
-                        if device == "cuda":
-                            if dtype =="float32":
-                                llama_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cuda"
-                                )
-                            elif dtype =="float16":
-                                llama_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cuda"
-                                ).half()
-                            elif dtype =="int8":
-                                quantization_config = BitsAndBytesConfig(load_in_8bit=True,)
-                                llama_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cuda",quantization_config=quantization_config
-                                )
-                            elif dtype =="int4":
-                                quantization_config = BitsAndBytesConfig(load_in_4bit=True)
-                                llama_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cuda",quantization_config=quantization_config
-                                )
-                        elif device == "cpu":
-                            if dtype =="float32":
-                                llama_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cpu"
-                                    )
-                            elif dtype =="float16":
-                                llama_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cpu"
-                                ).half()
-                            elif dtype =="int8":
-                                llama_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cpu"
-                                ).half()
-                            elif dtype =="int4":
-                                llama_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cpu"
-                                ).half()
-                        elif device == "mps":
-                            if dtype =="float32":
-                                llama_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="mps"
-                            )
-                            elif dtype =="float16":
-                                llama_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="mps"
-                            ).half()
-                            elif dtype =="int8":
-                                llama_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="mps"
-                            ).half()
-                            elif dtype =="int4":
-                                llama_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="mps"
-                            ).half()
-                        llama_model = llama_model.eval()
                     response, history = llm_chat(
-                        llama_model, llama_tokenizer, user_prompt, history, device, max_length
+                        model, tokenizer, user_prompt, history, device, max_length
                     )
                     while "Action Input:" in response:
                         print(response)
@@ -1096,82 +1167,11 @@ class LLM_local:
                         result = dispatch_tool(Action, ActionInput)
                         print(result)
                         response, history = llm_chat(
-                            llama_model, llama_tokenizer, result, history, device, max_length, role="observation"
+                            model, tokenizer, result, history, device, max_length, role="observation"
                         )
                 elif model_type == "Qwen":
-                    if qwen_tokenizer == "":
-                        qwen_tokenizer = AutoTokenizer.from_pretrained(
-                            tokenizer_path, revision="master", trust_remote_code=True
-                        )
-                    if qwen_model == "" or self.device != device or self.dtype!=dtype:
-                        if self.device != device or self.dtype!=dtype:
-                            del qwen_model
-                            if device == "cuda":
-                                torch.cuda.empty_cache()
-                                gc.collect()
-                            # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
-                            elif device == "cpu" or device == "mps":
-                                gc.collect()
-                            qwen_model = ""
-                        self.device = device
-                        self.dtype = dtype
-                        if device == "cuda":
-                            if dtype =="float32":
-                                qwen_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cuda"
-                                )
-                            elif dtype =="float16":
-                                qwen_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cuda"
-                                ).half()
-                            elif dtype =="int8":
-                                quantization_config = BitsAndBytesConfig(load_in_8bit=True,)
-                                qwen_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cuda",quantization_config=quantization_config
-                                )
-                            elif dtype =="int4":
-                                quantization_config = BitsAndBytesConfig(load_in_4bit=True)
-                                qwen_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cuda",quantization_config=quantization_config
-                                )
-                        elif device == "cpu":
-                            if dtype =="float32":
-                                qwen_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cpu"
-                                )
-                            elif dtype =="float16":
-                                qwen_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cpu"
-                                ).half()
-                            elif dtype =="int8":
-                                qwen_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cpu"
-                                ).half()
-                            elif dtype =="int4":
-                                qwen_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="cpu"
-                                ).half()
-                        elif device == "mps":
-                            if dtype =="float32":
-                                qwen_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="mps"
-                                )
-                            elif dtype =="float16":
-                                qwen_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="mps"
-                                ).half()
-                            elif dtype =="int8":
-                                qwen_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="mps"
-                                ).half()
-                            elif dtype =="int4":
-                                qwen_model = AutoModelForCausalLM.from_pretrained(
-                                    model_path, trust_remote_code=True, device_map="mps"
-                                ).half()
-                        qwen_model = qwen_model.eval()
-                    qwen_model.generation_config = GenerationConfig.from_pretrained(model_path, trust_remote_code=True)
                     response, history = llm_chat(
-                        qwen_model, qwen_tokenizer, user_prompt, history, device, max_length
+                        model, tokenizer, user_prompt, history, device, max_length
                     )
                     while "Action Input:" in response:
                         print(response)
@@ -1184,32 +1184,13 @@ class LLM_local:
                         result = dispatch_tool(Action, ActionInput)
                         print(result)
                         response, history = llm_chat(
-                            qwen_model, qwen_tokenizer, result, history, device, max_length, role="observation"
+                            model, tokenizer, result, history, device, max_length, role="observation"
                         )
                 print(response)
                 # 修改prompt.json文件
                 with open(self.prompt_path, "w", encoding="utf-8") as f:
                     json.dump(history, f, indent=4, ensure_ascii=False)
                 history = str(history)
-                if is_reload == "enable":
-                    del glm_model
-                    del glm_tokenizer
-                    del llama_model
-                    del llama_tokenizer
-                    del qwen_model
-                    del qwen_tokenizer
-                    if device == "cuda" :
-                        torch.cuda.empty_cache()
-                        gc.collect()
-                    # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
-                    elif device == "cpu" or device == "mps":
-                        gc.collect()
-                    glm_tokenizer = ""
-                    glm_model = ""
-                    llama_tokenizer = ""
-                    llama_model = ""
-                    qwen_tokenizer = ""
-                    qwen_model = ""
                 return (
                     response,
                     history,
@@ -1270,11 +1251,13 @@ NODE_CLASS_MAPPINGS = {
     "classify_persona_plus": classify_persona_plus,
     "classify_function_plus": classify_function_plus,
     "About_us":About_us,
+    "LLM_api_loader":LLM_api_loader,
+    "LLM_local_loader":LLM_local_loader,
 }
 
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "LLM": "大语言模型api(LLM_api)",
+    "LLM": "API大语言模型(LLM_api)",
     "LLM_local": "本地大语言模型(LLM_local)",
     "load_file": "加载文件(load_file)",
     "load_persona": "加载人格面具(load_persona)",
@@ -1313,6 +1296,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "classify_persona_plus": "超大分类器面具(classify_persona_plus)",
     "classify_function_plus": "超大分类器函数(classify_function_plus)",
     "About_us": "关于我们(About_us)",
+    "LLM_api_loader": "API大语言模型加载器(LLM_api_loader)",
+    "LLM_local_loader": "本地大语言模型加载器(LLM_local_loader)",
 }
 
 if __name__ == "__main__":

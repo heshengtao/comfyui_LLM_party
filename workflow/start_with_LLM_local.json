@@ -1,26 +1,26 @@
 {
-  "last_node_id": 74,
-  "last_link_id": 94,
+  "last_node_id": 22,
+  "last_link_id": 34,
   "nodes": [
     {
-      "id": 72,
+      "id": 11,
       "type": "show_text_party",
       "pos": [
-        1219,
-        343
+        1403,
+        264
       ],
       "size": {
-        "0": 315,
-        "1": 58
+        "0": 454.6876220703125,
+        "1": 290.2985534667969
       },
       "flags": {},
-      "order": 4,
+      "order": 2,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 93,
+          "link": 34,
           "widget": {
             "name": "text"
           },
@@ -40,126 +40,38 @@
         "Node name for S&R": "show_text_party"
       },
       "widgets_values": [
-        ""
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 70,
-      "type": "load_file",
-      "pos": [
-        46,
-        339
-      ],
-      "size": {
-        "0": 310,
-        "1": 130
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "links": [
-            87
-          ],
-          "shape": 3,
-          "label": "file_content",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_file"
-      },
-      "widgets_values": [
-        "test.txt",
-        "enable",
-        "Relative_Path"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
-      "id": 69,
-      "type": "ebd_tool",
-      "pos": [
-        387,
-        339
-      ],
-      "size": {
-        "0": 315,
-        "1": 178
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": 87,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            92
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ebd_tool"
-      },
-      "widgets_values": [
-        "D:\\AI\\AIhuitu\\Blender_ComfyUI\\Blender_ComfyUI_Mini\\ComfyUI\\custom_nodes\\comfyui_LLM_party\\model\\bge-large-zh\\",
-        "enable",
         "",
-        "cuda",
-        200,
-        50,
-        "disable"
+        "你好👋！我是人工智能助手 ChatGLM3-6B，很高兴见到你，欢迎问我任何问题。"
       ],
       "color": "#233",
       "bgcolor": "#355"
     },
     {
-      "id": 73,
-      "type": "LLM",
+      "id": 21,
+      "type": "LLM_local",
       "pos": [
-        740,
-        330
+        939,
+        242
       ],
       "size": [
-        413.36087585449127,
-        374
+        397.584277343748,
+        350
       ],
       "flags": {},
-      "order": 3,
+      "order": 1,
       "mode": 0,
       "inputs": [
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 94,
+          "link": 32,
           "label": "model"
         },
         {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "link": 33,
+          "label": "tokenizer"
         },
         {
           "name": "system_prompt_input",
@@ -172,7 +84,7 @@
         {
           "name": "tools",
           "type": "STRING",
-          "link": 92,
+          "link": null,
           "widget": {
             "name": "tools"
           }
@@ -191,7 +103,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            93
+            34
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -213,18 +125,17 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "LLM"
+        "Node name for S&R": "LLM_local"
       },
       "widgets_values": [
         "你一个强大的人工智能助手。",
-        "在加州最幸福的事情是什么",
+        "你好",
+        "GLM",
         0.7,
+        512,
         "enable",
         "disable",
-        "disable",
         "enable",
-        2048,
-        "",
         "",
         "",
         ""
@@ -233,38 +144,50 @@
       "bgcolor": "#335"
     },
     {
-      "id": 74,
-      "type": "LLM_api_loader",
+      "id": 22,
+      "type": "LLM_local_loader",
       "pos": [
-        391,
-        165
+        513,
+        241
       ],
       "size": {
         "0": 315,
-        "1": 106
+        "1": 174
       },
       "flags": {},
-      "order": 1,
+      "order": 0,
       "mode": 0,
       "outputs": [
         {
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            94
+            32
           ],
           "shape": 3,
           "label": "model",
           "slot_index": 0
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "links": [
+            33
+          ],
+          "shape": 3,
+          "label": "tokenizer",
+          "slot_index": 1
         }
       ],
       "properties": {
-        "Node name for S&R": "LLM_api_loader"
+        "Node name for S&R": "LLM_local_loader"
       },
       "widgets_values": [
-        "gpt-3.5-turbo-1106",
-        "https://api.openai.com/v1",
-        "sk-XXXXX"
+        "GLM",
+        "D:\\AI\\mychat\\model\\chatglm3-6b\\",
+        "D:\\AI\\mychat\\model\\chatglm3-6b\\",
+        "auto",
+        "float32"
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
@@ -272,36 +195,28 @@
   ],
   "links": [
     [
-      87,
-      70,
+      32,
+      22,
       0,
-      69,
-      0,
-      "STRING"
-    ],
-    [
-      92,
-      69,
-      0,
-      73,
-      3,
-      "STRING"
-    ],
-    [
-      93,
-      73,
-      0,
-      72,
-      0,
-      "STRING"
-    ],
-    [
-      94,
-      74,
-      0,
-      73,
+      21,
       0,
       "CUSTOM"
+    ],
+    [
+      33,
+      22,
+      1,
+      21,
+      1,
+      "CUSTOM"
+    ],
+    [
+      34,
+      21,
+      0,
+      11,
+      0,
+      "STRING"
     ]
   ],
   "groups": [],

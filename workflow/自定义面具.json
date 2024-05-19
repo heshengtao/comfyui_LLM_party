@@ -1,13 +1,56 @@
 {
-  "last_node_id": 177,
-  "last_link_id": 161,
+  "last_node_id": 180,
+  "last_link_id": 166,
   "nodes": [
+    {
+      "id": 177,
+      "type": "show_text_party",
+      "pos": [
+        1535,
+        416
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 163,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
     {
       "id": 175,
       "type": "custom_persona",
       "pos": [
-        660,
-        410
+        657,
+        507
       ],
       "size": {
         "0": 306.919921875,
@@ -32,7 +75,7 @@
           "name": "system_prompt",
           "type": "STRING",
           "links": [
-            159
+            162
           ],
           "shape": 3,
           "label": "system_prompt",
@@ -52,28 +95,96 @@
       "bgcolor": "#000"
     },
     {
-      "id": 174,
+      "id": 180,
+      "type": "LLM_local_loader",
+      "pos": [
+        664,
+        271
+      ],
+      "size": {
+        "0": 315,
+        "1": 174
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            165
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "links": [
+            166
+          ],
+          "shape": 3,
+          "label": "tokenizer",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local_loader"
+      },
+      "widgets_values": [
+        "GLM",
+        "D:\\AI\\mychat\\model\\chatglm3-6b\\",
+        "D:\\AI\\mychat\\model\\chatglm3-6b\\",
+        "auto",
+        "float32"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 178,
       "type": "LLM_local",
       "pos": [
         1056.7067953186036,
         408.75369714355475
       ],
-      "size": {
-        "0": 400,
-        "1": 390
-      },
+      "size": [
+        410.220841400145,
+        361.7513992919912
+      ],
       "flags": {},
-      "order": 1,
+      "order": 2,
       "mode": 0,
       "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 165,
+          "label": "model"
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "link": 166,
+          "label": "tokenizer"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 162,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
         {
           "name": "tools",
           "type": "STRING",
           "link": null,
           "widget": {
             "name": "tools"
-          },
-          "label": "tools"
+          }
         },
         {
           "name": "file_content",
@@ -81,17 +192,7 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          },
-          "label": "file_content"
-        },
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "link": 159,
-          "widget": {
-            "name": "system_prompt"
-          },
-          "label": "system_prompt"
+          }
         }
       ],
       "outputs": [
@@ -99,7 +200,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            161
+            163
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -127,79 +228,51 @@
         "你一个强大的人工智能助手。",
         "人工智能",
         "GLM",
-        "D:\\AI\\mychat\\model\\chatglm3-6b",
-        "D:\\AI\\mychat\\model\\chatglm3-6b",
         0.7,
-        "disable",
-        "disable",
-        "disable",
-        "disable",
-        "cuda-float16",
         512,
+        "enable",
+        "disable",
+        "enable",
         "",
         "",
         ""
       ],
       "color": "#223",
       "bgcolor": "#335"
-    },
-    {
-      "id": 177,
-      "type": "show_text_party",
-      "pos": [
-        1535,
-        416
-      ],
-      "size": [
-        315,
-        58
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 161,
-          "widget": {
-            "name": "text"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        ""
-      ]
     }
   ],
   "links": [
     [
-      159,
+      162,
       175,
       0,
-      174,
+      178,
       2,
       "STRING"
     ],
     [
-      161,
-      174,
+      163,
+      178,
       0,
       177,
       0,
       "STRING"
+    ],
+    [
+      165,
+      180,
+      0,
+      178,
+      0,
+      "CUSTOM"
+    ],
+    [
+      166,
+      180,
+      1,
+      178,
+      1,
+      "CUSTOM"
     ]
   ],
   "groups": [],

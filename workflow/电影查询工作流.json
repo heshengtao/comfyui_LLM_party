@@ -1,80 +1,7 @@
 {
-  "last_node_id": 74,
-  "last_link_id": 91,
+  "last_node_id": 77,
+  "last_link_id": 98,
   "nodes": [
-    {
-      "id": 69,
-      "type": "google_tool",
-      "pos": [
-        300,
-        330
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            86
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "google_tool"
-      },
-      "widgets_values": [
-        "",
-        "",
-        ""
-      ],
-      "color": "#332922",
-      "bgcolor": "#593930"
-    },
-    {
-      "id": 71,
-      "type": "check_web_tool",
-      "pos": [
-        300,
-        740
-      ],
-      "size": {
-        "0": 315,
-        "1": 82
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            88
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "check_web_tool"
-      },
-      "widgets_values": [
-        "",
-        ""
-      ],
-      "color": "#332922",
-      "bgcolor": "#593930"
-    },
     {
       "id": 73,
       "type": "show_text_party",
@@ -82,10 +9,10 @@
         1185,
         366
       ],
-      "size": [
-        315,
-        58
-      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
       "flags": {},
       "order": 4,
       "mode": 0,
@@ -93,10 +20,11 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 90,
+          "link": 93,
           "widget": {
             "name": "text"
-          }
+          },
+          "label": "text"
         }
       ],
       "outputs": [
@@ -118,28 +46,90 @@
       "bgcolor": "#355"
     },
     {
-      "id": 50,
+      "id": 74,
+      "type": "show_text_party",
+      "pos": [
+        1185,
+        758
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 96,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 75,
       "type": "LLM",
       "pos": [
         705,
         279
       ],
-      "size": {
-        "0": 400,
-        "1": 406
-      },
+      "size": [
+        402.00946411132713,
+        374
+      ],
       "flags": {},
-      "order": 2,
+      "order": 3,
       "mode": 0,
       "inputs": [
         {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 97,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
           "name": "tools",
           "type": "STRING",
-          "link": 86,
+          "link": 92,
           "widget": {
             "name": "tools"
-          },
-          "label": "tools"
+          }
         },
         {
           "name": "file_content",
@@ -147,8 +137,7 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          },
-          "label": "file_content"
+          }
         }
       ],
       "outputs": [
@@ -156,8 +145,8 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            87,
-            90
+            93,
+            95
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -166,7 +155,7 @@
         {
           "name": "history",
           "type": "STRING",
-          "links": [],
+          "links": null,
           "shape": 3,
           "label": "history"
         },
@@ -184,14 +173,12 @@
       "widgets_values": [
         "你一个智能助手，请根据用户提问，在网络上搜索答案，并返回多个网页以及网页摘要",
         "联网查一下周处除三害的相关信息",
-        "gpt-3.5-turbo-1106",
         0.7,
+        "enable",
         "disable",
-        "",
-        "",
-        "",
-        "",
-        "",
+        "disable",
+        "enable",
+        2048,
         "",
         "",
         "",
@@ -201,28 +188,47 @@
       "bgcolor": "#335"
     },
     {
-      "id": 70,
+      "id": 76,
       "type": "LLM",
       "pos": [
         700,
         730
       ],
-      "size": {
-        "0": 400,
-        "1": 356
-      },
+      "size": [
+        406.45705200195334,
+        374
+      ],
       "flags": {},
-      "order": 3,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 98,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
           "name": "tools",
           "type": "STRING",
-          "link": 88,
+          "link": 94,
           "widget": {
             "name": "tools"
-          },
-          "label": "tools"
+          }
         },
         {
           "name": "file_content",
@@ -230,17 +236,15 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          },
-          "label": "file_content"
+          }
         },
         {
           "name": "user_prompt",
           "type": "STRING",
-          "link": 87,
+          "link": 95,
           "widget": {
             "name": "user_prompt"
-          },
-          "label": "user_prompt"
+          }
         }
       ],
       "outputs": [
@@ -248,7 +252,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            91
+            96
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -257,7 +261,7 @@
         {
           "name": "history",
           "type": "STRING",
-          "links": [],
+          "links": null,
           "shape": 3,
           "label": "history"
         },
@@ -274,15 +278,13 @@
       },
       "widgets_values": [
         "你一个智能助手，请根据用户给出的多个链接，逐一查询，总结返回电影的剧情简介和电影其他相关信息",
-        "联网查一下周处除三害的相关信息",
-        "gpt-3.5-turbo-1106",
+        "你好",
         0.7,
+        "enable",
         "disable",
-        "",
-        "",
-        "",
-        "",
-        "",
+        "disable",
+        "enable",
+        2048,
         "",
         "",
         "",
@@ -292,88 +294,177 @@
       "bgcolor": "#335"
     },
     {
-      "id": 74,
-      "type": "show_text_party",
+      "id": 77,
+      "type": "LLM_api_loader",
       "pos": [
-        1185,
-        758
+        282,
+        527
       ],
-      "size": [
-        315,
-        58
-      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
       "flags": {},
-      "order": 5,
+      "order": 0,
       "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 91,
-          "widget": {
-            "name": "text"
-          }
-        }
-      ],
       "outputs": [
         {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            97,
+            98
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "show_text_party"
+        "Node name for S&R": "LLM_api_loader"
       },
       "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "https://api.openai.com/v1",
+        "sk-XXXXX"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 71,
+      "type": "check_web_tool",
+      "pos": [
+        300,
+        740
+      ],
+      "size": {
+        "0": 315,
+        "1": 178
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            94
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "check_web_tool"
+      },
+      "widgets_values": [
+        true,
+        "",
+        50,
+        "auto",
+        "",
         ""
       ],
-      "color": "#233",
-      "bgcolor": "#355"
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 69,
+      "type": "google_tool",
+      "pos": [
+        300,
+        330
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            92
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "google_tool"
+      },
+      "widgets_values": [
+        true,
+        "",
+        ""
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
     }
   ],
   "links": [
     [
-      86,
+      92,
       69,
       0,
-      50,
-      0,
+      75,
+      3,
       "STRING"
     ],
     [
-      87,
-      50,
-      0,
-      70,
-      2,
-      "STRING"
-    ],
-    [
-      88,
-      71,
-      0,
-      70,
-      0,
-      "STRING"
-    ],
-    [
-      90,
-      50,
+      93,
+      75,
       0,
       73,
       0,
       "STRING"
     ],
     [
-      91,
-      70,
+      94,
+      71,
+      0,
+      76,
+      3,
+      "STRING"
+    ],
+    [
+      95,
+      75,
+      0,
+      76,
+      5,
+      "STRING"
+    ],
+    [
+      96,
+      76,
       0,
       74,
       0,
       "STRING"
+    ],
+    [
+      97,
+      77,
+      0,
+      75,
+      0,
+      "CUSTOM"
+    ],
+    [
+      98,
+      77,
+      0,
+      76,
+      0,
+      "CUSTOM"
     ]
   ],
   "groups": [],

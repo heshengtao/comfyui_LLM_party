@@ -1,18 +1,18 @@
 {
-  "last_node_id": 80,
-  "last_link_id": 43,
+  "last_node_id": 20,
+  "last_link_id": 31,
   "nodes": [
     {
-      "id": 78,
+      "id": 19,
       "type": "LLM",
       "pos": [
-        824,
-        314
+        940,
+        260
       ],
-      "size": [
-        404.3429870605469,
-        374
-      ],
+      "size": {
+        "0": 396.7934265136719,
+        "1": 404.169189453125
+      },
       "flags": {},
       "order": 1,
       "mode": 0,
@@ -20,7 +20,7 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 43,
+          "link": 31,
           "label": "model"
         },
         {
@@ -35,7 +35,8 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
-          }
+          },
+          "label": "system_prompt_input"
         },
         {
           "name": "tools",
@@ -43,7 +44,8 @@
           "link": null,
           "widget": {
             "name": "tools"
-          }
+          },
+          "label": "tools"
         },
         {
           "name": "file_content",
@@ -51,7 +53,8 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
@@ -59,7 +62,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            42
+            30
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -101,15 +104,15 @@
       "bgcolor": "#335"
     },
     {
-      "id": 76,
+      "id": 11,
       "type": "show_text_party",
       "pos": [
-        1311,
-        321
+        1403,
+        264
       ],
       "size": {
-        "0": 339.77325439453125,
-        "1": 117.2219009399414
+        "0": 454.6876220703125,
+        "1": 290.2985534667969
       },
       "flags": {},
       "order": 2,
@@ -118,7 +121,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 42,
+          "link": 30,
           "widget": {
             "name": "text"
           },
@@ -139,25 +142,23 @@
       },
       "widgets_values": [
         "",
-        "😊 你好！我是强大的人工智能助手，很高兴地见到你！有什么请求或问题吗？我会尽力帮助你的！ 👋"
+        "你好！有什么我可以帮助你的吗？"
       ],
       "color": "#233",
       "bgcolor": "#355"
     },
     {
-      "id": 80,
+      "id": 20,
       "type": "LLM_api_loader",
       "pos": [
-        429,
-        320
+        513,
+        269
       ],
       "size": {
         "0": 315,
         "1": 106
       },
-      "flags": {
-        "pinned": false
-      },
+      "flags": {},
       "order": 0,
       "mode": 0,
       "outputs": [
@@ -165,7 +166,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            43
+            31
           ],
           "shape": 3,
           "label": "model",
@@ -176,9 +177,9 @@
         "Node name for S&R": "LLM_api_loader"
       },
       "widgets_values": [
-        "llama3",
-        "http://localhost:11434/v1/",
-        "ollama"
+        "gpt-3.5-turbo",
+        "https://api.openai.com/v1/",
+        "sk-XXXXX"
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
@@ -186,18 +187,18 @@
   ],
   "links": [
     [
-      42,
-      78,
+      30,
+      19,
       0,
-      76,
+      11,
       0,
       "STRING"
     ],
     [
-      43,
-      80,
+      31,
+      20,
       0,
-      78,
+      19,
       0,
       "CUSTOM"
     ]

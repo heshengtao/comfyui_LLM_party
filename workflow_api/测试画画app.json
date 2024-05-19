@@ -6,7 +6,7 @@
     },
     "class_type": "load_persona",
     "_meta": {
-      "title": "加载人格面具（load_persona）"
+      "title": "加载人格面具(load_persona)"
     }
   },
   "154": {
@@ -18,20 +18,20 @@
     },
     "class_type": "classify_persona",
     "_meta": {
-      "title": "分类器面具（classify_persona）"
+      "title": "分类器面具(classify_persona)"
     }
   },
   "162": {
     "inputs": {
       "is_enable": "enable",
       "text": [
-        "179",
+        "204",
         0
       ]
     },
     "class_type": "classify_function",
     "_meta": {
-      "title": "分类器函数（classify_function）"
+      "title": "分类器函数(classify_function)"
     }
   },
   "169": {
@@ -56,22 +56,26 @@
   },
   "176": {
     "inputs": {
+      "file_content": "",
       "file_path": "",
-      "img_path": "",
-      "system_prompt": "你是一个强大的智能助手",
-      "user_prompt": "你好"
+      "img_path": "你是一个强大的智能助手",
+      "system_prompt": "你好",
+      "user_prompt": "你好",
+      "positive_prompt": "",
+      "negative_prompt": "",
+      "model_name": ""
     },
     "class_type": "start_workflow",
     "_meta": {
-      "title": "开始工作流（start_workflow）"
+      "title": "开始工作流(start_workflow)"
     }
   },
   "177": {
     "inputs": {
       "filename_prefix": "ComfyUI",
       "text": [
-        "162",
-        2
+        "202",
+        0
       ],
       "images": [
         "198",
@@ -80,59 +84,7 @@
     },
     "class_type": "end_workflow",
     "_meta": {
-      "title": "结束工作流（end_workflow）"
-    }
-  },
-  "178": {
-    "inputs": {
-      "system_prompt": [
-        "150",
-        0
-      ],
-      "user_prompt": [
-        "176",
-        3
-      ],
-      "model_name": "gpt-4",
-      "temperature": 0.7000000000000001,
-      "is_memory": "disable",
-      "is_tools_in_sys_prompt": "disable",
-      "is_locked": "disable",
-      "main_brain": "enable",
-      "max_length": 2048,
-      "base_url": "",
-      "api_key": "",
-      "imgbb_api_key": ""
-    },
-    "class_type": "LLM",
-    "_meta": {
-      "title": "大语言模型api（LLM_api）"
-    }
-  },
-  "179": {
-    "inputs": {
-      "system_prompt": [
-        "154",
-        0
-      ],
-      "user_prompt": [
-        "178",
-        0
-      ],
-      "model_name": "gpt-4",
-      "temperature": 0.7000000000000001,
-      "is_memory": "disable",
-      "is_tools_in_sys_prompt": "disable",
-      "is_locked": "disable",
-      "main_brain": "enable",
-      "max_length": 2048,
-      "base_url": "",
-      "api_key": "",
-      "imgbb_api_key": ""
-    },
-    "class_type": "LLM",
-    "_meta": {
-      "title": "大语言模型api（LLM_api）"
+      "title": "结束工作流(end_workflow)"
     }
   },
   "195": {
@@ -148,7 +100,7 @@
     },
     "class_type": "CLIPTextEncode_party",
     "_meta": {
-      "title": "CLIP文本编码器（CLIPTextEncode_party）"
+      "title": "CLIP文本编码器(CLIPTextEncode_party)"
     }
   },
   "196": {
@@ -164,12 +116,12 @@
     },
     "class_type": "CLIPTextEncode_party",
     "_meta": {
-      "title": "CLIP文本编码器（CLIPTextEncode_party）"
+      "title": "CLIP文本编码器(CLIPTextEncode_party)"
     }
   },
   "197": {
     "inputs": {
-      "seed": 750231815664258,
+      "seed": 519148138973913,
       "steps": 20,
       "cfg": 8,
       "sampler_name": "euler",
@@ -194,7 +146,7 @@
     },
     "class_type": "KSampler_party",
     "_meta": {
-      "title": "KSampler采样器（KSampler_party）"
+      "title": "KSampler采样器(KSampler_party)"
     }
   },
   "198": {
@@ -210,7 +162,86 @@
     },
     "class_type": "VAEDecode_party",
     "_meta": {
-      "title": "VAEDecode解码器（VAEDecode_party）"
+      "title": "VAEDecode解码器(VAEDecode_party)"
+    }
+  },
+  "202": {
+    "inputs": {
+      "text": [
+        "162",
+        2
+      ]
+    },
+    "class_type": "show_text_party",
+    "_meta": {
+      "title": "显示文本(show_text)"
+    }
+  },
+  "203": {
+    "inputs": {
+      "system_prompt": "",
+      "user_prompt": [
+        "176",
+        3
+      ],
+      "temperature": 0.7,
+      "is_memory": "enable",
+      "is_tools_in_sys_prompt": "disable",
+      "is_locked": "disable",
+      "main_brain": "enable",
+      "max_length": 2048,
+      "system_prompt_input": [
+        "150",
+        0
+      ],
+      "imgbb_api_key": "",
+      "model": [
+        "205",
+        0
+      ]
+    },
+    "class_type": "LLM",
+    "_meta": {
+      "title": "API大语言模型(LLM_api)"
+    }
+  },
+  "204": {
+    "inputs": {
+      "system_prompt": "",
+      "user_prompt": [
+        "203",
+        0
+      ],
+      "temperature": 0.7,
+      "is_memory": "enable",
+      "is_tools_in_sys_prompt": "disable",
+      "is_locked": "disable",
+      "main_brain": "enable",
+      "max_length": 2048,
+      "system_prompt_input": [
+        "154",
+        0
+      ],
+      "imgbb_api_key": "",
+      "model": [
+        "205",
+        0
+      ]
+    },
+    "class_type": "LLM",
+    "_meta": {
+      "title": "API大语言模型(LLM_api)"
+    }
+  },
+  "205": {
+    "inputs": {
+      "model_name": "gpt-3.5-turbo-1106",
+      "base_url": "https://api.openai.com/v1",
+      "api_key": "sk-XXXXX"
+    },
+    "class_type": "LLM_api_loader",
+    "_meta": {
+      "title": "API大语言模型加载器(LLM_api_loader)"
     }
   }
 }

@@ -1,187 +1,7 @@
 {
-  "last_node_id": 85,
-  "last_link_id": 109,
+  "last_node_id": 89,
+  "last_link_id": 115,
   "nodes": [
-    {
-      "id": 69,
-      "type": "google_tool",
-      "pos": [
-        -80,
-        240
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            101
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "google_tool"
-      },
-      "widgets_values": [
-        "",
-        "",
-        ""
-      ],
-      "color": "#332922",
-      "bgcolor": "#593930"
-    },
-    {
-      "id": 74,
-      "type": "time_tool",
-      "pos": [
-        -90,
-        380
-      ],
-      "size": {
-        "0": 315,
-        "1": 82
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            104
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "time_tool"
-      },
-      "widgets_values": [
-        "Asia/Shanghai",
-        "enable"
-      ],
-      "color": "#332922",
-      "bgcolor": "#593930"
-    },
-    {
-      "id": 75,
-      "type": "check_web_tool",
-      "pos": [
-        -90,
-        490
-      ],
-      "size": {
-        "0": 315,
-        "1": 82
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            105
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "check_web_tool"
-      },
-      "widgets_values": [
-        "",
-        ""
-      ],
-      "color": "#332922",
-      "bgcolor": "#593930"
-    },
-    {
-      "id": 76,
-      "type": "weather_tool",
-      "pos": [
-        0,
-        600
-      ],
-      "size": {
-        "0": 210,
-        "1": 82
-      },
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            106
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "weather_tool"
-      },
-      "widgets_values": [
-        "上海市",
-        "enable"
-      ],
-      "color": "#332922",
-      "bgcolor": "#593930"
-    },
-    {
-      "id": 80,
-      "type": "interpreter_tool",
-      "pos": [
-        -110,
-        750
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            107
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "interpreter_tool"
-      },
-      "widgets_values": [
-        "enable"
-      ],
-      "color": "#332922",
-      "bgcolor": "#593930"
-    },
     {
       "id": 83,
       "type": "tool_combine_plus",
@@ -194,7 +14,7 @@
         "1": 298
       },
       "flags": {},
-      "order": 5,
+      "order": 8,
       "mode": 0,
       "inputs": [
         {
@@ -245,7 +65,7 @@
         {
           "name": "tool6",
           "type": "STRING",
-          "link": null,
+          "link": 113,
           "widget": {
             "name": "tool6"
           },
@@ -254,7 +74,7 @@
         {
           "name": "tool7",
           "type": "STRING",
-          "link": null,
+          "link": 114,
           "widget": {
             "name": "tool7"
           },
@@ -293,7 +113,7 @@
           "name": "tools",
           "type": "STRING",
           "links": [
-            103
+            110
           ],
           "shape": 3,
           "label": "tools",
@@ -320,112 +140,28 @@
       "bgcolor": "#533"
     },
     {
-      "id": 50,
-      "type": "LLM",
-      "pos": [
-        700,
-        300
-      ],
-      "size": {
-        "0": 400,
-        "1": 406
-      },
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 103,
-          "widget": {
-            "name": "tools"
-          },
-          "label": "tools"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            108
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": [
-            109
-          ],
-          "shape": 3,
-          "label": "history",
-          "slot_index": 1
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的智能助手，你可以把代码输入到解释器中运行，以查看代码运行结果",
-        "帮我计算一个20以内的所有质数之积\n",
-        "gpt-3.5-turbo-1106",
-        0.7,
-        "disable",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
       "id": 84,
       "type": "show_text_party",
       "pos": [
         1188,
         303
       ],
-      "size": [
-        315,
-        58
-      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
       "flags": {},
-      "order": 7,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 108,
+          "link": 111,
           "widget": {
             "name": "text"
-          }
+          },
+          "label": "text"
         }
       ],
       "outputs": [
@@ -453,22 +189,23 @@
         1202,
         747
       ],
-      "size": [
-        315,
-        58
-      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
       "flags": {},
-      "order": 8,
+      "order": 11,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 109,
+          "link": 112,
           "widget": {
             "name": "text"
           },
-          "slot_index": 0
+          "slot_index": 0,
+          "label": "text"
         }
       ],
       "outputs": [
@@ -488,6 +225,402 @@
       ],
       "color": "#233",
       "bgcolor": "#355"
+    },
+    {
+      "id": 86,
+      "type": "LLM",
+      "pos": [
+        700,
+        300
+      ],
+      "size": [
+        396.5980285644532,
+        374
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 115,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 110,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            111,
+            112
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。你可以将你生成的代码输入到解释器中，解释器会返回代码执行后在控制台的输出。",
+        "将北京时间的分钟数和北京明天的最高气温相乘，再除以7取余数，告诉我返回的余数",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 69,
+      "type": "google_tool",
+      "pos": [
+        -138,
+        18
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            101
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "google_tool"
+      },
+      "widgets_values": [
+        "",
+        "",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 74,
+      "type": "time_tool",
+      "pos": [
+        -137,
+        193
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            104
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "time_tool"
+      },
+      "widgets_values": [
+        "Asia/Shanghai",
+        "enable"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 75,
+      "type": "check_web_tool",
+      "pos": [
+        -140,
+        345
+      ],
+      "size": {
+        "0": 315,
+        "1": 178
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            105
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "check_web_tool"
+      },
+      "widgets_values": [
+        "",
+        "",
+        50,
+        "auto",
+        "",
+        ""
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 76,
+      "type": "weather_tool",
+      "pos": [
+        -68,
+        596
+      ],
+      "size": {
+        "0": 210,
+        "1": 82
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            106
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "weather_tool"
+      },
+      "widgets_values": [
+        "上海市",
+        "enable"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 80,
+      "type": "interpreter_tool",
+      "pos": [
+        -135,
+        745
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            107
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "interpreter_tool"
+      },
+      "widgets_values": [
+        "enable"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 87,
+      "type": "wikipedia_tool",
+      "pos": [
+        -151,
+        875
+      ],
+      "size": {
+        "0": 315,
+        "1": 178
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            113
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "wikipedia_tool"
+      },
+      "widgets_values": [
+        "query",
+        true,
+        200,
+        50,
+        "auto",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 88,
+      "type": "arxiv_tool",
+      "pos": [
+        -168,
+        1115
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            114
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "arxiv_tool"
+      },
+      "widgets_values": [
+        "query",
+        true
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 89,
+      "type": "LLM_api_loader",
+      "pos": [
+        321,
+        97
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            115
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "https://api.openai.com/v1",
+        "sk-XXXXX"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
     }
   ],
   "links": [
@@ -496,14 +629,6 @@
       69,
       0,
       83,
-      0,
-      "STRING"
-    ],
-    [
-      103,
-      83,
-      0,
-      50,
       0,
       "STRING"
     ],
@@ -540,20 +665,52 @@
       "STRING"
     ],
     [
-      108,
-      50,
+      110,
+      83,
+      0,
+      86,
+      3,
+      "STRING"
+    ],
+    [
+      111,
+      86,
       0,
       84,
       0,
       "STRING"
     ],
     [
-      109,
-      50,
-      1,
+      112,
+      86,
+      0,
       85,
       0,
       "STRING"
+    ],
+    [
+      113,
+      87,
+      0,
+      83,
+      5,
+      "STRING"
+    ],
+    [
+      114,
+      88,
+      0,
+      83,
+      6,
+      "STRING"
+    ],
+    [
+      115,
+      89,
+      0,
+      86,
+      0,
+      "CUSTOM"
     ]
   ],
   "groups": [],

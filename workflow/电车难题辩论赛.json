@@ -1,6 +1,6 @@
 {
-  "last_node_id": 72,
-  "last_link_id": 89,
+  "last_node_id": 75,
+  "last_link_id": 98,
   "nodes": [
     {
       "id": 57,
@@ -14,7 +14,7 @@
         "1": 82
       },
       "flags": {},
-      "order": 5,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
@@ -29,7 +29,7 @@
         {
           "name": "assistant_response",
           "type": "STRING",
-          "link": 73,
+          "link": 92,
           "widget": {
             "name": "assistant_response"
           },
@@ -47,73 +47,29 @@
       "bgcolor": "#653"
     },
     {
-      "id": 60,
-      "type": "start_dialog",
-      "pos": [
-        290,
-        330
-      ],
-      "size": {
-        "0": 315,
-        "1": 78
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "links": [
-            78
-          ],
-          "shape": 3,
-          "label": "user_prompt",
-          "slot_index": 0
-        },
-        {
-          "name": "dialog_id",
-          "type": "STRING",
-          "links": [
-            79
-          ],
-          "shape": 3,
-          "label": "dialog_id",
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "start_dialog"
-      },
-      "widgets_values": [
-        "辩论开始了，请问你在电车难题中会怎么选择"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
       "id": 69,
       "type": "show_text_party",
       "pos": [
         718,
         796
       ],
-      "size": [
-        315,
-        58
-      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
       "flags": {},
-      "order": 3,
+      "order": 4,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 86,
+          "link": 93,
           "widget": {
             "name": "text"
           },
-          "slot_index": 0
+          "slot_index": 0,
+          "label": "text"
         }
       ],
       "outputs": [
@@ -141,22 +97,23 @@
         728,
         1288
       ],
-      "size": [
-        315,
-        58
-      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
       "flags": {},
-      "order": 4,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 88,
+          "link": 94,
           "widget": {
             "name": "text"
           },
-          "slot_index": 0
+          "slot_index": 0,
+          "label": "text"
         }
       ],
       "outputs": [
@@ -178,123 +135,29 @@
       "bgcolor": "#355"
     },
     {
-      "id": 50,
-      "type": "LLM",
-      "pos": [
-        700,
-        330
-      ],
-      "size": {
-        "0": 400,
-        "1": 356
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          },
-          "label": "tools"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 78,
-          "widget": {
-            "name": "user_prompt"
-          },
-          "label": "user_prompt"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            71,
-            86
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": [
-            88
-          ],
-          "shape": 3,
-          "label": "history",
-          "slot_index": 1
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个辩论赛选手，辩论的主题是电车难题中应该是救一个人还是救五个人。请阐述电车难题中选择救5个人的原因，并反驳救1个人是的立场。请尽最大努力反驳用户的观点。如果需要论据，可以联网获得。",
-        "在旧金山可以干嘛",
-        "gpt-3.5-turbo-1106",
-        0.7,
-        "enable",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
       "id": 70,
       "type": "show_text_party",
       "pos": [
         1235,
         802
       ],
-      "size": [
-        315,
-        58
-      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
       "flags": {},
-      "order": 6,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 87,
+          "link": 95,
           "widget": {
             "name": "text"
           },
-          "slot_index": 0
+          "slot_index": 0,
+          "label": "text"
         }
       ],
       "outputs": [
@@ -322,22 +185,23 @@
         1239,
         1286
       ],
-      "size": [
-        315,
-        58
-      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
       "flags": {},
-      "order": 7,
+      "order": 8,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 89,
+          "link": 96,
           "widget": {
             "name": "text"
           },
-          "slot_index": 0
+          "slot_index": 0,
+          "label": "text"
         }
       ],
       "outputs": [
@@ -359,20 +223,86 @@
       "bgcolor": "#355"
     },
     {
-      "id": 55,
-      "type": "LLM",
+      "id": 60,
+      "type": "start_dialog",
       "pos": [
-        1200,
+        290,
         330
       ],
       "size": {
-        "0": 400,
-        "1": 356
+        "0": 315,
+        "1": 78
       },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "links": [
+            90
+          ],
+          "shape": 3,
+          "label": "user_prompt",
+          "slot_index": 0
+        },
+        {
+          "name": "dialog_id",
+          "type": "STRING",
+          "links": [
+            79
+          ],
+          "shape": 3,
+          "label": "dialog_id",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "start_dialog"
+      },
+      "widgets_values": [
+        "辩论开始了，请问你在电车难题中会怎么选择"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 73,
+      "type": "LLM",
+      "pos": [
+        700,
+        330
+      ],
+      "size": [
+        394.74566650390625,
+        374
+      ],
       "flags": {},
       "order": 2,
       "mode": 0,
       "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 97,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
         {
           "name": "tools",
           "type": "STRING",
@@ -394,11 +324,10 @@
         {
           "name": "user_prompt",
           "type": "STRING",
-          "link": 71,
+          "link": 90,
           "widget": {
             "name": "user_prompt"
-          },
-          "label": "user_prompt"
+          }
         }
       ],
       "outputs": [
@@ -406,8 +335,8 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            73,
-            87
+            91,
+            93
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -417,7 +346,117 @@
           "name": "history",
           "type": "STRING",
           "links": [
-            89
+            94
+          ],
+          "shape": 3,
+          "label": "history",
+          "slot_index": 1
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你你一个辩论赛选手，辩论的主题是电车难题中应该是救一个人还是救五个人。请阐述电车难题中选择救5个人的原因，并反驳救1个人是的立场。请尽最大努力反驳用户的观点。如果需要论据，可以联网获得。",
+        "你好",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 74,
+      "type": "LLM",
+      "pos": [
+        1200,
+        330
+      ],
+      "size": [
+        394.14570434570305,
+        374
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 98,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        },
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "link": 91,
+          "widget": {
+            "name": "user_prompt"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            92,
+            95
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [
+            96
           ],
           "shape": 3,
           "label": "history",
@@ -436,15 +475,13 @@
       },
       "widgets_values": [
         "你一个辩论赛选手，辩论的主题是电车难题中应该是救一个人还是救五个人。请阐述电车难题中选择救1个人的原因，并反驳救5个人是的立场。请尽最大努力反驳用户的观点。如果需要论据，可以联网获得。",
-        "在旧金山可以干嘛",
-        "gpt-3.5-turbo-1106",
+        "你好",
         0.7,
         "enable",
-        "",
-        "",
-        "",
-        "",
-        "",
+        "disable",
+        "disable",
+        "enable",
+        2048,
         "",
         "",
         "",
@@ -452,33 +489,47 @@
       ],
       "color": "#223",
       "bgcolor": "#335"
+    },
+    {
+      "id": 75,
+      "type": "LLM_api_loader",
+      "pos": [
+        288,
+        104
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            97,
+            98
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "https://api.openai.com/v1",
+        "sk-XXXXX"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
     }
   ],
   "links": [
-    [
-      71,
-      50,
-      0,
-      55,
-      2,
-      "STRING"
-    ],
-    [
-      73,
-      55,
-      0,
-      57,
-      1,
-      "STRING"
-    ],
-    [
-      78,
-      60,
-      0,
-      50,
-      2,
-      "STRING"
-    ],
     [
       79,
       60,
@@ -488,36 +539,76 @@
       "STRING"
     ],
     [
-      86,
-      50,
+      90,
+      60,
+      0,
+      73,
+      5,
+      "STRING"
+    ],
+    [
+      91,
+      73,
+      0,
+      74,
+      5,
+      "STRING"
+    ],
+    [
+      92,
+      74,
+      0,
+      57,
+      1,
+      "STRING"
+    ],
+    [
+      93,
+      73,
       0,
       69,
       0,
       "STRING"
     ],
     [
-      87,
-      55,
-      0,
-      70,
-      0,
-      "STRING"
-    ],
-    [
-      88,
-      50,
+      94,
+      73,
       1,
       71,
       0,
       "STRING"
     ],
     [
-      89,
-      55,
+      95,
+      74,
+      0,
+      70,
+      0,
+      "STRING"
+    ],
+    [
+      96,
+      74,
       1,
       72,
       0,
       "STRING"
+    ],
+    [
+      97,
+      75,
+      0,
+      73,
+      0,
+      "CUSTOM"
+    ],
+    [
+      98,
+      75,
+      0,
+      74,
+      0,
+      "CUSTOM"
     ]
   ],
   "groups": [],
