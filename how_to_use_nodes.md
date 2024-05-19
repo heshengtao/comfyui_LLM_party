@@ -16,9 +16,8 @@
 
 ### LLM_Local Node and its loader node
 1. Currently supports GLM/Llama/Qwen, but only GLM's tool calling is perfectly adapted, the other two require a large parameter version to call tools normally.
-2. is_reload determines whether to unload the local model after the node runs. It is disabled by default to prevent reloading the large model and increasing running time. When the video memory cannot support running LLM and SD at the same time, it can be enabled.
-3. Input the model's project folder into model_path and tokenizer_path, compatible with all models that can be compatible with transformer.
-4. Other parameters are consistent with the LLM_API node.
+2. Input the model's project folder into model_path and tokenizer_path, compatible with all models that can be compatible with transformer.
+3. Other parameters are consistent with the LLM_API node.
 
 ### Embedding Model
 1. The file_content node can input a string, which will be used as the input to the word embedding model. The model will search on this string and return the most relevant text content based on the question.

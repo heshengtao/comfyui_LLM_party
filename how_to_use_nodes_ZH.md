@@ -16,9 +16,8 @@
 
 ### 本地LLM节点及其加载节点
 1. 目前支持GLM/Llama/Qwen，不过只有GLM的工具调用是完美适配的，其他两个需要大参数版本才能正常工具调用
-2. is_reload决定了在节点运行结束后是否会卸载本地模型。默认为禁用，防止重复加载大模型，增加运行时间。当显存不能支持同时运行LLM和SD时，可以启用。
-3. model_path和tokenizer_path填入模型的项目文件夹即可，适配所以可以被transformer兼容的型号。
-4. 其余参数与APILLM节点一致
+2. model_path和tokenizer_path填入模型的项目文件夹即可，适配所以可以被transformer兼容的型号。
+3. 其余参数与APILLM节点一致
 
 ### 词嵌入模型
 1. file_content节点可以输入一个字符串，该字符串会被作为词嵌入模型的输入，模型会在这个字符串上进行搜索，根据question来返回最相关的文本内容。
