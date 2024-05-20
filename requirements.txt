@@ -22,3 +22,5 @@ arxiv
 accelerate
 bitsandbytes
 fastapi
+py-cpuinfo
+diskcache

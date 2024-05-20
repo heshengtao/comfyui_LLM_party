@@ -53,7 +53,7 @@ from .tools.show_text import show_text_party,About_us
 from .tools.tool_combine import tool_combine, tool_combine_plus
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import workflow_transfer
-
+from torchvision.transforms import ToPILImage
 
 _TOOL_HOOKS = [
     "get_time",
@@ -137,6 +137,7 @@ def another_llm(id, type, question):
             system_prompt_input,
             tools,
             file_content,
+            image,
         ) = llm.list
         res, _, _ = llm.chatbot(
             question,
@@ -152,6 +153,7 @@ def another_llm(id, type, question):
             system_prompt_input,
             tools,
             file_content,
+            image,
         )
     else:
         return "type参数错误，请使用api或local"
@@ -924,7 +926,6 @@ class LLM_local:
         return {
             "required": {
                 "model": ("CUSTOM", {}),
-                "tokenizer":("CUSTOM",{}),
                 "system_prompt": ("STRING", {"multiline": True, "default": "你一个强大的人工智能助手。"}),
                 "user_prompt": (
                     "STRING",
@@ -934,7 +935,7 @@ class LLM_local:
                     },
                 ),
                 "model_type": (
-                    ["GLM", "llama", "Qwen"],
+                    ["GLM", "llama", "Qwen","llaVa"],
                     {
                         "default": "GLM",
                     },
@@ -946,6 +947,8 @@ class LLM_local:
                 "main_brain": (["enable", "disable"], {"default": "enable"}),
             },
             "optional": {
+                "tokenizer":("CUSTOM",{}),
+                "image": ("IMAGE", {"forceInput": True}),
                 "system_prompt_input": ("STRING", {"forceInput": True}),
                 "tools": ("STRING", {"forceInput": True}),
                 "file_content": ("STRING", {"forceInput": True}),
@@ -976,14 +979,15 @@ class LLM_local:
         system_prompt,
         model_type,
         model,
-        tokenizer,
-        temperature,
-        max_length,
-        is_memory,
-        is_locked,
+        tokenizer=None,
+        temperature=0.7,
+        max_length=2048,
+        is_memory="enable",
+        is_locked="disable",
         system_prompt_input="",
         tools=None,
         file_content=None,
+        image=None,
     ):
         self.list = [
             main_brain,
@@ -998,6 +1002,7 @@ class LLM_local:
             system_prompt_input,
             tools,
             file_content,
+            image,
         ]
         self.tool_data["system_prompt"] = system_prompt
         if system_prompt_input is not None and system_prompt is not None:
@@ -1094,6 +1099,7 @@ class LLM_local:
     Final Answer: the final answer to the original input question
 
     Begin!"""
+                
                 for message in history:
                     if message["role"] == "system":
                         message["content"] = system_prompt
@@ -1105,11 +1111,12 @@ class LLM_local:
                                 message["content"] += "\n" + GPT_INSTRUCTION + "\n"
                             elif model_type == "Qwen":
                                 message["content"] += "\n" + GPT_INSTRUCTION + "\n"
+                            elif model_type == "llaVa":
+                                message["content"] += "\n" + GPT_INSTRUCTION + "\n"
                         else:
                             if "tools" in message:
                                 # 如果存在，移除 'tools' 键值对
                                 message.pop("tools")
-
                 if tools is not None:
                     print(tools)
                     tools = json.loads(tools)
@@ -1135,7 +1142,8 @@ class LLM_local:
                 
                 
                 #获得model存放的设备
-                device = next(model.parameters()).device
+                if model_type != "llaVa":
+                    device = next(model.parameters()).device
                 if model_type == "GLM":
                     response, history = model.chat(
                         tokenizer, user_prompt, history, temperature=temperature, max_length=max_length, role="user"
@@ -1186,6 +1194,52 @@ class LLM_local:
                         response, history = llm_chat(
                             model, tokenizer, result, history, device, max_length, role="observation"
                         )
+                elif model_type == "llaVa":
+                    if image is not None:
+                        pil_image = ToPILImage()(image[0].permute(2, 0, 1))
+                        # Convert the PIL image to a bytes buffer
+                        buffer = io.BytesIO()
+                        pil_image.save(buffer, format="PNG")  # You can change the format if needed
+                        # Get the bytes from the buffer
+                        image_bytes = buffer.getvalue()
+                        # Encode the bytes to base64
+                        base64_string = f"data:image/jpeg;base64,{base64.b64encode(image_bytes).decode('utf-8')}"
+                        user_content={
+                            "role": "user",
+                            "content": [
+                                {"type": "image_url", "image_url": {"url" : base64_string}},
+                                {"type" : "text", "text": user_prompt}
+                            ]
+                        }
+                        history.append(user_content)
+                        response = model.create_chat_completion(
+                            messages = history,
+                            temperature = temperature,
+                            max_tokens=max_length,
+                        )
+                        response=f"{response['choices'][0]['message']['content']}"
+                        print(response)
+                        assistant_content={
+                            "role": "assistant",
+                            "content": response
+                        }
+                        history.append(assistant_content)
+                    else:
+                        user_content={
+                            "role": "user",
+                            "content":  user_prompt
+                        }
+                        history.append(user_content)
+                        response = model.create_chat_completion(
+                            messages = history,
+                            temperature = temperature,
+                        )
+                        response=f"{response['choices'][0]['message']['content']}"
+                        assistant_content={
+                            "role": "assistant",
+                            "content": response
+                        }
+                        history.append(assistant_content)
                 print(response)
                 # 修改prompt.json文件
                 with open(self.prompt_path, "w", encoding="utf-8") as f:
@@ -1209,6 +1263,32 @@ class LLM_local:
         # 返回当前时间的哈希值，确保每次都不同
         current_time = str(time.time())
         return hashlib.sha256(current_time.encode()).hexdigest()
+    
+class LLavaLoader:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": { 
+              "ckpt_path": ("STRING", {"default": ""}),   
+              "clip_path": ("STRING", {"default": ""}), 
+              "max_ctx": ("INT", {"default": 2048, "min": 300, "max": 100000, "step": 64}),
+              "gpu_layers": ("INT", {"default": 27, "min": 0, "max": 100, "step": 1}),
+              "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
+                             }}
+                
+    
+    RETURN_TYPES = ("CUSTOM",)
+    RETURN_NAMES = ("model",)
+    FUNCTION = "load_llava_checkpoint"
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    def load_llava_checkpoint(self, ckpt_path, max_ctx, gpu_layers, n_threads, clip_path ):
+        from llama_cpp import Llama
+        from llama_cpp.llama_chat_format import Llava15ChatHandler
+        clip = Llava15ChatHandler(clip_model_path = clip_path, verbose=False) 
+        llm = Llama(model_path = ckpt_path, chat_handler=clip,offload_kqv=True, f16_kv=True, use_mlock=False, embedding=False, n_batch=1024, last_n_tokens_size=1024, verbose=True, seed=42, n_ctx = max_ctx, n_gpu_layers=gpu_layers, n_threads=n_threads, logits_all=True, echo=False) 
+        return (llm, ) 
+
+
 
 
 NODE_CLASS_MAPPINGS = {
@@ -1253,6 +1333,7 @@ NODE_CLASS_MAPPINGS = {
     "About_us":About_us,
     "LLM_api_loader":LLM_api_loader,
     "LLM_local_loader":LLM_local_loader,
+    "LLavaLoader":LLavaLoader,
 }
 
 
@@ -1298,6 +1379,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "About_us": "关于我们(About_us)",
     "LLM_api_loader": "API大语言模型加载器(LLM_api_loader)",
     "LLM_local_loader": "本地大语言模型加载器(LLM_local_loader)",
+    "LLavaLoader": "LLava加载器(LLavaLoader)",
 }
 
 if __name__ == "__main__":
