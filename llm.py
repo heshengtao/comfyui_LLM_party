@@ -1216,6 +1216,10 @@ class LLM_local:
                             messages = history,
                             temperature = temperature,
                             max_tokens=max_length,
+                            frequency_penalty=0,
+                            presence_penalty=0,
+                            repeat_penalty=1.1,
+                            stop=["<|eot_id|>","[/INST]","</s>"],
                         )
                         response=f"{response['choices'][0]['message']['content']}"
                         print(response)
@@ -1233,6 +1237,11 @@ class LLM_local:
                         response = model.create_chat_completion(
                             messages = history,
                             temperature = temperature,
+                            max_tokens=max_length,
+                            frequency_penalty=0,
+                            presence_penalty=0,
+                            repeat_penalty=1.1,
+                            stop=["<|eot_id|>","[/INST]","</s>"],
                         )
                         response=f"{response['choices'][0]['message']['content']}"
                         assistant_content={
@@ -1379,7 +1388,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "About_us": "关于我们(About_us)",
     "LLM_api_loader": "API大语言模型加载器(LLM_api_loader)",
     "LLM_local_loader": "本地大语言模型加载器(LLM_local_loader)",
-    "LLavaLoader": "LLava加载器(LLavaLoader)",
+    "LLavaLoader": "LVM加载器(LVM_Loader)",
 }
 
 if __name__ == "__main__":
