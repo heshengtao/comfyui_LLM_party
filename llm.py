@@ -1253,6 +1253,14 @@ class LLM_local:
                 # 修改prompt.json文件
                 with open(self.prompt_path, "w", encoding="utf-8") as f:
                     json.dump(history, f, indent=4, ensure_ascii=False)
+                for his in history:
+                    if his["role"] == "user":
+                        #如果his["content"]是个列表，则只保留"type" : "text"时的"text"属性内容
+                        if isinstance(his["content"], list):
+                            for item in his["content"]:
+                                if item.get("type") == "text" and item.get("text"):
+                                    his["content"] = item["text"]
+                                    break
                 history = str(history)
                 return (
                     response,

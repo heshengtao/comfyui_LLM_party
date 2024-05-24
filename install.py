@@ -35,7 +35,7 @@ def install_llama(system_info):
         if system_info['os'] == 'Darwin' and 'arm64' in platform.machine():
             # MPS设备，使用Metal后端
             os.environ['CMAKE_ARGS'] = '-DLLAMA_METAL=on'
-            custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
+            custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{system_info['platform_tag']}.whl"
         else:
             # 非MPS设备，使用标准安装命令
             avx = "AVX2" if system_info['avx2'] else "AVX"
