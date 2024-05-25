@@ -615,7 +615,29 @@ class LLM:
                 # 修改prompt.json文件
                 with open(self.prompt_path, "w", encoding="utf-8") as f:
                     json.dump(history, f, indent=4, ensure_ascii=False)
-                history = str(history)
+                for his in history:
+                    if his["role"] == "user":
+                        #如果his["content"]是个列表，则只保留"type" : "text"时的"text"属性内容
+                        if isinstance(his["content"], list):
+                            for item in his["content"]:
+                                if item.get("type") == "text" and item.get("text"):
+                                    his["content"] = item["text"]
+                                    break
+                historys=""
+                #将history中的消息转换成便于用户阅读的markdown格式
+                for his in history:
+                    if his["role"] == "user":
+                        historys += f"**User:** {his['content']}\n\n"
+                    elif his["role"] == "assistant":
+                        historys += f"**Assistant:** {his['content']}\n\n"
+                    elif his["role"] == "system":
+                        historys += f"**System:** {his['content']}\n\n"
+                    elif his["role"] == "observation":
+                        historys += f"**Observation:** {his['content']}\n\n"
+                    elif his["role"] == "tool":
+                        historys += f"**Tool:** {his['content']}\n\n"
+
+                history = str(historys)
                 return (
                     response,
                     history,
@@ -1219,7 +1241,7 @@ class LLM_local:
                             frequency_penalty=0,
                             presence_penalty=0,
                             repeat_penalty=1.1,
-                            stop=["<|eot_id|>","[/INST]","</s>"],
+                            stop=["<|eot_id|>","[/INST]","</s>","[End Conversation]"],
                         )
                         response=f"{response['choices'][0]['message']['content']}"
                         print(response)
@@ -1241,7 +1263,7 @@ class LLM_local:
                             frequency_penalty=0,
                             presence_penalty=0,
                             repeat_penalty=1.1,
-                            stop=["<|eot_id|>","[/INST]","</s>"],
+                            stop=["<|eot_id|>","[/INST]","</s>","[End Conversation]"],
                         )
                         response=f"{response['choices'][0]['message']['content']}"
                         assistant_content={
@@ -1261,7 +1283,21 @@ class LLM_local:
                                 if item.get("type") == "text" and item.get("text"):
                                     his["content"] = item["text"]
                                     break
-                history = str(history)
+                historys=""
+                #将history中的消息转换成便于用户阅读的markdown格式
+                for his in history:
+                    if his["role"] == "user":
+                        historys += f"**User:** {his['content']}\n\n"
+                    elif his["role"] == "assistant":
+                        historys += f"**Assistant:** {his['content']}\n\n"
+                    elif his["role"] == "system":
+                        historys += f"**System:** {his['content']}\n\n"
+                    elif his["role"] == "observation":
+                        historys += f"**Observation:** {his['content']}\n\n"
+                    elif his["role"] == "tool":
+                        historys += f"**Tool:** {his['content']}\n\n"
+
+                history = str(historys)
                 return (
                     response,
                     history,
