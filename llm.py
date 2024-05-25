@@ -53,6 +53,7 @@ from .tools.show_text import show_text_party,About_us
 from .tools.tool_combine import tool_combine, tool_combine_plus
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import workflow_transfer
+from .tools.excel import load_excel
 from torchvision.transforms import ToPILImage
 
 _TOOL_HOOKS = [
@@ -1399,6 +1400,7 @@ NODE_CLASS_MAPPINGS = {
     "LLM_api_loader":LLM_api_loader,
     "LLM_local_loader":LLM_local_loader,
     "LLavaLoader":LLavaLoader,
+    "load_excel":load_excel,
 }
 
 
@@ -1445,6 +1447,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "LLM_api_loader": "API大语言模型加载器(LLM_api_loader)",
     "LLM_local_loader": "本地大语言模型加载器(LLM_local_loader)",
     "LLavaLoader": "LVM加载器(LVM_Loader)",
+    "load_excel": "Excel迭代器(Excel_iterator)",
 }
 
 if __name__ == "__main__":
