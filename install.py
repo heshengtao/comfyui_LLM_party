@@ -4,6 +4,7 @@ import re
 import shutil
 import subprocess
 import sys
+import pkg_resources
 import torch
 from requests import get
 import platform
@@ -117,6 +118,37 @@ def get_system_info():
         system_info['platform_tag'] = next(packaging.tags.sys_tags()).platform
 
     return system_info
+
+
+
+def check_and_uninstall_websocket():
+    # 获取当前Python解释器的路径
+    interpreter = sys.executable
+
+    # 检查websocket库是否已安装
+    installed_packages = {pkg.key for pkg in pkg_resources.working_set}
+    websocket_installed = 'websocket' in installed_packages
+    websocket_client_installed = 'websocket-client' in installed_packages
+
+    # 如果websocket库已安装，卸载websocket和websocket-client库
+    if websocket_installed:
+        packages_to_uninstall = []
+        packages_to_uninstall.append('websocket')
+        packages_to_uninstall.append('websocket-client')
+
+        try:
+            subprocess.check_call([interpreter, '-m', 'pip', 'uninstall', '-y'] + packages_to_uninstall)
+            print("已成功卸载: " + ', '.join(packages_to_uninstall))
+        except subprocess.CalledProcessError as e:
+            print("卸载过程中出现错误：", e)
+        # 重新安装websocket-client库
+        try:
+            subprocess.check_call([interpreter, '-m', 'pip', 'install', 'websocket-client'])
+            print("websocket-client库已成功重新安装。")
+        except subprocess.CalledProcessError as e:
+            print("重新安装过程中出现错误：", e)
+
+check_and_uninstall_websocket()
 
 # 调用函数
 copy_js_files()

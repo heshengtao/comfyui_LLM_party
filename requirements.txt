@@ -10,7 +10,7 @@ pytz
 Requests
 xlrd
 faiss-cpu
-websocket
+websocket-client
 streamlit
 virtualenv
 tiktoken
