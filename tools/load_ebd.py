@@ -127,7 +127,7 @@ class load_embeddings:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/模型（model）"
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
     def file(self, path, question, file_content, chunk_size, chunk_overlap, is_locked, device, is_enable=True):
         if is_enable == False:

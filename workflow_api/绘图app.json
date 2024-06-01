@@ -19,20 +19,6 @@
       "title": "空Latent"
     }
   },
-  "176": {
-    "inputs": {
-      "file_path": "",
-      "img_path": "",
-      "system_prompt": "你是一个强大的智能助手",
-      "user_prompt": "你好",
-      "positive_prompt": "",
-      "negative_prompt": ""
-    },
-    "class_type": "start_workflow",
-    "_meta": {
-      "title": "开始工作流(start_workflow)"
-    }
-  },
   "177": {
     "inputs": {
       "filename_prefix": "ComfyUI",
@@ -49,7 +35,7 @@
   "195": {
     "inputs": {
       "text": [
-        "176",
+        "199",
         4
       ],
       "clip": [
@@ -65,7 +51,7 @@
   "196": {
     "inputs": {
       "text": [
-        "176",
+        "199",
         5
       ],
       "clip": [
@@ -122,6 +108,21 @@
     "class_type": "VAEDecode_party",
     "_meta": {
       "title": "VAEDecode解码器(VAEDecode_party)"
+    }
+  },
+  "199": {
+    "inputs": {
+      "file_path": "",
+      "img_path": "",
+      "system_prompt": "你是一个强大的智能助手",
+      "user_prompt": "你好",
+      "positive_prompt": "",
+      "negative_prompt": "",
+      "model_name": ""
+    },
+    "class_type": "start_workflow",
+    "_meta": {
+      "title": "开始工作流(start_workflow)"
     }
   }
 }

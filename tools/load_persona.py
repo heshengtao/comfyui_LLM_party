@@ -26,7 +26,7 @@ class load_persona:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/面具（persona）"
 
     def persona(self, persona_name, is_enable=True, file_content=None):
         if is_enable == False:

@@ -249,8 +249,8 @@ class workflow_tool:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "workflow_path": ("STRING", {"default": "绘图app.json"}),
-                "description": ("STRING", {"default": "这是一个根据输入的文本生成图片的工作流"}),
+                "workflow_path": ("STRING", {"default": "测试画画app.json"}),
+                "description": ("STRING", {"default": "这是一个根据user_prompt生成图片的工作流"}),
             },
         }
 
@@ -277,14 +277,22 @@ class workflow_tool:
                         "properties": {
                             "workflow_path": {
                                 "type": "string",
-                                "description": "workflow_path必须输入" + str(workflow_path),
+                                "description": "请直接输入workflow_path的默认值，不要作任何修改，workflow_path的默认值为：" + str(workflow_path),
                             },
                             "user_prompt": {
                                 "type": "string",
-                                "description": "这个工作流运行所需要的文本",
-                            }
+                                "description": "用户输入的信息",
+                            },
+                            "positive_prompt": {
+                                "type": "string",
+                                "description": "正面提示",
+                            },
+                            "negative_prompt": {
+                                "type": "string",
+                                "description": "负面提示",
+                            },
                         },
-                        "required": ["workflow_path","user_prompt"],
+                        "required": ["workflow_path"],
                     },
                 },
             }
@@ -295,6 +303,8 @@ class workflow_tool:
 
 def work_flow(
     user_prompt="",
+    positive_prompt="",
+    negative_prompt="",
     workflow_path="测试画画app.json",
     ):
     # 获取当前Python解释器的路径
@@ -319,6 +329,8 @@ def work_flow(
         # 如果p的class_type是start_workflow
         if prompt[p]["class_type"] == "start_workflow":
             prompt[p]["inputs"]["user_prompt"] = user_prompt
+            prompt[p]["inputs"]["positive_prompt"] = positive_prompt
+            prompt[p]["inputs"]["negative_prompt"] = negative_prompt
 
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
