@@ -249,7 +249,7 @@ class workflow_tool:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "workflow_path": ("STRING", {"default": "测试画画app.json"}),
+                "workflow_path": ("STRING", {"default": "绘图app.json"}),
                 "description": ("STRING", {"default": "这是一个根据输入的文本生成图片的工作流"}),
             },
         }
