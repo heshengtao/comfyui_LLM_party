@@ -52,7 +52,7 @@ from .tools.search_web import google_tool, search_web
 from .tools.show_text import show_text_party,About_us
 from .tools.tool_combine import tool_combine, tool_combine_plus
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
-from .tools.workflow import workflow_transfer
+from .tools.workflow import workflow_transfer,workflow_tool,work_flow
 from .tools.excel import load_excel
 from torchvision.transforms import ToPILImage
 
@@ -69,9 +69,10 @@ _TOOL_HOOKS = [
     "get_accuweather",
     "get_wikipedia",
     "get_arxiv",
+    "work_flow",
 ]
 instances = []
-
+image_buffer = []
 
 def another_llm(id, type, question):
     print(id, type, question)
@@ -191,7 +192,14 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
         return f"Tool `{tool_name}` not found. Please use a provided tool."
     tool_call = globals().get(tool_name)
     try:
-        ret = tool_call(**tool_params)
+        ret_out = tool_call(**tool_params)
+        if tool_name =="work_flow":
+            ret = ret_out[0]
+            image_buffer= ret_out[1]
+            if ret =="" or ret is None:
+                ret = "图片已生成。"
+        else:
+            ret = ret_out
     except:
         ret = traceback.format_exc()
     return str(ret)
@@ -426,11 +434,13 @@ class LLM:
         "STRING",
         "STRING",
         "STRING",
+        "IMAGE",
     )
     RETURN_NAMES = (
         "assistant_response",
         "history",
         "tool",
+        "image",
     )
 
     FUNCTION = "chatbot"
@@ -509,6 +519,7 @@ class LLM:
                 "",
                 str(history),
                 llm_tools_json,
+                None,
             )
         else:
             try:
@@ -520,6 +531,8 @@ class LLM:
                     return (
                         history[-1]["content"],
                         str(history),
+                        llm_tools_json,
+                        None,
                     )
                 if is_memory == "disable":
                     with open(self.prompt_path, "w", encoding="utf-8") as f:
@@ -649,10 +662,16 @@ class LLM:
                         historys += f"**Function:** {his['content']}\n\n"
 
                 history = str(historys)
+                global image_buffer
+                image_out=image_buffer.copy()
+                image_buffer=[]
+                if image_out ==[]:
+                    image_out=None
                 return (
                     response,
                     history,
                     llm_tools_json,
+                    image_out,
                 )
             except Exception as ex:
                 print(ex)
@@ -660,6 +679,7 @@ class LLM:
                     str(ex),
                     str(ex),
                     llm_tools_json,
+                    None,
                 )
 
     @classmethod
@@ -992,11 +1012,13 @@ class LLM_local:
         "STRING",
         "STRING",
         "STRING",
+        "IMAGE",
     )
     RETURN_NAMES = (
         "assistant_response",
         "history",
         "tool",
+        "image",
     )
 
     FUNCTION = "chatbot"
@@ -1311,10 +1333,16 @@ class LLM_local:
                         historys += f"**Function:** {his['content']}\n\n"
 
                 history = str(historys)
+                global image_buffer
+                image_out=image_buffer.copy()
+                image_buffer=[]
+                if image_out ==[]:
+                    image_out=None
                 return (
                     response,
                     history,
                     llm_tools_json,
+                    image_out,
                 )
             except Exception as ex:
                 print(ex)
@@ -1322,6 +1350,7 @@ class LLM_local:
                     str(ex),
                     str(ex),
                     llm_tools_json,
+                    None,
                 )
 
     @classmethod
@@ -1401,6 +1430,7 @@ NODE_CLASS_MAPPINGS = {
     "LLM_local_loader":LLM_local_loader,
     "LLavaLoader":LLavaLoader,
     "load_excel":load_excel,
+    "workflow_tool":workflow_tool,
 }
 
 
@@ -1448,6 +1478,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "LLM_local_loader": "本地大语言模型加载器(LLM_local_loader)",
     "LLavaLoader": "LVM加载器(LVM_Loader)",
     "load_excel": "Excel迭代器(Excel_iterator)",
+    "workflow_tool": "工作流工具(workflow_tool)",
 }
 
 if __name__ == "__main__":

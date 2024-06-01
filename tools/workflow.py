@@ -85,7 +85,7 @@ def api(
     positive_prompt="",
     negative_prompt="",
     model_name="",
-    workflow_path="测试画画api.json",
+    workflow_path="测试画画app.json",
 ):
     global current_dir_path
     workflow_path = workflow_path
@@ -189,7 +189,7 @@ class workflow_transfer:
         positive_prompt="",
         negative_prompt="",
         model_name="",
-        workflow_path="测试画画api.json",
+        workflow_path="测试画画app.json",
         is_enable=True,
     ):
         if is_enable == False:
@@ -241,3 +241,87 @@ class workflow_transfer:
             img_out,
             output_text,
         )
+
+
+class workflow_tool:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "workflow_path": ("STRING", {"default": "测试画画app.json"}),
+                "description": ("STRING", {"default": "这是一个根据输入的文本生成图片的工作流"}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("tool",)
+
+    FUNCTION = "workflow"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+
+    def workflow(self,workflow_path,description, is_enable="enable"):
+        if is_enable == "disable":
+            return (None,)
+        output = [
+            {
+                "type": "function",
+                "function": {
+                    "name": "work_flow",
+                    "description": str(description),
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "workflow_path": {
+                                "type": "string",
+                                "description": "workflow_path必须输入" + str(workflow_path),
+                            },
+                            "user_prompt": {
+                                "type": "string",
+                                "description": "这个工作流运行所需要的文本",
+                            }
+                        },
+                        "required": ["workflow_path","user_prompt"],
+                    },
+                },
+            }
+        ]
+        out = json.dumps(output, ensure_ascii=False)
+        return (out,)
+    
+
+def work_flow(
+    user_prompt="",
+    workflow_path="测试画画app.json",
+    ):
+    # 获取当前Python解释器的路径
+    interpreter = sys.executable
+
+    # 获取main.py的绝对路径
+    root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "main.py"))
+
+    # 构建在新控制台窗口中执行main.py的命令
+    # 使用'cmd /c'在新窗口中执行命令，并且'cmd /k'保持窗口打开
+    command = f'cmd /c start cmd /k "{interpreter} {root_path} --port 8189"'
+    check_port_and_execute_bat(8189, command)
+    global current_dir_path
+    workflow_path = workflow_path
+    WF_path = os.path.join(current_dir_path, "workflow_api", workflow_path)
+    with open(WF_path, "r", encoding="utf-8") as f:
+        prompt_text = f.read()
+
+    prompt = json.loads(prompt_text)
+
+    for p in prompt:
+        # 如果p的class_type是start_workflow
+        if prompt[p]["class_type"] == "start_workflow":
+            prompt[p]["inputs"]["user_prompt"] = user_prompt
+
+    ws = websocket.WebSocket()
+    ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
+    images, res = get_all(ws, prompt)
+    return res,images
+
