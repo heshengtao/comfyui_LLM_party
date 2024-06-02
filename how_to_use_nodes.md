@@ -44,10 +44,6 @@
 ### Load_Wikipedia Node
 1. Can return all content related to the question in Wikipedia.
 
-### Load_Persona Node
-1. Can return a preset persona persona, which can be used as the system_prompt_input of the large model, allowing the large model to have the personality of the persona.
-2. The persona folder contains the persona of the image prompt assistant and DAN. You can add more personas to this folder for your use.
-
 ## Persona
 
 ### Classifier persona and Super Large Classifier persona Nodes
@@ -58,6 +54,10 @@
 ### Custom persona
 1. prompt is the system_prompt_input that will be input into the LLM node, which can contain some variables, such as: "You are an intelligent customer service about {app}, you need to generate content related to {text}", where {text} will automatically be filled with the user_prompt received by LLM.
 2. prompt_template contains the corresponding rules for the variables in the prompt, generally in json format, which can be filled in as follows: {"app":"chatgpt"}, at this time, {app} in the prompt will be automatically replaced with chatgpt.
+
+### Load_Persona Node
+1. Can return a preset persona persona, which can be used as the system_prompt_input of the large model, allowing the large model to have the personality of the persona.
+2. The persona folder contains the persona of the image prompt assistant and DAN. You can add more personas to this folder for your use.
 
 ## Functions
 
