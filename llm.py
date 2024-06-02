@@ -324,7 +324,7 @@ class LLM_api_loader:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1",
+                        "default": "https://api.openai.com/v1/",
                     },
                 ),
                 "api_key": (
