@@ -29,7 +29,7 @@ def package_is_installed(package_name):
 def install_llama(system_info):
     imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
     if imported:
-        print("llama-cpp installed")
+        pass
     else:
         lcpp_version = latest_lamacpp()
         base_url = "https://github.com/abetlen/llama-cpp-python/releases/download/v"
