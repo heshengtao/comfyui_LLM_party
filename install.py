@@ -63,7 +63,6 @@ def copy_js_files():
         source_file = os.path.join(current_folder, "web", file_name)
         target_file = os.path.join(target_folder, file_name)
         shutil.copy2(source_file, target_file)
-        print(f"复制了文件: {file_name}")
 
 def get_python_version():
     """Return the Python version in a concise format, e.g., '39' for Python 3.9."""
