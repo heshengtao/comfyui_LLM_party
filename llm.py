@@ -48,7 +48,7 @@ from .tools.load_file import load_file, load_file_folder, load_url, start_workfl
 from .tools.load_persona import load_persona
 from .tools.logic import string_logic
 from .tools.new_interpreter import new_interpreter, new_interpreter_tool
-from .tools.search_web import google_tool, search_web
+from .tools.search_web import google_tool, search_web,bing_tool,search_web_bing
 from .tools.show_text import show_text_party,About_us
 from .tools.tool_combine import tool_combine, tool_combine_plus
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
@@ -60,6 +60,7 @@ _TOOL_HOOKS = [
     "get_time",
     "get_weather",
     "search_web",
+    "search_web_bing",
     "check_web",
     "interpreter",
     "data_base",
@@ -1403,6 +1404,7 @@ NODE_CLASS_MAPPINGS = {
     "weather_tool": weather_tool,
     "accuweather_tool": accuweather_tool,
     "google_tool": google_tool,
+    "bing_tool": bing_tool,
     "check_web_tool": check_web_tool,
     "file_combine": file_combine,
     "file_combine_plus": file_combine_plus,
@@ -1451,6 +1453,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "weather_tool": "天气工具(weather_tool)",
     "accuweather_tool": "accuweather工具(accuweather_tool)",
     "google_tool": "谷歌搜索工具(google_tool)",
+    "bing_tool": "必应搜索工具(bing_tool)",
     "check_web_tool": "检视网页工具(check_web_tool)",
     "file_combine": "文件组合(file_combine)",
     "file_combine_plus": "超大文件组合(file_combine_plus)",
