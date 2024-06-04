@@ -53,11 +53,13 @@ class arxiv_tool:
                         "properties": {
                             "query": {
                                 "type": "string",
-                                "description": "需要查询的关键词，例如：quantum physics，默认查询" + str(query),
+                                "description": "需要查询的关键词，例如：quantum physics",
+                                "default": query,
                             },
                             "max_results": {
                                 "type": "string",
-                                "description": "需要查询的论文数量,缺省时为3",
+                                "description": "需要查询的论文数量",
+                                "default": "3",
                             },
                         },
                         "required": ["query"],

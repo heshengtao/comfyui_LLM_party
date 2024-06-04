@@ -277,7 +277,8 @@ class workflow_tool:
                         "properties": {
                             "workflow_path": {
                                 "type": "string",
-                                "description": "请直接输入workflow_path的默认值，不要作任何修改，workflow_path的默认值为：" + str(workflow_path),
+                                "description": "请直接输入workflow_path的默认值，不要作任何修改",
+                                "default": str(workflow_path),
                             },
                             "user_prompt": {
                                 "type": "string",

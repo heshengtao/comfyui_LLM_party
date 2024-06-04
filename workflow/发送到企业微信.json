@@ -1,0 +1,309 @@
+{
+  "last_node_id": 72,
+  "last_link_id": 66,
+  "nodes": [
+    {
+      "id": 61,
+      "type": "show_text_party",
+      "pos": [
+        1255,
+        226
+      ],
+      "size": {
+        "0": 315,
+        "1": 76
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 57,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "好的，我已经将快速排序代码发送到了企业微信。如果有其他问题，请随时告诉我。"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 69,
+      "type": "work_wechat_tool",
+      "pos": [
+        361,
+        365
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            63
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "work_wechat_tool"
+      },
+      "widgets_values": [
+        true,
+        "markdown",
+        ""
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 70,
+      "type": "LLM_api_loader",
+      "pos": [
+        358,
+        198
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            64
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "https://api.openai.com/v1/",
+        "sk-XXXXX"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 48,
+      "type": "LLM",
+      "pos": [
+        754,
+        221
+      ],
+      "size": {
+        "0": 411.9311828613281,
+        "1": 386.9210205078125
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 64,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 63,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            57
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [
+            66
+          ],
+          "shape": 3,
+          "label": "history",
+          "slot_index": 1
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "你好，帮我发一个快速排序代码到企业微信",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 72,
+      "type": "work_wechat",
+      "pos": [
+        1253,
+        391
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "link": 66,
+          "widget": {
+            "name": "content"
+          }
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "work_wechat"
+      },
+      "widgets_values": [
+        "hello world",
+        true,
+        "markdown",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    }
+  ],
+  "links": [
+    [
+      57,
+      48,
+      0,
+      61,
+      0,
+      "STRING"
+    ],
+    [
+      63,
+      69,
+      0,
+      48,
+      3,
+      "STRING"
+    ],
+    [
+      64,
+      70,
+      0,
+      48,
+      0,
+      "CUSTOM"
+    ],
+    [
+      66,
+      48,
+      1,
+      72,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

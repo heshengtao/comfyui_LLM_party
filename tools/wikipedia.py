@@ -107,7 +107,8 @@ class wikipedia_tool:
                         "properties": {
                             "query": {
                                 "type": "string",
-                                "description": "需要查询的关键词，例如：python，默认查询" + str(query),
+                                "description": "需要查询的关键词，例如：python",
+                                "default": str(query),
                             }
                         },
                         "required": ["query"],

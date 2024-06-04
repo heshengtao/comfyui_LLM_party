@@ -68,11 +68,13 @@ class weather_tool:
                         "properties": {
                             "city": {
                                 "type": "string",
-                                "description": "用户询问的目标区域，例如：长沙市，默认查询" + city,
+                                "description": "用户询问的目标区域，例如：长沙市",
+                                "default": city,
                             },
                             "extensions": {
                                 "type": "string",
-                                "description": "可选值：base/all base:返回实况天气 all:返回预报天气，默认为all ",
+                                "description": "可选值：base/all base:返回实况天气 all:返回预报天气",
+                                "default": "all",
                             },
                         },
                         "required": ["city"],
@@ -166,11 +168,13 @@ class accuweather_tool:
                         "properties": {
                             "city": {
                                 "type": "string",
-                                "description": "城市，例如：长沙市，用户未给定时，默认输入" + city,
+                                "description": "城市，例如：长沙市",
+                                "default": city,
                             },
                             "extensions": {
                                 "type": "string",
-                                "description": "可选值：base/all base:返回实况天气 all:返回预报天气，默认为all ",
+                                "description": "可选值：base/all base:返回实况天气 all:返回预报天气 ",
+                                "default": "all",
                             },
                         },
                         "required": ["city"],

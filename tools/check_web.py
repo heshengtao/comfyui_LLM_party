@@ -111,7 +111,7 @@ class check_web_tool:
                         "parameters": {
                             "type": "object",
                             "properties": {
-                                "url": {"type": "string", "description": "要被搜索的网页的URL，默认网址为" + web_url},
+                                "url": {"type": "string", "description": "要被搜索的网页的URL","default": web_url},
                                 "keyword": {
                                     "type": "string",
                                     "description": "需要搜索的关键词，如果没有关键词，则搜索网页上的所有内容",
