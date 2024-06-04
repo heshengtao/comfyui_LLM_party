@@ -4,7 +4,7 @@ from ..config import config_path, load_api_keys
 
 api_keys = load_api_keys(config_path)
 wechat_key=api_keys.get("wechat_key")
-def send_wechat(content,msgtype="text"):
+def send_wechat(content,msgtype="markdown"):
     global wechat_key
     webhook_url = f'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key={wechat_key}'
     headers = {'Content-Type': 'application/json'}
@@ -26,7 +26,7 @@ class work_wechat_tool:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "msgtype": (["text", "markdown", "image", "news"], {"default": "markdown"}),
+                "msgtype": (["text", "markdown"], {"default": "markdown"}),
             },
             "optional": {
                 "key": ("STRING", {}),
@@ -66,7 +66,7 @@ class work_wechat_tool:
                             },
                             "msgtype": {
                                 "type": "string",
-                                "description": "消息类型，支持text、markdown、image、news",
+                                "description": "消息类型，支持text、markdown",
                                 "default": msgtype,
                             }
                         },
@@ -87,7 +87,7 @@ class work_wechat:
             "required": {
                 "content": ("STRING", {"default": "hello world"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "msgtype": (["text", "markdown", "image", "news"], {"default": "markdown"}),
+                "msgtype": (["text", "markdown"], {"default": "markdown"}),
             },
             "optional": {
                 "key": ("STRING", {}),
@@ -103,7 +103,7 @@ class work_wechat:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def web(self, is_enable=True,key=None,content="hello world",msgtype="text"):
+    def web(self, is_enable=True,key=None,content="hello world",msgtype="markdown"):
         if is_enable == False:
             return (None,)
         
