@@ -55,6 +55,7 @@ from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import workflow_transfer,workflow_tool,work_flow
 from .tools.excel import load_excel
 from .tools.git_tool import github_tool,search_github_repositories
+from .tools.wechat import work_wechat_tool,send_wechat,work_wechat
 from torchvision.transforms import ToPILImage
 
 _TOOL_HOOKS = [
@@ -72,7 +73,8 @@ _TOOL_HOOKS = [
     "get_wikipedia",
     "get_arxiv",
     "work_flow",
-    "search_github_repositories"
+    "search_github_repositories",
+    "send_wechat",   
 ]
 instances = []
 image_buffer = []
@@ -1436,6 +1438,8 @@ NODE_CLASS_MAPPINGS = {
     "load_excel":load_excel,
     "workflow_tool":workflow_tool,
     "github_tool":github_tool,
+    "work_wechat_tool":work_wechat_tool,
+    "work_wechat":work_wechat,
 }
 
 
@@ -1486,6 +1490,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "load_excel": "Excel迭代器(Excel_iterator)",
     "workflow_tool": "工作流工具(workflow_tool)",
     "github_tool": "GitHub工具(github_tool)",
+    "work_wechat_tool": "企业微信工具(work_wechat_tool)",
+    "work_wechat": "发送到企业微信(send_to_work_wechat)",
 }
 
 if __name__ == "__main__":
