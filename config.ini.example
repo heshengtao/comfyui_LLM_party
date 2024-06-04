@@ -2,6 +2,8 @@
 google_api_key = google_api_key_put_here
 cse_id = Google_cse_id_put_here
 bing_api_key = bing_api_key_put_here
+github_api_key = github_api_key_put_here
+google_api_url = https://www.googleapis.com/customsearch/v1?key=google_api_key&cx=cse_id&q=
 openai_api_key = sk-XXXXX
 base_url = https://api.openai.com/v1/
 imgbb_api=
