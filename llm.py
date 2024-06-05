@@ -56,6 +56,7 @@ from .tools.workflow import workflow_transfer,workflow_tool,work_flow
 from .tools.excel import load_excel
 from .tools.git_tool import github_tool,search_github_repositories
 from .tools.wechat import work_wechat_tool,send_wechat,work_wechat
+from .tools.dingding import Dingding_tool,send_dingding,Dingding
 from torchvision.transforms import ToPILImage
 
 _TOOL_HOOKS = [
@@ -75,6 +76,7 @@ _TOOL_HOOKS = [
     "work_flow",
     "search_github_repositories",
     "send_wechat",   
+    "send_dingding",
 ]
 instances = []
 image_buffer = []
@@ -1440,6 +1442,8 @@ NODE_CLASS_MAPPINGS = {
     "github_tool":github_tool,
     "work_wechat_tool":work_wechat_tool,
     "work_wechat":work_wechat,
+    "Dingding_tool":Dingding_tool,
+    "Dingding":Dingding,
 }
 
 
@@ -1492,6 +1496,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "github_tool": "GitHub工具(github_tool)",
     "work_wechat_tool": "企业微信工具(work_wechat_tool)",
     "work_wechat": "发送到企业微信(send_to_work_wechat)",
+    "Dingding_tool":"钉钉工具(Dingding_tool)",
+    "Dingding": "发送到钉钉(send_to_dingding)",
 }
 
 if __name__ == "__main__":

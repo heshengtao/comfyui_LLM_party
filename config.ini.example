@@ -7,4 +7,5 @@ google_api_url = https://www.googleapis.com/customsearch/v1?key=google_api_key&c
 openai_api_key = sk-XXXXX
 base_url = https://api.openai.com/v1/
 imgbb_api=
-wechat_key=work_wechat_key_put_here
+wechat_url=work_wechat_url_put_here
+dingding_url=dingding_url_put_here

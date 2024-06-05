@@ -3,30 +3,43 @@ import requests
 from ..config import config_path, load_api_keys
 
 api_keys = load_api_keys(config_path)
-wechat_url=api_keys.get("wechat_url")
-def send_wechat(content,msgtype="markdown"):
-    global wechat_url
-    webhook_url = wechat_url
-    headers = {'Content-Type': 'application/json'}
-    data = {
-        "msgtype": msgtype,
-        msgtype: {
-            "content": content
+dingding_url=api_keys.get("dingding_url")
+wake_word=""
+# 发送消息到钉钉的函数
+def send_dingding(content, msgtype="markdown"):
+    global dingding_url,wake_word
+    webhook_url = dingding_url
+    headers = {'Content-Type': 'application/json; charset=utf-8'}
+    if msgtype=="text":
+        data = {
+            "msgtype": msgtype,
+            "text": {
+                "content":wake_word+"\n"+content,
+            }
         }
-    }
+    elif msgtype=="markdown":
+        data = {
+            "msgtype": msgtype,
+            "markdown":{
+                "text":content,
+                "title":wake_word
+            },
+        }
 
-    response = requests.post(webhook_url, headers=headers, json=data)
+    # 发送POST请求到钉钉服务器
+    response = requests.post(webhook_url, headers=headers, data=json.dumps(data))
 
-    #返回响应代码
+    # 返回响应状态码
     return response.status_code
 
-class work_wechat_tool:
+class Dingding_tool:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "msgtype": (["text", "markdown"], {"default": "markdown"}),
+                "key_word": ("STRING", {"default":""}),
             },
             "optional": {
                 "url": ("STRING", {}),
@@ -42,21 +55,24 @@ class work_wechat_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def web(self, is_enable=True,url=None,msgtype="markdown"):
+    def web(self, is_enable=True,url=None,msgtype="markdown",key_word=""):
         if is_enable == False:
             return (None,)
         
-        global wechat_url
+        global dingding_url,wake_word
         if url is not None and url != "":
-            wechat_url = url
+            dingding_url = url
         else:
-            wechat_url = api_keys.get("wechat_url")
+            dingding_url = api_keys.get("dingding_url")
+
+        if key_word is not None and key_word != "":
+            wake_word = key_word
         output = [
             {
                 "type": "function",
                 "function": {
-                    "name": "send_wechat",
-                    "description": "向企业微信发送消息",
+                    "name": "send_dingding",
+                    "description": "向钉钉发送消息",
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -79,8 +95,7 @@ class work_wechat_tool:
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
 
-
-class work_wechat:
+class Dingding:
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -88,6 +103,7 @@ class work_wechat:
                 "content": ("STRING", {"default": "hello world"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "msgtype": (["text", "markdown"], {"default": "markdown"}),
+                "key_word": ("STRING", {"default":""}),
             },
             "optional": {
                 "url": ("STRING", {}),
@@ -103,14 +119,17 @@ class work_wechat:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def web(self, is_enable=True,url=None,content="hello world",msgtype="markdown"):
+    def web(self, is_enable=True,url=None,content="hello world",msgtype="markdown",key_word=""):
         if is_enable == False:
             return (None,)
         
-        global wechat_url
+        global dingding_url, wake_word
         if url is not None and url != "":
-            wechat_url = url
+            dingding_url = url
         else:
-            wechat_url = api_keys.get("wechat_url")
-        send_wechat(content,msgtype)
+            dingding_url = api_keys.get("dingding_url")
+
+        if key_word is not None and key_word != "":
+            wake_word = key_word
+        send_dingding(content,msgtype)
         return ()
