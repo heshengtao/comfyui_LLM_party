@@ -14,7 +14,7 @@ def send_dingding(content, msgtype="markdown"):
         data = {
             "msgtype": msgtype,
             "text": {
-                "content":wake_word+"\n"+content,
+                "content":wake_word+"\n"+content if wake_word !="" else content,
             }
         }
     elif msgtype=="markdown":

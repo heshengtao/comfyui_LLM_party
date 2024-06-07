@@ -9,3 +9,4 @@ base_url = https://api.openai.com/v1/
 imgbb_api=
 wechat_url=work_wechat_url_put_here
 dingding_url=dingding_url_put_here
+feishu_url=feishu_url_put_here
