@@ -384,7 +384,7 @@ class LLM_api_loader:
 
 
 class LLM:
-
+    original_IS_CHANGED = None
     def __init__(self):
         # 生成一个hash值作为id
         self.id = hash(str(self))
@@ -403,7 +403,7 @@ class LLM:
         self.tool_data = {"id": self.id, "system_prompt": "", "type": "api"}
         self.list = []
         self.added_to_list = False
-
+        self.is_locked = "disable"
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -500,6 +500,16 @@ class LLM:
             if self.added_to_list == False:
                 llm_tools_list.append(self.tool_data)
                 self.added_to_list = True
+        self.is_locked=is_locked
+        if self.is_locked == "disable":
+            if LLM.original_IS_CHANGED is None:
+                # 保存原始的IS_CHANGED方法的引用
+                LLM.original_IS_CHANGED = LLM.IS_CHANGED
+            setattr(LLM, 'IS_CHANGED', LLM.original_IS_CHANGED)
+        else:
+            # 如果方法存在，则删除
+            if hasattr(LLM, 'IS_CHANGED'):
+                delattr(LLM, 'IS_CHANGED')
         llm_tools = [
             {
                 "type": "function",
@@ -535,14 +545,7 @@ class LLM:
                 # 读取prompt.json文件
                 with open(self.prompt_path, "r", encoding="utf-8") as f:
                     history = json.load(f)
-                if is_locked == "enable":
-                    # 返回对话历史中，最后一个content
-                    return (
-                        history[-1]["content"],
-                        str(history),
-                        llm_tools_json,
-                        None,
-                    )
+                
                 if is_memory == "disable":
                     with open(self.prompt_path, "w", encoding="utf-8") as f:
                         json.dump([{"role": "system", "content": system_prompt}], f, indent=4, ensure_ascii=False)
@@ -690,12 +693,10 @@ class LLM:
                     llm_tools_json,
                     None,
                 )
-
+            
     @classmethod
-    def IS_CHANGED(s):
-        # 返回当前时间的哈希值，确保每次都不同
-        current_time = str(time.time())
-        return hashlib.sha256(current_time.encode()).hexdigest()
+    def IS_CHANGED():
+        pass
 
 
 def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="user"):
@@ -964,6 +965,7 @@ class LLM_local_loader:
         return (self.model, self.tokenizer,)
 
 class LLM_local:
+    original_IS_CHANGED = None
     def __init__(self):
         # 生成一个hash值作为id
         self.id = hash(str(self))
@@ -982,7 +984,7 @@ class LLM_local:
         self.tool_data = {"id": self.id, "system_prompt": "", "type": "local"}
         self.list = []
         self.added_to_list = False
-
+        self.is_locked= "disable"
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -1078,6 +1080,16 @@ class LLM_local:
             if not self.added_to_list:
                 llm_tools_list.append(self.tool_data)
                 self.added_to_list = True
+        self.is_locked=is_locked
+        if LLM_local.original_IS_CHANGED is None:
+            # 保存原始的IS_CHANGED方法的引用
+            LLM_local.original_IS_CHANGED = LLM_local.IS_CHANGED
+        if self.is_locked == "disable":
+            setattr(LLM_local, 'IS_CHANGED', LLM_local.original_IS_CHANGED)
+        else:
+            # 如果方法存在，则删除
+            if hasattr(LLM_local, 'IS_CHANGED'):
+                delattr(LLM_local, 'IS_CHANGED')
         llm_tools = [
             {
                 "type": "function",
@@ -1111,12 +1123,6 @@ class LLM_local:
                 # 读取prompt.json文件
                 with open(self.prompt_path, "r", encoding="utf-8") as f:
                     history = json.load(f)
-                if is_locked == "enable":
-                    # 返回对话历史中，最后一个content
-                    return (
-                        history[-1]["content"],
-                        str(history),
-                    )
                 if is_memory == "disable":
                     with open(self.prompt_path, "w", encoding="utf-8") as f:
                         json.dump([{"role": "system", "content": system_prompt}], f, indent=4, ensure_ascii=False)
@@ -1364,9 +1370,7 @@ class LLM_local:
 
     @classmethod
     def IS_CHANGED(s):
-        # 返回当前时间的哈希值，确保每次都不同
-        current_time = str(time.time())
-        return hashlib.sha256(current_time.encode()).hexdigest()
+        pass
     
 class LLavaLoader:
     @classmethod
