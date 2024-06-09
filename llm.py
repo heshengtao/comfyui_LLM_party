@@ -46,7 +46,7 @@ from .tools.interpreter import interpreter, interpreter_tool
 from .tools.load_ebd import data_base, ebd_tool, load_embeddings
 from .tools.load_file import load_file, load_file_folder, load_url, start_workflow
 from .tools.load_persona import load_persona
-from .tools.logic import string_logic
+from .tools.logic import string_logic,substring
 from .tools.new_interpreter import new_interpreter, new_interpreter_tool
 from .tools.search_web import google_tool, search_web,bing_tool,search_web_bing
 from .tools.show_text import show_text_party,About_us
@@ -1452,6 +1452,7 @@ NODE_CLASS_MAPPINGS = {
     "Dingding":Dingding,
     "feishu_tool":feishu_tool,
     "feishu":feishu,
+    "substring":substring,
 }
 
 
@@ -1508,6 +1509,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "Dingding": "发送到钉钉(send_to_dingding)",
     "feishu_tool":"飞书工具(feishu_tool)",
     "feishu":"发送到飞书(send_to_feishu)",
+    "substring": "提取字符串(extract_substring)",
 }
 
 if __name__ == "__main__":

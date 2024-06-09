@@ -85,3 +85,51 @@ class string_logic:
             out,
             out2,
         )
+
+
+import re
+
+
+class substring:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "input_string": ("STRING", {"multiline": True}),
+            },
+            "optional": {
+                "start_string": ("STRING", {}),
+                "end_string": ("STRING", {}),
+            },
+        }
+
+    RETURN_TYPES = (
+        "STRING",
+    )
+    RETURN_NAMES = (
+        "substring",
+    )
+
+    FUNCTION = "substr"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/函数（function）"
+
+    def substr(self, input_string, start_string="", end_string=""):
+        if start_string =="" and end_string =="":
+            out= input_string
+        elif start_string =="":
+            # 获取从开头到end_string的子串
+            out = input_string[: input_string.find(end_string)]
+        elif end_string =="":
+            # 获取从start_string到结尾的子串
+            out = input_string[input_string.find(start_string) + len(start_string) :]
+        else:
+            # 获取从start_string到end_string的子串
+            out = input_string[input_string.find(start_string) + len(start_string) : input_string.find(end_string)]
+        
+        out =out.strip()
+        return (
+            out,
+        )
