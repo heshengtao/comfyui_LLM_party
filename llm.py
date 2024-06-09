@@ -695,7 +695,7 @@ class LLM:
                 )
             
     @classmethod
-    def IS_CHANGED():
+    def IS_CHANGED(s):
         pass
 
 
