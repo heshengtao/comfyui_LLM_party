@@ -501,10 +501,10 @@ class LLM:
                 llm_tools_list.append(self.tool_data)
                 self.added_to_list = True
         self.is_locked=is_locked
+        if LLM.original_IS_CHANGED is None:
+            # 保存原始的IS_CHANGED方法的引用
+            LLM.original_IS_CHANGED = LLM.IS_CHANGED
         if self.is_locked == "disable":
-            if LLM.original_IS_CHANGED is None:
-                # 保存原始的IS_CHANGED方法的引用
-                LLM.original_IS_CHANGED = LLM.IS_CHANGED
             setattr(LLM, 'IS_CHANGED', LLM.original_IS_CHANGED)
         else:
             # 如果方法存在，则删除
