@@ -58,6 +58,7 @@ from .tools.git_tool import github_tool,search_github_repositories
 from .tools.wechat import work_wechat_tool,send_wechat,work_wechat
 from .tools.dingding import Dingding_tool,send_dingding,Dingding
 from .tools.feishu import feishu_tool,send_feishu,feishu
+from .tools.tts import openai_tts,play_audio
 from torchvision.transforms import ToPILImage
 
 _TOOL_HOOKS = [
@@ -1453,6 +1454,8 @@ NODE_CLASS_MAPPINGS = {
     "feishu_tool":feishu_tool,
     "feishu":feishu,
     "substring":substring,
+    "openai_tts":openai_tts,
+    "play_audio":play_audio,
 }
 
 
@@ -1510,6 +1513,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "feishu_tool":"飞书工具(feishu_tool)",
     "feishu":"发送到飞书(send_to_feishu)",
     "substring": "提取字符串(extract_substring)",
+    "openai_tts": "OpenAI语音合成(openai_tts)",
+    "play_audio": "播放音频(play_audio)",
 }
 
 if __name__ == "__main__":

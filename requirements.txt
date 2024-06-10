@@ -25,3 +25,4 @@ fastapi
 py-cpuinfo
 diskcache
 requests_toolbelt
+playsound==1.2.2
