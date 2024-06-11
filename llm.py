@@ -246,15 +246,18 @@ class Chat:
                     results = dispatch_tool(response_content.name, json.loads(response_content.arguments))
                     print(results)
                     print(assistant_message)
-                    history.append({"tool_calls":assistant_message.tool_calls,"role": "assistant", "content": str(response_content)})
-                    history.append(
-                        {
-                            "role": function_role,
-                            "tool_call_id": assistant_message.tool_calls[0].id,
-                            "name": response_content.name,
-                            "content": results,
-                        }
-                    )
+                    if "glm" in self.model_name or "qwen" in self.model_name or "moonshot" in self.model_name:
+                        history.append({"tool_calls":assistant_message.tool_calls,"role": "assistant", "content": str(response_content)})
+                        history.append(
+                            {
+                                "role": function_role,
+                                "tool_call_id": assistant_message.tool_calls[0].id,
+                                "name": response_content.name,
+                                "content": results,
+                            }
+                        )
+                    else:
+                        history.append({"role": function_role, "name": response_content.name, "content": results})
                     response = openai.chat.completions.create(
                         model=self.model_name, 
                         messages=history, 
