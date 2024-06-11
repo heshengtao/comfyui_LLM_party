@@ -4,6 +4,7 @@
 
 ## Latest Updates
 1. Added LLM tools to send messages to Work_wechat, DingTalk, and Feishu, as well as external functions to call.
+2. Added OpenAI’s TTS functionality, which can achieve voice output.
 
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
 
