@@ -111,7 +111,7 @@ def another_llm(id, type, question):
             images,
             imgbb_api_key,
         ) = llm.list
-        res, _, _ = llm.chatbot(
+        res, _, _, _ = llm.chatbot(
             question,
             main_brain,
             system_prompt,
@@ -151,7 +151,7 @@ def another_llm(id, type, question):
             file_content,
             image,
         ) = llm.list
-        res, _, _ = llm.chatbot(
+        res, _, _, _ = llm.chatbot(
             question,
             main_brain,
             system_prompt,
