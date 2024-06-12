@@ -1,3 +1,3 @@
 @echo off
-..\..\..\python_embeded\python.exe fastapi.py
+..\..\..\python_embeded\python.exe fast_api.py
 pause
