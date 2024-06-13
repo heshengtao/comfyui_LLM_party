@@ -1,6 +1,6 @@
 import json
 import os
-
+import chardet
 import docx2txt
 import numpy as np
 import openpyxl
@@ -26,17 +26,46 @@ def read_one(path):
                 text += page.extract_text()
     elif path.endswith(".xlsx"):
         workbook = openpyxl.load_workbook(path)
-        for sheet in workbook:
-            for row in sheet.iter_rows(values_only=True):
-                text += " ".join([str(cell) for cell in row if cell is not None]) + " "
+        for sheet in workbook.worksheets:
+            # 检查工作表是否至少有一行数据
+            if sheet.max_row > 1:  # 至少有一行数据（不包括表头）
+                # 获取工作表名称
+                text += f"## {sheet.title} 的内容\n"
+                
+                # 获取表头
+                headers = next(sheet.iter_rows(min_row=1, max_row=1, values_only=True), None)
+                if headers:
+                    text += "|" + " | ".join([" " if cell is None else str(cell) for cell in headers]) + "|\n"
+                    text += "|" + " | ".join(['---'] * len(headers)) + "|\n"
+                else:
+                    text += "没有找到表头。\n"
+                    continue
+                
+                # 获取数据行
+                for row in sheet.iter_rows(min_row=2, values_only=True):
+                    if any(cell is not None for cell in row):
+                        text += "|" + " | ".join([" " if cell is None else str(cell) for cell in row]) + "|\n"
+                    else:
+                        # 如果整行都是空的，则停止读取当前工作表
+                        break
     elif path.endswith(".xls"):
-        workbook = xlrd.open_workbook(path)
-        sheet = workbook.sheet_by_index(0)
-        for row_num in range(sheet.nrows):
-            text += " ".join([str(cell) for cell in sheet.row_values(row_num)]) + " "
+        workbook = xlrd.open_workbook(path)       
+        for sheet_index in range(workbook.nsheets):
+            sheet = workbook.sheet_by_index(sheet_index)          
+            # 检查工作表是否为空
+            if sheet.nrows > 0:
+                text += f"## {sheet.name} 的内容\n"
+                text += "| " + " | ".join(sheet.row_values(0)) + " |\n"  # 添加表头
+                text += "| " + " | ".join(['---'] * sheet.ncols) + " |\n"  # 添加分隔符
+                for row_num in range(1, sheet.nrows):
+                    text += "| " + " | ".join([str(cell) for cell in sheet.row_values(row_num)]) + " |\n"
     elif path.endswith(".csv"):
-        df = pd.read_csv(path, encoding="utf-8")
-        text += df.to_string(header=True, index=True)
+        # 检测文件编码
+        with open(path, 'rb') as file:
+            result = chardet.detect(file.read())
+            encoding = result['encoding']
+        df = pd.read_csv(path, encoding=encoding)
+        text += df.to_markdown(index=True)
     elif path.endswith(".txt"):
         with open(path, "r", encoding="utf-8") as f:
             text += f.read()
