@@ -1,6 +1,7 @@
 import io
 import json
 import os
+import re
 import socket
 import subprocess
 import sys
@@ -249,7 +250,7 @@ class workflow_tool:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "workflow_path": ("STRING", {"default": "测试画画app.json"}),
+                "workflow_name": ("STRING", {"default": "测试画画app.json,绘图app.json"}),
                 "description": ("STRING", {"default": "这是一个根据user_prompt生成图片的工作流"}),
             },
         }
@@ -263,7 +264,7 @@ class workflow_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def workflow(self,workflow_path,description, is_enable="enable"):
+    def workflow(self,workflow_name,description, is_enable="enable"):
         if is_enable == "disable":
             return (None,)
         output = [
@@ -275,10 +276,9 @@ class workflow_tool:
                     "parameters": {
                         "type": "object",
                         "properties": {
-                            "workflow_path": {
+                            "workflow_name": {
                                 "type": "string",
-                                "description": "请直接输入workflow_path的默认值，不要作任何修改",
-                                "default": str(workflow_path),
+                                "description": f"请从[{str(workflow_name)}]中选择一个工作流，作为要调用的workflow_name",
                             },
                             "user_prompt": {
                                 "type": "string",
@@ -293,7 +293,7 @@ class workflow_tool:
                                 "description": "负面提示",
                             },
                         },
-                        "required": ["workflow_path"],
+                        "required": ["workflow_name"],
                     },
                 },
             }
@@ -306,8 +306,11 @@ def work_flow(
     user_prompt="",
     positive_prompt="",
     negative_prompt="",
-    workflow_path="测试画画app.json",
+    workflow_name="测试画画app.json",
     ):
+    #用re去掉workflow_name字符串中的'['、']'字符
+    workflow_name = re.sub(r"[\[\]]", "", workflow_name)
+    
     # 获取当前Python解释器的路径
     interpreter = sys.executable
 
@@ -319,8 +322,7 @@ def work_flow(
     command = f'cmd /c start cmd /k "{interpreter} {root_path} --port 8189"'
     check_port_and_execute_bat(8189, command)
     global current_dir_path
-    workflow_path = workflow_path
-    WF_path = os.path.join(current_dir_path, "workflow_api", workflow_path)
+    WF_path = os.path.join(current_dir_path, "workflow_api", workflow_name)
     with open(WF_path, "r", encoding="utf-8") as f:
         prompt_text = f.read()
 
