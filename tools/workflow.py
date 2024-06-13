@@ -251,7 +251,6 @@ class workflow_tool:
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "workflow_name": ("STRING", {"default": "测试画画app.json,绘图app.json"}),
-                "description": ("STRING", {"default": "这是一个根据user_prompt生成图片的工作流"}),
             },
         }
 
@@ -264,7 +263,7 @@ class workflow_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def workflow(self,workflow_name,description, is_enable="enable"):
+    def workflow(self,workflow_name, is_enable="enable"):
         if is_enable == "disable":
             return (None,)
         output = [
@@ -272,7 +271,7 @@ class workflow_tool:
                 "type": "function",
                 "function": {
                     "name": "work_flow",
-                    "description": str(description),
+                    "description": "这是一个根据workflow_name调用workflow的工具，请根据workflow_name判断这个工作流的作用，然后调用对应的工作流",
                     "parameters": {
                         "type": "object",
                         "properties": {
