@@ -1,0 +1,298 @@
+{
+  "last_node_id": 26,
+  "last_link_id": 27,
+  "nodes": [
+    {
+      "id": 20,
+      "type": "LLM",
+      "pos": [
+        1386,
+        270
+      ],
+      "size": {
+        "0": 412.428955078125,
+        "1": 392.5848388671875
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 27
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 24,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            25
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "你好,请帮我找出这两张表格之间的不同",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 22,
+      "type": "show_text_party",
+      "pos": [
+        1829,
+        273
+      ],
+      "size": {
+        "0": 329.24566650390625,
+        "1": 273.4353942871094
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 25,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "根据您提供的两张表格内容，我们可以比较两张表格中姓名、性别和年龄的差异：\n\n在 Sheet1 和 Sheet2 中，有以下不同之处：\n\n1. 王五的年龄不同：\n   - Sheet1 中王五的年龄是 21 岁。\n   - Sheet2 中王五的年龄是 22 岁。\n\n2. 赵六的性别和年龄不同：\n   - Sheet1 中赵六是女性，年龄是 23 岁。\n   - Sheet2 中赵六是男性，年龄也是 23 岁。\n\n其他条目在两张表格中是相同的。"
+      ]
+    },
+    {
+      "id": 25,
+      "type": "show_text_party",
+      "pos": [
+        1033,
+        432
+      ],
+      "size": {
+        "0": 329.24566650390625,
+        "1": 273.4353942871094
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 26,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "## Sheet1 的内容\n|  | 姓名 | 性别 | 年龄|\n|--- | --- | --- | ---|\n|1 | 张三 | 男 | 18|\n|2 | 李四 | 女 | 20|\n|3 | 王五 | 男 | 21|\n|4 | 赵六 | 女 | 23|\n## Sheet2 的内容\n|  | 姓名 | 性别 | 年龄|\n|--- | --- | --- | ---|\n|1 | 张三 | 男 | 18|\n|2 | 李四 | 女 | 20|\n|3 | 王五 | 男 | 22|\n|4 | 赵六 | 男 | 23|\n"
+      ]
+    },
+    {
+      "id": 24,
+      "type": "load_file",
+      "pos": [
+        1028,
+        261
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": [
+            24,
+            26
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_file"
+      },
+      "widgets_values": [
+        "test.xlsx",
+        true,
+        "Relative_Path"
+      ]
+    },
+    {
+      "id": 26,
+      "type": "LLM_api_loader",
+      "pos": [
+        1039,
+        78
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            27
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "https://api.openai.com/v1/",
+        "sk-XXXXX"
+      ]
+    }
+  ],
+  "links": [
+    [
+      24,
+      24,
+      0,
+      20,
+      4,
+      "STRING"
+    ],
+    [
+      25,
+      20,
+      0,
+      22,
+      0,
+      "STRING"
+    ],
+    [
+      26,
+      24,
+      0,
+      25,
+      0,
+      "STRING"
+    ],
+    [
+      27,
+      26,
+      0,
+      20,
+      0,
+      "CUSTOM"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": {
+        "0": -761.2146961007608,
+        "1": 20.593760956707634
+      }
+    }
+  },
+  "version": 0.4
+}
