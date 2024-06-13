@@ -36,7 +36,7 @@ def read_one(path):
             text += " ".join([str(cell) for cell in sheet.row_values(row_num)]) + " "
     elif path.endswith(".csv"):
         df = pd.read_csv(path, encoding="utf-8")
-        text += df.to_string(header=False, index=False)
+        text += df.to_string(header=True, index=True)
     elif path.endswith(".txt"):
         with open(path, "r", encoding="utf-8") as f:
             text += f.read()
