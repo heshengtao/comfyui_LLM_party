@@ -250,7 +250,7 @@ class workflow_tool:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "workflow_name": ("STRING", {"default": "测试画画app.json,绘图app.json"}),
+                "workflow_name": ("STRING", {"multiline": True,"default": "测试画画app.json,绘图app.json"}),
             },
         }
 
@@ -277,7 +277,7 @@ class workflow_tool:
                         "properties": {
                             "workflow_name": {
                                 "type": "string",
-                                "description": f"请从[{str(workflow_name)}]中选择一个工作流，作为要调用的workflow_name",
+                                "description": f"请从[{str(workflow_name)}]中选择json文件名作为要调用的workflow_name",
                             },
                             "user_prompt": {
                                 "type": "string",
