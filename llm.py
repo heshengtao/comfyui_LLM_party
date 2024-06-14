@@ -24,7 +24,7 @@ from transformers import (
 if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
 
-from .config import config_path, current_dir_path, load_api_keys
+from .config import config_path, current_dir_path, load_api_keys,config_key
 from .tools.api_tool import api_tool, use_api_tool
 from .tools.arxiv import arxiv_tool, get_arxiv
 from .tools.check_web import check_web, check_web_tool
@@ -365,6 +365,9 @@ class LLM_api_loader:
         api_keys = load_api_keys(config_path)
         if api_key != "":
             openai.api_key = api_key
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.api_key = api_keys.get("api_key")
         elif api_keys.get("openai_api_key") != "":
             openai.api_key = api_keys.get("openai_api_key")
         else:
@@ -375,6 +378,9 @@ class LLM_api_loader:
                 openai.base_url = base_url
             else:
                 openai.base_url = base_url + "/"
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.base_url = api_keys.get("base_url")
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         else:

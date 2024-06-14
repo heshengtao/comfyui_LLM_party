@@ -9,7 +9,8 @@ current_dir_path = os.path.dirname(current_file_path)
 
 # 构建config.ini的绝对路径
 config_path = os.path.join(current_dir_path, "config.ini")
-
+config_key = configparser.ConfigParser()
+config_key.read(config_path, encoding="utf-8")
 
 def load_api_keys(config_file):
     config = configparser.ConfigParser()

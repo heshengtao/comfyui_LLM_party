@@ -10,3 +10,11 @@ imgbb_api=
 wechat_url=work_wechat_url_put_here
 dingding_url=dingding_url_put_here
 feishu_url=feishu_url_put_here
+
+[deepseek-chat]
+base_url=
+api_key=
+
+[your_model_name]
+base_url=
+api_key=
