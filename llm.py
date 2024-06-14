@@ -432,7 +432,7 @@ class LLM:
                 "is_tools_in_sys_prompt": (["enable", "disable"], {"default": "disable"}),
                 "is_locked": (["enable", "disable"], {"default": "disable"}),
                 "main_brain": (["enable", "disable"], {"default": "enable"}),
-                "max_length": ("FLOAT", {"default": 2048, "min": 256, "max": 128000, "step": 256}),
+                "max_length": ("FLOAT", {"default": 1920, "min": 256, "max": 128000, "step": 128}),
             },
             "optional": {
                 "system_prompt_input": ("STRING", {"forceInput": True}),
@@ -1015,7 +1015,7 @@ class LLM_local:
                     },
                 ),
                 "temperature": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0, "step": 0.1}),
-                "max_length": ("FLOAT", {"default": 512, "min": 256, "max": 128000, "step": 256}),
+                "max_length": ("FLOAT", {"default": 512, "min": 256, "max": 128000, "step": 128}),
                 "is_memory": (["enable", "disable"], {"default": "enable"}),
                 "is_locked": (["enable", "disable"], {"default": "disable"}),
                 "main_brain": (["enable", "disable"], {"default": "enable"}),
