@@ -11,10 +11,22 @@ wechat_url=work_wechat_url_put_here
 dingding_url=dingding_url_put_here
 feishu_url=feishu_url_put_here
 
+[your_model_name]
+base_url=
+api_key=
+
 [deepseek-chat]
 base_url=
 api_key=
 
-[your_model_name]
+[glm-4]
+base_url=
+api_key=
+
+[qwen-max]
+base_url=
+api_key=
+
+[moonshot-v1-8k]
 base_url=
 api_key=
