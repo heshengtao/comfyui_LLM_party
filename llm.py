@@ -59,6 +59,7 @@ from .tools.wechat import work_wechat_tool,send_wechat,work_wechat
 from .tools.dingding import Dingding_tool,send_dingding,Dingding
 from .tools.feishu import feishu_tool,send_feishu,feishu
 from .tools.tts import openai_tts,play_audio
+from .tools.load_model_name import load_name
 from torchvision.transforms import ToPILImage
 
 _TOOL_HOOKS = [
@@ -1465,6 +1466,7 @@ NODE_CLASS_MAPPINGS = {
     "substring":substring,
     "openai_tts":openai_tts,
     "play_audio":play_audio,
+    "load_name":load_name,
 }
 
 
@@ -1524,6 +1526,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "substring": "提取字符串(extract_substring)",
     "openai_tts": "OpenAI语音合成(openai_tts)",
     "play_audio": "播放音频(play_audio)",
+    "load_name": "加载模型名称(load_model_name)",
 }
 
 if __name__ == "__main__":

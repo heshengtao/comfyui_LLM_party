@@ -12,6 +12,11 @@ config_path = os.path.join(current_dir_path, "config.ini")
 config_key = configparser.ConfigParser()
 config_key.read(config_path, encoding="utf-8")
 
+#获取config_key中的所有部分
+config_keys = config_key.sections()
+# 删除config_key中名为"API_KEYS"的元素
+del config_keys[config_keys.index("API_KEYS")]
+
 def load_api_keys(config_file):
     config = configparser.ConfigParser()
     config.read(config_file, encoding="utf-8")
