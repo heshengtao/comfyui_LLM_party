@@ -16,17 +16,17 @@ base_url=
 api_key=
 
 [deepseek-chat]
-base_url=
+base_url=https://api.deepseek.com/v1/
 api_key=
 
 [glm-4]
-base_url=
+base_url=https://open.bigmodel.cn/api/paas/v4/
 api_key=
 
 [qwen-max]
-base_url=
+base_url=https://dashscope.aliyuncs.com/compatible-mode/v1/
 api_key=
 
 [moonshot-v1-8k]
-base_url=
+base_url=https://api.moonshot.cn/v1/
 api_key=
