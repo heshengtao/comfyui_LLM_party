@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 from ..lib_omost.canvas import Canvas as omost_canvas
-
+import torch.nn.functional as F
 
 class omost_decode:
     def __init__(self):
@@ -52,9 +52,10 @@ class omost_decode:
             tokens = clip[0].tokenize(prompt)
             condition, pooled = clip[0].encode_from_tokens(tokens, return_pooled=True)
             conditions.append(condition)
-        condition_out=torch.cat(conditions, dim=0)
-        # 使用torch.cat沿着第0维合并所有的mask_tensor
-        combined_mask_tensor = torch.cat(mask_tensors, dim=0)
+        # 使用torch.cat沿着第1维合并所有的conditions
+        condition_out = torch.cat(conditions, dim=1)
+        # mask_tensors里所有张量直接相加，形状不变，再除以列表长度
+        combined_mask_tensor = torch.cat(mask_tensors, dim=0).sum(dim=0) / len(mask_tensors)
         return ([[condition_out, {"pooled_output": pooled}]],combined_mask_tensor,)
     
 

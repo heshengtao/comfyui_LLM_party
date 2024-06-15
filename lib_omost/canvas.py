@@ -239,7 +239,7 @@ class Canvas:
             bag_of_conditions.append(dict(
                 mask=m,
                 prefixes=component['prefixes'],
-                suffixes=component['suffixes']
+                suffixes=component['suffixes'],
             ))
 
         return dict(
