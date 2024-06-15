@@ -60,6 +60,7 @@ from .tools.dingding import Dingding_tool,send_dingding,Dingding
 from .tools.feishu import feishu_tool,send_feishu,feishu
 from .tools.tts import openai_tts,play_audio
 from .tools.load_model_name import load_name
+from .tools.omost import omost_decode
 from torchvision.transforms import ToPILImage
 
 _TOOL_HOOKS = [
@@ -1467,6 +1468,7 @@ NODE_CLASS_MAPPINGS = {
     "openai_tts":openai_tts,
     "play_audio":play_audio,
     "load_name":load_name,
+    "omost_decode":omost_decode,
 }
 
 
@@ -1527,6 +1529,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "openai_tts": "OpenAI语音合成(openai_tts)",
     "play_audio": "播放音频(play_audio)",
     "load_name": "加载模型名称(load_model_name)",
+    "omost_decode": "omost解码器(omost_decode)",
 }
 
 if __name__ == "__main__":
