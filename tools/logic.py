@@ -133,3 +133,31 @@ class substring:
         return (
             out,
         )
+    
+class get_string:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "input_string": ("STRING", {"multiline": True}),
+            },
+        }
+
+    RETURN_TYPES = (
+        "STRING",
+    )
+    RETURN_NAMES = (
+        "string",
+    )
+
+    FUNCTION = "substr"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/函数（function）"
+
+    def substr(self, input_string):
+        out =input_string
+        return (
+            out,
+        )

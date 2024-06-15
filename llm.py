@@ -47,7 +47,7 @@ from .tools.interpreter import interpreter, interpreter_tool
 from .tools.load_ebd import data_base, ebd_tool, load_embeddings
 from .tools.load_file import load_file, load_file_folder, load_url, start_workflow
 from .tools.load_persona import load_persona
-from .tools.logic import string_logic,substring
+from .tools.logic import string_logic,substring,get_string
 from .tools.new_interpreter import new_interpreter, new_interpreter_tool
 from .tools.search_web import google_tool, search_web,bing_tool,search_web_bing
 from .tools.show_text import show_text_party,About_us
@@ -1474,6 +1474,7 @@ NODE_CLASS_MAPPINGS = {
     "play_audio":play_audio,
     "load_name":load_name,
     "omost_decode":omost_decode,
+    "get_string":get_string,
 }
 
 
@@ -1535,6 +1536,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "play_audio": "播放音频(play_audio)",
     "load_name": "加载模型名称(load_model_name)",
     "omost_decode": "omost解码器(omost_decode)",
+    "get_string": "获取字符串(get_string)",
 }
 
 if __name__ == "__main__":
