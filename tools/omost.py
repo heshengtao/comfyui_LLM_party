@@ -10,14 +10,14 @@ class omost_decode:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "clip": ("CLIP", ),
+                "clip": ("CLIP",{} ),
                 "text": ("STRING", {"forceInput": True}),
             },
         }
 
     INPUT_IS_LIST = True
-    RETURN_TYPES = ("CONDITIONING","MASK","LATENT",)
-    RETURN_NAMES = ("conditioning","mask","initial_latent",)
+    RETURN_TYPES = ("CONDITIONING","MASK",)
+    RETURN_NAMES = ("conditioning","mask",)
     FUNCTION = "notify"
     OUTPUT_NODE = True
 
@@ -49,12 +49,12 @@ class omost_decode:
             suffixes=cond['suffixes']
             for target in suffixes:
                 prompt = "".join(prefixes + [target])
-            tokens = clip.tokenize(prompt)
-            condition, pooled = clip.encode_from_tokens(tokens, return_pooled=True)
+            tokens = clip[0].tokenize(prompt)
+            condition, pooled = clip[0].encode_from_tokens(tokens, return_pooled=True)
             conditions.append(condition)
-        condition=torch.cat(conditions, dim=0)
+        condition_out=torch.cat(conditions, dim=0)
         # 使用torch.cat沿着第0维合并所有的mask_tensor
         combined_mask_tensor = torch.cat(mask_tensors, dim=0)
-        return ([[condition, {"pooled_output": pooled}]],combined_mask_tensor,{"samples":latent},)
+        return ([[condition_out, {"pooled_output": pooled}]],combined_mask_tensor,)
     
 
