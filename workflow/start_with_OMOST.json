@@ -1,6 +1,6 @@
 {
-  "last_node_id": 67,
-  "last_link_id": 63,
+  "last_node_id": 68,
+  "last_link_id": 67,
   "nodes": [
     {
       "id": 56,
@@ -14,7 +14,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 10,
+      "order": 9,
       "mode": 0,
       "inputs": [
         {
@@ -58,7 +58,7 @@
         "1": 262
       },
       "flags": {},
-      "order": 9,
+      "order": 8,
       "mode": 0,
       "inputs": [
         {
@@ -70,7 +70,7 @@
         {
           "name": "positive",
           "type": "CONDITIONING",
-          "link": 40,
+          "link": 67,
           "label": "positive"
         },
         {
@@ -104,61 +104,13 @@
         "Node name for S&R": "KSampler"
       },
       "widgets_values": [
-        949661247934955,
+        40041744403304,
         "randomize",
         20,
         8,
         "euler",
         "normal",
         1
-      ]
-    },
-    {
-      "id": 53,
-      "type": "ConditioningSetMask",
-      "pos": [
-        1920,
-        442
-      ],
-      "size": {
-        "0": 317.4000244140625,
-        "1": 102
-      },
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "conditioning",
-          "type": "CONDITIONING",
-          "link": 61,
-          "label": "conditioning"
-        },
-        {
-          "name": "mask",
-          "type": "MASK",
-          "link": 62,
-          "label": "mask"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "CONDITIONING",
-          "type": "CONDITIONING",
-          "links": [
-            40
-          ],
-          "shape": 3,
-          "label": "CONDITIONING",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ConditioningSetMask"
-      },
-      "widgets_values": [
-        1,
-        "default"
       ]
     },
     {
@@ -255,66 +207,6 @@
       ]
     },
     {
-      "id": 66,
-      "type": "omost_decode",
-      "pos": [
-        1521,
-        443
-      ],
-      "size": {
-        "0": 315,
-        "1": 78
-      },
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 59,
-          "label": "clip"
-        },
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 60,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "conditioning",
-          "type": "CONDITIONING",
-          "links": [
-            61
-          ],
-          "shape": 3,
-          "label": "conditioning",
-          "slot_index": 0
-        },
-        {
-          "name": "mask",
-          "type": "MASK",
-          "links": [
-            62
-          ],
-          "shape": 3,
-          "label": "mask",
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "omost_decode"
-      },
-      "widgets_values": [
-        ""
-      ]
-    },
-    {
       "id": 55,
       "type": "CLIPTextEncode",
       "pos": [
@@ -400,7 +292,7 @@
         "1": 246
       },
       "flags": {},
-      "order": 11,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
@@ -444,7 +336,7 @@
           "type": "CLIP",
           "links": [
             47,
-            59
+            65
           ],
           "shape": 3,
           "label": "CLIP",
@@ -534,8 +426,8 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            60,
-            63
+            63,
+            66
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -573,7 +465,7 @@
         0.7,
         2048,
         "disable",
-        "enable",
+        "disable",
         "enable",
         "",
         "",
@@ -588,11 +480,11 @@
         1162
       ],
       "size": [
-        315,
-        76
+        421.1827473133153,
+        646.0502533738027
       ],
       "flags": {},
-      "order": 7,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
@@ -601,7 +493,8 @@
           "link": 63,
           "widget": {
             "name": "text"
-          }
+          },
+          "label": "text"
         }
       ],
       "outputs": [
@@ -618,19 +511,60 @@
       },
       "widgets_values": [
         "",
-        "```python\n# Initialize the canvas\ncanvas = Canvas()\n\n# Set a global description for the canvas\ncanvas.set_global_description(\n    description='A beautiful woman wearing a red hat, with blue eyes, and white hair.',\n    detailed_descriptions=[\n        'The image features a stunning woman with striking blue eyes and white hair, all set against a neutral background.',\n        'She is wearing a vibrant red hat that stands out and adds a pop of color to the composition.',\n        'Her expression is serene, and her gaze is captivating, drawing the viewer in.',\n        'The white of her hair contrasts beautifully with the red of her hat, creating a visually appealing contrast.',\n        'The background is kept simple to ensure the focus remains on her, allowing her striking features and the vibrant hat to be the focal points.',\n    ],\n    tags='woman, red hat, blue eyes, white hair, beautiful, captivating, serene, striking, neutral background, pop of color, visual contrast, simple background, stunning, gaze, expression, neutral, vibrant, focal point, striking features, visually appealing',\n    HTML_web_color_name='lightgray',\n)\n\n# Add the woman with blue eyes and white hair.\ncanvas.add_local_description(\n    location='in the center',\n    offset='no offset',\n    area='a medium-sized square area',\n    distance_to_viewer=1.5,\n    description='The woman with blue eyes and white hair.',\n    detailed_descriptions=[\n        'The central figure in the image is a woman with mesmerizing blue eyes and a head full of white hair.',\n        'Her hair is styled in a way that frames her face beautifully, and her eyes are strikingly blue, almost luminescent.',\n        'She has a serene expression on her face, and her gaze is captivating, drawing the viewer in.',\n        'Her white hair adds a touch of elegance and contrasts with her red hat, making her stand out even more.',\n        'The overall effect is one of beauty and mystery, with her striking features and serene expression creating a powerful visual impact.',\n    ],\n    tags='woman, blue eyes, white hair, serene expression, captivating gaze, striking features, elegant, beauty, mystery, visual impact, central figure, mesmerizing, styled hair, framed face, powerful',\n    atmosphere='A serene and captivating presence that draws the viewer in.',\n    style='A portrait with a focus on striking features and a serene expression.',\n    quality_meta='High-quality, detailed depiction of the central figure.',\n    HTML_web_color_name='white',\n)\n\n# Add the vibrant red hat.\ncanvas.add_local_description(\n    location='on the top',\n    offset='no offset',\n    area='a small square area',\n    distance_to_viewer=1.8,\n    description='The vibrant red hat.',\n    detailed_descriptions=[\n        'The red hat worn by the woman is vibrant and eye-catching, adding a bold pop of color to the image.',\n        'The hat is stylish and well-fitted, complementing her white hair and striking blue eyes.',\n        'The red of the hat contrasts sharply with the neutral background, making it stand out even more.',\n        'The hat is a key element in the composition, as it adds a dynamic and vibrant touch to the overall image.',\n        'The way the hat is styled adds to the overall elegance and sophistication of the woman, making her look even more striking and memorable.',\n    ],\n    tags='red hat, vibrant, eye-catching, bold, stylish, well-fitted, complement, white hair, blue eyes, contrast, neutral background, stand out, dynamic, vibrant touch, elegance, sophistication, striking, memorable',\n    atmosphere='A vibrant and eye-catching element that adds boldness.',\n    style='A stylish and well-fitted hat that complements the overall composition.',\n    quality_meta='High-quality, detailed depiction of the red hat.',\n    HTML_web_color_name='red',\n)\n\n# Add the woman's white hair.\ncanvas.add_local_description(\n    location='on the left',\n    offset='slightly to the upper-left',\n    area='a medium-sized vertical area',\n    distance_to_viewer=1.6,\n    description=\"The woman's white hair.\",\n    detailed_descriptions=[\n        \"The woman's white hair is a key feature in the image, adding a touch of elegance and sophistication.\",\n        'The hair is styled in a way that frames her face beautifully, with each strand carefully placed to create a harmonious look.',\n        'The white of her hair contrasts sharply with the red of her hat, making her stand out even more.',\n        'The way her hair is styled adds to the overall elegance and sophistication of the woman, making her look even more striking and memorable.',\n        'The white hair is a key element in the composition, as it adds a dynamic and vibrant touch to the overall image.',\n    ],\n    tags='white hair, elegant, sophisticated, styled, frame face, harmonious, contrast, red hat, stand out, striking, memorable, key feature, dynamic, vibrant, touch, overall image, carefully placed, harmonious look',\n    atmosphere='A sophisticated and elegant touch that adds a harmonious look.',\n    style='A well-styled hair that complements the overall composition.',\n    quality_meta='High-quality, detailed depiction of the white hair.',\n    HTML_web_color_name='white',\n)\n```"
+        "```python\n# Initialize the canvas\ncanvas = Canvas()\n\n# Set a global description for the canvas\ncanvas.set_global_description(\n    description='A beautiful woman wearing a red hat with blue eyes and white hair.',\n    detailed_descriptions=[\n        'The image features a stunning woman who is the focal point of the composition.',\n        'She is wearing a vibrant red hat that stands out against her white hair.',\n        'Her blue eyes are strikingly beautiful, adding a sense of depth and intrigue to her gaze.',\n        'The background is subtle, ensuring that the focus remains on the woman and her striking appearance.',\n        'The overall atmosphere of the image is one of elegance and mystery, with the red hat adding a pop of color and the blue eyes providing a captivating focal point.',\n    ],\n    tags='beautiful woman, red hat, blue eyes, white hair, striking appearance, vibrant colors, elegant, mysterious, captivating, focal point, subtle background, depth, intrigue, pop of color, stunning, eye-catching, fashion, portrait, stylish, chic, captivating gaze, attention to detail',\n    HTML_web_color_name='lightcoral',\n)\n\n# Add the woman's face with blue eyes and white hair\ncanvas.add_local_description(\n    location='in the center',\n    offset='no offset',\n    area='a medium-sized square area',\n    distance_to_viewer=1.0,\n    description=\"The woman's face with blue eyes and white hair\",\n    detailed_descriptions=[\n        \"The woman's face is the central focus of the image.\",\n        'Her blue eyes are mesmerizing, drawing the viewer in with their depth and clarity.',\n        'Her white hair is styled elegantly, framing her face perfectly.',\n        'The red hat she wears adds a vibrant splash of color, making her stand out even more.',\n        'The lighting is soft, highlighting her facial features and adding a gentle glow to her skin.',\n        'The overall effect is one of beauty and sophistication, with each element working together to create a harmonious and captivating portrait.',\n    ],\n    tags='woman, blue eyes, white hair, red hat, central focus, mesmerizing, depth, clarity, elegant hairstyle, vibrant color, standout, soft lighting, facial features, gentle glow, beauty, sophistication, harmonious, captivating, portrait, stunning, detailed',\n    atmosphere='The atmosphere is one of elegance and sophistication.',\n    style='The style is a blend of portrait photography with a focus on beauty and detail.',\n    quality_meta='The image is of high quality, with detailed and clear features.',\n    HTML_web_color_name='lightcoral',\n)\n\n# Add the red hat\ncanvas.add_local_description(\n    location='on the top',\n    offset='slightly to the left',\n    area='a small square area',\n    distance_to_viewer=1.5,\n    description='The red hat',\n    detailed_descriptions=[\n        'The red hat is a striking accessory that adds a vibrant touch to the overall image.',\n        'It is made of high-quality fabric, with a smooth texture and a slight sheen that catches the light.',\n        'The hat is positioned slightly to the left, allowing it to frame the woman’s face without overpowering it.',\n        'The red color is rich and deep, creating a beautiful contrast against her white hair and blue eyes.',\n        'The hat’s design is simple yet elegant, with a classic style that enhances the woman’s sophisticated appearance.',\n    ],\n    tags='red hat, striking accessory, vibrant touch, high-quality fabric, smooth texture, slight sheen, catches light, positioned left, frames face, rich color, deep red, beautiful contrast, white hair, blue eyes, simple design, elegant, classic style, sophisticated appearance',\n    atmosphere='The atmosphere is vibrant and stylish.',\n    style='The style is classic and elegant, with a focus on simplicity and quality.',\n    quality_meta='The hat is depicted with high detail, showcasing its texture and color.',\n    HTML_web_color_name='crimson',\n)\n\n# Add the woman's white hair\ncanvas.add_local_description(\n    location='on the right',\n    offset='slightly to the upper-left',\n    area='a small vertical area',\n    distance_to_viewer=1.2,\n    description=\"The woman's white hair\",\n    detailed_descriptions=[\n        'The woman’s white hair is styled elegantly, cascading down her shoulders in soft waves.',\n        'The hair has a silky texture, with each strand catching the light in a way that highlights its natural shine.',\n        'The white color of her hair contrasts beautifully with the red hat and her blue eyes, creating a harmonious and visually appealing composition.',\n        'The styling is simple yet effective, with a focus on natural beauty and sophistication.',\n        'The hair frames her face perfectly, adding to the overall elegance of the image.',\n    ],\n    tags='white hair, styled elegantly, cascading, soft waves, silky texture, catching light, natural shine, white color, contrast, red hat, blue eyes, harmonious, visually appealing, simple styling, natural beauty, sophistication, frames face, overall elegance',\n    atmosphere='The atmosphere is one of natural beauty and sophistication.',\n    style='The style is elegant and simple, with a focus on natural beauty.',\n    quality_meta='The hair is depicted with high detail, showing its texture and shine.',\n    HTML_web_color_name='white',\n)\n\n# Add the woman's blue eyes\ncanvas.add_local_description(\n    location='on the left',\n    offset='slightly to the lower-right',\n    area='a small vertical area',\n    distance_to_viewer=1.3,\n    description=\"The woman's blue eyes\",\n    detailed_descriptions=[\n        'The woman’s blue eyes are a striking feature that captures the viewer’s attention.',\n        'They are deep and clear, with a natural sparkle that adds to their allure.',\n        'The blue color is rich and vibrant, contrasting beautifully with her white hair and red hat.',\n        'The eyes are framed by long, dark lashes and subtle makeup that enhances their natural beauty without overpowering it.',\n        'The lighting is soft, highlighting the depth and clarity of her eyes, making them a focal point of the image.',\n    ],\n    tags='blue eyes, striking feature, captures attention, deep, clear, natural sparkle, allure, rich color, vibrant, beautiful contrast, white hair, red hat, framed, long lashes, subtle makeup, enhances beauty, soft lighting, depth, clarity, focal point',\n    atmosphere='The atmosphere is captivating and alluring.',\n    style='The style is focused on natural beauty with subtle enhancements.',\n    quality_meta='The eyes are depicted with high detail, showcasing their clarity and color.',\n    HTML_web_color_name='skyblue',\n)\n\n# Add the subtle background\ncanvas.add_local_description(\n    location='on the bottom',\n    offset='slightly to the upper-left',\n    area='a small horizontal area',\n    distance_to_viewer=1.5,\n    description='The subtle background',\n    detailed_descriptions=[\n        'The background of the image is subtle and unobtrusive, ensuring that the focus remains on the woman and her striking appearance.',\n        'It is a soft gradient that blends seamlessly into the surrounding area, with a slight hint of color that adds depth without distracting from the main subject.',\n        'The lighting is soft and even, providing a gentle illumination that enhances the overall elegance of the image.',\n        'The background is designed to complement the woman’s features, rather than compete with them, creating a harmonious and visually appealing composition.',\n    ],\n    tags='background, subtle, unobtrusive, focus, striking appearance, soft gradient, seamless blend, hint of color, depth, main subject, soft lighting, even lighting, gentle illumination, enhances elegance, complements features, harmonious, visually appealing, composition',\n    atmosphere='The atmosphere is subtle and elegant.',\n    style='The style is minimalist and complementary, enhancing the main subject.',\n    quality_meta='The background is depicted with high detail, showing its subtle nuances.',\n    HTML_web_color_name='lavenderblush',\n)\n```"
+      ]
+    },
+    {
+      "id": 68,
+      "type": "omost_decode",
+      "pos": [
+        1640,
+        447
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 65,
+          "label": "clip"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 66,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            67
+          ],
+          "shape": 3,
+          "label": "conditioning",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "omost_decode"
+      },
+      "widgets_values": [
+        ""
       ]
     }
   ],
   "links": [
-    [
-      40,
-      53,
-      0,
-      54,
-      1,
-      "CONDITIONING"
-    ],
     [
       42,
       51,
@@ -712,54 +646,46 @@
       "STRING"
     ],
     [
-      59,
-      51,
-      1,
-      66,
-      0,
-      "CLIP"
-    ],
-    [
-      60,
-      62,
-      0,
-      66,
-      1,
-      "STRING"
-    ],
-    [
-      61,
-      66,
-      0,
-      53,
-      0,
-      "CONDITIONING"
-    ],
-    [
-      62,
-      66,
-      1,
-      53,
-      1,
-      "MASK"
-    ],
-    [
       63,
       62,
       0,
       67,
       0,
       "STRING"
+    ],
+    [
+      65,
+      51,
+      1,
+      68,
+      0,
+      "CLIP"
+    ],
+    [
+      66,
+      62,
+      0,
+      68,
+      1,
+      "STRING"
+    ],
+    [
+      67,
+      68,
+      0,
+      54,
+      1,
+      "CONDITIONING"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.683013455365072,
+      "scale": 0.6209213230591552,
       "offset": {
-        "0": -737.8284202992797,
-        "1": -171.13441125326125
+        "0": -425.65849993272354,
+        "1": 63.80722373937394
       }
     }
   },
