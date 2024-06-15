@@ -1,0 +1,767 @@
+{
+  "last_node_id": 67,
+  "last_link_id": 63,
+  "nodes": [
+    {
+      "id": 56,
+      "type": "VAEDecode",
+      "pos": [
+        2873.239392250689,
+        301.5725193208629
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 44,
+          "label": "samples"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 45,
+          "label": "vae"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            46
+          ],
+          "shape": 3,
+          "label": "IMAGE",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 54,
+      "type": "KSampler",
+      "pos": [
+        2421,
+        285
+      ],
+      "size": {
+        "0": 315,
+        "1": 262
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 42,
+          "label": "model"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 40,
+          "label": "positive"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 43,
+          "label": "negative",
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 50,
+          "label": "latent_image",
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "label": "LATENT",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        949661247934955,
+        "randomize",
+        20,
+        8,
+        "euler",
+        "normal",
+        1
+      ]
+    },
+    {
+      "id": 53,
+      "type": "ConditioningSetMask",
+      "pos": [
+        1920,
+        442
+      ],
+      "size": {
+        "0": 317.4000244140625,
+        "1": 102
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 61,
+          "label": "conditioning"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 62,
+          "label": "mask"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningSetMask"
+      },
+      "widgets_values": [
+        1,
+        "default"
+      ]
+    },
+    {
+      "id": 61,
+      "type": "LLM_local_loader",
+      "pos": [
+        527,
+        506
+      ],
+      "size": {
+        "0": 315,
+        "1": 174
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            52
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "links": [
+            53
+          ],
+          "shape": 3,
+          "label": "tokenizer",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local_loader"
+      },
+      "widgets_values": [
+        "llama",
+        "D:\\AI\\mychat\\model\\omost\\",
+        "D:\\AI\\mychat\\model\\omost\\",
+        "auto",
+        "float32"
+      ]
+    },
+    {
+      "id": 63,
+      "type": "load_persona",
+      "pos": [
+        530,
+        743
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            54
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "omost",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 66,
+      "type": "omost_decode",
+      "pos": [
+        1521,
+        443
+      ],
+      "size": {
+        "0": 315,
+        "1": 78
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 59,
+          "label": "clip"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 60,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            61
+          ],
+          "shape": 3,
+          "label": "conditioning",
+          "slot_index": 0
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [
+            62
+          ],
+          "shape": 3,
+          "label": "mask",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "omost_decode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 55,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1628,
+        628
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 47,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            43
+          ],
+          "shape": 3,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "NSFW,(text), animal ears, (logo), (watermark), ((big hands, un-detailed skin, sketch, cartoon, drawing)), ((ugly mouth, ugly eyes, missing teeth, crooked teeth, cropped, out of frame)), worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck,(more than two arm per body:1.5), (more than two leg per body:1.5), (more than five fingers on one hand:1.5), multi arms, multi legs, bad arm anatomy, bad leg anatomy, bad hand anatomy, bad finger anatomy, bad detailed background, unclear architectural outline, non-linear background, elf-ears, hair crosses the screen border, obesity, fat, lowres, worst quality, low quality, blurry, mutated hands and fingers, disfigured, fused, cloned, duplicate, artist name, giantess, odd eyes, long fingers, long neck, handrail,paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, bad eyes, asymmetric eyes, tattoo,"
+      ]
+    },
+    {
+      "id": 60,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1696,
+        897
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            50
+          ],
+          "shape": 3,
+          "label": "LATENT"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 57,
+      "type": "PreviewImage",
+      "pos": [
+        3228,
+        304
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 46,
+          "label": "images"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 51,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        1027,
+        344
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            42
+          ],
+          "shape": 3,
+          "label": "MODEL",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            47,
+            59
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "OldFish_236151438.safetensors"
+      ]
+    },
+    {
+      "id": 62,
+      "type": "LLM_local",
+      "pos": [
+        950,
+        506
+      ],
+      "size": {
+        "0": 445.62530517578125,
+        "1": 392.92010498046875
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 52,
+          "label": "model"
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "link": 53,
+          "label": "tokenizer"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null,
+          "label": "image"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 54,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            60,
+            63
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local"
+      },
+      "widgets_values": [
+        "",
+        "请画一个戴着红色帽子的美女，眼睛是蓝色的，头发是白色的",
+        "llama",
+        0.7,
+        2048,
+        "disable",
+        "enable",
+        "enable",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 67,
+      "type": "show_text_party",
+      "pos": [
+        1541,
+        1162
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 63,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "```python\n# Initialize the canvas\ncanvas = Canvas()\n\n# Set a global description for the canvas\ncanvas.set_global_description(\n    description='A beautiful woman wearing a red hat, with blue eyes, and white hair.',\n    detailed_descriptions=[\n        'The image features a stunning woman with striking blue eyes and white hair, all set against a neutral background.',\n        'She is wearing a vibrant red hat that stands out and adds a pop of color to the composition.',\n        'Her expression is serene, and her gaze is captivating, drawing the viewer in.',\n        'The white of her hair contrasts beautifully with the red of her hat, creating a visually appealing contrast.',\n        'The background is kept simple to ensure the focus remains on her, allowing her striking features and the vibrant hat to be the focal points.',\n    ],\n    tags='woman, red hat, blue eyes, white hair, beautiful, captivating, serene, striking, neutral background, pop of color, visual contrast, simple background, stunning, gaze, expression, neutral, vibrant, focal point, striking features, visually appealing',\n    HTML_web_color_name='lightgray',\n)\n\n# Add the woman with blue eyes and white hair.\ncanvas.add_local_description(\n    location='in the center',\n    offset='no offset',\n    area='a medium-sized square area',\n    distance_to_viewer=1.5,\n    description='The woman with blue eyes and white hair.',\n    detailed_descriptions=[\n        'The central figure in the image is a woman with mesmerizing blue eyes and a head full of white hair.',\n        'Her hair is styled in a way that frames her face beautifully, and her eyes are strikingly blue, almost luminescent.',\n        'She has a serene expression on her face, and her gaze is captivating, drawing the viewer in.',\n        'Her white hair adds a touch of elegance and contrasts with her red hat, making her stand out even more.',\n        'The overall effect is one of beauty and mystery, with her striking features and serene expression creating a powerful visual impact.',\n    ],\n    tags='woman, blue eyes, white hair, serene expression, captivating gaze, striking features, elegant, beauty, mystery, visual impact, central figure, mesmerizing, styled hair, framed face, powerful',\n    atmosphere='A serene and captivating presence that draws the viewer in.',\n    style='A portrait with a focus on striking features and a serene expression.',\n    quality_meta='High-quality, detailed depiction of the central figure.',\n    HTML_web_color_name='white',\n)\n\n# Add the vibrant red hat.\ncanvas.add_local_description(\n    location='on the top',\n    offset='no offset',\n    area='a small square area',\n    distance_to_viewer=1.8,\n    description='The vibrant red hat.',\n    detailed_descriptions=[\n        'The red hat worn by the woman is vibrant and eye-catching, adding a bold pop of color to the image.',\n        'The hat is stylish and well-fitted, complementing her white hair and striking blue eyes.',\n        'The red of the hat contrasts sharply with the neutral background, making it stand out even more.',\n        'The hat is a key element in the composition, as it adds a dynamic and vibrant touch to the overall image.',\n        'The way the hat is styled adds to the overall elegance and sophistication of the woman, making her look even more striking and memorable.',\n    ],\n    tags='red hat, vibrant, eye-catching, bold, stylish, well-fitted, complement, white hair, blue eyes, contrast, neutral background, stand out, dynamic, vibrant touch, elegance, sophistication, striking, memorable',\n    atmosphere='A vibrant and eye-catching element that adds boldness.',\n    style='A stylish and well-fitted hat that complements the overall composition.',\n    quality_meta='High-quality, detailed depiction of the red hat.',\n    HTML_web_color_name='red',\n)\n\n# Add the woman's white hair.\ncanvas.add_local_description(\n    location='on the left',\n    offset='slightly to the upper-left',\n    area='a medium-sized vertical area',\n    distance_to_viewer=1.6,\n    description=\"The woman's white hair.\",\n    detailed_descriptions=[\n        \"The woman's white hair is a key feature in the image, adding a touch of elegance and sophistication.\",\n        'The hair is styled in a way that frames her face beautifully, with each strand carefully placed to create a harmonious look.',\n        'The white of her hair contrasts sharply with the red of her hat, making her stand out even more.',\n        'The way her hair is styled adds to the overall elegance and sophistication of the woman, making her look even more striking and memorable.',\n        'The white hair is a key element in the composition, as it adds a dynamic and vibrant touch to the overall image.',\n    ],\n    tags='white hair, elegant, sophisticated, styled, frame face, harmonious, contrast, red hat, stand out, striking, memorable, key feature, dynamic, vibrant, touch, overall image, carefully placed, harmonious look',\n    atmosphere='A sophisticated and elegant touch that adds a harmonious look.',\n    style='A well-styled hair that complements the overall composition.',\n    quality_meta='High-quality, detailed depiction of the white hair.',\n    HTML_web_color_name='white',\n)\n```"
+      ]
+    }
+  ],
+  "links": [
+    [
+      40,
+      53,
+      0,
+      54,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      42,
+      51,
+      0,
+      54,
+      0,
+      "MODEL"
+    ],
+    [
+      43,
+      55,
+      0,
+      54,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      44,
+      54,
+      0,
+      56,
+      0,
+      "LATENT"
+    ],
+    [
+      45,
+      51,
+      2,
+      56,
+      1,
+      "VAE"
+    ],
+    [
+      46,
+      56,
+      0,
+      57,
+      0,
+      "IMAGE"
+    ],
+    [
+      47,
+      51,
+      1,
+      55,
+      0,
+      "CLIP"
+    ],
+    [
+      50,
+      60,
+      0,
+      54,
+      3,
+      "LATENT"
+    ],
+    [
+      52,
+      61,
+      0,
+      62,
+      0,
+      "CUSTOM"
+    ],
+    [
+      53,
+      61,
+      1,
+      62,
+      1,
+      "CUSTOM"
+    ],
+    [
+      54,
+      63,
+      0,
+      62,
+      3,
+      "STRING"
+    ],
+    [
+      59,
+      51,
+      1,
+      66,
+      0,
+      "CLIP"
+    ],
+    [
+      60,
+      62,
+      0,
+      66,
+      1,
+      "STRING"
+    ],
+    [
+      61,
+      66,
+      0,
+      53,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      62,
+      66,
+      1,
+      53,
+      1,
+      "MASK"
+    ],
+    [
+      63,
+      62,
+      0,
+      67,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.683013455365072,
+      "offset": {
+        "0": -737.8284202992797,
+        "1": -171.13441125326125
+      }
+    }
+  },
+  "version": 0.4
+}
