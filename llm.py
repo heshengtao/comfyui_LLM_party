@@ -1,4 +1,5 @@
 import base64
+import datetime
 import gc
 import hashlib
 import importlib
@@ -708,7 +709,9 @@ class LLM:
             
     @classmethod
     def IS_CHANGED(s):
-        pass
+        #生成当前时间的哈希值
+        hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+        return hash_value
 
 
 def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="user"):
@@ -1382,7 +1385,9 @@ class LLM_local:
 
     @classmethod
     def IS_CHANGED(s):
-        pass
+        #生成当前时间的哈希值
+        hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+        return hash_value
     
 class LLavaLoader:
     @classmethod
