@@ -3,8 +3,9 @@
 </p>
 
 ## Latest Updates
-1. Added LLM tools to send messages to Work_wechat, DingTalk, and Feishu, as well as external functions to call.
-2. Added OpenAI’s TTS functionality, which can achieve voice output.
+1. Compatible with [Omost](https://github.com/lllyasviel/Omost) now!!! Please download [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) to experience it immediately! For an example workflow, refer to: [start_with_OMOST.json](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow/start_with_OMOST.json) 
+2. Added LLM tools to send messages to Work_wechat, DingTalk, and Feishu, as well as external functions to call.
+3. Added OpenAI’s TTS functionality, which can achieve voice output.
 
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
 

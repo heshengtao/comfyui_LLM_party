@@ -3,8 +3,9 @@
 </p>
 
 ## 最新更新
-1. 新增了将消息发送到企业微信、钉钉和飞书的LLM工具以及可供调用的外部函数。
-2. 新增了openai的tts功能，可以实现语音输出。
+1. 兼容[Omost](https://github.com/lllyasviel/Omost)啦！！！请下载[omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)立即体验吧！示例工作流参考：[start_with_OMOST.json](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow/start_with_OMOST.json)
+2. 新增了将消息发送到企业微信、钉钉和飞书的LLM工具以及可供调用的外部函数。
+3. 新增了openai的tts功能，可以实现语音输出。
 
 # **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库**
 
