@@ -19,7 +19,9 @@
 
 2. [[ComfyUI黑科技]教你GPT-4o接入comfyui | 让工作流调用另一个工作流 | 让LLM变成一个tool](https://www.bilibili.com/video/BV1JJ4m1A789/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 
-3. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：931057213
+3. [[comfyui黑科技]将你的工作流伪装成GPT接入微信|Omost兼容！灵活地创造自己的dalle3](https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0)
+
+4. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：931057213
 
 ## 功能
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)

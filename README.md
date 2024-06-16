@@ -19,7 +19,9 @@
 
 2. [Teach you GPT-4o access to comfyui | Make workflow call another workflow | Make LLM a tool](https://www.bilibili.com/video/BV1JJ4m1A789/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 
-3. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: 931057213.
+3. [[Comfyui Black Technology] Disguise your workflow as GPT to access WeChat | Omost compatible! Flexibly create your own dalle3](https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0)
+
+4. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: 931057213.
 
 ## Features
 1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
