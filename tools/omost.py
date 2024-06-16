@@ -73,3 +73,73 @@ class omost_decode:
                                             "mask_strength": strength[0]})
         return (c_list ,mask_tensor_out,)
     
+class omost_setting:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "color": ([
+    'aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure', 'beige', 'bisque', 'black',
+    'blanchedalmond', 'blue', 'blueviolet', 'brown', 'burlywood', 'cadetblue', 'chartreuse',
+    'chocolate', 'coral', 'cornflowerblue', 'cornsilk', 'crimson', 'cyan', 'darkblue',
+    'darkcyan', 'darkgoldenrod', 'darkgray', 'darkgrey', 'darkgreen', 'darkkhaki',
+    'darkmagenta', 'darkolivegreen', 'darkorange', 'darkorchid', 'darkred', 'darksalmon',
+    'darkseagreen', 'darkslateblue', 'darkslategray', 'darkslategrey', 'darkturquoise',
+    'darkviolet', 'deeppink', 'deepskyblue', 'dimgray', 'dimgrey', 'dodgerblue', 'firebrick',
+    'floralwhite', 'forestgreen', 'fuchsia', 'gainsboro', 'ghostwhite', 'gold', 'goldenrod',
+    'gray', 'grey', 'green', 'greenyellow', 'honeydew', 'hotpink', 'indianred', 'indigo',
+    'ivory', 'khaki', 'lavender', 'lavenderblush', 'lawngreen', 'lemonchiffon', 'lightblue',
+    'lightcoral', 'lightcyan', 'lightgoldenrodyellow', 'lightgray', 'lightgrey', 'lightgreen',
+    'lightpink', 'lightsalmon', 'lightseagreen', 'lightskyblue', 'lightslategray',
+    'lightslategrey', 'lightsteelblue', 'lightyellow', 'lime', 'limegreen', 'linen', 'magenta',
+    'maroon', 'mediumaquamarine', 'mediumblue', 'mediumorchid', 'mediumpurple',
+    'mediumseagreen', 'mediumslateblue', 'mediumspringgreen', 'mediumturquoise',
+    'mediumvioletred', 'midnightblue', 'mintcream', 'mistyrose', 'moccasin', 'navajowhite',
+    'navy', 'navyblue', 'oldlace', 'olive', 'olivedrab', 'orange', 'orangered', 'orchid',
+    'palegoldenrod', 'palegreen', 'paleturquoise', 'palevioletred', 'papayawhip', 'peachpuff',
+    'peru', 'pink', 'plum', 'powderblue', 'purple', 'rebeccapurple', 'red', 'rosybrown',
+    'royalblue', 'saddlebrown', 'salmon', 'sandybrown', 'seagreen', 'seashell', 'sienna',
+    'silver', 'skyblue', 'slateblue', 'slategray', 'slategrey', 'snow', 'springgreen',
+    'steelblue', 'tan', 'teal', 'thistle', 'tomato', 'turquoise', 'violet', 'wheat', 'white',
+    'whitesmoke', 'yellow', 'yellowgreen'
+],{"default":'aliceblue'}),
+                "locations": ([
+    'in the center', 'on the left', 'on the right', 'on the top', 'on the bottom',
+    'on the top-left', 'on the top-right', 'on the bottom-left', 'on the bottom-right'
+],{"default":'in the center'}),
+                "offsets": ([
+    'no offset', 'slightly to the left', 'slightly to the right', 'slightly to the upper',
+    'slightly to the lower', 'slightly to the upper-left', 'slightly to the upper-right',
+    'slightly to the lower-left', 'slightly to the lower-right'
+],{"default":'no offset'}),
+                "areas": ([
+    'a small square area', 'a small vertical area', 'a small horizontal area',
+    'a medium-sized square area', 'a medium-sized vertical area', 'a medium-sized horizontal area',
+    'a large square area', 'a large vertical area', 'a large horizontal area'
+],{"default":'a small square area'}),
+            },
+        }
+
+    RETURN_TYPES = (
+        "STRING",
+    )
+    RETURN_NAMES = (
+        "string",
+    )
+
+    FUNCTION = "substr"
+
+    #OUTPUT_NODE = True
+
+    CATEGORY = "大模型派对（llm_party）/函数（function）"
+
+    def substr(self, color, locations, offsets, areas):
+        out =f"""location='{locations}',
+offset='{offsets}',
+area='{areas}',
+HTML_web_color_name='{color}',
+"""
+        return (
+            out,
+        )
+    
