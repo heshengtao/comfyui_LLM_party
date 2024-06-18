@@ -21,8 +21,9 @@
 
 3. [[comfyui黑科技]将你的工作流伪装成GPT接入微信|Omost兼容！灵活地创造自己的dalle3](https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0)
 
-4. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：931057213
+4. 节点的使用说明请参考：[怎么使用节点](how_to_use_nodes_ZH.md)
 
+5. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：[931057213](img/Q群.jpg)
 ## 功能
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)
 2. 支持API接入或者本地大模型接入。模块化实现工具调用功能。在填入base_url时，请填入以`/v1/`结尾的网址。你可以用[ollama](https://github.com/ollama/ollama)来管理你的模型，然后在base_url填入`http://localhost:11434/v1/`，在api_key填入ollama，在model_name填入你的模型名称，例如:llama3，如果调用失败503，可以尝试关闭代理服务器。
