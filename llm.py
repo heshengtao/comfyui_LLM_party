@@ -233,7 +233,6 @@ class Chat:
             new_message = {"role": "user", "content": user_prompt}
             history.append(new_message)
             print(history)
-            function_role="function"
             if tools is not None:
                 response = openai.chat.completions.create(
                     model=self.model_name,
@@ -246,34 +245,56 @@ class Chat:
                     assistant_message = response.choices[0].message
                     response_content = assistant_message.tool_calls[0].function
                     print("正在调用" + response_content.name + "工具")
+                    print(response_content.arguments)
                     results = dispatch_tool(response_content.name, json.loads(response_content.arguments))
                     print(results)
-                    print(assistant_message)
-                    if "glm" in self.model_name or "qwen" in self.model_name or "moonshot" in self.model_name:
-                        history.append({"tool_calls":assistant_message.tool_calls,"role": "assistant", "content": str(response_content)})
-                        history.append(
+                    history.append({
+                        "tool_calls":[
                             {
-                                "role": "tool",
-                                "tool_call_id": assistant_message.tool_calls[0].id,
-                                "name": response_content.name,
-                                "content": results,
+                                "id": assistant_message.tool_calls[0].id,
+                                "function":{
+                                    "arguments": response_content.arguments,
+                                    "name": response_content.name
+                                    },
+                                "type":assistant_message.tool_calls[0].type
                             }
-                        )
-                    else:
-                        history.append({"role": "assistant", "content": str(response_content)})
-                        history.append({"role": "function","tool_call_id": assistant_message.tool_calls[0].id, "name": response_content.name, "content": results})
-                    response = openai.chat.completions.create(
-                        model=self.model_name, 
-                        messages=history, 
-                        tools=tools,
-                        temperature=temperature, 
-                        max_tokens=max_length
+                        ],
+                        "role": "assistant", 
+                        "content": str(response_content)
+                        }
                     )
-                    #删除tool_call部分
-                    for item in history:
-                        if "tool_calls" in item:
-                            del item["tool_calls"]
-                    print(response)
+                    history.append(
+                        {
+                            "role": "tool",
+                            "tool_call_id": assistant_message.tool_calls[0].id,
+                            "name": response_content.name,
+                            "content": results,
+                        }
+                    )
+                    try:
+                        response = openai.chat.completions.create(
+                            model=self.model_name, 
+                            messages=history, 
+                            tools=tools,
+                            temperature=temperature, 
+                            max_tokens=max_length
+                        )
+                        print(response)
+                    except Exception as e:
+                        print("tools calling失败，尝试使用function calling"+str(e))
+                        #删除history最后两个元素
+                        history.pop()
+                        history.pop()
+                        history.append({"role": "assistant", "content": str(response_content),"function_call":{ "name": response_content.name, "arguments": response_content.arguments}})
+                        history.append({"role": "function", "name": response_content.name, "content": results})
+                        response = openai.chat.completions.create(
+                            model=self.model_name, 
+                            messages=history, 
+                            tools=tools,
+                            temperature=temperature, 
+                            max_tokens=max_length
+                        )
+                        print(response)
                 while response.choices[0].message.function_call:
                     assistant_message = response.choices[0].message
                     function_call = assistant_message.function_call
@@ -282,8 +303,8 @@ class Chat:
                     print("正在调用" + function_name + "工具")
                     results = dispatch_tool(function_name, function_arguments)
                     print(results)
-                    history.append({"role": "assistant", "content": str(function_call)})
-                    history.append({"role": function_role, "name": function_name, "content": results})
+                    history.append({"role": "assistant", "content": str(function_call),"function_call":{"name": function_name, "arguments": function_arguments}})
+                    history.append({"role": "function", "name": function_name, "content": results})
                     response = openai.chat.completions.create(
                         model=self.model_name, 
                         messages=history, 
@@ -324,7 +345,7 @@ class Chat:
             response_content = response.choices[0].message.content
             history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
-            response_content = "这个话题聊太久了，我想聊点别的了：" + str(ex)
+            response_content = str(ex)
         return response_content, history
 
 class LLM_api_loader:
