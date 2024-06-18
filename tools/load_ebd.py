@@ -6,7 +6,7 @@ from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-ebd_model = ""
+
 bge_embeddings = ""
 files_load = ""
 c_size = 200
@@ -41,7 +41,6 @@ class ebd_tool:
                 ),
                 "chunk_size": ("INT", {"default": 200}),
                 "chunk_overlap": ("INT", {"default": 50}),
-                "is_locked": (["enable", "disable"], {"default": "disable"}),
             },
             "optional": {},
         }
@@ -55,24 +54,23 @@ class ebd_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, path, file_content,k, chunk_size, chunk_overlap, is_locked, device, is_enable="enable"):
+    def file(self, path, file_content,k, chunk_size, chunk_overlap, device, is_enable="enable"):
         if is_enable == "disable":
             return (None,)
-        global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base,k_setting
+        global  files_load, bge_embeddings, c_size, c_overlap, knowledge_base,k_setting
         k_setting = k
         if device == "auto":
             device ="cuda"if torch.cuda.is_available()else ("mps" if torch.backends.mps.is_available() else "cpu")
         c_size = chunk_size
         c_overlap = chunk_overlap
         files_load = file_content
-        if ebd_model == "":
+        if bge_embeddings == "":
             model_kwargs = {"device": device}
             encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度
-        if bge_embeddings == "":
             bge_embeddings = HuggingFaceBgeEmbeddings(
                 model_name=path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
             )
-        if knowledge_base == "" or is_locked == False:
+        if knowledge_base == "":
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size=c_size,
                 chunk_overlap=c_overlap,
@@ -100,6 +98,10 @@ class ebd_tool:
 
 
 class load_embeddings:
+    def __init__(self):
+        self.embeddings = ""
+        self.embeddings_path = ""
+
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -119,7 +121,6 @@ class load_embeddings:
                 "k":("INT", {"default": 5}),
                 "chunk_size": ("INT", {"default": 200}),
                 "chunk_overlap": ("INT", {"default": 50}),
-                "is_locked": (["enable", "disable"], {"default": "disable"}),
             },
             "optional": {},
         }
@@ -133,31 +134,26 @@ class load_embeddings:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, path, question, file_content,k, chunk_size, chunk_overlap, is_locked, device, is_enable=True):
+    def file(self, path, question, file_content,k, chunk_size, chunk_overlap, device, is_enable=True):
         if is_enable == False:
             return (None,)
-        global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base
         if device == "auto":
             device ="cuda"if torch.cuda.is_available()else ("mps" if torch.backends.mps.is_available() else "cpu")
-        c_size = chunk_size
-        c_size = chunk_size
-        c_overlap = chunk_overlap
-        files_load = file_content
-        if ebd_model == "":
+
+        if self.embeddings_path != path:
             model_kwargs = {"device": device}
             encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度
-        if bge_embeddings == "":
-            bge_embeddings = HuggingFaceBgeEmbeddings(
+            self.bge_embeddings = HuggingFaceBgeEmbeddings(
                 model_name=path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
             )
-        if knowledge_base == "" or is_locked == False:
-            text_splitter = RecursiveCharacterTextSplitter(
-                chunk_size=c_size,
-                chunk_overlap=c_overlap,
-            )
-            chunks = text_splitter.split_text(files_load)
-            knowledge_base = FAISS.from_texts(chunks, bge_embeddings)
-        docs = knowledge_base.similarity_search(question, k=k)
+            self.embeddings_path = path
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+        )
+        chunks = text_splitter.split_text(file_content)
+        base = FAISS.from_texts(chunks, self.bge_embeddings)
+        docs = base.similarity_search(question, k=k)
         combined_content = "".join(doc.page_content + "\n\n" for doc in docs)
         output = "文件中的相关信息如下：\n" + combined_content
         return (output,)

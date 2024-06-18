@@ -62,6 +62,7 @@ from .tools.feishu import feishu_tool,send_feishu,feishu
 from .tools.tts import openai_tts,play_audio
 from .tools.load_model_name import load_name
 from .tools.omost import omost_decode,omost_setting
+from .tools.keyword import keyword_tool,search_keyword,load_keyword
 from torchvision.transforms import ToPILImage
 
 _TOOL_HOOKS = [
@@ -83,6 +84,7 @@ _TOOL_HOOKS = [
     "send_wechat",   
     "send_dingding",
     "send_feishu",
+    "search_keyword",
 ]
 instances = []
 image_buffer = []
@@ -1476,6 +1478,8 @@ NODE_CLASS_MAPPINGS = {
     "omost_decode":omost_decode,
     "get_string":get_string,
     "omost_setting":omost_setting,
+    "keyword_tool":keyword_tool,
+    "load_keyword":load_keyword,
 }
 
 
@@ -1539,6 +1543,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "omost_decode": "omost解码器(omost_decode)",
     "get_string": "获取字符串(get_string)",
     "omost_setting": "omost设置(omost_setting)",
+    "keyword_tool": "搜索关键词工具(search_keyword_tool)",
+    "load_keyword": "加载关键词检索器(load_keyword_searcher)",
 }
 
 if __name__ == "__main__":

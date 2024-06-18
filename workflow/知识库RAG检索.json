@@ -1,6 +1,6 @@
 {
-  "last_node_id": 74,
-  "last_link_id": 94,
+  "last_node_id": 75,
+  "last_link_id": 96,
   "nodes": [
     {
       "id": 72,
@@ -64,7 +64,7 @@
           "name": "file_content",
           "type": "STRING",
           "links": [
-            87
+            95
           ],
           "shape": 3,
           "label": "file_content",
@@ -81,156 +81,6 @@
       ],
       "color": "#432",
       "bgcolor": "#653"
-    },
-    {
-      "id": 69,
-      "type": "ebd_tool",
-      "pos": [
-        387,
-        339
-      ],
-      "size": {
-        "0": 315,
-        "1": 178
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": 87,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            92
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ebd_tool"
-      },
-      "widgets_values": [
-        "D:\\AI\\AIhuitu\\Blender_ComfyUI\\Blender_ComfyUI_Mini\\ComfyUI\\custom_nodes\\comfyui_LLM_party\\model\\bge-large-zh\\",
-        "enable",
-        "",
-        "cuda",
-        200,
-        50,
-        "disable"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 73,
-      "type": "LLM",
-      "pos": [
-        740,
-        330
-      ],
-      "size": [
-        413.36087585449127,
-        374
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 94,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 92,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            93
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。",
-        "在加州最幸福的事情是什么",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
     },
     {
       "id": 74,
@@ -268,25 +118,168 @@
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
+    },
+    {
+      "id": 75,
+      "type": "ebd_tool",
+      "pos": [
+        387,
+        339
+      ],
+      "size": [
+        315,
+        202
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 95,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            96
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ebd_tool"
+      },
+      "widgets_values": [
+        "D:\\AI\\mychat\\model\\bge-large-zh",
+        "enable",
+        "",
+        5,
+        "auto",
+        200,
+        50
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 73,
+      "type": "LLM",
+      "pos": [
+        740,
+        330
+      ],
+      "size": {
+        "0": 413.3608703613281,
+        "1": 374
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 94,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 96,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            93
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。在回答问题之前必须调用工具搜索用户上传的文件，根据搜索的信息作答",
+        "在加州最幸福的事情是什么",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
     }
   ],
   "links": [
-    [
-      87,
-      70,
-      0,
-      69,
-      0,
-      "STRING"
-    ],
-    [
-      92,
-      69,
-      0,
-      73,
-      3,
-      "STRING"
-    ],
     [
       93,
       73,
@@ -302,10 +295,34 @@
       73,
       0,
       "CUSTOM"
+    ],
+    [
+      95,
+      70,
+      0,
+      75,
+      0,
+      "STRING"
+    ],
+    [
+      96,
+      75,
+      0,
+      73,
+      3,
+      "STRING"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": {
+        "0": 119.42050245326685,
+        "1": 156.11136342276941
+      }
+    }
+  },
   "version": 0.4
 }
