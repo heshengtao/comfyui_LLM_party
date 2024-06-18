@@ -12,11 +12,12 @@ files_load = ""
 c_size = 200
 c_overlap = 50
 knowledge_base = ""
+k_setting=5
 
 
 def data_base(question):
-    global knowledge_base
-    docs = knowledge_base.similarity_search(question, k=5)
+    global knowledge_base,k_setting
+    docs = knowledge_base.similarity_search(question, k=k_setting)
     combined_content = "".join(doc.page_content + "\n" for doc in docs)
     return "文件中的相关信息如下：\n" + combined_content
 
@@ -29,6 +30,7 @@ class ebd_tool:
                 "path": ("STRING", {"default": None}),
                 "is_enable": (["enable", "disable"], {"default": "enable"}),
                 "file_content": ("STRING", {"forceInput": True}),
+                "k": ("INT", {"default": 5}),
                 "device": (
                     ["auto","cuda", "mps", "cpu"],
                     {
@@ -53,10 +55,11 @@ class ebd_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, path, file_content, chunk_size, chunk_overlap, is_locked, device, is_enable="enable"):
+    def file(self, path, file_content,k, chunk_size, chunk_overlap, is_locked, device, is_enable="enable"):
         if is_enable == "disable":
             return (None,)
-        global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base
+        global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base,k_setting
+        k_setting = k
         if device == "auto":
             device ="cuda"if torch.cuda.is_available()else ("mps" if torch.backends.mps.is_available() else "cpu")
         c_size = chunk_size
@@ -113,6 +116,7 @@ class load_embeddings:
                         )
                     },
                 ),
+                "k":("INT", {"default": 5}),
                 "chunk_size": ("INT", {"default": 200}),
                 "chunk_overlap": ("INT", {"default": 50}),
                 "is_locked": (["enable", "disable"], {"default": "disable"}),
@@ -129,7 +133,7 @@ class load_embeddings:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, path, question, file_content, chunk_size, chunk_overlap, is_locked, device, is_enable=True):
+    def file(self, path, question, file_content,k, chunk_size, chunk_overlap, is_locked, device, is_enable=True):
         if is_enable == False:
             return (None,)
         global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base
@@ -153,7 +157,7 @@ class load_embeddings:
             )
             chunks = text_splitter.split_text(files_load)
             knowledge_base = FAISS.from_texts(chunks, bge_embeddings)
-        docs = knowledge_base.similarity_search(question, k=5)
+        docs = knowledge_base.similarity_search(question, k=k)
         combined_content = "".join(doc.page_content + "\n\n" for doc in docs)
         output = "文件中的相关信息如下：\n" + combined_content
         return (output,)
