@@ -378,11 +378,7 @@ class LLM_api_loader:
         else:
             openai.api_key = os.environ.get("OPENAI_API_KEY")
         if base_url != "":
-            #如果以/结尾
-            if base_url[-1] == "/":
-                openai.base_url = base_url
-            else:
-                openai.base_url = base_url + "/"
+            openai.base_url = base_url
         elif model_name in config_key:
             api_keys = config_key[model_name]
             openai.base_url = api_keys.get("base_url")
@@ -392,6 +388,9 @@ class LLM_api_loader:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
         if openai.api_key == "":
             return ("请输入API_KEY",)
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
         chat = Chat(model_name,openai.api_key,openai.base_url)
         return (chat,)
 
