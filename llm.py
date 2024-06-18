@@ -234,8 +234,6 @@ class Chat:
             history.append(new_message)
             print(history)
             function_role="function"
-            if "glm" in self.model_name or "qwen" in self.model_name or "moonshot" in self.model_name:
-                function_role="tool"
             if tools is not None:
                 response = openai.chat.completions.create(
                     model=self.model_name,
@@ -255,14 +253,15 @@ class Chat:
                         history.append({"tool_calls":assistant_message.tool_calls,"role": "assistant", "content": str(response_content)})
                         history.append(
                             {
-                                "role": function_role,
+                                "role": "tool",
                                 "tool_call_id": assistant_message.tool_calls[0].id,
                                 "name": response_content.name,
                                 "content": results,
                             }
                         )
                     else:
-                        history.append({"role": function_role, "name": response_content.name, "content": results})
+                        history.append({"role": "assistant", "content": str(response_content)})
+                        history.append({"role": "function","tool_call_id": assistant_message.tool_calls[0].id, "name": response_content.name, "content": results})
                     response = openai.chat.completions.create(
                         model=self.model_name, 
                         messages=history, 
