@@ -880,7 +880,7 @@ class LLM_local_loader:
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().to("mps")
                 self.model = self.model.eval()
             
-        elif model_type == "llama":
+        elif model_type in ["llama", "Qwen"]:
             if self.tokenizer == "":
                 self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
             if self.model == "" :
@@ -937,66 +937,6 @@ class LLM_local_loader:
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="mps"
                     ).half()
-                self.model = self.model.eval()
-        elif model_type == "Qwen":
-            if self.tokenizer == "":
-                self.tokenizer = AutoTokenizer.from_pretrained(
-                    tokenizer_path, revision="master", trust_remote_code=True
-                )
-            if self.model == "":
-                if device == "cuda":
-                    if dtype =="float32":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cuda"
-                        )
-                    elif dtype =="float16":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cuda"
-                        ).half()
-                    elif dtype =="int8":
-                        quantization_config = BitsAndBytesConfig(load_in_8bit=True,)
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cuda",quantization_config=quantization_config
-                        )
-                    elif dtype =="int4":
-                        quantization_config = BitsAndBytesConfig(load_in_4bit=True)
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cuda",quantization_config=quantization_config
-                        )
-                elif device == "cpu":
-                    if dtype =="float32":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cpu"
-                        )
-                    elif dtype =="float16":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cpu"
-                        ).half()
-                    elif dtype =="int8":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cpu"
-                        ).half()
-                    elif dtype =="int4":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cpu"
-                        ).half()
-                elif device == "mps":
-                    if dtype =="float32":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="mps"
-                        )
-                    elif dtype =="float16":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="mps"
-                        ).half()
-                    elif dtype =="int8":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="mps"
-                        ).half()
-                    elif dtype =="int4":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="mps"
-                        ).half()
                 self.model = self.model.eval()
         return (self.model, self.tokenizer,)
 
@@ -1266,7 +1206,7 @@ class LLM_local:
                             response, history = model.chat(
                                 tokenizer, result, history=history, role="observation"
                             )
-                elif model_type == "llama":
+                elif model_type in ["llama", "Qwen"]:
                     response, history = llm_chat(
                         model, tokenizer, user_prompt, history, device, max_length
                     )
@@ -1274,24 +1214,6 @@ class LLM_local:
                         print(response)
                         pattern_A = r"Action: (.*?)\n"
                         pattern_B = r"Action Input: (.*?)\n"
-
-                        Action = re.search(pattern_A, response).group(1)
-                        ActionInput = re.search(pattern_B, response).group(1)
-                        ActionInput = json.loads(ActionInput.replace("'", '"'))
-                        result = dispatch_tool(Action, ActionInput)
-                        print(result)
-                        response, history = llm_chat(
-                            model, tokenizer, result, history, device, max_length, role="observation"
-                        )
-                elif model_type == "Qwen":
-                    response, history = llm_chat(
-                        model, tokenizer, user_prompt, history, device, max_length
-                    )
-                    while "Action Input:" in response:
-                        print(response)
-                        pattern_A = r"Action: (.*?)\n"
-                        pattern_B = r"Action Input: (.*?)\n"
-
                         Action = re.search(pattern_A, response).group(1)
                         ActionInput = re.search(pattern_B, response).group(1)
                         ActionInput = json.loads(ActionInput.replace("'", '"'))
