@@ -842,11 +842,11 @@ class LLM_local_loader:
                 gc.collect()
             self.model = ""
             self.tokenizer = ""
-        self.model_type = model_type
-        self.model_path = model_path
-        self.tokenizer_path = tokenizer_path
-        self.device=device
-        self.dtype=dtype
+            self.model_type = model_type
+            self.model_path = model_path
+            self.tokenizer_path = tokenizer_path
+            self.device=device
+            self.dtype=dtype
         if model_type == "GLM":
             if self.tokenizer == "":
                 self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
