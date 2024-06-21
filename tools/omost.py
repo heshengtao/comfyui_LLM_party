@@ -25,7 +25,7 @@ class omost_decode:
             "required": {
                 "clip": ("CLIP",{} ),
                 "text": ("STRING", {"forceInput": True}),
-                "mode": (["fusion","block","greedy"],{"default":"greedy"}),
+                "mode": (["greedy","fusion","block"],{"default":"greedy"}),
                 "strength": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 10.0, "step": 0.01}),
             },
         }
