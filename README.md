@@ -28,7 +28,7 @@
 5. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg).
 
 ## Model support
-1. Support all API calls in openai format, base_url selection reference [config.ini.example] (config.ini.example), which has been tested so far:
+1. Support all API calls in openai format, base_url selection reference [config.ini.example](config.ini.example), which has been tested so far:
 * [ollama](https://github.com/ollama/ollama)
 * [Tongyi Qianwen /qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [zhipu qingyan/glm](https://open.bigmodel.cn/dev/api#http_auth)
