@@ -64,6 +64,8 @@ from .tools.load_model_name import load_name
 from .tools.omost import omost_decode,omost_setting
 from .tools.keyword import keyword_tool,search_keyword,load_keyword
 from .tools.whisper import listen_audio,openai_whisper
+from .tools.story import story_json_tool,read_story_json
+
 from torchvision.transforms import ToPILImage
 
 _TOOL_HOOKS = [
@@ -86,6 +88,7 @@ _TOOL_HOOKS = [
     "send_dingding",
     "send_feishu",
     "search_keyword",
+    "read_story_json",
 ]
 instances = []
 image_buffer = []
@@ -1424,6 +1427,7 @@ NODE_CLASS_MAPPINGS = {
     "load_keyword":load_keyword,
     "listen_audio":listen_audio,
     "openai_whisper":openai_whisper,
+    "story_json_tool":story_json_tool,
 }
 
 
@@ -1491,6 +1495,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "load_keyword": "加载关键词检索器(load_keyword_searcher)",
     "listen_audio": "监听音频(listen_audio)",
     "openai_whisper": "OpenAI语音识别(openai_whisper)",
+    "story_json_tool": "故事JSON工具(story_json_tool)",
 }
 
 if __name__ == "__main__":

@@ -1,0 +1,316 @@
+{
+  "last_node_id": 23,
+  "last_link_id": 33,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1403,
+        264
+      ],
+      "size": {
+        "0": 454.6876220703125,
+        "1": 290.2985534667969
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 30,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "吃下红药丸的你醒来了，看到了现实世界，达成结局：黑客帝国。游戏已经结束了，希望你喜欢这次的冒险！如果你想重新开始或尝试其他选项，可以随时告诉我。"
+      ]
+    },
+    {
+      "id": 23,
+      "type": "story_json_tool",
+      "pos": [
+        495,
+        413
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            33
+          ],
+          "shape": 3,
+          "label": "tools",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "story_json_tool"
+      },
+      "widgets_values": [
+        "story.json",
+        true,
+        "Relative_Path"
+      ]
+    },
+    {
+      "id": 20,
+      "type": "LLM_api_loader",
+      "pos": [
+        499,
+        233
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            31
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4-turbo",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 19,
+      "type": "LLM",
+      "pos": [
+        940,
+        260
+      ],
+      "size": {
+        "0": 396.7934265136719,
+        "1": 404.169189453125
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 31,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 33,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 32,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            30
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "我选择红药丸",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 21,
+      "type": "load_persona",
+      "pos": [
+        496,
+        620
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            32
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "互动小说",
+        true,
+        ""
+      ]
+    }
+  ],
+  "links": [
+    [
+      30,
+      19,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      31,
+      20,
+      0,
+      19,
+      0,
+      "CUSTOM"
+    ],
+    [
+      32,
+      21,
+      0,
+      19,
+      4,
+      "STRING"
+    ],
+    [
+      33,
+      23,
+      0,
+      19,
+      3,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": {
+        "0": -417.0931340718395,
+        "1": -47.214354420016946
+      }
+    }
+  },
+  "version": 0.4
+}
