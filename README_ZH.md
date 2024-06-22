@@ -26,7 +26,7 @@
 5. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：[931057213](img/Q群.jpg)
 
 ## 模型支持
-1. 支持所有openai格式的API调用，base_url的选择参考[config.ini.example](config.ini.example),目前已测试的有：
+1. 支持所有openai格式的API调用，base_url的选择参考[config.ini.example](config.ini.example)，目前已测试的有：
 * [ollama](https://github.com/ollama/ollama)
 * [通义千问/qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [智谱清言/glm](https://open.bigmodel.cn/dev/api#http_auth)
