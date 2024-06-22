@@ -63,6 +63,7 @@ from .tools.tts import openai_tts,play_audio
 from .tools.load_model_name import load_name
 from .tools.omost import omost_decode,omost_setting
 from .tools.keyword import keyword_tool,search_keyword,load_keyword
+from .tools.whisper import listen_audio,openai_whisper
 from torchvision.transforms import ToPILImage
 
 _TOOL_HOOKS = [
@@ -1421,6 +1422,8 @@ NODE_CLASS_MAPPINGS = {
     "omost_setting":omost_setting,
     "keyword_tool":keyword_tool,
     "load_keyword":load_keyword,
+    "listen_audio":listen_audio,
+    "openai_whisper":openai_whisper,
 }
 
 
@@ -1486,6 +1489,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "omost_setting": "omost设置(omost_setting)",
     "keyword_tool": "搜索关键词工具(search_keyword_tool)",
     "load_keyword": "加载关键词检索器(load_keyword_searcher)",
+    "listen_audio": "监听音频(listen_audio)",
+    "openai_whisper": "OpenAI语音识别(openai_whisper)",
 }
 
 if __name__ == "__main__":

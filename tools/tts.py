@@ -90,7 +90,6 @@ class openai_tts:
 
             # 使用base_url变量构建完整的URL
             response = requests.post(f'{base_url}audio/speech', headers=headers, json=data)
-            print(response.content)
             # 将响应内容写入MP3文件
             with open(full_audio_path, 'wb') as f:
                 f.write(response.content)
