@@ -25,6 +25,20 @@
 
 5. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg).
 
+## Model support
+1. Support all API calls in openai format, base_url selection reference [config.ini.example] (config.ini.example), which has been tested so far:
+* [ollama](https://github.com/ollama/ollama)
+* [Tongyi Qianwen /qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
+* [zhipu qingyan/glm](https://open.bigmodel.cn/dev/api#http_auth)
+* [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)
+* [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
+
+2. Most of the local models supported by the transformer library have been tested so far:
+* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b)
+* [meta-llama/llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
+* [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
+* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
+
 ## Features
 1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
 2. Supports API integration or local large model integration. Modular implementation for tool invocation.When entering the base_url, please use a URL that ends with `/v1/`.You can use [ollama](https://github.com/ollama/ollama) to manage your model. Then, enter `http://localhost:11434/v1/` for the base_url, `ollama` for the api_key, and your model name for the model_name, such as: llama3. If the call fails with a 503 error, you can try turning off the proxy server.

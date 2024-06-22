@@ -24,6 +24,21 @@
 4. 节点的使用说明请参考：[怎么使用节点](how_to_use_nodes_ZH.md)
 
 5. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：[931057213](img/Q群.jpg)
+
+## 模型支持
+1. 支持所有openai格式的API调用，base_url的选择参考[config.ini.example](config.ini.example),目前已测试的有：
+* [ollama](https://github.com/ollama/ollama)
+* [通义千问/qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
+* [智谱清言/glm](https://open.bigmodel.cn/dev/api#http_auth)
+* [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)
+* [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
+
+2. 兼容transformer库支持的大部分本地模型，目前已测试的有：
+* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b)
+* [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
+* [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
+* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
+
 ## 功能
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)
 2. 支持API接入或者本地大模型接入。模块化实现工具调用功能。在填入base_url时，请填入以`/v1/`结尾的网址。你可以用[ollama](https://github.com/ollama/ollama)来管理你的模型，然后在base_url填入`http://localhost:11434/v1/`，在api_key填入ollama，在model_name填入你的模型名称，例如:llama3，如果调用失败503，可以尝试关闭代理服务器。
