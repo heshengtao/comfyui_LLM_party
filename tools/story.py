@@ -7,11 +7,12 @@ story_path=""
 class story_json_tool:
     @classmethod
     def INPUT_TYPES(s):
+        # 获取file_path文件夹下的所有json文件的文件名
+        paths = [f for f in os.listdir(file_path) if f.endswith(".json")]
         return {
             "required": {
-                "path": ("STRING", {"default": "story.json"}),
+                "path": (paths, {"default": "story.json"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "path_type": (["Absolute_Path", "Relative_Path"], {"default": "Relative_Path"}),
             },
             "optional": {},
         }
@@ -25,13 +26,10 @@ class story_json_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, path, path_type, is_enable=True):
+    def file(self, path, is_enable=True):
         if is_enable == False:
             return (None,)
-        if path_type == "Absolute_Path":
-            path = path
-        else:
-            path = os.path.join(file_path, path)
+        path = os.path.join(file_path, path)
         global story_path
         story_path = path
         output = [

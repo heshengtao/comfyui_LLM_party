@@ -1,17 +1,52 @@
 {
-  "last_node_id": 23,
-  "last_link_id": 33,
+  "last_node_id": 24,
+  "last_link_id": 35,
   "nodes": [
+    {
+      "id": 20,
+      "type": "LLM_api_loader",
+      "pos": [
+        572,
+        232
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            31
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4-turbo",
+        "",
+        ""
+      ]
+    },
     {
       "id": 11,
       "type": "show_text_party",
       "pos": [
-        1403,
-        264
+        1361,
+        258
       ],
       "size": {
-        "0": 454.6876220703125,
-        "1": 290.2985534667969
+        "0": 414.8237609863281,
+        "1": 287.0350646972656
       },
       "flags": {},
       "order": 4,
@@ -41,77 +76,7 @@
       },
       "widgets_values": [
         "",
-        "吃下红药丸的你醒来了，看到了现实世界，达成结局：黑客帝国。游戏已经结束了，希望你喜欢这次的冒险！如果你想重新开始或尝试其他选项，可以随时告诉我。"
-      ]
-    },
-    {
-      "id": 23,
-      "type": "story_json_tool",
-      "pos": [
-        495,
-        413
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tools",
-          "type": "STRING",
-          "links": [
-            33
-          ],
-          "shape": 3,
-          "label": "tools",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "story_json_tool"
-      },
-      "widgets_values": [
-        "story.json",
-        true,
-        "Relative_Path"
-      ]
-    },
-    {
-      "id": 20,
-      "type": "LLM_api_loader",
-      "pos": [
-        499,
-        233
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            31
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "gpt-4-turbo",
-        "",
-        ""
+        "吃下蓝药丸的你呕吐不止，你打算怎么做？"
       ]
     },
     {
@@ -144,7 +109,7 @@
         {
           "name": "system_prompt_input",
           "type": "STRING",
-          "link": null,
+          "link": 35,
           "widget": {
             "name": "system_prompt_input"
           },
@@ -162,7 +127,7 @@
         {
           "name": "file_content",
           "type": "STRING",
-          "link": 32,
+          "link": null,
           "widget": {
             "name": "file_content"
           },
@@ -183,9 +148,10 @@
         {
           "name": "history",
           "type": "STRING",
-          "links": null,
+          "links": [],
           "shape": 3,
-          "label": "history"
+          "label": "history",
+          "slot_index": 1
         },
         {
           "name": "tool",
@@ -207,7 +173,7 @@
       },
       "widgets_values": [
         "",
-        "我选择红药丸",
+        "我选择吃蓝色药丸",
         0.7,
         "enable",
         "disable",
@@ -224,15 +190,15 @@
       "id": 21,
       "type": "load_persona",
       "pos": [
-        496,
-        620
+        561,
+        406
       ],
       "size": {
         "0": 315,
         "1": 106
       },
       "flags": {},
-      "order": 2,
+      "order": 1,
       "mode": 0,
       "inputs": [
         {
@@ -250,7 +216,7 @@
           "name": "system_prompt",
           "type": "STRING",
           "links": [
-            32
+            35
           ],
           "shape": 3,
           "label": "system_prompt",
@@ -264,6 +230,41 @@
         "互动小说",
         true,
         ""
+      ]
+    },
+    {
+      "id": 23,
+      "type": "story_json_tool",
+      "pos": [
+        560,
+        573
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            33
+          ],
+          "shape": 3,
+          "label": "tools",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "story_json_tool"
+      },
+      "widgets_values": [
+        "story.json",
+        true,
+        "Relative_Path"
       ]
     }
   ],
@@ -285,19 +286,19 @@
       "CUSTOM"
     ],
     [
-      32,
-      21,
-      0,
-      19,
-      4,
-      "STRING"
-    ],
-    [
       33,
       23,
       0,
       19,
       3,
+      "STRING"
+    ],
+    [
+      35,
+      21,
+      0,
+      19,
+      2,
       "STRING"
     ]
   ],
@@ -305,10 +306,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1,
+      "scale": 0.9090909090909091,
       "offset": {
-        "0": -417.0931340718395,
-        "1": -47.214354420016946
+        "0": -460.90879728392724,
+        "1": -103.95979565788205
       }
     }
   },
