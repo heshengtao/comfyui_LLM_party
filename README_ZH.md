@@ -3,9 +3,10 @@
 </p>
 
 ## 最新更新
-1. 兼容[Omost](https://github.com/lllyasviel/Omost)啦！！！请下载[omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)立即体验吧！示例工作流参考：[start_with_OMOST.json](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow/start_with_OMOST.json)
-2. 新增了将消息发送到企业微信、钉钉和飞书的LLM工具以及可供调用的外部函数。
-3. 新增了openai的tts功能，可以实现语音输出。
+1. 可以搭建自己的互动小说游戏了，根据用户的选择，走向不同的结局！示例工作流参考：[互动小说](workflow/互动小说.json)
+2. 适配了openai的whisper和tts功能，可以实现语音输入和输出。示例工作流参考：[语音输入+语音输出](workflow/语音输入+语音输出.json)
+3. 兼容[Omost](https://github.com/lllyasviel/Omost)啦！！！请下载[omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)立即体验吧！示例工作流参考：[start_with_OMOST](workflow/start_with_OMOST.json)
+4. 新增了将消息发送到企业微信、钉钉和飞书的LLM工具以及可供调用的外部函数。
 
 # **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库**
 
