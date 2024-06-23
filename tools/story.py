@@ -43,7 +43,7 @@ class story_json_tool:
                         "properties": {
                             "chapter": {
                                 "type": "string",
-                                "description": "章节的数目，例如：0, 1, 2, 3",
+                                "description": "章节的数目，例如：0, 5, 1-1, 2-2-1, 3-23-42-12",
                             }
                         },
                         "required": ["chapter"],

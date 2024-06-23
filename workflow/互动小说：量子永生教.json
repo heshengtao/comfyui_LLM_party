@@ -1,0 +1,316 @@
+{
+  "last_node_id": 25,
+  "last_link_id": 36,
+  "nodes": [
+    {
+      "id": 20,
+      "type": "LLM_api_loader",
+      "pos": [
+        572,
+        232
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            31
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4-turbo",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 21,
+      "type": "load_persona",
+      "pos": [
+        561,
+        406
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "互动小说",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 23,
+      "type": "story_json_tool",
+      "pos": [
+        567,
+        574
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            33
+          ],
+          "shape": 3,
+          "label": "tools",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "story_json_tool"
+      },
+      "widgets_values": [
+        "量子永生教.json",
+        true
+      ]
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1361,
+        258
+      ],
+      "size": {
+        "0": 414.8237609863281,
+        "1": 287.0350646972656
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 30,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "你输入完了完整的密码：2969mlw42，但是发现清醒程序返回了权限不够。一旁的道士沉思了一会说到：“原来你只是你的一个副脑，一般是副脑要逃离虚拟世界就是报这个错误，我去了太多的虚拟世界，见过太多了。”或许你真的是一个副脑，又或者你的副脑篡改了权限，取代了你。你的记忆太模糊了，甚至连自己也没有坚信自己不是一个生活在虚拟世界的程序。又或者你和副脑本质上没有区别，都是你本体意识的备份，只是现在的这个你没有被本体选中罢了。你或许是本体意识专门用来做某些工作的专用人格也说不定。但不管怎么说，道士是说对了，确实每一个人都永生了，而你永生的方式，就是困在这个孤独的虚拟世界里，无法醒来。达成真结局：【副脑人格】\n\n这场互动小说游戏到此结束了。如果你想再次体验或尝试不同的选择，可以随时告诉我重新开始。谢谢你的参与！"
+      ]
+    },
+    {
+      "id": 19,
+      "type": "LLM",
+      "pos": [
+        940,
+        260
+      ],
+      "size": {
+        "0": 396.7934265136719,
+        "1": 404.169189453125
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 31,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 35,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 33,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            30
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "label": "history",
+          "slot_index": 1
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "42",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  ],
+  "links": [
+    [
+      30,
+      19,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      31,
+      20,
+      0,
+      19,
+      0,
+      "CUSTOM"
+    ],
+    [
+      33,
+      23,
+      0,
+      19,
+      3,
+      "STRING"
+    ],
+    [
+      35,
+      21,
+      0,
+      19,
+      2,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": {
+        "0": -531.2436119941354,
+        "1": -101.7336187230388
+      }
+    }
+  },
+  "version": 0.4
+}
