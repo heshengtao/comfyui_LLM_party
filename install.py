@@ -29,23 +29,35 @@ def package_is_installed(package_name):
 def install_llama(system_info):
     imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
     if imported:
+        # 如果已经安装，则不执行任何操作
         pass
     else:
         lcpp_version = latest_lamacpp()
         base_url = "https://github.com/abetlen/llama-cpp-python/releases/download/v"
-        if system_info['os'] == 'Darwin' and 'arm64' in platform.machine():
-            # MPS设备，使用Metal后端
-            os.environ['CMAKE_ARGS'] = '-DLLAMA_METAL=on'
-            custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{system_info['platform_tag']}.whl"
-        else:
-            # 非MPS设备，使用标准安装命令
-            avx = "AVX2" if system_info['avx2'] else "AVX"
+        platform_tag = system_info['platform_tag']
+        avx = "AVX2" if system_info['avx2'] else "AVX"
+        
+        # 根据不同操作系统构建安装命令
+        if system_info['os'] == 'Linux' or system_info['os'] == 'Windows':
             if system_info['gpu']:
                 cuda_version = system_info['cuda_version']
                 custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
             else:
-                custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{system_info['platform_tag']}.whl"
+                custom_command = f"pip install llama-cpp-python=={lcpp_version}"
+        elif system_info['os'] == 'Darwin':
+            if 'arm64' in platform.machine():
+                # MPS设备，使用Metal后端
+                os.environ['CMAKE_ARGS'] = '-DLLAMA_METAL=on'
+                custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{platform_tag}.whl"
+            else:
+                # 非MPS设备，使用AVX指令集
+                custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{avx}-{platform_tag}.whl"
+        else:
+            raise ValueError("不支持的操作系统")
+        
+        # 执行安装命令
         install_package("llama-cpp-python", custom_command=custom_command)
+
 
 def copy_js_files():
     # 设置当前文件夹路径和目标文件夹路径
