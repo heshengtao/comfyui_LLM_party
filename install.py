@@ -41,22 +41,23 @@ def install_llama(system_info):
         if system_info['os'] == 'Linux' or system_info['os'] == 'Windows':
             if system_info['gpu']:
                 cuda_version = system_info['cuda_version']
-                custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
+                custom_command = f"pip install --force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
             else:
                 custom_command = f"pip install llama-cpp-python=={lcpp_version}"
         elif system_info['os'] == 'Darwin':
             if 'arm64' in platform.machine():
                 # MPS设备，使用Metal后端
                 os.environ['CMAKE_ARGS'] = '-DLLAMA_METAL=on'
-                custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{platform_tag}.whl"
+                custom_command = f"pip install --upgrade {base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{platform_tag}.whl"
             else:
                 # 非MPS设备，使用AVX指令集
-                custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{avx}-{platform_tag}.whl"
+                custom_command = f"pip install --upgrade {base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{avx}-{platform_tag}.whl"
         else:
             raise ValueError("不支持的操作系统")
         
         # 执行安装命令
         install_package("llama-cpp-python", custom_command=custom_command)
+
 
 
 def copy_js_files():
