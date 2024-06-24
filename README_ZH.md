@@ -83,7 +83,8 @@
 ## 环境部署
 1. 导航到`comfyui_LLM_party`的项目文件夹
 2. 在终端输入`pip install -r requirements.txt`将本项目需要的第三方库部署到comfyui的环境中。请注意你是否在comfyui的环境进行安装，并关注终端中的`pip`报错
-3. 如果你是用的comfyui启动器，你需要在终端中输入 `启动器配置中的路径\python_embeded\python.exe 启动器配置中的路径\python_embeded\Scripts\pip.exe  install -r requirements.txt`进行安装。`python_embeded`文件夹一般与你的`ComfyUI`文件夹同级。
+3. 如果你是用的comfyui启动器，你需要在终端中输入 `启动器配置中的路径\python_embeded\python.exe -m pip install -r requirements.txt`进行安装。`python_embeded`文件夹一般与你的`ComfyUI`文件夹同级。
+4. 如果你出现了一些环境配置问题，可以尝试使用`requirements_fixed.txt`中的依赖。
 
 ## 配置
 可以使用以下方法之一配置APIKEY
