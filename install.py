@@ -43,7 +43,7 @@ def install_llama(system_info):
                 cuda_version = system_info['cuda_version']
                 custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
             else:
-                custom_command = f"pip install llama-cpp-python=={lcpp_version}"
+                custom_command = f"llama-cpp-python=={lcpp_version}"
         elif system_info['os'] == 'Darwin':
             if 'arm64' in platform.machine():
                 # MPS设备，使用Metal后端
