@@ -1,0 +1,316 @@
+{
+  "last_node_id": 26,
+  "last_link_id": 37,
+  "nodes": [
+    {
+      "id": 26,
+      "type": "KG_json_toolkit",
+      "pos": [
+        573,
+        581
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "label": "tools",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KG_json_toolkit"
+      },
+      "widgets_values": [
+        "test.json",
+        true
+      ]
+    },
+    {
+      "id": 21,
+      "type": "load_persona",
+      "pos": [
+        573,
+        407
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "知识图谱",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 20,
+      "type": "LLM_api_loader",
+      "pos": [
+        574,
+        240
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            31
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4-turbo",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 19,
+      "type": "LLM",
+      "pos": [
+        940,
+        260
+      ],
+      "size": {
+        "0": 396.7934265136719,
+        "1": 404.169189453125
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 31,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 35,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            30
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "label": "history",
+          "slot_index": 1
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "袁术和刘备是什么关系",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1361,
+        258
+      ],
+      "size": {
+        "0": 414.8237609863281,
+        "1": 287.0350646972656
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 30,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "袁术和刘备之间的关系通过一个关系链来描述：袁术是孙策的义父，孙策的亲兄弟是孙权，孙权的妹妹是孙尚香，而孙尚香是刘备的妻子（虽然状态为离异）。这构成了他们之间的间接关系链。"
+      ]
+    }
+  ],
+  "links": [
+    [
+      30,
+      19,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      31,
+      20,
+      0,
+      19,
+      0,
+      "CUSTOM"
+    ],
+    [
+      35,
+      21,
+      0,
+      19,
+      2,
+      "STRING"
+    ],
+    [
+      37,
+      26,
+      0,
+      19,
+      3,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.1,
+      "offset": {
+        "0": -491.9758320619171,
+        "1": -80.61043489836898
+      }
+    }
+  },
+  "version": 0.4
+}

@@ -37,7 +37,7 @@ class story_json_tool:
                 "type": "function",
                 "function": {
                     "name": "read_story_json",
-                    "description": "用于查询维基百科上的相关内容",
+                    "description": "用于查询小说对应章节的内容",
                     "parameters": {
                         "type": "object",
                         "properties": {
