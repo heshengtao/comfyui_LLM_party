@@ -3,10 +3,7 @@
 </p>
 
 ## 最新更新
-1. 可以搭建自己的互动小说游戏了，根据用户的选择，走向不同的结局！示例工作流参考：[互动小说](workflow/互动小说.json)
-2. 适配了openai的whisper和tts功能，可以实现语音输入和输出。示例工作流参考：[语音输入+语音输出](workflow/语音输入+语音输出.json)
-3. 兼容[Omost](https://github.com/lllyasviel/Omost)啦！！！请下载[omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)立即体验吧！示例工作流参考：[start_with_OMOST](workflow/start_with_OMOST.json)
-4. 新增了将消息发送到企业微信、钉钉和飞书的LLM工具以及可供调用的外部函数。
+1. 新增了知识图谱工具，让LLM与知识图谱可以完美交互，LLM可以根据你的输入修改知识图谱，可以在知识图谱上推理以获取你需要的答案。示例工作流参考：[知识图谱](workflow/知识图谱.json)
 
 # **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库**
 
@@ -62,6 +59,10 @@
 18. 写了一个`fastapi.py`文件，如果你直接运行它，你就获得了一个`http://127.0.0.1:8817/v1/`上的openai接口，任何可以调用GPT的应用都可以调用你的comfyui工作流了！详细怎么操作我会出一期教程来演示~
 19. 拆分了LLM加载器和LLM链，把模型加载和模型设置分开来了，这样就可以在不同的LLM节点之间共享模型了!
 20. 目前已经支持了macOS以及mps设备!感谢[bigcat88](https://github.com/bigcat88)对此的贡献！
+21. 可以搭建自己的互动小说游戏了，根据用户的选择，走向不同的结局！示例工作流参考：[互动小说](workflow/互动小说.json)
+22. 适配了openai的whisper和tts功能，可以实现语音输入和输出。示例工作流参考：[语音输入+语音输出](workflow/语音输入+语音输出.json)
+23. 兼容[Omost](https://github.com/lllyasviel/Omost)啦！！！请下载[omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)立即体验吧！示例工作流参考：[start_with_OMOST](workflow/start_with_OMOST.json)
+24. 新增了将消息发送到企业微信、钉钉和飞书的LLM工具以及可供调用的外部函数。
 
 ![图片](img/画画应用.png)
 

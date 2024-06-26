@@ -3,11 +3,7 @@
 </p>
 
 ## Latest update
-1. You can build your own interactive novel game, and go to different endings according to the user's choice! Example workflow reference: [interactive_novel](workflow/互动小说.json)
-2. Adapted to OpenAI's whisper and tts functions, voice input and output can be realized. Example workflow reference: [voice_input&voice_output](workflow/语音输入+语音输出.json)
-3. Compatible with [Omost](https://github.com/lllyasviel/Omost)!!! Please download [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) to experience it now! Sample workflow reference: [start_with_OMOST](workflow/start_with_OMOST)
-4. Added LLM tools to send messages to WeCom, DingTalk, and Feishu, as well as external functions to call.
-
+1. Added Knowledge Graph tool, so that LLM and Knowledge Graph can interact perfectly. LLM can modify Knowledge Graph according to your input, and can reason on Knowledge Graph to get the answers you need. Example workflow reference: [Knowledge_Graph](workflow/知识图谱.json)
 
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
 
@@ -63,6 +59,10 @@
 18. I wrote a `fastapi.py` file, and if you run it directly, you’ll get an OpenAI interface on `http://127.0.0.1:8817/v1/`. Any application that can call GPT can now invoke your comfyui workflow! I will create a tutorial to demonstrate the details on how to do this.
 19. I’ve separated the LLM loader and the LLM chain, dividing the model loading and model configuration. This allows for sharing models across different LLM nodes!
 20. macOS and mps devices are now supported! Thanks to [bigcat88](https://github.com/bigcat88) for their contribution!
+21. You can build your own interactive novel game, and go to different endings according to the user's choice! Example workflow reference: [interactive_novel](workflow/互动小说.json)
+22. Adapted to OpenAI's whisper and tts functions, voice input and output can be realized. Example workflow reference: [voice_input&voice_output](workflow/语音输入+语音输出.json)
+23. Compatible with [Omost](https://github.com/lllyasviel/Omost)!!! Please download [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) to experience it now! Sample workflow reference: [start_with_OMOST](workflow/start_with_OMOST)
+24. Added LLM tools to send messages to WeCom, DingTalk, and Feishu, as well as external functions to call.
 
 ![图片](img/画画应用.png)
 
