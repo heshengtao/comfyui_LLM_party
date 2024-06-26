@@ -65,7 +65,7 @@ from .tools.omost import omost_decode,omost_setting
 from .tools.keyword import keyword_tool,search_keyword,load_keyword
 from .tools.whisper import listen_audio,openai_whisper
 from .tools.story import story_json_tool,read_story_json
-from .tools.KG import KG_json_toolkit,Inquire_entities,New_entities,Modify_entities,Delete_entities,Inquire_relationships,New_relationships,Modify_relationships,Delete_relationships
+from .tools.KG import KG_json_toolkit_developer,KG_json_toolkit_user,Inquire_entities,New_entities,Modify_entities,Delete_entities,Inquire_relationships,New_relationships,Modify_relationships,Delete_relationships
 
 
 _TOOL_HOOKS = [
@@ -1436,7 +1436,8 @@ NODE_CLASS_MAPPINGS = {
     "listen_audio":listen_audio,
     "openai_whisper":openai_whisper,
     "story_json_tool":story_json_tool,
-    "KG_json_toolkit":KG_json_toolkit,
+    "KG_json_toolkit_developer":KG_json_toolkit_developer,
+    "KG_json_toolkit_user":KG_json_toolkit_user,
 }
 
 
@@ -1505,7 +1506,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "listen_audio": "监听音频(listen_audio)",
     "openai_whisper": "OpenAI语音识别(openai_whisper)",
     "story_json_tool": "故事JSON工具(story_json_tool)",
-    "KG_json_toolkit": "知识图谱JSON工具包(KG_json_toolkit)",
+    "KG_json_toolkit_developer": "知识图谱JSON工具包开发者版(KG_json_toolkit_developer)",
+    "KG_json_toolkit_user": "知识图谱JSON工具包用户版(KG_json_toolkit_user)",
 }
 
 if __name__ == "__main__":

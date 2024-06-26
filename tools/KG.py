@@ -6,7 +6,7 @@ from collections import deque
 file_path = os.path.join(current_dir_path, "KG")
 
 KG_path=""
-class KG_json_toolkit:
+class KG_json_toolkit_developer:
     @classmethod
     def INPUT_TYPES(s):
         # 获取file_path文件夹下的所有json文件的文件名
@@ -248,7 +248,108 @@ class KG_json_toolkit:
         ]
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
-    
+
+class KG_json_toolkit_user:
+    @classmethod
+    def INPUT_TYPES(s):
+        # 获取file_path文件夹下的所有json文件的文件名
+        paths = [f for f in os.listdir(file_path) if f.endswith(".json")]
+        return {
+            "required": {
+                "path": (paths, {"default": "test.json"}),
+                "is_enable": ("BOOLEAN", {"default": True}),
+            },
+            "optional": {},
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("tools",)
+
+    FUNCTION = "file"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+
+    def file(self, path, is_enable=True):
+        if is_enable == False:
+            return (None,)
+        path = os.path.join(file_path, path)
+        global KG_path
+        KG_path = path
+        output = [
+            {
+                "type": "function",
+                "function": {
+                    "name": "Inquire_entities",
+                    "description": "用于查询实体节点的相关信息，可以用来判断实体是否存在，以选择使用新增实体还是修改实体工具",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "实体的name",
+                            }
+                        },
+                        "required": ["name"],
+                    },
+                },
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "Inquire_relationships",
+                    "description": "用于查询关系边的相关信息，entitie_A和entitie_B的顺序可能会颠倒",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "entitie_A": {
+                                "type": "string",
+                                "description": "关系中的其中一个节点的name",
+                            },
+                            "entitie_B": {
+                                "type": "string",
+                                "description": "关系中的其中另一个节点的name",
+                            }
+                        },
+                        "required": ["entitie_A","entitie_B"],
+                    },
+                },
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "Inquire_entity_relationships",
+                    "description": "用于查询一个已存在的实体连接的所有关系边，请在查询关系边前使用Inquire_entities工具判断实体是否存在",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "实体的name",
+                            }
+                        },
+                        "required": ["name"],
+                    },
+                },
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "Inquire_entity_list",
+                    "description": "用于查询所有实体节点name",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                        },
+                        "required": [],
+                    },
+                },
+            }
+        ]
+        out = json.dumps(output, ensure_ascii=False)
+        return (out,)
+
 def Inquire_entities(name):
     with open(KG_path, "r", encoding="utf-8") as f:
         data = json.load(f)
