@@ -270,7 +270,7 @@ def New_entities(name, attributes):
     # 添加实体节点
     data["entities"].append({"name": name, "attributes": attributes})
     with open(KG_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False)
+        json.dump(data, f, ensure_ascii=False,indent=4)
     return "添加成功"
 
 def Modify_entities(name, attributes):
@@ -284,7 +284,7 @@ def Modify_entities(name, attributes):
             is_exist = True
     if is_exist:
         with open(KG_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False)
+            json.dump(data, f, ensure_ascii=False,indent=4)
         return "修改成功"
     else:
         return "该实体节点不存在"
@@ -300,7 +300,7 @@ def Delete_entities(name):
             is_exist = True
     if is_exist:
         with open(KG_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False)
+            json.dump(data, f, ensure_ascii=False,indent=4)
         return "删除成功"
     else:
         return "该实体节点不存在"
@@ -340,17 +340,17 @@ def Inquire_relationships(entitie_A,entitie_B):
     # 直接关系查询
     direct_relationships = [rel for rel in data["relationships"] if rel["source"] == entitie_A and rel["target"] == entitie_B]
     if direct_relationships:
-        return "两者之间的直接关系为："+json.dumps(direct_relationships, ensure_ascii=False)
+        return "两者之间的直接关系为："+json.dumps(direct_relationships, ensure_ascii=False,indent=4)
     # 反向查询
     reverse_relationships = [rel for rel in data["relationships"] if rel["source"] == entitie_B and rel["target"] == entitie_A]
     if reverse_relationships:
-        return "两者之间的反向直接关系为："+json.dumps(reverse_relationships, ensure_ascii=False)
+        return "两者之间的反向直接关系为："+json.dumps(reverse_relationships, ensure_ascii=False,indent=4)
     
     # 构建图并查询最短关系链
     graph = build_graph(data)
     shortest_path = bfs_shortest_path(graph, entitie_A, entitie_B)
     if shortest_path:
-        return "两者之间不存在直接关系，最短关系链为："+json.dumps(shortest_path, ensure_ascii=False)
+        return "两者之间不存在直接关系，最短关系链为："+json.dumps(shortest_path, ensure_ascii=False,indent=4)
     
     return "两者之间不存在任何直接或间接关系"
 
@@ -365,7 +365,7 @@ def New_relationships(source, target, type, attributes):
     # 添加关系边
     data["relationships"].append({"type": type,"source": source, "target": target, "attributes": attributes})
     with open(KG_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False)
+        json.dump(data, f, ensure_ascii=False,indent=4)
     return "添加成功"
 
 def Modify_relationships(source, target, type, attributes):
@@ -380,7 +380,7 @@ def Modify_relationships(source, target, type, attributes):
                 is_exist = True
     if is_exist:
         with open(KG_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False)
+            json.dump(data, f, ensure_ascii=False,indent=4)
             return "修改成功"
     else:
         return "该关系边不存在"
@@ -394,7 +394,7 @@ def Delete_relationships(source, target, type):
             if i["type"] == type:
                 data["relationships"].remove(i)
                 with open(KG_path, "w", encoding="utf-8") as f:
-                    json.dump(data, f, ensure_ascii=False)
+                    json.dump(data, f, ensure_ascii=False,indent=4)
                     return "删除成功"
     return "该关系边不存在"
 
