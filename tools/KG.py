@@ -66,10 +66,10 @@ class KG_json_toolkit:
                             },
                             "attributes": {
                                 "type": "string",
-                                "description": "实体的attributes，例如：{'name': '张三', 'age': 20}",
+                                "description": "实体的attributes，例如：{'name': '张三', 'age': 20}，缺省时，attributes为空",
                             }
                         },
-                        "required": ["name","attributes"],
+                        "required": ["name"],
                     },
                 },
             },
@@ -87,10 +87,10 @@ class KG_json_toolkit:
                             },
                             "attributes": {
                                 "type": "string",
-                                "description": "实体的attributes，例如：{'name': '张三', 'age': 20}",
+                                "description": "实体的attributes，例如：{'name': '张三', 'age': 20}，缺省时，会删除已有的attributes信息",
                             }
                         },
-                        "required": ["name","attributes"],
+                        "required": ["name"],
                     },
                 },
             },
@@ -154,10 +154,10 @@ class KG_json_toolkit:
                             },
                             "attributes": {
                                 "type": "object",
-                                "description": "关系的属性，例如：{'起始于':'2010年'}",
+                                "description": "关系的属性，例如：{'起始于':'2010年'}，缺省时，attributes为空",
                             }
                         },
-                        "required": ["type","source","target","attributes"],
+                        "required": ["type","source","target"],
                     },
                 },
             },
@@ -183,10 +183,10 @@ class KG_json_toolkit:
                             },
                             "attributes": {
                                 "type": "object",
-                                "description": "关系的属性，例如：{'起始于':'2010年'}",
+                                "description": "关系的属性，例如：{'起始于':'2010年'}，缺省时会删除已有的attributes信息",
                             }
                         },
-                        "required": ["type","source","target","attributes"],
+                        "required": ["type","source","target"],
                     },
                 },
             },
@@ -260,7 +260,7 @@ def Inquire_entities(name):
         out = "该实体节点不存在"
     return str(out)
 
-def New_entities(name, attributes):
+def New_entities(name, attributes=None):
     with open(KG_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     # 检查实体节点是否已存在
@@ -268,15 +268,19 @@ def New_entities(name, attributes):
         if i["name"] == name:
             return "该实体节点已存在"+"\n"+"实体节点信息："+"\n"+str(i)
     # 添加实体节点
+    if attributes is None:
+        attributes = {}
     data["entities"].append({"name": name, "attributes": attributes})
     with open(KG_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False,indent=4)
     return "添加成功"
 
-def Modify_entities(name, attributes):
+def Modify_entities(name, attributes=None):
     with open(KG_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     is_exist = False
+    if attributes is None:
+        attributes = {}
     # 检查实体节点是否存在
     for i in data["entities"]:
         if i["name"] == name:
@@ -354,7 +358,7 @@ def Inquire_relationships(entitie_A,entitie_B):
     
     return "两者之间不存在任何直接或间接关系"
 
-def New_relationships(source, target, type, attributes):
+def New_relationships(source, target, type, attributes=None):
     with open(KG_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     # 检查关系边是否已存在
@@ -363,15 +367,19 @@ def New_relationships(source, target, type, attributes):
             if i["type"] == type:
                 return "该关系边已存在"+"\n"+"关系边信息："+"\n"+str(i)
     # 添加关系边
+    if attributes is None:
+        attributes = {}
     data["relationships"].append({"type": type,"source": source, "target": target, "attributes": attributes})
     with open(KG_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False,indent=4)
     return "添加成功"
 
-def Modify_relationships(source, target, type, attributes):
+def Modify_relationships(source, target, type, attributes=None):
     with open(KG_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     is_exist = False
+    if attributes is None:
+        attributes = {}
     # 检查关系边是否存在
     for i in data["relationships"]:
         if i["source"] == source and i["target"] == target: 
