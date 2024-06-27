@@ -19,9 +19,11 @@
 
 3. [Disguise your workflow as GPT to access WeChat | Omost compatible! Flexibly create your own dalle3](https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0)
 
-4. For the instructions for using the node, please refer to: [how to use nodes](how_to_use_nodes.md)
+4. [How to play interactive fiction games in comfyui](https://www.bilibili.com/video/BV15y411q78L/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 
-5. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg).
+5. For the instructions for using the node, please refer to: [how to use nodes](how_to_use_nodes.md)
+
+6. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg).
 
 ## Model support
 1. Support all API calls in openai format, base_url selection reference [config.ini.example](config.ini.example), which has been tested so far:

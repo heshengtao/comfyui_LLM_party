@@ -19,9 +19,11 @@
 
 3. [将你的工作流伪装成GPT接入微信|Omost兼容！灵活地创造自己的dalle3](https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0)
 
-4. 节点的使用说明请参考：[怎么使用节点](how_to_use_nodes_ZH.md)
+4. [如何在comfyui中玩到互动小说游戏](https://www.bilibili.com/video/BV15y411q78L/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 
-5. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：[931057213](img/Q群.jpg)
+5. 节点的使用说明请参考：[怎么使用节点](how_to_use_nodes_ZH.md)
+
+6. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：[931057213](img/Q群.jpg)
 
 ## 模型支持
 1. 支持所有openai格式的API调用，base_url的选择参考[config.ini.example](config.ini.example)，目前已测试的有：
