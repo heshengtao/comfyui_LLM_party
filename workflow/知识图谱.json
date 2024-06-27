@@ -1,53 +1,7 @@
 {
-  "last_node_id": 27,
-  "last_link_id": 38,
+  "last_node_id": 29,
+  "last_link_id": 40,
   "nodes": [
-    {
-      "id": 21,
-      "type": "load_persona",
-      "pos": [
-        573,
-        407
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "links": [
-            35
-          ],
-          "shape": 3,
-          "label": "system_prompt",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_persona"
-      },
-      "widgets_values": [
-        "知识图谱",
-        true,
-        ""
-      ]
-    },
     {
       "id": 20,
       "type": "LLM_api_loader",
@@ -60,7 +14,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 1,
+      "order": 0,
       "mode": 0,
       "outputs": [
         {
@@ -122,7 +76,7 @@
       },
       "widgets_values": [
         "",
-        "根据查询到的最短关系链，曹操和袁术之间的关系可以通过以下路径描述：\n\n1. 曹操是夏侯渊的表亲。\n2. 夏侯渊的妹妹是夏侯氏。\n3. 夏侯氏是张飞的妻子。\n4. 张飞和刘备是结拜兄弟。\n5. 刘备的妻子是孙尚香。\n6. 孙尚香的兄弟是孙权。\n7. 孙权的兄弟是孙策。\n8. 孙策的义父是袁术。\n\n因此，曹操和袁术之间的关系通过多个中介连接，包括表亲、夫妻、结拜兄弟和亲兄弟关系，最终通过义父关系与袁术连接。这条关系链实质上构建了一种复杂的家族和义务关联网络。"
+        "曹操和孙权之间的关系通过一系列连接可以追溯。具体关系链如下：\n\n1. 曹操是夏侯渊的表亲。\n2. 夏侯渊的妹妹是夏侯氏。\n3. 夏侯氏是张飞的妻子。\n4. 张飞与刘备是结拜兄弟。\n5. 刘备的妻子是孙尚香。\n6. 孙尚香是孙权的妹妹。\n\n通过这一系列关系，可以看出曹操和孙权是通过多重间接关系相连，但没有直接的血缘或婚姻关系。"
       ]
     },
     {
@@ -164,7 +118,7 @@
         {
           "name": "tools",
           "type": "STRING",
-          "link": 38,
+          "link": 40,
           "widget": {
             "name": "tools"
           },
@@ -219,7 +173,7 @@
       },
       "widgets_values": [
         "",
-        "如果把义父大于义子一辈，夫妻关系时平辈，表亲、结拜兄弟、亲兄弟都是平辈，请问你可以折算出曹操和袁术之间的关系吗",
+        "那来一个难一点的，曹操是孙权的什么亲戚关系",
         0.7,
         "enable",
         "disable",
@@ -233,15 +187,61 @@
       ]
     },
     {
-      "id": 27,
-      "type": "KG_json_toolkit_developer",
+      "id": 21,
+      "type": "load_persona",
       "pos": [
-        579,
-        572
+        573,
+        407
       ],
       "size": {
         "0": 315,
-        "1": 82
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "知识图谱",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 29,
+      "type": "KG_json_toolkit_developer",
+      "pos": [
+        579,
+        577
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
       },
       "flags": {},
       "order": 2,
@@ -251,7 +251,7 @@
           "name": "tools",
           "type": "STRING",
           "links": [
-            38
+            40
           ],
           "shape": 3,
           "label": "tools",
@@ -262,6 +262,7 @@
         "Node name for S&R": "KG_json_toolkit_developer"
       },
       "widgets_values": [
+        "",
         "test.json",
         true
       ]
@@ -293,8 +294,8 @@
       "STRING"
     ],
     [
-      38,
-      27,
+      40,
+      29,
       0,
       19,
       3,
@@ -305,10 +306,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.9090909090909091,
+      "scale": 1.1,
       "offset": {
-        "0": -364.2711752203633,
-        "1": 7.944557757781768
+        "0": -522.9676430830197,
+        "1": -48.82721465179611
       }
     }
   },

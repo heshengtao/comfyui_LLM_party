@@ -1,6 +1,6 @@
 {
-  "last_node_id": 75,
-  "last_link_id": 96,
+  "last_node_id": 76,
+  "last_link_id": 97,
   "nodes": [
     {
       "id": 72,
@@ -46,43 +46,6 @@
       "bgcolor": "#355"
     },
     {
-      "id": 70,
-      "type": "load_file",
-      "pos": [
-        46,
-        339
-      ],
-      "size": {
-        "0": 310,
-        "1": 130
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "links": [
-            95
-          ],
-          "shape": 3,
-          "label": "file_content",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_file"
-      },
-      "widgets_values": [
-        "test.txt",
-        "enable",
-        "Relative_Path"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
       "id": 74,
       "type": "LLM_api_loader",
       "pos": [
@@ -94,7 +57,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 1,
+      "order": 0,
       "mode": 0,
       "outputs": [
         {
@@ -126,10 +89,10 @@
         387,
         339
       ],
-      "size": [
-        315,
-        202
-      ],
+      "size": {
+        "0": 315,
+        "1": 202
+      },
       "flags": {},
       "order": 2,
       "mode": 0,
@@ -137,10 +100,11 @@
         {
           "name": "file_content",
           "type": "STRING",
-          "link": 95,
+          "link": 97,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
@@ -277,6 +241,43 @@
       ],
       "color": "#223",
       "bgcolor": "#335"
+    },
+    {
+      "id": 76,
+      "type": "load_file",
+      "pos": [
+        42,
+        343
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": [
+            97
+          ],
+          "shape": 3,
+          "label": "file_content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_file"
+      },
+      "widgets_values": [
+        "",
+        "test.txt",
+        true
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
     }
   ],
   "links": [
@@ -297,19 +298,19 @@
       "CUSTOM"
     ],
     [
-      95,
-      70,
-      0,
-      75,
-      0,
-      "STRING"
-    ],
-    [
       96,
       75,
       0,
       73,
       3,
+      "STRING"
+    ],
+    [
+      97,
+      76,
+      0,
+      75,
+      0,
       "STRING"
     ]
   ],
@@ -319,8 +320,8 @@
     "ds": {
       "scale": 0.8264462809917354,
       "offset": {
-        "0": 119.42050245326685,
-        "1": 156.11136342276941
+        "0": 93.68050245326678,
+        "1": 152.29805470694905
       }
     }
   },

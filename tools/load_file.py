@@ -12,7 +12,7 @@ import xlrd
 from PIL import Image, ImageOps, ImageSequence
 
 from ..config import current_dir_path
-
+file_path = os.path.join(current_dir_path, "file")
 programming_languages_extensions = [".py", ".js", ".java", ".c", ".cpp", ".html", ".css", ".sql", ".r", ".swift"]
 
 
@@ -86,11 +86,12 @@ file_path = os.path.join(current_dir_path, "file")
 class load_file:
     @classmethod
     def INPUT_TYPES(s):
+        paths = [f for f in os.listdir(file_path)]
         return {
             "required": {
-                "path": ("STRING", {"default": "test.txt"}),
+                "absolute_path": ("STRING", {"default": ""}),
+                "relative_path": (paths, {"default": "test.json"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "path_type": (["Absolute_Path", "Relative_Path"], {"default": "Relative_Path"}),
             },
             "optional": {},
         }
@@ -104,13 +105,13 @@ class load_file:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, path, path_type, is_enable=True):
+    def file(self,relative_path,absolute_path="", is_enable=True):
         if is_enable == False:
             return (None,)
-        if path_type == "Absolute_Path":
-            path = path
+        if absolute_path!="":
+            path = absolute_path
         else:
-            path = os.path.join(file_path, path)
+            path = os.path.join(file_path, relative_path)
         out = read_one(path)
         return (out,)
 

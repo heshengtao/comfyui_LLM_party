@@ -13,7 +13,8 @@ class KG_json_toolkit_developer:
         paths = [f for f in os.listdir(file_path) if f.endswith(".json")]
         return {
             "required": {
-                "path": (paths, {"default": "test.json"}),
+                "absolute_path": ("STRING", {"default": ""}),
+                "relative_path": (paths, {"default": "test.json"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             },
             "optional": {},
@@ -28,12 +29,14 @@ class KG_json_toolkit_developer:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, path, is_enable=True):
+    def file(self,relative_path,absolute_path="", is_enable=True):
         if is_enable == False:
             return (None,)
-        path = os.path.join(file_path, path)
         global KG_path
-        KG_path = path
+        if absolute_path!="":
+            KG_path = absolute_path
+        else:
+            KG_path = os.path.join(file_path, relative_path)
         output = [
             {
                 "type": "function",
@@ -256,7 +259,8 @@ class KG_json_toolkit_user:
         paths = [f for f in os.listdir(file_path) if f.endswith(".json")]
         return {
             "required": {
-                "path": (paths, {"default": "test.json"}),
+                "absolute_path": ("STRING", {"default": ""}),
+                "relative_path": (paths, {"default": "test.json"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             },
             "optional": {},
@@ -271,12 +275,14 @@ class KG_json_toolkit_user:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, path, is_enable=True):
+    def file(self,relative_path,absolute_path="", is_enable=True):
         if is_enable == False:
             return (None,)
-        path = os.path.join(file_path, path)
         global KG_path
-        KG_path = path
+        if absolute_path!="":
+            KG_path = absolute_path
+        else:
+            KG_path = os.path.join(file_path, relative_path)
         output = [
             {
                 "type": "function",

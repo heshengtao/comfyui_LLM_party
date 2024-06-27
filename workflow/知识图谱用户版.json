@@ -76,7 +76,53 @@
       },
       "widgets_values": [
         "",
-        "抱歉，我没有权限更新知识图谱的内容。如果您有其他关于知识图谱的查询需求，我可以帮助您查询现有的信息。"
+        "根据最短的关系链，曹操和孙权之间的关系非常间接，通过多个中间人连接。这个关系链涉及表亲、婚姻和结拜关系，但如果要以一个词来概括他们之间的复杂关系，可以说他们是“远亲”。\n\n具体来说，这条链条通过曹操的表亲夏侯渊，到夏侯渊的妹妹夏侯氏，再通过夏侯氏的丈夫张飞，到张飞的结拜兄弟刘备，最后通过刘备的前妻孙尚香到孙权。这显示了一个极其复杂和间接的家族关系网络。"
+      ]
+    },
+    {
+      "id": 21,
+      "type": "load_persona",
+      "pos": [
+        573,
+        407
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "知识图谱用户版",
+        true,
+        ""
       ]
     },
     {
@@ -173,7 +219,7 @@
       },
       "widgets_values": [
         "",
-        "帮我添加一个知识：刘备是诸葛亮的主公，诸葛亮是刘备的谋士",
+        "那来一个难一点的，曹操是孙权的什么亲戚关系",
         0.7,
         "enable",
         "disable",
@@ -187,52 +233,6 @@
       ]
     },
     {
-      "id": 21,
-      "type": "load_persona",
-      "pos": [
-        573,
-        407
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "links": [
-            35
-          ],
-          "shape": 3,
-          "label": "system_prompt",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_persona"
-      },
-      "widgets_values": [
-        "知识图谱用户版",
-        true,
-        ""
-      ]
-    },
-    {
       "id": 28,
       "type": "KG_json_toolkit_user",
       "pos": [
@@ -241,7 +241,7 @@
       ],
       "size": {
         "0": 315,
-        "1": 82
+        "1": 106
       },
       "flags": {},
       "order": 2,
@@ -262,6 +262,7 @@
         "Node name for S&R": "KG_json_toolkit_user"
       },
       "widgets_values": [
+        "",
         "test.json",
         true
       ]
@@ -305,10 +306,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1,
+      "scale": 1.1,
       "offset": {
-        "0": -439.9058047773191,
-        "1": -7.349316531990951
+        "0": -522.9676430830197,
+        "1": -48.82721465179611
       }
     }
   },
