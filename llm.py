@@ -66,7 +66,7 @@ from .tools.keyword import keyword_tool,search_keyword,load_keyword
 from .tools.whisper import listen_audio,openai_whisper
 from .tools.story import story_json_tool,read_story_json
 from .tools.KG import KG_json_toolkit_developer,KG_json_toolkit_user,Inquire_entities,New_entities,Modify_entities,Delete_entities,Inquire_relationships,New_relationships,Modify_relationships,Delete_relationships
-
+from .tools.KG_csv import KG_csv_toolkit_developer,KG_csv_toolkit_user,Inquire_triple,New_triple,Delete_triple
 
 _TOOL_HOOKS = [
     "get_time",
@@ -97,6 +97,9 @@ _TOOL_HOOKS = [
     "New_relationships",
     "Modify_relationships",
     "Delete_relationships",
+    "Inquire_triple",
+    "New_triple",
+    "Delete_triple",
 ]
 instances = []
 image_buffer = []
@@ -1438,6 +1441,8 @@ NODE_CLASS_MAPPINGS = {
     "story_json_tool":story_json_tool,
     "KG_json_toolkit_developer":KG_json_toolkit_developer,
     "KG_json_toolkit_user":KG_json_toolkit_user,
+    "KG_csv_toolkit_developer":KG_csv_toolkit_developer,
+    "KG_csv_toolkit_user":KG_csv_toolkit_user,
 }
 
 
@@ -1508,6 +1513,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "story_json_tool": "故事JSON工具(story_json_tool)",
     "KG_json_toolkit_developer": "知识图谱JSON工具包开发者版(KG_json_toolkit_developer)",
     "KG_json_toolkit_user": "知识图谱JSON工具包用户版(KG_json_toolkit_user)",
+    "KG_csv_toolkit_developer": "知识图谱CSV工具包开发者版(KG_csv_toolkit_developer)",
+    "KG_csv_toolkit_user": "知识图谱CSV工具包用户版(KG_csv_toolkit_user)",
 }
 
 if __name__ == "__main__":

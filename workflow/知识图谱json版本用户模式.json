@@ -1,6 +1,6 @@
 {
-  "last_node_id": 29,
-  "last_link_id": 40,
+  "last_node_id": 30,
+  "last_link_id": 41,
   "nodes": [
     {
       "id": 20,
@@ -118,7 +118,7 @@
         {
           "name": "tools",
           "type": "STRING",
-          "link": 40,
+          "link": 41,
           "widget": {
             "name": "tools"
           },
@@ -227,17 +227,17 @@
         "Node name for S&R": "load_persona"
       },
       "widgets_values": [
-        "知识图谱",
+        "知识图谱json版本用户版",
         true,
         ""
       ]
     },
     {
-      "id": 29,
-      "type": "KG_json_toolkit_developer",
+      "id": 30,
+      "type": "KG_json_toolkit_user",
       "pos": [
         579,
-        577
+        558
       ],
       "size": {
         "0": 315,
@@ -251,7 +251,7 @@
           "name": "tools",
           "type": "STRING",
           "links": [
-            40
+            41
           ],
           "shape": 3,
           "label": "tools",
@@ -259,7 +259,7 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "KG_json_toolkit_developer"
+        "Node name for S&R": "KG_json_toolkit_user"
       },
       "widgets_values": [
         "",
@@ -294,8 +294,8 @@
       "STRING"
     ],
     [
-      40,
-      29,
+      41,
+      30,
       0,
       19,
       3,

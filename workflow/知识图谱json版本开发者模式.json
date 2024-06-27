@@ -1,6 +1,6 @@
 {
-  "last_node_id": 28,
-  "last_link_id": 39,
+  "last_node_id": 29,
+  "last_link_id": 40,
   "nodes": [
     {
       "id": 20,
@@ -76,53 +76,7 @@
       },
       "widgets_values": [
         "",
-        "根据最短的关系链，曹操和孙权之间的关系非常间接，通过多个中间人连接。这个关系链涉及表亲、婚姻和结拜关系，但如果要以一个词来概括他们之间的复杂关系，可以说他们是“远亲”。\n\n具体来说，这条链条通过曹操的表亲夏侯渊，到夏侯渊的妹妹夏侯氏，再通过夏侯氏的丈夫张飞，到张飞的结拜兄弟刘备，最后通过刘备的前妻孙尚香到孙权。这显示了一个极其复杂和间接的家族关系网络。"
-      ]
-    },
-    {
-      "id": 21,
-      "type": "load_persona",
-      "pos": [
-        573,
-        407
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "links": [
-            35
-          ],
-          "shape": 3,
-          "label": "system_prompt",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_persona"
-      },
-      "widgets_values": [
-        "知识图谱用户版",
-        true,
-        ""
+        "曹操和孙权之间的关系通过一系列连接可以追溯。具体关系链如下：\n\n1. 曹操是夏侯渊的表亲。\n2. 夏侯渊的妹妹是夏侯氏。\n3. 夏侯氏是张飞的妻子。\n4. 张飞与刘备是结拜兄弟。\n5. 刘备的妻子是孙尚香。\n6. 孙尚香是孙权的妹妹。\n\n通过这一系列关系，可以看出曹操和孙权是通过多重间接关系相连，但没有直接的血缘或婚姻关系。"
       ]
     },
     {
@@ -164,7 +118,7 @@
         {
           "name": "tools",
           "type": "STRING",
-          "link": 39,
+          "link": 40,
           "widget": {
             "name": "tools"
           },
@@ -233,11 +187,46 @@
       ]
     },
     {
-      "id": 28,
-      "type": "KG_json_toolkit_user",
+      "id": 29,
+      "type": "KG_json_toolkit_developer",
       "pos": [
-        577,
-        571
+        579,
+        577
+      ],
+      "size": {
+        "0": 352.79998779296875,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "label": "tools",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KG_json_toolkit_developer"
+      },
+      "widgets_values": [
+        "",
+        "test.json",
+        true
+      ]
+    },
+    {
+      "id": 21,
+      "type": "load_persona",
+      "pos": [
+        573,
+        407
       ],
       "size": {
         "0": 315,
@@ -246,25 +235,36 @@
       "flags": {},
       "order": 2,
       "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
       "outputs": [
         {
-          "name": "tools",
+          "name": "system_prompt",
           "type": "STRING",
           "links": [
-            39
+            35
           ],
           "shape": 3,
-          "label": "tools",
+          "label": "system_prompt",
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "KG_json_toolkit_user"
+        "Node name for S&R": "load_persona"
       },
       "widgets_values": [
-        "",
-        "test.json",
-        true
+        "知识图谱json版本",
+        true,
+        ""
       ]
     }
   ],
@@ -294,8 +294,8 @@
       "STRING"
     ],
     [
-      39,
-      28,
+      40,
+      29,
       0,
       19,
       3,
