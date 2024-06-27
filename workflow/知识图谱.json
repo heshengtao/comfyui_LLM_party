@@ -1,41 +1,7 @@
 {
-  "last_node_id": 26,
-  "last_link_id": 37,
+  "last_node_id": 27,
+  "last_link_id": 38,
   "nodes": [
-    {
-      "id": 26,
-      "type": "KG_json_toolkit",
-      "pos": [
-        573,
-        581
-      ],
-      "size": {
-        "0": 315,
-        "1": 82
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tools",
-          "type": "STRING",
-          "links": [
-            37
-          ],
-          "shape": 3,
-          "label": "tools",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "KG_json_toolkit"
-      },
-      "widgets_values": [
-        "test.json",
-        true
-      ]
-    },
     {
       "id": 21,
       "type": "load_persona",
@@ -48,7 +14,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 1,
+      "order": 0,
       "mode": 0,
       "inputs": [
         {
@@ -94,7 +60,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 2,
+      "order": 1,
       "mode": 0,
       "outputs": [
         {
@@ -115,6 +81,48 @@
         "gpt-4-turbo",
         "",
         ""
+      ]
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1361,
+        258
+      ],
+      "size": {
+        "0": 414.8237609863281,
+        "1": 287.0350646972656
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 30,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "根据查询到的最短关系链，曹操和袁术之间的关系可以通过以下路径描述：\n\n1. 曹操是夏侯渊的表亲。\n2. 夏侯渊的妹妹是夏侯氏。\n3. 夏侯氏是张飞的妻子。\n4. 张飞和刘备是结拜兄弟。\n5. 刘备的妻子是孙尚香。\n6. 孙尚香的兄弟是孙权。\n7. 孙权的兄弟是孙策。\n8. 孙策的义父是袁术。\n\n因此，曹操和袁术之间的关系通过多个中介连接，包括表亲、夫妻、结拜兄弟和亲兄弟关系，最终通过义父关系与袁术连接。这条关系链实质上构建了一种复杂的家族和义务关联网络。"
       ]
     },
     {
@@ -156,7 +164,7 @@
         {
           "name": "tools",
           "type": "STRING",
-          "link": 37,
+          "link": 38,
           "widget": {
             "name": "tools"
           },
@@ -211,7 +219,7 @@
       },
       "widgets_values": [
         "",
-        "袁术和刘备是什么关系",
+        "如果把义父大于义子一辈，夫妻关系时平辈，表亲、结拜兄弟、亲兄弟都是平辈，请问你可以折算出曹操和袁术之间的关系吗",
         0.7,
         "enable",
         "disable",
@@ -225,45 +233,37 @@
       ]
     },
     {
-      "id": 11,
-      "type": "show_text_party",
+      "id": 27,
+      "type": "KG_json_toolkit_developer",
       "pos": [
-        1361,
-        258
+        579,
+        572
       ],
       "size": {
-        "0": 414.8237609863281,
-        "1": 287.0350646972656
+        "0": 315,
+        "1": 82
       },
       "flags": {},
-      "order": 4,
+      "order": 2,
       "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 30,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
       "outputs": [
         {
-          "name": "STRING",
+          "name": "tools",
           "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
+          "links": [
+            38
+          ],
+          "shape": 3,
+          "label": "tools",
+          "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "show_text_party"
+        "Node name for S&R": "KG_json_toolkit_developer"
       },
       "widgets_values": [
-        "",
-        "袁术和刘备之间的关系通过一个关系链来描述：袁术是孙策的义父，孙策的亲兄弟是孙权，孙权的妹妹是孙尚香，而孙尚香是刘备的妻子（虽然状态为离异）。这构成了他们之间的间接关系链。"
+        "test.json",
+        true
       ]
     }
   ],
@@ -293,8 +293,8 @@
       "STRING"
     ],
     [
-      37,
-      26,
+      38,
+      27,
       0,
       19,
       3,
@@ -305,10 +305,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1.1,
+      "scale": 0.9090909090909091,
       "offset": {
-        "0": -491.9758320619171,
-        "1": -80.61043489836898
+        "0": -364.2711752203633,
+        "1": 7.944557757781768
       }
     }
   },
