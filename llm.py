@@ -130,6 +130,8 @@ def another_llm(id, type, question):
             file_content,
             images,
             imgbb_api_key,
+            conversation_rounds,
+            historical_record,
         ) = llm.list
         res, _, _, _ = llm.chatbot(
             question,
@@ -146,6 +148,8 @@ def another_llm(id, type, question):
             file_content,
             images,
             imgbb_api_key,
+            conversation_rounds,
+            historical_record,
         )
     elif type == "local":
         try:
@@ -170,6 +174,8 @@ def another_llm(id, type, question):
             tools,
             file_content,
             image,
+            conversation_rounds,
+            historical_record,
         ) = llm.list
         res, _, _, _ = llm.chatbot(
             question,
@@ -186,6 +192,8 @@ def another_llm(id, type, question):
             tools,
             file_content,
             image,
+            conversation_rounds,
+            historical_record,
         )
     else:
         return "type参数错误，请使用api或local"
@@ -435,8 +443,9 @@ class LLM_api_loader:
 class LLM:
     original_IS_CHANGED = None
     def __init__(self):
-        # 生成一个hash值作为id
-        self.id = hash(str(self))
+        current_time = datetime.datetime.now()
+        # 以时间戳作为ID，字符串格式 XX年XX月XX日XX时XX分XX秒
+        self.id =  current_time.strftime("%Y年%m月%d日%H时%M分%S秒")
         global instances
         instances.append(self)
         # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
@@ -455,6 +464,11 @@ class LLM:
         self.is_locked = "disable"
     @classmethod
     def INPUT_TYPES(s):
+        temp_path = os.path.join(current_dir_path, "temp")
+        full_paths = [os.path.join(temp_path, f) for f in os.listdir(temp_path)]
+        full_paths.sort(key=os.path.getmtime, reverse=True)
+        paths = [os.path.basename(f) for f in full_paths]
+        paths.insert(0, "")
         return {
             "required": {
                 "system_prompt": ("STRING", {"multiline": True, "default": "你一个强大的人工智能助手。"}),
@@ -485,6 +499,8 @@ class LLM:
                         "default": "",
                     },
                 ),
+                "conversation_rounds": ("INT", {"default": 100, "min": 1, "max": 10000}),
+                "historical_record": (paths, {"default": ""}),
             },
         }
 
@@ -523,6 +539,8 @@ class LLM:
         file_content=None,
         images=None,
         imgbb_api_key=None,
+        conversation_rounds=100,
+        historical_record="",
     ):
         self.list = [
             main_brain,
@@ -538,7 +556,12 @@ class LLM:
             file_content,
             images,
             imgbb_api_key,
+            conversation_rounds,
+            historical_record,
         ]
+        if historical_record != "":
+            temp_path = os.path.join(current_dir_path, "temp")
+            self.prompt_path = os.path.join(temp_path, historical_record)
         self.tool_data["system_prompt"] = system_prompt
         if system_prompt_input is not None and system_prompt is not None:
             system_prompt = system_prompt + system_prompt_input
@@ -591,18 +614,30 @@ class LLM:
             )
         else:
             try:
-                # 读取prompt.json文件
-                with open(self.prompt_path, "r", encoding="utf-8") as f:
-                    history = json.load(f)
-                
                 if is_memory == "disable":
                     with open(self.prompt_path, "w", encoding="utf-8") as f:
                         json.dump([{"role": "system", "content": system_prompt}], f, indent=4, ensure_ascii=False)
                 api_keys = load_api_keys(config_path)
 
-                # 读取prompt.json文件
                 with open(self.prompt_path, "r", encoding="utf-8") as f:
                     history = json.load(f)
+                history_temp = [history[0]]
+                elements_to_keep = 2 * conversation_rounds
+                if elements_to_keep < len(history)-1:
+                    history_temp += history[-elements_to_keep:]
+                    history_copy = history[1:-elements_to_keep]
+                else:
+                    if len(history) >1:
+                        history_temp += history[1:]
+                    history_copy = []
+                if len(history_temp) >1:
+                    if history_temp[1]['role'] == 'tool':
+                        history_temp.insert(1, history[-elements_to_keep-1])
+                        if -elements_to_keep-1>1:
+                            history_copy = history[1:-elements_to_keep-1]
+                        else:
+                            history_copy = []
+                history = history_temp
                 tool_list = []
                 if is_tools_in_sys_prompt == "enable":
                     if tools is not None:
@@ -696,6 +731,10 @@ class LLM:
                 response, history = model.send(user_prompt, temperature, max_length,history, tools)
                 print(response)
                 # 修改prompt.json文件
+                history_get = [history[0]]
+                history_get.extend(history_copy)
+                history_get.extend(history[1:])
+                history = history_get
                 with open(self.prompt_path, "w", encoding="utf-8") as f:
                     json.dump(history, f, indent=4, ensure_ascii=False)
                 for his in history:
@@ -978,6 +1017,11 @@ class LLM_local:
         self.is_locked= "disable"
     @classmethod
     def INPUT_TYPES(s):
+        temp_path = os.path.join(current_dir_path, "temp")
+        full_paths = [os.path.join(temp_path, f) for f in os.listdir(temp_path)]
+        full_paths.sort(key=os.path.getmtime, reverse=True)
+        paths = [os.path.basename(f) for f in full_paths]
+        paths.insert(0, "")
         return {
             "required": {
                 "model": ("CUSTOM", {}),
@@ -1007,6 +1051,8 @@ class LLM_local:
                 "system_prompt_input": ("STRING", {"forceInput": True}),
                 "tools": ("STRING", {"forceInput": True}),
                 "file_content": ("STRING", {"forceInput": True}),
+                "conversation_rounds": ("INT", {"default": 100, "min": 1, "max": 10000}),
+                "historical_record": (paths, {"default": ""}),
             },
         }
 
@@ -1045,6 +1091,8 @@ class LLM_local:
         tools=None,
         file_content=None,
         image=None,
+        conversation_rounds=100,
+        historical_record=None,
     ):
         self.list = [
             main_brain,
@@ -1060,7 +1108,12 @@ class LLM_local:
             tools,
             file_content,
             image,
+            conversation_rounds,
+            historical_record,
         ]
+        if historical_record != "":
+            temp_path = os.path.join(current_dir_path, "temp")
+            self.prompt_path = os.path.join(temp_path, historical_record)
         self.tool_data["system_prompt"] = system_prompt
         if system_prompt_input is not None and system_prompt is not None:
             system_prompt = system_prompt + system_prompt_input
@@ -1111,16 +1164,28 @@ class LLM_local:
             )
         else:
             try:
-                # 读取prompt.json文件
-                with open(self.prompt_path, "r", encoding="utf-8") as f:
-                    history = json.load(f)
                 if is_memory == "disable":
                     with open(self.prompt_path, "w", encoding="utf-8") as f:
                         json.dump([{"role": "system", "content": system_prompt}], f, indent=4, ensure_ascii=False)
-
-                # 读取prompt.json文件
                 with open(self.prompt_path, "r", encoding="utf-8") as f:
                     history = json.load(f)
+                history_temp = [history[0]]
+                elements_to_keep = 2 * conversation_rounds
+                if elements_to_keep < len(history)-1:
+                    history_temp += history[-elements_to_keep:]
+                    history_copy = history[1:-elements_to_keep]
+                else:
+                    if len(history) >1:
+                        history_temp += history[1:]
+                    history_copy = []
+                if len(history_temp) >1:
+                    if history_temp[1]['role'] == 'tool':
+                        history_temp.insert(1, history[-elements_to_keep-1])
+                        if -elements_to_keep-1>1:
+                            history_copy = history[1:-elements_to_keep-1]
+                        else:
+                            history_copy = []
+                history = history_temp
                 tools_list = []
                 GPT_INSTRUCTION = ""
                 if tools is not None:
@@ -1294,6 +1359,10 @@ class LLM_local:
                         history.append(assistant_content)
                 print(response)
                 # 修改prompt.json文件
+                history_get = [history[0]]
+                history_get.extend(history_copy)
+                history_get.extend(history[1:])
+                history = history_get
                 with open(self.prompt_path, "w", encoding="utf-8") as f:
                     json.dump(history, f, indent=4, ensure_ascii=False)
                 for his in history:
