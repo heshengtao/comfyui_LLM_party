@@ -212,12 +212,12 @@ if get_current_page() == "chat":
             for message in st.session_state["chat_history"]:
                 if message["role"] == "assistant":
                     if message["content"] is not None and message["content"] != "" and message["content"] != "empty":
-                        st.markdown(f"智能体: {message['content']}")
+                        st.markdown(f"{ai_name}: {message['content']}")
                 elif message["role"] == "user":
                     st.markdown(f"你: {message['content']}")
                 elif message["role"] == "image":
                     if message["content"] is not None:
-                        st.markdown(f"智能体:")
+                        st.markdown(f"{ai_name}:")
                         st.image(message["content"])
 
     with st.form("Question", clear_on_submit=True):
