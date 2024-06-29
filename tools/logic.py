@@ -161,3 +161,33 @@ class get_string:
         return (
             out,
         )
+    
+class replace_string:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "input_string": ("STRING", {}),
+                "string_delete": ("STRING", {"default": ""}),
+                "string_replace": ("STRING", {"default": ""}),
+            },
+        }
+
+    RETURN_TYPES = (
+        "STRING",
+    )
+    RETURN_NAMES = (
+        "string",
+    )
+
+    FUNCTION = "substr"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/函数（function）"
+
+    def substr(self, string_delete, string_replace, input_string=""):
+        out = input_string.replace(string_delete, string_replace)
+        return (
+            out,
+        )

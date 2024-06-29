@@ -47,7 +47,7 @@ from .tools.interpreter import interpreter, interpreter_tool
 from .tools.load_ebd import data_base, ebd_tool, load_embeddings
 from .tools.load_file import load_file, load_file_folder, load_url, start_workflow
 from .tools.load_persona import load_persona
-from .tools.logic import string_logic,substring,get_string
+from .tools.logic import string_logic,substring,get_string,replace_string
 from .tools.new_interpreter import new_interpreter, new_interpreter_tool
 from .tools.search_web import google_tool, search_web,bing_tool,search_web_bing
 from .tools.show_text import show_text_party,About_us
@@ -1514,6 +1514,7 @@ NODE_CLASS_MAPPINGS = {
     "KG_json_toolkit_user":KG_json_toolkit_user,
     "KG_csv_toolkit_developer":KG_csv_toolkit_developer,
     "KG_csv_toolkit_user":KG_csv_toolkit_user,
+    "replace_string":replace_string,
 }
 
 
@@ -1586,6 +1587,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "KG_json_toolkit_user": "知识图谱JSON工具包用户版(KG_json_toolkit_user)",
     "KG_csv_toolkit_developer": "知识图谱CSV工具包开发者版(KG_csv_toolkit_developer)",
     "KG_csv_toolkit_user": "知识图谱CSV工具包用户版(KG_csv_toolkit_user)",
+    "replace_string": "替换字符串(replace_string)",
 }
 
 if __name__ == "__main__":
