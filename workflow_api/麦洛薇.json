@@ -1,0 +1,96 @@
+{
+  "19": {
+    "inputs": {
+      "system_prompt": "",
+      "user_prompt": [
+        "28",
+        3
+      ],
+      "temperature": 0.7,
+      "is_memory": "disable",
+      "is_tools_in_sys_prompt": "disable",
+      "is_locked": "disable",
+      "main_brain": "enable",
+      "max_length": 2048,
+      "system_prompt_input": [
+        "21",
+        0
+      ],
+      "tools": [
+        "27",
+        0
+      ],
+      "imgbb_api_key": "",
+      "conversation_rounds": 5,
+      "historical_record": "2024年06月29日16时01分41秒.json",
+      "model": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "LLM",
+    "_meta": {
+      "title": "API大语言模型(LLM_api)"
+    }
+  },
+  "20": {
+    "inputs": {
+      "model_name": "gpt-4-turbo",
+      "base_url": "",
+      "api_key": ""
+    },
+    "class_type": "LLM_api_loader",
+    "_meta": {
+      "title": "API大语言模型加载器(LLM_api_loader)"
+    }
+  },
+  "21": {
+    "inputs": {
+      "persona_name": "麦洛薇稳定版",
+      "is_enable": true
+    },
+    "class_type": "load_persona",
+    "_meta": {
+      "title": "加载人格面具(load_persona)"
+    }
+  },
+  "27": {
+    "inputs": {
+      "absolute_path": "",
+      "relative_path": "麦洛薇.json",
+      "is_enable": true
+    },
+    "class_type": "KG_json_toolkit_developer",
+    "_meta": {
+      "title": "知识图谱JSON工具包开发者版(KG_json_toolkit_developer)"
+    }
+  },
+  "28": {
+    "inputs": {
+      "file_path": "",
+      "img_path": "",
+      "system_prompt": "你是一个强大的智能助手",
+      "user_prompt": "你好",
+      "positive_prompt": "",
+      "negative_prompt": "",
+      "model_name": ""
+    },
+    "class_type": "start_workflow",
+    "_meta": {
+      "title": "开始工作流(start_workflow)"
+    }
+  },
+  "29": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "text": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "end_workflow",
+    "_meta": {
+      "title": "结束工作流(end_workflow)"
+    }
+  }
+}

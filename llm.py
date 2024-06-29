@@ -65,7 +65,7 @@ from .tools.omost import omost_decode,omost_setting
 from .tools.keyword import keyword_tool,search_keyword,load_keyword
 from .tools.whisper import listen_audio,openai_whisper
 from .tools.story import story_json_tool,read_story_json
-from .tools.KG import KG_json_toolkit_developer,KG_json_toolkit_user,Inquire_entities,New_entities,Modify_entities,Delete_entities,Inquire_relationships,New_relationships,Modify_relationships,Delete_relationships
+from .tools.KG import KG_json_toolkit_developer,KG_json_toolkit_user,Inquire_entities,New_entities,Modify_entities,Delete_entities,Inquire_relationships,New_relationships,Modify_relationships,Delete_relationships,Inquire_entity_relationships
 from .tools.KG_csv import KG_csv_toolkit_developer,KG_csv_toolkit_user,Inquire_triple,New_triple,Delete_triple
 
 _TOOL_HOOKS = [
@@ -100,6 +100,7 @@ _TOOL_HOOKS = [
     "Inquire_triple",
     "New_triple",
     "Delete_triple",
+    "Inquire_entity_relationships",
 ]
 instances = []
 image_buffer = []
