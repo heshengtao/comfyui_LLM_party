@@ -445,7 +445,7 @@ class LLM:
     def __init__(self):
         current_time = datetime.datetime.now()
         # 以时间戳作为ID，字符串格式 XX年XX月XX日XX时XX分XX秒
-        self.id =  current_time.strftime("%Y年%m月%d日%H时%M分%S秒")
+        self.id =  current_time.strftime("%Y-%m-%d_%H:%M:%S")
         global instances
         instances.append(self)
         # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
@@ -998,7 +998,8 @@ class LLM_local:
     original_IS_CHANGED = None
     def __init__(self):
         # 生成一个hash值作为id
-        self.id = hash(str(self))
+        current_time = datetime.datetime.now()
+        self.id =  current_time.strftime("%Y-%m-%d_%H:%M:%S")
         global instances
         instances.append(self)
         # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
