@@ -4,6 +4,7 @@
 
 ## Latest update
 1. Added Knowledge Graph tool, so that LLM and Knowledge Graph can interact perfectly. LLM can modify Knowledge Graph according to your input, and can reason on Knowledge Graph to get the answers you need. Example workflow reference: [Knowledge_Graph](workflow/知识图谱csv版本开发者模式.json)
+2. Added personality AI function, 0 code to develop your own girlfriend AI or boyfriend AI, unlimited dialogue, permanent memory, stable personality. Example workflow reference: [Mylover Personality AI](workflow/麦洛薇人格AI.json)
 
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
 
