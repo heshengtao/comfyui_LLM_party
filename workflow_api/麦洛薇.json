@@ -7,7 +7,7 @@
         3
       ],
       "temperature": 0.7,
-      "is_memory": "disable",
+      "is_memory": "enable",
       "is_tools_in_sys_prompt": "disable",
       "is_locked": "disable",
       "main_brain": "enable",
