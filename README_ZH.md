@@ -125,6 +125,8 @@
 
 ### 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：931057213
 
-![图片](img/Q群.jpg)
+<div style="display:flex; justify-content:space-between;">
+    <img src="img/Q群.jpg" style="width: 48%;" />
+</div>
 
 ### 如果想持续关注本项目的最新功能，欢迎关注B站账号：[哔哩哔哩人工智能机器人](https://space.bilibili.com/26978344)

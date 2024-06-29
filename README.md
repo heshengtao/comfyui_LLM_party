@@ -125,6 +125,8 @@ Thanks to [@bigcat88](https://github.com/bigcat88) for contributing to this proj
 
 ### If there is a problem with the plug-in or you have other questions, welcome to join the QQ group: 931057213
 
-![image](img/Q群.jpg)
+<div style="display:flex; justify-content:space-between;">
+    <img src="img/Q群.jpg" style="width: 48%;" />
+</div>
 
 ### If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [Bilibili artificial intelligence robot](https://space.bilibili.com/26978344)
