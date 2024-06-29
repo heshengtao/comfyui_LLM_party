@@ -198,7 +198,9 @@ if "chat_history" not in st.session_state:
 # 使用函数来访问 'current_page'
 if get_current_page() == "chat":
     response = "你好哇~"
-    st.markdown(f"智能体: 你好哇~")
+    ai_name=st.session_state["wf_path"]
+    ai_name = ai_name.replace(".json", "")
+    st.markdown(f"{ai_name}: 你好哇~")
     chat_history_container = st.container()  # Use a container to hold the chat history
     # 更新对话记录容器
     chat_history_container.empty()
