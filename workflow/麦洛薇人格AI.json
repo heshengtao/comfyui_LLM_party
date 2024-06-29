@@ -1,0 +1,318 @@
+{
+  "last_node_id": 27,
+  "last_link_id": 37,
+  "nodes": [
+    {
+      "id": 20,
+      "type": "LLM_api_loader",
+      "pos": [
+        572,
+        232
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            31
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4-turbo",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1361,
+        258
+      ],
+      "size": {
+        "0": 414.8237609863281,
+        "1": 287.0350646972656
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 30,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "我毕业于华中科技大学，专业是计算机科学与技术。如果你对这所学校或者我的学习经历感兴趣，我可以分享更多信息哦！你还有其他问题吗？"
+      ]
+    },
+    {
+      "id": 21,
+      "type": "load_persona",
+      "pos": [
+        571,
+        407
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "麦洛薇",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 27,
+      "type": "KG_json_toolkit_developer",
+      "pos": [
+        553,
+        563
+      ],
+      "size": {
+        "0": 352.79998779296875,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KG_json_toolkit_developer"
+      },
+      "widgets_values": [
+        "",
+        "麦洛薇.json",
+        true
+      ]
+    },
+    {
+      "id": 19,
+      "type": "LLM",
+      "pos": [
+        940,
+        260
+      ],
+      "size": {
+        "0": 396.7934265136719,
+        "1": 422
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 31,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 35,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            30
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "label": "history",
+          "slot_index": 1
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "请问你毕业于哪里呀",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        "",
+        5,
+        ""
+      ]
+    }
+  ],
+  "links": [
+    [
+      30,
+      19,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      31,
+      20,
+      0,
+      19,
+      0,
+      "CUSTOM"
+    ],
+    [
+      35,
+      21,
+      0,
+      19,
+      2,
+      "STRING"
+    ],
+    [
+      37,
+      27,
+      0,
+      19,
+      3,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": {
+        "0": -548.1595103335015,
+        "1": -76.50521090052328
+      }
+    }
+  },
+  "version": 0.4
+}
