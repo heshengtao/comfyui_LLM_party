@@ -790,7 +790,7 @@ class LLM:
         return hash_value
 
 
-def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="user"):
+def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="user",temperature=0.7):
     if role == "observation":
         history.append({"role": role, "content": "Observation: " + user_prompt.strip()})
     else:
@@ -807,7 +807,7 @@ def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="u
     elif isinstance(stop_tokens_id, list):
         stop_token_ids.extend(stop_tokens_id)
     generated_ids = model.generate(
-        model_inputs.input_ids, max_new_tokens=max_length, eos_token_id=stop_token_ids  # Add the eos_token_id parameter
+        model_inputs.input_ids, max_new_tokens=max_length, eos_token_id=stop_token_ids,temperature=temperature  # Add the eos_token_id parameter
     )
     generated_ids = [
         output_ids[len(input_ids) :] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
@@ -1036,7 +1036,7 @@ class LLM_local:
                     },
                 ),
                 "model_type": (
-                    ["GLM", "llama", "Qwen","llaVa"],
+                    ["GLM", "llama", "Qwen","llaVa","llama-guff"],
                     {
                         "default": "GLM",
                     },
@@ -1235,11 +1235,7 @@ class LLM_local:
                             if model_type == "GLM":
                                 message["content"] += "\n" + "你可以使用以下工具："
                                 message["tools"] = tools_list
-                            elif model_type == "llama":
-                                message["content"] += "\n" + GPT_INSTRUCTION + "\n"
-                            elif model_type == "Qwen":
-                                message["content"] += "\n" + GPT_INSTRUCTION + "\n"
-                            elif model_type == "llaVa":
+                            elif model_type in ["llama", "Qwen", "llaVa","llama-guff"]:
                                 message["content"] += "\n" + GPT_INSTRUCTION + "\n"
                         else:
                             if "tools" in message:
@@ -1270,7 +1266,7 @@ class LLM_local:
                 
                 
                 #获得model存放的设备
-                if model_type != "llaVa":
+                if model_type not in  ["llaVa","llama-guff"]:
                     device = next(model.parameters()).device
                 if model_type == "GLM":
                     response, history = model.chat(
@@ -1290,7 +1286,7 @@ class LLM_local:
                             )
                 elif model_type in ["llama", "Qwen"]:
                     response, history = llm_chat(
-                        model, tokenizer, user_prompt, history, device, max_length
+                        model, tokenizer, user_prompt, history, device, max_length,temperature=temperature
                     )
                     while "Action Input:" in response:
                         print(response)
@@ -1302,8 +1298,61 @@ class LLM_local:
                         result = dispatch_tool(Action, ActionInput)
                         print(result)
                         response, history = llm_chat(
-                            model, tokenizer, result, history, device, max_length, role="observation"
+                            model, tokenizer, result, history, device, max_length, role="observation",temperature=temperature
                         )
+                elif model_type == "llama-guff":
+                    from llama_cpp import Llama
+                    history.append({
+                        "role": "user",
+                        "content": user_prompt.strip()
+                    })
+                    response= model.create_chat_completion(
+                        messages = history,
+                        stop=["/INST","[/INST]","Observation:","<PROMPT>","<|eot_id|>","</s>","[End Conversation]","[END]"],
+                        frequency_penalty=1,
+                        presence_penalty=1,
+                        repeat_penalty=1.1,
+                        max_tokens=max_length,
+                        temperature=temperature,
+                    )
+                    res=response['choices'][0]['message']['content'].strip()
+                    print(res)
+                    while "Action Input:" in res:
+                        history.append({
+                            "role": "assistant",
+                            "content": res
+                        })
+                        print(res)
+                        pattern_A = r"Action: (.*?)\n"
+                        pattern_B = r"Action Input: (.*?)\n"
+                        Action = re.search(pattern_A, res).group(1)
+                        ActionInput = re.search(pattern_B, res).group(1)
+                        ActionInput = json.loads(ActionInput.replace("'", '"'))
+                        result = dispatch_tool(Action, ActionInput)
+                        history.append({
+                            "role": "observation",
+                            "content": result
+                        })
+                        print(result)
+                        response= model.create_chat_completion(
+                            messages = history,
+                            stop=["/INST","[/INST]","Observation:","<PROMPT>","<|eot_id|>","</s>","[End Conversation]","[END]"],
+                            frequency_penalty=1,
+                            presence_penalty=0,
+                            repeat_penalty=1.1,
+                            max_tokens=max_length,
+                            temperature=temperature,
+                        )
+                        res=response['choices'][0]['message']['content'].strip()
+                    if "Final Answer: " in res:
+                        pattern_C = r"Final Answer: (.*)"
+                        FinalAnswer = re.search(pattern_C, res).group(1)
+                        res = FinalAnswer
+                    history.append({
+                        "role": "assistant",
+                        "content": res
+                    })
+                    response=res
                 elif model_type == "llaVa":
                     if image is not None:
                         pil_image = ToPILImage()(image[0].permute(2, 0, 1))
@@ -1326,7 +1375,7 @@ class LLM_local:
                             messages = history,
                             temperature = temperature,
                             max_tokens=max_length,
-                            frequency_penalty=0,
+                            frequency_penalty=1,
                             presence_penalty=0,
                             repeat_penalty=1.1,
                             stop=["<|eot_id|>","[/INST]","</s>","[End Conversation]"],
@@ -1348,8 +1397,8 @@ class LLM_local:
                             messages = history,
                             temperature = temperature,
                             max_tokens=max_length,
-                            frequency_penalty=0,
-                            presence_penalty=0,
+                            frequency_penalty=1,
+                            presence_penalty=1,
                             repeat_penalty=1.1,
                             stop=["<|eot_id|>","[/INST]","</s>","[End Conversation]"],
                         )
@@ -1442,8 +1491,32 @@ class LLavaLoader:
         llm = Llama(model_path = ckpt_path, chat_handler=clip,offload_kqv=True, f16_kv=True, use_mlock=False, embedding=False, n_batch=1024, last_n_tokens_size=1024, verbose=True, seed=42, n_ctx = max_ctx, n_gpu_layers=gpu_layers, n_threads=n_threads, logits_all=True, echo=False) 
         return (llm, ) 
 
+class llama_guff_loader:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": { 
+              "model_path": ("STRING", {"default": ""}),   
+              "max_ctx": ("INT", {"default": 512, "min": 300, "max": 100000, "step": 64}),
+              "gpu_layers": ("INT", {"default": 41, "min": 0, "max": 100, "step": 1}),
+              "n_threads": ("INT", {"default": 16, "min": 1, "max": 100, "step": 1}),
+                             }}
+                
+    
+    RETURN_TYPES = ("CUSTOM",)
+    RETURN_NAMES = ("model",)
+    FUNCTION = "load_llama_checkpoint"
 
-
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    def load_llama_checkpoint(self, model_path, max_ctx, gpu_layers, n_threads):
+        from llama_cpp import Llama
+        model = Llama(
+            model_path=model_path,
+            chat_format="llama-2",
+            n_ctx=max_ctx,
+            n_threads=n_threads,
+            n_gpu_layers=gpu_layers
+        )
+        return (model, )
 
 NODE_CLASS_MAPPINGS = {
     "LLM": LLM,
@@ -1451,6 +1524,7 @@ NODE_CLASS_MAPPINGS = {
     "LLM_api_loader":LLM_api_loader,
     "LLM_local_loader":LLM_local_loader,
     "LLavaLoader":LLavaLoader,
+    "llama_guff_loader":llama_guff_loader,
     "load_embeddings": load_embeddings,
     "load_file": load_file,
     "load_persona": load_persona,
@@ -1524,6 +1598,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "LLM_api_loader": "API大语言模型加载器(LLM_api_loader)",
     "LLM_local_loader": "本地大语言模型加载器(LLM_local_loader)",
     "LLavaLoader": "LVM加载器(LVM_Loader)",
+    "llama_guff_loader": "llama-guff加载器(llama_guff_loader)",
     "load_embeddings": "词嵌入模型加载器(embeddings_Loader)",
     "load_file": "加载文件(load_file)",
     "load_persona": "加载人格面具(load_persona)",
