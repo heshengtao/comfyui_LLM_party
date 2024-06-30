@@ -159,9 +159,16 @@ def check_and_uninstall_websocket():
         except subprocess.CalledProcessError as e:
             print("重新安装过程中出现错误：", e)
 
+def init_temp():
+    # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
+    current_dir_path = os.path.dirname(os.path.abspath(__file__))
+    os.makedirs(os.path.join(current_dir_path, "temp"), exist_ok=True)
+
+
 check_and_uninstall_websocket()
 
 # 调用函数
 copy_js_files()
 system_info = get_system_info()
 install_llama(system_info)
+init_temp()
