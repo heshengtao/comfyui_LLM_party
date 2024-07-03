@@ -127,6 +127,7 @@ def another_llm(id, type, question):
             is_locked,
             max_length,
             system_prompt_input,
+            user_prompt_input, 
             tools,
             file_content,
             images,
@@ -145,6 +146,7 @@ def another_llm(id, type, question):
             is_locked,
             max_length,
             system_prompt_input,
+            user_prompt_input, 
             tools,
             file_content,
             images,
@@ -172,6 +174,7 @@ def another_llm(id, type, question):
             is_memory,
             is_locked,
             system_prompt_input,
+            user_prompt_input, 
             tools,
             file_content,
             image,
@@ -190,6 +193,7 @@ def another_llm(id, type, question):
             is_memory,
             is_locked,
             system_prompt_input,
+            user_prompt_input, 
             tools,
             file_content,
             image,
@@ -490,6 +494,7 @@ class LLM:
             },
             "optional": {
                 "system_prompt_input": ("STRING", {"forceInput": True}),
+                "user_prompt_input": ("STRING", {"forceInput": True}),
                 "tools": ("STRING", {"forceInput": True}),
                 "file_content": ("STRING", {"forceInput": True}),
 
@@ -536,6 +541,7 @@ class LLM:
         is_locked,
         max_length,
         system_prompt_input="",
+        user_prompt_input="",
         tools=None,
         file_content=None,
         images=None,
@@ -553,6 +559,7 @@ class LLM:
             is_locked,
             max_length,
             system_prompt_input,
+            user_prompt_input,
             tools,
             file_content,
             images,
@@ -560,6 +567,10 @@ class LLM:
             conversation_rounds,
             historical_record,
         ]
+        if user_prompt is None:
+            user_prompt = user_prompt_input
+        else:
+            user_prompt = user_prompt +user_prompt_input 
         if historical_record != "":
             temp_path = os.path.join(current_dir_path, "temp")
             self.prompt_path = os.path.join(temp_path, historical_record)
@@ -1051,6 +1062,7 @@ class LLM_local:
                 "tokenizer":("CUSTOM",{}),
                 "image": ("IMAGE", {"forceInput": True}),
                 "system_prompt_input": ("STRING", {"forceInput": True}),
+                "user_prompt_input": ("STRING", {"forceInput": True}),
                 "tools": ("STRING", {"forceInput": True}),
                 "file_content": ("STRING", {"forceInput": True}),
                 "conversation_rounds": ("INT", {"default": 100, "min": 1, "max": 10000}),
@@ -1090,6 +1102,7 @@ class LLM_local:
         is_memory="enable",
         is_locked="disable",
         system_prompt_input="",
+        user_prompt_input="",
         tools=None,
         file_content=None,
         image=None,
@@ -1107,12 +1120,17 @@ class LLM_local:
             is_memory,
             is_locked,
             system_prompt_input,
+            user_prompt_input,
             tools,
             file_content,
             image,
             conversation_rounds,
             historical_record,
         ]
+        if user_prompt is None:
+            user_prompt = user_prompt_input
+        else:
+            user_prompt = user_prompt +user_prompt_input 
         if historical_record != "":
             temp_path = os.path.join(current_dir_path, "temp")
             self.prompt_path = os.path.join(temp_path, historical_record)
