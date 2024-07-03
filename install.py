@@ -67,6 +67,16 @@ def copy_js_files():
     # 确保目标文件夹存在
     os.makedirs(target_folder, exist_ok=True)
 
+    #清空目标文件夹里所有文件
+    for filename in os.listdir(target_folder):
+        file_path = os.path.join(target_folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+                
+        except Exception as e:
+            print(f"无法删除文件 {file_path}: {e}")
+
     # 获取当前文件夹中web子文件夹下的所有.js文件
     js_files = [f for f in os.listdir(os.path.join(current_folder, "web")) if f.endswith(".js")]
 
