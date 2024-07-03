@@ -1,6 +1,6 @@
 {
-  "last_node_id": 19,
-  "last_link_id": 22,
+  "last_node_id": 20,
+  "last_link_id": 25,
   "nodes": [
     {
       "id": 17,
@@ -20,7 +20,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 21,
+          "link": 25,
           "widget": {
             "name": "text"
           },
@@ -46,104 +46,6 @@
       "bgcolor": "#355"
     },
     {
-      "id": 18,
-      "type": "LLM",
-      "pos": [
-        610,
-        290
-      ],
-      "size": [
-        397.59446563720564,
-        381.1717468261711
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 22,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 20,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            21
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。你可以调用new interpreter来执行代码，该解释器会自动安装要导入的第三方库",
-        "请帮我写一个Python代码，有如下功能：查询维基百科上的人工智能相关的内容。然后执行这个代码",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
       "id": 16,
       "type": "new_interpreter_tool",
       "pos": [
@@ -162,7 +64,7 @@
           "name": "tool",
           "type": "STRING",
           "links": [
-            20
+            24
           ],
           "shape": 3,
           "label": "tool",
@@ -197,7 +99,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            22
+            23
           ],
           "shape": 3,
           "label": "model",
@@ -214,36 +116,158 @@
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
+    },
+    {
+      "id": 20,
+      "type": "LLM",
+      "pos": [
+        610,
+        290
+      ],
+      "size": [
+        426.0537872720049,
+        495.95027788149275
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 23,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 24,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            25
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。你可以调用new interpreter来执行代码，该解释器会自动安装要导入的第三方库 ",
+        "请帮我写一个Python代码，有如下功能：查询维基百科上的人工智能相关的内容。然后执行这个代码",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
     }
   ],
   "links": [
     [
+      23,
+      19,
+      0,
       20,
+      0,
+      "CUSTOM"
+    ],
+    [
+      24,
       16,
       0,
-      18,
-      3,
+      20,
+      4,
       "STRING"
     ],
     [
-      21,
-      18,
+      25,
+      20,
       0,
       17,
       0,
       "STRING"
-    ],
-    [
-      22,
-      19,
-      0,
-      18,
-      0,
-      "CUSTOM"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": {
+        "0": -94.54379581692662,
+        "1": 40.62310041440583
+      }
+    }
+  },
   "version": 0.4
 }

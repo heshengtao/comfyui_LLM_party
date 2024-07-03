@@ -1,6 +1,6 @@
 {
-  "last_node_id": 29,
-  "last_link_id": 40,
+  "last_node_id": 30,
+  "last_link_id": 44,
   "nodes": [
     {
       "id": 20,
@@ -21,7 +21,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            31
+            41
           ],
           "shape": 3,
           "label": "model",
@@ -55,7 +55,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 30,
+          "link": 44,
           "widget": {
             "name": "text"
           },
@@ -80,113 +80,6 @@
       ]
     },
     {
-      "id": 19,
-      "type": "LLM",
-      "pos": [
-        940,
-        260
-      ],
-      "size": {
-        "0": 396.7934265136719,
-        "1": 404.169189453125
-      },
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 31,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": 35,
-          "widget": {
-            "name": "system_prompt_input"
-          },
-          "label": "system_prompt_input"
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 40,
-          "widget": {
-            "name": "tools"
-          },
-          "label": "tools"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            30
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": [],
-          "shape": 3,
-          "label": "history",
-          "slot_index": 1
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": null,
-          "shape": 3,
-          "label": "image"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "",
-        "那来一个难一点的，曹操是孙权的什么亲戚关系",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ]
-    },
-    {
       "id": 29,
       "type": "KG_json_toolkit_developer",
       "pos": [
@@ -205,7 +98,7 @@
           "name": "tools",
           "type": "STRING",
           "links": [
-            40
+            43
           ],
           "shape": 3,
           "label": "tools",
@@ -251,7 +144,7 @@
           "name": "system_prompt",
           "type": "STRING",
           "links": [
-            35
+            42
           ],
           "shape": 3,
           "label": "system_prompt",
@@ -266,39 +159,153 @@
         true,
         ""
       ]
+    },
+    {
+      "id": 30,
+      "type": "LLM",
+      "pos": [
+        940,
+        260
+      ],
+      "size": [
+        411.1494612648378,
+        483.9787482988131
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 41,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 42,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 43,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "那来一个难一点的，曹操是孙权的什么亲戚关系",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
     }
   ],
   "links": [
     [
-      30,
-      19,
-      0,
-      11,
-      0,
-      "STRING"
-    ],
-    [
-      31,
+      41,
       20,
       0,
-      19,
+      30,
       0,
       "CUSTOM"
     ],
     [
-      35,
+      42,
       21,
       0,
-      19,
+      30,
       2,
       "STRING"
     ],
     [
-      40,
+      43,
       29,
       0,
-      19,
-      3,
+      30,
+      4,
+      "STRING"
+    ],
+    [
+      44,
+      30,
+      0,
+      11,
+      0,
       "STRING"
     ]
   ],

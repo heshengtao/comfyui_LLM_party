@@ -1,6 +1,6 @@
 {
-  "last_node_id": 25,
-  "last_link_id": 36,
+  "last_node_id": 26,
+  "last_link_id": 40,
   "nodes": [
     {
       "id": 20,
@@ -21,7 +21,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            31
+            37
           ],
           "shape": 3,
           "label": "model",
@@ -67,7 +67,7 @@
           "name": "system_prompt",
           "type": "STRING",
           "links": [
-            35
+            38
           ],
           "shape": 3,
           "label": "system_prompt",
@@ -102,7 +102,7 @@
           "name": "tools",
           "type": "STRING",
           "links": [
-            33
+            39
           ],
           "shape": 3,
           "label": "tools",
@@ -135,7 +135,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 30,
+          "link": 40,
           "widget": {
             "name": "text"
           },
@@ -160,16 +160,16 @@
       ]
     },
     {
-      "id": 19,
+      "id": 26,
       "type": "LLM",
       "pos": [
         940,
         260
       ],
-      "size": {
-        "0": 396.7934265136719,
-        "1": 404.169189453125
-      },
+      "size": [
+        400.24361199413534,
+        461.06699274647633
+      ],
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -177,7 +177,7 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 31,
+          "link": 37,
           "label": "model"
         },
         {
@@ -189,20 +189,26 @@
         {
           "name": "system_prompt_input",
           "type": "STRING",
-          "link": 35,
+          "link": 38,
           "widget": {
             "name": "system_prompt_input"
-          },
-          "label": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
         },
         {
           "name": "tools",
           "type": "STRING",
-          "link": 33,
+          "link": 39,
           "widget": {
             "name": "tools"
-          },
-          "label": "tools"
+          }
         },
         {
           "name": "file_content",
@@ -210,8 +216,7 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          },
-          "label": "file_content"
+          }
         }
       ],
       "outputs": [
@@ -219,7 +224,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            30
+            40
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -228,10 +233,9 @@
         {
           "name": "history",
           "type": "STRING",
-          "links": [],
+          "links": null,
           "shape": 3,
-          "label": "history",
-          "slot_index": 1
+          "label": "history"
         },
         {
           "name": "tool",
@@ -253,51 +257,54 @@
       },
       "widgets_values": [
         "",
-        "42",
+        "你好",
         0.7,
         "enable",
         "disable",
         "disable",
         "enable",
-        2048,
+        1920,
         "",
         "",
         "",
+        "",
+        "",
+        100,
         ""
       ]
     }
   ],
   "links": [
     [
-      30,
-      19,
-      0,
-      11,
-      0,
-      "STRING"
-    ],
-    [
-      31,
+      37,
       20,
       0,
-      19,
+      26,
       0,
       "CUSTOM"
     ],
     [
-      33,
-      23,
+      38,
+      21,
       0,
-      19,
-      3,
+      26,
+      2,
       "STRING"
     ],
     [
-      35,
-      21,
+      39,
+      23,
       0,
-      19,
-      2,
+      26,
+      4,
+      "STRING"
+    ],
+    [
+      40,
+      26,
+      0,
+      11,
+      0,
       "STRING"
     ]
   ],
@@ -307,8 +314,8 @@
     "ds": {
       "scale": 1,
       "offset": {
-        "0": -531.2436119941354,
-        "1": -101.7336187230388
+        "0": -399.24361199413545,
+        "1": -49.0669927464763
       }
     }
   },

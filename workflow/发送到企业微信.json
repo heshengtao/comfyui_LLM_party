@@ -1,6 +1,6 @@
 {
-  "last_node_id": 72,
-  "last_link_id": 66,
+  "last_node_id": 73,
+  "last_link_id": 70,
   "nodes": [
     {
       "id": 61,
@@ -20,7 +20,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 57,
+          "link": 69,
           "widget": {
             "name": "text"
           },
@@ -65,7 +65,7 @@
           "name": "tool",
           "type": "STRING",
           "links": [
-            63
+            68
           ],
           "shape": 3,
           "label": "tool",
@@ -102,7 +102,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            64
+            67
           ],
           "shape": 3,
           "label": "model",
@@ -121,16 +121,53 @@
       "bgcolor": "#355"
     },
     {
-      "id": 48,
+      "id": 72,
+      "type": "work_wechat",
+      "pos": [
+        1253,
+        391
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "link": 70,
+          "widget": {
+            "name": "content"
+          },
+          "label": "content"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "work_wechat"
+      },
+      "widgets_values": [
+        "hello world",
+        true,
+        "markdown",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 73,
       "type": "LLM",
       "pos": [
         754,
         221
       ],
-      "size": {
-        "0": 411.9311828613281,
-        "1": 386.9210205078125
-      },
+      "size": [
+        404.1469980420052,
+        478.1980801385922
+      ],
       "flags": {},
       "order": 2,
       "mode": 0,
@@ -138,7 +175,7 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 64,
+          "link": 67,
           "label": "model"
         },
         {
@@ -153,17 +190,23 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
-          },
-          "label": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
         },
         {
           "name": "tools",
           "type": "STRING",
-          "link": 63,
+          "link": 68,
           "widget": {
             "name": "tools"
-          },
-          "label": "tools"
+          }
         },
         {
           "name": "file_content",
@@ -171,8 +214,7 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          },
-          "label": "file_content"
+          }
         }
       ],
       "outputs": [
@@ -180,7 +222,8 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            57
+            69,
+            70
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -189,12 +232,9 @@
         {
           "name": "history",
           "type": "STRING",
-          "links": [
-            66
-          ],
+          "links": null,
           "shape": 3,
-          "label": "history",
-          "slot_index": 1
+          "label": "history"
         },
         {
           "name": "tool",
@@ -218,85 +258,50 @@
         "你一个强大的人工智能助手。",
         "你好，帮我发一个快速排序代码到企业微信",
         0.7,
-        "disable",
+        "enable",
         "disable",
         "disable",
         "enable",
-        2048,
+        1920,
         "",
         "",
         "",
+        "",
+        "",
+        100,
         ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 72,
-      "type": "work_wechat",
-      "pos": [
-        1253,
-        391
-      ],
-      "size": [
-        315,
-        130
-      ],
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "content",
-          "type": "STRING",
-          "link": 66,
-          "widget": {
-            "name": "content"
-          }
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "work_wechat"
-      },
-      "widgets_values": [
-        "hello world",
-        true,
-        "markdown",
-        ""
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
+      ]
     }
   ],
   "links": [
     [
-      57,
-      48,
+      67,
+      70,
+      0,
+      73,
+      0,
+      "CUSTOM"
+    ],
+    [
+      68,
+      69,
+      0,
+      73,
+      4,
+      "STRING"
+    ],
+    [
+      69,
+      73,
       0,
       61,
       0,
       "STRING"
     ],
     [
-      63,
-      69,
-      0,
-      48,
-      3,
-      "STRING"
-    ],
-    [
-      64,
       70,
+      73,
       0,
-      48,
-      0,
-      "CUSTOM"
-    ],
-    [
-      66,
-      48,
-      1,
       72,
       0,
       "STRING"
@@ -304,6 +309,14 @@
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": {
+        "0": -199.83794375400817,
+        "1": 50.61401869397169
+      }
+    }
+  },
   "version": 0.4
 }

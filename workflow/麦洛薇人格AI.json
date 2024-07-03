@@ -1,6 +1,6 @@
 {
-  "last_node_id": 27,
-  "last_link_id": 37,
+  "last_node_id": 28,
+  "last_link_id": 40,
   "nodes": [
     {
       "id": 20,
@@ -21,7 +21,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            31
+            38
           ],
           "shape": 3,
           "label": "model",
@@ -49,13 +49,13 @@
         "1": 287.0350646972656
       },
       "flags": {},
-      "order": 4,
+      "order": 1,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 30,
+          "link": null,
           "widget": {
             "name": "text"
           },
@@ -91,7 +91,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 1,
+      "order": 2,
       "mode": 0,
       "inputs": [
         {
@@ -109,7 +109,7 @@
           "name": "system_prompt",
           "type": "STRING",
           "links": [
-            35
+            39
           ],
           "shape": 3,
           "label": "system_prompt",
@@ -137,17 +137,18 @@
         "1": 106
       },
       "flags": {},
-      "order": 2,
+      "order": 3,
       "mode": 0,
       "outputs": [
         {
           "name": "tools",
           "type": "STRING",
           "links": [
-            37
+            40
           ],
           "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "label": "tools"
         }
       ],
       "properties": {
@@ -160,24 +161,24 @@
       ]
     },
     {
-      "id": 19,
+      "id": 28,
       "type": "LLM",
       "pos": [
         940,
         260
       ],
-      "size": {
-        "0": 396.7934265136719,
-        "1": 422
-      },
+      "size": [
+        397.15951033350166,
+        457.83858492396075
+      ],
       "flags": {},
-      "order": 3,
+      "order": 4,
       "mode": 0,
       "inputs": [
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 31,
+          "link": 38,
           "label": "model"
         },
         {
@@ -189,20 +190,26 @@
         {
           "name": "system_prompt_input",
           "type": "STRING",
-          "link": 35,
+          "link": 39,
           "widget": {
             "name": "system_prompt_input"
-          },
-          "label": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
         },
         {
           "name": "tools",
           "type": "STRING",
-          "link": 37,
+          "link": 40,
           "widget": {
             "name": "tools"
-          },
-          "label": "tools"
+          }
         },
         {
           "name": "file_content",
@@ -210,28 +217,23 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          },
-          "label": "file_content"
+          }
         }
       ],
       "outputs": [
         {
           "name": "assistant_response",
           "type": "STRING",
-          "links": [
-            30
-          ],
+          "links": null,
           "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
+          "label": "assistant_response"
         },
         {
           "name": "history",
           "type": "STRING",
-          "links": [],
+          "links": null,
           "shape": 3,
-          "label": "history",
-          "slot_index": 1
+          "label": "history"
         },
         {
           "name": "tool",
@@ -259,47 +261,40 @@
         "disable",
         "disable",
         "enable",
-        2048,
+        1920,
         "",
         "",
         "",
         "",
-        5,
+        "",
+        100,
         ""
       ]
     }
   ],
   "links": [
     [
-      30,
-      19,
-      0,
-      11,
-      0,
-      "STRING"
-    ],
-    [
-      31,
+      38,
       20,
       0,
-      19,
+      28,
       0,
       "CUSTOM"
     ],
     [
-      35,
+      39,
       21,
       0,
-      19,
+      28,
       2,
       "STRING"
     ],
     [
-      37,
+      40,
       27,
       0,
-      19,
-      3,
+      28,
+      4,
       "STRING"
     ]
   ],
@@ -309,8 +304,8 @@
     "ds": {
       "scale": 1,
       "offset": {
-        "0": -548.1595103335015,
-        "1": -76.50521090052328
+        "0": -380.15951033350154,
+        "1": 1.4947890994767192
       }
     }
   },

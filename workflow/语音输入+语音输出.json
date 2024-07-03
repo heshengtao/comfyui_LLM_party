@@ -1,27 +1,194 @@
 {
-  "last_node_id": 27,
-  "last_link_id": 37,
+  "last_node_id": 28,
+  "last_link_id": 41,
   "nodes": [
     {
-      "id": 20,
-      "type": "LLM_api_loader",
+      "id": 24,
+      "type": "openai_tts",
       "pos": [
-        618,
-        179
+        1346,
+        259
       ],
       "size": {
         "0": 315,
-        "1": 106
+        "1": 178
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 40,
+          "widget": {
+            "name": "input_string"
+          },
+          "slot_index": 0,
+          "label": "input_string"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "audio"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "openai_tts"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "tts-1",
+        "alloy",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 26,
+      "type": "show_text_party",
+      "pos": [
+        1350,
+        480
+      ],
+      "size": {
+        "0": 312.29107666015625,
+        "1": 185.43215942382812
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 41,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "你好呀！有什么我可以帮助你的吗？"
+      ]
+    },
+    {
+      "id": 21,
+      "type": "listen_audio",
+      "pos": [
+        230,
+        333
+      ],
+      "size": {
+        "0": 239.18804931640625,
+        "1": 58
       },
       "flags": {},
       "order": 0,
       "mode": 0,
       "outputs": [
         {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            32
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "audio"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "listen_audio"
+      },
+      "widgets_values": [
+        "shift"
+      ]
+    },
+    {
+      "id": 27,
+      "type": "show_text_party",
+      "pos": [
+        512,
+        511
+      ],
+      "size": {
+        "0": 322.2001953125,
+        "1": 170.9775848388672
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "你好呀"
+      ]
+    },
+    {
+      "id": 20,
+      "type": "LLM_api_loader",
+      "pos": [
+        499,
+        161
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            31
+            38
           ],
           "shape": 3,
           "label": "model",
@@ -38,57 +205,68 @@
       ]
     },
     {
-      "id": 25,
-      "type": "play_audio",
+      "id": 22,
+      "type": "openai_whisper",
       "pos": [
-        1675,
-        263
+        512,
+        337
       ],
       "size": {
-        "0": 210,
-        "1": 26
+        "0": 315,
+        "1": 106
       },
       "flags": {},
-      "order": 7,
+      "order": 2,
       "mode": 0,
       "inputs": [
         {
           "name": "audio",
           "type": "AUDIO",
-          "link": 35
+          "link": 32,
+          "label": "audio"
         }
       ],
       "outputs": [
         {
-          "name": "audio",
-          "type": "AUDIO",
-          "links": null,
-          "shape": 3
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            37,
+            39
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "text"
         }
       ],
       "properties": {
-        "Node name for S&R": "play_audio"
-      }
+        "Node name for S&R": "openai_whisper"
+      },
+      "widgets_values": [
+        true,
+        "",
+        ""
+      ]
     },
     {
-      "id": 19,
+      "id": 28,
       "type": "LLM",
       "pos": [
-        940,
-        260
+        889,
+        248
       ],
-      "size": {
-        "0": 396.7934265136719,
-        "1": 404.169189453125
-      },
+      "size": [
+        393.4008792678578,
+        458.8365291367379
+      ],
       "flags": {},
-      "order": 3,
+      "order": 4,
       "mode": 0,
       "inputs": [
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 31,
+          "link": 38,
           "label": "model"
         },
         {
@@ -103,8 +281,15 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
-          },
-          "label": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "user_prompt_input"
+          }
         },
         {
           "name": "tools",
@@ -112,8 +297,7 @@
           "link": null,
           "widget": {
             "name": "tools"
-          },
-          "label": "tools"
+          }
         },
         {
           "name": "file_content",
@@ -121,17 +305,7 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          },
-          "label": "file_content"
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 33,
-          "widget": {
-            "name": "user_prompt"
-          },
-          "slot_index": 5
+          }
         }
       ],
       "outputs": [
@@ -139,8 +313,8 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            34,
-            36
+            40,
+            41
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -164,7 +338,8 @@
           "name": "image",
           "type": "IMAGE",
           "links": null,
-          "shape": 3
+          "shape": 3,
+          "label": "image"
         }
       ],
       "properties": {
@@ -172,231 +347,59 @@
       },
       "widgets_values": [
         "你一个强大的人工智能助手。",
-        "你好",
+        "",
         0.7,
-        "disable",
+        "enable",
         "disable",
         "disable",
         "enable",
-        2048,
+        1920,
         "",
         "",
         "",
+        "",
+        "",
+        100,
         ""
       ]
     },
     {
-      "id": 24,
-      "type": "openai_tts",
+      "id": 25,
+      "type": "play_audio",
       "pos": [
-        1346,
-        259
+        1712,
+        270
       ],
       "size": {
-        "0": 315,
-        "1": 178
+        "0": 210,
+        "1": 26
       },
       "flags": {},
-      "order": 5,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
-          "name": "input_string",
-          "type": "STRING",
-          "link": 34,
-          "widget": {
-            "name": "input_string"
-          },
-          "slot_index": 0
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 35,
+          "label": "audio"
         }
       ],
       "outputs": [
         {
           "name": "audio",
           "type": "AUDIO",
-          "links": [
-            35
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "openai_tts"
-      },
-      "widgets_values": [
-        true,
-        "",
-        "tts-1",
-        "alloy",
-        "",
-        ""
-      ]
-    },
-    {
-      "id": 22,
-      "type": "openai_whisper",
-      "pos": [
-        621,
-        334
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "audio",
-          "type": "AUDIO",
-          "link": 32
-        }
-      ],
-      "outputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "links": [
-            33,
-            37
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "openai_whisper"
-      },
-      "widgets_values": [
-        true,
-        "",
-        ""
-      ]
-    },
-    {
-      "id": 27,
-      "type": "show_text_party",
-      "pos": [
-        615,
-        485
-      ],
-      "size": {
-        "0": 322.2001953125,
-        "1": 170.9775848388672
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 37,
-          "widget": {
-            "name": "text"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
           "links": null,
-          "shape": 6
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        "",
-        "你好呀"
-      ]
-    },
-    {
-      "id": 26,
-      "type": "show_text_party",
-      "pos": [
-        1350,
-        480
-      ],
-      "size": {
-        "0": 312.29107666015625,
-        "1": 185.43215942382812
-      },
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 36,
-          "widget": {
-            "name": "text"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        "",
-        "你好呀！有什么我可以帮助你的吗？"
-      ]
-    },
-    {
-      "id": 21,
-      "type": "listen_audio",
-      "pos": [
-        369,
-        343
-      ],
-      "size": {
-        "0": 239.18804931640625,
-        "1": 58
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "audio",
-          "type": "AUDIO",
-          "links": [
-            32
-          ],
           "shape": 3,
-          "slot_index": 0
+          "label": "audio"
         }
       ],
       "properties": {
-        "Node name for S&R": "listen_audio"
-      },
-      "widgets_values": [
-        "shift"
-      ]
+        "Node name for S&R": "play_audio"
+      }
     }
   ],
   "links": [
-    [
-      31,
-      20,
-      0,
-      19,
-      0,
-      "CUSTOM"
-    ],
     [
       32,
       21,
@@ -404,22 +407,6 @@
       22,
       0,
       "AUDIO"
-    ],
-    [
-      33,
-      22,
-      0,
-      19,
-      5,
-      "STRING"
-    ],
-    [
-      34,
-      19,
-      0,
-      24,
-      0,
-      "STRING"
     ],
     [
       35,
@@ -430,18 +417,42 @@
       "AUDIO"
     ],
     [
-      36,
-      19,
-      0,
-      26,
-      0,
-      "STRING"
-    ],
-    [
       37,
       22,
       0,
       27,
+      0,
+      "STRING"
+    ],
+    [
+      38,
+      20,
+      0,
+      28,
+      0,
+      "CUSTOM"
+    ],
+    [
+      39,
+      22,
+      0,
+      28,
+      3,
+      "STRING"
+    ],
+    [
+      40,
+      28,
+      0,
+      24,
+      0,
+      "STRING"
+    ],
+    [
+      41,
+      28,
+      0,
+      26,
       0,
       "STRING"
     ]
@@ -450,10 +461,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.8264462809917354,
+      "scale": 0.6830134553650705,
       "offset": {
-        "0": -345.0017251041514,
-        "1": 14.361091379952569
+        "0": 58.420669786097775,
+        "1": 219.98933981467815
       }
     }
   },

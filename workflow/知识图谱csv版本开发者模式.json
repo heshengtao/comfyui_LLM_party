@@ -1,6 +1,6 @@
 {
-  "last_node_id": 31,
-  "last_link_id": 42,
+  "last_node_id": 32,
+  "last_link_id": 46,
   "nodes": [
     {
       "id": 20,
@@ -21,7 +21,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            31
+            43
           ],
           "shape": 3,
           "label": "model",
@@ -55,7 +55,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 30,
+          "link": 46,
           "widget": {
             "name": "text"
           },
@@ -109,7 +109,7 @@
           "name": "system_prompt",
           "type": "STRING",
           "links": [
-            35
+            44
           ],
           "shape": 3,
           "label": "system_prompt",
@@ -144,7 +144,7 @@
           "name": "tools",
           "type": "STRING",
           "links": [
-            42
+            45
           ],
           "shape": 3,
           "label": "tools",
@@ -161,16 +161,16 @@
       ]
     },
     {
-      "id": 19,
+      "id": 32,
       "type": "LLM",
       "pos": [
         940,
         260
       ],
-      "size": {
-        "0": 396.7934265136719,
-        "1": 404.169189453125
-      },
+      "size": [
+        403.2188533445935,
+        468.49697284160425
+      ],
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -178,7 +178,7 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 31,
+          "link": 43,
           "label": "model"
         },
         {
@@ -190,20 +190,26 @@
         {
           "name": "system_prompt_input",
           "type": "STRING",
-          "link": 35,
+          "link": 44,
           "widget": {
             "name": "system_prompt_input"
-          },
-          "label": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
         },
         {
           "name": "tools",
           "type": "STRING",
-          "link": 42,
+          "link": 45,
           "widget": {
             "name": "tools"
-          },
-          "label": "tools"
+          }
         },
         {
           "name": "file_content",
@@ -211,8 +217,7 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          },
-          "label": "file_content"
+          }
         }
       ],
       "outputs": [
@@ -220,7 +225,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            30
+            46
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -229,10 +234,9 @@
         {
           "name": "history",
           "type": "STRING",
-          "links": [],
+          "links": null,
           "shape": 3,
-          "label": "history",
-          "slot_index": 1
+          "label": "history"
         },
         {
           "name": "tool",
@@ -260,45 +264,48 @@
         "disable",
         "disable",
         "enable",
-        2048,
+        1920,
         "",
         "",
         "",
+        "",
+        "",
+        100,
         ""
       ]
     }
   ],
   "links": [
     [
-      30,
-      19,
-      0,
-      11,
-      0,
-      "STRING"
-    ],
-    [
-      31,
+      43,
       20,
       0,
-      19,
+      32,
       0,
       "CUSTOM"
     ],
     [
-      35,
+      44,
       21,
       0,
-      19,
+      32,
       2,
       "STRING"
     ],
     [
-      42,
+      45,
       31,
       0,
-      19,
-      3,
+      32,
+      4,
+      "STRING"
+    ],
+    [
+      46,
+      32,
+      0,
+      11,
+      0,
       "STRING"
     ]
   ],
@@ -306,10 +313,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1.1,
+      "scale": 0.9090909090909091,
       "offset": {
-        "0": -479.48549763170314,
-        "1": -74.73634440144102
+        "0": -305.18549763170296,
+        "1": 68.63638287128637
       }
     }
   },

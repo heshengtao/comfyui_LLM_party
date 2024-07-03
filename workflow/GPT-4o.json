@@ -1,6 +1,6 @@
 {
-  "last_node_id": 20,
-  "last_link_id": 31,
+  "last_node_id": 21,
+  "last_link_id": 34,
   "nodes": [
     {
       "id": 11,
@@ -20,7 +20,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 30,
+          "link": 34,
           "widget": {
             "name": "text"
           },
@@ -65,7 +65,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            29
+            33
           ],
           "shape": 3,
           "label": "图像"
@@ -89,15 +89,52 @@
       "bgcolor": "#353"
     },
     {
-      "id": 19,
+      "id": 20,
+      "type": "LLM_api_loader",
+      "pos": [
+        478,
+        107
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            32
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o",
+        "https://api.openai.com/v1",
+        "sk-XXXXX"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 21,
       "type": "LLM",
       "pos": [
         940,
         260
       ],
       "size": [
-        396.7934265136712,
-        404.16919403076133
+        392.7198045330424,
+        454.34486658153423
       ],
       "flags": {},
       "order": 2,
@@ -106,13 +143,13 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 31,
+          "link": 32,
           "label": "model"
         },
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 29,
+          "link": 33,
           "label": "images"
         },
         {
@@ -121,6 +158,14 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
           }
         },
         {
@@ -145,7 +190,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            30
+            34
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -164,6 +209,13 @@
           "links": null,
           "shape": 3,
           "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
         }
       ],
       "properties": {
@@ -177,81 +229,53 @@
         "disable",
         "disable",
         "enable",
-        2048,
+        1920,
         "",
         "",
         "",
+        "",
+        "",
+        100,
         ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 20,
-      "type": "LLM_api_loader",
-      "pos": [
-        478,
-        107
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            31
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "gpt-4o",
-        "https://api.openai.com/v1",
-        "sk-XXXXX"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
+      ]
     }
   ],
   "links": [
     [
-      29,
+      32,
+      20,
+      0,
+      21,
+      0,
+      "CUSTOM"
+    ],
+    [
+      33,
       18,
       0,
-      19,
+      21,
       1,
       "IMAGE"
     ],
     [
-      30,
-      19,
+      34,
+      21,
       0,
       11,
       0,
       "STRING"
-    ],
-    [
-      31,
-      20,
-      0,
-      19,
-      0,
-      "CUSTOM"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": {
+        "0": -290.9097306805033,
+        "1": 149.59513341846588
+      }
+    }
+  },
   "version": 0.4
 }

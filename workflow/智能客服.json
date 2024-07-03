@@ -1,6 +1,6 @@
 {
-  "last_node_id": 209,
-  "last_link_id": 213,
+  "last_node_id": 213,
+  "last_link_id": 227,
   "nodes": [
     {
       "id": 182,
@@ -21,7 +21,7 @@
           "name": "file_content",
           "type": "STRING",
           "links": [
-            200
+            218
           ],
           "shape": 3,
           "label": "file_content",
@@ -100,7 +100,7 @@
         {
           "name": "file1",
           "type": "STRING",
-          "link": 202,
+          "link": 219,
           "widget": {
             "name": "file1"
           },
@@ -109,7 +109,7 @@
         {
           "name": "file2",
           "type": "STRING",
-          "link": 204,
+          "link": 223,
           "widget": {
             "name": "file2"
           },
@@ -118,7 +118,7 @@
         {
           "name": "file3",
           "type": "STRING",
-          "link": 206,
+          "link": 227,
           "widget": {
             "name": "file3"
           },
@@ -150,391 +150,6 @@
       "bgcolor": "#653"
     },
     {
-      "id": 206,
-      "type": "LLM",
-      "pos": [
-        2036,
-        331
-      ],
-      "size": [
-        400,
-        362
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 211,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": 200,
-          "widget": {
-            "name": "file_content"
-          }
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 201,
-          "widget": {
-            "name": "user_prompt"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            202
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "请根据文件内容，回答用户的提问",
-        "你好",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 207,
-      "type": "LLM",
-      "pos": [
-        2037,
-        760
-      ],
-      "size": [
-        399.27487390136594,
-        374
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 212,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": 203,
-          "widget": {
-            "name": "file_content"
-          }
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 205,
-          "widget": {
-            "name": "user_prompt"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            204
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "请根据文件内容，回答用户的提问",
-        "你好",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 208,
-      "type": "LLM",
-      "pos": [
-        2030,
-        1190
-      ],
-      "size": [
-        408.69496496581905,
-        374
-      ],
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 213,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 208,
-          "widget": {
-            "name": "user_prompt"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            206
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "请回复用户，如果用户是打招呼，请引导用户咨询comfyui_llm_party项目相关的问题，如果用户的问题与comfyui_llm_party项目完全无关，则礼貌拒绝回答",
-        "你好",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 181,
-      "type": "classify_function",
-      "pos": [
-        1574,
-        618
-      ],
-      "size": {
-        "0": 315,
-        "1": 122
-      },
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 199,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "response1",
-          "type": "STRING",
-          "links": [
-            201
-          ],
-          "shape": 3,
-          "label": "response1",
-          "slot_index": 0
-        },
-        {
-          "name": "response2",
-          "type": "STRING",
-          "links": [
-            205
-          ],
-          "shape": 3,
-          "label": "response2",
-          "slot_index": 1
-        },
-        {
-          "name": "response3",
-          "type": "STRING",
-          "links": [
-            208
-          ],
-          "shape": 3,
-          "label": "response3",
-          "slot_index": 2
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "classify_function"
-      },
-      "widgets_values": [
-        "enable",
-        ""
-      ],
-      "color": "#323",
-      "bgcolor": "#535"
-    },
-    {
       "id": 178,
       "type": "classify_persona",
       "pos": [
@@ -564,7 +179,7 @@
           "name": "system_prompt",
           "type": "STRING",
           "links": [
-            198
+            215
           ],
           "shape": 3,
           "label": "system_prompt",
@@ -585,104 +200,6 @@
       "bgcolor": "#000"
     },
     {
-      "id": 205,
-      "type": "LLM",
-      "pos": [
-        1047,
-        616
-      ],
-      "size": [
-        395.69510772704984,
-        374
-      ],
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 210,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": 198,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            199
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。",
-        "comfyui_llm_party项目怎么安装啊",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
       "id": 209,
       "type": "LLM_api_loader",
       "pos": [
@@ -701,10 +218,10 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            210,
-            211,
-            212,
-            213
+            214,
+            217,
+            221,
+            225
           ],
           "shape": 3,
           "label": "model",
@@ -741,7 +258,7 @@
           "name": "file_content",
           "type": "STRING",
           "links": [
-            203
+            222
           ],
           "shape": 3,
           "label": "file_content",
@@ -758,6 +275,529 @@
       ],
       "color": "#432",
       "bgcolor": "#653"
+    },
+    {
+      "id": 210,
+      "type": "LLM",
+      "pos": [
+        1047,
+        616
+      ],
+      "size": [
+        407.7119567587804,
+        491.07007477086995
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 214,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 215,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            216
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "comfyui_llm_party项目怎么安装啊",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
+    },
+    {
+      "id": 211,
+      "type": "LLM",
+      "pos": [
+        2034,
+        288
+      ],
+      "size": [
+        407.979772432609,
+        442
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 217,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 220,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 218,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            219
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "请根据文件内容，回答用户的提问",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
+    },
+    {
+      "id": 212,
+      "type": "LLM",
+      "pos": [
+        2042,
+        824
+      ],
+      "size": [
+        399.3131159384684,
+        455.53541147130954
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 221,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 224,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 222,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            223
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "请根据文件内容，回答用户的提问",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
+    },
+    {
+      "id": 181,
+      "type": "classify_function",
+      "pos": [
+        1574,
+        618
+      ],
+      "size": {
+        "0": 315,
+        "1": 122
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 216,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "response1",
+          "type": "STRING",
+          "links": [
+            220
+          ],
+          "shape": 3,
+          "label": "response1",
+          "slot_index": 0
+        },
+        {
+          "name": "response2",
+          "type": "STRING",
+          "links": [
+            224
+          ],
+          "shape": 3,
+          "label": "response2",
+          "slot_index": 1
+        },
+        {
+          "name": "response3",
+          "type": "STRING",
+          "links": [
+            226
+          ],
+          "shape": 3,
+          "label": "response3",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "classify_function"
+      },
+      "widgets_values": [
+        "enable",
+        ""
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 213,
+      "type": "LLM",
+      "pos": [
+        2034,
+        1387
+      ],
+      "size": [
+        415.4897419150311,
+        474.2825854947473
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 225,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 226,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            227
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "请回复用户，如果用户是打招呼，请引导用户咨询comfyui_llm_party项目相关的问题，如果用户的问题与comfyui_llm_party项目完全无关，则礼貌拒绝回答",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
     }
   ],
   "links": [
@@ -770,120 +810,128 @@
       "STRING"
     ],
     [
-      198,
+      214,
+      209,
+      0,
+      210,
+      0,
+      "CUSTOM"
+    ],
+    [
+      215,
       178,
       0,
-      205,
+      210,
       2,
       "STRING"
     ],
     [
-      199,
-      205,
+      216,
+      210,
       0,
       181,
       0,
       "STRING"
     ],
     [
-      200,
+      217,
+      209,
+      0,
+      211,
+      0,
+      "CUSTOM"
+    ],
+    [
+      218,
       182,
       0,
-      206,
-      4,
-      "STRING"
-    ],
-    [
-      201,
-      181,
-      0,
-      206,
+      211,
       5,
       "STRING"
     ],
     [
-      202,
-      206,
+      219,
+      211,
       0,
       185,
       0,
       "STRING"
     ],
     [
-      203,
+      220,
+      181,
+      0,
+      211,
+      3,
+      "STRING"
+    ],
+    [
+      221,
+      209,
+      0,
+      212,
+      0,
+      "CUSTOM"
+    ],
+    [
+      222,
       184,
       0,
-      207,
-      4,
-      "STRING"
-    ],
-    [
-      204,
-      207,
-      0,
-      185,
-      1,
-      "STRING"
-    ],
-    [
-      205,
-      181,
-      1,
-      207,
-      5,
-      "STRING"
-    ],
-    [
-      206,
-      208,
-      0,
-      185,
-      2,
-      "STRING"
-    ],
-    [
-      208,
-      181,
-      2,
-      208,
-      5,
-      "STRING"
-    ],
-    [
-      210,
-      209,
-      0,
-      205,
-      0,
-      "CUSTOM"
-    ],
-    [
-      211,
-      209,
-      0,
-      206,
-      0,
-      "CUSTOM"
-    ],
-    [
       212,
+      5,
+      "STRING"
+    ],
+    [
+      223,
+      212,
+      0,
+      185,
+      1,
+      "STRING"
+    ],
+    [
+      224,
+      181,
+      1,
+      212,
+      3,
+      "STRING"
+    ],
+    [
+      225,
       209,
       0,
-      207,
+      213,
       0,
       "CUSTOM"
     ],
     [
+      226,
+      181,
+      2,
       213,
-      209,
+      3,
+      "STRING"
+    ],
+    [
+      227,
+      213,
       0,
-      208,
-      0,
-      "CUSTOM"
+      185,
+      2,
+      "STRING"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.4665073802097333,
+      "offset": {
+        "0": -425.42387140991275,
+        "1": -107.27227887413028
+      }
+    }
+  },
   "version": 0.4
 }

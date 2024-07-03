@@ -1,6 +1,6 @@
 {
-  "last_node_id": 77,
-  "last_link_id": 98,
+  "last_node_id": 79,
+  "last_link_id": 105,
   "nodes": [
     {
       "id": 73,
@@ -20,7 +20,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 93,
+          "link": 101,
           "widget": {
             "name": "text"
           },
@@ -44,254 +44,6 @@
       ],
       "color": "#233",
       "bgcolor": "#355"
-    },
-    {
-      "id": 74,
-      "type": "show_text_party",
-      "pos": [
-        1185,
-        758
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 96,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        ""
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 75,
-      "type": "LLM",
-      "pos": [
-        705,
-        279
-      ],
-      "size": [
-        402.00946411132713,
-        374
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 97,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 92,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            93,
-            95
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个智能助手，请根据用户提问，在网络上搜索答案，并返回多个网页以及网页摘要",
-        "联网查一下周处除三害的相关信息",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 76,
-      "type": "LLM",
-      "pos": [
-        700,
-        730
-      ],
-      "size": [
-        406.45705200195334,
-        374
-      ],
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 98,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 94,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 95,
-          "widget": {
-            "name": "user_prompt"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            96
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个智能助手，请根据用户给出的多个链接，逐一查询，总结返回电影的剧情简介和电影其他相关信息",
-        "你好",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
     },
     {
       "id": 77,
@@ -312,8 +64,8 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            97,
-            98
+            99,
+            102
           ],
           "shape": 3,
           "label": "model",
@@ -350,7 +102,7 @@
           "name": "tool",
           "type": "STRING",
           "links": [
-            94
+            103
           ],
           "shape": 3,
           "label": "tool",
@@ -390,7 +142,7 @@
           "name": "tool",
           "type": "STRING",
           "links": [
-            92
+            100
           ],
           "shape": 3,
           "label": "tool",
@@ -407,68 +159,348 @@
       ],
       "color": "#332922",
       "bgcolor": "#593930"
+    },
+    {
+      "id": 78,
+      "type": "LLM",
+      "pos": [
+        705,
+        279
+      ],
+      "size": [
+        400.2405501243559,
+        452.482453932039
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 99,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 100,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            101,
+            104
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个智能助手，请根据用户提问，在网络上搜索答案，并返回多个网页以及网页摘要联网",
+        "查一下周处除三害的相关信息",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
+    },
+    {
+      "id": 74,
+      "type": "show_text_party",
+      "pos": [
+        1197,
+        863
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 105,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 79,
+      "type": "LLM",
+      "pos": [
+        705,
+        864
+      ],
+      "size": [
+        399.77316065347486,
+        461.7378006873896
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 102,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 104,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 103,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            105
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个智能助手，请根据用户给出的多个链接，逐一查询，总结返回电影的剧情简介和电影其他相关信息",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
     }
   ],
   "links": [
     [
-      92,
+      99,
+      77,
+      0,
+      78,
+      0,
+      "CUSTOM"
+    ],
+    [
+      100,
       69,
       0,
-      75,
-      3,
+      78,
+      4,
       "STRING"
     ],
     [
-      93,
-      75,
+      101,
+      78,
       0,
       73,
       0,
       "STRING"
     ],
     [
-      94,
+      102,
+      77,
+      0,
+      79,
+      0,
+      "CUSTOM"
+    ],
+    [
+      103,
       71,
       0,
-      76,
+      79,
+      4,
+      "STRING"
+    ],
+    [
+      104,
+      78,
+      0,
+      79,
       3,
       "STRING"
     ],
     [
-      95,
-      75,
-      0,
-      76,
-      5,
-      "STRING"
-    ],
-    [
-      96,
-      76,
+      105,
+      79,
       0,
       74,
       0,
       "STRING"
-    ],
-    [
-      97,
-      77,
-      0,
-      75,
-      0,
-      "CUSTOM"
-    ],
-    [
-      98,
-      77,
-      0,
-      76,
-      0,
-      "CUSTOM"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": {
+        "0": 14.606866739103253,
+        "1": -134.34881680067173
+      }
+    }
+  },
   "version": 0.4
 }

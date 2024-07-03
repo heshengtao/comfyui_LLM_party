@@ -1,6 +1,6 @@
 {
-  "last_node_id": 31,
-  "last_link_id": 37,
+  "last_node_id": 32,
+  "last_link_id": 41,
   "nodes": [
     {
       "id": 17,
@@ -20,7 +20,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 35,
+          "link": 40,
           "widget": {
             "name": "text"
           },
@@ -64,7 +64,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 36,
+          "link": 41,
           "widget": {
             "name": "text"
           },
@@ -120,7 +120,7 @@
           "name": "tool",
           "type": "STRING",
           "links": [
-            34
+            39
           ],
           "shape": 3,
           "label": "tool",
@@ -179,107 +179,6 @@
       "bgcolor": "#653"
     },
     {
-      "id": 30,
-      "type": "LLM",
-      "pos": [
-        576,
-        288
-      ],
-      "size": [
-        402.7716546630854,
-        376.0788711547849
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 37,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 34,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            35
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": [
-            36
-          ],
-          "shape": 3,
-          "label": "history",
-          "slot_index": 1
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。",
-        "查一下这个文件里Streaming mode相关的内容",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
       "id": 31,
       "type": "LLM_api_loader",
       "pos": [
@@ -298,7 +197,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            37
+            38
           ],
           "shape": 3,
           "label": "model",
@@ -315,6 +214,123 @@
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
+    },
+    {
+      "id": 32,
+      "type": "LLM",
+      "pos": [
+        576,
+        288
+      ],
+      "size": [
+        411.15951033350154,
+        483.1719208004256
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 38,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [
+            41
+          ],
+          "shape": 3,
+          "label": "history",
+          "slot_index": 1
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "查一下这个文件里Streaming mode相关的内容",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
     }
   ],
   "links": [
@@ -327,40 +343,48 @@
       "STRING"
     ],
     [
-      34,
+      38,
+      31,
+      0,
+      32,
+      0,
+      "CUSTOM"
+    ],
+    [
+      39,
       28,
       0,
-      30,
-      3,
+      32,
+      4,
       "STRING"
     ],
     [
-      35,
-      30,
+      40,
+      32,
       0,
       17,
       0,
       "STRING"
     ],
     [
-      36,
-      30,
+      41,
+      32,
       1,
       26,
       0,
       "STRING"
-    ],
-    [
-      37,
-      31,
-      0,
-      30,
-      0,
-      "CUSTOM"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7513148009015777,
+      "offset": {
+        "0": 136.92285007909618,
+        "1": 78.817453223012
+      }
+    }
+  },
   "version": 0.4
 }

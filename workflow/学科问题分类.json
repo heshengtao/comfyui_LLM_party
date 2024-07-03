@@ -1,6 +1,6 @@
 {
-  "last_node_id": 176,
-  "last_link_id": 164,
+  "last_node_id": 177,
+  "last_link_id": 169,
   "nodes": [
     {
       "id": 170,
@@ -20,7 +20,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 162,
+          "link": 169,
           "widget": {
             "name": "text"
           },
@@ -192,7 +192,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 161,
+          "link": 167,
           "widget": {
             "name": "text"
           },
@@ -242,115 +242,16 @@
       "bgcolor": "#535"
     },
     {
-      "id": 175,
-      "type": "LLM",
-      "pos": [
-        970,
-        210
-      ],
-      "size": [
-        405.1653076171867,
-        402.33582153320265
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 164,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": 163,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            161,
-            162
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "",
-        "鲁迅有哪些名人名言？\n123*234等于多少？\n将我想和你在一起用英语翻译一下？",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
       "id": 174,
       "type": "classify_persona",
       "pos": [
         589,
         438
       ],
-      "size": [
-        315.8322418212887,
-        149.00254364013642
-      ],
+      "size": {
+        "0": 315.8322448730469,
+        "1": 149.00254821777344
+      },
       "flags": {},
       "order": 0,
       "mode": 0,
@@ -361,7 +262,8 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
@@ -369,7 +271,7 @@
           "name": "system_prompt",
           "type": "STRING",
           "links": [
-            163
+            166
           ],
           "shape": 3,
           "label": "system_prompt",
@@ -408,7 +310,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            164
+            165
           ],
           "shape": 3,
           "label": "model",
@@ -425,6 +327,122 @@
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
+    },
+    {
+      "id": 177,
+      "type": "LLM",
+      "pos": [
+        970,
+        210
+      ],
+      "size": [
+        419.99408254502737,
+        506.335273389426
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 165,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 166,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            167,
+            169
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "label": "history",
+          "slot_index": 1
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "鲁迅有哪些名人名言？\n123*234等于多少？\n将我想和你在一起用英语翻译一下？",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
     }
   ],
   "links": [
@@ -453,40 +471,48 @@
       "STRING"
     ],
     [
-      161,
-      175,
+      165,
+      176,
       0,
-      162,
+      177,
       0,
-      "STRING"
+      "CUSTOM"
     ],
     [
-      162,
-      175,
-      0,
-      170,
-      0,
-      "STRING"
-    ],
-    [
-      163,
+      166,
       174,
       0,
-      175,
+      177,
       2,
       "STRING"
     ],
     [
-      164,
-      176,
+      167,
+      177,
       0,
-      175,
+      162,
       0,
-      "CUSTOM"
+      "STRING"
+    ],
+    [
+      169,
+      177,
+      0,
+      170,
+      0,
+      "STRING"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": {
+        "0": -461.5768098177548,
+        "1": 111.98138715522968
+      }
+    }
+  },
   "version": 0.4
 }

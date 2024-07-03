@@ -1,6 +1,6 @@
 {
-  "last_node_id": 9,
-  "last_link_id": 12,
+  "last_node_id": 10,
+  "last_link_id": 16,
   "nodes": [
     {
       "id": 8,
@@ -21,10 +21,10 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            10
+            14
           ],
           "shape": 3,
-          "label": "IMAGE",
+          "label": "图像",
           "slot_index": 0
         },
         {
@@ -32,7 +32,7 @@
           "type": "MASK",
           "links": null,
           "shape": 3,
-          "label": "MASK"
+          "label": "遮罩"
         }
       ],
       "properties": {
@@ -63,7 +63,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 12,
+          "link": 16,
           "widget": {
             "name": "text"
           },
@@ -107,7 +107,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 11,
+          "link": 15,
           "widget": {
             "name": "text"
           },
@@ -152,7 +152,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            9
+            13
           ],
           "shape": 3,
           "label": "model",
@@ -173,16 +173,16 @@
       "bgcolor": "#3f5159"
     },
     {
-      "id": 9,
+      "id": 10,
       "type": "LLM_local",
       "pos": [
         678,
         173
       ],
-      "size": {
-        "0": 403.00006103515625,
-        "1": 370
-      },
+      "size": [
+        402.3828818035504,
+        445.3281153852449
+      ],
       "flags": {},
       "order": 2,
       "mode": 0,
@@ -190,7 +190,7 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 9,
+          "link": 13,
           "label": "model"
         },
         {
@@ -202,7 +202,7 @@
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 10,
+          "link": 14,
           "label": "image"
         },
         {
@@ -211,8 +211,15 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
-          },
-          "label": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
         },
         {
           "name": "tools",
@@ -220,8 +227,7 @@
           "link": null,
           "widget": {
             "name": "tools"
-          },
-          "label": "tools"
+          }
         },
         {
           "name": "file_content",
@@ -229,8 +235,7 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          },
-          "label": "file_content"
+          }
         }
       ],
       "outputs": [
@@ -238,7 +243,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            11
+            15
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -248,7 +253,7 @@
           "name": "history",
           "type": "STRING",
           "links": [
-            12
+            16
           ],
           "shape": 3,
           "label": "history",
@@ -260,6 +265,13 @@
           "links": null,
           "shape": 3,
           "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
         }
       ],
       "properties": {
@@ -268,48 +280,49 @@
       "widgets_values": [
         "You are an assistant who perfectly describes images.",
         "Describe this image.",
-        "llaVa",
+        "GLM",
         0.7,
         512,
-        "disable",
+        "enable",
         "disable",
         "enable",
         "",
         "",
+        "",
+        "",
+        100,
         ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
+      ]
     }
   ],
   "links": [
     [
-      9,
+      13,
       6,
       0,
-      9,
+      10,
       0,
       "CUSTOM"
     ],
     [
-      10,
+      14,
       8,
       0,
-      9,
+      10,
       2,
       "IMAGE"
     ],
     [
-      11,
-      9,
+      15,
+      10,
       0,
       3,
       0,
       "STRING"
     ],
     [
-      12,
-      9,
+      16,
+      10,
       1,
       4,
       0,
@@ -318,6 +331,14 @@
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": {
+        "0": -38.28286349300349,
+        "1": 63.13857162647382
+      }
+    }
+  },
   "version": 0.4
 }

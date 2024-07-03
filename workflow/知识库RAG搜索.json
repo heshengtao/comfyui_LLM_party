@@ -1,6 +1,6 @@
 {
-  "last_node_id": 76,
-  "last_link_id": 97,
+  "last_node_id": 77,
+  "last_link_id": 100,
   "nodes": [
     {
       "id": 72,
@@ -20,7 +20,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 93,
+          "link": 100,
           "widget": {
             "name": "text"
           },
@@ -64,7 +64,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            94
+            98
           ],
           "shape": 3,
           "label": "model",
@@ -112,7 +112,7 @@
           "name": "tool",
           "type": "STRING",
           "links": [
-            96
+            99
           ],
           "shape": 3,
           "label": "tool",
@@ -135,16 +135,53 @@
       "bgcolor": "#535"
     },
     {
-      "id": 73,
+      "id": 76,
+      "type": "load_file",
+      "pos": [
+        42,
+        343
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": [
+            97
+          ],
+          "shape": 3,
+          "label": "file_content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_file"
+      },
+      "widgets_values": [
+        "",
+        "test.txt",
+        true
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 77,
       "type": "LLM",
       "pos": [
         740,
         330
       ],
-      "size": {
-        "0": 413.3608703613281,
-        "1": 374
-      },
+      "size": [
+        404.95622575718266,
+        464.72863657723076
+      ],
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -152,7 +189,7 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 94,
+          "link": 98,
           "label": "model"
         },
         {
@@ -167,17 +204,23 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
-          },
-          "label": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
         },
         {
           "name": "tools",
           "type": "STRING",
-          "link": 96,
+          "link": 99,
           "widget": {
             "name": "tools"
-          },
-          "label": "tools"
+          }
         },
         {
           "name": "file_content",
@@ -185,8 +228,7 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          },
-          "label": "file_content"
+          }
         }
       ],
       "outputs": [
@@ -194,7 +236,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            93
+            100
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -233,83 +275,47 @@
         "disable",
         "disable",
         "enable",
-        2048,
+        1920,
         "",
         "",
         "",
+        "",
+        "",
+        100,
         ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 76,
-      "type": "load_file",
-      "pos": [
-        42,
-        343
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "links": [
-            97
-          ],
-          "shape": 3,
-          "label": "file_content",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_file"
-      },
-      "widgets_values": [
-        "",
-        "test.txt",
-        true
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
+      ]
     }
   ],
   "links": [
-    [
-      93,
-      73,
-      0,
-      72,
-      0,
-      "STRING"
-    ],
-    [
-      94,
-      74,
-      0,
-      73,
-      0,
-      "CUSTOM"
-    ],
-    [
-      96,
-      75,
-      0,
-      73,
-      3,
-      "STRING"
-    ],
     [
       97,
       76,
       0,
       75,
+      0,
+      "STRING"
+    ],
+    [
+      98,
+      74,
+      0,
+      77,
+      0,
+      "CUSTOM"
+    ],
+    [
+      99,
+      75,
+      0,
+      77,
+      4,
+      "STRING"
+    ],
+    [
+      100,
+      77,
+      0,
+      72,
       0,
       "STRING"
     ]
@@ -318,10 +324,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.8264462809917354,
+      "scale": 0.7513148009015777,
       "offset": {
-        "0": 93.68050245326678,
-        "1": 152.29805470694905
+        "0": 13.538023876606491,
+        "1": 147.4177459911288
       }
     }
   },

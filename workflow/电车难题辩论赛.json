@@ -1,95 +1,7 @@
 {
-  "last_node_id": 75,
-  "last_link_id": 98,
+  "last_node_id": 77,
+  "last_link_id": 108,
   "nodes": [
-    {
-      "id": 57,
-      "type": "end_dialog",
-      "pos": [
-        1700,
-        330
-      ],
-      "size": {
-        "0": 315,
-        "1": 82
-      },
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "dialog_id",
-          "type": "STRING",
-          "link": 79,
-          "widget": {
-            "name": "dialog_id"
-          },
-          "label": "dialog_id"
-        },
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "link": 92,
-          "widget": {
-            "name": "assistant_response"
-          },
-          "label": "assistant_response"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "end_dialog"
-      },
-      "widgets_values": [
-        "",
-        ""
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
-      "id": 69,
-      "type": "show_text_party",
-      "pos": [
-        718,
-        796
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 93,
-          "widget": {
-            "name": "text"
-          },
-          "slot_index": 0,
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        ""
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
     {
       "id": 71,
       "type": "show_text_party",
@@ -108,51 +20,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 94,
-          "widget": {
-            "name": "text"
-          },
-          "slot_index": 0,
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        ""
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 70,
-      "type": "show_text_party",
-      "pos": [
-        1235,
-        802
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 95,
+          "link": 103,
           "widget": {
             "name": "text"
           },
@@ -196,7 +64,89 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 96,
+          "link": 108,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0,
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 75,
+      "type": "LLM_api_loader",
+      "pos": [
+        288,
+        104
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            99,
+            104
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "https://api.openai.com/v1",
+        "sk-XXXXX"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 69,
+      "type": "show_text_party",
+      "pos": [
+        730,
+        959
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 102,
           "widget": {
             "name": "text"
           },
@@ -234,14 +184,14 @@
         "1": 78
       },
       "flags": {},
-      "order": 0,
+      "order": 1,
       "mode": 0,
       "outputs": [
         {
           "name": "user_prompt",
           "type": "STRING",
           "links": [
-            90
+            100
           ],
           "shape": 3,
           "label": "user_prompt",
@@ -268,15 +218,59 @@
       "bgcolor": "#653"
     },
     {
-      "id": 73,
+      "id": 70,
+      "type": "show_text_party",
+      "pos": [
+        1233,
+        979
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 107,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0,
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 76,
       "type": "LLM",
       "pos": [
         700,
-        330
+        332
       ],
       "size": [
-        394.74566650390625,
-        374
+        396.36156206172654,
+        446.31132691602954
       ],
       "flags": {},
       "order": 2,
@@ -285,7 +279,7 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 97,
+          "link": 99,
           "label": "model"
         },
         {
@@ -300,8 +294,15 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
-          },
-          "label": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 100,
+          "widget": {
+            "name": "user_prompt_input"
+          }
         },
         {
           "name": "tools",
@@ -309,8 +310,7 @@
           "link": null,
           "widget": {
             "name": "tools"
-          },
-          "label": "tools"
+          }
         },
         {
           "name": "file_content",
@@ -318,15 +318,6 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          },
-          "label": "file_content"
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 90,
-          "widget": {
-            "name": "user_prompt"
           }
         }
       ],
@@ -335,8 +326,8 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            91,
-            93
+            102,
+            105
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -346,7 +337,7 @@
           "name": "history",
           "type": "STRING",
           "links": [
-            94
+            103
           ],
           "shape": 3,
           "label": "history",
@@ -358,47 +349,99 @@
           "links": null,
           "shape": 3,
           "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
         }
       ],
       "properties": {
         "Node name for S&R": "LLM"
       },
       "widgets_values": [
-        "你你一个辩论赛选手，辩论的主题是电车难题中应该是救一个人还是救五个人。请阐述电车难题中选择救5个人的原因，并反驳救1个人是的立场。请尽最大努力反驳用户的观点。如果需要论据，可以联网获得。",
-        "你好",
+        "你一个辩论赛选手，辩论的主题是电车难题中应该是救一个人还是救五个人。请阐述电车难题中选择救5个人的原因，并反驳救1个人是的立场。请尽最大努力反驳用户的观点。如果需要论据，可以联网获得。",
+        "",
         0.7,
         "enable",
         "disable",
         "disable",
         "enable",
-        2048,
+        1920,
         "",
         "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
+    },
+    {
+      "id": 57,
+      "type": "end_dialog",
+      "pos": [
+        1720,
+        310
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "dialog_id",
+          "type": "STRING",
+          "link": 79,
+          "widget": {
+            "name": "dialog_id"
+          },
+          "label": "dialog_id"
+        },
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "link": 106,
+          "widget": {
+            "name": "assistant_response"
+          },
+          "label": "assistant_response"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "end_dialog"
+      },
+      "widgets_values": [
         "",
         ""
       ],
-      "color": "#223",
-      "bgcolor": "#335"
+      "color": "#432",
+      "bgcolor": "#653"
     },
     {
-      "id": 74,
+      "id": 77,
       "type": "LLM",
       "pos": [
         1200,
         330
       ],
       "size": [
-        394.14570434570305,
-        374
+        403.88472204957543,
+        461.8453099971953
       ],
       "flags": {},
-      "order": 3,
+      "order": 4,
       "mode": 0,
       "inputs": [
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 98,
+          "link": 104,
           "label": "model"
         },
         {
@@ -416,6 +459,14 @@
           }
         },
         {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 105,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
           "name": "tools",
           "type": "STRING",
           "link": null,
@@ -430,14 +481,6 @@
           "widget": {
             "name": "file_content"
           }
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 91,
-          "widget": {
-            "name": "user_prompt"
-          }
         }
       ],
       "outputs": [
@@ -445,8 +488,8 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            92,
-            95
+            106,
+            107
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -456,7 +499,7 @@
           "name": "history",
           "type": "STRING",
           "links": [
-            96
+            108
           ],
           "shape": 3,
           "label": "history",
@@ -468,6 +511,13 @@
           "links": null,
           "shape": 3,
           "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
         }
       ],
       "properties": {
@@ -475,58 +525,21 @@
       },
       "widgets_values": [
         "你一个辩论赛选手，辩论的主题是电车难题中应该是救一个人还是救五个人。请阐述电车难题中选择救1个人的原因，并反驳救5个人是的立场。请尽最大努力反驳用户的观点。如果需要论据，可以联网获得。",
-        "你好",
+        "",
         0.7,
         "enable",
         "disable",
         "disable",
         "enable",
-        2048,
+        1920,
         "",
         "",
         "",
+        "",
+        "",
+        100,
         ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 75,
-      "type": "LLM_api_loader",
-      "pos": [
-        288,
-        104
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            97,
-            98
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "gpt-3.5-turbo-1106",
-        "https://api.openai.com/v1",
-        "sk-XXXXX"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
+      ]
     }
   ],
   "links": [
@@ -539,80 +552,88 @@
       "STRING"
     ],
     [
-      90,
+      99,
+      75,
+      0,
+      76,
+      0,
+      "CUSTOM"
+    ],
+    [
+      100,
       60,
       0,
-      73,
-      5,
+      76,
+      3,
       "STRING"
     ],
     [
-      91,
-      73,
-      0,
-      74,
-      5,
-      "STRING"
-    ],
-    [
-      92,
-      74,
-      0,
-      57,
-      1,
-      "STRING"
-    ],
-    [
-      93,
-      73,
+      102,
+      76,
       0,
       69,
       0,
       "STRING"
     ],
     [
-      94,
-      73,
+      103,
+      76,
       1,
       71,
       0,
       "STRING"
     ],
     [
-      95,
-      74,
+      104,
+      75,
+      0,
+      77,
+      0,
+      "CUSTOM"
+    ],
+    [
+      105,
+      76,
+      0,
+      77,
+      3,
+      "STRING"
+    ],
+    [
+      106,
+      77,
+      0,
+      57,
+      1,
+      "STRING"
+    ],
+    [
+      107,
+      77,
       0,
       70,
       0,
       "STRING"
     ],
     [
-      96,
-      74,
+      108,
+      77,
       1,
       72,
       0,
       "STRING"
-    ],
-    [
-      97,
-      75,
-      0,
-      73,
-      0,
-      "CUSTOM"
-    ],
-    [
-      98,
-      75,
-      0,
-      74,
-      0,
-      "CUSTOM"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909095,
+      "offset": {
+        "0": -201.52846254042043,
+        "1": 33.50928160515065
+      }
+    }
+  },
   "version": 0.4
 }

@@ -1,6 +1,6 @@
 {
-  "last_node_id": 176,
-  "last_link_id": 162,
+  "last_node_id": 178,
+  "last_link_id": 169,
   "nodes": [
     {
       "id": 170,
@@ -100,13 +100,13 @@
         "1": 122
       },
       "flags": {},
-      "order": 6,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 159,
+          "link": 168,
           "widget": {
             "name": "text"
           },
@@ -160,10 +160,10 @@
         46,
         223
       ],
-      "size": [
-        315,
-        106
-      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
       "flags": {},
       "order": 0,
       "mode": 0,
@@ -174,7 +174,8 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
@@ -182,7 +183,7 @@
           "name": "system_prompt",
           "type": "STRING",
           "links": [
-            155
+            164
           ],
           "shape": 3,
           "label": "system_prompt",
@@ -201,24 +202,112 @@
       "bgcolor": "#000"
     },
     {
+      "id": 174,
+      "type": "classify_persona",
+      "pos": [
+        534,
+        8
+      ],
+      "size": {
+        "0": 316.79571533203125,
+        "1": 134.10263061523438
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            166
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "classify_persona"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "Positive Prompt",
+        "Negative Prompt",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 176,
+      "type": "LLM_api_loader",
+      "pos": [
+        51,
+        637
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            163,
+            165
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "https://api.openai.com/v1",
+        "sk-XXXXX"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
       "id": 169,
       "type": "show_text_party",
       "pos": [
-        1020,
-        677
+        1014,
+        865
       ],
       "size": {
         "0": 315,
         "1": 58
       },
       "flags": {},
-      "order": 5,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 160,
+          "link": 169,
           "widget": {
             "name": "text"
           },
@@ -244,170 +333,15 @@
       "bgcolor": "#355"
     },
     {
-      "id": 174,
-      "type": "classify_persona",
-      "pos": [
-        534,
-        8
-      ],
-      "size": [
-        316.7957201538079,
-        134.1026276092527
-      ],
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "links": [
-            158
-          ],
-          "shape": 3,
-          "label": "system_prompt",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "classify_persona"
-      },
-      "widgets_values": [
-        true,
-        "",
-        "Positive Prompt",
-        "Negative Prompt",
-        ""
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 175,
-      "type": "LLM",
-      "pos": [
-        980,
-        210
-      ],
-      "size": [
-        404.14233020019424,
-        374
-      ],
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 162,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": 158,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 157,
-          "widget": {
-            "name": "user_prompt"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            159
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。",
-        "你好",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 173,
+      "id": 177,
       "type": "LLM",
       "pos": [
         460,
         210
       ],
       "size": [
-        407.87566845703054,
-        374
+        411.79919535062106,
+        463.2246375840043
       ],
       "flags": {},
       "order": 3,
@@ -416,7 +350,7 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 161,
+          "link": 163,
           "label": "model"
         },
         {
@@ -428,9 +362,17 @@
         {
           "name": "system_prompt_input",
           "type": "STRING",
-          "link": 155,
+          "link": 164,
           "widget": {
             "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
           }
         },
         {
@@ -455,8 +397,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            157,
-            160
+            167
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -475,6 +416,13 @@
           "links": null,
           "shape": 3,
           "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
         }
       ],
       "properties": {
@@ -488,52 +436,130 @@
         "disable",
         "disable",
         "enable",
-        2048,
+        1920,
         "",
         "",
         "",
+        "",
+        "",
+        100,
         ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
+      ]
     },
     {
-      "id": 176,
-      "type": "LLM_api_loader",
+      "id": 178,
+      "type": "LLM",
       "pos": [
-        51,
-        637
+        980,
+        210
       ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
+      "size": [
+        416.9391953506213,
+        478.55125501564487
+      ],
       "flags": {},
-      "order": 2,
+      "order": 4,
       "mode": 0,
-      "outputs": [
+      "inputs": [
         {
           "name": "model",
           "type": "CUSTOM",
+          "link": 165,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 166,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 167,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
           "links": [
-            161,
-            162
+            168,
+            169
           ],
           "shape": 3,
-          "label": "model",
+          "label": "assistant_response",
           "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
         }
       ],
       "properties": {
-        "Node name for S&R": "LLM_api_loader"
+        "Node name for S&R": "LLM"
       },
       "widgets_values": [
-        "gpt-3.5-turbo-1106",
-        "https://api.openai.com/v1",
-        "sk-XXXXX"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
+        "你一个强大的人工智能助手。",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
     }
   ],
   "links": [
@@ -554,64 +580,72 @@
       "STRING"
     ],
     [
-      155,
+      163,
+      176,
+      0,
+      177,
+      0,
+      "CUSTOM"
+    ],
+    [
+      164,
       172,
       0,
-      173,
+      177,
       2,
       "STRING"
     ],
     [
-      157,
-      173,
+      165,
+      176,
       0,
-      175,
-      5,
-      "STRING"
+      178,
+      0,
+      "CUSTOM"
     ],
     [
-      158,
+      166,
       174,
       0,
-      175,
+      178,
       2,
       "STRING"
     ],
     [
-      159,
-      175,
+      167,
+      177,
+      0,
+      178,
+      3,
+      "STRING"
+    ],
+    [
+      168,
+      178,
       0,
       162,
       0,
       "STRING"
     ],
     [
-      160,
-      173,
+      169,
+      178,
       0,
       169,
       0,
       "STRING"
-    ],
-    [
-      161,
-      176,
-      0,
-      173,
-      0,
-      "CUSTOM"
-    ],
-    [
-      162,
-      176,
-      0,
-      175,
-      0,
-      "CUSTOM"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6209213230591552,
+      "offset": {
+        "0": 162.83370936800668,
+        "1": 292.08759016929173
+      }
+    }
+  },
   "version": 0.4
 }

@@ -1,6 +1,6 @@
 {
-  "last_node_id": 85,
-  "last_link_id": 105,
+  "last_node_id": 86,
+  "last_link_id": 108,
   "nodes": [
     {
       "id": 80,
@@ -70,7 +70,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 103,
+          "link": 108,
           "widget": {
             "name": "text"
           },
@@ -99,15 +99,100 @@
       "bgcolor": "#3f5159"
     },
     {
-      "id": 82,
+      "id": 83,
+      "type": "LLM_api_loader",
+      "pos": [
+        203,
+        237
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            106
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "https://api.openai.com/v1",
+        "sk-XXXXX"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 85,
+      "type": "load_persona",
+      "pos": [
+        205,
+        392
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            107
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "图片提示词生成器",
+        true,
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 86,
       "type": "LLM",
       "pos": [
         603,
         314
       ],
       "size": {
-        "0": 400,
-        "1": 374
+        "0": 399.1064147949219,
+        "1": 470.8382568359375
       },
       "flags": {},
       "order": 2,
@@ -116,7 +201,7 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 104,
+          "link": 106,
           "label": "model"
         },
         {
@@ -128,11 +213,20 @@
         {
           "name": "system_prompt_input",
           "type": "STRING",
-          "link": 105,
+          "link": 107,
           "widget": {
             "name": "system_prompt_input"
           },
           "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
         },
         {
           "name": "tools",
@@ -158,7 +252,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            103
+            108
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -177,6 +271,13 @@
           "links": null,
           "shape": 3,
           "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
         }
       ],
       "properties": {
@@ -190,98 +291,15 @@
         "disable",
         "disable",
         "enable",
-        2048,
+        1920,
         "",
         "",
         "",
+        "",
+        "",
+        100,
         ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 83,
-      "type": "LLM_api_loader",
-      "pos": [
-        203,
-        237
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            104
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "gpt-3.5-turbo-1106",
-        "https://api.openai.com/v1",
-        "sk-XXXXX"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 85,
-      "type": "load_persona",
-      "pos": [
-        205,
-        392
-      ],
-      "size": [
-        315,
-        106
-      ],
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "links": [
-            105
-          ],
-          "shape": 3,
-          "label": "system_prompt",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_persona"
-      },
-      "widgets_values": [
-        "图片提示词生成器",
-        true,
-        ""
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
+      ]
     }
   ],
   "links": [
@@ -294,32 +312,40 @@
       "STRING"
     ],
     [
-      103,
-      82,
-      0,
-      81,
-      0,
-      "STRING"
-    ],
-    [
-      104,
+      106,
       83,
       0,
-      82,
+      86,
       0,
       "CUSTOM"
     ],
     [
-      105,
+      107,
       85,
       0,
-      82,
+      86,
       2,
+      "STRING"
+    ],
+    [
+      108,
+      86,
+      0,
+      81,
+      0,
       "STRING"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": {
+        "0": -167.0397349529643,
+        "1": -32.1048708539951
+      }
+    }
+  },
   "version": 0.4
 }

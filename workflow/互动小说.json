@@ -1,6 +1,6 @@
 {
-  "last_node_id": 24,
-  "last_link_id": 35,
+  "last_node_id": 25,
+  "last_link_id": 39,
   "nodes": [
     {
       "id": 20,
@@ -21,7 +21,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            31
+            36
           ],
           "shape": 3,
           "label": "model",
@@ -55,7 +55,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 30,
+          "link": 39,
           "widget": {
             "name": "text"
           },
@@ -77,113 +77,6 @@
       "widgets_values": [
         "",
         "吃下蓝药丸的你呕吐不止，你打算怎么做？"
-      ]
-    },
-    {
-      "id": 19,
-      "type": "LLM",
-      "pos": [
-        940,
-        260
-      ],
-      "size": {
-        "0": 396.7934265136719,
-        "1": 404.169189453125
-      },
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 31,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": 35,
-          "widget": {
-            "name": "system_prompt_input"
-          },
-          "label": "system_prompt_input"
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 33,
-          "widget": {
-            "name": "tools"
-          },
-          "label": "tools"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            30
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": [],
-          "shape": 3,
-          "label": "history",
-          "slot_index": 1
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": null,
-          "shape": 3,
-          "label": "image"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "",
-        "我选择吃蓝色药丸",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
       ]
     },
     {
@@ -216,7 +109,7 @@
           "name": "system_prompt",
           "type": "STRING",
           "links": [
-            35
+            37
           ],
           "shape": 3,
           "label": "system_prompt",
@@ -251,7 +144,7 @@
           "name": "tools",
           "type": "STRING",
           "links": [
-            33
+            38
           ],
           "shape": 3,
           "label": "tools",
@@ -263,42 +156,155 @@
       },
       "widgets_values": [
         "story.json",
-        true,
-        "Relative_Path"
+        true
+      ]
+    },
+    {
+      "id": 25,
+      "type": "LLM",
+      "pos": [
+        940,
+        260
+      ],
+      "size": [
+        400.6936905278901,
+        462.729511123081
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 36,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 38,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            39
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "我选择吃蓝色药丸",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
       ]
     }
   ],
   "links": [
     [
-      30,
-      19,
-      0,
-      11,
-      0,
-      "STRING"
-    ],
-    [
-      31,
+      36,
       20,
       0,
-      19,
+      25,
       0,
       "CUSTOM"
     ],
     [
-      33,
-      23,
+      37,
+      21,
       0,
-      19,
-      3,
+      25,
+      2,
       "STRING"
     ],
     [
-      35,
-      21,
+      38,
+      23,
       0,
-      19,
-      2,
+      25,
+      4,
+      "STRING"
+    ],
+    [
+      39,
+      25,
+      0,
+      11,
+      0,
       "STRING"
     ]
   ],
@@ -306,10 +312,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.9090909090909091,
+      "scale": 1,
       "offset": {
-        "0": -460.90879728392724,
-        "1": -103.95979565788205
+        "0": -433.57668014081634,
+        "1": -58.06888656697295
       }
     }
   },

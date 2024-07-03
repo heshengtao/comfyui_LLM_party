@@ -1,6 +1,6 @@
 {
-  "last_node_id": 22,
-  "last_link_id": 34,
+  "last_node_id": 23,
+  "last_link_id": 37,
   "nodes": [
     {
       "id": 11,
@@ -20,7 +20,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 34,
+          "link": 37,
           "widget": {
             "name": "text"
           },
@@ -47,15 +47,64 @@
       "bgcolor": "#355"
     },
     {
-      "id": 21,
+      "id": 22,
+      "type": "LLM_local_loader",
+      "pos": [
+        513,
+        241
+      ],
+      "size": {
+        "0": 315,
+        "1": 174
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "links": [
+            36
+          ],
+          "shape": 3,
+          "label": "tokenizer",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local_loader"
+      },
+      "widgets_values": [
+        "GLM",
+        "D:\\AI\\mychat\\model\\chatglm3-6b\\",
+        "D:\\AI\\mychat\\model\\chatglm3-6b\\",
+        "auto",
+        "float32"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 23,
       "type": "LLM_local",
       "pos": [
         939,
         242
       ],
       "size": [
-        397.584277343748,
-        350
+        396.0495077801129,
+        452.3281153852449
       ],
       "flags": {},
       "order": 1,
@@ -64,14 +113,20 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 32,
+          "link": 35,
           "label": "model"
         },
         {
           "name": "tokenizer",
           "type": "CUSTOM",
-          "link": 33,
+          "link": 36,
           "label": "tokenizer"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null,
+          "label": "image"
         },
         {
           "name": "system_prompt_input",
@@ -79,6 +134,14 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
           }
         },
         {
@@ -103,7 +166,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            34
+            37
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -122,6 +185,13 @@
           "links": null,
           "shape": 3,
           "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
         }
       ],
       "properties": {
@@ -138,81 +208,33 @@
         "enable",
         "",
         "",
+        "",
+        "",
+        100,
         ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 22,
-      "type": "LLM_local_loader",
-      "pos": [
-        513,
-        241
-      ],
-      "size": {
-        "0": 315,
-        "1": 174
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            32
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        },
-        {
-          "name": "tokenizer",
-          "type": "CUSTOM",
-          "links": [
-            33
-          ],
-          "shape": 3,
-          "label": "tokenizer",
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_local_loader"
-      },
-      "widgets_values": [
-        "GLM",
-        "D:\\AI\\mychat\\model\\chatglm3-6b\\",
-        "D:\\AI\\mychat\\model\\chatglm3-6b\\",
-        "auto",
-        "float32"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
+      ]
     }
   ],
   "links": [
     [
-      32,
+      35,
       22,
       0,
-      21,
+      23,
       0,
       "CUSTOM"
     ],
     [
-      33,
+      36,
       22,
       1,
-      21,
+      23,
       1,
       "CUSTOM"
     ],
     [
-      34,
-      21,
+      37,
+      23,
       0,
       11,
       0,
@@ -221,6 +243,14 @@
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": {
+        "0": -436.0495077801129,
+        "1": 13.005258638192544
+      }
+    }
+  },
   "version": 0.4
 }

@@ -1,6 +1,6 @@
 {
-  "last_node_id": 89,
-  "last_link_id": 115,
+  "last_node_id": 90,
+  "last_link_id": 119,
   "nodes": [
     {
       "id": 83,
@@ -113,7 +113,7 @@
           "name": "tools",
           "type": "STRING",
           "links": [
-            110
+            117
           ],
           "shape": 3,
           "label": "tools",
@@ -157,7 +157,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 111,
+          "link": 118,
           "widget": {
             "name": "text"
           },
@@ -200,7 +200,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 112,
+          "link": 119,
           "widget": {
             "name": "text"
           },
@@ -225,105 +225,6 @@
       ],
       "color": "#233",
       "bgcolor": "#355"
-    },
-    {
-      "id": 86,
-      "type": "LLM",
-      "pos": [
-        700,
-        300
-      ],
-      "size": [
-        396.5980285644532,
-        374
-      ],
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 115,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 110,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            111,
-            112
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。你可以将你生成的代码输入到解释器中，解释器会返回代码执行后在控制台的输出。",
-        "将北京时间的分钟数和北京明天的最高气温相乘，再除以7取余数，告诉我返回的余数",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
     },
     {
       "id": 69,
@@ -604,7 +505,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            115
+            116
           ],
           "shape": 3,
           "label": "model",
@@ -621,6 +522,123 @@
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
+    },
+    {
+      "id": 90,
+      "type": "LLM",
+      "pos": [
+        700,
+        300
+      ],
+      "size": [
+        397.138716763596,
+        469.0284014602803
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 116,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 117,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            118
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [
+            119
+          ],
+          "shape": 3,
+          "label": "history",
+          "slot_index": 1
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。你可以将你生成的代码输入到解释器中，解释器会返回代码执行后在控制台的输出。",
+        "将北京时间的分钟数和北京明天的最高气温相乘，再除以7取余数，告诉我返回的余数",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
     }
   ],
   "links": [
@@ -665,30 +683,6 @@
       "STRING"
     ],
     [
-      110,
-      83,
-      0,
-      86,
-      3,
-      "STRING"
-    ],
-    [
-      111,
-      86,
-      0,
-      84,
-      0,
-      "STRING"
-    ],
-    [
-      112,
-      86,
-      0,
-      85,
-      0,
-      "STRING"
-    ],
-    [
       113,
       87,
       0,
@@ -705,16 +699,48 @@
       "STRING"
     ],
     [
-      115,
+      116,
       89,
       0,
-      86,
+      90,
       0,
       "CUSTOM"
+    ],
+    [
+      117,
+      83,
+      0,
+      90,
+      4,
+      "STRING"
+    ],
+    [
+      118,
+      90,
+      0,
+      84,
+      0,
+      "STRING"
+    ],
+    [
+      119,
+      90,
+      1,
+      85,
+      0,
+      "STRING"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.620921323059155,
+      "offset": {
+        "0": 345.69617364900165,
+        "1": 159.43738285307424
+      }
+    }
+  },
   "version": 0.4
 }

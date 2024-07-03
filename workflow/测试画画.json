@@ -1,6 +1,6 @@
 {
-  "last_node_id": 205,
-  "last_link_id": 45,
+  "last_node_id": 207,
+  "last_link_id": 52,
   "nodes": [
     {
       "id": 195,
@@ -263,7 +263,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 43,
+          "link": 51,
           "widget": {
             "name": "text"
           },
@@ -427,10 +427,10 @@
         2598.881080932617,
         480.8224737548828
       ],
-      "size": [
-        315,
-        58
-      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
       "flags": {},
       "order": 11,
       "mode": 0,
@@ -442,7 +442,8 @@
           "widget": {
             "name": "text"
           },
-          "slot_index": 0
+          "slot_index": 0,
+          "label": "text"
         }
       ],
       "outputs": [
@@ -496,7 +497,7 @@
           "name": "system_prompt",
           "type": "STRING",
           "links": [
-            39
+            47
           ],
           "shape": 3,
           "label": "system_prompt",
@@ -544,7 +545,7 @@
           "name": "system_prompt",
           "type": "STRING",
           "links": [
-            40
+            50
           ],
           "shape": 3,
           "label": "system_prompt",
@@ -612,7 +613,7 @@
           "name": "user_prompt",
           "type": "STRING",
           "links": [
-            41
+            48
           ],
           "shape": 3,
           "label": "user_prompt",
@@ -657,218 +658,6 @@
       "bgcolor": "#3f5159"
     },
     {
-      "id": 203,
-      "type": "LLM",
-      "pos": [
-        515,
-        130
-      ],
-      "size": [
-        391.9725835388184,
-        374
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 44,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": 39,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 41,
-          "widget": {
-            "name": "user_prompt"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            42
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "",
-        "你好",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 204,
-      "type": "LLM",
-      "pos": [
-        1015,
-        130
-      ],
-      "size": [
-        393.3158464660646,
-        374
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 45,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": 40,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 42,
-          "widget": {
-            "name": "user_prompt"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            43
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "",
-        "你好",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
       "id": 205,
       "type": "LLM_api_loader",
       "pos": [
@@ -887,8 +676,8 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            44,
-            45
+            46,
+            49
           ],
           "shape": 3,
           "label": "model",
@@ -905,6 +694,235 @@
       ],
       "color": "#432",
       "bgcolor": "#653"
+    },
+    {
+      "id": 206,
+      "type": "LLM",
+      "pos": [
+        515,
+        130
+      ],
+      "size": [
+        398.5218626229779,
+        456.6959912100408
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 46,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 47,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 48,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "slot_index": 3
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            52
+          ],
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
+    },
+    {
+      "id": 207,
+      "type": "LLM",
+      "pos": [
+        1015,
+        130
+      ],
+      "size": [
+        403.3559297616496,
+        469.1186354971503
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 49,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 50,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 52,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "slot_index": 3
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            51
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
     }
   ],
   "links": [
@@ -1013,64 +1031,72 @@
       "STRING"
     ],
     [
-      39,
+      46,
+      205,
+      0,
+      206,
+      0,
+      "CUSTOM"
+    ],
+    [
+      47,
       150,
       0,
-      203,
+      206,
       2,
       "STRING"
     ],
     [
-      40,
-      154,
-      0,
-      204,
-      2,
-      "STRING"
-    ],
-    [
-      41,
+      48,
       176,
       3,
-      203,
-      5,
+      206,
+      3,
       "STRING"
     ],
     [
-      42,
-      203,
+      49,
+      205,
       0,
-      204,
-      5,
+      207,
+      0,
+      "CUSTOM"
+    ],
+    [
+      50,
+      154,
+      0,
+      207,
+      2,
       "STRING"
     ],
     [
-      43,
-      204,
+      51,
+      207,
       0,
       162,
       0,
       "STRING"
     ],
     [
-      44,
-      205,
+      52,
+      206,
       0,
-      203,
-      0,
-      "CUSTOM"
-    ],
-    [
-      45,
-      205,
-      0,
-      204,
-      0,
-      "CUSTOM"
+      207,
+      3,
+      "STRING"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917358,
+      "offset": {
+        "0": 98.16890493323535,
+        "1": 203.56846481925527
+      }
+    }
+  },
   "version": 0.4
 }
