@@ -1,102 +1,7 @@
 {
-  "last_node_id": 214,
-  "last_link_id": 56,
+  "last_node_id": 215,
+  "last_link_id": 57,
   "nodes": [
-    {
-      "id": 203,
-      "type": "workflow_transfer",
-      "pos": [
-        2293,
-        -26
-      ],
-      "size": {
-        "0": 315,
-        "1": 270
-      },
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image_input",
-          "type": "IMAGE",
-          "link": null,
-          "label": "image_input"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        },
-        {
-          "name": "positive_prompt",
-          "type": "STRING",
-          "link": 45,
-          "widget": {
-            "name": "positive_prompt"
-          },
-          "label": "positive_prompt"
-        },
-        {
-          "name": "negative_prompt",
-          "type": "STRING",
-          "link": 39,
-          "widget": {
-            "name": "negative_prompt"
-          },
-          "label": "negative_prompt"
-        },
-        {
-          "name": "is_enable",
-          "type": "BOOLEAN",
-          "link": 43,
-          "widget": {
-            "name": "is_enable"
-          },
-          "label": "is_enable"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "links": [
-            41
-          ],
-          "shape": 3,
-          "label": "images",
-          "slot_index": 0
-        },
-        {
-          "name": "text",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "text"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "workflow_transfer"
-      },
-      "widgets_values": [
-        true,
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "绘图app.json",
-        "测试画画app.json"
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
     {
       "id": 162,
       "type": "classify_function",
@@ -165,78 +70,6 @@
       "bgcolor": "#535"
     },
     {
-      "id": 206,
-      "type": "string_logic",
-      "pos": [
-        1883,
-        -134
-      ],
-      "size": {
-        "0": 315,
-        "1": 146
-      },
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "stringA",
-          "type": "STRING",
-          "link": 44,
-          "widget": {
-            "name": "stringA"
-          },
-          "label": "stringA"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "if",
-          "type": "STRING",
-          "links": [
-            45
-          ],
-          "shape": 3,
-          "label": "if",
-          "slot_index": 0
-        },
-        {
-          "name": "else",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "else"
-        },
-        {
-          "name": "is_true",
-          "type": "BOOLEAN",
-          "links": [
-            43
-          ],
-          "shape": 3,
-          "label": "is_true",
-          "slot_index": 2
-        },
-        {
-          "name": "is_false",
-          "type": "BOOLEAN",
-          "links": null,
-          "shape": 3,
-          "label": "is_false"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "string_logic"
-      },
-      "widgets_values": [
-        "A is not null",
-        "",
-        ""
-      ],
-      "color": "#332922",
-      "bgcolor": "#593930"
-    },
-    {
       "id": 205,
       "type": "end_workflow",
       "pos": [
@@ -272,52 +105,6 @@
       },
       "widgets_values": [
         "ComfyUI",
-        ""
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 202,
-      "type": "show_text_party",
-      "pos": [
-        1885,
-        455
-      ],
-      "size": {
-        "0": 315,
-        "1": 76
-      },
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 37,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            42
-          ],
-          "shape": 6,
-          "label": "STRING",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
         ""
       ],
       "color": "#233",
@@ -422,218 +209,6 @@
       "bgcolor": "#000"
     },
     {
-      "id": 212,
-      "type": "LLM",
-      "pos": [
-        515,
-        130
-      ],
-      "size": [
-        400,
-        362
-      ],
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 55,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": 50,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 51,
-          "widget": {
-            "name": "user_prompt"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            53
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "",
-        "你好",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
-      "id": 213,
-      "type": "LLM",
-      "pos": [
-        1015,
-        130
-      ],
-      "size": [
-        400,
-        362
-      ],
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 56,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": 52,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        },
-        {
-          "name": "user_prompt",
-          "type": "STRING",
-          "link": 53,
-          "widget": {
-            "name": "user_prompt"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            54
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "",
-        "你好",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        2048,
-        "",
-        "",
-        "",
-        ""
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
       "id": 208,
       "type": "start_workflow",
       "pos": [
@@ -735,6 +310,101 @@
       "bgcolor": "#355"
     },
     {
+      "id": 203,
+      "type": "workflow_transfer",
+      "pos": [
+        2293,
+        -26
+      ],
+      "size": {
+        "0": 315,
+        "1": 270
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_input",
+          "type": "IMAGE",
+          "link": null,
+          "label": "image_input"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "positive_prompt",
+          "type": "STRING",
+          "link": 45,
+          "widget": {
+            "name": "positive_prompt"
+          },
+          "label": "positive_prompt"
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "negative_prompt"
+          },
+          "label": "negative_prompt"
+        },
+        {
+          "name": "is_enable",
+          "type": "BOOLEAN",
+          "link": 43,
+          "widget": {
+            "name": "is_enable"
+          },
+          "label": "is_enable"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            41
+          ],
+          "shape": 3,
+          "label": "images",
+          "slot_index": 0
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "text"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "workflow_transfer"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "绘图app.json"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
       "id": 214,
       "type": "LLM_api_loader",
       "pos": [
@@ -766,11 +436,367 @@
       },
       "widgets_values": [
         "gpt-3.5-turbo-1106",
-        "https://api.openai.com/v1",
-        "sk-XXXXX"
+        "",
+        ""
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
+    },
+    {
+      "id": 206,
+      "type": "string_logic",
+      "pos": [
+        1883,
+        -134
+      ],
+      "size": {
+        "0": 315,
+        "1": 146
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "stringA",
+          "type": "STRING",
+          "link": 44,
+          "widget": {
+            "name": "stringA"
+          },
+          "label": "stringA"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "if",
+          "type": "STRING",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "label": "if",
+          "slot_index": 0
+        },
+        {
+          "name": "else",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "else"
+        },
+        {
+          "name": "is_true",
+          "type": "BOOLEAN",
+          "links": [
+            43
+          ],
+          "shape": 3,
+          "label": "is_true",
+          "slot_index": 2
+        },
+        {
+          "name": "is_false",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3,
+          "label": "is_false"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "string_logic"
+      },
+      "widgets_values": [
+        "A is not null",
+        "",
+        ""
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 202,
+      "type": "show_text_party",
+      "pos": [
+        1885,
+        455
+      ],
+      "size": [
+        354.1500147154752,
+        205.4353239254816
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            42
+          ],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 212,
+      "type": "LLM",
+      "pos": [
+        515,
+        130
+      ],
+      "size": {
+        "0": 400,
+        "1": 392
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 55,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 50,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "link": 51,
+          "widget": {
+            "name": "user_prompt"
+          },
+          "label": "user_prompt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            53
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "你好",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 213,
+      "type": "LLM",
+      "pos": [
+        1015,
+        130
+      ],
+      "size": {
+        "0": 400,
+        "1": 392
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 56,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 52,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "link": 53,
+          "widget": {
+            "name": "user_prompt"
+          },
+          "label": "user_prompt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            54
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "你好",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        2048,
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
     }
   ],
   "links": [
@@ -889,6 +915,14 @@
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5644739300537782,
+      "offset": {
+        "0": -204.84778885284058,
+        "1": 572.1016425779189
+      }
+    }
+  },
   "version": 0.4
 }

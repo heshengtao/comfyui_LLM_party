@@ -1,6 +1,7 @@
 import io
 import json
 import os
+import platform
 import re
 import socket
 import subprocess
@@ -117,14 +118,14 @@ def api(
     return images, res
 
 
-def check_port_and_execute_bat(port, bat_command):
+def check_port_and_execute_bat(port, command):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    result = sock.connect_ex(("localhost", port))
+    result = sock.connect_ex(('localhost', port))
     if result != 0:
-        print(f"端口 {port} 未被占用，正在执行bat命令...")
-        subprocess.Popen(bat_command)
+        print(f"端口 {port} 未被占用，正在执行命令...")
+        subprocess.Popen(command, shell=True)
         while True:
-            result = sock.connect_ex(("localhost", port))
+            result = sock.connect_ex(('localhost', port))
             if result == 0:
                 print(f"端口 {port} 已经开放，可以正常访问。")
                 sock.close()
@@ -140,6 +141,27 @@ def check_port_and_execute_bat(port, bat_command):
 api_path = os.path.join(current_dir_path, "workflow_api")
 # 获取apipath文件夹下的所有json文件名
 json_files = [f for f in os.listdir(api_path) if f.endswith(".json")]
+
+def execute_command_in_new_window(interpreter, root_path, port):
+    os_type = platform.system()
+    command = ''
+
+    if os_type == 'Windows':
+        command = f'start cmd /k "{interpreter} {root_path} --port {port}"'
+    elif os_type == 'Darwin':  # 'Darwin' 是 macOS 的系统类型
+        # 使用 AppleScript 打开新的 Terminal 窗口
+        command = f"osascript -e 'tell application \"Terminal\" to do script \"{interpreter} {root_path} --port {port}\"'"
+    else:
+        # 对于 Linux，检查 'gnome-terminal' 或 'xterm'
+        if os.path.exists('/usr/bin/gnome-terminal'):
+            command = f'gnome-terminal -- {interpreter} {root_path} --port {port}'
+        elif os.path.exists('/usr/bin/xterm'):
+            command = f'xterm -e "{interpreter} {root_path} --port {port}"'
+        else:
+            print("错误：未找到合适的终端程序。")
+            return
+
+    check_port_and_execute_bat(port, command)
 
 
 class workflow_transfer:
@@ -201,10 +223,7 @@ class workflow_transfer:
         # 获取main.py的绝对路径
         root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "main.py"))
 
-        # 构建在新控制台窗口中执行main.py的命令
-        # 使用'cmd /c'在新窗口中执行命令，并且'cmd /k'保持窗口打开
-        command = f'cmd /c start cmd /k "{interpreter} {root_path} --port 8189"'
-        check_port_and_execute_bat(8189, command)
+        execute_command_in_new_window(interpreter, root_path, 8189)
 
         output_images, output_text = api(
             file_content,
