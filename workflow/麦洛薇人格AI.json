@@ -1,6 +1,6 @@
 {
   "last_node_id": 28,
-  "last_link_id": 40,
+  "last_link_id": 41,
   "nodes": [
     {
       "id": 20,
@@ -49,13 +49,13 @@
         "1": 287.0350646972656
       },
       "flags": {},
-      "order": 1,
+      "order": 4,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": null,
+          "link": 41,
           "widget": {
             "name": "text"
           },
@@ -77,6 +77,41 @@
       "widgets_values": [
         "",
         "我毕业于华中科技大学，专业是计算机科学与技术。如果你对这所学校或者我的学习经历感兴趣，我可以分享更多信息哦！你还有其他问题吗？"
+      ]
+    },
+    {
+      "id": 27,
+      "type": "KG_json_toolkit_developer",
+      "pos": [
+        553,
+        563
+      ],
+      "size": {
+        "0": 352.79998779296875,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "tools"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KG_json_toolkit_developer"
+      },
+      "widgets_values": [
+        "",
+        "麦洛薇.json",
+        true
       ]
     },
     {
@@ -120,44 +155,9 @@
         "Node name for S&R": "load_persona"
       },
       "widgets_values": [
-        "麦洛薇",
+        "麦洛薇自由版",
         true,
         ""
-      ]
-    },
-    {
-      "id": 27,
-      "type": "KG_json_toolkit_developer",
-      "pos": [
-        553,
-        563
-      ],
-      "size": {
-        "0": 352.79998779296875,
-        "1": 106
-      },
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tools",
-          "type": "STRING",
-          "links": [
-            40
-          ],
-          "shape": 3,
-          "slot_index": 0,
-          "label": "tools"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "KG_json_toolkit_developer"
-      },
-      "widgets_values": [
-        "",
-        "麦洛薇.json",
-        true
       ]
     },
     {
@@ -167,12 +167,12 @@
         940,
         260
       ],
-      "size": [
-        397.15951033350166,
-        457.83858492396075
-      ],
+      "size": {
+        "0": 397.1595153808594,
+        "1": 457.8385925292969
+      },
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
       "inputs": [
         {
@@ -193,7 +193,8 @@
           "link": 39,
           "widget": {
             "name": "system_prompt_input"
-          }
+          },
+          "label": "system_prompt_input"
         },
         {
           "name": "user_prompt_input",
@@ -201,7 +202,8 @@
           "link": null,
           "widget": {
             "name": "user_prompt_input"
-          }
+          },
+          "label": "user_prompt_input"
         },
         {
           "name": "tools",
@@ -209,7 +211,8 @@
           "link": 40,
           "widget": {
             "name": "tools"
-          }
+          },
+          "label": "tools"
         },
         {
           "name": "file_content",
@@ -217,16 +220,20 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
         {
           "name": "assistant_response",
           "type": "STRING",
-          "links": null,
+          "links": [
+            41
+          ],
           "shape": 3,
-          "label": "assistant_response"
+          "label": "assistant_response",
+          "slot_index": 0
         },
         {
           "name": "history",
@@ -296,6 +303,14 @@
       28,
       4,
       "STRING"
+    ],
+    [
+      41,
+      28,
+      0,
+      11,
+      0,
+      "STRING"
     ]
   ],
   "groups": [],
@@ -304,8 +319,8 @@
     "ds": {
       "scale": 1,
       "offset": {
-        "0": -380.15951033350154,
-        "1": 1.4947890994767192
+        "0": -438.71596028669103,
+        "1": -39.73388138331657
       }
     }
   },
