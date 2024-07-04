@@ -102,7 +102,7 @@ def api(
         if prompt[p]["class_type"] == "start_workflow":
             if file_content != "":
                 prompt[p]["inputs"]["file_content"] = file_content
-            if image_input is not None and image_input!=[]:
+            if image_input is not None and image_input != []:
                 prompt[p]["inputs"]["image_input"] = image_input
             prompt[p]["inputs"]["file_path"] = file_path
             prompt[p]["inputs"]["img_path"] = img_path
@@ -120,12 +120,12 @@ def api(
 
 def check_port_and_execute_bat(port, command):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    result = sock.connect_ex(('localhost', port))
+    result = sock.connect_ex(("localhost", port))
     if result != 0:
         print(f"端口 {port} 未被占用，正在执行命令...")
         subprocess.Popen(command, shell=True)
         while True:
-            result = sock.connect_ex(('localhost', port))
+            result = sock.connect_ex(("localhost", port))
             if result == 0:
                 print(f"端口 {port} 已经开放，可以正常访问。")
                 sock.close()
@@ -142,20 +142,21 @@ api_path = os.path.join(current_dir_path, "workflow_api")
 # 获取apipath文件夹下的所有json文件名
 json_files = [f for f in os.listdir(api_path) if f.endswith(".json")]
 
+
 def execute_command_in_new_window(interpreter, root_path, port):
     os_type = platform.system()
-    command = ''
+    command = ""
 
-    if os_type == 'Windows':
+    if os_type == "Windows":
         command = f'start cmd /k "{interpreter} {root_path} --port {port}"'
-    elif os_type == 'Darwin':  # 'Darwin' 是 macOS 的系统类型
+    elif os_type == "Darwin":  # 'Darwin' 是 macOS 的系统类型
         # 使用 AppleScript 打开新的 Terminal 窗口
-        command = f"osascript -e 'tell application \"Terminal\" to do script \"{interpreter} {root_path} --port {port}\"'"
+        command = f'osascript -e \'tell application "Terminal" to do script "{interpreter} {root_path} --port {port}"\''
     else:
         # 对于 Linux，检查 'gnome-terminal' 或 'xterm'
-        if os.path.exists('/usr/bin/gnome-terminal'):
-            command = f'gnome-terminal -- {interpreter} {root_path} --port {port}'
-        elif os.path.exists('/usr/bin/xterm'):
+        if os.path.exists("/usr/bin/gnome-terminal"):
+            command = f"gnome-terminal -- {interpreter} {root_path} --port {port}"
+        elif os.path.exists("/usr/bin/xterm"):
             command = f'xterm -e "{interpreter} {root_path} --port {port}"'
         else:
             print("错误：未找到合适的终端程序。")
@@ -269,7 +270,7 @@ class workflow_tool:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "workflow_name": ("STRING", {"multiline": True,"default": "测试画画app.json,绘图app.json"}),
+                "workflow_name": ("STRING", {"multiline": True, "default": "测试画画app.json,绘图app.json"}),
             },
         }
 
@@ -282,7 +283,7 @@ class workflow_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def workflow(self,workflow_name, is_enable="enable"):
+    def workflow(self, workflow_name, is_enable="enable"):
         if is_enable == "disable":
             return (None,)
         output = [
@@ -318,17 +319,17 @@ class workflow_tool:
         ]
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
-    
+
 
 def work_flow(
     user_prompt="",
     positive_prompt="",
     negative_prompt="",
     workflow_name="测试画画app.json",
-    ):
-    #用re去掉workflow_name字符串中的'['、']'字符
+):
+    # 用re去掉workflow_name字符串中的'['、']'字符
     workflow_name = re.sub(r"[\[\]]", "", workflow_name)
-    
+
     # 获取当前Python解释器的路径
     interpreter = sys.executable
 
@@ -356,5 +357,4 @@ def work_flow(
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
     images, res = get_all(ws, prompt)
-    return res,images
-
+    return res, images

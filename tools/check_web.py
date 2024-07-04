@@ -62,12 +62,8 @@ class check_web_tool:
                 "chunk_size": ("INT", {"default": 200}),
                 "chunk_overlap": ("INT", {"default": 50}),
                 "device": (
-                    ["auto","cuda", "mps", "cpu"],
-                    {
-                        "default": (
-                            "auto"
-                        )
-                    },
+                    ["auto", "cuda", "mps", "cpu"],
+                    {"default": ("auto")},
                 ),
             },
             "optional": {
@@ -85,13 +81,13 @@ class check_web_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def read_web(self, chunk_size, chunk_overlap,device, is_enable=True, web_url=None, embedding_path=None):
+    def read_web(self, chunk_size, chunk_overlap, device, is_enable=True, web_url=None, embedding_path=None):
         if is_enable == False:
             return (None,)
         global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base
         c_size = chunk_size
         c_overlap = chunk_overlap
-        if device=="auto":
+        if device == "auto":
             device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
         if ebd_model == "":
             model_kwargs = {"device": device}
@@ -111,7 +107,7 @@ class check_web_tool:
                         "parameters": {
                             "type": "object",
                             "properties": {
-                                "url": {"type": "string", "description": "要被搜索的网页的URL","default": web_url},
+                                "url": {"type": "string", "description": "要被搜索的网页的URL", "default": web_url},
                                 "keyword": {
                                     "type": "string",
                                     "description": "需要搜索的关键词，如果没有关键词，则搜索网页上的所有内容",

@@ -1,11 +1,14 @@
-import requests
 import json
 from datetime import date
 
+import requests
+
 from ..config import config_path, load_api_keys
+
 # 加载API密钥的函数保持不变
 api_keys = load_api_keys(config_path)
 github_api_key = api_keys.get("github_api_key")
+
 
 def search_github_repositories(keywords, paper_num, url=None):
     today = str(date.today())
@@ -21,7 +24,7 @@ def search_github_repositories(keywords, paper_num, url=None):
             "sort": "stars",
             "order": "desc",
             "per_page": num_results,
-            "page": paper_num
+            "page": paper_num,
         }
 
         response = requests.get(base_url, headers=headers, params=params, timeout=10)
@@ -51,6 +54,7 @@ def search_github_repositories(keywords, paper_num, url=None):
         + str(all_content)
         + "”。\n如果以上信息中没有相关信息，你可以改变paper_num，查看下一页的信息。"
     )
+
 
 # 类定义和方法保持不变，只需将bing_tool更名为github_tool，并更新相关注释
 class github_tool:
@@ -95,7 +99,10 @@ class github_tool:
                                 "type": "string",
                                 "description": "需要搜索的关键词，可以是多个词语，多个词语之间用空格隔开",
                             },
-                            "paper_num": {"type": "string", "description": "GitHub搜索的页码，可以改变paper_num用于翻页"},
+                            "paper_num": {
+                                "type": "string",
+                                "description": "GitHub搜索的页码，可以改变paper_num用于翻页",
+                            },
                         },
                         "required": ["keywords", "paper_num"],
                     },

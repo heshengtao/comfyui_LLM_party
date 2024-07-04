@@ -1,30 +1,28 @@
+import base64
 import configparser
 import io
-import time
-
-import openai
-import requests
-from fastapi import FastAPI, HTTPException,Request, Depends
-from pydantic import BaseModel, validator
-from typing import Any, List, Union, Optional
-import httpx
-import base64
-from io import BytesIO
-from PIL import Image, ImageOps
-import numpy as np
-import torch
-import os
-
 import json
+import os
+import time
 import urllib.parse
 import urllib.request
 import uuid
+from io import BytesIO
+from typing import Any, List, Optional, Union
 
+import httpx
+import numpy as np
+import openai
 import pandas as pd
+import requests
+import torch
 import websocket  # NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
-from PIL import Image
+from fastapi import Depends, FastAPI, HTTPException, Request
+from PIL import Image, ImageOps
+from pydantic import BaseModel, validator
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import get_lexer_by_name
+
 current_dir_path = os.path.dirname(os.path.realpath(__file__))
 server_address = "127.0.0.1:8188"
 client_id = str(uuid.uuid4())
@@ -105,7 +103,7 @@ def api(
         if prompt[p]["class_type"] == "start_workflow":
             if file_content != "":
                 prompt[p]["inputs"]["file_content"] = file_content
-            if image_input is not None and image_input!=[]:
+            if image_input is not None and image_input != []:
                 prompt[p]["inputs"]["image_input"] = image_input
             prompt[p]["inputs"]["file_path"] = file_path
             prompt[p]["inputs"]["img_path"] = img_path
@@ -123,6 +121,7 @@ def api(
 
 app = FastAPI()
 
+
 # 定义请求中的消息内容
 class MessageContent(BaseModel):
     type: str
@@ -130,16 +129,18 @@ class MessageContent(BaseModel):
     image_url: Optional[Union[str, dict]] = None
 
     # 自定义验证器来处理image_url字段
-    @validator('image_url', pre=True)
+    @validator("image_url", pre=True)
     def parse_image_url(cls, value):
-        if isinstance(value, dict) and 'url' in value:
-            return value['url']
+        if isinstance(value, dict) and "url" in value:
+            return value["url"]
         return value
+
 
 # 定义请求中的消息
 class Message(BaseModel):
     role: str
     content: Any
+
 
 # 定义整个请求体
 class CompletionRequest(BaseModel):
@@ -147,11 +148,13 @@ class CompletionRequest(BaseModel):
     messages: List[Message]
     max_tokens: int = 150  # 添加了默认值
 
+
 # 中间件或依赖项来验证 API 密钥
 async def verify_api_key(request: Request):
     # 从请求头中获取 API 密钥
     api_key = request.headers.get("Authorization").split("Bearer ")[-1]
     # 这里应该有验证api_key的逻辑
+
 
 # 创建路由处理函数
 @app.post("/v1/chat/completions")
@@ -167,11 +170,12 @@ async def create_completion(request_data: CompletionRequest, dependency=Depends(
     # 返回生成的响应
     return response
 
+
 # 异步函数来处理请求并生成响应
 async def process_request(request_data: CompletionRequest):
     model_name = request_data.model
     print(model_name)
-    base64_encoded_list=[]
+    base64_encoded_list = []
     # 遍历消息
     for message in request_data.messages:
         # 检查 content 是否为字符串
@@ -185,24 +189,24 @@ async def process_request(request_data: CompletionRequest):
         # 如果 content 是列表，按原有逻辑处理
         elif isinstance(message.content, list):
             for content in message.content:
-                if isinstance(content, dict) and 'type' in content:
-                    if content['type'] == "text":
+                if isinstance(content, dict) and "type" in content:
+                    if content["type"] == "text":
                         # 处理文本
-                        user_prompt = content['text']
-                    elif content['type'] == "image_url":
-                        if isinstance(content['image_url'], str):
+                        user_prompt = content["text"]
+                    elif content["type"] == "image_url":
+                        if isinstance(content["image_url"], str):
                             # 检查URL是否为Base64编码的数据URI
-                            if content['image_url'].startswith('data:image/jpeg;base64,'):
+                            if content["image_url"].startswith("data:image/jpeg;base64,"):
                                 # 提取Base64编码的图片数据
-                                base64_data = content['image_url'].split('data:image/jpeg;base64,')[1]
+                                base64_data = content["image_url"].split("data:image/jpeg;base64,")[1]
                                 base64_encoded_list.append(base64_data)
                             else:
                                 # 下载图片并转换为Base64编码
                                 async with httpx.AsyncClient() as client:
-                                    response = await client.get(content['image_url'])
+                                    response = await client.get(content["image_url"])
                                     if response.status_code == 200:
                                         image_bytes = BytesIO(response.content)
-                                        base64_encoded = base64.b64encode(image_bytes.read()).decode('utf-8')
+                                        base64_encoded = base64.b64encode(image_bytes.read()).decode("utf-8")
                                         base64_encoded_list.append(base64_encoded)
                                     else:
                                         raise HTTPException(status_code=400, detail="Image could not be retrieved.")
@@ -226,7 +230,7 @@ async def process_request(request_data: CompletionRequest):
 
         # 添加到输出列表
         img_out.append(image_tensor)
-    
+
     workflow_path = model_name + ".json"
     # 调用API函数
     images, response = api(
@@ -241,7 +245,7 @@ async def process_request(request_data: CompletionRequest):
         "",
         workflow_path,
     )
-    if images is None or images==[]:
+    if images is None or images == []:
         # 构建响应数据
         response_data = {
             "id": "0",
@@ -251,45 +255,39 @@ async def process_request(request_data: CompletionRequest):
             "system_fingerprint": "fp_0",
             "choices": [
                 {
-                    "message": {"role": "assistant","content": response},
+                    "message": {"role": "assistant", "content": response},
                     "index": 0,
                     "logprobs": None,
-                    "finish_reason": "Stop"
+                    "finish_reason": "Stop",
                 }
             ],
-            "usage": {
-                "prompt_tokens": 0,
-                "completion_tokens": 0,
-                "total_tokens": 0
-            }
+            "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
         }
     else:
         base64_images = []  # 用于存储Base64编码的图像字符串
 
         for node_id in images:
             for image_data in images[node_id]:
-                #获得image的base64编码
-                img_base64 = base64.b64encode(image_data).decode('utf-8')
-                
+                # 获得image的base64编码
+                img_base64 = base64.b64encode(image_data).decode("utf-8")
+
             global current_dir_path
             # 构建config.ini的绝对路径
             config_path = os.path.join(current_dir_path, "config.ini")
             print(config_path)
-            #从config.ini找到imgbb_key
+            # 从config.ini找到imgbb_key
             config = configparser.ConfigParser()
             config.read(config_path, encoding="utf-8")
             api_keys = {}
             if "API_KEYS" in config:
                 api_keys = config["API_KEYS"]
 
-            imgbb_key=api_keys.get("imgbb_api")
+            imgbb_key = api_keys.get("imgbb_api")
             print(imgbb_key)
 
-            if imgbb_key is None or imgbb_key=="":
-                #返回imgbb_key缺失，需要在config.ini填入的报错
-                return {
-                    "error": "imgbb_api key is missing in config.ini"
-                }
+            if imgbb_key is None or imgbb_key == "":
+                # 返回imgbb_key缺失，需要在config.ini填入的报错
+                return {"error": "imgbb_api key is missing in config.ini"}
 
             url = "https://api.imgbb.com/1/upload"
             payload = {"key": imgbb_key, "image": img_base64}
@@ -304,12 +302,12 @@ async def process_request(request_data: CompletionRequest):
                 return "Error: " + response0.text
             print(img_url)
             base64_images.append(img_url)
-            print("1"+img_url)
+            print("1" + img_url)
         if response is None:
-            response==""
+            response == ""
         for img in base64_images:
-            response_url=f"![image]({img})"
-            response += "\n"+response_url+"\n"
+            response_url = f"![image]({img})"
+            response += "\n" + response_url + "\n"
         print(response)
         # 构建响应数据
         response_data = {
@@ -320,22 +318,18 @@ async def process_request(request_data: CompletionRequest):
             "system_fingerprint": "fp_0",
             "choices": [
                 {
-                    "message": {"role": "assistant","content": response},
+                    "message": {"role": "assistant", "content": response},
                     "index": 0,
                     "logprobs": None,
-                    "finish_reason": "Stop"
+                    "finish_reason": "Stop",
                 }
             ],
-            "usage": {
-                "prompt_tokens": 0,
-                "completion_tokens": 0,
-                "total_tokens": 0
-            }
+            "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
         }
     return response_data
 
+
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="localhost", port=8817)
-
-

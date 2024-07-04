@@ -41,8 +41,7 @@ class About_us:
     @classmethod
     def INPUT_TYPES(s):
         return {
-            "required": {
-            },
+            "required": {},
             "hidden": {
                 "unique_id": "UNIQUE_ID",
                 "extra_pnginfo": "EXTRA_PNGINFO",
@@ -58,15 +57,17 @@ class About_us:
     CATEGORY = "大模型派对（llm_party）"
 
     def notify(self, unique_id=None, extra_pnginfo=None):
-        text = [f'''
+        text = [
+            f"""
 This is an easter egg node of the project.
 comfyui_LLM_party
-Project Initiator: heshengtao 
-Project URL: https://github.com/heshengtao/comfyui_LLM_party 
+Project Initiator: heshengtao
+Project URL: https://github.com/heshengtao/comfyui_LLM_party
 Project Media Channel: https://space.bilibili.com/26978344?spm_id_from=333.1007.0.0
-Special thanks to the following project contributors: 
+Special thanks to the following project contributors:
 1. Alexander Piskun: Thank you for your contributions to the project regarding cross-platform and GPU chip adaptation!
-        '''.strip()]
+        """.strip()
+        ]
         if unique_id is not None and extra_pnginfo is not None:
             if not isinstance(extra_pnginfo, list):
                 print("Error: extra_pnginfo is not a list")

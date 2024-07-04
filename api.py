@@ -92,7 +92,7 @@ def api(
         if prompt[p]["class_type"] == "start_workflow":
             if file_content != "":
                 prompt[p]["inputs"]["file_content"] = file_content
-            if image_input is not None and image_input!=[]:
+            if image_input is not None and image_input != []:
                 prompt[p]["inputs"]["image_input"] = image_input
             prompt[p]["inputs"]["file_path"] = file_path
             prompt[p]["inputs"]["img_path"] = img_path
@@ -198,7 +198,7 @@ if "chat_history" not in st.session_state:
 # 使用函数来访问 'current_page'
 if get_current_page() == "chat":
     response = "你好哇~"
-    ai_name=st.session_state["wf_path"]
+    ai_name = st.session_state["wf_path"]
     ai_name = ai_name.replace(".json", "")
     st.markdown(f"{ai_name}: 你好哇~")
     chat_history_container = st.container()  # Use a container to hold the chat history

@@ -1,9 +1,13 @@
 import json
 import os
+
 from ..config import current_dir_path
+
 file_path = os.path.join(current_dir_path, "file")
 
-story_path=""
+story_path = ""
+
+
 class story_json_tool:
     @classmethod
     def INPUT_TYPES(s):
@@ -54,9 +58,10 @@ class story_json_tool:
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
 
+
 def read_story_json(chapter):
     global story_path
     with open(story_path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    out = json.dumps(data[str(chapter)], ensure_ascii=False,indent=4)
+    out = json.dumps(data[str(chapter)], ensure_ascii=False, indent=4)
     return out

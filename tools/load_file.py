@@ -1,5 +1,6 @@
 import json
 import os
+
 import chardet
 import docx2txt
 import numpy as np
@@ -12,6 +13,7 @@ import xlrd
 from PIL import Image, ImageOps, ImageSequence
 
 from ..config import current_dir_path
+
 file_path = os.path.join(current_dir_path, "file")
 programming_languages_extensions = [".py", ".js", ".java", ".c", ".cpp", ".html", ".css", ".sql", ".r", ".swift"]
 
@@ -31,16 +33,16 @@ def read_one(path):
             if sheet.max_row > 1:  # 至少有一行数据（不包括表头）
                 # 获取工作表名称
                 text += f"## {sheet.title} 的内容\n"
-                
+
                 # 获取表头
                 headers = next(sheet.iter_rows(min_row=1, max_row=1, values_only=True), None)
                 if headers:
                     text += "|" + " | ".join([" " if cell is None else str(cell) for cell in headers]) + "|\n"
-                    text += "|" + " | ".join(['---'] * len(headers)) + "|\n"
+                    text += "|" + " | ".join(["---"] * len(headers)) + "|\n"
                 else:
                     text += "没有找到表头。\n"
                     continue
-                
+
                 # 获取数据行
                 for row in sheet.iter_rows(min_row=2, values_only=True):
                     if any(cell is not None for cell in row):
@@ -49,21 +51,21 @@ def read_one(path):
                         # 如果整行都是空的，则停止读取当前工作表
                         break
     elif path.endswith(".xls"):
-        workbook = xlrd.open_workbook(path)       
+        workbook = xlrd.open_workbook(path)
         for sheet_index in range(workbook.nsheets):
-            sheet = workbook.sheet_by_index(sheet_index)          
+            sheet = workbook.sheet_by_index(sheet_index)
             # 检查工作表是否为空
             if sheet.nrows > 0:
                 text += f"## {sheet.name} 的内容\n"
                 text += "| " + " | ".join(sheet.row_values(0)) + " |\n"  # 添加表头
-                text += "| " + " | ".join(['---'] * sheet.ncols) + " |\n"  # 添加分隔符
+                text += "| " + " | ".join(["---"] * sheet.ncols) + " |\n"  # 添加分隔符
                 for row_num in range(1, sheet.nrows):
                     text += "| " + " | ".join([str(cell) for cell in sheet.row_values(row_num)]) + " |\n"
     elif path.endswith(".csv"):
         # 检测文件编码
-        with open(path, 'rb') as file:
+        with open(path, "rb") as file:
             result = chardet.detect(file.read())
-            encoding = result['encoding']
+            encoding = result["encoding"]
         df = pd.read_csv(path, encoding=encoding)
         text += df.to_markdown(index=True)
     elif path.endswith(".txt"):
@@ -105,10 +107,10 @@ class load_file:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self,relative_path,absolute_path="", is_enable=True):
+    def file(self, relative_path, absolute_path="", is_enable=True):
         if is_enable == False:
             return (None,)
-        if absolute_path!="":
+        if absolute_path != "":
             path = absolute_path
         else:
             path = os.path.join(file_path, relative_path)
@@ -256,7 +258,7 @@ class start_workflow:
         user_prompt="你好",
         positive_prompt="",
         negative_prompt="",
-        model_name=""
+        model_name="",
     ):
         file_out = ""
         if file_content is not None and file_content != "":
