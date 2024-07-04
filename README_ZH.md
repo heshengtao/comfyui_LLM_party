@@ -115,8 +115,13 @@
 ## 免责声明：
 本开源项目及其内容（以下简称“项目”）仅供参考之用，并不意味着任何明示或暗示的保证。项目贡献者不对项目的完整性、准确性、可靠性或适用性承担任何责任。任何依赖项目内容的行为均需自行承担风险。在任何情况下，项目贡献者均不对因使用项目内容而产生的任何间接、特殊或附带的损失或损害承担责任。
 
-## 特别感谢：
-感谢[@bigcat88](https://github.com/bigcat88)对本项目的贡献！
+## 特别感谢
+<a href="https://github.com/bigcat88">
+  <img src="https://avatars.githubusercontent.com/u/13381981?v=4" width="50" height="50" style="border-radius: 50%;" alt="<GitHub-username>"/>
+</a>
+<a href="https://github.com/guobalove">
+  <img src="https://avatars.githubusercontent.com/u/171540731?v=4" width="50" height="50" style="border-radius: 50%;" alt="<GitHub-username>"/>
+</a>
 
 ## 支持：
 

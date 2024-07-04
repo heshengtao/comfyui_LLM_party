@@ -116,7 +116,12 @@ Configure the APIKEY using one of the following methods:
 This open-source project and its contents (hereinafter referred to as "Project") are provided for reference purposes only and do not imply any form of warranty, either expressed or implied. The contributors of the Project shall not be held responsible for the completeness, accuracy, reliability, or suitability of the Project. Any reliance you place on the Project is strictly at your own risk. In no event shall the contributors of the Project be liable for any indirect, special, or consequential damages or any damages whatsoever resulting from the use of the Project.
 
 ## Special thanks:
-Thanks to [@bigcat88](https://github.com/bigcat88) for contributing to this project!
+<a href="https://github.com/bigcat88">
+  <img src="https://avatars.githubusercontent.com/u/13381981?v=4" width="50" height="50" style="border-radius: 50%;" alt="<GitHub-username>"/>
+</a>
+<a href="https://github.com/guobalove">
+  <img src="https://avatars.githubusercontent.com/u/171540731?v=4" width="50" height="50" style="border-radius: 50%;" alt="<GitHub-username>"/>
+</a>
 
 ## Support:
 
