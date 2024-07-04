@@ -23,13 +23,10 @@ from transformers import (
     AutoTokenizer,
     GenerationConfig,
 )
-
 if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
-
 from torchvision.transforms import ToPILImage
-
-from .config import config_key, config_path, current_dir_path, load_api_keys
+from .config import config_path, current_dir_path, load_api_keys,config_key
 from .tools.api_tool import api_tool, use_api_tool
 from .tools.arxiv import arxiv_tool, get_arxiv
 from .tools.check_web import check_web, check_web_tool
@@ -37,10 +34,7 @@ from .tools.classify_function import classify_function, classify_function_plus
 from .tools.classify_persona import classify_persona, classify_persona_plus
 from .tools.custom_persona import custom_persona
 from .tools.dialog import end_dialog, start_dialog
-from .tools.dingding import Dingding, Dingding_tool, send_dingding
 from .tools.end_work import end_workflow
-from .tools.excel import load_excel
-from .tools.feishu import feishu, feishu_tool, send_feishu
 from .tools.file_combine import file_combine, file_combine_plus
 from .tools.get_time import get_time, time_tool
 from .tools.get_weather import (
@@ -49,46 +43,31 @@ from .tools.get_weather import (
     get_weather,
     weather_tool,
 )
-from .tools.git_tool import github_tool, search_github_repositories
 from .tools.image import CLIPTextEncode_party, KSampler_party, VAEDecode_party
 from .tools.interpreter import interpreter, interpreter_tool
-from .tools.keyword import keyword_tool, load_keyword, search_keyword
-from .tools.KG import (
-    Delete_entities,
-    Delete_relationships,
-    Inquire_entities,
-    Inquire_entity_relationships,
-    Inquire_relationships,
-    KG_json_toolkit_developer,
-    KG_json_toolkit_user,
-    Modify_entities,
-    Modify_relationships,
-    New_entities,
-    New_relationships,
-)
-from .tools.KG_csv import (
-    Delete_triple,
-    Inquire_triple,
-    KG_csv_toolkit_developer,
-    KG_csv_toolkit_user,
-    New_triple,
-)
 from .tools.load_ebd import data_base, ebd_tool, load_embeddings
 from .tools.load_file import load_file, load_file_folder, load_url, start_workflow
-from .tools.load_model_name import load_name
 from .tools.load_persona import load_persona
-from .tools.logic import get_string, replace_string, string_logic, substring
+from .tools.logic import string_logic,substring,get_string,replace_string
 from .tools.new_interpreter import new_interpreter, new_interpreter_tool
-from .tools.omost import omost_decode, omost_setting
-from .tools.search_web import bing_tool, google_tool, search_web, search_web_bing
-from .tools.show_text import About_us, show_text_party
-from .tools.story import read_story_json, story_json_tool
+from .tools.search_web import google_tool, search_web,bing_tool,search_web_bing
+from .tools.show_text import show_text_party,About_us
 from .tools.tool_combine import tool_combine, tool_combine_plus
-from .tools.tts import openai_tts, play_audio
-from .tools.wechat import send_wechat, work_wechat, work_wechat_tool
-from .tools.whisper import listen_audio, openai_whisper
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
-from .tools.workflow import work_flow, workflow_tool, workflow_transfer
+from .tools.workflow import workflow_transfer,workflow_tool,work_flow
+from .tools.excel import load_excel
+from .tools.git_tool import github_tool,search_github_repositories
+from .tools.wechat import work_wechat_tool,send_wechat,work_wechat
+from .tools.dingding import Dingding_tool,send_dingding,Dingding
+from .tools.feishu import feishu_tool,send_feishu,feishu
+from .tools.tts import openai_tts,play_audio
+from .tools.load_model_name import load_name
+from .tools.omost import omost_decode,omost_setting
+from .tools.keyword import keyword_tool,search_keyword,load_keyword
+from .tools.whisper import listen_audio,openai_whisper
+from .tools.story import story_json_tool,read_story_json
+from .tools.KG import KG_json_toolkit_developer,KG_json_toolkit_user,Inquire_entities,New_entities,Modify_entities,Delete_entities,Inquire_relationships,New_relationships,Modify_relationships,Delete_relationships,Inquire_entity_relationships
+from .tools.KG_csv import KG_csv_toolkit_developer,KG_csv_toolkit_user,Inquire_triple,New_triple,Delete_triple
 
 _TOOL_HOOKS = [
     "get_time",
@@ -106,7 +85,7 @@ _TOOL_HOOKS = [
     "get_arxiv",
     "work_flow",
     "search_github_repositories",
-    "send_wechat",
+    "send_wechat",   
     "send_dingding",
     "send_feishu",
     "search_keyword",
@@ -126,7 +105,6 @@ _TOOL_HOOKS = [
 ]
 instances = []
 image_buffer = []
-
 
 def another_llm(id, type, question):
     print(id, type, question)
@@ -150,7 +128,7 @@ def another_llm(id, type, question):
             is_locked,
             max_length,
             system_prompt_input,
-            user_prompt_input,
+            user_prompt_input, 
             tools,
             file_content,
             images,
@@ -169,7 +147,7 @@ def another_llm(id, type, question):
             is_locked,
             max_length,
             system_prompt_input,
-            user_prompt_input,
+            user_prompt_input, 
             tools,
             file_content,
             images,
@@ -197,7 +175,7 @@ def another_llm(id, type, question):
             is_memory,
             is_locked,
             system_prompt_input,
-            user_prompt_input,
+            user_prompt_input, 
             tools,
             file_content,
             image,
@@ -216,7 +194,7 @@ def another_llm(id, type, question):
             is_memory,
             is_locked,
             system_prompt_input,
-            user_prompt_input,
+            user_prompt_input, 
             tools,
             file_content,
             image,
@@ -259,10 +237,10 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
     tool_call = globals().get(tool_name)
     try:
         ret_out = tool_call(**tool_params)
-        if tool_name == "work_flow":
+        if tool_name =="work_flow":
             ret = ret_out[0]
-            image_buffer = ret_out[1]
-            if ret == "" or ret is None:
+            image_buffer= ret_out[1]
+            if ret =="" or ret is None:
                 ret = "图片已生成。"
         else:
             ret = ret_out
@@ -272,7 +250,7 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
 
 
 class Chat:
-    def __init__(self, model_name, apikey, baseurl) -> None:
+    def __init__(self, model_name,apikey,baseurl) -> None:
         self.model_name = model_name
         self.apikey = apikey
         self.baseurl = baseurl
@@ -299,20 +277,19 @@ class Chat:
                     print(response_content.arguments)
                     results = dispatch_tool(response_content.name, json.loads(response_content.arguments))
                     print(results)
-                    history.append(
-                        {
-                            "tool_calls": [
-                                {
-                                    "id": assistant_message.tool_calls[0].id,
-                                    "function": {
-                                        "arguments": response_content.arguments,
-                                        "name": response_content.name,
+                    history.append({
+                        "tool_calls":[
+                            {
+                                "id": assistant_message.tool_calls[0].id,
+                                "function":{
+                                    "arguments": response_content.arguments,
+                                    "name": response_content.name
                                     },
-                                    "type": assistant_message.tool_calls[0].type,
-                                }
-                            ],
-                            "role": "assistant",
-                            "content": str(response_content),
+                                "type":assistant_message.tool_calls[0].type
+                            }
+                        ],
+                        "role": "assistant", 
+                        "content": str(response_content)
                         }
                     )
                     history.append(
@@ -325,35 +302,26 @@ class Chat:
                     )
                     try:
                         response = openai.chat.completions.create(
-                            model=self.model_name,
-                            messages=history,
+                            model=self.model_name, 
+                            messages=history, 
                             tools=tools,
-                            temperature=temperature,
-                            max_tokens=max_length,
+                            temperature=temperature, 
+                            max_tokens=max_length
                         )
                         print(response)
                     except Exception as e:
-                        print("tools calling失败，尝试使用function calling" + str(e))
-                        # 删除history最后两个元素
+                        print("tools calling失败，尝试使用function calling"+str(e))
+                        #删除history最后两个元素
                         history.pop()
                         history.pop()
-                        history.append(
-                            {
-                                "role": "assistant",
-                                "content": str(response_content),
-                                "function_call": {
-                                    "name": response_content.name,
-                                    "arguments": response_content.arguments,
-                                },
-                            }
-                        )
+                        history.append({"role": "assistant", "content": str(response_content),"function_call":{ "name": response_content.name, "arguments": response_content.arguments}})
                         history.append({"role": "function", "name": response_content.name, "content": results})
                         response = openai.chat.completions.create(
-                            model=self.model_name,
-                            messages=history,
+                            model=self.model_name, 
+                            messages=history, 
                             tools=tools,
-                            temperature=temperature,
-                            max_tokens=max_length,
+                            temperature=temperature, 
+                            max_tokens=max_length
                         )
                         print(response)
                 while response.choices[0].message.function_call:
@@ -364,20 +332,14 @@ class Chat:
                     print("正在调用" + function_name + "工具")
                     results = dispatch_tool(function_name, function_arguments)
                     print(results)
-                    history.append(
-                        {
-                            "role": "assistant",
-                            "content": str(function_call),
-                            "function_call": {"name": function_name, "arguments": function_arguments},
-                        }
-                    )
+                    history.append({"role": "assistant", "content": str(function_call),"function_call":{"name": function_name, "arguments": function_arguments}})
                     history.append({"role": "function", "name": function_name, "content": results})
                     response = openai.chat.completions.create(
-                        model=self.model_name,
-                        messages=history,
+                        model=self.model_name, 
+                        messages=history, 
                         tools=tools,
-                        temperature=temperature,
-                        max_tokens=max_length,
+                        temperature=temperature, 
+                        max_tokens=max_length
                     )
                 response_content = response.choices[0].message.content
                 print(response)
@@ -395,11 +357,60 @@ class Chat:
                     results = interpreter(code)
                     history.append({"role": "function", "name": "interpreter", "content": results})
                     response = openai.chat.completions.create(
-                        model=self.model_name,
-                        messages=history,
+                        model=self.model_name, 
+                        messages=history, 
                         tools=tools,
-                        temperature=temperature,
-                        max_tokens=max_length,
+                        temperature=temperature, 
+                        max_tokens=max_length
+                    )
+                    response_content = response.choices[0].message.content
+
+                is_valid_json = True
+                try:
+                    json_str = response_content.replace("'", '"').strip()
+                    data = json.loads(json_str)
+                    is_valid_json = True
+                except json.JSONDecodeError:
+                    is_valid_json = False
+                while is_valid_json:
+                    tool = data.get("tool")
+                    parameters = data.get("parameters")
+                    print("正在调用" + tool + "工具")
+                    results = dispatch_tool(tool, parameters)
+                    print(results)
+                    history.append({"role":"assistant", "content": json_str})
+                    history.append({"role": "user", "content": "调用"+ tool + "工具返回的结果为："+results+"。请根据工具返回的结果回答我之前提出的问题。"})
+                    response = openai.chat.completions.create(
+                        model=self.model_name, 
+                        messages=history, 
+                        temperature=temperature, 
+                        max_tokens=max_length
+                    )
+                    response_content = response.choices[0].message.content      
+                    try:
+                        json_str = response_content.replace("'", '"').strip()
+                        data = json.loads(json_str)
+                        is_valid_json = True
+                    except json.JSONDecodeError:
+                        is_valid_json = False
+                # 正则表达式匹配
+                pattern = r'```tool_json(.*?)```'              
+                while re.search(pattern, response_content, re.DOTALL)!=None:
+                    match=re.search(pattern, response_content, re.DOTALL)
+                    json_str = match.group(1).strip()
+                    data = json.loads(json_str)
+                    tool = data.get("tool")
+                    parameters = data.get("parameters")
+                    print("正在调用" + tool + "工具")
+                    results = dispatch_tool(tool, parameters)
+                    print(results)
+                    history.append({"role":"assistant", "content": json_str})
+                    history.append({"role": "user", "content": "调用"+ tool + "工具返回的结果为："+results+"。请根据工具返回的结果继续回答我之前提出的问题。"})
+                    response = openai.chat.completions.create(
+                        model=self.model_name, 
+                        messages=history, 
+                        temperature=temperature, 
+                        max_tokens=max_length
                     )
                     response_content = response.choices[0].message.content
             else:
@@ -415,16 +426,15 @@ class Chat:
             response_content = str(ex)
         return response_content, history
 
-
 class LLM_api_loader:
     def __init__(self):
         pass
-
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "model_name": ("STRING", {"default": "gpt-3.5-turbo-1106"}),
+
             },
             "optional": {
                 "base_url": (
@@ -439,11 +449,14 @@ class LLM_api_loader:
                         "default": "sk-XXXXX",
                     },
                 ),
-            },
-        }
-
-    RETURN_TYPES = ("CUSTOM",)
-    RETURN_NAMES = ("model",)
+            }
+            }
+    RETURN_TYPES = (
+        "CUSTOM",
+    )
+    RETURN_NAMES = (
+        "model",
+    )
 
     FUNCTION = "chatbot"
 
@@ -451,7 +464,7 @@ class LLM_api_loader:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def chatbot(self, model_name, base_url=None, api_key=None):
+    def chatbot(self, model_name,base_url=None,api_key=None):
         api_keys = load_api_keys(config_path)
         if api_key != "":
             openai.api_key = api_key
@@ -476,17 +489,18 @@ class LLM_api_loader:
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
-        chat = Chat(model_name, openai.api_key, openai.base_url)
+        chat = Chat(model_name,openai.api_key,openai.base_url)
         return (chat,)
+
+            
 
 
 class LLM:
     original_IS_CHANGED = None
-
     def __init__(self):
         current_time = datetime.datetime.now()
         # 以时间戳作为ID，字符串格式 XX年XX月XX日XX时XX分XX秒
-        self.id = current_time.strftime("%Y_%m_%d_%H_%M_%S")
+        self.id =  current_time.strftime("%Y_%m_%d_%H_%M_%S")
         global instances
         instances.append(self)
         # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
@@ -503,7 +517,6 @@ class LLM:
         self.list = []
         self.added_to_list = False
         self.is_locked = "disable"
-
     @classmethod
     def INPUT_TYPES(s):
         temp_path = os.path.join(current_dir_path, "temp")
@@ -534,6 +547,7 @@ class LLM:
                 "user_prompt_input": ("STRING", {"forceInput": True}),
                 "tools": ("STRING", {"forceInput": True}),
                 "file_content": ("STRING", {"forceInput": True}),
+
                 "images": ("IMAGE", {"forceInput": True}),
                 "imgbb_api_key": (
                     "STRING",
@@ -606,7 +620,7 @@ class LLM:
         if user_prompt is None:
             user_prompt = user_prompt_input
         else:
-            user_prompt = user_prompt + user_prompt_input
+            user_prompt = user_prompt +user_prompt_input 
         if historical_record != "":
             temp_path = os.path.join(current_dir_path, "temp")
             self.prompt_path = os.path.join(temp_path, historical_record)
@@ -620,16 +634,16 @@ class LLM:
             if self.added_to_list == False:
                 llm_tools_list.append(self.tool_data)
                 self.added_to_list = True
-        self.is_locked = is_locked
+        self.is_locked=is_locked
         if LLM.original_IS_CHANGED is None:
             # 保存原始的IS_CHANGED方法的引用
             LLM.original_IS_CHANGED = LLM.IS_CHANGED
         if self.is_locked == "disable":
-            setattr(LLM, "IS_CHANGED", LLM.original_IS_CHANGED)
+            setattr(LLM, 'IS_CHANGED', LLM.original_IS_CHANGED)
         else:
             # 如果方法存在，则删除
-            if hasattr(LLM, "IS_CHANGED"):
-                delattr(LLM, "IS_CHANGED")
+            if hasattr(LLM, 'IS_CHANGED'):
+                delattr(LLM, 'IS_CHANGED')
         llm_tools = [
             {
                 "type": "function",
@@ -671,46 +685,73 @@ class LLM:
                     history = json.load(f)
                 history_temp = [history[0]]
                 elements_to_keep = 2 * conversation_rounds
-                if elements_to_keep < len(history) - 1:
+                if elements_to_keep < len(history)-1:
                     history_temp += history[-elements_to_keep:]
                     history_copy = history[1:-elements_to_keep]
                 else:
-                    if len(history) > 1:
+                    if len(history) >1:
                         history_temp += history[1:]
                     history_copy = []
-                if len(history_temp) > 1:
-                    if history_temp[1]["role"] == "tool":
-                        history_temp.insert(1, history[-elements_to_keep - 1])
-                        if -elements_to_keep - 1 > 1:
-                            history_copy = history[1 : -elements_to_keep - 1]
+                if len(history_temp) >1:
+                    if history_temp[1]['role'] == 'tool':
+                        history_temp.insert(1, history[-elements_to_keep-1])
+                        if -elements_to_keep-1>1:
+                            history_copy = history[1:-elements_to_keep-1]
                         else:
                             history_copy = []
                 history = history_temp
-                tool_list = []
                 if is_tools_in_sys_prompt == "enable":
+                    tools_list = []
+                    GPT_INSTRUCTION = ""
                     if tools is not None:
                         tools_dis = json.loads(tools)
                         for tool_dis in tools_dis:
-                            tool_list.append(tool_dis["function"])
-                        system_prompt = system_prompt + "\n" + "你可以使用以下工具："
-                else:
-                    tool_list = []
+                            tools_list.append(tool_dis["function"])
+                        tools_instructions = ""
+                        tools_instruction_list = []
+                        for tool in tools_list:
+                            tools_instruction_list.append(tool["name"])
+                            tools_instructions += (
+                                str(tool["name"])
+                                + ":"
+                                + "Call this tool to interact with the "
+                                + str(tool["name"])
+                                + " API. What is the "
+                                + str(tool["name"])
+                                + " API useful for? "
+                                + str(tool["description"])
+                                + ". Parameters:"
+                                + str(tool["parameters"])
+                                + "\n"
+                            )
+                        REUTRN_FORMAT="{\"tool\": \"tool name\", \"parameters\": {\"parameter name\": \"parameter value\"}}"
+                        TOOL_EAXMPLE = "You will receive a JSON string containing a list of callable tools. Please parse this JSON string and return a JSON object containing the tool name and tool parameters. Here is an example of the tool list:\n\n{\"tools\": [{\"name\": \"search\", \"description\": \"Search for information\", \"parameters\": {\"query\": \"string\"}}, {\"name\": \"calculator\", \"description\": \"Calculate mathematical expressions\", \"parameters\": {\"expression\": \"string\"}}]}\n\nBased on this tool list, generate a JSON object to call a tool. For example, if you need to search for 'weather forecast', return:\n\n{\"tool\": \"search\", \"parameters\": {\"query\": \"weather forecast\"}}"
+                        GPT_INSTRUCTION = f"""
+        Answer the following questions as best you can. You have access to the following APIs:
+        {tools_instructions}
+        
+        Use the following format:
+        ```tool_json
+        {REUTRN_FORMAT}
+        ``` 
 
-                for message in history:
-                    if message["role"] == "system":
-                        message["content"] = system_prompt
-                        if tool_list != []:
-                            message["tools"] = tool_list
-                        else:
-                            if "tools" in message:
-                                # 如果存在，移除 'tools' 键值对
-                                message.pop("tools")
+        Please choose the appropriate tool according to the user's question. If you don't need to call it, please reply directly to the user's question. When the user communicates with you in a language other than English, you need to communicate with the user in the same language.
+
+        When you have enough information from the tool results, respond directly to the user with a text message without having to call the tool again.
+        """
+                    
+                    for message in history:
+                        if message["role"] == "system":
+                            message["content"] = system_prompt
+                            if tools_list != []:
+                                message["content"] += "\n" +TOOL_EAXMPLE+"\n" + GPT_INSTRUCTION + "\n"
 
                 if tools is not None:
                     print(tools)
                     tools = json.loads(tools)
 
-                max_length = int(max_length)
+                max_length=int(max_length)
+                
 
                 if file_content is not None:
                     user_prompt = (
@@ -739,7 +780,9 @@ class LLM:
                             {"type": "text", "text": user_prompt},
                             {
                                 "type": "image_url",
-                                "image_url": {"url": f"data:image/jpeg;base64,{img_str}"},
+                                "image_url": {
+                                    "url": f"data:image/jpeg;base64,{img_str}"
+                                },
                             },
                         ]
                         user_prompt = img_json
@@ -765,15 +808,15 @@ class LLM:
                         img_json = [
                             {"type": "text", "text": user_prompt},
                             {
-                                "type": "image_url",
-                                "image_url": {
-                                    "url": img_url,
-                                },
+                            "type": "image_url",
+                            "image_url": {
+                                "url": img_url,
+                            },
                             },
                         ]
                         user_prompt = img_json
 
-                response, history = model.send(user_prompt, temperature, max_length, history, tools)
+                response, history = model.send(user_prompt, temperature, max_length,history, tools)
                 print(response)
                 # 修改prompt.json文件
                 history_get = [history[0]]
@@ -784,14 +827,14 @@ class LLM:
                     json.dump(history, f, indent=4, ensure_ascii=False)
                 for his in history:
                     if his["role"] == "user":
-                        # 如果his["content"]是个列表，则只保留"type" : "text"时的"text"属性内容
+                        #如果his["content"]是个列表，则只保留"type" : "text"时的"text"属性内容
                         if isinstance(his["content"], list):
                             for item in his["content"]:
                                 if item.get("type") == "text" and item.get("text"):
                                     his["content"] = item["text"]
                                     break
-                historys = ""
-                # 将history中的消息转换成便于用户阅读的markdown格式
+                historys=""
+                #将history中的消息转换成便于用户阅读的markdown格式
                 for his in history:
                     if his["role"] == "user":
                         historys += f"**User:** {his['content']}\n\n"
@@ -803,15 +846,15 @@ class LLM:
                         historys += f"**Observation:** {his['content']}\n\n"
                     elif his["role"] == "tool":
                         historys += f"**Tool:** {his['content']}\n\n"
-                    elif his["role"] == "function":
+                    elif his["role"]=="function":
                         historys += f"**Function:** {his['content']}\n\n"
 
                 history = str(historys)
                 global image_buffer
-                image_out = image_buffer.copy()
-                image_buffer = []
-                if image_out == []:
-                    image_out = None
+                image_out=image_buffer.copy()
+                image_buffer=[]
+                if image_out ==[]:
+                    image_out=None
                 return (
                     response,
                     history,
@@ -826,60 +869,38 @@ class LLM:
                     llm_tools_json,
                     None,
                 )
-
+            
     @classmethod
     def IS_CHANGED(s):
-        # 生成当前时间的哈希值
+        #生成当前时间的哈希值
         hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
         return hash_value
 
 
-def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="user", temperature=0.7):
-    if role == "observation":
-        history.append({"role": role, "content": "Observation: " + user_prompt.strip()})
-    else:
-        history.append({"role": role, "content": user_prompt.strip()})
+def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="user",temperature=0.7):
+    history.append({"role": role, "content": user_prompt.strip()})
     text = tokenizer.apply_chat_template(history, tokenize=False, add_generation_prompt=True)
     model_inputs = tokenizer([text], return_tensors="pt").to(device)
-    stop_tokens_id = tokenizer.eos_token_id
-    stop_tokens = ["Observation:"]  # 示例停止词
-    stop_token_ids = [tokenizer.encode(stop_token, add_special_tokens=False)[0] for stop_token in stop_tokens]
-    # 将stop_tokens_id和stop_tokens_ids进行合并
-    # 判断stop_tokens_id是否是int还是列表
-    if isinstance(stop_tokens_id, int):
-        stop_token_ids.append(stop_tokens_id)
-    elif isinstance(stop_tokens_id, list):
-        stop_token_ids.extend(stop_tokens_id)
     generated_ids = model.generate(
-        model_inputs.input_ids,
-        max_new_tokens=max_length,
-        eos_token_id=stop_token_ids,
-        temperature=temperature,  # Add the eos_token_id parameter
+        model_inputs.input_ids, max_new_tokens=max_length,temperature=temperature  # Add the eos_token_id parameter
     )
     generated_ids = [
         output_ids[len(input_ids) :] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
     ]
-
     response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
-    if "Final Answer: " in response:
-        pattern_C = r"Final Answer: (.*)"
-        FinalAnswer = re.search(pattern_C, response).group(1)
-        response = FinalAnswer
     history.append({"role": "assistant", "content": response})
     return response, history
-
 
 class LLM_local_loader:
     def __init__(self):
         self.id = hash(str(self))
-        self.device = ""
-        self.dtype = ""
-        self.model_type = ""
-        self.model_path = ""
-        self.tokenizer_path = ""
-        self.model = ""
-        self.tokenizer = ""
-
+        self.device=""
+        self.dtype=""
+        self.model_type=""
+        self.model_path=""
+        self.tokenizer_path=""
+        self.model=""
+        self.tokenizer=""
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -902,21 +923,20 @@ class LLM_local_loader:
                         "default": None,
                     },
                 ),
-                "device": (
-                    ["auto", "cuda", "cpu", "mps"],
+                "device":(
+                    ["auto","cuda", "cpu","mps"],
                     {
                         "default": "auto",
-                    },
+                    }
                 ),
                 "dtype": (
-                    ["float32", "float16", "int8", "int4"],
+                    ["float32", "float16","int8","int4"],
                     {
                         "default": "float32",
-                    },
+                    }
                 ),
-            }
-        }
-
+                
+            }}
     RETURN_TYPES = (
         "CUSTOM",
         "CUSTOM",
@@ -932,17 +952,11 @@ class LLM_local_loader:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def chatbot(self, model_type, model_path, tokenizer_path, device, dtype):
+    def chatbot(self, model_type,model_path,tokenizer_path,device,dtype):
         if device == "auto":
-            device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
-
-        if (
-            self.model_type != model_type
-            or self.device != device
-            or self.dtype != dtype
-            or self.model_path != model_path
-            or self.tokenizer_path != tokenizer_path
-        ):
+            device ="cuda"if torch.cuda.is_available()else ("mps" if torch.backends.mps.is_available() else "cpu")
+        
+        if self.model_type!=model_type or self.device != device or self.dtype!=dtype or self.model_path!=model_path or self.tokenizer_path!=tokenizer_path:
             del self.model
             del self.tokenizer
             if self.device == "cuda":
@@ -956,132 +970,107 @@ class LLM_local_loader:
             self.model_type = model_type
             self.model_path = model_path
             self.tokenizer_path = tokenizer_path
-            self.device = device
-            self.dtype = dtype
+            self.device=device
+            self.dtype=dtype
         if model_type == "GLM":
             if self.tokenizer == "":
                 self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
-            if self.model == "":
+            if self.model == "" :
                 if device == "cuda":
-                    if dtype == "float32":
+                    if dtype =="float32":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).cuda()
-                    elif dtype == "float16":
+                    elif dtype =="float16":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().cuda()
-                    elif dtype == "int8":
-                        self.model = (
-                            AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().cuda()
-                        )
-                    elif dtype == "int4":
-                        self.model = (
-                            AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().cuda()
-                        )
+                    elif dtype =="int8":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().cuda()
+                    elif dtype =="int4":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().cuda()
                 elif device == "cpu":
-                    if dtype == "float32":
+                    if dtype =="float32":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).float()
-                    elif dtype == "float16":
+                    elif dtype =="float16":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().float()
-                    elif dtype == "int8":
-                        self.model = (
-                            AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().float()
-                        )
-                    elif dtype == "int4":
-                        self.model = (
-                            AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().float()
-                        )
+                    elif dtype =="int8":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().float()
+                    elif dtype =="int4":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().float()
                 elif device == "mps":
-                    if dtype == "float32":
+                    if dtype =="float32":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).to("mps")
-                    elif dtype == "float16":
+                    elif dtype =="float16":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().to("mps")
-                    elif dtype == "int8":
-                        self.model = (
-                            AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().to("mps")
-                        )
-                    elif dtype == "int4":
-                        self.model = (
-                            AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().to("mps")
-                        )
+                    elif dtype =="int8":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().to("mps")
+                    elif dtype =="int4":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().to("mps")
                 self.model = self.model.eval()
-
+            
         elif model_type in ["llama", "Qwen"]:
             if self.tokenizer == "":
                 self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
-            if self.model == "":
+            if self.model == "" :
                 if device == "cuda":
-                    if dtype == "float32":
+                    if dtype =="float32":
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="cuda"
                         )
-                    elif dtype == "float16":
+                    elif dtype =="float16":
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="cuda"
                         ).half()
-                    elif dtype == "int8":
-                        quantization_config = BitsAndBytesConfig(
-                            load_in_8bit=True,
-                        )
+                    elif dtype =="int8":
+                        quantization_config = BitsAndBytesConfig(load_in_8bit=True,)
                         self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path,
-                            trust_remote_code=True,
-                            device_map="cuda",
-                            quantization_config=quantization_config,
+                            model_path, trust_remote_code=True, device_map="cuda",quantization_config=quantization_config
                         )
-                    elif dtype == "int4":
+                    elif dtype =="int4":
                         quantization_config = BitsAndBytesConfig(load_in_4bit=True)
                         self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path,
-                            trust_remote_code=True,
-                            device_map="cuda",
-                            quantization_config=quantization_config,
+                            model_path, trust_remote_code=True, device_map="cuda",quantization_config=quantization_config
                         )
                 elif device == "cpu":
-                    if dtype == "float32":
+                    if dtype =="float32":
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="cpu"
-                        )
-                    elif dtype == "float16":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cpu"
-                        ).half()
-                    elif dtype == "int8":
+                            )
+                    elif dtype =="float16":
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="cpu"
                         ).half()
-                    elif dtype == "int4":
+                    elif dtype =="int8":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cpu"
+                        ).half()
+                    elif dtype =="int4":
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="cpu"
                         ).half()
                 elif device == "mps":
-                    if dtype == "float32":
+                    if dtype =="float32":
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="mps"
-                        )
-                    elif dtype == "float16":
+                    )
+                    elif dtype =="float16":
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="mps"
-                        ).half()
-                    elif dtype == "int8":
+                    ).half()
+                    elif dtype =="int8":
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="mps"
-                        ).half()
-                    elif dtype == "int4":
+                    ).half()
+                    elif dtype =="int4":
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="mps"
-                        ).half()
+                    ).half()
                 self.model = self.model.eval()
-        return (
-            self.model,
-            self.tokenizer,
-        )
-
+        return (self.model, self.tokenizer,)
 
 class LLM_local:
     original_IS_CHANGED = None
-
     def __init__(self):
         # 生成一个hash值作为id
-        current_time = datetime.datetime.now()
-        self.id = current_time.strftime("%Y_%m_%d_%H_%M_%S")
+        current_time= datetime.datetime.now()
+        self.id =  current_time.strftime("%Y_%m_%d_%H_%M_%S")
         global instances
         instances.append(self)
         # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
@@ -1097,8 +1086,7 @@ class LLM_local:
         self.tool_data = {"id": self.id, "system_prompt": "", "type": "local"}
         self.list = []
         self.added_to_list = False
-        self.is_locked = "disable"
-
+        self.is_locked= "disable"
     @classmethod
     def INPUT_TYPES(s):
         temp_path = os.path.join(current_dir_path, "temp")
@@ -1118,7 +1106,7 @@ class LLM_local:
                     },
                 ),
                 "model_type": (
-                    ["GLM", "llama", "Qwen", "llaVa", "llama-guff"],
+                    ["GLM", "llama", "Qwen","llaVa","llama-guff"],
                     {
                         "default": "GLM",
                     },
@@ -1130,7 +1118,7 @@ class LLM_local:
                 "main_brain": (["enable", "disable"], {"default": "enable"}),
             },
             "optional": {
-                "tokenizer": ("CUSTOM", {}),
+                "tokenizer":("CUSTOM",{}),
                 "image": ("IMAGE", {"forceInput": True}),
                 "system_prompt_input": ("STRING", {"forceInput": True}),
                 "user_prompt_input": ("STRING", {"forceInput": True}),
@@ -1201,7 +1189,7 @@ class LLM_local:
         if user_prompt is None:
             user_prompt = user_prompt_input
         else:
-            user_prompt = user_prompt + user_prompt_input
+            user_prompt = user_prompt +user_prompt_input 
         if historical_record != "":
             temp_path = os.path.join(current_dir_path, "temp")
             self.prompt_path = os.path.join(temp_path, historical_record)
@@ -1215,16 +1203,16 @@ class LLM_local:
             if not self.added_to_list:
                 llm_tools_list.append(self.tool_data)
                 self.added_to_list = True
-        self.is_locked = is_locked
+        self.is_locked=is_locked
         if LLM_local.original_IS_CHANGED is None:
             # 保存原始的IS_CHANGED方法的引用
             LLM_local.original_IS_CHANGED = LLM_local.IS_CHANGED
         if self.is_locked == "disable":
-            setattr(LLM_local, "IS_CHANGED", LLM_local.original_IS_CHANGED)
+            setattr(LLM_local, 'IS_CHANGED', LLM_local.original_IS_CHANGED)
         else:
             # 如果方法存在，则删除
-            if hasattr(LLM_local, "IS_CHANGED"):
-                delattr(LLM_local, "IS_CHANGED")
+            if hasattr(LLM_local, 'IS_CHANGED'):
+                delattr(LLM_local, 'IS_CHANGED')
         llm_tools = [
             {
                 "type": "function",
@@ -1262,18 +1250,18 @@ class LLM_local:
                     history = json.load(f)
                 history_temp = [history[0]]
                 elements_to_keep = 2 * conversation_rounds
-                if elements_to_keep < len(history) - 1:
+                if elements_to_keep < len(history)-1:
                     history_temp += history[-elements_to_keep:]
                     history_copy = history[1:-elements_to_keep]
                 else:
-                    if len(history) > 1:
+                    if len(history) >1:
                         history_temp += history[1:]
                     history_copy = []
-                if len(history_temp) > 1:
-                    if history_temp[1]["role"] == "tool":
-                        history_temp.insert(1, history[-elements_to_keep - 1])
-                        if -elements_to_keep - 1 > 1:
-                            history_copy = history[1 : -elements_to_keep - 1]
+                if len(history_temp) >1:
+                    if history_temp[1]['role'] == 'tool':
+                        history_temp.insert(1, history[-elements_to_keep-1])
+                        if -elements_to_keep-1>1:
+                            history_copy = history[1:-elements_to_keep-1]
                         else:
                             history_copy = []
                 history = history_temp
@@ -1300,23 +1288,22 @@ class LLM_local:
                             + str(tool["parameters"])
                             + "\n"
                         )
-                    GPT_INSTRUCTION = f"""Answer the following questions as best you can. You have access to the following APIs:
-
+                    REUTRN_FORMAT="{\"tool\": \"tool name\", \"parameters\": {\"parameter name\": \"parameter value\"}}"
+                    TOOL_EAXMPLE = "You will receive a JSON string containing a list of callable tools. Please parse this JSON string and return a JSON object containing the tool name and tool parameters. Here is an example of the tool list:\n\n{\"tools\": [{\"name\": \"search\", \"description\": \"Search for information\", \"parameters\": {\"query\": \"string\"}}, {\"name\": \"calculator\", \"description\": \"Calculate mathematical expressions\", \"parameters\": {\"expression\": \"string\"}}]}\n\nBased on this tool list, generate a JSON object to call a tool. For example, if you need to search for 'weather forecast', return:\n\n{\"tool\": \"search\", \"parameters\": {\"query\": \"weather forecast\"}}"
+                    GPT_INSTRUCTION = f"""
+    Answer the following questions as best you can. You have access to the following APIs:
     {tools_instructions}
-
+    
     Use the following format:
+    ```tool_json
+    {REUTRN_FORMAT}
+    ``` 
 
-    Question: the input question you must answer
-    Thought: you should always think about what to do
-    Action: the action to take, should be one of {tools_instruction_list}
-    Action Input: the input to the action, which must include the parameters in required
-    Observation: the result of the action
-    ... (this Thought/Action/Action Input/Observation can be repeated zero or more times)
-    Thought: I now know the final answer
-    Final Answer: the final answer to the original input question
+    Please choose the appropriate tool according to the user's question. If you don't need to call it, please reply directly to the user's question. When the user communicates with you in a language other than English, you need to communicate with the user in the same language.
 
-    Begin!"""
-
+    When you have enough information from the tool results, respond directly to the user with a text message without having to call the tool again.
+    """
+                
                 for message in history:
                     if message["role"] == "system":
                         message["content"] = system_prompt
@@ -1324,8 +1311,11 @@ class LLM_local:
                             if model_type == "GLM":
                                 message["content"] += "\n" + "你可以使用以下工具："
                                 message["tools"] = tools_list
-                            elif model_type in ["llama", "Qwen", "llaVa", "llama-guff"]:
-                                message["content"] += "\n" + GPT_INSTRUCTION + "\n"
+                            elif model_type in ["llama", "Qwen", "llaVa","llama-guff"]:
+                                message["content"] += "\n" +TOOL_EAXMPLE+"\n" + GPT_INSTRUCTION + "\n"
+                                if "tools" in message:
+                                # 如果存在，移除 'tools' 键值对
+                                    message.pop("tools")
                         else:
                             if "tools" in message:
                                 # 如果存在，移除 'tools' 键值对
@@ -1340,8 +1330,7 @@ class LLM_local:
                         return True
                     except json.JSONDecodeError:
                         return False
-
-                max_length = int(max_length)
+                max_length=int(max_length)
                 if file_content is not None:
                     user_prompt = (
                         "文件中相关内容："
@@ -1353,9 +1342,10 @@ class LLM_local:
                         + "请根据文件内容回答用户问题。\n"
                         + "如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
                     )
-
-                # 获得model存放的设备
-                if model_type not in ["llaVa", "llama-guff"]:
+                
+                
+                #获得model存放的设备
+                if model_type not in  ["llaVa","llama-guff"]:
                     device = next(model.parameters()).device
                 if model_type == "GLM":
                     response, history = model.chat(
@@ -1364,94 +1354,114 @@ class LLM_local:
                     while type(response) == dict:
                         if response["name"] == "interpreter":
                             result = interpreter(str(response["content"]))
-                            response, history = model.chat(tokenizer, result, history=history, role="observation")
+                            response, history = model.chat(
+                                tokenizer, result, history=history, role="observation"
+                            )
                         else:
                             result = dispatch_tool(response["name"], response["parameters"])
                             print(result)
-                            response, history = model.chat(tokenizer, result, history=history, role="observation")
+                            response, history = model.chat(
+                                tokenizer, result, history=history, role="observation"
+                            )
                 elif model_type in ["llama", "Qwen"]:
                     response, history = llm_chat(
-                        model, tokenizer, user_prompt, history, device, max_length, temperature=temperature
+                        model, tokenizer, user_prompt, history, device, max_length,temperature=temperature
                     )
-                    while "Action Input:" in response:
-                        print(response)
-                        pattern_A = r"Action: (.*?)\n"
-                        pattern_B = r"Action Input: (.*?)\n"
-                        Action = re.search(pattern_A, response).group(1)
-                        ActionInput = re.search(pattern_B, response).group(1)
-                        ActionInput = json.loads(ActionInput.replace("'", '"'))
-                        result = dispatch_tool(Action, ActionInput)
-                        print(result)
+                    is_valid_json = True
+                    try:
+                        json_str = response.replace("'", '"').strip()
+                        data = json.loads(json_str)
+                        is_valid_json = True
+                    except json.JSONDecodeError:
+                        is_valid_json = False
+                    while is_valid_json:
+                        tool = data.get("tool")
+                        parameters = data.get("parameters")
+                        print("正在调用" + tool + "工具")
+                        results = dispatch_tool(tool, parameters)
+                        print(results)
                         response, history = llm_chat(
-                            model,
-                            tokenizer,
-                            result,
-                            history,
-                            device,
-                            max_length,
-                            role="observation",
-                            temperature=temperature,
+                            model, tokenizer, results, history, device, max_length,role="observation",temperature=temperature
+                        )  
+                        try:
+                            json_str = response.replace("'", '"').strip()
+                            data = json.loads(json_str)
+                            is_valid_json = True
+                        except json.JSONDecodeError:
+                            is_valid_json = False
+                    # 正则表达式匹配
+                    pattern = r'```tool_json(.*?)```'              
+                    while re.search(pattern, response, re.DOTALL)!=None:
+                        match=re.search(pattern, response, re.DOTALL)
+                        json_str = match.group(1).strip()
+                        data = json.loads(json_str)
+                        tool = data.get("tool")
+                        parameters = data.get("parameters")
+                        print("正在调用" + tool + "工具")
+                        results = dispatch_tool(tool, parameters)
+                        print(results)
+                        response, history = llm_chat(
+                            model, tokenizer, results, history, device, max_length,role="observation",temperature=temperature
                         )
                 elif model_type == "llama-guff":
                     from llama_cpp import Llama
-
-                    history.append({"role": "user", "content": user_prompt.strip()})
-                    response = model.create_chat_completion(
-                        messages=history,
-                        stop=[
-                            "/INST",
-                            "[/INST]",
-                            "Observation:",
-                            "<PROMPT>",
-                            "<|eot_id|>",
-                            "</s>",
-                            "[End Conversation]",
-                            "[END]",
-                        ],
-                        frequency_penalty=1,
-                        presence_penalty=1,
-                        repeat_penalty=1.1,
+                    history.append({
+                        "role": "user",
+                        "content": user_prompt.strip()
+                    })
+                    response= model.create_chat_completion(
+                        messages = history,
                         max_tokens=max_length,
                         temperature=temperature,
                     )
-                    res = response["choices"][0]["message"]["content"].strip()
-                    print(res)
-                    while "Action Input:" in res:
-                        history.append({"role": "assistant", "content": res})
-                        print(res)
-                        pattern_A = r"Action: (.*?)\n"
-                        pattern_B = r"Action Input: (.*?)\n"
-                        Action = re.search(pattern_A, res).group(1)
-                        ActionInput = re.search(pattern_B, res).group(1)
-                        ActionInput = json.loads(ActionInput.replace("'", '"'))
-                        result = dispatch_tool(Action, ActionInput)
-                        history.append({"role": "observation", "content": result})
-                        print(result)
-                        response = model.create_chat_completion(
-                            messages=history,
-                            stop=[
-                                "/INST",
-                                "[/INST]",
-                                "Observation:",
-                                "<PROMPT>",
-                                "<|eot_id|>",
-                                "</s>",
-                                "[End Conversation]",
-                                "[END]",
-                            ],
-                            frequency_penalty=1,
-                            presence_penalty=0,
-                            repeat_penalty=1.1,
+                    response_content=response['choices'][0]['message']['content']
+                    print(response_content)
+                    is_valid_json = True
+                    try:
+                        json_str = response_content.replace("'", '"').strip()
+                        data = json.loads(json_str)
+                        is_valid_json = True
+                    except json.JSONDecodeError:
+                        is_valid_json = False
+                    while is_valid_json:
+                        tool = data.get("tool")
+                        parameters = data.get("parameters")
+                        print("正在调用" + tool + "工具")
+                        results = dispatch_tool(tool, parameters)
+                        print(results)
+                        history.append({"role":"assistant", "content": json_str})
+                        history.append({"role": "observation", "content": results})
+                        response= model.create_chat_completion(
+                            messages = history,
                             max_tokens=max_length,
                             temperature=temperature,
                         )
-                        res = response["choices"][0]["message"]["content"].strip()
-                    if "Final Answer: " in res:
-                        pattern_C = r"Final Answer: (.*)"
-                        FinalAnswer = re.search(pattern_C, res).group(1)
-                        res = FinalAnswer
-                    history.append({"role": "assistant", "content": res})
-                    response = res
+                        response_content = response.choices[0].message.content      
+                        try:
+                            json_str = response_content.replace("'", '"').strip()
+                            data = json.loads(json_str)
+                            is_valid_json = True
+                        except json.JSONDecodeError:
+                            is_valid_json = False
+                    # 正则表达式匹配
+                    pattern = r'```tool_json(.*?)```'              
+                    while re.search(pattern, response_content, re.DOTALL)!=None:
+                        match=re.search(pattern, response_content, re.DOTALL)
+                        json_str = match.group(1).strip()
+                        data = json.loads(json_str)
+                        tool = data.get("tool")
+                        parameters = data.get("parameters")
+                        print("正在调用" + tool + "工具")
+                        results = dispatch_tool(tool, parameters)
+                        print(results)
+                        history.append({"role":"assistant", "content": json_str})
+                        history.append({"role": "user", "content": "调用"+ tool + "工具返回的结果为："+results+"。请根据工具返回的结果继续回答我之前提出的问题。"})
+                        response= model.create_chat_completion(
+                            messages = history,
+                            max_tokens=max_length,
+                            temperature=temperature,
+                        )
+                        response_content = response.choices[0].message.content
                 elif model_type == "llaVa":
                     if image is not None:
                         pil_image = ToPILImage()(image[0].permute(2, 0, 1))
@@ -1462,41 +1472,50 @@ class LLM_local:
                         image_bytes = buffer.getvalue()
                         # Encode the bytes to base64
                         base64_string = f"data:image/jpeg;base64,{base64.b64encode(image_bytes).decode('utf-8')}"
-                        user_content = {
+                        user_content={
                             "role": "user",
                             "content": [
-                                {"type": "image_url", "image_url": {"url": base64_string}},
-                                {"type": "text", "text": user_prompt},
-                            ],
+                                {"type": "image_url", "image_url": {"url" : base64_string}},
+                                {"type" : "text", "text": user_prompt}
+                            ]
                         }
                         history.append(user_content)
                         response = model.create_chat_completion(
-                            messages=history,
-                            temperature=temperature,
+                            messages = history,
+                            temperature = temperature,
                             max_tokens=max_length,
                             frequency_penalty=1,
                             presence_penalty=0,
                             repeat_penalty=1.1,
-                            stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
+                            stop=["<|eot_id|>","[/INST]","</s>","[End Conversation]"],
                         )
-                        response = f"{response['choices'][0]['message']['content']}"
+                        response=f"{response['choices'][0]['message']['content']}"
                         print(response)
-                        assistant_content = {"role": "assistant", "content": response}
+                        assistant_content={
+                            "role": "assistant",
+                            "content": response
+                        }
                         history.append(assistant_content)
                     else:
-                        user_content = {"role": "user", "content": user_prompt}
+                        user_content={
+                            "role": "user",
+                            "content":  user_prompt
+                        }
                         history.append(user_content)
                         response = model.create_chat_completion(
-                            messages=history,
-                            temperature=temperature,
+                            messages = history,
+                            temperature = temperature,
                             max_tokens=max_length,
                             frequency_penalty=1,
                             presence_penalty=1,
                             repeat_penalty=1.1,
-                            stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
+                            stop=["<|eot_id|>","[/INST]","</s>","[End Conversation]"],
                         )
-                        response = f"{response['choices'][0]['message']['content']}"
-                        assistant_content = {"role": "assistant", "content": response}
+                        response=f"{response['choices'][0]['message']['content']}"
+                        assistant_content={
+                            "role": "assistant",
+                            "content": response
+                        }
                         history.append(assistant_content)
                 print(response)
                 # 修改prompt.json文件
@@ -1508,14 +1527,14 @@ class LLM_local:
                     json.dump(history, f, indent=4, ensure_ascii=False)
                 for his in history:
                     if his["role"] == "user":
-                        # 如果his["content"]是个列表，则只保留"type" : "text"时的"text"属性内容
+                        #如果his["content"]是个列表，则只保留"type" : "text"时的"text"属性内容
                         if isinstance(his["content"], list):
                             for item in his["content"]:
                                 if item.get("type") == "text" and item.get("text"):
                                     his["content"] = item["text"]
                                     break
-                historys = ""
-                # 将history中的消息转换成便于用户阅读的markdown格式
+                historys=""
+                #将history中的消息转换成便于用户阅读的markdown格式
                 for his in history:
                     if his["role"] == "user":
                         historys += f"**User:** {his['content']}\n\n"
@@ -1527,15 +1546,15 @@ class LLM_local:
                         historys += f"**Observation:** {his['content']}\n\n"
                     elif his["role"] == "tool":
                         historys += f"**Tool:** {his['content']}\n\n"
-                    elif his["role"] == "function":
+                    elif his["role"]=="function":
                         historys += f"**Function:** {his['content']}\n\n"
 
                 history = str(historys)
                 global image_buffer
-                image_out = image_buffer.copy()
-                image_buffer = []
-                if image_out == []:
-                    image_out = None
+                image_out=image_buffer.copy()
+                image_buffer=[]
+                if image_out ==[]:
+                    image_out=None
                 return (
                     response,
                     history,
@@ -1553,89 +1572,68 @@ class LLM_local:
 
     @classmethod
     def IS_CHANGED(s):
-        # 生成当前时间的哈希值
+        #生成当前时间的哈希值
         hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
         return hash_value
-
-
+    
 class LLavaLoader:
     @classmethod
     def INPUT_TYPES(s):
-        return {
-            "required": {
-                "ckpt_path": ("STRING", {"default": ""}),
-                "clip_path": ("STRING", {"default": ""}),
-                "max_ctx": ("INT", {"default": 2048, "min": 300, "max": 100000, "step": 64}),
-                "gpu_layers": ("INT", {"default": 27, "min": 0, "max": 100, "step": 1}),
-                "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
-            }
-        }
-
+        return {"required": { 
+              "ckpt_path": ("STRING", {"default": ""}),   
+              "clip_path": ("STRING", {"default": ""}), 
+              "max_ctx": ("INT", {"default": 2048, "min": 300, "max": 100000, "step": 64}),
+              "gpu_layers": ("INT", {"default": 27, "min": 0, "max": 100, "step": 1}),
+              "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
+                             }}
+                
+    
     RETURN_TYPES = ("CUSTOM",)
     RETURN_NAMES = ("model",)
     FUNCTION = "load_llava_checkpoint"
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
-
-    def load_llava_checkpoint(self, ckpt_path, max_ctx, gpu_layers, n_threads, clip_path):
+    def load_llava_checkpoint(self, ckpt_path, max_ctx, gpu_layers, n_threads, clip_path ):
         from llama_cpp import Llama
         from llama_cpp.llama_chat_format import Llava15ChatHandler
-
-        clip = Llava15ChatHandler(clip_model_path=clip_path, verbose=False)
-        llm = Llama(
-            model_path=ckpt_path,
-            chat_handler=clip,
-            offload_kqv=True,
-            f16_kv=True,
-            use_mlock=False,
-            embedding=False,
-            n_batch=1024,
-            last_n_tokens_size=1024,
-            verbose=True,
-            seed=42,
-            n_ctx=max_ctx,
-            n_gpu_layers=gpu_layers,
-            n_threads=n_threads,
-            logits_all=True,
-            echo=False,
-        )
-        return (llm,)
-
+        clip = Llava15ChatHandler(clip_model_path = clip_path, verbose=False) 
+        llm = Llama(model_path = ckpt_path, chat_handler=clip,offload_kqv=True, f16_kv=True, use_mlock=False, embedding=False, n_batch=1024, last_n_tokens_size=1024, verbose=True, seed=42, n_ctx = max_ctx, n_gpu_layers=gpu_layers, n_threads=n_threads, logits_all=True, echo=False) 
+        return (llm, ) 
 
 class llama_guff_loader:
     @classmethod
     def INPUT_TYPES(s):
-        return {
-            "required": {
-                "model_path": ("STRING", {"default": ""}),
-                "max_ctx": ("INT", {"default": 512, "min": 300, "max": 100000, "step": 64}),
-                "gpu_layers": ("INT", {"default": 41, "min": 0, "max": 100, "step": 1}),
-                "n_threads": ("INT", {"default": 16, "min": 1, "max": 100, "step": 1}),
-            }
-        }
-
+        return {"required": { 
+              "model_path": ("STRING", {"default": ""}),   
+              "max_ctx": ("INT", {"default": 512, "min": 300, "max": 100000, "step": 64}),
+              "gpu_layers": ("INT", {"default": 41, "min": 0, "max": 100, "step": 1}),
+              "n_threads": ("INT", {"default": 16, "min": 1, "max": 100, "step": 1}),
+                             }}
+                
+    
     RETURN_TYPES = ("CUSTOM",)
     RETURN_NAMES = ("model",)
     FUNCTION = "load_llama_checkpoint"
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
-
     def load_llama_checkpoint(self, model_path, max_ctx, gpu_layers, n_threads):
         from llama_cpp import Llama
-
         model = Llama(
-            model_path=model_path, chat_format="llama-2", n_ctx=max_ctx, n_threads=n_threads, n_gpu_layers=gpu_layers
+            model_path=model_path,
+            chat_format="llama-2",
+            n_ctx=max_ctx,
+            n_threads=n_threads,
+            n_gpu_layers=gpu_layers
         )
-        return (model,)
-
+        return (model, )
 
 NODE_CLASS_MAPPINGS = {
     "LLM": LLM,
     "LLM_local": LLM_local,
-    "LLM_api_loader": LLM_api_loader,
-    "LLM_local_loader": LLM_local_loader,
-    "LLavaLoader": LLavaLoader,
-    "llama_guff_loader": llama_guff_loader,
+    "LLM_api_loader":LLM_api_loader,
+    "LLM_local_loader":LLM_local_loader,
+    "LLavaLoader":LLavaLoader,
+    "llama_guff_loader":llama_guff_loader,
     "load_embeddings": load_embeddings,
     "load_file": load_file,
     "load_persona": load_persona,
@@ -1673,33 +1671,33 @@ NODE_CLASS_MAPPINGS = {
     "load_wikipedia": load_wikipedia,
     "arxiv_tool": arxiv_tool,
     "workflow_transfer": workflow_transfer,
-    "About_us": About_us,
-    "load_excel": load_excel,
-    "workflow_tool": workflow_tool,
-    "github_tool": github_tool,
-    "work_wechat_tool": work_wechat_tool,
-    "work_wechat": work_wechat,
-    "Dingding_tool": Dingding_tool,
-    "Dingding": Dingding,
-    "feishu_tool": feishu_tool,
-    "feishu": feishu,
-    "substring": substring,
-    "openai_tts": openai_tts,
-    "play_audio": play_audio,
-    "load_name": load_name,
-    "omost_decode": omost_decode,
-    "get_string": get_string,
-    "omost_setting": omost_setting,
-    "keyword_tool": keyword_tool,
-    "load_keyword": load_keyword,
-    "listen_audio": listen_audio,
-    "openai_whisper": openai_whisper,
-    "story_json_tool": story_json_tool,
-    "KG_json_toolkit_developer": KG_json_toolkit_developer,
-    "KG_json_toolkit_user": KG_json_toolkit_user,
-    "KG_csv_toolkit_developer": KG_csv_toolkit_developer,
-    "KG_csv_toolkit_user": KG_csv_toolkit_user,
-    "replace_string": replace_string,
+    "About_us":About_us,
+    "load_excel":load_excel,
+    "workflow_tool":workflow_tool,
+    "github_tool":github_tool,
+    "work_wechat_tool":work_wechat_tool,
+    "work_wechat":work_wechat,
+    "Dingding_tool":Dingding_tool,
+    "Dingding":Dingding,
+    "feishu_tool":feishu_tool,
+    "feishu":feishu,
+    "substring":substring,
+    "openai_tts":openai_tts,
+    "play_audio":play_audio,
+    "load_name":load_name,
+    "omost_decode":omost_decode,
+    "get_string":get_string,
+    "omost_setting":omost_setting,
+    "keyword_tool":keyword_tool,
+    "load_keyword":load_keyword,
+    "listen_audio":listen_audio,
+    "openai_whisper":openai_whisper,
+    "story_json_tool":story_json_tool,
+    "KG_json_toolkit_developer":KG_json_toolkit_developer,
+    "KG_json_toolkit_user":KG_json_toolkit_user,
+    "KG_csv_toolkit_developer":KG_csv_toolkit_developer,
+    "KG_csv_toolkit_user":KG_csv_toolkit_user,
+    "replace_string":replace_string,
 }
 
 
@@ -1753,10 +1751,10 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "github_tool": "GitHub工具(github_tool)",
     "work_wechat_tool": "企业微信工具(work_wechat_tool)",
     "work_wechat": "发送到企业微信(send_to_work_wechat)",
-    "Dingding_tool": "钉钉工具(Dingding_tool)",
+    "Dingding_tool":"钉钉工具(Dingding_tool)",
     "Dingding": "发送到钉钉(send_to_dingding)",
-    "feishu_tool": "飞书工具(feishu_tool)",
-    "feishu": "发送到飞书(send_to_feishu)",
+    "feishu_tool":"飞书工具(feishu_tool)",
+    "feishu":"发送到飞书(send_to_feishu)",
     "substring": "提取字符串(extract_substring)",
     "openai_tts": "OpenAI语音合成(openai_tts)",
     "play_audio": "播放音频(play_audio)",
@@ -1775,35 +1773,33 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "KG_csv_toolkit_user": "知识图谱CSV工具包用户版(KG_csv_toolkit_user)",
     "replace_string": "替换字符串(replace_string)",
 }
-
-
 def load_custom_tools():
     # 获取 custom_tool 文件夹的路径
-    custom_tool_dir = os.path.join(os.path.dirname(__file__), "custom_tool")
-
+    custom_tool_dir = os.path.join(os.path.dirname(__file__), 'custom_tool')
+    
     # 找到 custom_tool 文件夹下所有的 .py 文件
     files = glob.glob(os.path.join(custom_tool_dir, "*.py"), recursive=False)
-
+    
     for file in files:
         # 获取文件名（不包含扩展名）
         name = os.path.splitext(os.path.basename(file))[0]
-
+        
         # 创建一个导入规范
         spec = importlib.util.spec_from_file_location(name, file)
-
+        
         # 根据导入规范创建一个新的模块对象
         module = importlib.util.module_from_spec(spec)
-
+        
         # 在 sys.modules 中注册这个模块
         sys.modules[name] = module
-
+        
         # 执行模块的代码，实际加载模块
         spec.loader.exec_module(module)
-
+        
         # 如果模块有 NODE_CLASS_MAPPINGS 属性，更新字典
         if hasattr(module, "NODE_CLASS_MAPPINGS"):
             NODE_CLASS_MAPPINGS.update(getattr(module, "NODE_CLASS_MAPPINGS", {}))
-
+        
         # 如果模块有 NODE_DISPLAY_NAME_MAPPINGS 属性，更新字典
         if hasattr(module, "NODE_DISPLAY_NAME_MAPPINGS"):
             NODE_DISPLAY_NAME_MAPPINGS.update(getattr(module, "NODE_DISPLAY_NAME_MAPPINGS", {}))
@@ -1811,13 +1807,12 @@ def load_custom_tools():
         # 如果模块有 _TOOL_HOOKS 属性，将其字符串添加到_TOOL_HOOKS列表中
         if hasattr(module, "_TOOL_HOOKS"):
             _TOOL_HOOKS.extend(getattr(module, "_TOOL_HOOKS", []))
-
+            
             # 对于每个工具名称，将同名的函数导入到全局变量中
             for tool_name in getattr(module, "_TOOL_HOOKS", []):
                 if hasattr(module, tool_name):
                     # 将函数添加到全局变量中
                     globals()[tool_name] = getattr(module, tool_name)
-
 
 # 调用函数来加载 custom_tool 文件夹下的模块
 load_custom_tools()
