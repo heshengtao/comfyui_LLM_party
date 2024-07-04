@@ -117,10 +117,10 @@
 
 ## 特别感谢
 <a href="https://github.com/bigcat88">
-  <img src="https://avatars.githubusercontent.com/u/13381981?v=4" width="50" height="50" style="border-radius: 50%;" alt="<GitHub-username>"/>
+  <img src="https://avatars.githubusercontent.com/u/13381981?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
 <a href="https://github.com/guobalove">
-  <img src="https://avatars.githubusercontent.com/u/171540731?v=4" width="50" height="50" style="border-radius: 50%;" alt="<GitHub-username>"/>
+  <img src="https://avatars.githubusercontent.com/u/171540731?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
 
 ## 支持：
