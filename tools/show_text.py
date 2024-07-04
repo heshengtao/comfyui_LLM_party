@@ -65,7 +65,8 @@ Project Initiator: heshengtao
 Project URL: https://github.com/heshengtao/comfyui_LLM_party
 Project Media Channel: https://space.bilibili.com/26978344?spm_id_from=333.1007.0.0
 Special thanks to the following project contributors:
-1. Alexander Piskun: Thank you for your contributions to the project regarding cross-platform and GPU chip adaptation!
+1. [bigcat88](https://github.com/bigcat88)
+2. [guobalove](https://github.com/guobalove)
         """.strip()
         ]
         if unique_id is not None and extra_pnginfo is not None:
