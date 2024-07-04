@@ -15,7 +15,7 @@ def get_weekday(timezone):
 
 
 
-class time_tool:
+class weekday_tool:
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -62,8 +62,8 @@ class time_tool:
     
 
 _TOOL_HOOKS = ["get_weekday"]    
-NODE_CLASS_MAPPINGS = {"time_tool":time_tool}
-NODE_DISPLAY_NAME_MAPPINGS = {"time_tool":"星期查询工具（weekday_tool）"}
+NODE_CLASS_MAPPINGS = {"weekday_tool":weekday_tool}
+NODE_DISPLAY_NAME_MAPPINGS = {"weekday_tool":"星期查询工具（weekday_tool）"}
 
 
 

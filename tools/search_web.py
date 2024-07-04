@@ -115,10 +115,9 @@ class google_tool:
         return (out,)
 
 
-
-
 api_keys = load_api_keys(config_path)
 b_api_key = api_keys.get("bing_api_key")
+
 
 def search_web_bing(keywords, paper_num, url=None):
     today = str(date.today())
@@ -163,6 +162,7 @@ def search_web_bing(keywords, paper_num, url=None):
         + str(all_content)
         + "”。\n如果以上信息中没有相关信息，你可以改变paper_num，查看下一页的信息。"
     )
+
 
 # 类定义和方法保持不变，只需将google_tool更名为bing_tool，并更新相关注释
 class bing_tool:

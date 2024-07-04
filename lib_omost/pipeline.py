@@ -1,31 +1,39 @@
-import numpy as np
 import copy
 
-from tqdm.auto import trange
-from diffusers.pipelines.stable_diffusion_xl.pipeline_stable_diffusion_xl_img2img import *
+import numpy as np
 from diffusers.models.transformers import Transformer2DModel
-
+from diffusers.pipelines.stable_diffusion_xl.pipeline_stable_diffusion_xl_img2img import *
+from tqdm.auto import trange
 
 original_Transformer2DModel_forward = Transformer2DModel.forward
 
 
 def hacked_Transformer2DModel_forward(
-        self,
-        hidden_states: torch.Tensor,
-        encoder_hidden_states: Optional[torch.Tensor] = None,
-        timestep: Optional[torch.LongTensor] = None,
-        added_cond_kwargs: Dict[str, torch.Tensor] = None,
-        class_labels: Optional[torch.LongTensor] = None,
-        cross_attention_kwargs: Dict[str, Any] = None,
-        attention_mask: Optional[torch.Tensor] = None,
-        encoder_attention_mask: Optional[torch.Tensor] = None,
-        return_dict: bool = True,
+    self,
+    hidden_states: torch.Tensor,
+    encoder_hidden_states: Optional[torch.Tensor] = None,
+    timestep: Optional[torch.LongTensor] = None,
+    added_cond_kwargs: Dict[str, torch.Tensor] = None,
+    class_labels: Optional[torch.LongTensor] = None,
+    cross_attention_kwargs: Dict[str, Any] = None,
+    attention_mask: Optional[torch.Tensor] = None,
+    encoder_attention_mask: Optional[torch.Tensor] = None,
+    return_dict: bool = True,
 ):
     cross_attention_kwargs = cross_attention_kwargs or {}
-    cross_attention_kwargs['hidden_states_original_shape'] = hidden_states.shape
+    cross_attention_kwargs["hidden_states_original_shape"] = hidden_states.shape
     return original_Transformer2DModel_forward(
-        self, hidden_states, encoder_hidden_states, timestep, added_cond_kwargs, class_labels, cross_attention_kwargs,
-        attention_mask, encoder_attention_mask, return_dict)
+        self,
+        hidden_states,
+        encoder_hidden_states,
+        timestep,
+        added_cond_kwargs,
+        class_labels,
+        cross_attention_kwargs,
+        attention_mask,
+        encoder_attention_mask,
+        return_dict,
+    )
 
 
 Transformer2DModel.forward = hacked_Transformer2DModel_forward
@@ -43,7 +51,7 @@ def sample_dpmpp_2m(model, x, sigmas, extra_args=None, callback=None, disable=No
     for i in trange(len(sigmas) - 1, disable=disable):
         denoised = model(x, sigmas[i] * s_in, **extra_args)
         if callback is not None:
-            callback({'x': x, 'i': i, 'sigma': sigmas[i], 'sigma_hat': sigmas[i], 'denoised': denoised})
+            callback({"x": x, "i": i, "sigma": sigmas[i], "sigma_hat": sigmas[i], "denoised": denoised})
         t, t_next = t_fn(sigmas[i]), t_fn(sigmas[i + 1])
         h = t_next - t
         if old_denoised is None or sigmas[i + 1] == 0:
@@ -59,8 +67,8 @@ def sample_dpmpp_2m(model, x, sigmas, extra_args=None, callback=None, disable=No
 
 class KModel:
     def __init__(self, unet, timesteps=1000, linear_start=0.00085, linear_end=0.012):
-        betas = torch.linspace(linear_start ** 0.5, linear_end ** 0.5, timesteps, dtype=torch.float64) ** 2
-        alphas = 1. - betas
+        betas = torch.linspace(linear_start**0.5, linear_end**0.5, timesteps, dtype=torch.float64) ** 2
+        alphas = 1.0 - betas
         alphas_cumprod = torch.tensor(np.cumprod(alphas, axis=0), dtype=torch.float32)
 
         self.sigmas = ((1 - alphas_cumprod) / alphas_cumprod) ** 0.5
@@ -82,7 +90,7 @@ class KModel:
         dists = log_sigma.to(self.log_sigmas.device) - self.log_sigmas[:, None]
         return dists.abs().argmin(dim=0).view(sigma.shape).to(sigma.device)
 
-    def get_sigmas_karras(self, n, rho=7.):
+    def get_sigmas_karras(self, n, rho=7.0):
         ramp = torch.linspace(0, 1, n)
         min_inv_rho = self.sigma_min ** (1 / rho)
         max_inv_rho = self.sigma_max ** (1 / rho)
@@ -90,11 +98,11 @@ class KModel:
         return torch.cat([sigmas, sigmas.new_zeros([1])])
 
     def __call__(self, x, sigma, **extra_args):
-        x_ddim_space = x / (sigma[:, None, None, None] ** 2 + self.sigma_data ** 2) ** 0.5
+        x_ddim_space = x / (sigma[:, None, None, None] ** 2 + self.sigma_data**2) ** 0.5
         t = self.timestep(sigma)
-        cfg_scale = extra_args['cfg_scale']
-        eps_positive = self.unet(x_ddim_space, t, return_dict=False, **extra_args['positive'])[0]
-        eps_negative = self.unet(x_ddim_space, t, return_dict=False, **extra_args['negative'])[0]
+        cfg_scale = extra_args["cfg_scale"]
+        eps_positive = self.unet(x_ddim_space, t, return_dict=False, **extra_args["positive"])[0]
+        eps_negative = self.unet(x_ddim_space, t, return_dict=False, **extra_args["negative"])[0]
         noise_pred = eps_negative + cfg_scale * (eps_positive - eps_negative)
         return x - noise_pred * sigma[:, None, None, None]
 
@@ -134,7 +142,12 @@ class OmostCrossAttnProcessor:
         masks = []
 
         for m, c in encoder_hidden_states:
-            m = torch.nn.functional.interpolate(m[None, None, :, :], (H, W), mode='nearest-exact').flatten().unsqueeze(1).repeat(1, c.size(1))
+            m = (
+                torch.nn.functional.interpolate(m[None, None, :, :], (H, W), mode="nearest-exact")
+                .flatten()
+                .unsqueeze(1)
+                .repeat(1, c.size(1))
+            )
             conds.append(c)
             masks.append(m)
 
@@ -199,7 +212,7 @@ class StableDiffusionXLOmostPipeline(StableDiffusionXLImg2ImgPipeline):
             current_sum = 0
 
             for item in items:
-                num = item['length']
+                num = item["length"]
                 if current_sum + num > max_sum:
                     if current_bag:
                         bags.append(current_bag)
@@ -217,7 +230,12 @@ class StableDiffusionXLOmostPipeline(StableDiffusionXLImg2ImgPipeline):
         @torch.inference_mode()
         def get_77_tokens_in_torch(subprompt_inds, tokenizer):
             # Note that all subprompt are theoretically less than 75 tokens (without bos/eos)
-            result = [tokenizer.bos_token_id] + subprompt_inds[:75] + [tokenizer.eos_token_id] + [tokenizer.pad_token_id] * 75
+            result = (
+                [tokenizer.bos_token_id]
+                + subprompt_inds[:75]
+                + [tokenizer.eos_token_id]
+                + [tokenizer.pad_token_id] * 75
+            )
             result = result[:77]
             result = torch.tensor([result]).to(device=device, dtype=torch.int64)
             return result
@@ -228,17 +246,17 @@ class StableDiffusionXLOmostPipeline(StableDiffusionXLImg2ImgPipeline):
             merged_ids_t2 = copy.deepcopy(prefix_ids_t2)
 
             for item in bag:
-                merged_ids_t1.extend(item['ids_t1'])
-                merged_ids_t2.extend(item['ids_t2'])
+                merged_ids_t1.extend(item["ids_t1"])
+                merged_ids_t2.extend(item["ids_t2"])
 
             return dict(
                 ids_t1=get_77_tokens_in_torch(merged_ids_t1, self.tokenizer),
-                ids_t2=get_77_tokens_in_torch(merged_ids_t2, self.tokenizer_2)
+                ids_t2=get_77_tokens_in_torch(merged_ids_t2, self.tokenizer_2),
             )
 
         @torch.inference_mode()
         def double_encode(pair_of_inds):
-            inds = [pair_of_inds['ids_t1'], pair_of_inds['ids_t2']]
+            inds = [pair_of_inds["ids_t1"], pair_of_inds["ids_t2"]]
             text_encoders = [self.text_encoder, self.text_encoder_2]
 
             pooled_prompt_embeds = None
@@ -282,11 +300,7 @@ class StableDiffusionXLOmostPipeline(StableDiffusionXLImg2ImgPipeline):
             ids_t1 = self.tokenizer(subprompt, truncation=False, add_special_tokens=False).input_ids[:75]
             ids_t2 = self.tokenizer_2(subprompt, truncation=False, add_special_tokens=False).input_ids[:75]
             assert len(ids_t1) == len(ids_t2)
-            suffix_targets.append(dict(
-                length=len(ids_t1),
-                ids_t1=ids_t1,
-                ids_t2=ids_t2
-            ))
+            suffix_targets.append(dict(length=len(ids_t1), ids_t1=ids_t1, ids_t2=ids_t2))
 
         # Then merge prefix and suffix tokens
 
@@ -316,17 +330,17 @@ class StableDiffusionXLOmostPipeline(StableDiffusionXLImg2ImgPipeline):
         positive_result = []
         positive_pooler = None
 
-        for item in canvas_outputs['bag_of_conditions']:
-            current_mask = torch.from_numpy(item['mask']).to(torch.float32)
-            current_prefixes = item['prefixes']
-            current_suffixes = item['suffixes']
+        for item in canvas_outputs["bag_of_conditions"]:
+            current_mask = torch.from_numpy(item["mask"]).to(torch.float32)
+            current_prefixes = item["prefixes"]
+            current_suffixes = item["suffixes"]
 
             current_cond = self.encode_bag_of_subprompts_greedy(prefixes=current_prefixes, suffixes=current_suffixes)
 
             if positive_pooler is None:
-                positive_pooler = current_cond['pooler']
+                positive_pooler = current_cond["pooler"]
 
-            positive_result.append((current_mask, current_cond['cond']))
+            positive_result.append((current_mask, current_cond["cond"]))
 
         return positive_result, positive_pooler, negative_result, negative_pooler
 
@@ -364,18 +378,18 @@ class StableDiffusionXLOmostPipeline(StableDiffusionXLImg2ImgPipeline):
 
     @torch.inference_mode()
     def __call__(
-            self,
-            initial_latent: torch.FloatTensor = None,
-            strength: float = 1.0,
-            num_inference_steps: int = 25,
-            guidance_scale: float = 5.0,
-            batch_size: Optional[int] = 1,
-            generator: Optional[Union[torch.Generator, List[torch.Generator]]] = None,
-            prompt_embeds: Optional[torch.FloatTensor] = None,
-            negative_prompt_embeds: Optional[torch.FloatTensor] = None,
-            pooled_prompt_embeds: Optional[torch.FloatTensor] = None,
-            negative_pooled_prompt_embeds: Optional[torch.FloatTensor] = None,
-            cross_attention_kwargs: Optional[dict] = None,
+        self,
+        initial_latent: torch.FloatTensor = None,
+        strength: float = 1.0,
+        num_inference_steps: int = 25,
+        guidance_scale: float = 5.0,
+        batch_size: Optional[int] = 1,
+        generator: Optional[Union[torch.Generator, List[torch.Generator]]] = None,
+        prompt_embeds: Optional[torch.FloatTensor] = None,
+        negative_prompt_embeds: Optional[torch.FloatTensor] = None,
+        pooled_prompt_embeds: Optional[torch.FloatTensor] = None,
+        negative_pooled_prompt_embeds: Optional[torch.FloatTensor] = None,
+        cross_attention_kwargs: Optional[dict] = None,
     ):
 
         device = self.unet.device
@@ -384,7 +398,7 @@ class StableDiffusionXLOmostPipeline(StableDiffusionXLImg2ImgPipeline):
         # Sigmas
 
         sigmas = self.k_model.get_sigmas_karras(int(num_inference_steps / strength))
-        sigmas = sigmas[-(num_inference_steps + 1):].to(device)
+        sigmas = sigmas[-(num_inference_steps + 1) :].to(device)
 
         # Initial latents
 
@@ -408,7 +422,9 @@ class StableDiffusionXLOmostPipeline(StableDiffusionXLImg2ImgPipeline):
         add_time_ids = add_time_ids.repeat(batch_size, 1).to(device)
         add_neg_time_ids = add_neg_time_ids.repeat(batch_size, 1).to(device)
         prompt_embeds = [(k.to(device), v.repeat(batch_size, 1, 1).to(noise)) for k, v in prompt_embeds]
-        negative_prompt_embeds = [(k.to(device), v.repeat(batch_size, 1, 1).to(noise)) for k, v in negative_prompt_embeds]
+        negative_prompt_embeds = [
+            (k.to(device), v.repeat(batch_size, 1, 1).to(noise)) for k, v in negative_prompt_embeds
+        ]
         pooled_prompt_embeds = pooled_prompt_embeds.repeat(batch_size, 1).to(noise)
         negative_pooled_prompt_embeds = negative_pooled_prompt_embeds.repeat(batch_size, 1).to(noise)
 
@@ -419,13 +435,13 @@ class StableDiffusionXLOmostPipeline(StableDiffusionXLImg2ImgPipeline):
             positive=dict(
                 encoder_hidden_states=prompt_embeds,
                 added_cond_kwargs={"text_embeds": pooled_prompt_embeds, "time_ids": add_time_ids},
-                cross_attention_kwargs=cross_attention_kwargs
+                cross_attention_kwargs=cross_attention_kwargs,
             ),
             negative=dict(
                 encoder_hidden_states=negative_prompt_embeds,
                 added_cond_kwargs={"text_embeds": negative_pooled_prompt_embeds, "time_ids": add_neg_time_ids},
-                cross_attention_kwargs=cross_attention_kwargs
-            )
+                cross_attention_kwargs=cross_attention_kwargs,
+            ),
         )
 
         # Sample

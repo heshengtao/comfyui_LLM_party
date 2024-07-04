@@ -103,12 +103,8 @@ class substring:
             },
         }
 
-    RETURN_TYPES = (
-        "STRING",
-    )
-    RETURN_NAMES = (
-        "substring",
-    )
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("substring",)
 
     FUNCTION = "substr"
 
@@ -117,23 +113,22 @@ class substring:
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
     def substr(self, input_string, start_string="", end_string=""):
-        if start_string =="" and end_string =="":
-            out= input_string
-        elif start_string =="":
+        if start_string == "" and end_string == "":
+            out = input_string
+        elif start_string == "":
             # 获取从开头到end_string的子串
             out = input_string[: input_string.find(end_string)]
-        elif end_string =="":
+        elif end_string == "":
             # 获取从start_string到结尾的子串
             out = input_string[input_string.find(start_string) + len(start_string) :]
         else:
             # 获取从start_string到end_string的子串
             out = input_string[input_string.find(start_string) + len(start_string) : input_string.find(end_string)]
-        
-        out =out.strip()
-        return (
-            out,
-        )
-    
+
+        out = out.strip()
+        return (out,)
+
+
 class get_string:
     @classmethod
     def INPUT_TYPES(s):
@@ -143,12 +138,8 @@ class get_string:
             },
         }
 
-    RETURN_TYPES = (
-        "STRING",
-    )
-    RETURN_NAMES = (
-        "string",
-    )
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("string",)
 
     FUNCTION = "substr"
 
@@ -157,11 +148,10 @@ class get_string:
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
     def substr(self, input_string):
-        out =input_string
-        return (
-            out,
-        )
-    
+        out = input_string
+        return (out,)
+
+
 class replace_string:
     @classmethod
     def INPUT_TYPES(s):
@@ -173,12 +163,8 @@ class replace_string:
             },
         }
 
-    RETURN_TYPES = (
-        "STRING",
-    )
-    RETURN_NAMES = (
-        "string",
-    )
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("string",)
 
     FUNCTION = "substr"
 
@@ -188,6 +174,4 @@ class replace_string:
 
     def substr(self, string_delete, string_replace, input_string=""):
         out = input_string.replace(string_delete, string_replace)
-        return (
-            out,
-        )
+        return (out,)

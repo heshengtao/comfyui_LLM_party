@@ -29,7 +29,7 @@ requests_toolbelt
 playsound<=1.2.2
 tabulate
 chardet
-tenacity>=8.1.0,<8.4.0 
+tenacity>=8.1.0,<8.4.0
 cpm_kernels
 pydub
 keyboard

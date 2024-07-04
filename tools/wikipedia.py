@@ -58,12 +58,8 @@ class wikipedia_tool:
                 "chunk_size": ("INT", {"default": 200}),
                 "chunk_overlap": ("INT", {"default": 50}),
                 "device": (
-                    ["auto","cuda", "mps", "cpu"],
-                    {
-                        "default": (
-                            "auto"
-                        )
-                    },
+                    ["auto", "cuda", "mps", "cpu"],
+                    {"default": ("auto")},
                 ),
             },
             "optional": {
@@ -80,13 +76,13 @@ class wikipedia_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def wikipedia(self, query, embedding_path, chunk_size, chunk_overlap,device, is_enable="enable"):
+    def wikipedia(self, query, embedding_path, chunk_size, chunk_overlap, device, is_enable="enable"):
         if is_enable == "disable":
             return (None,)
         global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base
         c_size = chunk_size
         c_overlap = chunk_overlap
-        if device=="auto":
+        if device == "auto":
             device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
         if ebd_model == "":
             model_kwargs = {"device": device}
