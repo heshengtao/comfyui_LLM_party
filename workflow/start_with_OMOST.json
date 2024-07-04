@@ -535,10 +535,10 @@
         950,
         506
       ],
-      "size": [
-        448.70738462257304,
-        502.29706688266856
-      ],
+      "size": {
+        "0": 448.7073974609375,
+        "1": 502.29705810546875
+      },
       "flags": {},
       "order": 4,
       "mode": 0,
@@ -567,7 +567,8 @@
           "link": 72,
           "widget": {
             "name": "system_prompt_input"
-          }
+          },
+          "label": "system_prompt_input"
         },
         {
           "name": "user_prompt_input",
@@ -575,7 +576,8 @@
           "link": null,
           "widget": {
             "name": "user_prompt_input"
-          }
+          },
+          "label": "user_prompt_input"
         },
         {
           "name": "tools",
@@ -583,7 +585,8 @@
           "link": null,
           "widget": {
             "name": "tools"
-          }
+          },
+          "label": "tools"
         },
         {
           "name": "file_content",
@@ -591,7 +594,8 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
@@ -636,7 +640,7 @@
         "请画一个戴着红色帽子的美女，眼睛是蓝色的，头发是白色的",
         "llama",
         0.7,
-        512,
+        2048,
         "enable",
         "disable",
         "enable",
@@ -783,10 +787,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.7513148009015777,
+      "scale": 0.6830134553650705,
       "offset": {
-        "0": -471.9683329257954,
-        "1": -225.4270373416523
+        "0": -546.3730539951309,
+        "1": -162.03439660068577
       }
     }
   },
