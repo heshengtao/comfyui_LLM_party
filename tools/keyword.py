@@ -11,17 +11,17 @@ files_load = ""
 c_size = 200
 c_overlap = 50
 knowledge_base = ""
-k_setting=5
+k_setting = 5
 
 
 def search_keyword(question):
-    global knowledge_base,k_setting
+    global knowledge_base, k_setting
     keyword_counts = [chunk.count(question) for chunk in knowledge_base]
     chunk_counter = Counter(dict(zip(knowledge_base, keyword_counts)))
     top_chunks = chunk_counter.most_common(k_setting)
     top_chunks_text = [chunk[0] for chunk in top_chunks]
-    text = '\n'.join(top_chunks_text)
-    
+    text = "\n".join(top_chunks_text)
+
     return "文件中的相关信息如下：\n" + text
 
 
@@ -48,10 +48,10 @@ class keyword_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, file_content,k, chunk_size, chunk_overlap, is_enable="enable"):
+    def file(self, file_content, k, chunk_size, chunk_overlap, is_enable="enable"):
         if is_enable == "disable":
             return (None,)
-        global  files_load, c_size, c_overlap, knowledge_base,k_setting
+        global files_load, c_size, c_overlap, knowledge_base, k_setting
         k_setting = k
         c_size = chunk_size
         c_overlap = chunk_overlap
@@ -81,7 +81,8 @@ class keyword_tool:
         ]
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
-    
+
+
 class load_keyword:
     @classmethod
     def INPUT_TYPES(s):
@@ -90,7 +91,7 @@ class load_keyword:
                 "question": ("STRING", {"default": "question"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "file_content": ("STRING", {"forceInput": True}),
-                "k":("INT", {"default": 5}),
+                "k": ("INT", {"default": 5}),
                 "chunk_size": ("INT", {"default": 200}),
                 "chunk_overlap": ("INT", {"default": 50}),
             },
@@ -106,7 +107,7 @@ class load_keyword:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, question, file_content,k, chunk_size, chunk_overlap, is_enable=True):
+    def file(self, question, file_content, k, chunk_size, chunk_overlap, is_enable=True):
         if is_enable == False:
             return (None,)
         text_splitter = RecursiveCharacterTextSplitter(
@@ -118,6 +119,6 @@ class load_keyword:
         chunk_counter = Counter(dict(zip(chunks, keyword_counts)))
         top_chunks = chunk_counter.most_common(k)
         top_chunks_text = [chunk[0] for chunk in top_chunks]
-        text = '\n'.join(top_chunks_text)
+        text = "\n".join(top_chunks_text)
         output = "文件中的相关信息如下：\n" + text
         return (output,)

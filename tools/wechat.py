@@ -1,24 +1,24 @@
 import json
+
 import requests
+
 from ..config import config_path, load_api_keys
 
 api_keys = load_api_keys(config_path)
-wechat_url=api_keys.get("wechat_url")
-def send_wechat(content,msgtype="markdown"):
+wechat_url = api_keys.get("wechat_url")
+
+
+def send_wechat(content, msgtype="markdown"):
     global wechat_url
     webhook_url = wechat_url
-    headers = {'Content-Type': 'application/json'}
-    data = {
-        "msgtype": msgtype,
-        msgtype: {
-            "content": content
-        }
-    }
+    headers = {"Content-Type": "application/json"}
+    data = {"msgtype": msgtype, msgtype: {"content": content}}
 
     response = requests.post(webhook_url, headers=headers, json=data)
 
-    #返回响应代码
+    # 返回响应代码
     return response.status_code
+
 
 class work_wechat_tool:
     @classmethod
@@ -42,10 +42,10 @@ class work_wechat_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def web(self, is_enable=True,url=None,msgtype="markdown"):
+    def web(self, is_enable=True, url=None, msgtype="markdown"):
         if is_enable == False:
             return (None,)
-        
+
         global wechat_url
         if url is not None and url != "":
             wechat_url = url
@@ -68,9 +68,9 @@ class work_wechat_tool:
                                 "type": "string",
                                 "description": "消息类型，支持text、markdown",
                                 "default": msgtype,
-                            }
+                            },
                         },
-                        "required": ["content","msgtype"],
+                        "required": ["content", "msgtype"],
                     },
                 },
             }
@@ -103,14 +103,14 @@ class work_wechat:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def web(self, is_enable=True,url=None,content="hello world",msgtype="markdown"):
+    def web(self, is_enable=True, url=None, content="hello world", msgtype="markdown"):
         if is_enable == False:
             return (None,)
-        
+
         global wechat_url
         if url is not None and url != "":
             wechat_url = url
         else:
             wechat_url = api_keys.get("wechat_url")
-        send_wechat(content,msgtype)
+        send_wechat(content, msgtype)
         return ()

@@ -1,14 +1,17 @@
 import csv
 import json
 import os
+from collections import deque
 
 import pandas as pd
+
 from ..config import current_dir_path
-from collections import deque
 
 file_path = os.path.join(current_dir_path, "KG")
 
-KG_path=""
+KG_path = ""
+
+
 class KG_csv_toolkit_developer:
     @classmethod
     def INPUT_TYPES(s):
@@ -32,11 +35,11 @@ class KG_csv_toolkit_developer:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self,relative_path,absolute_path="", is_enable=True):
+    def file(self, relative_path, absolute_path="", is_enable=True):
         if is_enable == False:
             return (None,)
         global KG_path
-        if absolute_path!="":
+        if absolute_path != "":
             KG_path = absolute_path
         else:
             KG_path = os.path.join(file_path, relative_path)
@@ -60,7 +63,7 @@ class KG_csv_toolkit_developer:
                             "entitie_B": {
                                 "type": "string",
                                 "description": "实体B",
-                            }
+                            },
                         },
                         "required": ["entitie_A"],
                     },
@@ -85,14 +88,14 @@ class KG_csv_toolkit_developer:
                             "entitie_B": {
                                 "type": "string",
                                 "description": "实体B",
-                            }
+                            },
                         },
                         "required": ["entitie_A", "relationship", "entitie_B"],
                     },
                 },
             },
             {
-                "type": "function", 
+                "type": "function",
                 "function": {
                     "name": "Delete_triple",
                     "description": "用于删除一个存在的三元组，请在删除三元组前使用Inquire_entities工具判断三元组是否存在",
@@ -110,15 +113,16 @@ class KG_csv_toolkit_developer:
                             "entitie_B": {
                                 "type": "string",
                                 "description": "实体B",
-                            }
+                            },
                         },
                         "required": ["entitie_A", "relationship", "entitie_B"],
                     },
                 },
-            }
+            },
         ]
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
+
 
 class KG_csv_toolkit_user:
     @classmethod
@@ -143,11 +147,11 @@ class KG_csv_toolkit_user:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self,relative_path,absolute_path="", is_enable=True):
+    def file(self, relative_path, absolute_path="", is_enable=True):
         if is_enable == False:
             return (None,)
         global KG_path
-        if absolute_path!="":
+        if absolute_path != "":
             KG_path = absolute_path
         else:
             KG_path = os.path.join(file_path, relative_path)
@@ -171,7 +175,7 @@ class KG_csv_toolkit_user:
                             "entitie_B": {
                                 "type": "string",
                                 "description": "实体B",
-                            }
+                            },
                         },
                         "required": ["entitie_A"],
                     },
@@ -181,8 +185,9 @@ class KG_csv_toolkit_user:
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
 
+
 def generate_graph(entitie_A=None, relationship=None, entitie_B=None):
-    with open(KG_path, 'r', encoding='utf8') as fin:
+    with open(KG_path, "r", encoding="utf8") as fin:
         reader = csv.reader(fin)
         for row in reader:
             if entitie_A and row[0] != entitie_A:
@@ -192,6 +197,7 @@ def generate_graph(entitie_A=None, relationship=None, entitie_B=None):
             if entitie_B and row[2] != entitie_B:
                 continue
             yield row
+
 
 def Inquire_triple(entitie_A, relationship=None, entitie_B=None):
     """
@@ -223,9 +229,7 @@ def Inquire_triple(entitie_A, relationship=None, entitie_B=None):
             for path in paths:
                 out_list.append(path)
     else:
-        if (entitie_B in graph.get(entitie_A, []) and
-                (relationship, entitie_B) in graph.get(entitie_A, [])
-        ):
+        if entitie_B in graph.get(entitie_A, []) and (relationship, entitie_B) in graph.get(entitie_A, []):
             out_list.append((relationship, entitie_B))
 
     if out_list:
@@ -234,6 +238,7 @@ def Inquire_triple(entitie_A, relationship=None, entitie_B=None):
         return str(out)
     else:
         return "查询不到任何相关的三元组"
+
 
 def find_paths_BFS(graph, start, goal):
     """
@@ -257,36 +262,38 @@ def find_paths_BFS(graph, start, goal):
             queue.append(new_path)
     return paths
 
+
 def New_triple(entitie_A, relationship, entitie_B):
     """
     用于添加一个不存在的三元组，返回添加后的知识图谱
     :param entitie_A: 实体A
     :param relationship: 关系
-    :param entitie_B: 实体B 
+    :param entitie_B: 实体B
     :return: 返回添加是否成功
     """
-    with open(KG_path, 'a', encoding='utf8') as fin:
+    with open(KG_path, "a", encoding="utf8") as fin:
         writer = csv.writer(fin)
         writer.writerow([entitie_A, relationship, entitie_B])
         return "添加成功"
+
 
 def Delete_triple(entitie_A, relationship, entitie_B):
     """
     用于删除一个存在的三元组，返回删除后的知识图谱
     :param entitie_A: 实体A
-    :param relationship: 关系   
+    :param relationship: 关系
     :param entitie_B: 实体B
     :param chunk_size: 每次读取的行数
     :return: 返回删除是否成功
     """
-    temp_path = KG_path + '.tmp'
-    with open(KG_path, 'r', encoding='utf8') as fin, open(temp_path, 'w', encoding='utf8', newline='') as fout:
+    temp_path = KG_path + ".tmp"
+    with open(KG_path, "r", encoding="utf8") as fin, open(temp_path, "w", encoding="utf8", newline="") as fout:
         reader = csv.reader(fin)
         writer = csv.writer(fout)
         for row in reader:
             if row[0] != entitie_A or row[1] != relationship or row[2] != entitie_B:
                 writer.writerow(row)
-    
+
     # 替换原文件
     os.replace(temp_path, KG_path)
     return "删除成功"

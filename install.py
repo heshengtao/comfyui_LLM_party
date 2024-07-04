@@ -1,20 +1,25 @@
 import importlib
 import os
+import platform
 import re
 import shutil
 import subprocess
 import sys
+
+import packaging.tags
 import pkg_resources
 import torch
 from requests import get
-import platform
-import packaging.tags
+
+
 def latest_lamacpp():
-    try:        
+    try:
         response = get("https://api.github.com/repos/abetlen/llama-cpp-python/releases/latest")
         return response.json()["tag_name"].replace("v", "")
     except Exception:
         return "0.2.20"
+
+
 def install_package(package_name, custom_command=None):
     if not package_is_installed(package_name):
         print(f"Installing {package_name}...")
@@ -24,8 +29,12 @@ def install_package(package_name, custom_command=None):
         subprocess.check_call(command)
     else:
         print(f"{package_name} is already installed.")
+
+
 def package_is_installed(package_name):
     return importlib.util.find_spec(package_name) is not None
+
+
 def install_llama(system_info):
     imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
     if imported:
@@ -34,27 +43,27 @@ def install_llama(system_info):
     else:
         lcpp_version = latest_lamacpp()
         base_url = "https://github.com/abetlen/llama-cpp-python/releases/download/v"
-        platform_tag = system_info['platform_tag']
-        avx = "AVX2" if system_info['avx2'] else "AVX"
-        
+        platform_tag = system_info["platform_tag"]
+        avx = "AVX2" if system_info["avx2"] else "AVX"
+
         # 根据不同操作系统构建安装命令
-        if system_info['os'] == 'Linux' or system_info['os'] == 'Windows':
-            if system_info['gpu']:
-                cuda_version = system_info['cuda_version']
+        if system_info["os"] == "Linux" or system_info["os"] == "Windows":
+            if system_info["gpu"]:
+                cuda_version = system_info["cuda_version"]
                 custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
             else:
                 custom_command = f"llama-cpp-python=={lcpp_version}"
-        elif system_info['os'] == 'Darwin':
-            if 'arm64' in platform.machine():
+        elif system_info["os"] == "Darwin":
+            if "arm64" in platform.machine():
                 # MPS设备，使用Metal后端
-                os.environ['CMAKE_ARGS'] = '-DLLAMA_METAL=on'
+                os.environ["CMAKE_ARGS"] = "-DLLAMA_METAL=on"
                 custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{platform_tag}.whl"
             else:
                 # 非MPS设备，使用AVX指令集
                 custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{avx}-{platform_tag}.whl"
         else:
             raise ValueError("不支持的操作系统")
-        
+
         # 执行安装命令
         install_package("llama-cpp-python", custom_command=custom_command)
 
@@ -67,13 +76,13 @@ def copy_js_files():
     # 确保目标文件夹存在
     os.makedirs(target_folder, exist_ok=True)
 
-    #清空目标文件夹里所有文件
+    # 清空目标文件夹里所有文件
     for filename in os.listdir(target_folder):
         file_path = os.path.join(target_folder, filename)
         try:
             if os.path.isfile(file_path) or os.path.islink(file_path):
                 os.unlink(file_path)
-                
+
         except Exception as e:
             print(f"无法删除文件 {file_path}: {e}")
 
@@ -86,6 +95,7 @@ def copy_js_files():
         target_file = os.path.join(target_folder, file_name)
         shutil.copy2(source_file, target_file)
 
+
 def get_python_version():
     """Return the Python version in a concise format, e.g., '39' for Python 3.9."""
     version_match = re.match(r"3\.(\d+)", platform.python_version())
@@ -94,52 +104,52 @@ def get_python_version():
     else:
         return None
 
+
 def get_system_info():
     """Gather system information related to NVIDIA GPU, CUDA version, AVX2 support, Python version, OS, and platform tag."""
     system_info = {
-        'gpu': False,
-        'cuda_version': None,
-        'avx2': False,
-        'python_version': get_python_version(),
-        'os': platform.system(),
-        'os_bit': platform.architecture()[0].replace("bit", ""),
-        'platform_tag': None,
+        "gpu": False,
+        "cuda_version": None,
+        "avx2": False,
+        "python_version": get_python_version(),
+        "os": platform.system(),
+        "os_bit": platform.architecture()[0].replace("bit", ""),
+        "platform_tag": None,
     }
 
     # Check for NVIDIA GPU and CUDA version
-    if importlib.util.find_spec('torch'): 
-        system_info['gpu'] = torch.cuda.is_available()
-        if system_info['gpu']:
-            system_info['cuda_version'] = "cu" + torch.version.cuda.replace(".", "").strip()
-    
+    if importlib.util.find_spec("torch"):
+        system_info["gpu"] = torch.cuda.is_available()
+        if system_info["gpu"]:
+            system_info["cuda_version"] = "cu" + torch.version.cuda.replace(".", "").strip()
+
     # Check for AVX2 support
-    if importlib.util.find_spec('cpuinfo'):
+    if importlib.util.find_spec("cpuinfo"):
         try:
             # Attempt to import the cpuinfo module
             import cpuinfo
-            
+
             # Safely attempt to retrieve CPU flags
             cpu_info = cpuinfo.get_cpu_info()
-            if cpu_info and 'flags' in cpu_info:
+            if cpu_info and "flags" in cpu_info:
                 # Check if 'avx2' is among the CPU flags
-                system_info['avx2'] = 'avx2' in cpu_info['flags']
+                system_info["avx2"] = "avx2" in cpu_info["flags"]
             else:
                 # Handle the case where CPU info is unavailable or does not contain 'flags'
-                system_info['avx2'] = False
+                system_info["avx2"] = False
         except Exception as e:
             # Handle unexpected errors gracefully
             print(f"Error retrieving CPU information: {e}")
-            system_info['avx2'] = False
+            system_info["avx2"] = False
     else:
         # Handle the case where the cpuinfo module is not installed
         print("cpuinfo module not available.")
-        system_info['avx2'] = False
+        system_info["avx2"] = False
     # Determine the platform tag
-    if importlib.util.find_spec('packaging.tags'):        
-        system_info['platform_tag'] = next(packaging.tags.sys_tags()).platform
+    if importlib.util.find_spec("packaging.tags"):
+        system_info["platform_tag"] = next(packaging.tags.sys_tags()).platform
 
     return system_info
-
 
 
 def check_and_uninstall_websocket():
@@ -148,26 +158,27 @@ def check_and_uninstall_websocket():
 
     # 检查websocket库是否已安装
     installed_packages = {pkg.key for pkg in pkg_resources.working_set}
-    websocket_installed = 'websocket' in installed_packages
-    websocket_client_installed = 'websocket-client' in installed_packages
+    websocket_installed = "websocket" in installed_packages
+    websocket_client_installed = "websocket-client" in installed_packages
 
     # 如果websocket库已安装，卸载websocket和websocket-client库
     if websocket_installed:
         packages_to_uninstall = []
-        packages_to_uninstall.append('websocket')
-        packages_to_uninstall.append('websocket-client')
+        packages_to_uninstall.append("websocket")
+        packages_to_uninstall.append("websocket-client")
 
         try:
-            subprocess.check_call([interpreter, '-m', 'pip', 'uninstall', '-y'] + packages_to_uninstall)
-            print("已成功卸载: " + ', '.join(packages_to_uninstall))
+            subprocess.check_call([interpreter, "-m", "pip", "uninstall", "-y"] + packages_to_uninstall)
+            print("已成功卸载: " + ", ".join(packages_to_uninstall))
         except subprocess.CalledProcessError as e:
             print("卸载过程中出现错误：", e)
         # 重新安装websocket-client库
         try:
-            subprocess.check_call([interpreter, '-m', 'pip', 'install', 'websocket-client'])
+            subprocess.check_call([interpreter, "-m", "pip", "install", "websocket-client"])
             print("websocket-client库已成功重新安装。")
         except subprocess.CalledProcessError as e:
             print("重新安装过程中出现错误：", e)
+
 
 def init_temp():
     # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建

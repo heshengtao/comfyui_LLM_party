@@ -1,5 +1,6 @@
 import json
 
+
 def load_json_file(file_path) -> dict:
     def set_to_list(obj):
         if isinstance(obj, set):
@@ -12,7 +13,7 @@ def load_json_file(file_path) -> dict:
             return obj
 
     try:
-        with open(file_path, 'r', encoding='utf-8') as data:
+        with open(file_path, "r", encoding="utf-8") as data:
             data = json.load(data)
             data = set_to_list(data)
             return data
@@ -23,12 +24,14 @@ def load_json_file(file_path) -> dict:
         print("Invalid JSON format.")
         return None
 
+
 def json_loader(file_path: str, is_enable=True) -> str:
-        if is_enable == False:
-            return (None,)
-        output = load_json_file(file_path)
-        output = json.dumps(output, ensure_ascii=False)
-        return (output)
+    if is_enable == False:
+        return (None,)
+    output = load_json_file(file_path)
+    output = json.dumps(output, ensure_ascii=False)
+    return output
+
 
 class json_parser:
     @classmethod
@@ -40,7 +43,7 @@ class json_parser:
                 "is_enable": ("BOOLEAN", {"default": True}),
             }
         }
-    
+
     RETURN_TYPES = (
         "STRING",
         "STRING",
@@ -53,13 +56,16 @@ class json_parser:
     FUNCTION = "json_parser_tool"
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
-    
+
     def json_parser_tool(self, file_path: str, key=None, is_enable=True):
         if is_enable == False:
             return (None,)
         data_json = json_loader(file_path)
         if key == None:
-            return (data_json, None, )
+            return (
+                data_json,
+                None,
+            )
         data_dict = json.loads(data_json)
         try:
             value = data_dict[key]
@@ -67,7 +73,11 @@ class json_parser:
             print(f"Key '{key}' not found in JSON data.")
             value = None
         out = json.dumps(value, ensure_ascii=False)
-        return (data_json, out,)
+        return (
+            data_json,
+            out,
+        )
+
 
 class json_get_value:
     @classmethod
@@ -79,12 +89,13 @@ class json_get_value:
                 "is_enable": ("BOOLEAN", {"default": True}),
             }
         }
+
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("content",)
     FUNCTION = "get_value"
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def get_value(self, text, key = None, is_enable=True):
+    def get_value(self, text, key=None, is_enable=True):
         if is_enable == False:
             return (None,)
         try:
@@ -95,14 +106,16 @@ class json_get_value:
             print("Invalid JSON format.")
             return (None,)
 
-# _TOOL_HOOKS = ["json_parser"]    
+
+# _TOOL_HOOKS = ["json_parser"]
 NODE_CLASS_MAPPINGS = {
-    "json_parser":json_parser, 
-    "json_get_value":json_get_value,
-    }
+    "json_parser": json_parser,
+    "json_get_value": json_get_value,
+}
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "json_parser":"JSON文件解析🐶（json_parser）",
-    "json_get_value":"JSON取值🐶（json_get_value）",}
+    "json_parser": "JSON文件解析🐶（json_parser）",
+    "json_get_value": "JSON取值🐶（json_get_value）",
+}
 
 # if __name__ == "__main__":
 #     file_path_ = "E:\\project\\comfyui_LLM_party\\file\\量子永生教.json"

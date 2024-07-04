@@ -22,6 +22,5 @@ class load_name:
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
     def file(self, model_name):
-        out=model_name
+        out = model_name
         return (out,)
-

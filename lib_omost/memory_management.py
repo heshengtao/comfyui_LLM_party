@@ -1,10 +1,10 @@
-import torch
 from contextlib import contextmanager
 
+import torch
 
 high_vram = False
-gpu = torch.device('cuda')
-cpu = torch.device('cpu')
+gpu = torch.device("cuda")
+cpu = torch.device("cpu")
 
 torch.zeros((1, 1)).to(gpu, torch.float32)
 torch.cuda.empty_cache()
@@ -14,13 +14,13 @@ models_in_gpu = []
 
 @contextmanager
 def movable_bnb_model(m):
-    if hasattr(m, 'quantization_method'):
+    if hasattr(m, "quantization_method"):
         m.quantization_method_backup = m.quantization_method
         del m.quantization_method
     try:
         yield None
     finally:
-        if hasattr(m, 'quantization_method_backup'):
+        if hasattr(m, "quantization_method_backup"):
             m.quantization_method = m.quantization_method_backup
             del m.quantization_method_backup
     return
@@ -40,13 +40,13 @@ def load_models_to_gpu(models):
         for m in models_to_unload:
             with movable_bnb_model(m):
                 m.to(cpu)
-            print('Unload to CPU:', m.__class__.__name__)
+            print("Unload to CPU:", m.__class__.__name__)
         models_in_gpu = models_to_remain
 
     for m in models_to_load:
         with movable_bnb_model(m):
             m.to(gpu)
-        print('Load to GPU:', m.__class__.__name__)
+        print("Load to GPU:", m.__class__.__name__)
 
     models_in_gpu = list(set(models_in_gpu + models))
     torch.cuda.empty_cache()

@@ -1,11 +1,14 @@
 import json
 import os
-from ..config import current_dir_path
 from collections import deque
+
+from ..config import current_dir_path
 
 file_path = os.path.join(current_dir_path, "KG")
 
-KG_path=""
+KG_path = ""
+
+
 class KG_json_toolkit_developer:
     @classmethod
     def INPUT_TYPES(s):
@@ -29,11 +32,11 @@ class KG_json_toolkit_developer:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self,relative_path,absolute_path="", is_enable=True):
+    def file(self, relative_path, absolute_path="", is_enable=True):
         if is_enable == False:
             return (None,)
         global KG_path
-        if absolute_path!="":
+        if absolute_path != "":
             KG_path = absolute_path
         else:
             KG_path = os.path.join(file_path, relative_path)
@@ -70,7 +73,7 @@ class KG_json_toolkit_developer:
                             "attributes": {
                                 "type": "string",
                                 "description": "实体的attributes，例如：{'name': '张三', 'age': 20}，缺省时，attributes为空",
-                            }
+                            },
                         },
                         "required": ["name"],
                     },
@@ -91,7 +94,7 @@ class KG_json_toolkit_developer:
                             "attributes": {
                                 "type": "string",
                                 "description": "实体的attributes，例如：{'name': '张三', 'age': 20}，缺省时，会删除已有的attributes信息",
-                            }
+                            },
                         },
                         "required": ["name"],
                     },
@@ -129,9 +132,9 @@ class KG_json_toolkit_developer:
                             "entitie_B": {
                                 "type": "string",
                                 "description": "关系中的其中另一个节点的name",
-                            }
+                            },
                         },
-                        "required": ["entitie_A","entitie_B"],
+                        "required": ["entitie_A", "entitie_B"],
                     },
                 },
             },
@@ -158,9 +161,9 @@ class KG_json_toolkit_developer:
                             "attributes": {
                                 "type": "object",
                                 "description": "关系的属性，例如：{'起始于':'2010年'}，缺省时，attributes为空",
-                            }
+                            },
                         },
-                        "required": ["type","source","target"],
+                        "required": ["type", "source", "target"],
                     },
                 },
             },
@@ -187,9 +190,9 @@ class KG_json_toolkit_developer:
                             "attributes": {
                                 "type": "object",
                                 "description": "关系的属性，例如：{'起始于':'2010年'}，缺省时会删除已有的attributes信息",
-                            }
+                            },
                         },
-                        "required": ["type","source","target"],
+                        "required": ["type", "source", "target"],
                     },
                 },
             },
@@ -212,9 +215,9 @@ class KG_json_toolkit_developer:
                             "target": {
                                 "type": "string",
                                 "description": "关系的target，代表目标节点的name",
-                            }
+                            },
                         },
-                        "required": ["type","source","target"],
+                        "required": ["type", "source", "target"],
                     },
                 },
             },
@@ -242,15 +245,15 @@ class KG_json_toolkit_developer:
                     "description": "用于查询所有实体节点name",
                     "parameters": {
                         "type": "object",
-                        "properties": {
-                        },
+                        "properties": {},
                         "required": [],
                     },
                 },
-            }
+            },
         ]
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
+
 
 class KG_json_toolkit_user:
     @classmethod
@@ -275,11 +278,11 @@ class KG_json_toolkit_user:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self,relative_path,absolute_path="", is_enable=True):
+    def file(self, relative_path, absolute_path="", is_enable=True):
         if is_enable == False:
             return (None,)
         global KG_path
-        if absolute_path!="":
+        if absolute_path != "":
             KG_path = absolute_path
         else:
             KG_path = os.path.join(file_path, relative_path)
@@ -316,9 +319,9 @@ class KG_json_toolkit_user:
                             "entitie_B": {
                                 "type": "string",
                                 "description": "关系中的其中另一个节点的name",
-                            }
+                            },
                         },
-                        "required": ["entitie_A","entitie_B"],
+                        "required": ["entitie_A", "entitie_B"],
                     },
                 },
             },
@@ -346,15 +349,15 @@ class KG_json_toolkit_user:
                     "description": "用于查询所有实体节点name",
                     "parameters": {
                         "type": "object",
-                        "properties": {
-                        },
+                        "properties": {},
                         "required": [],
                     },
                 },
-            }
+            },
         ]
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
+
 
 def Inquire_entities(name):
     with open(KG_path, "r", encoding="utf-8") as f:
@@ -367,20 +370,22 @@ def Inquire_entities(name):
         out = "该实体节点不存在"
     return str(out)
 
+
 def New_entities(name, attributes=None):
     with open(KG_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     # 检查实体节点是否已存在
     for i in data["entities"]:
         if i["name"] == name:
-            return "该实体节点已存在"+"\n"+"实体节点信息："+"\n"+str(i)
+            return "该实体节点已存在" + "\n" + "实体节点信息：" + "\n" + str(i)
     # 添加实体节点
     if attributes is None:
         attributes = {}
     data["entities"].append({"name": name, "attributes": json.loads(attributes)})
     with open(KG_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False,indent=4)
+        json.dump(data, f, ensure_ascii=False, indent=4)
     return "添加成功"
+
 
 def Modify_entities(name, attributes=None):
     with open(KG_path, "r", encoding="utf-8") as f:
@@ -395,10 +400,11 @@ def Modify_entities(name, attributes=None):
             is_exist = True
     if is_exist:
         with open(KG_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False,indent=4)
+            json.dump(data, f, ensure_ascii=False, indent=4)
         return "修改成功"
     else:
         return "该实体节点不存在"
+
 
 def Delete_entities(name):
     with open(KG_path, "r", encoding="utf-8") as f:
@@ -411,7 +417,7 @@ def Delete_entities(name):
             is_exist = True
     if is_exist:
         with open(KG_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False,indent=4)
+            json.dump(data, f, ensure_ascii=False, indent=4)
         return "删除成功"
     else:
         return "该实体节点不存在"
@@ -429,10 +435,11 @@ def build_graph(data):
         graph[target].append((source, rel))  # 如果关系是双向的
     return graph
 
-def bfs_shortest_path(graph, start,target):
+
+def bfs_shortest_path(graph, start, target):
     visited = set()
     queue = deque([(start, [])])
-    
+
     while queue:
         current, path = queue.popleft()
         if current == target:
@@ -444,26 +451,32 @@ def bfs_shortest_path(graph, start,target):
                 queue.append((neighbor, path + [relationship]))
     return []
 
-def Inquire_relationships(entitie_A,entitie_B):
+
+def Inquire_relationships(entitie_A, entitie_B):
     with open(KG_path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    
+
     # 直接关系查询
-    direct_relationships = [rel for rel in data["relationships"] if rel["source"] == entitie_A and rel["target"] == entitie_B]
+    direct_relationships = [
+        rel for rel in data["relationships"] if rel["source"] == entitie_A and rel["target"] == entitie_B
+    ]
     if direct_relationships:
-        return "两者之间的直接关系为："+json.dumps(direct_relationships, ensure_ascii=False,indent=4)
+        return "两者之间的直接关系为：" + json.dumps(direct_relationships, ensure_ascii=False, indent=4)
     # 反向查询
-    reverse_relationships = [rel for rel in data["relationships"] if rel["source"] == entitie_B and rel["target"] == entitie_A]
+    reverse_relationships = [
+        rel for rel in data["relationships"] if rel["source"] == entitie_B and rel["target"] == entitie_A
+    ]
     if reverse_relationships:
-        return "两者之间的反向直接关系为："+json.dumps(reverse_relationships, ensure_ascii=False,indent=4)
-    
+        return "两者之间的反向直接关系为：" + json.dumps(reverse_relationships, ensure_ascii=False, indent=4)
+
     # 构建图并查询最短关系链
     graph = build_graph(data)
     shortest_path = bfs_shortest_path(graph, entitie_A, entitie_B)
     if shortest_path:
-        return "两者之间不存在直接关系，最短关系链为："+json.dumps(shortest_path, ensure_ascii=False,indent=4)
-    
+        return "两者之间不存在直接关系，最短关系链为：" + json.dumps(shortest_path, ensure_ascii=False, indent=4)
+
     return "两者之间不存在任何直接或间接关系"
+
 
 def New_relationships(source, target, type, attributes=None):
     with open(KG_path, "r", encoding="utf-8") as f:
@@ -472,14 +485,17 @@ def New_relationships(source, target, type, attributes=None):
     for i in data["relationships"]:
         if i["source"] == source and i["target"] == target:
             if i["type"] == type:
-                return "该关系边已存在"+"\n"+"关系边信息："+"\n"+str(i)
+                return "该关系边已存在" + "\n" + "关系边信息：" + "\n" + str(i)
     # 添加关系边
     if attributes is None:
         attributes = {}
-    data["relationships"].append({"type": type,"source": source, "target": target, "attributes": json.loads(attributes)})
+    data["relationships"].append(
+        {"type": type, "source": source, "target": target, "attributes": json.loads(attributes)}
+    )
     with open(KG_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False,indent=4)
+        json.dump(data, f, ensure_ascii=False, indent=4)
     return "添加成功"
+
 
 def Modify_relationships(source, target, type, attributes=None):
     with open(KG_path, "r", encoding="utf-8") as f:
@@ -489,17 +505,18 @@ def Modify_relationships(source, target, type, attributes=None):
         attributes = {}
     # 检查关系边是否存在
     for i in data["relationships"]:
-        if i["source"] == source and i["target"] == target: 
+        if i["source"] == source and i["target"] == target:
             if i["type"] == type:
                 i["attributes"] = json.loads(attributes)
                 is_exist = True
     if is_exist:
         with open(KG_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False,indent=4)
+            json.dump(data, f, ensure_ascii=False, indent=4)
             return "修改成功"
     else:
         return "该关系边不存在"
-    
+
+
 def Delete_relationships(source, target, type):
     with open(KG_path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -509,9 +526,10 @@ def Delete_relationships(source, target, type):
             if i["type"] == type:
                 data["relationships"].remove(i)
                 with open(KG_path, "w", encoding="utf-8") as f:
-                    json.dump(data, f, ensure_ascii=False,indent=4)
+                    json.dump(data, f, ensure_ascii=False, indent=4)
                     return "删除成功"
     return "该关系边不存在"
+
 
 def Inquire_entity_relationships(name):
     with open(KG_path, "r", encoding="utf-8") as f:
@@ -525,15 +543,16 @@ def Inquire_entity_relationships(name):
     if is_exist:
         # 查询实体关系
         relationships = [i for i in data["relationships"] if i["source"] == name or i["target"] == name]
-        return "实体"+name+"的关系边为："+"\n"+str(relationships)
+        return "实体" + name + "的关系边为：" + "\n" + str(relationships)
     else:
-        return "实体"+name+"不存在"
+        return "实体" + name + "不存在"
+
 
 def Inquire_entity_list():
     with open(KG_path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    name_list=[]
+    name_list = []
     # 返回所有实体的name
     for i in data["entities"]:
         name_list.append(i["name"])
-    return "实体列表为："+"\n"+str(name_list)
+    return "实体列表为：" + "\n" + str(name_list)
