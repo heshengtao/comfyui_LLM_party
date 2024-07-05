@@ -10,7 +10,9 @@ g_api_key = api_keys.get("google_api_key")
 g_CSE_ID = api_keys.get("CSE_ID")
 
 
-def search_web(keywords, paper_num, url=None):
+def search_web(keywords, paper_num=1, url=None):
+    if paper_num=="":
+        paper_num=1
     today = str(date.today())
     global g_api_key, g_CSE_ID
     num_results = 10
