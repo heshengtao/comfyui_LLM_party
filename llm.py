@@ -697,7 +697,7 @@ class LLM:
                                 + "\n"
                             )
                         REUTRN_FORMAT="{\"tool\": \"tool name\", \"parameters\": {\"parameter name\": \"parameter value\"}}"
-                        TOOL_EAXMPLE = "You will receive a JSON string containing a list of callable tools. Please parse this JSON string and return a JSON object containing the tool name and tool parameters. Here is an example of the tool list:\n\n{\"tools\": [{\"name\": \"plus_one\", \"description\": \"Add one to a number\", \"parameters\": {\"number\": \"number string\"}},{\"name\": \"minus_one\", \"description\": \"Minus one to a number\", \"parameters\": {\"number\": \"number string\"}}]}\n\nBased on this tool list, generate a JSON object to call a tool. For example, if you need to add one to number 77, return:\n\n{\"tool\": \"plus_one\", \"parameters\": {\"query\": \"77\"}}\n\nPlease note that the above is just an example and does not mean that the search and calculator tools are currently available."
+                        TOOL_EAXMPLE = "You will receive a JSON string containing a list of callable tools. Please parse this JSON string and return a JSON object containing the tool name and tool parameters. Here is an example of the tool list:\n\n{\"tools\": [{\"name\": \"plus_one\", \"description\": \"Add one to a number\", \"parameters\": {\"number\": \"number string\"}},{\"name\": \"minus_one\", \"description\": \"Minus one to a number\", \"parameters\": {\"number\": \"number string\"}}]}\n\nBased on this tool list, generate a JSON object to call a tool. For example, if you need to add one to number 77, return:\n\n{\"tool\": \"plus_one\", \"parameters\": {\"query\": \"77\"}}\n\nPlease note that the above is just an example and does not mean that the plus_one and minus_one tools are currently available."
                         GPT_INSTRUCTION = f"""
         Answer the following questions as best you can. You have access to the following APIs:
         {tools_instructions}
@@ -1261,7 +1261,7 @@ class LLM_local:
                             + "\n"
                         )
                     REUTRN_FORMAT="{\"tool\": \"tool name\", \"parameters\": {\"parameter name\": \"parameter value\"}}"
-                    TOOL_EAXMPLE = "You will receive a JSON string containing a list of callable tools. Please parse this JSON string and return a JSON object containing the tool name and tool parameters. Here is an example of the tool list:\n\n{\"tools\": [{\"name\": \"plus_one\", \"description\": \"Add one to a number\", \"parameters\": {\"number\": \"number string\"}},{\"name\": \"minus_one\", \"description\": \"Minus one to a number\", \"parameters\": {\"number\": \"number string\"}}]}\n\nBased on this tool list, generate a JSON object to call a tool. For example, if you need to add one to number 77, return:\n\n{\"tool\": \"plus_one\", \"parameters\": {\"query\": \"77\"}}\n\nPlease note that the above is just an example and does not mean that the search and calculator tools are currently available."
+                    TOOL_EAXMPLE = "You will receive a JSON string containing a list of callable tools. Please parse this JSON string and return a JSON object containing the tool name and tool parameters. Here is an example of the tool list:\n\n{\"tools\": [{\"name\": \"plus_one\", \"description\": \"Add one to a number\", \"parameters\": {\"number\": \"number string\"}},{\"name\": \"minus_one\", \"description\": \"Minus one to a number\", \"parameters\": {\"number\": \"number string\"}}]}\n\nBased on this tool list, generate a JSON object to call a tool. For example, if you need to add one to number 77, return:\n\n{\"tool\": \"plus_one\", \"parameters\": {\"query\": \"77\"}}\n\nPlease note that the above is just an example and does not mean that the plus_one and minus_one tools are currently available."
                     GPT_INSTRUCTION = f"""
     Answer the following questions as best you can. You have access to the following APIs:
     {tools_instructions}
@@ -1341,8 +1341,8 @@ class LLM_local:
                     )
                     # 正则表达式匹配
                     pattern =  r'\{\s*"tool":\s*"(.*?)",\s*"parameters":\s*\{(.*?)\}\s*\}'            
-                    while re.search(pattern, response_content, re.DOTALL)!=None:
-                        match=re.search(pattern, response_content, re.DOTALL)
+                    while re.search(pattern, response, re.DOTALL)!=None:
+                        match=re.search(pattern, response, re.DOTALL)
                         tool = match.group(1)
                         parameters = match.group(2)
                         json_str = '{"tool": "' + tool + '", "parameters": {' + parameters + '}}'
@@ -1366,41 +1366,13 @@ class LLM_local:
                     )
                     response_content=response['choices'][0]['message']['content']
                     print(response_content)
-                    is_valid_json = True
-                    try:
-                        json_str = response_content.replace("'", '"').strip()
-                        data = json.loads(json_str)
-                        is_valid_json = True
-                    except json.JSONDecodeError:
-                        is_valid_json = False
-                    while is_valid_json:
-                        tool = data.get("tool")
-                        parameters = data.get("parameters")
-                        print("正在调用" + tool + "工具")
-                        results = dispatch_tool(tool, parameters)
-                        print(results)
-                        history.append({"role":"assistant", "content": json_str})
-                        history.append({"role": "observation", "content": results})
-                        response= model.create_chat_completion(
-                            messages = history,
-                            max_tokens=max_length,
-                            temperature=temperature,
-                        )
-                        response_content = response.choices[0].message.content      
-                        try:
-                            json_str = response_content.replace("'", '"').strip()
-                            data = json.loads(json_str)
-                            is_valid_json = True
-                        except json.JSONDecodeError:
-                            is_valid_json = False
                     # 正则表达式匹配
-                    pattern = r'```tool_json(.*?)```'              
+                    pattern =  r'\{\s*"tool":\s*"(.*?)",\s*"parameters":\s*\{(.*?)\}\s*\}'            
                     while re.search(pattern, response_content, re.DOTALL)!=None:
                         match=re.search(pattern, response_content, re.DOTALL)
-                        json_str = match.group(1).strip()
-                        data = json.loads(json_str)
-                        tool = data.get("tool")
-                        parameters = data.get("parameters")
+                        tool = match.group(1)
+                        parameters = match.group(2)
+                        json_str = '{"tool": "' + tool + '", "parameters": {' + parameters + '}}'
                         print("正在调用" + tool + "工具")
                         results = dispatch_tool(tool, parameters)
                         print(results)
