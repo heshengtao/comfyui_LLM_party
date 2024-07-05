@@ -68,6 +68,7 @@ from .tools.whisper import listen_audio,openai_whisper
 from .tools.story import story_json_tool,read_story_json
 from .tools.KG import KG_json_toolkit_developer,KG_json_toolkit_user,Inquire_entities,New_entities,Modify_entities,Delete_entities,Inquire_relationships,New_relationships,Modify_relationships,Delete_relationships,Inquire_entity_relationships
 from .tools.KG_csv import KG_csv_toolkit_developer,KG_csv_toolkit_user,Inquire_triple,New_triple,Delete_triple
+from .tools.CosyVoice import CosyVoice
 
 _TOOL_HOOKS = [
     "get_time",
@@ -1647,6 +1648,7 @@ NODE_CLASS_MAPPINGS = {
     "KG_csv_toolkit_developer":KG_csv_toolkit_developer,
     "KG_csv_toolkit_user":KG_csv_toolkit_user,
     "replace_string":replace_string,
+    "CosyVoice":CosyVoice,
 }
 
 
@@ -1721,6 +1723,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "KG_csv_toolkit_developer": "知识图谱CSV工具包开发者版(KG_csv_toolkit_developer)",
     "KG_csv_toolkit_user": "知识图谱CSV工具包用户版(KG_csv_toolkit_user)",
     "replace_string": "替换字符串(replace_string)",
+    "CosyVoice": "CosyVoice语音合成(CosyVoice)",
 }
 def load_custom_tools():
     # 获取 custom_tool 文件夹的路径

@@ -35,3 +35,4 @@ pydub
 keyboard
 sounddevice
 scipy
+gradio_client
