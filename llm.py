@@ -694,6 +694,8 @@ class LLM:
                                 + str(tool["description"])
                                 + ". Parameters:"
                                 + str(tool["parameters"])
+                                + "Required parameters:"
+                                + str(tool["parameters"]["required"])
                                 + "\n"
                             )
                         REUTRN_FORMAT="{\"tool\": \"tool name\", \"parameters\": {\"parameter name\": \"parameter value\"}}"
@@ -1258,6 +1260,8 @@ class LLM_local:
                             + str(tool["description"])
                             + ". Parameters:"
                             + str(tool["parameters"])
+                            + "Required parameters:"
+                            + str(tool["parameters"]["required"])
                             + "\n"
                         )
                     REUTRN_FORMAT="{\"tool\": \"tool name\", \"parameters\": {\"parameter name\": \"parameter value\"}}"
