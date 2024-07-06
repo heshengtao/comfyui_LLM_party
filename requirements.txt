@@ -36,3 +36,4 @@ keyboard
 sounddevice
 scipy
 gradio_client
+neo4j

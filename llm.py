@@ -66,8 +66,9 @@ from .tools.omost import omost_decode,omost_setting
 from .tools.keyword import keyword_tool,search_keyword,load_keyword
 from .tools.whisper import listen_audio,openai_whisper
 from .tools.story import story_json_tool,read_story_json
-from .tools.KG import KG_json_toolkit_developer,KG_json_toolkit_user,Inquire_entities,New_entities,Modify_entities,Delete_entities,Inquire_relationships,New_relationships,Modify_relationships,Delete_relationships,Inquire_entity_relationships
+from .tools.KG import KG_json_toolkit_developer,KG_json_toolkit_user,Inquire_entities,New_entities,Modify_entities,Delete_entities,Inquire_relationships,New_relationships,Modify_relationships,Delete_relationships,Inquire_entity_relationships,Inquire_entity_list
 from .tools.KG_csv import KG_csv_toolkit_developer,KG_csv_toolkit_user,Inquire_triple,New_triple,Delete_triple
+from .tools.KG_neo4j import KG_neo_toolkit_developer,KG_neo_toolkit_user,Inquire_entities_neo4j,New_entities_neo4j,Modify_entities_neo4j,Delete_entities_neo4j,Inquire_relationships_neo4j,New_relationships_neo4j,Modify_relationships_neo4j,Delete_relationships_neo4j,Inquire_entity_relationships_neo4j,Inquire_entity_list_neo4j
 from .tools.CosyVoice import CosyVoice
 
 _TOOL_HOOKS = [
@@ -103,6 +104,17 @@ _TOOL_HOOKS = [
     "New_triple",
     "Delete_triple",
     "Inquire_entity_relationships",
+    "Inquire_entity_list",
+    "Inquire_entities_neo4j",
+    "New_entities_neo4j",
+    "Modify_entities_neo4j",
+    "Delete_entities_neo4j",
+    "Inquire_relationships_neo4j",
+    "New_relationships_neo4j",
+    "Modify_relationships_neo4j",
+    "Delete_relationships_neo4j",
+    "Inquire_entity_relationships_neo4j",
+    "Inquire_entity_list_neo4j",
 ]
 instances = []
 image_buffer = []
@@ -1649,6 +1661,8 @@ NODE_CLASS_MAPPINGS = {
     "KG_csv_toolkit_user":KG_csv_toolkit_user,
     "replace_string":replace_string,
     "CosyVoice":CosyVoice,
+    "KG_neo_toolkit_developer":KG_neo_toolkit_developer,
+    "KG_neo_toolkit_user":KG_neo_toolkit_user,
 }
 
 
@@ -1724,6 +1738,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "KG_csv_toolkit_user": "知识图谱CSV工具包用户版(KG_csv_toolkit_user)",
     "replace_string": "替换字符串(replace_string)",
     "CosyVoice": "CosyVoice语音合成(CosyVoice)",
+    "KG_neo_toolkit_developer": "知识图谱Neo4j工具包开发者版(KG_neo4j_toolkit_developer)",
+    "KG_neo_toolkit_user": "知识图谱Neo4j工具包用户版(KG_neo4j_toolkit_user)"
 }
 def load_custom_tools():
     # 获取 custom_tool 文件夹的路径

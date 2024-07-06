@@ -1,0 +1,316 @@
+{
+  "last_node_id": 24,
+  "last_link_id": 37,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1403,
+        264
+      ],
+      "size": {
+        "0": 454.6876220703125,
+        "1": 290.2985534667969
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 36,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "在数据库中，刘备和孙尚香之间的关系被定义为“丈夫”。这表明刘备是孙尚香的丈夫。"
+      ]
+    },
+    {
+      "id": 20,
+      "type": "LLM_api_loader",
+      "pos": [
+        513,
+        269
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            34
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4-turbo",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 24,
+      "type": "load_persona",
+      "pos": [
+        523,
+        423
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "知识图谱neo4j版本",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 22,
+      "type": "KG_neo_toolkit_developer",
+      "pos": [
+        516,
+        581
+      ],
+      "size": {
+        "0": 369.6000061035156,
+        "1": 130
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KG_neo_toolkit_developer"
+      },
+      "widgets_values": [
+        "bolt://localhost:7687",
+        "neo4j",
+        "12345678",
+        true
+      ]
+    },
+    {
+      "id": 23,
+      "type": "LLM",
+      "pos": [
+        940,
+        260
+      ],
+      "size": {
+        "0": 401.7856750488281,
+        "1": 469.7105407714844
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 34
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 35,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            36
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "查询一下neo4j数据库，刘备和孙尚香在数据库中的关系",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
+    }
+  ],
+  "links": [
+    [
+      34,
+      20,
+      0,
+      23,
+      0,
+      "CUSTOM"
+    ],
+    [
+      35,
+      22,
+      0,
+      23,
+      4,
+      "STRING"
+    ],
+    [
+      36,
+      23,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      37,
+      24,
+      0,
+      23,
+      2,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": {
+        "0": -471.5149553803878,
+        "1": -93.25105688572376
+      }
+    }
+  },
+  "version": 0.4
+}
