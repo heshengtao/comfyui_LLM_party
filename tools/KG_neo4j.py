@@ -368,7 +368,7 @@ def New_entities_neo4j(name, attributes=None):
         result = session.run("MATCH (n {name: $name}) RETURN n", name=name)
         if result.single():
             return "该实体节点已存在"
-        query = f"CREATE (n:{name} {{name: $name, attributes: $attributes}})"
+        query = f"CREATE (n:{name.replace(' ', '_')} {{name: $name, attributes: $attributes}})"
         session.run(query, name=name, attributes=attributes)
     driver.close()
     return "添加成功"
@@ -377,7 +377,7 @@ def Modify_entities_neo4j(name, attributes=None):
     global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
     with driver.session() as session:
-        query = f"MATCH (n:{name} {{name: $name}}) SET n.attributes = $attributes RETURN n"
+        query = f"MATCH (n:{name.replace(' ', '_')} {{name: $name}}) SET n.attributes = $attributes RETURN n"
         result = session.run(query, name=name, attributes=attributes)
         if not result.single():
             return "该实体节点不存在"
@@ -388,7 +388,7 @@ def Delete_entities_neo4j(name):
     global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
     with driver.session() as session:
-        query = f"MATCH (n:{name} {{name: $name}}) DETACH DELETE n RETURN n"
+        query = f"MATCH (n:{name.replace(' ', '_')} {{name: $name}}) DETACH DELETE n RETURN n"
         result = session.run(query, name=name)
         if not result.single():
             return "该实体节点不存在"
@@ -430,14 +430,14 @@ def New_relationships_neo4j(source, target, label, attributes=None):
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
     with driver.session() as session:
         result = session.run("""
-            MATCH (a {name: $source})-[r:`""" + label + """` {name: $label}]->(b {name: $target})
+            MATCH (a {name: $source})-[r:`""" + label.replace(' ', '_') + """` {name: $label}]->(b {name: $target})
             RETURN r
         """, source=source, target=target, label=label)
         if result.single():
             return "该关系边已存在"
         session.run("""
             MATCH (a {name: $source}), (b {name: $target})
-            CREATE (a)-[r:`""" + label + """` {name: $label, attributes: $attributes}]->(b)
+            CREATE (a)-[r:`""" + label.replace(' ', '_') + """` {name: $label, attributes: $attributes}]->(b)
         """, source=source, target=target, label=label, attributes=attributes)
     driver.close()
     return "添加成功"
@@ -447,7 +447,7 @@ def Modify_relationships_neo4j(source, target, label, attributes=None):
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
     with driver.session() as session:
         result = session.run("""
-            MATCH (a {name: $source})-[r:`""" + label + """` {name: $label}]->(b {name: $target})
+            MATCH (a {name: $source})-[r:`""" + label.replace(' ', '_') + """` {name: $label}]->(b {name: $target})
             SET r.attributes = $attributes
             RETURN r
         """, source=source, target=target, label=label, attributes=attributes)
@@ -461,7 +461,7 @@ def Delete_relationships_neo4j(source, target, label):
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
     with driver.session() as session:
         result = session.run("""
-            MATCH (a {name: $source})-[r:`""" + label + """` {name: $label}]->(b {name: $target})
+            MATCH (a {name: $source})-[r:`""" + label.replace(' ', '_') + """` {name: $label}]->(b {name: $target})
             DELETE r
             RETURN r
         """, source=source, target=target, label=label)
