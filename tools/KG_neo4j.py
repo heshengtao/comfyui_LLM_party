@@ -364,23 +364,50 @@ def Inquire_entities_neo4j(name):
 def New_entities_neo4j(name, attributes=None):
     global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
+    if attributes is None:
+        attributes = {}
+    else:
+        attributes = json.loads(attributes)
+    
     with driver.session() as session:
         result = session.run("MATCH (n {name: $name}) RETURN n", name=name)
         if result.single():
             return "该实体节点已存在"
-        query = f"CREATE (n:{name.replace(' ', '_')} {{name: $name, attributes: $attributes}})"
-        session.run(query, name=name, attributes=attributes)
+        
+        # Create the query string with dynamic attributes
+        attr_str = ', '.join([f"{key}: ${key}" for key in attributes.keys()])
+        if attr_str:
+            query = f"CREATE (n:{name.replace(' ', '_')} {{name: $name, {attr_str}}})"
+        else:
+            query = f"CREATE (n:{name.replace(' ', '_')} {{name: $name}})"
+        
+        # Run the query with the attributes
+        session.run(query, name=name, **attributes)
+    
     driver.close()
     return "添加成功"
 
 def Modify_entities_neo4j(name, attributes=None):
     global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
+    if attributes is None:
+        attributes = {}
+    else:
+        attributes = json.loads(attributes)
+    
     with driver.session() as session:
-        query = f"MATCH (n:{name.replace(' ', '_')} {{name: $name}}) SET n.attributes = $attributes RETURN n"
-        result = session.run(query, name=name, attributes=attributes)
+        # Create the query string with dynamic attributes
+        attr_str = ', '.join([f"n.{key} = ${key}" for key in attributes.keys()])
+        if attr_str:
+            query = f"MATCH (n:{name.replace(' ', '_')} {{name: $name}}) SET {attr_str} RETURN n"
+        else:
+            query = f"MATCH (n:{name.replace(' ', '_')} {{name: $name}}) RETURN n"
+        
+        # Run the query with the attributes
+        result = session.run(query, name=name, **attributes)
         if not result.single():
             return "该实体节点不存在"
+    
     driver.close()
     return "修改成功"
 
@@ -428,31 +455,67 @@ def Inquire_relationships_neo4j(entitie_A, entitie_B):
 def New_relationships_neo4j(source, target, label, attributes=None):
     global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
+    if attributes is None:
+        attributes = {}
+    else:
+        attributes = json.loads(attributes)
+    
     with driver.session() as session:
         result = session.run("""
-            MATCH (a {name: $source})-[r:`""" + label.replace(' ', '_') + """` {name: $label}]->(b {name: $target})
+            MATCH (a {name: $source})-[r:`""" + label.replace(' ', '_') + """`]->(b {name: $target})
             RETURN r
-        """, source=source, target=target, label=label)
+        """, source=source, target=target)
         if result.single():
             return "该关系边已存在"
-        session.run("""
-            MATCH (a {name: $source}), (b {name: $target})
-            CREATE (a)-[r:`""" + label.replace(' ', '_') + """` {name: $label, attributes: $attributes}]->(b)
-        """, source=source, target=target, label=label, attributes=attributes)
+        
+        # Create the query string with dynamic attributes
+        attr_str = ', '.join([f"{key}: ${key}" for key in attributes.keys()])
+        if attr_str:
+            query = f"""
+                MATCH (a {{name: $source}}), (b {{name: $target}})
+                CREATE (a)-[r:`{label.replace(' ', '_')}` {{ {attr_str} }}]->(b)
+            """
+        else:
+            query = f"""
+                MATCH (a {{name: $source}}), (b {{name: $target}})
+                CREATE (a)-[r:`{label.replace(' ', '_')}`]->(b)
+            """
+        
+        # Run the query with the attributes
+        session.run(query, source=source, target=target, **attributes)
+    
     driver.close()
     return "添加成功"
+
 
 def Modify_relationships_neo4j(source, target, label, attributes=None):
     global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
+    if attributes is None:
+        attributes = {}
+    else:
+        attributes = json.loads(attributes)
+    
     with driver.session() as session:
-        result = session.run("""
-            MATCH (a {name: $source})-[r:`""" + label.replace(' ', '_') + """` {name: $label}]->(b {name: $target})
-            SET r.attributes = $attributes
-            RETURN r
-        """, source=source, target=target, label=label, attributes=attributes)
+        # Create the query string with dynamic attributes
+        attr_str = ', '.join([f"r.{key} = ${key}" for key in attributes.keys()])
+        if attr_str:
+            query = f"""
+                MATCH (a {{name: $source}})-[r:`{label.replace(' ', '_')}`]->(b {{name: $target}})
+                SET {attr_str}
+                RETURN r
+            """
+        else:
+            query = f"""
+                MATCH (a {{name: $source}})-[r:`{label.replace(' ', '_')}`]->(b {{name: $target}})
+                RETURN r
+            """
+        
+        # Run the query with the attributes
+        result = session.run(query, source=source, target=target, **attributes)
         if not result.single():
             return "该关系边不存在"
+    
     driver.close()
     return "修改成功"
 
