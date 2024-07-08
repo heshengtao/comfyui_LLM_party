@@ -36,7 +36,6 @@ base_url=http://127.0.0.1:11434/v1/
 api_key=ollama
 
 [your_local_model_name]
-model_type= GLM
 model_path=/path/to/your/model
 tokenizer_path=/path/to/your/tokenizer
 

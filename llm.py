@@ -939,9 +939,11 @@ class LLM_local_loader:
 
     def chatbot(self, model_name,model_type,model_path,tokenizer_path,device,dtype):
         if model_name in config_key:
-            model_type = config_key[model_name].get("model_type")
             model_path = config_key[model_name].get("model_path")
             tokenizer_path = config_key[model_name].get("tokenizer_path")
+        elif model_name != "":
+            model_path =model_name
+            tokenizer_path =model_name
         if device == "auto":
             device ="cuda"if torch.cuda.is_available()else ("mps" if torch.backends.mps.is_available() else "cpu")
         
