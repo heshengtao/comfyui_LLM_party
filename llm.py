@@ -70,7 +70,7 @@ from .tools.KG import KG_json_toolkit_developer,KG_json_toolkit_user,Inquire_ent
 from .tools.KG_csv import KG_csv_toolkit_developer,KG_csv_toolkit_user,Inquire_triple,New_triple,Delete_triple
 from .tools.KG_neo4j import KG_neo_toolkit_developer,KG_neo_toolkit_user,Inquire_entities_neo4j,New_entities_neo4j,Modify_entities_neo4j,Delete_entities_neo4j,Inquire_relationships_neo4j,New_relationships_neo4j,Modify_relationships_neo4j,Delete_relationships_neo4j,Inquire_entity_relationships_neo4j,Inquire_entity_list_neo4j
 from .tools.CosyVoice import CosyVoice
-
+from .tools.translate_persona import translate_persona
 _TOOL_HOOKS = [
     "get_time",
     "get_weather",
@@ -1681,6 +1681,7 @@ NODE_CLASS_MAPPINGS = {
     "CosyVoice":CosyVoice,
     "KG_neo_toolkit_developer":KG_neo_toolkit_developer,
     "KG_neo_toolkit_user":KG_neo_toolkit_user,
+    "translate_persona":translate_persona,
 }
 
 
@@ -1757,7 +1758,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "replace_string": "替换字符串(replace_string)",
     "CosyVoice": "CosyVoice语音合成(CosyVoice)",
     "KG_neo_toolkit_developer": "知识图谱Neo4j工具包开发者版(KG_neo4j_toolkit_developer)",
-    "KG_neo_toolkit_user": "知识图谱Neo4j工具包用户版(KG_neo4j_toolkit_user)"
+    "KG_neo_toolkit_user": "知识图谱Neo4j工具包用户版(KG_neo4j_toolkit_user)",
+    "translate_persona":"翻译面具(translate_persona)",
 }
 def load_custom_tools():
     # 获取 custom_tool 文件夹的路径
