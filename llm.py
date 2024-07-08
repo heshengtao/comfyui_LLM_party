@@ -887,6 +887,9 @@ class LLM_local_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
+                "model_name": (
+                    "STRING",{"default": ""}
+                ),
                 "model_type": (
                     ["GLM", "llama", "Qwen"],
                     {
@@ -934,7 +937,11 @@ class LLM_local_loader:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def chatbot(self, model_type,model_path,tokenizer_path,device,dtype):
+    def chatbot(self, model_name,model_type,model_path,tokenizer_path,device,dtype):
+        if model_name in config_key:
+            model_type = config_key[model_name].get("model_type")
+            model_path = config_key[model_name].get("model_path")
+            tokenizer_path = config_key[model_name].get("tokenizer_path")
         if device == "auto":
             device ="cuda"if torch.cuda.is_available()else ("mps" if torch.backends.mps.is_available() else "cpu")
         
@@ -1542,11 +1549,14 @@ class LLavaLoader:
     @classmethod
     def INPUT_TYPES(s):
         return {"required": { 
-              "ckpt_path": ("STRING", {"default": ""}),   
-              "clip_path": ("STRING", {"default": ""}), 
-              "max_ctx": ("INT", {"default": 2048, "min": 300, "max": 100000, "step": 64}),
-              "gpu_layers": ("INT", {"default": 27, "min": 0, "max": 100, "step": 1}),
-              "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
+                "model_name": (
+                    "STRING",{"default": ""}
+                ),
+                "ckpt_path": ("STRING", {"default": ""}),   
+                "clip_path": ("STRING", {"default": ""}), 
+                "max_ctx": ("INT", {"default": 2048, "min": 300, "max": 100000, "step": 64}),
+                "gpu_layers": ("INT", {"default": 27, "min": 0, "max": 100, "step": 1}),
+                "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
                              }}
                 
     
@@ -1555,9 +1565,12 @@ class LLavaLoader:
     FUNCTION = "load_llava_checkpoint"
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
-    def load_llava_checkpoint(self, ckpt_path, max_ctx, gpu_layers, n_threads, clip_path ):
+    def load_llava_checkpoint(self,model_name, ckpt_path, max_ctx, gpu_layers, n_threads, clip_path ):
         from llama_cpp import Llama
         from llama_cpp.llama_chat_format import Llava15ChatHandler
+        if model_name in config_key:
+            ckpt_path = config_key[model_name].get("ckpt_path")
+            clip_path = config_key[model_name].get("clip_path")
         clip = Llava15ChatHandler(clip_model_path = clip_path, verbose=False) 
         llm = Llama(model_path = ckpt_path, chat_handler=clip,offload_kqv=True, f16_kv=True, use_mlock=False, embedding=False, n_batch=1024, last_n_tokens_size=1024, verbose=True, seed=42, n_ctx = max_ctx, n_gpu_layers=gpu_layers, n_threads=n_threads, logits_all=True, echo=False) 
         return (llm, ) 
@@ -1566,10 +1579,13 @@ class llama_guff_loader:
     @classmethod
     def INPUT_TYPES(s):
         return {"required": { 
-              "model_path": ("STRING", {"default": ""}),   
-              "max_ctx": ("INT", {"default": 512, "min": 300, "max": 100000, "step": 64}),
-              "gpu_layers": ("INT", {"default": 41, "min": 0, "max": 100, "step": 1}),
-              "n_threads": ("INT", {"default": 16, "min": 1, "max": 100, "step": 1}),
+                "model_name": (
+                    "STRING",{"default": ""}
+                ),
+                "model_path": ("STRING", {"default": ""}),   
+                "max_ctx": ("INT", {"default": 512, "min": 300, "max": 100000, "step": 64}),
+                "gpu_layers": ("INT", {"default": 41, "min": 0, "max": 100, "step": 1}),
+                "n_threads": ("INT", {"default": 16, "min": 1, "max": 100, "step": 1}),
                              }}
                 
     
@@ -1578,8 +1594,10 @@ class llama_guff_loader:
     FUNCTION = "load_llama_checkpoint"
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
-    def load_llama_checkpoint(self, model_path, max_ctx, gpu_layers, n_threads):
+    def load_llama_checkpoint(self, model_name,model_path, max_ctx, gpu_layers, n_threads):
         from llama_cpp import Llama
+        if model_name in config_key:
+            model_path = config_key[model_name].get("model_path")
         model = Llama(
             model_path=model_path,
             chat_format="llama-2",
