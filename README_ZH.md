@@ -7,7 +7,7 @@
 2. 新增了JSON文件解析节点和JSON取值节点，可以让你从文件或者文本中获取某一个键的值。感谢[guobalove](https://github.com/guobalove)的贡献！
 3. 改进了工具调用的代码，现在没有工具调用功能的LLM也可以开启is_tools_in_sys_prompt属性（本地LLM默认无需开启，自动适配），开启之后，工具信息会添加到系统提示词中，这样LLM就可以调用工具了。
 4. 新建了custom_tool文件夹，用于存放自定义工具的代码，可以参考[custom_tool](custom_tool)文件夹中的代码，将自定义工具的代码放入custom_tool文件夹中，即可在LLM中调用自定义工具。
-5. 新增了知识图谱工具，让LLM与知识图谱可以完美交互，LLM可以根据你的输入修改知识图谱，可以在知识图谱上推理以获取你需要的答案。示例工作流参考：[知识图谱](workflow/知识图谱csv版本开发者模式.json)
+5. 新增了知识图谱工具，让LLM与知识图谱可以完美交互，LLM可以根据你的输入修改知识图谱，可以在知识图谱上推理以获取你需要的答案。示例工作流参考：[graphRAG_neo4j](workflow/graphRAG_neo4j.json)
 6. 新增了人格AI功能，0代码开发自己的女友AI或男友AI，无限对话，永久记忆，人设稳定。示例工作流参考：[麦洛薇人格AI](workflow/麦洛薇人格AI.json)
 
 # **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库**
@@ -48,19 +48,22 @@
 ## 功能
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)
 2. 支持API接入或者本地大模型接入。模块化实现工具调用功能。在填入base_url时，请填入以`/v1/`结尾的网址。你可以用[ollama](https://github.com/ollama/ollama)来管理你的模型，然后在base_url填入`http://127.0.0.1:11434/v1/`，在api_key填入ollama，在model_name填入你的模型名称，例如:llama3。
-3. 本地知识库接入，支持RAG
+- API接入示例工作流：[start_with_LLM_api](workflow/start_with_LLM_api.json)
+- 本地模型接入示例工作流：[start_with_LLM_local](workflow/start_with_LLM_local.json)
+- ollama接入示例工作流：[ollama](workflow/ollama.json)
+3. 本地知识库接入，支持RAG。示例工作流：[知识库RAG搜索.json](workflow/知识库RAG搜索.json)
 4. 可以调用代码解释器
-5. 可以联网查询，支持谷歌搜索
-6. 可以在comfyui中实现条件语句，可以对用户提问进行分类后再针对性回复
-7. 支持大模型的回环链接，可以让两个大模型打辩论赛
+5. 可以联网查询，支持谷歌搜索。示例工作流：[电影查询工作流](workflow/电影查询工作流.json)
+6. 可以在comfyui中实现条件语句，可以对用户提问进行分类后再针对性回复。示例工作流：[智能客服](workflow/智能客服.json)
+7. 支持大模型的回环链接，可以让两个大模型打辩论赛。示例工作流：[电车难题辩论赛](workflow/电车难题辩论赛.json)
 8. 支持挂接任意人格面具，可以自定义提示词模板
 9. 支持多种工具调用，目前开发了查天气、查时间、知识库、代码执行、联网搜索、对单一网页进行搜索等功能。
-10. 支持将LLM当作一个工具节点使用
+10. 支持将LLM当作一个工具节点使用。示例工作流：[LLM套娃](workflow/LLM套娃.json)
 11. 支持通过API+streamlit快速开发自己的web应用，下图为一个绘画应用示例。
 12. 新增了危险的万能解释器节点，可以让大模型做任何事情
 13. 推荐使用右键菜单里的函数（function）子目录下的显示文本（show_text）节点，作为LLM节点的输出显示
-14. 支持了GPT-4O的视觉功能！
-15. 新增了一个工作流中转器，可以让你的工作流调用其他的工作流!
+14. 支持了GPT-4O的视觉功能！示例工作流：[GPT-4o](workflow/GPT-4o.json)
+15. 新增了一个工作流中转器，可以让你的工作流调用其他的工作流!示例工作流：[调用另一个工作流](workflow/调用另一个工作流.json)
 16. 适配了所有具有类似openai接口的模型，例如：通义千问/qwen、智谱清言/GLM、deepseek、kimi/moonshot。请将这些模型的base_url、api_key、model_name填入LLM节点以调用它们。
 17. 新增了一个LVM加载器，现在可以本地调用LVM模型了，支持[llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)模型，其他LVM模型如果是GUFF格式，理论上应该也可以运行。示例工作流在这里: [start_with_LVM.json](workflow/start_with_LVM.json).
 18. 写了一个`fastapi.py`文件，如果你直接运行它，你就获得了一个`http://127.0.0.1:8817/v1/`上的openai接口，任何可以调用GPT的应用都可以调用你的comfyui工作流了！详细怎么操作我会出一期教程来演示~
