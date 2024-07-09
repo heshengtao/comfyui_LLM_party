@@ -6,8 +6,20 @@ import time
 import numpy as np
 import pandas as pd
 import torch
-from PIL import Image, ImageOps, ImageSequence
-import node_helpers
+from PIL import Image, ImageOps, ImageSequence,ImageFile, UnidentifiedImageError
+
+def pillow(fn, arg):
+    prev_value = None
+    try:
+        x = fn(arg)
+    except (OSError, UnidentifiedImageError, ValueError): #PIL issues #4472 and #2445, also fixes ComfyUI issue #3416
+        prev_value = ImageFile.LOAD_TRUNCATED_IMAGES
+        ImageFile.LOAD_TRUNCATED_IMAGES = True
+        x = fn(arg)
+    finally:
+        if prev_value is not None:
+            ImageFile.LOAD_TRUNCATED_IMAGES = prev_value
+        return x
 
 class load_excel:
     def __init__(self):
@@ -103,7 +115,7 @@ class image_iterator:
         # 如果没有更多的图片可以读取，返回None
         if self.index < len(image_files):
             image_path = os.path.join(folder_path, image_files[self.index])
-            img = node_helpers.pillow(Image.open, image_path)
+            img = pillow(Image.open, image_path)
         
             output_images = []
             w, h = None, None
@@ -111,7 +123,7 @@ class image_iterator:
             excluded_formats = ['MPO']
             
             for i in ImageSequence.Iterator(img):
-                i = node_helpers.pillow(ImageOps.exif_transpose, i)
+                i = pillow(ImageOps.exif_transpose, i)
 
                 if i.mode == 'I':
                     i = i.point(lambda i: i * (1 / 255))
