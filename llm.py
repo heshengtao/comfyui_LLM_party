@@ -55,7 +55,7 @@ from .tools.show_text import show_text_party,About_us
 from .tools.tool_combine import tool_combine, tool_combine_plus
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import workflow_transfer,workflow_tool,work_flow
-from .tools.excel import load_excel
+from .tools.excel import load_excel,image_iterator
 from .tools.git_tool import github_tool,search_github_repositories
 from .tools.wechat import work_wechat_tool,send_wechat,work_wechat
 from .tools.dingding import Dingding_tool,send_dingding,Dingding
@@ -1655,7 +1655,6 @@ NODE_CLASS_MAPPINGS = {
     "arxiv_tool": arxiv_tool,
     "workflow_transfer": workflow_transfer,
     "About_us":About_us,
-    "load_excel":load_excel,
     "workflow_tool":workflow_tool,
     "github_tool":github_tool,
     "work_wechat_tool":work_wechat_tool,
@@ -1685,7 +1684,9 @@ NODE_CLASS_MAPPINGS = {
     "KG_neo_toolkit_developer":KG_neo_toolkit_developer,
     "KG_neo_toolkit_user":KG_neo_toolkit_user,
     "translate_persona":translate_persona,
+    "load_excel":load_excel,
     "text_iterator":text_iterator,
+    "image_iterator":image_iterator,
 }
 
 
@@ -1734,7 +1735,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "arxiv_tool": "arxiv工具(arxiv_tool)",
     "workflow_transfer": "工作流中转器(workflow_transfer)",
     "About_us": "关于我们(About_us)",
-    "load_excel": "Excel迭代器(Excel_iterator)",
     "workflow_tool": "工作流工具(workflow_tool)",
     "github_tool": "GitHub工具(github_tool)",
     "work_wechat_tool": "企业微信工具(work_wechat_tool)",
@@ -1764,7 +1764,9 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "KG_neo_toolkit_developer": "知识图谱Neo4j工具包开发者版(KG_neo4j_toolkit_developer)",
     "KG_neo_toolkit_user": "知识图谱Neo4j工具包用户版(KG_neo4j_toolkit_user)",
     "translate_persona":"翻译面具(translate_persona)",
+    "load_excel": "Excel迭代器(Excel_iterator)",
     "text_iterator":" 文本迭代器(text_iterator)",
+    "image_iterator":" 图片迭代器(image_iterator)",
 }
 def load_custom_tools():
     # 获取 custom_tool 文件夹的路径
