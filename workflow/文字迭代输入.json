@@ -1,0 +1,318 @@
+{
+  "last_node_id": 32,
+  "last_link_id": 46,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1364,
+        262
+      ],
+      "size": {
+        "0": 454.6876220703125,
+        "1": 290.2985534667969
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 36,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "## Features\n1. You can right-click within the comfyui interface and select `llm` from the context menu to find the nodes of this project. [How to use nodes](how_to_use_nodes_ZH.md)\n2. Supports OpenAI's API-driven approach and allows custom base_url, enabling the use of relay APIs to drive the LLM node. If you are using other large model interfaces, you can use [openai-style-api](https://github.com/tian-minghui/openai-style-api) to convert them into OpenAI interface format. For local large models, please select the local large model node; currently, GLM and llama are adapted, but llama cannot use tool calls because the native llama does not include this feature.\n3. The base_url must end with `/v1/`.\n4. Supports importing various types of file formats into the LLM node, allowing the LLM to answer based on file content through RAG technology. Currently supported file types include: .docx, .xlsx, .csv, .txt, .py, .js, .java, .c, .cpp, .html, .css, .sql, .r, .swift.\n5. By combining tool nodes, multiple tools can be passed into the LLM node, and by combining file nodes, multiple files can be passed into the LLM node."
+      ]
+    },
+    {
+      "id": 32,
+      "type": "text_iterator",
+      "pos": [
+        575,
+        364
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 44,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "text_iterator"
+      },
+      "widgets_values": [
+        "",
+        true,
+        false,
+        512,
+        0
+      ]
+    },
+    {
+      "id": 20,
+      "type": "LLM_api_loader",
+      "pos": [
+        583,
+        184
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            34
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "deepseek-chat",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 31,
+      "type": "load_file",
+      "pos": [
+        224,
+        364
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_file"
+      },
+      "widgets_values": [
+        "",
+        "README_ZH.txt",
+        true
+      ]
+    },
+    {
+      "id": 23,
+      "type": "LLM",
+      "pos": [
+        940,
+        260
+      ],
+      "size": {
+        "0": 401.7856750488281,
+        "1": 469.7105407714844
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 34
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 45,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            36
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "帮我翻译一下文件中的文字到英文",
+        0.7,
+        "disable",
+        "enable",
+        "enable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
+    }
+  ],
+  "links": [
+    [
+      34,
+      20,
+      0,
+      23,
+      0,
+      "CUSTOM"
+    ],
+    [
+      36,
+      23,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      44,
+      31,
+      0,
+      32,
+      0,
+      "STRING"
+    ],
+    [
+      45,
+      32,
+      0,
+      23,
+      5,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": {
+        "0": -234.70541907156766,
+        "1": 53.15784824120775
+      }
+    }
+  },
+  "version": 0.4
+}
