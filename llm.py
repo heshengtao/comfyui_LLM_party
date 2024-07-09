@@ -939,6 +939,8 @@ class LLM_local_loader:
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
     def chatbot(self, model_name,model_type,model_path,tokenizer_path,device,dtype):
+        if model_path!="" and tokenizer_path !="":
+            model_name=""
         if model_name in config_key:
             model_path = config_key[model_name].get("model_path")
             tokenizer_path = config_key[model_name].get("tokenizer_path")
@@ -1571,6 +1573,8 @@ class LLavaLoader:
     def load_llava_checkpoint(self,model_name, ckpt_path, max_ctx, gpu_layers, n_threads, clip_path ):
         from llama_cpp import Llama
         from llama_cpp.llama_chat_format import Llava15ChatHandler
+        if ckpt_path!="" and clip_path !="":
+            model_name=""
         if model_name in config_key:
             ckpt_path = config_key[model_name].get("ckpt_path")
             clip_path = config_key[model_name].get("clip_path")
@@ -1599,6 +1603,8 @@ class llama_guff_loader:
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
     def load_llama_checkpoint(self, model_name,model_path, max_ctx, gpu_layers, n_threads):
         from llama_cpp import Llama
+        if model_path!="":
+            model_name=""
         if model_name in config_key:
             model_path = config_key[model_name].get("model_path")
         model = Llama(
