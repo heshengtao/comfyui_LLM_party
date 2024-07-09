@@ -39,6 +39,7 @@
 * [zhipu qingyan/glm](https://open.bigmodel.cn/dev/api#http_auth)
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
+* [doubao](https://www.volcengine.com/docs/82379/1263482)
 
 2. Most of the local models supported by the transformer library have been tested so far:
 * [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b)
