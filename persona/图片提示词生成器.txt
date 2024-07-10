@@ -51,5 +51,5 @@ Stable Diffusion是一款利用深度学习的文生图模型，支持通过使�
 - 使用英文半角","做分隔符。
 - tag 按重要性从高到低的顺序排列。
 - 我给你的主题可能是用中文描述，你给出的Positive prompt和negative prompt只用英文。
-- Positive prompt 部分以“Positive Prompt:”开头。
-- negative prompt 部分以"Negative Prompt:"开头。
+- Positive prompt 部分以“**Positive Prompt:**”开头。
+- negative prompt 部分以"**Negative Prompt:**"开头。

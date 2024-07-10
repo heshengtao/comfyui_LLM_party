@@ -1,6 +1,6 @@
 {
-  "last_node_id": 207,
-  "last_link_id": 52,
+  "last_node_id": 210,
+  "last_link_id": 58,
   "nodes": [
     {
       "id": 195,
@@ -14,7 +14,7 @@
         "1": 200
       },
       "flags": {},
-      "order": 9,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
@@ -26,7 +26,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 23,
+          "link": 57,
           "widget": {
             "name": "text"
           },
@@ -66,7 +66,7 @@
         "1": 200
       },
       "flags": {},
-      "order": 10,
+      "order": 11,
       "mode": 0,
       "inputs": [
         {
@@ -78,7 +78,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 24,
+          "link": 58,
           "widget": {
             "name": "text"
           },
@@ -144,62 +144,6 @@
       "bgcolor": "#355"
     },
     {
-      "id": 169,
-      "type": "CheckpointLoaderSimple",
-      "pos": [
-        1511,
-        417
-      ],
-      "size": {
-        "0": 315,
-        "1": 98
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "MODEL",
-          "type": "MODEL",
-          "links": [
-            27
-          ],
-          "shape": 3,
-          "label": "模型",
-          "slot_index": 0
-        },
-        {
-          "name": "CLIP",
-          "type": "CLIP",
-          "links": [
-            25,
-            26
-          ],
-          "shape": 3,
-          "label": "CLIP",
-          "slot_index": 1
-        },
-        {
-          "name": "VAE",
-          "type": "VAE",
-          "links": [
-            32
-          ],
-          "shape": 3,
-          "label": "VAE",
-          "slot_index": 2
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CheckpointLoaderSimple"
-      },
-      "widgets_values": [
-        "CounterfeitV30_v30.safetensors"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
       "id": 198,
       "type": "VAEDecode_party",
       "pos": [
@@ -244,73 +188,6 @@
       },
       "color": "#233",
       "bgcolor": "#355"
-    },
-    {
-      "id": 162,
-      "type": "classify_function",
-      "pos": [
-        1515,
-        130
-      ],
-      "size": {
-        "0": 315,
-        "1": 122
-      },
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 51,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "response1",
-          "type": "STRING",
-          "links": [
-            23
-          ],
-          "shape": 3,
-          "label": "response1",
-          "slot_index": 0
-        },
-        {
-          "name": "response2",
-          "type": "STRING",
-          "links": [
-            24
-          ],
-          "shape": 3,
-          "label": "response2",
-          "slot_index": 1
-        },
-        {
-          "name": "response3",
-          "type": "STRING",
-          "links": [
-            38
-          ],
-          "shape": 3,
-          "label": "response3",
-          "slot_index": 2
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "classify_function"
-      },
-      "widgets_values": [
-        "enable",
-        ""
-      ],
-      "color": "#323",
-      "bgcolor": "#535"
     },
     {
       "id": 197,
@@ -368,7 +245,7 @@
         "Node name for S&R": "KSampler_party"
       },
       "widgets_values": [
-        519148138973913,
+        624419671310362,
         "randomize",
         20,
         8,
@@ -421,53 +298,6 @@
       "bgcolor": "#3f5159"
     },
     {
-      "id": 202,
-      "type": "show_text_party",
-      "pos": [
-        2598.881080932617,
-        480.8224737548828
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 11,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 38,
-          "widget": {
-            "name": "text"
-          },
-          "slot_index": 0,
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            37
-          ],
-          "shape": 6,
-          "label": "STRING",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        ""
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
       "id": 150,
       "type": "load_persona",
       "pos": [
@@ -479,7 +309,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 2,
+      "order": 1,
       "mode": 0,
       "inputs": [
         {
@@ -516,54 +346,51 @@
       "bgcolor": "#000"
     },
     {
-      "id": 154,
-      "type": "classify_persona",
+      "id": 202,
+      "type": "show_text_party",
       "pos": [
-        562,
-        -116
+        1934,
+        894
       ],
       "size": {
-        "0": 315,
-        "1": 154
+        "0": 417.2795104980469,
+        "1": 255.6949920654297
       },
       "flags": {},
-      "order": 3,
+      "order": 9,
       "mode": 0,
       "inputs": [
         {
-          "name": "file_content",
+          "name": "text",
           "type": "STRING",
-          "link": null,
+          "link": 54,
           "widget": {
-            "name": "file_content"
+            "name": "text"
           },
-          "label": "file_content"
+          "slot_index": 0,
+          "label": "text"
         }
       ],
       "outputs": [
         {
-          "name": "system_prompt",
+          "name": "STRING",
           "type": "STRING",
           "links": [
-            50
+            37
           ],
-          "shape": 3,
-          "label": "system_prompt",
+          "shape": 6,
+          "label": "STRING",
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "classify_persona"
+        "Node name for S&R": "show_text_party"
       },
       "widgets_values": [
-        "enable",
-        "",
-        "Positive Prompt",
-        "Negative Prompt",
-        "智能助手对用户的回复，不属于生成图像Prompt的文本"
+        ""
       ],
-      "color": "#222",
-      "bgcolor": "#000"
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
     },
     {
       "id": 176,
@@ -577,7 +404,7 @@
         "1": 346
       },
       "flags": {},
-      "order": 4,
+      "order": 2,
       "mode": 0,
       "inputs": [
         {
@@ -647,8 +474,8 @@
       "widgets_values": [
         "",
         "",
+        "",
         "你是一个强大的智能助手",
-        "你好",
         "你好",
         "",
         "",
@@ -656,6 +483,219 @@
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
+    },
+    {
+      "id": 208,
+      "type": "string_logic",
+      "pos": [
+        957,
+        203
+      ],
+      "size": {
+        "0": 315,
+        "1": 166
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "stringA",
+          "type": "STRING",
+          "link": 53,
+          "widget": {
+            "name": "stringA"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "if",
+          "type": "STRING",
+          "links": [
+            55,
+            56
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "else",
+          "type": "STRING",
+          "links": [
+            54
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "is_true",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "is_false",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "string_logic"
+      },
+      "widgets_values": [
+        "A contain B",
+        "",
+        "**Positive Prompt:**"
+      ]
+    },
+    {
+      "id": 209,
+      "type": "substring",
+      "pos": [
+        1345,
+        116
+      ],
+      "size": {
+        "0": 397.2904357910156,
+        "1": 113.91371154785156
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 55,
+          "widget": {
+            "name": "input_string"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "substring",
+          "type": "STRING",
+          "links": [
+            57
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "substring"
+      },
+      "widgets_values": [
+        "",
+        "**Positive Prompt:**",
+        "**Negative Prompt:**"
+      ]
+    },
+    {
+      "id": 210,
+      "type": "substring",
+      "pos": [
+        1357,
+        326
+      ],
+      "size": {
+        "0": 395.7024230957031,
+        "1": 92.18375396728516
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 56,
+          "widget": {
+            "name": "input_string"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "substring",
+          "type": "STRING",
+          "links": [
+            58
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "substring"
+      },
+      "widgets_values": [
+        "",
+        "**Negative Prompt:**",
+        ""
+      ]
+    },
+    {
+      "id": 169,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        1417,
+        -86
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            27
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            25,
+            26
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            32
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "oldFishOldschool_2307211635D.safetensors"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
     },
     {
       "id": 205,
@@ -669,15 +709,14 @@
         "1": 106
       },
       "flags": {},
-      "order": 5,
+      "order": 4,
       "mode": 0,
       "outputs": [
         {
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            46,
-            49
+            46
           ],
           "shape": 3,
           "label": "model",
@@ -688,9 +727,9 @@
         "Node name for S&R": "LLM_api_loader"
       },
       "widgets_values": [
-        "gpt-3.5-turbo-1106",
-        "https://api.openai.com/v1",
-        "sk-XXXXX"
+        "gpt-4-turbo",
+        "",
+        ""
       ],
       "color": "#432",
       "bgcolor": "#653"
@@ -702,12 +741,12 @@
         515,
         130
       ],
-      "size": [
-        398.5218626229779,
-        456.6959912100408
-      ],
+      "size": {
+        "0": 398.5218505859375,
+        "1": 456.69598388671875
+      },
       "flags": {},
-      "order": 6,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
@@ -761,7 +800,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            52
+            53
           ],
           "shape": 3,
           "label": "assistant_response"
@@ -793,124 +832,9 @@
       },
       "widgets_values": [
         "",
-        "",
+        "帮我生成一个美女的提示词吧",
         0.7,
-        "enable",
         "disable",
-        "disable",
-        "enable",
-        1920,
-        "",
-        "",
-        "",
-        "",
-        "",
-        100,
-        ""
-      ]
-    },
-    {
-      "id": 207,
-      "type": "LLM",
-      "pos": [
-        1015,
-        130
-      ],
-      "size": [
-        403.3559297616496,
-        469.1186354971503
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 49,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": 50,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "user_prompt_input",
-          "type": "STRING",
-          "link": 52,
-          "widget": {
-            "name": "user_prompt_input"
-          },
-          "slot_index": 3
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            51
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": null,
-          "shape": 3,
-          "label": "image"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "",
-        "",
-        0.7,
-        "enable",
         "disable",
         "disable",
         "enable",
@@ -926,22 +850,6 @@
     }
   ],
   "links": [
-    [
-      23,
-      162,
-      0,
-      195,
-      1,
-      "STRING"
-    ],
-    [
-      24,
-      162,
-      1,
-      196,
-      1,
-      "STRING"
-    ],
     [
       25,
       169,
@@ -1023,14 +931,6 @@
       "STRING"
     ],
     [
-      38,
-      162,
-      2,
-      202,
-      0,
-      "STRING"
-    ],
-    [
       46,
       205,
       0,
@@ -1055,35 +955,51 @@
       "STRING"
     ],
     [
-      49,
-      205,
-      0,
-      207,
-      0,
-      "CUSTOM"
-    ],
-    [
-      50,
-      154,
-      0,
-      207,
-      2,
-      "STRING"
-    ],
-    [
-      51,
-      207,
-      0,
-      162,
-      0,
-      "STRING"
-    ],
-    [
-      52,
+      53,
       206,
       0,
-      207,
-      3,
+      208,
+      0,
+      "STRING"
+    ],
+    [
+      54,
+      208,
+      1,
+      202,
+      0,
+      "STRING"
+    ],
+    [
+      55,
+      208,
+      0,
+      209,
+      0,
+      "STRING"
+    ],
+    [
+      56,
+      208,
+      0,
+      210,
+      0,
+      "STRING"
+    ],
+    [
+      57,
+      209,
+      0,
+      195,
+      1,
+      "STRING"
+    ],
+    [
+      58,
+      210,
+      0,
+      196,
+      1,
       "STRING"
     ]
   ],
@@ -1091,10 +1007,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.8264462809917358,
+      "scale": 0.6830134553650709,
       "offset": {
-        "0": 98.16890493323535,
-        "1": 203.56846481925527
+        "0": -15.256076346649252,
+        "1": 269.62936948248307
       }
     }
   },
