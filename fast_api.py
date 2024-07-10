@@ -93,6 +93,9 @@ def api(
     global current_dir_path
     workflow_path = workflow_path
     WF_path = os.path.join(current_dir_path, "workflow_api", workflow_path)
+    # 判断 WF_path 是否存在
+    if not os.path.exists(WF_path):
+        raise HTTPException(status_code=404, detail="Workflow file not found")
     with open(WF_path, "r", encoding="utf-8") as f:
         prompt_text = f.read()
 
