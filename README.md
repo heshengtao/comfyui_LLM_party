@@ -51,8 +51,8 @@
 ## Features
 1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
 2. Supports API integration or local large model integration. Modular implementation for tool invocation.When entering the base_url, please use a URL that ends with `/v1/`.You can use [ollama](https://github.com/ollama/ollama) to manage your model. Then, enter `http://127.0.0.1:11434/v1/` for the base_url, `ollama` for the api_key, and your model name for the model_name, such as: llama3.
-- API access sample workflow: [start_with_LLM_api](workflow/start_with_LLM_api) 
-- Local model access sample workflow: [start_with_LLM_local](workflow/start_with_LLM_local) 
+- API access sample workflow: [start_with_LLM_api](workflow/start_with_LLM_api)
+- Local model access sample workflow: [start_with_LLM_local](workflow/start_with_LLM_local)
 - ollama access sample workflow: [ollama](workflow/ollama.json)
 3. Local knowledge base integration with RAG support.sample workflow: [Knowledge Base RAG Search](workflow/知识库RAG搜索.json)
 4. Ability to invoke code interpreters.
