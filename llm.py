@@ -436,30 +436,6 @@ class Chat:
                         model=self.model_name, messages=history, temperature=temperature, max_tokens=max_length
                     )
                     response_content = response.choices[0].message.content
-                pattern = r"```python\n(.*?)\n```"
-                while re.search(pattern, response_content, re.DOTALL) != None:
-                    matches = re.search(pattern, response_content, re.DOTALL)
-                    code = matches.group(1)
-                    json_str = '{"tool": "interpreter", "parameters": ' + code + "}"
-                    history.append({"role": "assistant", "content": json_str})
-                    print("正在调用interpreter工具")
-                    results = interpreter(code)
-                    history.append(
-                        {
-                            "role": "user",
-                            "content": "调用interpreter工具返回的结果为："
-                            + results
-                            + "。请根据工具返回的结果继续回答我之前提出的问题。",
-                        }
-                    )
-                    response = openai.chat.completions.create(
-                        model=self.model_name,
-                        messages=history,
-                        tools=tools,
-                        temperature=temperature,
-                        max_tokens=max_length,
-                    )
-                    response_content = response.choices[0].message.content
             else:
                 response = openai.chat.completions.create(
                     model=self.model_name,
@@ -1474,25 +1450,6 @@ class LLM_local:
                             role="observation",
                             temperature=temperature,
                         )
-                    pattern = r"```python\n(.*?)\n```"
-                    while re.search(pattern, response, re.DOTALL) != None:
-                        matches = re.search(pattern, response, re.DOTALL)
-                        code = matches.group(1)
-                        print("正在调用interpreter工具")
-                        json_str = '{"tool": "interpreter", "parameters": ' + code + "}"
-                        history.append({"role": "assistant", "content": json_str})
-                        results = interpreter(code)
-                        print(results)
-                        response, history = llm_chat(
-                            model,
-                            tokenizer,
-                            results,
-                            history,
-                            device,
-                            max_length,
-                            role="observation",
-                            temperature=temperature,
-                        )
                 elif model_type == "llama-guff":
                     from llama_cpp import Llama
 
@@ -1514,21 +1471,6 @@ class LLM_local:
                         print("正在调用" + tool + "工具")
                         results = dispatch_tool(tool, parameters)
                         print(results)
-                        history.append({"role": "assistant", "content": json_str})
-                        history.append({"role": "observation", "content": results})
-                        response = model.create_chat_completion(
-                            messages=history,
-                            max_tokens=max_length,
-                            temperature=temperature,
-                        )
-                        response_content = response.choices[0].message.content
-                    pattern = r"```python\n(.*?)\n```"
-                    while re.search(pattern, response_content, re.DOTALL) != None:
-                        matches = re.search(pattern, response_content, re.DOTALL)
-                        code = matches.group(1)
-                        results = interpreter(code)
-                        print(results)
-                        json_str = '{"tool": "interpreter", "parameters": ' + code + "}"
                         history.append({"role": "assistant", "content": json_str})
                         history.append({"role": "observation", "content": results})
                         response = model.create_chat_completion(
