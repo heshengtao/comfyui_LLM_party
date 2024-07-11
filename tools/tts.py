@@ -128,6 +128,5 @@ class play_audio:
             audio = os.path.join(current_dir_path, "audio", os.path.basename(audio))
         # 播放音频文件
         playsound(audio)
-                        
 
         return ()

@@ -1,8 +1,7 @@
-from datetime import datetime
 import json
+from datetime import datetime
 
 import pytz
-
 
 
 def get_weekday(timezone):
@@ -12,7 +11,6 @@ def get_weekday(timezone):
     # 字符串格式输出
     weekday = now.strftime("%A")
     return weekday
-
 
 
 class weekday_tool:
@@ -59,12 +57,11 @@ class weekday_tool:
         ]
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
-    
 
-_TOOL_HOOKS = ["get_weekday"]    
-NODE_CLASS_MAPPINGS = {"weekday_tool":weekday_tool}
-NODE_DISPLAY_NAME_MAPPINGS = {"weekday_tool":"星期查询工具（weekday_tool）"}
 
+_TOOL_HOOKS = ["get_weekday"]
+NODE_CLASS_MAPPINGS = {"weekday_tool": weekday_tool}
+NODE_DISPLAY_NAME_MAPPINGS = {"weekday_tool": "星期查询工具（weekday_tool）"}
 
 
 if __name__ == "__main__":

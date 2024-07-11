@@ -5,8 +5,10 @@
 
 import json
 
+
 def split_paragraphs(text):
-    return text.split('\n')
+    return text.split("\n")
+
 
 class text2json:
     @classmethod
@@ -35,8 +37,9 @@ class text2json:
         json_data = json.dumps(dict, ensure_ascii=False)
         return (json_data,)
 
-NODE_CLASS_MAPPINGS = {"text2json":text2json}
-NODE_DISPLAY_NAME_MAPPINGS = {"text2json":"字符串段落转JSON🐶（text2json）"}
+
+NODE_CLASS_MAPPINGS = {"text2json": text2json}
+NODE_DISPLAY_NAME_MAPPINGS = {"text2json": "字符串段落转JSON🐶（text2json）"}
 
 
 if __name__ == "__main__":
