@@ -104,106 +104,13 @@
         "Node name for S&R": "KSampler"
       },
       "widgets_values": [
-        995990168097671,
+        665178491272069,
         "randomize",
         20,
         8,
         "euler",
         "normal",
         1
-      ]
-    },
-    {
-      "id": 61,
-      "type": "LLM_local_loader",
-      "pos": [
-        527,
-        506
-      ],
-      "size": {
-        "0": 315,
-        "1": 174
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            70
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        },
-        {
-          "name": "tokenizer",
-          "type": "CUSTOM",
-          "links": [
-            71
-          ],
-          "shape": 3,
-          "label": "tokenizer",
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_local_loader"
-      },
-      "widgets_values": [
-        "llama",
-        "D:\\AI\\mychat\\model\\omost\\",
-        "D:\\AI\\mychat\\model\\omost\\",
-        "auto",
-        "float32"
-      ]
-    },
-    {
-      "id": 63,
-      "type": "load_persona",
-      "pos": [
-        530,
-        743
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "links": [
-            72
-          ],
-          "shape": 3,
-          "label": "system_prompt",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_persona"
-      },
-      "widgets_values": [
-        "omost",
-        true,
-        ""
       ]
     },
     {
@@ -218,7 +125,7 @@
         "1": 200
       },
       "flags": {},
-      "order": 5,
+      "order": 4,
       "mode": 0,
       "inputs": [
         {
@@ -273,60 +180,6 @@
       }
     },
     {
-      "id": 51,
-      "type": "CheckpointLoaderSimple",
-      "pos": [
-        1027,
-        344
-      ],
-      "size": {
-        "0": 315,
-        "1": 98
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "MODEL",
-          "type": "MODEL",
-          "links": [
-            42
-          ],
-          "shape": 3,
-          "label": "模型",
-          "slot_index": 0
-        },
-        {
-          "name": "CLIP",
-          "type": "CLIP",
-          "links": [
-            47,
-            65
-          ],
-          "shape": 3,
-          "label": "CLIP",
-          "slot_index": 1
-        },
-        {
-          "name": "VAE",
-          "type": "VAE",
-          "links": [
-            45
-          ],
-          "shape": 3,
-          "label": "VAE",
-          "slot_index": 2
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CheckpointLoaderSimple"
-      },
-      "widgets_values": [
-        "OldFish_236151438.safetensors"
-      ]
-    },
-    {
       "id": 60,
       "type": "EmptyLatentImage",
       "pos": [
@@ -338,7 +191,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 3,
+      "order": 0,
       "mode": 0,
       "outputs": [
         {
@@ -540,7 +393,7 @@
         "1": 502.29705810546875
       },
       "flags": {},
-      "order": 4,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
@@ -650,6 +503,154 @@
         "",
         100,
         ""
+      ]
+    },
+    {
+      "id": 63,
+      "type": "load_persona",
+      "pos": [
+        528,
+        775
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            72
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "omost",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 51,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        1027,
+        344
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            42
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            47,
+            65
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "oldFishOldschool_2307211635D.safetensors"
+      ]
+    },
+    {
+      "id": 61,
+      "type": "LLM_local_loader",
+      "pos": [
+        527,
+        506
+      ],
+      "size": {
+        "0": 315,
+        "1": 198
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            70
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "links": [
+            71
+          ],
+          "shape": 3,
+          "label": "tokenizer",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local_loader"
+      },
+      "widgets_values": [
+        "llama",
+        "llama",
+        "E:\\GitHub\\model\\omost",
+        "E:\\GitHub\\model\\omost",
+        "auto",
+        "float32"
       ]
     }
   ],
@@ -787,10 +788,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.6830134553650705,
+      "scale": 0.7513148009015779,
       "offset": {
-        "0": -546.3730539951309,
-        "1": -162.03439660068577
+        "0": -454.85279860248704,
+        "1": -203.49558008785817
       }
     }
   },
