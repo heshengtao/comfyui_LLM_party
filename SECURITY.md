@@ -1,4 +1,6 @@
-# Security Policy
+# Security Policy 
+- Changing security files is not enabled for the time being. The following are just examples. They will be enabled in the future to report version security
+- 暂时未启用改安全文件，以下仅为示例，未来会启用以报告版本的安全性
 
 ## Supported Versions
 
