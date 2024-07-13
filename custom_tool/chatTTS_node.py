@@ -1,9 +1,11 @@
+import os
+import time
+
 import ChatTTS
 import torch
 import torchaudio
-import os
-import time
-if os.name == 'nt':
+
+if os.name == "nt":
     import winsound
 else:
     from playsound import playsound
@@ -28,39 +30,45 @@ class ChatTTS_Node:
             },
         }
 
-    
     RETURN_TYPES = ("AUDIO",)
     RETURN_NAMES = ("audio",)
-    FUNCTION = "chattts"    
+    FUNCTION = "chattts"
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def chattts(self, 
-                text, 
-                seed, 
-                temperature = 0.3,
-                top_P = 0.7,
-                top_K = 20,
-                enableRefine = True,
-                oral_param = 1,
-                laugh_param = 0,
-                break_param = 2,
-                save_path = "",
-                is_enable = True):
+    def chattts(
+        self,
+        text,
+        seed,
+        temperature=0.3,
+        top_P=0.7,
+        top_K=20,
+        enableRefine=True,
+        oral_param=1,
+        laugh_param=0,
+        break_param=2,
+        save_path="",
+        is_enable=True,
+    ):
         if not is_enable:
             return (None,)
-        
-        text = (text.replace('\n', '').replace('》', '')
-            .replace('《', '').replace('：', '')
-            .replace('）', '').replace('（', ''))
-        
+
+        text = (
+            text.replace("\n", "")
+            .replace("》", "")
+            .replace("《", "")
+            .replace("：", "")
+            .replace("）", "")
+            .replace("（", "")
+        )
+
         chat = ChatTTS.Chat()
-        chat.load(compile=False) # Set to True for better performance
+        chat.load(compile=False)  # Set to True for better performance
 
         torch.manual_seed(seed=seed)
         rand_spk = chat.sample_random_speaker()
         # print(rand_spk)
         torch.seed()
-        
+
         params_infer_code = ChatTTS.Chat.InferCodeParams(
             spk_emb=rand_spk,
             temperature=temperature,
@@ -71,18 +79,11 @@ class ChatTTS_Node:
         # For sentence level manual control.
         if enableRefine:
             params_refine_text = ChatTTS.Chat.RefineTextParams(
-                prompt=f'[oral_{oral_param}][laugh_{laugh_param}][break_{break_param}]'
+                prompt=f"[oral_{oral_param}][laugh_{laugh_param}][break_{break_param}]"
             )
-            wavs = chat.infer(
-                text=text,
-                params_refine_text=params_refine_text,
-                params_infer_code=params_infer_code
-            )
+            wavs = chat.infer(text=text, params_refine_text=params_refine_text, params_infer_code=params_infer_code)
         else:
-            wavs = chat.infer(
-                text=text,
-                params_infer_code=params_infer_code
-            )
+            wavs = chat.infer(text=text, params_infer_code=params_infer_code)
 
         timestamp = str(int(round(time.time() * 1000)))
         if not os.path.isabs(save_path):
@@ -90,10 +91,11 @@ class ChatTTS_Node:
         if not os.path.exists(os.path.join(save_path, "audio")):
             os.mkdir(os.path.join(save_path, "audio"))
         full_audio_path = os.path.join(save_path, "audio", f"seed{seed}_{timestamp}.wav")
-        
+
         torchaudio.save(full_audio_path, torch.from_numpy(wavs[0]), 24000)
         print("[ChatTTS] Saved audio to: ", full_audio_path)
         return (full_audio_path,)
+
 
 NODE_CLASS_MAPPINGS = {
     "ChatTTS_Node": ChatTTS_Node,
@@ -104,13 +106,13 @@ NODE_DISPLAY_NAME_MAPPINGS = {
 
 if __name__ == "__main__":
     input1 = """
-    chat T T S is a text to speech model designed for dialogue applications. 
-    [uv_break]it supports mixed language input [uv_break]and offers multi speaker 
-    capabilities with precise control over prosodic elements like 
-    [uv_break]laughter[uv_break][laugh], [uv_break]pauses, [uv_break]and intonation. 
+    chat T T S is a text to speech model designed for dialogue applications.
+    [uv_break]it supports mixed language input [uv_break]and offers multi speaker
+    capabilities with precise control over prosodic elements like
+    [uv_break]laughter[uv_break][laugh], [uv_break]pauses, [uv_break]and intonation.
     [uv_break]it delivers natural and expressive speech,[uv_break]so please
     [uv_break] use the project responsibly at your own risk.[uv_break]
-    """ # English is still experimental.
+    """  # English is still experimental.
 
     input2 = """
     《乌鸦喝水》（英语：The Crow and the Pitcher，或译为《乌鸦和水壶》）是《伊索寓言》里的一则故事。
@@ -122,7 +124,7 @@ if __name__ == "__main__":
     output = chat.chattts(input1, seed=2048, enableRefine=False)
     print(output)
     # playsound(output[0])
-    if os.name == 'nt':
+    if os.name == "nt":
         winsound.PlaySound(output[0], winsound.SND_FILENAME)
     output = chat.chattts(input2, seed=2048)
     print(output)

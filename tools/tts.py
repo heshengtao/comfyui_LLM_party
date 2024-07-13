@@ -5,7 +5,8 @@ import time
 
 import openai
 import requests
-if os.name == 'nt':
+
+if os.name == "nt":
     import winsound
 else:
     from playsound import playsound
@@ -132,10 +133,9 @@ class play_audio:
         # 播放音频文件
         audio = os.path.normpath(audio)
         print("[playsound]:", audio)
-        if os.name == 'nt':
+        if os.name == "nt":
             winsound.PlaySound(audio, winsound.SND_FILENAME)
         else:
             playsound(audio)
-                        
 
         return ()
