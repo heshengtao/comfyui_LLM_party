@@ -72,11 +72,11 @@ class ChatTTS_Node:
             chat.load(compile=False)  # Set to True for better performance
         elif load_mode == "custom":
             if model_path=="" or model_path is None:
-                model_path = os.path.dirname(os.path.dirname(__file__))
+                model_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "model")
                 # 如果没有，创建model文件夹
-                if not os.path.exists(os.path.join(model_path, "model")):
-                    os.mkdir(os.path.join(model_path, "model"))
-            chat.load(source="custom",compile=False,custom_path= os.path.join(save_path,"model")) 
+                if not os.path.exists(model_path):
+                    os.mkdir(model_path)
+            chat.load(source="custom",compile=False,custom_path= model_path) 
         elif load_mode == "HF":
             chat.load(source="huggingface", force_redownload=True)
 
