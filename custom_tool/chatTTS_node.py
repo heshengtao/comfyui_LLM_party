@@ -27,6 +27,7 @@ class ChatTTS_Node:
                 "break_param": ("INT", {"default": 2, "min": 0, "max": 7}),
                 "save_path": ("STRING", {"forceInput": True}),
                 "is_enable": ("BOOLEAN", {"default": True}),
+                "load_mode":(["HF", "local"], {"default": "HF"}),
             },
         }
 
@@ -48,6 +49,7 @@ class ChatTTS_Node:
         break_param=2,
         save_path="",
         is_enable=True,
+        load_mode="HF",
     ):
         if not is_enable:
             return (None,)
@@ -62,7 +64,10 @@ class ChatTTS_Node:
         )
 
         chat = ChatTTS.Chat()
-        chat.load(compile=False)  # Set to True for better performance
+        if load_mode=="local":
+            chat.load(compile=False)  # Set to True for better performance
+        elif load_mode=="HF":
+            chat.load(source="huggingface", force_redownload=True)
 
         torch.manual_seed(seed=seed)
         rand_spk = chat.sample_random_speaker()
