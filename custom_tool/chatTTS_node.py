@@ -30,7 +30,7 @@ class ChatTTS_Node:
                 "laugh_param": ("INT", {"default": 0, "min": 0, "max": 2}),
                 "break_param": ("INT", {"default": 2, "min": 0, "max": 7}),
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "load_mode": (["HF", "local","custom"], {"default": "HF"}),
+                "load_mode": (["HF","custom", "local"], {"default": "HF"}),
             },
         }
 
