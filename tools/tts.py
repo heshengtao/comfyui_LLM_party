@@ -5,7 +5,10 @@ import time
 
 import openai
 import requests
-from playsound import playsound
+if os.name == 'nt':
+    import winsound
+else:
+    from playsound import playsound
 
 from ..config import config_path, current_dir_path, load_api_keys
 
@@ -127,7 +130,12 @@ class play_audio:
             shutil.move(audio, os.path.join(current_dir_path, "audio", os.path.basename(audio)))
             audio = os.path.join(current_dir_path, "audio", os.path.basename(audio))
         # 播放音频文件
-        playsound(audio)
+        audio = os.path.normpath(audio)
+        print("[playsound]:", audio)
+        if os.name == 'nt':
+            winsound.PlaySound(audio, winsound.SND_FILENAME)
+        else:
+            playsound(audio)
                         
 
         return ()
