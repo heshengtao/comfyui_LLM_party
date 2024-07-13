@@ -3,7 +3,8 @@
 </p>
 
 ## Latest update
-1. The [chatTTS](https://github.com/2noise/ChatTTS) node has been added, thank you very much [guobalove](https://github.com/guobalove) for your contribution! It is recommended to use HF mode to load the model, the model will be automatically downloaded from hugging face, no need to download manually! If using local loading, please put the'asset 'and'config' folders of the model in the comfyui root directory. [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu
+1. The [chatTTS](https://github.com/2noise/ChatTTS) node has been added, thank you very much for the contribution of [guobalove](https://github.com/guobalove)! `model_path` parameter can be empty! It is recommended to use `HF` mode to load the model, the model will be automatically downloaded from hugging face, no need to download manually; if using `local` loading, please put the model's`asset` and `config` folders in the root directory. [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu; if using `custom` mode to load, please put the model's `asset` and `config` folders under `model_path`.
+
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
 
 ## Introduction

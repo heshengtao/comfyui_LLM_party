@@ -19,6 +19,7 @@ class ChatTTS_Node:
         return {
             "required": {
                 "text": ("STRING", {}),
+                "model_path": ("STRING", {}),
                 "save_path": ("STRING", {}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 1125899906842624}),
                 "temperature": ("FLOAT", {"default": 0.3, "min": 0.0, "max": 1.0}),
@@ -29,7 +30,7 @@ class ChatTTS_Node:
                 "laugh_param": ("INT", {"default": 0, "min": 0, "max": 2}),
                 "break_param": ("INT", {"default": 2, "min": 0, "max": 7}),
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "load_mode": (["HF", "local"], {"default": "HF"}),
+                "load_mode": (["HF", "local","custom"], {"default": "HF"}),
             },
         }
 
@@ -42,6 +43,7 @@ class ChatTTS_Node:
         self,
         text,
         seed,
+        model_path="",
         save_path="",
         temperature=0.3,
         top_P=0.7,
@@ -68,6 +70,13 @@ class ChatTTS_Node:
         chat = ChatTTS.Chat()
         if load_mode == "local":
             chat.load(compile=False)  # Set to True for better performance
+        elif load_mode == "custom":
+            if model_path=="" or model_path is None:
+                model_path = os.path.dirname(os.path.dirname(__file__))
+                # 如果没有，创建model文件夹
+                if not os.path.exists(os.path.join(model_path, "model")):
+                    os.mkdir(os.path.join(model_path, "model"))
+            chat.load(source="custom",compile=False,custom_path= os.path.join(save_path,"model")) 
         elif load_mode == "HF":
             chat.load(source="huggingface", force_redownload=True)
 
