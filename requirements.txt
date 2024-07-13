@@ -37,3 +37,7 @@ sounddevice
 scipy
 gradio_client
 neo4j
+<<<<<<< HEAD
+ChatTTS
+=======
+>>>>>>> 62b107613a69332e6b62470a325c5a76b7fd3e8a
