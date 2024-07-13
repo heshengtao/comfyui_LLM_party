@@ -3,9 +3,11 @@ import time
 
 import ChatTTS
 import torch
+torch.compile = lambda *args, **kwargs: args[0]
 import torchaudio
 
 if os.name == "nt":
+    
     import winsound
 else:
     from playsound import playsound
