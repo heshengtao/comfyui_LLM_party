@@ -3,14 +3,7 @@
 </p>
 
 ## 最新更新
-1. 新增了一个文本迭代器，可以每次只输出一部分的字符，是根据回车符号和chunk size来安全分割文本的，不会从文本中间分割。chunk_overlap是指分割的文本重叠多少字符。这样可以批量输入超长文本，只要无脑点击，或者开启comfyui里的循环执行就行了，就可以自动执行完了。记得开启is_locked属性，可以在输入结束时，自动锁住工作流，不会继续执行。示例工作流：[文本迭代输入](workflow/文本迭代输入.json)
-2. 在本地LLM加载器、本地llava加载器、本地guff加载器上添加了model name属性，如果为空，则使用节点中的各类本地path加载。如果不为空，则会使用`config.ini`中你自己填写的路径参数加载。如果不为空且不在`config.ini`中，则会从huggingface上下载或则从huggingface的模型保存目录中加载。如果你想从huggingface上下载，请按照例如：`THUDM/glm-4-9b-chat`的格式填写model name属性。注意！这样子加载的模型必须适配transformer库。
-3. 适配了[CosyVoice](https://github.com/FunAudioLLM/CosyVoice)，现在可以无需下载任何模型或者任何API key，直接使用TTS功能。目前该接口只适配了中文。
-4. 新增了JSON文件解析节点和JSON取值节点，可以让你从文件或者文本中获取某一个键的值。感谢[guobalove](https://github.com/guobalove)的贡献！
-5. 改进了工具调用的代码，现在没有工具调用功能的LLM也可以开启is_tools_in_sys_prompt属性（本地LLM默认无需开启，自动适配），开启之后，工具信息会添加到系统提示词中，这样LLM就可以调用工具了。实现原理的相关论文：[Achieving Tool Calling Functionality in LLMs Using Only Prompt Engineering Without Fine-Tuning](https://arxiv.org/abs/2407.04997)
-6. 新建了custom_tool文件夹，用于存放自定义工具的代码，可以参考[custom_tool](custom_tool)文件夹中的代码，将自定义工具的代码放入custom_tool文件夹中，即可在LLM中调用自定义工具。
-7. 新增了知识图谱工具，让LLM与知识图谱可以完美交互，LLM可以根据你的输入修改知识图谱，可以在知识图谱上推理以获取你需要的答案。示例工作流参考：[graphRAG_neo4j](workflow/graphRAG_neo4j.json)
-8. 新增了人格AI功能，0代码开发自己的女友AI或男友AI，无限对话，永久记忆，人设稳定。示例工作流参考：[麦洛薇人格AI](workflow/麦洛薇人格AI.json)
+1. 已添加了chatTTS节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！
 
 # **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库**
 
@@ -77,6 +70,14 @@ C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​�
 22. 适配了openai的whisper和tts功能，可以实现语音输入和输出。示例工作流参考：[语音输入+语音输出](workflow/语音输入+语音输出.json)
 23. 兼容[Omost](https://github.com/lllyasviel/Omost)啦！！！请下载[omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)立即体验吧！示例工作流参考：[start_with_OMOST](workflow/start_with_OMOST.json)
 24. 新增了将消息发送到企业微信、钉钉和飞书的LLM工具以及可供调用的外部函数。
+25. 新增了一个文本迭代器，可以每次只输出一部分的字符，是根据回车符号和chunk size来安全分割文本的，不会从文本中间分割。chunk_overlap是指分割的文本重叠多少字符。这样可以批量输入超长文本，只要无脑点击，或者开启comfyui里的循环执行就行了，就可以自动执行完了。记得开启is_locked属性，可以在输入结束时，自动锁住工作流，不会继续执行。示例工作流：[文本迭代输入](workflow/文本迭代输入.json)
+26. 在本地LLM加载器、本地llava加载器、本地guff加载器上添加了model name属性，如果为空，则使用节点中的各类本地path加载。如果不为空，则会使用`config.ini`中你自己填写的路径参数加载。如果不为空且不在`config.ini`中，则会从huggingface上下载或则从huggingface的模型保存目录中加载。如果你想从huggingface上下载，请按照例如：`THUDM/glm-4-9b-chat`的格式填写model name属性。注意！这样子加载的模型必须适配transformer库。
+27. 适配了[CosyVoice](https://github.com/FunAudioLLM/CosyVoice)，现在可以无需下载任何模型或者任何API key，直接使用TTS功能。目前该接口只适配了中文。
+26. 新增了JSON文件解析节点和JSON取值节点，可以让你从文件或者文本中获取某一个键的值。感谢[guobalove](https://github.com/guobalove)的贡献！
+29. 改进了工具调用的代码，现在没有工具调用功能的LLM也可以开启is_tools_in_sys_prompt属性（本地LLM默认无需开启，自动适配），开启之后，工具信息会添加到系统提示词中，这样LLM就可以调用工具了。实现原理的相关论文：[Achieving Tool Calling Functionality in LLMs Using Only Prompt Engineering Without Fine-Tuning](https://arxiv.org/abs/2407.04997)
+30. 新建了custom_tool文件夹，用于存放自定义工具的代码，可以参考[custom_tool](custom_tool)文件夹中的代码，将自定义工具的代码放入custom_tool文件夹中，即可在LLM中调用自定义工具。
+31. 新增了知识图谱工具，让LLM与知识图谱可以完美交互，LLM可以根据你的输入修改知识图谱，可以在知识图谱上推理以获取你需要的答案。示例工作流参考：[graphRAG_neo4j](workflow/graphRAG_neo4j.json)
+32. 新增了人格AI功能，0代码开发自己的女友AI或男友AI，无限对话，永久记忆，人设稳定。示例工作流参考：[麦洛薇人格AI](workflow/麦洛薇人格AI.json)
 
 ![图片](img/画画应用.png)
 
