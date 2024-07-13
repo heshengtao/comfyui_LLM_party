@@ -15,7 +15,7 @@
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
 
 ## Introduction
-[comfyui](https://github.com/comfyanonymous/ComfyUI) is an extremely minimalist UI interface, primarily used for AI drawing and other workflows based on the SD model. This project aims to develop a complete set of nodes for LLM workflow construction based on comfyui. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.The picture shows a workflow of LLM implementing multi-tool calling, for more workflows please refer to the [workflow](workflow) folder.
+[comfyui](https://github.com/comfyanonymous/ComfyUI) is an extremely minimalist UI interface, primarily used for AI drawing and other workflows based on the SD model. C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​﻿‎‍​﻿‍‏​‍﻿‌​﻿‌‏omfyui_llm_party aims to develop a complete set of nodes for LLM workflow construction based on comfyui. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.The picture shows a workflow of LLM implementing multi-tool calling, for more workflows please refer to the [workflow](workflow) folder.
 
 ![图片](img/多工具调用.png)
 
@@ -51,8 +51,8 @@
 ## Features
 1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
 2. Supports API integration or local large model integration. Modular implementation for tool invocation.When entering the base_url, please use a URL that ends with `/v1/`.You can use [ollama](https://github.com/ollama/ollama) to manage your model. Then, enter `http://127.0.0.1:11434/v1/` for the base_url, `ollama` for the api_key, and your model name for the model_name, such as: llama3.
-- API access sample workflow: [start_with_LLM_api](workflow/start_with_LLM_api) 
-- Local model access sample workflow: [start_with_LLM_local](workflow/start_with_LLM_local) 
+- API access sample workflow: [start_with_LLM_api](workflow/start_with_LLM_api)
+- Local model access sample workflow: [start_with_LLM_local](workflow/start_with_LLM_local)
 - ollama access sample workflow: [ollama](workflow/ollama.json)
 3. Local knowledge base integration with RAG support.sample workflow: [Knowledge Base RAG Search](workflow/知识库RAG搜索.json)
 4. Ability to invoke code interpreters.

@@ -3,15 +3,16 @@ import json
 from neo4j import GraphDatabase
 
 database_url_hold = "bolt://localhost:7687"
-database_name_hold= "neo4j"
+database_name_hold = "neo4j"
 password_hold = "12345678"
+
 
 class KG_neo_toolkit_developer:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
-                "database_url":("STRING", {"default": "bolt://localhost:7687"}),
+                "database_url": ("STRING", {"default": "bolt://localhost:7687"}),
                 "database_name": ("STRING", {"default": "neo4j"}),
                 "password": ("STRING", {"default": "12345678"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
@@ -28,10 +29,10 @@ class KG_neo_toolkit_developer:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, database_url,database_name,password, is_enable=True):
+    def file(self, database_url, database_name, password, is_enable=True):
         if is_enable == False:
             return (None,)
-        global database_url_hold, database_name_hold,password_hold
+        global database_url_hold, database_name_hold, password_hold
         database_url_hold = database_url
         database_name_hold = database_name
         password_hold = password
@@ -271,10 +272,10 @@ class KG_neo_toolkit_user:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, database_name,password, is_enable=True):
+    def file(self, database_name, password, is_enable=True):
         if is_enable == False:
             return (None,)
-        global  database_name_hold,password_hold
+        global database_name_hold, password_hold
         database_name_hold = database_name
         password_hold = password
         output = [
@@ -351,7 +352,7 @@ class KG_neo_toolkit_user:
 
 
 def Inquire_entities_neo4j(name):
-    global database_url_hold, database_name_hold,password_hold
+    global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
     with driver.session() as session:
         result = session.run("MATCH (n {name: $name}) RETURN n", name=name)
@@ -361,6 +362,7 @@ def Inquire_entities_neo4j(name):
         return "该实体节点不存在"
     return str(entities)
 
+
 def New_entities_neo4j(name, attributes=None):
     global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
@@ -368,24 +370,25 @@ def New_entities_neo4j(name, attributes=None):
         attributes = {}
     else:
         attributes = json.loads(attributes)
-    
+
     with driver.session() as session:
         result = session.run("MATCH (n {name: $name}) RETURN n", name=name)
         if result.single():
             return "该实体节点已存在"
-        
+
         # Create the query string with dynamic attributes
-        attr_str = ', '.join([f"{key}: ${key}" for key in attributes.keys()])
+        attr_str = ", ".join([f"{key}: ${key}" for key in attributes.keys()])
         if attr_str:
             query = f"CREATE (n:{name.replace(' ', '_')} {{name: $name, {attr_str}}})"
         else:
             query = f"CREATE (n:{name.replace(' ', '_')} {{name: $name}})"
-        
+
         # Run the query with the attributes
         session.run(query, name=name, **attributes)
-    
+
     driver.close()
     return "添加成功"
+
 
 def Modify_entities_neo4j(name, attributes=None):
     global database_url_hold, database_name_hold, password_hold
@@ -394,22 +397,23 @@ def Modify_entities_neo4j(name, attributes=None):
         attributes = {}
     else:
         attributes = json.loads(attributes)
-    
+
     with driver.session() as session:
         # Create the query string with dynamic attributes
-        attr_str = ', '.join([f"n.{key} = ${key}" for key in attributes.keys()])
+        attr_str = ", ".join([f"n.{key} = ${key}" for key in attributes.keys()])
         if attr_str:
             query = f"MATCH (n:{name.replace(' ', '_')} {{name: $name}}) SET {attr_str} RETURN n"
         else:
             query = f"MATCH (n:{name.replace(' ', '_')} {{name: $name}}) RETURN n"
-        
+
         # Run the query with the attributes
         result = session.run(query, name=name, **attributes)
         if not result.single():
             return "该实体节点不存在"
-    
+
     driver.close()
     return "修改成功"
+
 
 def Delete_entities_neo4j(name):
     global database_url_hold, database_name_hold, password_hold
@@ -422,35 +426,49 @@ def Delete_entities_neo4j(name):
     driver.close()
     return "删除成功"
 
+
 def Inquire_relationships_neo4j(entitie_A, entitie_B):
-    global database_url_hold, database_name_hold,password_hold
+    global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
     with driver.session() as session:
-        result = session.run("""
+        result = session.run(
+            """
             MATCH (a {name: $entitie_A})-[r]->(b {name: $entitie_B})
             RETURN r
-        """, entitie_A=entitie_A, entitie_B=entitie_B)
+        """,
+            entitie_A=entitie_A,
+            entitie_B=entitie_B,
+        )
         relationships = [record["r"] for record in result]
         if relationships:
             return "两者之间的直接关系为：" + str(relationships)
-        
-        result = session.run("""
+
+        result = session.run(
+            """
             MATCH (b {name: $entitie_B})-[r]->(a {name: $entitie_A})
             RETURN r
-        """, entitie_A=entitie_A, entitie_B=entitie_B)
+        """,
+            entitie_A=entitie_A,
+            entitie_B=entitie_B,
+        )
         reverse_relationships = [record["r"] for record in result]
         if reverse_relationships:
             return "两者之间的反向直接关系为：" + str(reverse_relationships)
-        
-        result = session.run("""
+
+        result = session.run(
+            """
             MATCH path = shortestPath((a {name: $entitie_A})-[*]-(b {name: $entitie_B}))
             RETURN path
-        """, entitie_A=entitie_A, entitie_B=entitie_B)
+        """,
+            entitie_A=entitie_A,
+            entitie_B=entitie_B,
+        )
         shortest_path = [record["path"] for record in result]
         if shortest_path:
             return "两者之间不存在直接关系，最短关系链为：" + str(shortest_path)
     driver.close()
     return "两者之间不存在任何直接或间接关系"
+
 
 def New_relationships_neo4j(source, target, label, attributes=None):
     global database_url_hold, database_name_hold, password_hold
@@ -459,17 +477,23 @@ def New_relationships_neo4j(source, target, label, attributes=None):
         attributes = {}
     else:
         attributes = json.loads(attributes)
-    
+
     with driver.session() as session:
-        result = session.run("""
-            MATCH (a {name: $source})-[r:`""" + label.replace(' ', '_') + """`]->(b {name: $target})
+        result = session.run(
+            """
+            MATCH (a {name: $source})-[r:`"""
+            + label.replace(" ", "_")
+            + """`]->(b {name: $target})
             RETURN r
-        """, source=source, target=target)
+        """,
+            source=source,
+            target=target,
+        )
         if result.single():
             return "该关系边已存在"
-        
+
         # Create the query string with dynamic attributes
-        attr_str = ', '.join([f"{key}: ${key}" for key in attributes.keys()])
+        attr_str = ", ".join([f"{key}: ${key}" for key in attributes.keys()])
         if attr_str:
             query = f"""
                 MATCH (a {{name: $source}}), (b {{name: $target}})
@@ -480,10 +504,10 @@ def New_relationships_neo4j(source, target, label, attributes=None):
                 MATCH (a {{name: $source}}), (b {{name: $target}})
                 CREATE (a)-[r:`{label.replace(' ', '_')}`]->(b)
             """
-        
+
         # Run the query with the attributes
         session.run(query, source=source, target=target, **attributes)
-    
+
     driver.close()
     return "添加成功"
 
@@ -495,10 +519,10 @@ def Modify_relationships_neo4j(source, target, label, attributes=None):
         attributes = {}
     else:
         attributes = json.loads(attributes)
-    
+
     with driver.session() as session:
         # Create the query string with dynamic attributes
-        attr_str = ', '.join([f"r.{key} = ${key}" for key in attributes.keys()])
+        attr_str = ", ".join([f"r.{key} = ${key}" for key in attributes.keys()])
         if attr_str:
             query = f"""
                 MATCH (a {{name: $source}})-[r:`{label.replace(' ', '_')}`]->(b {{name: $target}})
@@ -510,46 +534,59 @@ def Modify_relationships_neo4j(source, target, label, attributes=None):
                 MATCH (a {{name: $source}})-[r:`{label.replace(' ', '_')}`]->(b {{name: $target}})
                 RETURN r
             """
-        
+
         # Run the query with the attributes
         result = session.run(query, source=source, target=target, **attributes)
         if not result.single():
             return "该关系边不存在"
-    
+
     driver.close()
     return "修改成功"
+
 
 def Delete_relationships_neo4j(source, target, label):
     global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
     with driver.session() as session:
-        result = session.run("""
-            MATCH (a {name: $source})-[r:`""" + label.replace(' ', '_') + """` {name: $label}]->(b {name: $target})
+        result = session.run(
+            """
+            MATCH (a {name: $source})-[r:`"""
+            + label.replace(" ", "_")
+            + """` {name: $label}]->(b {name: $target})
             DELETE r
             RETURN r
-        """, source=source, target=target, label=label)
+        """,
+            source=source,
+            target=target,
+            label=label,
+        )
         if not result.single():
             return "该关系边不存在"
     driver.close()
     return "删除成功"
 
+
 def Inquire_entity_relationships_neo4j(name):
-    global database_url_hold, database_name_hold,password_hold
+    global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
     with driver.session() as session:
         result = session.run("MATCH (n {name: $name}) RETURN n", name=name)
         if not result.single():
             return "实体" + name + "不存在"
-        result = session.run("""
+        result = session.run(
+            """
             MATCH (n {name: $name})-[r]-(m)
             RETURN r
-        """, name=name)
+        """,
+            name=name,
+        )
         relationships = [record["r"] for record in result]
     driver.close()
     return "实体" + name + "的关系边为：" + str(relationships)
 
+
 def Inquire_entity_list_neo4j():
-    global database_url_hold, database_name_hold,password_hold
+    global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
     with driver.session() as session:
         result = session.run("MATCH (n) RETURN n.name")
