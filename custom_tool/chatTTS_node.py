@@ -2,6 +2,7 @@ import os
 import time
 
 import ChatTTS
+import numpy as np
 import torch
 torch.compile = lambda *args, **kwargs: args[0]
 import torchaudio
@@ -11,7 +12,19 @@ if os.name == "nt":
     import winsound
 else:
     from playsound import playsound
-
+    
+def deterministic(seed=0):
+    """
+    Set random seed for reproducibility
+    :param seed:
+    :return:
+    """
+    # ref: https://github.com/Jackiexiao/ChatTTS-api-ui-docker/blob/main/api.py#L27
+    torch.manual_seed(seed)
+    np.random.seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 class ChatTTS_Node:
     @classmethod
@@ -21,7 +34,7 @@ class ChatTTS_Node:
                 "text": ("STRING", {}),
                 "model_path": ("STRING", {}),
                 "save_path": ("STRING", {}),
-                "seed": ("INT", {"default": 0, "min": 0, "max": 1125899906842624}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 9999}),
                 "temperature": ("FLOAT", {"default": 0.3, "min": 0.0, "max": 1.0}),
                 "top_P": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0}),
                 "top_K": ("INT", {"default": 20, "min": 0, "max": 100}),
@@ -80,7 +93,7 @@ class ChatTTS_Node:
         elif load_mode == "HF":
             chat.load(source="huggingface", force_redownload=True)
 
-        torch.manual_seed(seed=seed)
+        deterministic(seed)
         rand_spk = chat.sample_random_speaker()
         # print(rand_spk)
         torch.seed()
