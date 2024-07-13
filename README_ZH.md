@@ -3,7 +3,7 @@
 </p>
 
 ## 最新更新
-1. 已添加了[chatTTS](https://github.com/2noise/ChatTTS)节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！
+1. 已添加了[chatTTS](https://github.com/2noise/ChatTTS)节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！推荐使用HF模式加载模型，模型会自动从hugging face上下载，无需手动下载！如果使用local加载，请将模型的`asset`和`config`文件夹放到comfyui根目录下。[百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu
 
 # **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库**
 
@@ -41,6 +41,9 @@ C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​�
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)
+
+3. 模型下载：
+* [百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu
 
 ## 功能
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)

@@ -3,8 +3,7 @@
 </p>
 
 ## Latest update
-1. The [chatTTS](https://github.com/2noise/ChatTTS) node has been added, thank you very much [guobalove](https://github.com/guobalove) for your contribution!
-
+1. The [chatTTS](https://github.com/2noise/ChatTTS) node has been added, thank you very much [guobalove](https://github.com/guobalove) for your contribution! It is recommended to use HF mode to load the model, the model will be automatically downloaded from hugging face, no need to download manually! If using local loading, please put the'asset 'and'config' folders of the model in the comfyui root directory. [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
 
 ## Introduction
@@ -41,6 +40,8 @@
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)
 
+3. Model download
+* [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu
 ## Features
 1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
 2. Supports API integration or local large model integration. Modular implementation for tool invocation.When entering the base_url, please use a URL that ends with `/v1/`.You can use [ollama](https://github.com/ollama/ollama) to manage your model. Then, enter `http://127.0.0.1:11434/v1/` for the base_url, `ollama` for the api_key, and your model name for the model_name, such as: llama3.
