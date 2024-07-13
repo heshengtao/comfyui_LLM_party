@@ -3,7 +3,7 @@
 </p>
 
 ## 最新更新
-1. 已添加了chatTTS节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！
+1. 已添加了[chatTTS](https://github.com/2noise/ChatTTS)节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！
 
 # **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库**
 

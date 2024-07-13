@@ -3,7 +3,7 @@
 </p>
 
 ## Latest update
-1. The chatTTS node has been added, thank you very much [guobalove](https://github.com/guobalove) for your contribution!
+1. The [chatTTS](https://github.com/2noise/ChatTTS) node has been added, thank you very much [guobalove](https://github.com/guobalove) for your contribution!
 
 # **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
 
