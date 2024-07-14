@@ -1838,35 +1838,40 @@ def load_custom_tools():
         # 获取文件名（不包含扩展名）
         name = os.path.splitext(os.path.basename(file))[0]
 
-        # 创建一个导入规范
-        spec = importlib.util.spec_from_file_location(name, file)
+        try:
+            # 创建一个导入规范
+            spec = importlib.util.spec_from_file_location(name, file)
 
-        # 根据导入规范创建一个新的模块对象
-        module = importlib.util.module_from_spec(spec)
+            # 根据导入规范创建一个新的模块对象
+            module = importlib.util.module_from_spec(spec)
 
-        # 在 sys.modules 中注册这个模块
-        sys.modules[name] = module
+            # 在 sys.modules 中注册这个模块
+            sys.modules[name] = module
 
-        # 执行模块的代码，实际加载模块
-        spec.loader.exec_module(module)
+            # 执行模块的代码，实际加载模块
+            spec.loader.exec_module(module)
 
-        # 如果模块有 NODE_CLASS_MAPPINGS 属性，更新字典
-        if hasattr(module, "NODE_CLASS_MAPPINGS"):
-            NODE_CLASS_MAPPINGS.update(getattr(module, "NODE_CLASS_MAPPINGS", {}))
+            # 如果模块有 NODE_CLASS_MAPPINGS 属性，更新字典
+            if hasattr(module, "NODE_CLASS_MAPPINGS"):
+                NODE_CLASS_MAPPINGS.update(getattr(module, "NODE_CLASS_MAPPINGS", {}))
 
-        # 如果模块有 NODE_DISPLAY_NAME_MAPPINGS 属性，更新字典
-        if hasattr(module, "NODE_DISPLAY_NAME_MAPPINGS"):
-            NODE_DISPLAY_NAME_MAPPINGS.update(getattr(module, "NODE_DISPLAY_NAME_MAPPINGS", {}))
+            # 如果模块有 NODE_DISPLAY_NAME_MAPPINGS 属性，更新字典
+            if hasattr(module, "NODE_DISPLAY_NAME_MAPPINGS"):
+                NODE_DISPLAY_NAME_MAPPINGS.update(getattr(module, "NODE_DISPLAY_NAME_MAPPINGS", {}))
 
-        # 如果模块有 _TOOL_HOOKS 属性，将其字符串添加到_TOOL_HOOKS列表中
-        if hasattr(module, "_TOOL_HOOKS"):
-            _TOOL_HOOKS.extend(getattr(module, "_TOOL_HOOKS", []))
+            # 如果模块有 _TOOL_HOOKS 属性，将其字符串添加到 _TOOL_HOOKS 列表中
+            if hasattr(module, "_TOOL_HOOKS"):
+                _TOOL_HOOKS.extend(getattr(module, "_TOOL_HOOKS", []))
 
-            # 对于每个工具名称，将同名的函数导入到全局变量中
-            for tool_name in getattr(module, "_TOOL_HOOKS", []):
-                if hasattr(module, tool_name):
-                    # 将函数添加到全局变量中
-                    globals()[tool_name] = getattr(module, tool_name)
+                # 对于每个工具名称，将同名的函数导入到全局变量中
+                for tool_name in getattr(module, "_TOOL_HOOKS", []):
+                    if hasattr(module, tool_name):
+                        # 将函数添加到全局变量中
+                        globals()[tool_name] = getattr(module, tool_name)
+
+        except Exception as e:
+            # 处理导入错误（例如，跳过文件）
+            print(f"导入 {name} 时出错：{e}")
 
 
 # 调用函数来加载 custom_tool 文件夹下的模块
