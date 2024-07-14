@@ -465,7 +465,18 @@ def Inquire_relationships_neo4j(entitie_A, entitie_B):
         )
         shortest_path = [record["path"] for record in result]
         if shortest_path:
-            return "两者之间不存在直接关系，最短关系链为：" + str(shortest_path)
+            path_details = []
+            for path in shortest_path:
+                nodes = [node["name"] for node in path.nodes]
+                relationships = []
+                for rel in path.relationships:
+                    start_node = rel.start_node["name"]
+                    end_node = rel.end_node["name"]
+                    rel_type = rel.type
+                    relationships.append(f"{start_node}-[{rel_type}]->{end_node}")
+                path_details.append({"nodes": nodes, "relationships": relationships})
+            return "两者之间不存在直接关系，最短关系链为：" + str(path_details)
+
     driver.close()
     return "两者之间不存在任何直接或间接关系"
 
