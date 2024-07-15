@@ -39,3 +39,4 @@ gradio_client
 neo4j
 ChatTTS
 soundfile
+jax
