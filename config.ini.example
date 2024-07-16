@@ -31,6 +31,10 @@ api_key=
 base_url=https://api.moonshot.cn/v1/
 api_key=
 
+[general]
+base_url=https://spark-api-open.xf-yun.com/v1/
+api_key=
+
 [doubao_YOUR_ENDPOINT_ID]
 base_url=https://ark.cn-beijing.volces.com/api/v3/
 api_key=
