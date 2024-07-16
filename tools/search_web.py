@@ -8,24 +8,34 @@ from ..config import config_path, load_api_keys
 api_keys = load_api_keys(config_path)
 g_api_key = api_keys.get("google_api_key")
 g_CSE_ID = api_keys.get("CSE_ID")
+g_searchType="web"
 
-
-def search_web(keywords, paper_num=1, url=None):
+def search_web(keywords, paper_num=1):
     if paper_num == "":
         paper_num = 1
     today = str(date.today())
-    global g_api_key, g_CSE_ID
+    global g_api_key, g_CSE_ID,g_searchType
     num_results = 10
     start = num_results * (int(paper_num) - 1) + 1
     try:
         base_url = "https://www.googleapis.com/customsearch/v1"
-        params = {
-            "key": g_api_key,
-            "cx": g_CSE_ID,  # 替换为你自己的Custom Search Engine ID
-            "num": num_results,
-            "q": keywords if isinstance(keywords, str) else " ".join(keywords),
-            "start": start,
-        }
+        if g_searchType == "image":
+            params = {
+                "key": g_api_key,
+                "cx": g_CSE_ID,  # 替换为你自己的Custom Search Engine ID
+                "num": num_results,
+                "q": keywords if isinstance(keywords, str) else " ".join(keywords),
+                "start": start,
+                "searchType": g_searchType
+            }
+        else:
+            params = {
+                "key": g_api_key,
+                "cx": g_CSE_ID,  # 替换为你自己的Custom Search Engine ID
+                "num": num_results,
+                "q": keywords if isinstance(keywords, str) else " ".join(keywords),
+                "start": start,
+            }  
 
         response = requests.get(base_url, params=params, timeout=10)
         # 打印HTTP状态码和响应内容以供调试
@@ -40,7 +50,7 @@ def search_web(keywords, paper_num=1, url=None):
                 for item in data["items"]:
                     keyword = item["snippet"]
                     url = item["link"]
-                    all_content += json.dumps({"snippet": keyword, "link": url}, ensure_ascii=False, indent=4)
+                    all_content += "/n/n" + json.dumps({"snippet": keyword, "link": url}, ensure_ascii=False, indent=4)
 
         else:
             return f"Error: {response.status_code} - {response.text}"
@@ -64,6 +74,7 @@ class google_tool:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
+                "searchType":(["web","image"],{"default": "web"}),
             },
             "optional": {
                 "google_api_key": ("STRING", {}),
@@ -80,10 +91,11 @@ class google_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def web(self, google_api_key=None, google_CSE_ID=None, is_enable=True):
+    def web(self,searchType="web",google_api_key=None, google_CSE_ID=None, is_enable=True):
         if is_enable == False:
             return (None,)
-        global g_api_key, g_CSE_ID
+        global g_api_key, g_CSE_ID,g_searchType
+        g_searchType = searchType
         if google_api_key is not None and google_api_key != "":
             g_api_key = google_api_key
         else:
@@ -97,7 +109,7 @@ class google_tool:
                 "type": "function",
                 "function": {
                     "name": "search_web",
-                    "description": "通过关键词获得谷歌搜索上的信息。",
+                    "description": f"通过关键词获得谷歌搜索上的{g_searchType}信息。",
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -116,19 +128,67 @@ class google_tool:
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
 
+class google_loader:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "searchType":(["web","image"],{"default": "web"}),
+                "keywords":("STRING", {}),
+                "paper_num": ("INT", {"default": "1"}),
+            },
+            "optional": {
+                "google_api_key": ("STRING", {}),
+                "google_CSE_ID": ("STRING", {}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("text",)
+
+    FUNCTION = "web"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+    def web(self,keywords, paper_num=1,searchType="web",google_api_key=None, google_CSE_ID=None, is_enable=True):
+        if is_enable == False:
+            return (None,)
+        global g_api_key, g_CSE_ID,g_searchType
+        g_searchType = searchType
+        if google_api_key is not None and google_api_key != "":
+            g_api_key = google_api_key
+        else:
+            g_api_key = api_keys.get("google_api_key")
+        if google_CSE_ID is not None and google_CSE_ID != "":
+            g_CSE_ID = google_CSE_ID
+        else:
+            g_CSE_ID = api_keys.get("CSE_ID")
+        out=search_web(keywords, paper_num)
+        return (out,)
+
 
 api_keys = load_api_keys(config_path)
 b_api_key = api_keys.get("bing_api_key")
+b_searchType= "web"
 
-
-def search_web_bing(keywords, paper_num, url=None):
+def search_web_bing(keywords, paper_num):
     today = str(date.today())
-    global b_api_key
+    global b_api_key,b_searchType
     num_results = 10
     start = num_results * (int(paper_num) - 1) + 1
     try:
         # 使用必应搜索API的基础URL
-        base_url = "https://api.cognitive.microsoft.com/bing/v7.0/search"
+        if b_searchType == "web":
+            base_url = "https://api.bing.microsoft.com/v7.0/search"
+        elif b_searchType == "image":
+            base_url = "https://api.bing.microsoft.com/v7.0/images/search"
+        elif b_searchType == "video":
+            base_url = "https://api.bing.microsoft.com/v7.0/videos/search"
+        elif b_searchType == "news":
+            base_url = "https://api.bing.microsoft.com/v7.0/news/search"
         headers = {"Ocp-Apim-Subscription-Key": b_api_key}
         params = {
             "q": keywords if isinstance(keywords, str) else " ".join(keywords),
@@ -148,7 +208,7 @@ def search_web_bing(keywords, paper_num, url=None):
                 for item in data["webPages"]["value"]:
                     snippet = item["snippet"]
                     url = item["url"]
-                    all_content += json.dumps({"snippet": snippet, "link": url}, ensure_ascii=False, indent=4)
+                    all_content += "/n/n" + json.dumps({"snippet": snippet, "link": url}, ensure_ascii=False, indent=4)
 
         else:
             return f"Error: {response.status_code} - {response.text}"
@@ -173,6 +233,7 @@ class bing_tool:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
+                "searchType":(["web", "image", "video", "news"], {"default": "web"}),
             },
             "optional": {
                 "bing_api_key": ("STRING", {}),
@@ -188,10 +249,11 @@ class bing_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def web(self, bing_api_key=None, is_enable=True):
+    def web(self,searchType="web", bing_api_key=None, is_enable=True):
         if is_enable == False:
             return (None,)
-        global b_api_key
+        global b_api_key,b_searchType
+        b_searchType = searchType
         if bing_api_key is not None and bing_api_key != "":
             b_api_key = bing_api_key
         else:
@@ -201,7 +263,7 @@ class bing_tool:
                 "type": "function",
                 "function": {
                     "name": "search_web_bing",
-                    "description": "通过关键词获得必应搜索上的信息。",
+                    "description": f"通过关键词获得必应搜索上的{b_searchType}信息。",
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -218,4 +280,41 @@ class bing_tool:
         ]
 
         out = json.dumps(output, ensure_ascii=False)
+        return (out,)
+
+class bing_loader:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "searchType":(["web", "image", "video", "news"], {"default": "web"}),
+                "keywords":("STRING", {}),
+                "paper_num": ("INT", {"default": "1"}),
+            },
+            "optional": {
+                "bing_api_key": ("STRING", {}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("text",)
+
+    FUNCTION = "web"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+    def web(self,keywords, paper_num=1,searchType="web", bing_api_key=None, is_enable=True):
+        if is_enable == False:
+            return (None,)
+        global b_api_key,b_searchType
+        b_searchType = searchType
+        if bing_api_key is not None and bing_api_key != "":
+            b_api_key = bing_api_key
+        else:
+            b_api_key = api_keys.get("bing_api_key")
+
+        out = search_web_bing(keywords, paper_num)
         return (out,)

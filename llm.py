@@ -96,7 +96,7 @@ from .tools.load_persona import load_persona
 from .tools.logic import get_string, replace_string, string_logic, substring
 from .tools.new_interpreter import new_interpreter, new_interpreter_tool
 from .tools.omost import omost_decode, omost_setting
-from .tools.search_web import bing_tool, google_tool, search_web, search_web_bing
+from .tools.search_web import bing_tool, google_tool, search_web, search_web_bing,google_loader,bing_loader
 from .tools.show_text import About_us, show_text_party
 from .tools.story import read_story_json, story_json_tool
 from .tools.text_iterator import text_iterator
@@ -1744,6 +1744,8 @@ NODE_CLASS_MAPPINGS = {
     "load_excel": load_excel,
     "text_iterator": text_iterator,
     "image_iterator": image_iterator,
+    "google_loader":google_loader,
+    "bing_loader":bing_loader,
 }
 
 
@@ -1824,6 +1826,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "load_excel": "Excel迭代器(Excel_iterator)",
     "text_iterator": " 文本迭代器(text_iterator)",
     "image_iterator": " 图片迭代器(image_iterator)",
+    "google_loader":"Google搜索加载器(Google_image_loader)",
+    "bing_loader":"Bing搜索加载器(Bing_image_loader)",
 }
 
 
