@@ -21,6 +21,8 @@
 
 4. [How to play interactive fiction games in comfyui](https://www.bilibili.com/video/BV15y411q78L/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 
+5. [AI girlfriend, and is your shape | comfyui on the implementation of graphRAG, linkage neoa4j | comfyui workflow access streamlit front-end](https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
+
 5. For the instructions for using the node, please refer to: [how to use nodes](how_to_use_nodes.md)
 
 6. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg).
