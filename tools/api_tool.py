@@ -4,12 +4,17 @@ import requests
 
 
 class api_box:
-    def __init__(self, id, url) -> None:
+    def __init__(self, id, url,api_key="") -> None:
         self.id = id
         self.url = url
-
+        self.api_key = api_key
     def request_api(self, **parameter):
-        response = requests.get(self.url, params=parameter, timeout=10)
+
+        if self.api_key != None and self.api_key!="":
+            headers = {"Authorization": f"Bearer {self.api_key}"}
+            response = requests.get(self.url, params=parameter,headers=headers, timeout=10)
+        else:
+            response = requests.get(self.url, params=parameter, timeout=10)
         response.encoding = response.apparent_encoding
         if response.status_code == 200:
             return response.text
@@ -39,6 +44,7 @@ class api_tool:
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "url": ("STRING", {"default": "被请求的网址"}),
+                "api_key":("STRING", {"default": ""}),
                 "description": ("STRING", {"multiline": True, "default": "用来查天气的工具"}),
                 "parameters": (
                     "STRING",
@@ -65,11 +71,11 @@ class api_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def read_web(self, url, description, parameters, is_enable=True):
+    def read_web(self, url, description, parameters,api_key="", is_enable=True):
         if is_enable == False:
             return (None,)
         global api_boxes
-        api_boxes[str(self.id).strip()] = api_box(self.id, url)
+        api_boxes[str(self.id).strip()] = api_box(self.id, url,api_key)
 
         if parameters:
             try:
