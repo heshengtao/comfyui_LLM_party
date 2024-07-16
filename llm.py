@@ -30,7 +30,7 @@ if torch.cuda.is_available():
 from torchvision.transforms import ToPILImage
 
 from .config import config_key, config_path, current_dir_path, load_api_keys
-from .tools.api_tool import api_tool, use_api_tool
+from .tools.api_tool import api_tool, use_api_tool,api_function,parameter_function,parameter_combine, parameter_combine_plus,list_append,list_append_plus,list_extend,list_extend_plus
 from .tools.arxiv import arxiv_tool, get_arxiv
 from .tools.check_web import check_web, check_web_tool
 from .tools.classify_function import classify_function, classify_function_plus
@@ -1725,7 +1725,6 @@ NODE_CLASS_MAPPINGS = {
     "play_audio": play_audio,
     "load_name": load_name,
     "omost_decode": omost_decode,
-    "get_string": get_string,
     "omost_setting": omost_setting,
     "keyword_tool": keyword_tool,
     "load_keyword": load_keyword,
@@ -1746,6 +1745,15 @@ NODE_CLASS_MAPPINGS = {
     "image_iterator": image_iterator,
     "google_loader":google_loader,
     "bing_loader":bing_loader,
+    "api_function":api_function,
+    "parameter_function":parameter_function,
+    "get_string": get_string,
+    "parameter_combine":parameter_combine,
+    "parameter_combine_plus":parameter_combine_plus,
+    "list_append":list_append,
+    "list_append_plus":list_append_plus,
+    "list_extend":list_extend,
+    "list_extend_plus":list_extend_plus,
 }
 
 
@@ -1807,7 +1815,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "play_audio": "播放音频(play_audio)",
     "load_name": "加载模型名称(load_model_name)",
     "omost_decode": "omost解码器(omost_decode)",
-    "get_string": "获取字符串(get_string)",
     "omost_setting": "omost设置(omost_setting)",
     "keyword_tool": "搜索关键词工具(search_keyword_tool)",
     "load_keyword": "加载关键词检索器(load_keyword_searcher)",
@@ -1828,6 +1835,15 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "image_iterator": " 图片迭代器(image_iterator)",
     "google_loader":"Google搜索加载器(Google_image_loader)",
     "bing_loader":"Bing搜索加载器(Bing_image_loader)",
+    "api_function":" API函数(api_function)",
+    "parameter_function":" 参数字典函数(parameter_function)",
+    "get_string": "获取字符串(get_string)",
+    "parameter_combine":"参数字典组合(parameter_combine)",
+    "parameter_combine_plus":"超大参数字典组合(parameter_combine_plus)",
+    "list_append":" 列表追加(list_append)",
+    "list_append_plus":"超大列表追加(list_append_plus)",
+    "list_extend":" 列表扩展(list_extend)",
+    "list_extend_plus":"超大列表扩展(list_extend_plus)",
 }
 
 
