@@ -103,8 +103,8 @@ class substring:
             },
         }
 
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("substring",)
+    RETURN_TYPES = ("STRING","STRING",)
+    RETURN_NAMES = ("substring","remaining_string",)
 
     FUNCTION = "substr"
 
@@ -115,18 +115,24 @@ class substring:
     def substr(self, input_string, start_string="", end_string=""):
         if start_string == "" and end_string == "":
             out = input_string
+            remaining_string = ""
         elif start_string == "":
-            # 获取从开头到end_string的子串
-            out = input_string[: input_string.find(end_string)]
+            end_index = input_string.find(end_string)
+            out = input_string[:end_index]
+            remaining_string = input_string[end_index + len(end_string):]
         elif end_string == "":
-            # 获取从start_string到结尾的子串
-            out = input_string[input_string.find(start_string) + len(start_string) :]
+            start_index = input_string.find(start_string) + len(start_string)
+            out = input_string[start_index:]
+            remaining_string = input_string[:start_index - len(start_string)]
         else:
-            # 获取从start_string到end_string的子串
-            out = input_string[input_string.find(start_string) + len(start_string) : input_string.find(end_string)]
+            start_index = input_string.find(start_string) + len(start_string)
+            end_index = input_string.find(end_string, start_index)
+            out = input_string[start_index:end_index]
+            remaining_string = input_string[:start_index - len(start_string)] + input_string[end_index + len(end_string):]
 
         out = out.strip()
-        return (out,)
+        remaining_string = remaining_string.strip()
+        return (out, remaining_string)
 
 
 class get_string:
