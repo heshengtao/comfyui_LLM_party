@@ -107,7 +107,7 @@ from .tools.wechat import send_wechat, work_wechat, work_wechat_tool
 from .tools.whisper import listen_audio, openai_whisper
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import work_flow, workflow_tool, workflow_transfer
-
+from .tools.clear_model import clear_model
 _TOOL_HOOKS = [
     "get_time",
     "get_weather",
@@ -912,6 +912,7 @@ def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="u
 
 
 class LLM_local_loader:
+    original_IS_CHANGED = None
     def __init__(self):
         self.id = hash(str(self))
         self.device = ""
@@ -921,7 +922,7 @@ class LLM_local_loader:
         self.tokenizer_path = ""
         self.model = ""
         self.tokenizer = ""
-
+        self.is_locked = False
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -957,6 +958,7 @@ class LLM_local_loader:
                         "default": "float32",
                     },
                 ),
+                "is_locked": ("BOOLEAN", {"default":True}),
             }
         }
 
@@ -975,7 +977,17 @@ class LLM_local_loader:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def chatbot(self, model_name, model_type, model_path, tokenizer_path, device, dtype):
+    def chatbot(self, model_name, model_type, model_path, tokenizer_path, device, dtype,is_locked=False):
+        self.is_locked = is_locked
+        if LLM_local_loader.original_IS_CHANGED is None:
+            # 保存原始的IS_CHANGED方法的引用
+            LLM_local_loader.original_IS_CHANGED = LLM_local_loader.IS_CHANGED
+        if self.is_locked == False:
+            setattr(LLM_local_loader, "IS_CHANGED", LLM_local_loader.original_IS_CHANGED)
+        else:
+            # 如果方法存在，则删除
+            if hasattr(LLM_local_loader, "IS_CHANGED"):
+                delattr(LLM_local_loader, "IS_CHANGED")
         if model_path != "" and tokenizer_path != "":
             model_name = ""
         if model_name in config_key:
@@ -993,6 +1005,7 @@ class LLM_local_loader:
             or self.dtype != dtype
             or self.model_path != model_path
             or self.tokenizer_path != tokenizer_path
+            or is_locked == False
         ):
             del self.model
             del self.tokenizer
@@ -1124,7 +1137,11 @@ class LLM_local_loader:
             self.model,
             self.tokenizer,
         )
-
+    @classmethod
+    def IS_CHANGED(s):
+        # 生成当前时间的哈希值
+        hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+        return hash_value
 
 class LLM_local:
     original_IS_CHANGED = None
@@ -1754,6 +1771,7 @@ NODE_CLASS_MAPPINGS = {
     "list_append_plus":list_append_plus,
     "list_extend":list_extend,
     "list_extend_plus":list_extend_plus,
+    "clear_model":clear_model,
 }
 
 
@@ -1831,19 +1849,20 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "KG_neo_toolkit_user": "知识图谱Neo4j工具包用户版(KG_neo4j_toolkit_user)",
     "translate_persona": "翻译面具(translate_persona)",
     "load_excel": "Excel迭代器(Excel_iterator)",
-    "text_iterator": " 文本迭代器(text_iterator)",
-    "image_iterator": " 图片迭代器(image_iterator)",
+    "text_iterator": "文本迭代器(text_iterator)",
+    "image_iterator": "图片迭代器(image_iterator)",
     "google_loader":"Google搜索加载器(Google_image_loader)",
     "bing_loader":"Bing搜索加载器(Bing_image_loader)",
     "api_function":" API函数(api_function)",
-    "parameter_function":" 参数字典函数(parameter_function)",
+    "parameter_function":"参数字典函数(parameter_function)",
     "get_string": "获取字符串(get_string)",
     "parameter_combine":"参数字典组合(parameter_combine)",
     "parameter_combine_plus":"超大参数字典组合(parameter_combine_plus)",
-    "list_append":" 列表追加(list_append)",
+    "list_append":"列表追加(list_append)",
     "list_append_plus":"超大列表追加(list_append_plus)",
-    "list_extend":" 列表扩展(list_extend)",
+    "list_extend":"列表扩展(list_extend)",
     "list_extend_plus":"超大列表扩展(list_extend_plus)",
+    "clear_model":"清空模型(clear_model)",
 }
 
 
