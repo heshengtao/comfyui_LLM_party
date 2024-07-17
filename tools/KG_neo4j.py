@@ -431,11 +431,33 @@ def Inquire_relationships_neo4j(entitie_A, entitie_B):
     global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
     with driver.session() as session:
+        # Check if entities exist
+        result = session.run(
+            """
+            MATCH (a {name: $entitie_A})
+            RETURN a
+            """,
+            entitie_A=entitie_A
+        )
+        if not result.single():
+            return f"实体 {entitie_A} 不存在"
+
+        result = session.run(
+            """
+            MATCH (b {name: $entitie_B})
+            RETURN b
+            """,
+            entitie_B=entitie_B
+        )
+        if not result.single():
+            return f"实体 {entitie_B} 不存在"
+
+        # Check direct relationships
         result = session.run(
             """
             MATCH (a {name: $entitie_A})-[r]->(b {name: $entitie_B})
             RETURN r
-        """,
+            """,
             entitie_A=entitie_A,
             entitie_B=entitie_B,
         )
@@ -447,7 +469,7 @@ def Inquire_relationships_neo4j(entitie_A, entitie_B):
             """
             MATCH (b {name: $entitie_B})-[r]->(a {name: $entitie_A})
             RETURN r
-        """,
+            """,
             entitie_A=entitie_A,
             entitie_B=entitie_B,
         )
@@ -455,11 +477,12 @@ def Inquire_relationships_neo4j(entitie_A, entitie_B):
         if reverse_relationships:
             return "两者之间的反向直接关系为：" + str(reverse_relationships)
 
+        # Check shortest path
         result = session.run(
             """
             MATCH path = shortestPath((a {name: $entitie_A})-[*]-(b {name: $entitie_B}))
             RETURN path
-        """,
+            """,
             entitie_A=entitie_A,
             entitie_B=entitie_B,
         )
@@ -490,13 +513,35 @@ def New_relationships_neo4j(source, target, label, attributes=None):
         attributes = json.loads(attributes)
 
     with driver.session() as session:
+        # Check if entities exist
+        result = session.run(
+            """
+            MATCH (a {name: $source})
+            RETURN a
+            """,
+            source=source
+        )
+        if not result.single():
+            return f"实体 {source} 不存在"
+
+        result = session.run(
+            """
+            MATCH (b {name: $target})
+            RETURN b
+            """,
+            target=target
+        )
+        if not result.single():
+            return f"实体 {target} 不存在"
+
+        # Check if relationship already exists
         result = session.run(
             """
             MATCH (a {name: $source})-[r:`"""
             + label.replace(" ", "_")
             + """`]->(b {name: $target})
             RETURN r
-        """,
+            """,
             source=source,
             target=target,
         )
@@ -532,6 +577,27 @@ def Modify_relationships_neo4j(source, target, label, attributes=None):
         attributes = json.loads(attributes)
 
     with driver.session() as session:
+        # Check if entities exist
+        result = session.run(
+            """
+            MATCH (a {name: $source})
+            RETURN a
+            """,
+            source=source
+        )
+        if not result.single():
+            return f"实体 {source} 不存在"
+
+        result = session.run(
+            """
+            MATCH (b {name: $target})
+            RETURN b
+            """,
+            target=target
+        )
+        if not result.single():
+            return f"实体 {target} 不存在"
+
         # Create the query string with dynamic attributes
         attr_str = ", ".join([f"r.{key} = ${key}" for key in attributes.keys()])
         if attr_str:
