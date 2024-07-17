@@ -15,11 +15,16 @@ class api_box:
             response = requests.get(self.url, params=parameter,headers=headers, timeout=10)
         else:
             response = requests.get(self.url, params=parameter, timeout=10)
-        response.encoding = response.apparent_encoding
+
         if response.status_code == 200:
-            return response.text
+            # 解析 JSON 响应并自动处理 Unicode 转义字符
+            json_data = json.loads(response.content.decode('utf-8'))
+            # 将 JSON 数据转换回字符串
+            out = json.dumps(json_data, ensure_ascii=False,indent=4)
         else:
-            return "API请求失败"
+            out = "API请求失败"
+
+        return (out,)
 
 
 api_boxes = {}
@@ -121,17 +126,18 @@ class api_function:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def api(self, url, parameters,api_key=""):
-        if api_key != None and api_key!="":
+    def api(self, url, parameters, api_key=""):
+        if api_key:
             headers = {"Authorization": f"Bearer {api_key}"}
-            response = requests.get(url, params=parameters,headers=headers, timeout=10)
+            response = requests.get(url, params=parameters, headers=headers, timeout=10)
         else:
-            print(url)
-            print(parameters)
             response = requests.get(url, params=parameters, timeout=10)
-        response.encoding = response.apparent_encoding
+        
         if response.status_code == 200:
-            out = response.text
+            # 解析 JSON 响应并自动处理 Unicode 转义字符
+            json_data = json.loads(response.content.decode('utf-8'))
+            # 将 JSON 数据转换回字符串
+            out = json.dumps(json_data, ensure_ascii=False,indent=4)
         else:
             out = "API请求失败"
 
@@ -200,7 +206,6 @@ class parameter_combine:
         if parameter3 is not None:
             for key, value in parameter3.items():
                 parameter[key] = value
-        print(parameter)
         return (parameter,)
     
 class parameter_combine_plus:

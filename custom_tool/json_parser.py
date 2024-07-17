@@ -100,7 +100,15 @@ class json_get_value:
             return (None,)
         try:
             data = json.loads(text)
-            out = data[key]
+            # 如果是字典，按key取值
+            if isinstance(data, dict):
+                out = data[key]
+            # 如果是列表，按索引取值
+            elif isinstance(data, list):
+                out = data[int(key)]
+            # 判断是否为列表或者是字典
+            if isinstance(out, list) or isinstance(out, dict):
+                out = json.dumps(out, ensure_ascii=False)
             return (out,)
         except json.JSONDecodeError:
             print("Invalid JSON format.")
