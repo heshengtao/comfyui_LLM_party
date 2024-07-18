@@ -1,16 +1,24 @@
-<p align="right">
-   <a href="./README_ZH.md">中文</a> |  <strong>English</strong>
-</p>
+# **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
+
+<div align="center">
+  <a href="https://space.bilibili.com/26978344">video tutorial</a> ·
+  <a href="how_to_use_nodes_ZH.md">text tutorial</a> ·
+  <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baidu cloud</a> ·
+  <a href="img/Q群.jpg">QQ group</a>
+</div>
+
+<div align="center">
+  <a href="./README.md"><img src="https://img.shields.io/badge/英文-d9d9d9"></a>
+  <a href="./README_ZH.md"><img src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
+</div>
 
 ## Latest update
 1. Added universal API call node and a large number of auxiliary nodes for constructing the request body and grabbing the information in the response. 
 2. Added empty model node, you can uninstall LLM from video memory at any location!
 3. The [chatTTS](https://github.com/2noise/ChatTTS) node has been added, thank you very much for the contribution of [guobalove](https://github.com/guobalove)! `model_path` parameter can be empty! It is recommended to use `HF` mode to load the model, the model will be automatically downloaded from hugging face, no need to download manually; if using `local` loading, please put the model's`asset` and `config` folders in the root directory. [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu; if using `custom` mode to load, please put the model's `asset` and `config` folders under `model_path`.
 
-# **COMFYUI LLM PARTY—A Node Library for LLM Workflow Development in ComfyUI**
-
 ## Introduction
-[comfyui](https://github.com/comfyanonymous/ComfyUI) is an extremely minimalist UI interface, primarily used for AI drawing and other workflows based on the SD model. C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​﻿‎‍​﻿‍‏​‍﻿‌​﻿‌‏omfyui_llm_party aims to develop a complete set of nodes for LLM workflow construction based on comfyui. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.The picture shows a workflow of LLM implementing multi-tool calling, for more workflows please refer to the [workflow](workflow) folder.
+C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​﻿‎‍​﻿‍‏​‍﻿‌​﻿‌‏omfyui_llm_party aims to develop a complete set of nodes for LLM workflow construction based on [comfyui](https://github.com/comfyanonymous/ComfyUI) as the front end. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.The picture shows a workflow of LLM implementing multi-tool calling, for more workflows please refer to the [workflow](workflow) folder.
 
 ![图片](img/多工具调用.png)
 

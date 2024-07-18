@@ -1,17 +1,24 @@
-<p align="right">
-   <strong>中文</strong> | <a href="./README.md">English</a>
-</p>
+# **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库**
+
+<div align="center">
+  <a href="https://space.bilibili.com/26978344">视频教程</a> ·
+  <a href="how_to_use_nodes_ZH.md">文字教程</a> ·
+  <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">度盘链接</a> ·
+  <a href="img/Q群.jpg">加入Q群</a>
+</div>
+
+<div align="center">
+  <a href="./README.md"><img src="https://img.shields.io/badge/英文-d9d9d9"></a>
+  <a href="./README_ZH.md"><img src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
+</div>
 
 ## 最新更新
 1. 新增了万能API调用节点以及大量的辅助节点，用于构造请求体和抓取响应中的信息。
 2. 新增了清空模型节点，可以在任意位置将LLM从显存中卸载！
 3. 已添加了[chatTTS](https://github.com/2noise/ChatTTS)节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！`model_path`参数可以为空！推荐使用HF模式加载模型，模型会自动从hugging face上下载，无需手动下载；如果使用local加载，请将模型的`asset`和`config`文件夹放到根目录下。[百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu；如果使用`custom`模式加载，请将模型的`asset`和`config`文件夹放到`model_path`下。
 
-# **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库**
-
 ## 简介
-[comfyui](https://github.com/comfyanonymous/ComfyUI)是一个极为简约的UI界面，主要用于AI绘图等基于SD模型的工作流搭建。
-C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​﻿‎‍​﻿‍‏​‍﻿‌​﻿‌‏omfyui_llm_party希望基于comfyui开发一套完整的用于LLM工作流搭建的节点库。可以让用户更便捷快速地搭建自己的LLM工作流，并且更方便地接入自己的SD工作流中。（图为一个LLM实现多工具调用的工作流，更多的工作流可以参考[workflow](workflow)文件夹）
+C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​﻿‎‍​﻿‍‏​‍﻿‌​﻿‌‏omfyui_llm_party希望基于[comfyui](https://github.com/comfyanonymous/ComfyUI)这一个极为简约的UI界面作为前端，开发一套完整的用于LLM工作流搭建的节点库。可以让用户更便捷快速地搭建自己的LLM工作流，并且更方便地接入自己的SD工作流中。（图为一个LLM实现多工具调用的工作流，更多的工作流可以参考[workflow](workflow)文件夹）
 
 ![图片](img/多工具调用.png)
 
