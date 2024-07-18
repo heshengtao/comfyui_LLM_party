@@ -1,6 +1,6 @@
 {
-  "last_node_id": 32,
-  "last_link_id": 41,
+  "last_node_id": 33,
+  "last_link_id": 43,
   "nodes": [
     {
       "id": 17,
@@ -41,7 +41,7 @@
       },
       "widgets_values": [
         "",
-        "文件中关于\"Streaming mode\"的相关内容如下：\n\n1. 如果你的下游LLM/代理系统需要立即的内容传输或需要按块处理数据来交织I/O和LLM处理时间，那么Streaming mode会很有用。\n   \n2. 当你发现标准模式提供的结果不完全时，Streaming mode也会很有用。这是因为阅读器会等待更长的时间，直到页面稳定地渲染。可以通过接受标题来切换到Streaming mode。\n\n   例如，比较下面的这两条curl命令。你会看到Streaming模式最后会给你完整的信息，而标准模式则不会。因为这份文档在加载内容时使用的是Streaming模式。\n\n3. 在Reader API中有一个流程顺序：streamContent1 ----> streamContent2 ----> streamContent3 ---> ...，每一个内容都有其相应的位置和动作。"
+        "文件中的相关信息如下：\n- Streaming mode is also useful if your downstream LLM/agent system requires immediate content delivery or needs to process data in chunks to interleave I/O and LLM processing times. This allows for\n- Streaming mode is useful when you find that the standard mode provides an incomplete result. This is because the Reader will wait a bit longer until the page is _stablely_ rendered. Use the\n- Streaming mode: [Link](https://github.com/jina-ai/reader#streaming-mode) until the page is _stablely_ rendered. Use the accept-header to toggle the streaming mode:\n- For example, compare these two curl commands below. You can see streaming one gives you complete information at last, whereas standard mode does not. This is because the content loading on this"
       ],
       "color": "#233",
       "bgcolor": "#355"
@@ -85,62 +85,10 @@
       },
       "widgets_values": [
         "",
-        "[{'role': 'system', 'content': '你一个强大的人工智能助手。'}, {'role': 'user', 'content': '查一下这个文件里Streaming mode相关的内容'}, {'role': 'assistant', 'content': 'Function(arguments=\\'{\\\\n  \"question\": \"Streaming mode\"\\\\n}\\', name=\\'data_base\\')'}, {'role': 'function', 'tool_call_id': 'call_lxzSXAnjV8FqE2R6iSKf0YRo', 'name': 'data_base', 'content': '文件中的相关信息如下：\\nStreaming mode is also useful if your downstream LLM/agent system requires immediate content delivery or needs to process data in chunks to interleave I/O and LLM processing times. This allows for\\nStreaming mode is useful when you find that the standard mode provides an incomplete result. This is because the Reader will wait a bit longer until the page is _stablely_ rendered. Use the\\nuntil the page is _stablely_ rendered. Use the accept-header to toggle the streaming mode:\\nFor example, compare these two curl commands below. You can see streaming one gives you complete information at last, whereas standard mode does not. This is because the content loading on this\\nReader API:  streamContent1 ----> streamContent2 ----> streamContent3 ---> ... \\n|                    |                     |\\nv                    |                     |\\n'}, {'role': 'assistant', 'content': '文件中关于\"Streaming mode\"的相关内容如下：\\n\\n1. 如果你的下游LLM/代理系统需要立即的内容传输或需要按块处理数据来交织I/O和LLM处理时间，那么Streaming mode会很有用。\\n   \\n2. 当你发现标准模式提供的结果不完全时，Streaming mode也会很有用。这是因为阅读器会等待更长的时间，直到页面稳定地渲染。可以通过接受标题来切换到Streaming mode。\\n\\n   例如，比较下面的这两条curl命令。你会看到Streaming模式最后会给你完整的信息，而标准模式则不会。因为这份文档在加载内容时使用的是Streaming模式。\\n\\n3. 在Reader API中有一个流程顺序：streamContent1 ----> streamContent2 ----> streamContent3 ---> ...，每一个内容都有其相应的位置和动作。'}]"
+        "**System:** 你是一个强大的人工智能助手。\n\n**User:** 查一下这个文件里Streaming mode相关的内容\n\n**Assistant:** Function(arguments='{\"question\":\"Streaming mode\"}', name='data_base')\n\n**Tool:** 文件中的相关信息如下：\nStreaming mode is also useful if your downstream LLM/agent system requires immediate content delivery or needs to process data in chunks to interleave I/O and LLM processing times. This allows for\nStreaming mode is useful when you find that the standard mode provides an incomplete result. This is because the Reader will wait a bit longer until the page is _stablely_ rendered. Use the\n### Streaming mode\n\n[](https://github.com/jina-ai/reader#streaming-mode)\nuntil the page is _stablely_ rendered. Use the accept-header to toggle the streaming mode:\nFor example, compare these two curl commands below. You can see streaming one gives you complete information at last, whereas standard mode does not. This is because the content loading on this\n\n\n**Assistant:** 文件中的相关信息如下：\n- Streaming mode is also useful if your downstream LLM/agent system requires immediate content delivery or needs to process data in chunks to interleave I/O and LLM processing times. This allows for\n- Streaming mode is useful when you find that the standard mode provides an incomplete result. This is because the Reader will wait a bit longer until the page is _stablely_ rendered. Use the\n- Streaming mode: [Link](https://github.com/jina-ai/reader#streaming-mode) until the page is _stablely_ rendered. Use the accept-header to toggle the streaming mode:\n- For example, compare these two curl commands below. You can see streaming one gives you complete information at last, whereas standard mode does not. This is because the content loading on this\n\n"
       ],
       "color": "#233",
       "bgcolor": "#355"
-    },
-    {
-      "id": 28,
-      "type": "ebd_tool",
-      "pos": [
-        188,
-        306
-      ],
-      "size": {
-        "0": 315,
-        "1": 202
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": 32,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            39
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ebd_tool"
-      },
-      "widgets_values": [
-        "D:\\AI\\AIyuyan\\ChatGLM3\\bge-large-zh\\",
-        "enable",
-        "",
-        "cuda",
-        200,
-        50,
-        "disable"
-      ],
-      "color": "#323",
-      "bgcolor": "#535"
     },
     {
       "id": 27,
@@ -161,7 +109,7 @@
           "name": "file_content",
           "type": "STRING",
           "links": [
-            32
+            42
           ],
           "shape": 3,
           "label": "file_content",
@@ -179,53 +127,16 @@
       "bgcolor": "#653"
     },
     {
-      "id": 31,
-      "type": "LLM_api_loader",
-      "pos": [
-        188,
-        138
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            38
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "gpt-3.5-turbo-1106",
-        "https://api.openai.com/v1",
-        "sk-XXXXX"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
       "id": 32,
       "type": "LLM",
       "pos": [
         576,
         288
       ],
-      "size": [
-        411.15951033350154,
-        483.1719208004256
-      ],
+      "size": {
+        "0": 411.1595153808594,
+        "1": 483.17193603515625
+      },
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -248,7 +159,8 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
-          }
+          },
+          "label": "system_prompt_input"
         },
         {
           "name": "user_prompt_input",
@@ -256,15 +168,17 @@
           "link": null,
           "widget": {
             "name": "user_prompt_input"
-          }
+          },
+          "label": "user_prompt_input"
         },
         {
           "name": "tools",
           "type": "STRING",
-          "link": 39,
+          "link": 43,
           "widget": {
             "name": "tools"
-          }
+          },
+          "label": "tools"
         },
         {
           "name": "file_content",
@@ -272,7 +186,8 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
@@ -331,17 +246,95 @@
         100,
         ""
       ]
+    },
+    {
+      "id": 31,
+      "type": "LLM_api_loader",
+      "pos": [
+        188,
+        138
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            38
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "",
+        ""
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 33,
+      "type": "ebd_tool",
+      "pos": [
+        188,
+        306
+      ],
+      "size": [
+        326.305724447604,
+        218.4169567501326
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 42,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            43
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ebd_tool"
+      },
+      "widgets_values": [
+        "D:\\AI\\mychat\\model\\bge-large-zh",
+        "enable",
+        "",
+        5,
+        "auto",
+        200,
+        50
+      ]
     }
   ],
   "links": [
-    [
-      32,
-      27,
-      0,
-      28,
-      0,
-      "STRING"
-    ],
     [
       38,
       31,
@@ -349,14 +342,6 @@
       32,
       0,
       "CUSTOM"
-    ],
-    [
-      39,
-      28,
-      0,
-      32,
-      4,
-      "STRING"
     ],
     [
       40,
@@ -373,16 +358,32 @@
       26,
       0,
       "STRING"
+    ],
+    [
+      42,
+      27,
+      0,
+      33,
+      0,
+      "STRING"
+    ],
+    [
+      43,
+      33,
+      0,
+      32,
+      4,
+      "STRING"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.7513148009015777,
+      "scale": 0.9090909090909091,
       "offset": {
-        "0": 136.92285007909618,
-        "1": 78.817453223012
+        "0": 106.71539815537889,
+        "1": -38.01696063418801
       }
     }
   },
