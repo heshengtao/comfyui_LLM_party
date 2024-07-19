@@ -1,4 +1,7 @@
-# **COMFYUI LLM PARTY——面向comfyui开发的LLM工具节点库**
+<div align="center">
+  <h1><strong>COMFYUI LLM PARTY</strong></h1>
+  <h3>派对越多，工作越少</h3>
+</div>
 
 <div align="center">
   <a href="https://space.bilibili.com/26978344">视频教程</a> ·
