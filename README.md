@@ -5,7 +5,7 @@
 
 <div align="center">
   <a href="https://space.bilibili.com/26978344">video tutorial</a> ·
-  <a href="how_to_use_nodes_ZH.md">text tutorial</a> ·
+  <a href="how_to_use_nodes.md">text tutorial</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baidu cloud</a> ·
   <a href="img/Q群.jpg">QQ group</a>
 </div>
