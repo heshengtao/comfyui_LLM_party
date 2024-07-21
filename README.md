@@ -1,7 +1,4 @@
-<div align="center">
-  <h1><strong>COMFYUI LLM PARTY</strong></h1>
-  <h3>party hard, work smart</h3>
-</div>
+![图片](img/封面.png)
 
 <div align="center">
   <a href="https://space.bilibili.com/26978344">video tutorial</a> ·
