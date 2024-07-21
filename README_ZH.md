@@ -30,39 +30,15 @@ C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​�
 3. 更多的工作流可以参考[workflow](workflow)文件夹.
 
 ## 视频教程
+1. [手把手教你如何搭建积木化智能体（超简单！）](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
 
-<div style="display: flex; overflow-x: auto;">
-  <div style="flex: 0 0 auto; margin-right: 10px; text-align: center; width: 320px;">
-    <a href="https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b">
-      <img src="https://i1.hdslb.com/bfs/archive/66fdd78f58d6ed95f13719991800c7b216a0c000.jpg@320w_200h_1c_!web-space-index-myvideo.avif" alt="手把手教你如何搭建积木化智能体（超简单！）" width="320" height="200">
-    </a>
-    <p style="word-wrap: break-word;">手把手教你如何搭建积木化智能体（超简单！）</p>
-  </div>
-  <div style="flex: 0 0 auto; margin-right: 10px; text-align: center; width: 320px;">
-    <a href="https://www.bilibili.com/video/BV1JJ4m1A789/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b">
-      <img src="https://i2.hdslb.com/bfs/archive/0aca1691cc1364f6ab73eca40359bd05badc78bf.jpg@320w_200h_1c_!web-space-index-myvideo.avif" alt="教你GPT-4o接入comfyui | 让工作流调用另一个工作流 | 让LLM变成一个tool" width="320" height="200">
-    </a>
-    <p style="word-wrap: break-word;">教你GPT-4o接入comfyui | 让工作流调用另一个工作流 | 让LLM变成一个tool</p>
-  </div>
-  <div style="flex: 0 0 auto; margin-right: 10px; text-align: center; width: 320px;">
-    <a href="https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0">
-      <img src="https://i1.hdslb.com/bfs/archive/90335ee7375424eb71cd304c70013e83c9b6d0f7.jpg@320w_200h_1c_!web-space-index-myvideo.avif" alt="将你的工作流伪装成GPT接入微信|Omost兼容！灵活地创造自己的dalle3" width="320" height="200">
-    </a>
-    <p style="word-wrap: break-word;">将你的工作流伪装成GPT接入微信|Omost兼容！灵活地创造自己的dalle3</p>
-  </div>
-  <div style="flex: 0 0 auto; margin-right: 10px; text-align: center; width: 320px;">
-    <a href="https://www.bilibili.com/video/BV15y411q78L/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b">
-      <img src="https://i0.hdslb.com/bfs/archive/4ae1a56b78650e386ba1656c1877ff1d6eaa2876.jpg@320w_200h_1c_!web-space-index-myvideo.avif" alt="如何在comfyui中玩到互动小说游戏" width="320" height="200">
-    </a>
-    <p style="word-wrap: break-word;">如何在comfyui中玩到互动小说游戏</p>
-  </div>
-  <div style="flex: 0 0 auto; text-align: center; width: 320px;">
-    <a href="https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b">
-      <img src="https://i1.hdslb.com/bfs/archive/7011f766f57899d933bcda846b785e3edbca65fc.jpg@320w_200h_1c_!web-space-index-myvideo.avif" alt="AI女友，并且是你的形状|实现graphRAG，联动neo4j|工作流接入streamlit前端" width="320" height="200">
-    </a>
-    <p style="word-wrap: break-word;">AI女友，并且是你的形状|实现graphRAG，联动neo4j|工作流接入streamlit前端</p>
-  </div>
-</div>
+2. [教你GPT-4o接入comfyui | 让工作流调用另一个工作流 | 让LLM变成一个tool](https://www.bilibili.com/video/BV1JJ4m1A789/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
+
+3. [将你的工作流伪装成GPT接入微信|Omost兼容！灵活地创造自己的dalle3](https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0)
+
+4. [如何在comfyui中玩到互动小说游戏](https://www.bilibili.com/video/BV15y411q78L/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
+
+5. [AI女友，并且是你的形状|comfyui上实现graphRAG，联动neoa4j|comfyui工作流接入streamlit前端](https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 
 ## 模型支持
 1. 支持所有openai格式的API调用，base_url的选择参考[config.ini.example](config.ini.example)，目前已测试的有：
