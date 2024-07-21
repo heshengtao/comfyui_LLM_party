@@ -15,15 +15,12 @@
   <a href="./README_ZH.md"><img src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
 </div>
 
+C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​﻿‎‍​﻿‍‏​‍﻿‌​﻿‌‏omfyui_llm_party aims to develop a complete set of nodes for LLM workflow construction based on [comfyui](https://github.com/comfyanonymous/ComfyUI) as the front end. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.
+
 ## Latest update
 1. Added universal API call node and a large number of auxiliary nodes for constructing the request body and grabbing the information in the response. 
 2. Added empty model node, you can uninstall LLM from video memory at any location!
 3. The [chatTTS](https://github.com/2noise/ChatTTS) node has been added, thank you very much for the contribution of [guobalove](https://github.com/guobalove)! `model_path` parameter can be empty! It is recommended to use `HF` mode to load the model, the model will be automatically downloaded from hugging face, no need to download manually; if using `local` loading, please put the model's`asset` and `config` folders in the root directory. [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu; if using `custom` mode to load, please put the model's `asset` and `config` folders under `model_path`.
-
-## Introduction
-C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​﻿‎‍​﻿‍‏​‍﻿‌​﻿‌‏omfyui_llm_party aims to develop a complete set of nodes for LLM workflow construction based on [comfyui](https://github.com/comfyanonymous/ComfyUI) as the front end. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.The picture shows a workflow of LLM implementing multi-tool calling, for more workflows please refer to the [workflow](workflow) folder.
-
-![图片](img/多工具调用.png)
 
 ## User Guide
 1. [Building a Modular AI with ComfyUI×LLM: A Step-by-Step Tutorial (Super Easy!)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
@@ -36,9 +33,11 @@ C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌�
 
 5. [AI girlfriend, and is your shape | comfyui on the implementation of graphRAG, linkage neoa4j | comfyui workflow access streamlit front-end](https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 
-5. For the instructions for using the node, please refer to: [how to use nodes](how_to_use_nodes.md)
+6. For the instructions for using the node, please refer to: [how to use nodes](how_to_use_nodes.md)
 
-6. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg).
+7. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg).
+
+8. More workflows please refer to the [workflow](workflow) folder.
 
 ## Model support
 1. Support all API calls in openai format, base_url selection reference [config.ini.example](config.ini.example), which has been tested so far:
@@ -58,44 +57,6 @@ C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌�
 
 3. Model download
 * [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu
-## Features
-1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
-2. Supports API integration or local large model integration. Modular implementation for tool invocation.When entering the base_url, please use a URL that ends with `/v1/`.You can use [ollama](https://github.com/ollama/ollama) to manage your model. Then, enter `http://127.0.0.1:11434/v1/` for the base_url, `ollama` for the api_key, and your model name for the model_name, such as: llama3.
-- API access sample workflow: [start_with_LLM_api](workflow/start_with_LLM_api)
-- Local model access sample workflow: [start_with_LLM_local](workflow/start_with_LLM_local)
-- ollama access sample workflow: [ollama](workflow/ollama.json)
-3. Local knowledge base integration with RAG support.sample workflow: [Knowledge Base RAG Search](workflow/知识库RAG搜索.json)
-4. Ability to invoke code interpreters.
-5. Enables online queries, including Google search support.sample workflow: [movie query workflow](workflow/电影查询工作流.json)
-6. Implement conditional statements within ComfyUI to categorize user queries and provide targeted responses.sample workflow: [intelligent customer service](workflow/智能客服.json)
-7. Supports looping links for large models, allowing two large models to engage in debates.sample workflow: [Tram Challenge Debate](workflow/电车难题辩论赛.json)
-8. Attach any persona mask, customize prompt templates.
-9. Supports various tool invocations, including weather lookup, time lookup, knowledge base, code execution, web search, and single-page search.
-10. Use LLM as a tool node.sample workflow: [LLM Matryoshka dolls](workflow/LLM套娃.json)
-11. Rapidly develop your own web applications using API + Streamlit.The picture below is an example of a drawing application.
-12. Added a dangerous omnipotent interpreter node that allows the large model to perform any task.
-13. It is recommended to use the `show_text` node under the `function` submenu of the right-click menu as the display output for the LLM node.
-14. Supported the visual features of GPT-4O!sample workflow:[GPT-4o](workflow/GPT-4o.json)
-15. A new workflow intermediary has been added, which allows your workflow to call other workflows!sample workflow:[Invoke another workflow](workflow/调用另一个工作流.json)
-16. Adapted to all models with an interface similar to OpenAI, such as: Tongyi Qianwen/QWEN, Zhigu Qingyan/GLM, DeepSeek, Kimi/Moonshot. Please fill in the base_url, api_key, and model_name of these models into the LLM node to call them.
-17. Added an LVM loader, now you can call the LVM model locally, support [lava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf) model, other LVM models should theoretically run if they are GUFF format.The example workflow can be found here: [start_with_LVM.json](workflow/start_with_LVM.json).
-18. I wrote a `fastapi.py` file, and if you run it directly, you’ll get an OpenAI interface on `http://127.0.0.1:8817/v1/`. Any application that can call GPT can now invoke your comfyui workflow! I will create a tutorial to demonstrate the details on how to do this.
-19. I’ve separated the LLM loader and the LLM chain, dividing the model loading and model configuration. This allows for sharing models across different LLM nodes!
-20. macOS and mps devices are now supported! Thanks to [bigcat88](https://github.com/bigcat88) for their contribution!
-21. You can build your own interactive novel game, and go to different endings according to the user's choice! Example workflow reference: [interactive_novel](workflow/互动小说.json)
-22. Adapted to OpenAI's whisper and tts functions, voice input and output can be realized. Example workflow reference: [voice_input&voice_output](workflow/语音输入+语音输出.json)
-23. Compatible with [Omost](https://github.com/lllyasviel/Omost)!!! Please download [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) to experience it now! Sample workflow reference: [start_with_OMOST](workflow/start_with_OMOST)
-24. Added LLM tools to send messages to WeCom, DingTalk, and Feishu, as well as external functions to call.
-25. Added a new text iterator, which can output only part of the characters at a time. It is safe to split the text according to Carriage Return and chunk size, and will not be divided from the middle of the text. chunk_overlap refers to how many characters the divided text overlaps. In this way, you can enter super long text in batches, as long as you don't have a brain to click, or open the loop in comfyui to execute, it can be automatically executed. Remember to turn on the is_locked property, which can automatically lock the workflow at the end of the input and will not continue to execute. Example workflow: [text iteration input](workflow/文本迭代输入.json)
-26. Added the model name attribute to the local LLM loader, local llava loader, and local guff loader. If it is empty, it will be loaded using various local paths in the node. If it is not empty, it will be loaded using the path parameters you fill in yourself in `config.ini`. If it is not empty and not in `config.ini`, it will be downloaded from huggingface or loaded from the model save directory of huggingface. If you want to download from huggingface, please fill in the format of for example: `THUDM/glm-4-9b-chat`.Attention! Models loaded in this way must be adapted to the transformer library.
-27. Adapted to [CosyVoice](https://github.com/FunAudioLLM/CosyVoice), now you can use the TTS function directly without downloading any model or any API key. Currently the interface is only adapted to Chinese.
-28. Added JSON file parsing node and JSON value node, which allows you to get the value of a key from a file or text. Thanks to [guobalove](https://github.com/guobalove) for your contribution!
-29. Improved the code of tool call. Now LLM without tool call function can also open is_tools_in_sys_prompt attribute (local LLM does not need to be opened by default, automatic adaptation). After opening, the tool information will be added to the system prompt word, so that LLM can call the tool.Related papers on implementation principles: [Achieving Tool Calling Functionality in LLMs Using Only Prompt Engineering Without Fine-Tuning](https://arxiv.org/abs/2407.04997)
-30. A new custom_tool folder is created to store the code of the custom tool. You can refer to the code in the [custom_tool](custom_tool) folder, put the code of the custom tool into the custom_tool folder, and you can call the custom tool in LLM.
-31. Added Knowledge Graph tool, so that LLM and Knowledge Graph can interact perfectly. LLM can modify Knowledge Graph according to your input, and can reason on Knowledge Graph to get the answers you need. Example workflow reference: [graphRAG_neo4j](workflow/graphRAG_neo4j.json)
-32. Added personality AI function, 0 code to develop your own girlfriend AI or boyfriend AI, unlimited dialogue, permanent memory, stable personality. Example workflow reference: [Mylover Personality AI](workflow/麦洛薇人格AI.json)
-
-![图片](img/画画应用.png)
 
 ## Download
 Install using one of the following methods:
@@ -119,16 +80,58 @@ Install using one of the following methods:
 4. If you have some environment configuration problems, you can try to use the dependencies in `requirements_fixed.txt`.
 
 ## Configuration
-Configure the APIKEY using one of the following methods:
-### Method One:
-1. Open the `config.ini` file in the `comfyui_LLM_party` project folder.
-2. Enter your `openai_api_key` and `base_url` in `config.ini`.
-3. If you want to use the Google search tool, enter your `google_api_key` and `cse_id` in `config.ini`.
+APIKEY can be configured using one of the following methods
+### Method 1:
+1. Open the `config.ini` file in the project folder of the `comfyui_LLM_party`.
+2. Enter your openai_api_key, base_url in `config.ini`.
+3. If you are using an ollama model, fill in `http://127.0.0.1:11434/v1/` in `base_url`, `ollama` in `openai_api_key`, and your model name in `model_name`, for example: `llama3`.
+4. If you want to use Google search or Bing search tools, enter your `google_api_key`, `cse_id` or `bing_api_key` in `config.ini`.
+5. If you want to use image input LLM, it is recommended to use image bed imgbb and enter your imgbb_api in `config.ini`.
+6. Each model can be configured separately in the `config.ini` file, which can be filled in by referring to the `config.ini.example` file. After you configure it, just enter `model_name` on the node.
 
-### Method Two:
+
+### Method 2:
 1. Open the comfyui interface.
-2. Create a new Large Language Model (LLM) node and directly enter your `openai_api_key` and `base_url` in the node.
-3. Create a new Google Search Tool (google_tool) node and directly enter your `google_api_key` and `cse_id` in the node.
+2. Create a Large Language Model (LLM) node and enter your openai_api_key and base_url directly in the node.
+3. If you use the ollama model, use LLM_api node, fill in `http://127.0.0.1:11434/v1/` in `base_url` node, fill in `ollama` in `api_key`, and fill in your model name in `model_name`, for example: `llama3`.
+4. If you want to use image input LLM, it is recommended to use graph bed imgbb and enter your `imgbb_api_key` on the node.
+
+## Features
+1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
+2. Supports API integration or local large model integration. Modular implementation for tool invocation.When entering the base_url, please use a URL that ends with `/v1/`.You can use [ollama](https://github.com/ollama/ollama) to manage your model. Then, enter `http://127.0.0.1:11434/v1/` for the base_url, `ollama` for the api_key, and your model name for the model_name, such as: llama3.
+- API access sample workflow: [start_with_LLM_api](workflow/start_with_LLM_api)
+- Local model access sample workflow: [start_with_LLM_local](workflow/start_with_LLM_local)
+- ollama access sample workflow: [ollama](workflow/ollama.json)
+3. Local knowledge base integration with RAG support.sample workflow: [Knowledge Base RAG Search](workflow/知识库RAG搜索.json)
+4. Ability to invoke code interpreters.
+5. Enables online queries, including Google search support.sample workflow: [movie query workflow](workflow/电影查询工作流.json)
+6. Implement conditional statements within ComfyUI to categorize user queries and provide targeted responses.sample workflow: [intelligent customer service](workflow/智能客服.json)
+7. Supports looping links for large models, allowing two large models to engage in debates.sample workflow: [Tram Challenge Debate](workflow/电车难题辩论赛.json)
+8. Attach any persona mask, customize prompt templates.
+9. Supports various tool invocations, including weather lookup, time lookup, knowledge base, code execution, web search, and single-page search.
+10. Use LLM as a tool node.sample workflow: [LLM Matryoshka dolls](workflow/LLM套娃.json)
+11. Rapidly develop your own web applications using API + Streamlit.
+12. Added a dangerous omnipotent interpreter node that allows the large model to perform any task.
+13. It is recommended to use the `show_text` node under the `function` submenu of the right-click menu as the display output for the LLM node.
+14. Supported the visual features of GPT-4O!sample workflow:[GPT-4o](workflow/GPT-4o.json)
+15. A new workflow intermediary has been added, which allows your workflow to call other workflows!sample workflow:[Invoke another workflow](workflow/调用另一个工作流.json)
+16. Adapted to all models with an interface similar to OpenAI, such as: Tongyi Qianwen/QWEN, Zhigu Qingyan/GLM, DeepSeek, Kimi/Moonshot. Please fill in the base_url, api_key, and model_name of these models into the LLM node to call them.
+17. Added an LVM loader, now you can call the LVM model locally, support [lava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf) model, other LVM models should theoretically run if they are GUFF format.The example workflow can be found here: [start_with_LVM.json](workflow/start_with_LVM.json).
+18. I wrote a `fastapi.py` file, and if you run it directly, you’ll get an OpenAI interface on `http://127.0.0.1:8817/v1/`. Any application that can call GPT can now invoke your comfyui workflow! I will create a tutorial to demonstrate the details on how to do this.
+19. I’ve separated the LLM loader and the LLM chain, dividing the model loading and model configuration. This allows for sharing models across different LLM nodes!
+20. macOS and mps devices are now supported! Thanks to [bigcat88](https://github.com/bigcat88) for their contribution!
+21. You can build your own interactive novel game, and go to different endings according to the user's choice! Example workflow reference: [interactive_novel](workflow/互动小说.json)
+22. Adapted to OpenAI's whisper and tts functions, voice input and output can be realized. Example workflow reference: [voice_input&voice_output](workflow/语音输入+语音输出.json)
+23. Compatible with [Omost](https://github.com/lllyasviel/Omost)!!! Please download [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) to experience it now! Sample workflow reference: [start_with_OMOST](workflow/start_with_OMOST)
+24. Added LLM tools to send messages to WeCom, DingTalk, and Feishu, as well as external functions to call.
+25. Added a new text iterator, which can output only part of the characters at a time. It is safe to split the text according to Carriage Return and chunk size, and will not be divided from the middle of the text. chunk_overlap refers to how many characters the divided text overlaps. In this way, you can enter super long text in batches, as long as you don't have a brain to click, or open the loop in comfyui to execute, it can be automatically executed. Remember to turn on the is_locked property, which can automatically lock the workflow at the end of the input and will not continue to execute. Example workflow: [text iteration input](workflow/文本迭代输入.json)
+26. Added the model name attribute to the local LLM loader, local llava loader, and local guff loader. If it is empty, it will be loaded using various local paths in the node. If it is not empty, it will be loaded using the path parameters you fill in yourself in `config.ini`. If it is not empty and not in `config.ini`, it will be downloaded from huggingface or loaded from the model save directory of huggingface. If you want to download from huggingface, please fill in the format of for example: `THUDM/glm-4-9b-chat`.Attention! Models loaded in this way must be adapted to the transformer library.
+27. Adapted to [CosyVoice](https://github.com/FunAudioLLM/CosyVoice), now you can use the TTS function directly without downloading any model or any API key. Currently the interface is only adapted to Chinese.
+28. Added JSON file parsing node and JSON value node, which allows you to get the value of a key from a file or text. Thanks to [guobalove](https://github.com/guobalove) for your contribution!
+29. Improved the code of tool call. Now LLM without tool call function can also open is_tools_in_sys_prompt attribute (local LLM does not need to be opened by default, automatic adaptation). After opening, the tool information will be added to the system prompt word, so that LLM can call the tool.Related papers on implementation principles: [Achieving Tool Calling Functionality in LLMs Using Only Prompt Engineering Without Fine-Tuning](https://arxiv.org/abs/2407.04997)
+30. A new custom_tool folder is created to store the code of the custom tool. You can refer to the code in the [custom_tool](custom_tool) folder, put the code of the custom tool into the custom_tool folder, and you can call the custom tool in LLM.
+31. Added Knowledge Graph tool, so that LLM and Knowledge Graph can interact perfectly. LLM can modify Knowledge Graph according to your input, and can reason on Knowledge Graph to get the answers you need. Example workflow reference: [graphRAG_neo4j](workflow/graphRAG_neo4j.json)
+32. Added personality AI function, 0 code to develop your own girlfriend AI or boyfriend AI, unlimited dialogue, permanent memory, stable personality. Example workflow reference: [Mylover Personality AI](workflow/麦洛薇人格AI.json)
 
 ## Next Steps Plan:
 1. More model adaptations, at least covering the API interfaces of mainstream large models and local calls of mainstream open-source models, as well as more LVM model adaptations. Currently, I have only adapted the visual function calls of GPT-4;
