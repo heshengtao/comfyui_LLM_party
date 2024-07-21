@@ -39,6 +39,41 @@ C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌�
 
 8. More workflows please refer to the [workflow](workflow) folder.
 
+## Vedio tutorial
+
+<div style="display: flex; overflow-x: auto;">
+  <div style="flex: 0 0 auto; margin-right: 10px; text-align: center; width: 320px;">
+    <a href="https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b">
+      <img src="https://i1.hdslb.com/bfs/archive/66fdd78f58d6ed95f13719991800c7b216a0c000.jpg@320w_200h_1c_!web-space-index-myvideo.avif" alt="Step-by-Step Guide to Building Modular Agents (Super Easy!)" width="320" height="200">
+    </a>
+    <p style="word-wrap: break-word;">Step-by-Step Guide to Building Modular Agents (Super Easy!)</p>
+  </div>
+  <div style="flex: 0 0 auto; margin-right: 10px; text-align: center; width: 320px;">
+    <a href="https://www.bilibili.com/video/BV1JJ4m1A789/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b">
+      <img src="https://i2.hdslb.com/bfs/archive/0aca1691cc1364f6ab73eca40359bd05badc78bf.jpg@320w_200h_1c_!web-space-index-myvideo.avif" alt="How to Integrate GPT-4o with ComfyUI | Workflow Calls Another Workflow | Turn LLM into a Tool" width="320" height="200">
+    </a>
+    <p style="word-wrap: break-word;">How to Integrate GPT-4o with ComfyUI | Workflow Calls Another Workflow | Turn LLM into a Tool</p>
+  </div>
+  <div style="flex: 0 0 auto; margin-right: 10px; text-align: center; width: 320px;">
+    <a href="https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0">
+      <img src="https://i1.hdslb.com/bfs/archive/90335ee7375424eb71cd304c70013e83c9b6d0f7.jpg@320w_200h_1c_!web-space-index-myvideo.avif" alt="Disguise Your Workflow as GPT to Integrate with WeChat | Omost Compatible! Flexibly Create Your Own Dalle3" width="320" height="200">
+    </a>
+    <p style="word-wrap: break-word;">Disguise Your Workflow as GPT to Integrate with WeChat | Omost Compatible! Flexibly Create Your Own Dalle3</p>
+  </div>
+  <div style="flex: 0 0 auto; margin-right: 10px; text-align: center; width: 320px;">
+    <a href="https://www.bilibili.com/video/BV15y411q78L/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b">
+      <img src="https://i0.hdslb.com/bfs/archive/4ae1a56b78650e386ba1656c1877ff1d6eaa2876.jpg@320w_200h_1c_!web-space-index-myvideo.avif" alt="How to Play Interactive Novel Games in ComfyUI" width="320" height="200">
+    </a>
+    <p style="word-wrap: break-word;">How to Play Interactive Novel Games in ComfyUI</p>
+  </div>
+  <div style="flex: 0 0 auto; text-align: center; width: 320px;">
+    <a href="https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b">
+      <img src="https://i1.hdslb.com/bfs/archive/7011f766f57899d933bcda846b785e3edbca65fc.jpg@320w_200h_1c_!web-space-index-myvideo.avif" alt="AI Girlfriend, and It's Your Shape | Implement GraphRAG on ComfyUI with Neo4j | Workflow with Streamlit Frontend" width="320" height="200">
+    </a>
+    <p style="word-wrap: break-word;">AI Girlfriend, and It's Your Shape | Implement GraphRAG on ComfyUI with Neo4j | Workflow with Streamlit Frontend</p>
+  </div>
+</div>
+
 ## Model support
 1. Support all API calls in openai format, base_url selection reference [config.ini.example](config.ini.example), which has been tested so far:
 * [ollama](https://github.com/ollama/ollama)
