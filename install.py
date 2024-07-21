@@ -192,8 +192,8 @@ def install_portaudio():
                 # Linux
                 result = subprocess.run(["dpkg", "-s", "libportaudio2"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 if result.returncode != 0:
-                    subprocess.check_call(["sudo", "apt-get", "update"])
-                    subprocess.check_call(["sudo", "apt-get", "install", "-y", "libportaudio2", "libasound-dev"])
+                    os.system("apt-get update")
+                    os.system("apt-get install -y libportaudio2 libasound-dev")
                 else:
                     print("libportaudio2 已经安装")
             elif sys.platform == "darwin":
