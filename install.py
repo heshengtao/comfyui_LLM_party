@@ -185,7 +185,32 @@ def init_temp():
     current_dir_path = os.path.dirname(os.path.abspath(__file__))
     os.makedirs(os.path.join(current_dir_path, "temp"), exist_ok=True)
 
+def install_portaudio():
+    try:
+        if os.name == "posix":
+            if sys.platform == "linux" or sys.platform == "linux2":
+                # Linux
+                result = subprocess.run(["dpkg", "-s", "libportaudio2"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                if result.returncode != 0:
+                    subprocess.check_call(["sudo", "apt-get", "update"])
+                    subprocess.check_call(["sudo", "apt-get", "install", "-y", "libportaudio2", "libasound-dev"])
+                else:
+                    print("libportaudio2 已经安装")
+            elif sys.platform == "darwin":
+                # macOS
+                result = subprocess.run(["brew", "list", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                if result.returncode != 0:
+                    subprocess.check_call(["brew", "install", "portaudio"])
+                else:
+                    print("portaudio 已经安装")
+        elif os.name == "nt":
+            pass
+        else:
+            print("不支持的操作系统")
+    except subprocess.CalledProcessError as e:
+        print(f"安装 PortAudio 库时出错: {e}")
 
+install_portaudio()
 check_and_uninstall_websocket()
 
 # 调用函数
