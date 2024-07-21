@@ -1,158 +1,7 @@
 {
-  "last_node_id": 178,
-  "last_link_id": 169,
+  "last_node_id": 183,
+  "last_link_id": 174,
   "nodes": [
-    {
-      "id": 170,
-      "type": "show_text_party",
-      "pos": [
-        1905,
-        37
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 153,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        ""
-      ],
-      "color": "#232",
-      "bgcolor": "#353"
-    },
-    {
-      "id": 171,
-      "type": "show_text_party",
-      "pos": [
-        1914,
-        471
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 154,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        ""
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 162,
-      "type": "classify_function",
-      "pos": [
-        1480,
-        210
-      ],
-      "size": {
-        "0": 315,
-        "1": 122
-      },
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 168,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "response1",
-          "type": "STRING",
-          "links": [
-            153
-          ],
-          "shape": 3,
-          "label": "response1",
-          "slot_index": 0
-        },
-        {
-          "name": "response2",
-          "type": "STRING",
-          "links": [
-            154
-          ],
-          "shape": 3,
-          "label": "response2",
-          "slot_index": 1
-        },
-        {
-          "name": "response3",
-          "type": "STRING",
-          "links": [],
-          "shape": 3,
-          "label": "response3",
-          "slot_index": 2
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "classify_function"
-      },
-      "widgets_values": [
-        "enable",
-        ""
-      ],
-      "color": "#323",
-      "bgcolor": "#535"
-    },
     {
       "id": 172,
       "type": "load_persona",
@@ -197,81 +46,28 @@
         "图片提示词生成器",
         true,
         ""
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 174,
-      "type": "classify_persona",
-      "pos": [
-        534,
-        8
-      ],
-      "size": {
-        "0": 316.79571533203125,
-        "1": 134.10263061523438
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "links": [
-            166
-          ],
-          "shape": 3,
-          "label": "system_prompt",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "classify_persona"
-      },
-      "widgets_values": [
-        true,
-        "",
-        "Positive Prompt",
-        "Negative Prompt",
-        ""
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
+      ]
     },
     {
       "id": 176,
       "type": "LLM_api_loader",
       "pos": [
-        51,
-        637
+        22,
+        631
       ],
       "size": {
         "0": 315,
         "1": 106
       },
       "flags": {},
-      "order": 2,
+      "order": 1,
       "mode": 0,
       "outputs": [
         {
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            163,
-            165
+            163
           ],
           "shape": 3,
           "label": "model",
@@ -282,55 +78,10 @@
         "Node name for S&R": "LLM_api_loader"
       },
       "widgets_values": [
-        "gpt-3.5-turbo-1106",
-        "https://api.openai.com/v1",
-        "sk-XXXXX"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 169,
-      "type": "show_text_party",
-      "pos": [
-        1014,
-        865
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 169,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
+        "gpt-4-turbo",
+        "",
         ""
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
+      ]
     },
     {
       "id": 177,
@@ -339,12 +90,12 @@
         460,
         210
       ],
-      "size": [
-        411.79919535062106,
-        463.2246375840043
-      ],
+      "size": {
+        "0": 411.7991943359375,
+        "1": 463.2246398925781
+      },
       "flags": {},
-      "order": 3,
+      "order": 2,
       "mode": 0,
       "inputs": [
         {
@@ -365,7 +116,8 @@
           "link": 164,
           "widget": {
             "name": "system_prompt_input"
-          }
+          },
+          "label": "system_prompt_input"
         },
         {
           "name": "user_prompt_input",
@@ -373,7 +125,8 @@
           "link": null,
           "widget": {
             "name": "user_prompt_input"
-          }
+          },
+          "label": "user_prompt_input"
         },
         {
           "name": "tools",
@@ -381,7 +134,8 @@
           "link": null,
           "widget": {
             "name": "tools"
-          }
+          },
+          "label": "tools"
         },
         {
           "name": "file_content",
@@ -389,7 +143,8 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
@@ -397,7 +152,7 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            167
+            170
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -432,7 +187,7 @@
         "",
         "你好，我想要一个大美女，戴着红色的帽子，手里拿着棒棒糖",
         0.7,
-        "enable",
+        "disable",
         "disable",
         "disable",
         "enable",
@@ -447,138 +202,244 @@
       ]
     },
     {
-      "id": 178,
-      "type": "LLM",
+      "id": 179,
+      "type": "show_text_party",
       "pos": [
-        980,
-        210
+        1001,
+        235
       ],
-      "size": [
-        416.9391953506213,
-        478.55125501564487
+      "size": {
+        "0": 370.53173828125,
+        "1": 298.57183837890625
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 170,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
       ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            171,
+            172
+          ],
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "**Positive Prompt:**\nbeautiful woman wearing a red hat, holding a lollipop, detailed facial features, beautiful detailed eyes, long eyelashes, (smiling:1.1), (stylish:1.1), vivid colors, ultra-detailed, high fashion, outdoor background, summer day, (best quality,4k,8k,highres,masterpiece:1.2), (realistic,photorealistic,photo-realistic:1.37), sunlight, soft shadows, colorful attire, lively expression, playful pose, natural light, sharp focus, portrait\n\n**Negative Prompt:**\nnsfw, (low quality, normal quality, worst quality, jpeg artifacts), cropped, monochrome, lowres, low saturation, ((watermark)), (white letters), skin spots, acnes, skin blemishes, age spot, mutated hands, mutated fingers, deformed, bad anatomy, disfigured, poorly drawn face, extra limb, ugly, poorly drawn hands, missing limb, floating limbs, disconnected limbs, out of focus, long neck, long body, extra fingers, fewer fingers, (multi nipples), bad hands, signature, username, bad feet, blurry, bad body"
+      ]
+    },
+    {
+      "id": 180,
+      "type": "substring",
+      "pos": [
+        1530,
+        185
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
       "flags": {},
       "order": 4,
       "mode": 0,
       "inputs": [
         {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 165,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
+          "name": "input_string",
           "type": "STRING",
-          "link": 166,
+          "link": 171,
           "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "user_prompt_input",
-          "type": "STRING",
-          "link": 167,
-          "widget": {
-            "name": "user_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
+            "name": "input_string"
+          },
+          "slot_index": 0,
+          "label": "input_string"
         }
       ],
       "outputs": [
         {
-          "name": "assistant_response",
+          "name": "substring",
           "type": "STRING",
           "links": [
-            168,
-            169
+            173
           ],
           "shape": 3,
-          "label": "assistant_response",
+          "label": "substring",
           "slot_index": 0
         },
         {
-          "name": "history",
+          "name": "remaining_string",
           "type": "STRING",
           "links": null,
           "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": null,
-          "shape": 3,
-          "label": "image"
+          "label": "remaining_string"
         }
       ],
       "properties": {
-        "Node name for S&R": "LLM"
+        "Node name for S&R": "substring"
       },
       "widgets_values": [
-        "你一个强大的人工智能助手。",
         "",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        1920,
+        "**Positive Prompt:**",
+        "**Negative Prompt:**"
+      ]
+    },
+    {
+      "id": 181,
+      "type": "substring",
+      "pos": [
+        1530,
+        443
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 172,
+          "widget": {
+            "name": "input_string"
+          },
+          "slot_index": 0,
+          "label": "input_string"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "substring",
+          "type": "STRING",
+          "links": [
+            174
+          ],
+          "shape": 3,
+          "label": "substring",
+          "slot_index": 0
+        },
+        {
+          "name": "remaining_string",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "remaining_string"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "substring"
+      },
+      "widgets_values": [
         "",
-        "",
-        "",
-        "",
-        "",
-        100,
+        "**Negative Prompt:**",
         ""
+      ]
+    },
+    {
+      "id": 183,
+      "type": "show_text_party",
+      "pos": [
+        2198,
+        436
+      ],
+      "size": {
+        "0": 395.8833312988281,
+        "1": 180.5515594482422
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 174,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "nsfw, (low quality, normal quality, worst quality, jpeg artifacts), cropped, monochrome, lowres, low saturation, ((watermark)), (white letters), skin spots, acnes, skin blemishes, age spot, mutated hands, mutated fingers, deformed, bad anatomy, disfigured, poorly drawn face, extra limb, ugly, poorly drawn hands, missing limb, floating limbs, disconnected limbs, out of focus, long neck, long body, extra fingers, fewer fingers, (multi nipples), bad hands, signature, username, bad feet, blurry, bad body"
+      ]
+    },
+    {
+      "id": 182,
+      "type": "show_text_party",
+      "pos": [
+        2202,
+        171
+      ],
+      "size": {
+        "0": 419.43157958984375,
+        "1": 157.94822692871094
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 173,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "beautiful woman wearing a red hat, holding a lollipop, detailed facial features, beautiful detailed eyes, long eyelashes, (smiling:1.1), (stylish:1.1), vivid colors, ultra-detailed, high fashion, outdoor background, summer day, (best quality,4k,8k,highres,masterpiece:1.2), (realistic,photorealistic,photo-realistic:1.37), sunlight, soft shadows, colorful attire, lively expression, playful pose, natural light, sharp focus, portrait"
       ]
     }
   ],
   "links": [
-    [
-      153,
-      162,
-      0,
-      170,
-      0,
-      "STRING"
-    ],
-    [
-      154,
-      162,
-      1,
-      171,
-      0,
-      "STRING"
-    ],
     [
       163,
       176,
@@ -596,42 +457,42 @@
       "STRING"
     ],
     [
-      165,
-      176,
-      0,
-      178,
-      0,
-      "CUSTOM"
-    ],
-    [
-      166,
-      174,
-      0,
-      178,
-      2,
-      "STRING"
-    ],
-    [
-      167,
+      170,
       177,
       0,
-      178,
-      3,
-      "STRING"
-    ],
-    [
-      168,
-      178,
-      0,
-      162,
+      179,
       0,
       "STRING"
     ],
     [
-      169,
-      178,
+      171,
+      179,
       0,
-      169,
+      180,
+      0,
+      "STRING"
+    ],
+    [
+      172,
+      179,
+      0,
+      181,
+      0,
+      "STRING"
+    ],
+    [
+      173,
+      180,
+      0,
+      182,
+      0,
+      "STRING"
+    ],
+    [
+      174,
+      181,
+      0,
+      183,
       0,
       "STRING"
     ]
@@ -640,10 +501,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.6209213230591552,
+      "scale": 0.9090909090909091,
       "offset": {
-        "0": 162.83370936800668,
-        "1": 292.08759016929173
+        "0": -1071.6334419183088,
+        "1": 95.22095161961312
       }
     }
   },
