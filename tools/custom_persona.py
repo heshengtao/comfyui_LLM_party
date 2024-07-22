@@ -11,12 +11,14 @@ class custom_persona:
                     "STRING",
                     {
                         "multiline": True,
+                        "default": "根据背景知识，请帮我写一篇关于/{主题/}的文章。",
                     },
                 ),
                 "prompt_template": (
                     "STRING",
                     {
                         "multiline": True,
+                        "default":"{\"主题\":\"人工智能\"}",
                     },
                 ),
             },
