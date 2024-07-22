@@ -164,8 +164,8 @@ class replace_string:
         return {
             "required": {
                 "input_string": ("STRING", {}),
-                "string_delete": ("STRING", {"default": ""}),
-                "string_replace": ("STRING", {"default": ""}),
+                "old_string": ("STRING", {"default": ""}),
+                "new_string": ("STRING", {"default": ""}),
             },
         }
 
@@ -178,6 +178,6 @@ class replace_string:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def substr(self, string_delete, string_replace, input_string=""):
-        out = input_string.replace(string_delete, string_replace)
+    def substr(self, old_string, new_string, input_string=""):
+        out = input_string.replace(old_string, new_string)
         return (out,)

@@ -99,7 +99,7 @@ class load_keyword:
         }
 
     RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("ebd_response",)
+    RETURN_NAMES = ("relative_info",)
 
     FUNCTION = "file"
 

@@ -720,6 +720,9 @@ class LLM:
                         else:
                             history_copy = []
                 history = history_temp
+                for message in history:
+                    if message["role"] == "system":
+                        message["content"] = system_prompt
                 if is_tools_in_sys_prompt == "enable":
                     tools_list = []
                     GPT_INSTRUCTION = ""
