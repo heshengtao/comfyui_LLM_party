@@ -5,17 +5,13 @@
 
 import json
 
-
-def split_paragraphs(text):
-    return text.split("\n")
-
-
 class text2json:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "text": ("STRING", {}),
+                "sep": ("STRING", {"default": "\n"})
             }
         }
 
@@ -26,8 +22,8 @@ class text2json:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def convert_txt2json(self, text):
-        paragraphs = split_paragraphs(text)
+    def convert_txt2json(self, text,sep="\n"):
+        paragraphs = text.split(sep)
         idx = 0
         dict = {}
         for paragraph in paragraphs:
