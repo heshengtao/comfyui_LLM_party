@@ -26,7 +26,9 @@ class text2json:
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
     def convert_txt2json(self, text,sep="\n"):
-        sep = decode_escapes(sep)
+        # 判断是不是转义
+        if sep.startswith("\\"):
+            sep = decode_escapes(sep)
         paragraphs = text.split(sep)
         idx = 0
         dict = {}
