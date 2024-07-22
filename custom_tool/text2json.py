@@ -2,7 +2,10 @@
 # 将text按段落切分，转换为json格式
 # 索引为0，1，2，...
 ##########
+import codecs
 
+def decode_escapes(text):
+    return codecs.decode(text, 'unicode_escape')
 import json
 
 class text2json:
@@ -23,6 +26,7 @@ class text2json:
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
     def convert_txt2json(self, text,sep="\n"):
+        sep = decode_escapes(sep)
         paragraphs = text.split(sep)
         idx = 0
         dict = {}
