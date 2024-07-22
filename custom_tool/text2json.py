@@ -35,7 +35,7 @@ class text2json:
 
 
 NODE_CLASS_MAPPINGS = {"text2json": text2json}
-NODE_DISPLAY_NAME_MAPPINGS = {"text2json": "字符串段落转JSON🐶（text2json）"}
+NODE_DISPLAY_NAME_MAPPINGS = {"text2json": "文本分割成json🐶（text2json）"}
 
 
 if __name__ == "__main__":
