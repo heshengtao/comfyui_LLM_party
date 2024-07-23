@@ -22,13 +22,15 @@ def data_base(question):
 
 
 class ebd_tool:
+    def __init__(self):
+        self.file_content=""
+        self.base_path=""
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "model_path": ("STRING", {"default": ""}),
                 "is_enable": (["enable", "disable"], {"default": "enable"}),
-                "file_content": ("STRING", {"forceInput": True}),
                 "k": ("INT", {"default": 5}),
                 "device": (
                     ["auto", "cuda", "mps", "cpu"],
@@ -38,7 +40,9 @@ class ebd_tool:
                 "chunk_overlap": ("INT", {"default": 50}),
                 "base_path": ("STRING", {"default": ""}),
             },
-            "optional": {},
+            "optional": {
+                "file_content": ("STRING", {"forceInput": True}),
+            },
         }
 
     RETURN_TYPES = ("STRING",)
@@ -50,7 +54,7 @@ class ebd_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, model_path,base_path, file_content, k, chunk_size, chunk_overlap, device, is_enable="enable"):
+    def file(self, model_path, file_content, k, chunk_size, chunk_overlap, device, is_enable="enable",base_path=""):
         if is_enable == "disable":
             return (None,)
         global files_load, bge_embeddings, c_size, c_overlap, knowledge_base, k_setting
@@ -66,16 +70,17 @@ class ebd_tool:
             bge_embeddings = HuggingFaceBgeEmbeddings(
                 model_name=model_path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
             )
-        if knowledge_base == "":
-            if base_path != "" and base_path is not None:
-                knowledge_base = FAISS.load_local(base_path, bge_embeddings)
-            else:
-                text_splitter = RecursiveCharacterTextSplitter(
-                    chunk_size=c_size,
-                    chunk_overlap=c_overlap,
-                )
-                chunks = text_splitter.split_text(files_load)
-                knowledge_base = FAISS.from_texts(chunks, bge_embeddings)
+        if base_path != "" and base_path is not None and self.base_path!=base_path:
+            knowledge_base = FAISS.load_local(base_path, bge_embeddings)
+            self.base_path =base_path
+        elif self.file_content!=files_load:
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=c_size,
+                chunk_overlap=c_overlap,
+            )
+            chunks = text_splitter.split_text(files_load)
+            knowledge_base = FAISS.from_texts(chunks, bge_embeddings)
+            self.file_content =files_load
         output = [
             {
                 "type": "function",
@@ -100,7 +105,8 @@ class load_embeddings:
     def __init__(self):
         self.embeddings = ""
         self.embeddings_path = ""
-
+        self.file_content=""
+        self.base_path=""
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -108,7 +114,6 @@ class load_embeddings:
                 "model_path": ("STRING", {"default": ""}),
                 "question": ("STRING", {"default": "question"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "file_content": ("STRING", {"forceInput": True}),
                 "device": (
                     ["auto", "cuda", "mps", "cpu"],
                     {"default": ("auto")},
@@ -118,7 +123,9 @@ class load_embeddings:
                 "chunk_overlap": ("INT", {"default": 50}),
                 "base_path": ("STRING", {"default": ""}),
             },
-            "optional": {},
+            "optional": {
+                "file_content": ("STRING", {"forceInput": True}),
+            },
         }
 
     RETURN_TYPES = ("STRING",)
@@ -143,15 +150,17 @@ class load_embeddings:
                 model_name=model_path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
             )
             self.embeddings_path = model_path
-        if base_path != "" and base_path is not None:
-                base = FAISS.load_local(base_path, bge_embeddings)
-        else:
+        if base_path != "" and base_path is not None and self.base_path!=base_path:
+            base = FAISS.load_local(base_path, bge_embeddings)
+            self.base_path =base_path
+        elif self.file_content!=files_load:
             text_splitter = RecursiveCharacterTextSplitter(
-                chunk_size=chunk_size,
-                chunk_overlap=chunk_overlap,
+                chunk_size=c_size,
+                chunk_overlap=c_overlap,
             )
-            chunks = text_splitter.split_text(file_content)
-            base = FAISS.from_texts(chunks, self.bge_embeddings)
+            chunks = text_splitter.split_text(files_load)
+            base = FAISS.from_texts(chunks, bge_embeddings)
+            self.file_content =files_load
         docs = base.similarity_search(question, k=k)
         combined_content = "".join(doc.page_content + "\n\n" for doc in docs)
         output = "文件中的相关信息如下：\n" + combined_content
