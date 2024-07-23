@@ -1,5 +1,3 @@
-
-
 import gc
 import sys
 
@@ -7,12 +5,14 @@ import torch
 
 
 class AnyType(str):
-  """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
+    """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
 
-  def __ne__(self, __value: object) -> bool:
-    return False
+    def __ne__(self, __value: object) -> bool:
+        return False
+
 
 any_type = AnyType("*")
+
 
 class clear_model:
     @classmethod
@@ -23,16 +23,17 @@ class clear_model:
                 "model": ("CUSTOM", {}),
             },
             "optional": {
-                "tokenizer": ("CUSTOM", {"default": None,}),
+                "tokenizer": (
+                    "CUSTOM",
+                    {
+                        "default": None,
+                    },
+                ),
             },
         }
 
-    RETURN_TYPES = (
-        any_type,
-    )
-    RETURN_NAMES = (
-        "any",
-    )
+    RETURN_TYPES = (any_type,)
+    RETURN_NAMES = ("any",)
 
     FUNCTION = "clear"
 
@@ -40,9 +41,10 @@ class clear_model:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def clear(self, any,model,tokenizer=None):
-        out=any
+    def clear(self, any, model, tokenizer=None):
+        out = any
         print(f"After function call, reference count: {sys.getrefcount(model)}")
+
         # 查找所有引用
         def find_references(obj):
             refs = []
@@ -67,30 +69,29 @@ class clear_model:
                     for value in ref:
                         if value is obj:
                             refs.append((ref, None))
-                elif hasattr(ref, '__dict__'):
+                elif hasattr(ref, "__dict__"):
                     # 如果ref.model存在
-                    if hasattr(ref, 'model'):
-                        ref.model=None
+                    if hasattr(ref, "model"):
+                        ref.model = None
                     # 如果ref.tokenizer存在
-                    if hasattr(ref, 'tokenizer'):
-                        ref.tokenizer=None
+                    if hasattr(ref, "tokenizer"):
+                        ref.tokenizer = None
             return refs
+
         # 获取所有引用
         references = find_references(model)
         print(f"Found {len(references)} references.")
-        model =None
+        model = None
         # 清除所有引用
         for ref, key in references:
             ref[key] = None
 
-        if tokenizer!=None:
+        if tokenizer != None:
             references = find_references(tokenizer)
             print(f"Found {len(references)} references.")
-            tokenizer =None
+            tokenizer = None
         # 显式调用垃圾回收
         gc.collect()
         # 回收显存
         torch.cuda.empty_cache()
-        return (
-            out,
-        )
+        return (out,)

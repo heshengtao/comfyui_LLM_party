@@ -437,7 +437,7 @@ def Inquire_relationships_neo4j(entitie_A, entitie_B):
             MATCH (a {name: $entitie_A})
             RETURN a
             """,
-            entitie_A=entitie_A
+            entitie_A=entitie_A,
         )
         if not result.single():
             return f"实体 {entitie_A} 不存在"
@@ -447,7 +447,7 @@ def Inquire_relationships_neo4j(entitie_A, entitie_B):
             MATCH (b {name: $entitie_B})
             RETURN b
             """,
-            entitie_B=entitie_B
+            entitie_B=entitie_B,
         )
         if not result.single():
             return f"实体 {entitie_B} 不存在"
@@ -519,7 +519,7 @@ def New_relationships_neo4j(source, target, label, attributes=None):
             MATCH (a {name: $source})
             RETURN a
             """,
-            source=source
+            source=source,
         )
         if not result.single():
             return f"实体 {source} 不存在"
@@ -529,7 +529,7 @@ def New_relationships_neo4j(source, target, label, attributes=None):
             MATCH (b {name: $target})
             RETURN b
             """,
-            target=target
+            target=target,
         )
         if not result.single():
             return f"实体 {target} 不存在"
@@ -583,7 +583,7 @@ def Modify_relationships_neo4j(source, target, label, attributes=None):
             MATCH (a {name: $source})
             RETURN a
             """,
-            source=source
+            source=source,
         )
         if not result.single():
             return f"实体 {source} 不存在"
@@ -593,7 +593,7 @@ def Modify_relationships_neo4j(source, target, label, attributes=None):
             MATCH (b {name: $target})
             RETURN b
             """,
-            target=target
+            target=target,
         )
         if not result.single():
             return f"实体 {target} 不存在"

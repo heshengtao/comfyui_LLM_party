@@ -1,25 +1,20 @@
-import os
 import json
+import os
 import time
+
 import requests
 from dotenv import load_dotenv
 
 
 def get_tenant_access_token(token_url, app_id, app_secret):
-    token_data = {
-        "app_id": app_id,
-        "app_secret": app_secret
-    }
-    token_headers = {
-        "Content-Type": "application/json"
-    }
+    token_data = {"app_id": app_id, "app_secret": app_secret}
+    token_headers = {"Content-Type": "application/json"}
     token_response = requests.post(token_url, data=json.dumps(token_data), headers=token_headers)
     if token_response.status_code == 200:
         return token_response.json().get("tenant_access_token")
     else:
         print(token_response.text)
         raise Exception("Failed to get tenant_access_token")
-
 
 
 class FeishuGetHistory:
@@ -36,35 +31,37 @@ class FeishuGetHistory:
 
         # self.receive_id = os.getenv("CHAT_ID")
         # self.receive_id_type = "chat_id"
-        
-    
+
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "app_id": ("STRING", {}),
                 "app_secret": ("STRING", {}),
-                "chat_id": ("STRING", {}), # for group chat
+                "chat_id": ("STRING", {}),  # for group chat
                 "mode": (["auto", "fixed_time_diff"], {"default": "fixed_time_diff"}),
                 "time_diff_sec": ("INT", {"default": 60}),
             }
         }
 
-    RETURN_TYPES = ("STRING", "STRING", "STRING",)
-    RETURN_NAMES = ("response", "last_ts", "show_help",)
+    RETURN_TYPES = (
+        "STRING",
+        "STRING",
+        "STRING",
+    )
+    RETURN_NAMES = (
+        "response",
+        "last_ts",
+        "show_help",
+    )
 
     FUNCTION = "get_history"
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-
-    def get_history(self,
-                app_id=None,
-                app_secret=None,
-                chat_type=None,
-                chat_id=None, # oc_xxx
-                mode="auto",
-                time_diff_sec=60): 
+    def get_history(
+        self, app_id=None, app_secret=None, chat_type=None, chat_id=None, mode="auto", time_diff_sec=60  # oc_xxx
+    ):
         show_help = "placeholder for help text"
         print(f"timestamp initialized to {self.last_ts}")
         if app_id is not None:
@@ -83,10 +80,10 @@ class FeishuGetHistory:
 
         headers = {
             "Authorization": f"Bearer {self.tenant_access_token}",
-            }
+        }
 
         end_time = int(time.time())
-        if (mode == "auto"):
+        if mode == "auto":
             if end_time - self.last_ts > 60:
                 start_time = end_time - 60
             else:
@@ -100,14 +97,17 @@ class FeishuGetHistory:
             "sort_type": "ByCreateTimeAsc",
             "start_time": start_time,
             "end_time": end_time,
-            "page_size": 10
+            "page_size": 10,
         }
 
         response = requests.get(url=self.url_msg, headers=headers, params=params)
 
         if response.status_code != 200:
             print(f"Error: {response.text}")
-            return (None, show_help,)
+            return (
+                None,
+                show_help,
+            )
 
         while response.json().get("data").get("has_more") == True:
             params["page_token"] = response.json().get("data").get("page_token")
@@ -115,7 +115,12 @@ class FeishuGetHistory:
             print(response.json())
         tmp_last_ts = self.last_ts
         self.last_ts = end_time
-        return (json.dumps(response.json()), str(tmp_last_ts), show_help,)
+        return (
+            json.dumps(response.json()),
+            str(tmp_last_ts),
+            show_help,
+        )
+
 
 NODE_CLASS_MAPPINGS = {
     "FeishuGetHistory": FeishuGetHistory,
