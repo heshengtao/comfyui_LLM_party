@@ -7,6 +7,7 @@ from .install import (
     install_portaudio,
 )
 from .llm import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
+
 install_portaudio()
 copy_js_files()
 system_info = get_system_info()

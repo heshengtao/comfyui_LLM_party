@@ -185,6 +185,7 @@ def init_temp():
     current_dir_path = os.path.dirname(os.path.abspath(__file__))
     os.makedirs(os.path.join(current_dir_path, "temp"), exist_ok=True)
 
+
 def install_portaudio():
     try:
         if os.name == "posix":
@@ -209,6 +210,7 @@ def install_portaudio():
             print("不支持的操作系统")
     except subprocess.CalledProcessError as e:
         print(f"安装 PortAudio 库时出错: {e}")
+
 
 install_portaudio()
 check_and_uninstall_websocket()

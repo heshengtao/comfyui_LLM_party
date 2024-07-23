@@ -1,18 +1,21 @@
 import os
 import time
-import jax
+
 import ChatTTS
+import jax
 import numpy as np
 import torch
+
 torch.compile = lambda *args, **kwargs: args[0]
 import torchaudio
 
 if os.name == "nt":
-    
+
     import winsound
 else:
     from playsound import playsound
-    
+
+
 def deterministic(seed=0):
     """
     Set random seed for reproducibility
@@ -25,6 +28,7 @@ def deterministic(seed=0):
     torch.cuda.manual_seed(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
+
 
 class ChatTTS_Node:
     @classmethod
@@ -43,7 +47,7 @@ class ChatTTS_Node:
                 "laugh_param": ("INT", {"default": 0, "min": 0, "max": 2}),
                 "break_param": ("INT", {"default": 2, "min": 0, "max": 7}),
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "load_mode": (["HF","custom", "local"], {"default": "HF"}),
+                "load_mode": (["HF", "custom", "local"], {"default": "HF"}),
             },
         }
 
@@ -84,12 +88,12 @@ class ChatTTS_Node:
         if load_mode == "local":
             chat.load(compile=False)  # Set to True for better performance
         elif load_mode == "custom":
-            if model_path=="" or model_path is None:
+            if model_path == "" or model_path is None:
                 model_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "model")
                 # 如果没有，创建model文件夹
                 if not os.path.exists(model_path):
                     os.mkdir(model_path)
-            chat.load(source="custom",compile=False,custom_path= model_path) 
+            chat.load(source="custom", compile=False, custom_path=model_path)
         elif load_mode == "HF":
             chat.load(source="huggingface", force_redownload=True)
 
@@ -115,7 +119,7 @@ class ChatTTS_Node:
             wavs = chat.infer(text=text, params_infer_code=params_infer_code)
 
         timestamp = str(int(round(time.time() * 1000)))
-        if save_path=="" or save_path is None:
+        if save_path == "" or save_path is None:
             save_path = os.path.dirname(os.path.dirname(__file__))
         if not os.path.isabs(save_path):
             save_path = os.path.abspath(save_path)

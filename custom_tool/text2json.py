@@ -4,19 +4,18 @@
 ##########
 import codecs
 
+
 def decode_escapes(text):
-    return codecs.decode(text, 'unicode_escape')
+    return codecs.decode(text, "unicode_escape")
+
+
 import json
+
 
 class text2json:
     @classmethod
     def INPUT_TYPES(s):
-        return {
-            "required": {
-                "text": ("STRING", {}),
-                "sep": ("STRING", {"default": "\n"})
-            }
-        }
+        return {"required": {"text": ("STRING", {}), "sep": ("STRING", {"default": "\n"})}}
 
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("JSON",)
@@ -25,7 +24,7 @@ class text2json:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def convert_txt2json(self, text,sep="\n"):
+    def convert_txt2json(self, text, sep="\n"):
         # 判断是不是转义
         if sep.startswith("\\"):
             sep = decode_escapes(sep)
