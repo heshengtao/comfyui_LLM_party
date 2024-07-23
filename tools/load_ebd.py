@@ -151,15 +151,16 @@ class load_embeddings:
             )
             self.embeddings_path = model_path
         if base_path != "" and base_path is not None and self.base_path!=base_path:
-            base = FAISS.load_local(base_path, bge_embeddings)
+            base = FAISS.load_local(base_path, self.bge_embeddings)
             self.base_path =base_path
+            print("加载本地文件")
         else:
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size=c_size,
                 chunk_overlap=c_overlap,
             )
             chunks = text_splitter.split_text(files_load)
-            base = FAISS.from_texts(chunks, bge_embeddings)
+            base = FAISS.from_texts(chunks, self.bge_embeddings)
             self.file_content =files_load
         docs = base.similarity_search(question, k=k)
         combined_content = "".join(doc.page_content + "\n\n" for doc in docs)
