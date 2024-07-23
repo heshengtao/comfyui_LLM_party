@@ -22,7 +22,6 @@ class FeishuGetHistory:
         self.url_msg = "https://open.feishu.cn/open-apis/im/v1/messages"
         self.tenant_access_token_url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/"
 
-
     @classmethod
     def INPUT_TYPES(s):
         return {
