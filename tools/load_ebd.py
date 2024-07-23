@@ -51,7 +51,7 @@ class ebd_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, path, k, chunk_size, chunk_overlap, device, file_content="", is_enable="enable",base_path=""):
+    def file(self, path, k, chunk_size, chunk_overlap, device, file_content="", is_enable="enable", base_path=""):
         if is_enable == "disable":
             return (None,)
         global files_load, bge_embeddings, c_size, c_overlap, knowledge_base, k_setting
@@ -70,12 +70,12 @@ class ebd_tool:
         if base_path != "":
             knowledge_base = FAISS.load_local(base_path, bge_embeddings, allow_dangerous_deserialization=True)
         elif knowledge_base == "":
-                text_splitter = RecursiveCharacterTextSplitter(
-                    chunk_size=c_size,
-                    chunk_overlap=c_overlap,
-                )
-                chunks = text_splitter.split_text(files_load)
-                knowledge_base = FAISS.from_texts(chunks, bge_embeddings)
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=c_size,
+                chunk_overlap=c_overlap,
+            )
+            chunks = text_splitter.split_text(files_load)
+            knowledge_base = FAISS.from_texts(chunks, bge_embeddings)
         output = [
             {
                 "type": "function",
@@ -131,7 +131,7 @@ class load_embeddings:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, path, question, k, chunk_size, chunk_overlap, device, file_content="", is_enable=True,base_path=""):
+    def file(self, path, question, k, chunk_size, chunk_overlap, device, file_content="", is_enable=True, base_path=""):
         if is_enable == False:
             return (None,)
         if device == "auto":
@@ -157,6 +157,7 @@ class load_embeddings:
         combined_content = "".join(doc.page_content + "\n\n" for doc in docs)
         output = "文件中的相关信息如下：\n" + combined_content
         return (output,)
+
 
 class save_ebd_database:
     def __init__(self):
@@ -190,13 +191,13 @@ class save_ebd_database:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def file(self, model_path,save_path,  file_content,  chunk_size, chunk_overlap, device, is_enable=True):
+    def file(self, model_path, save_path, file_content, chunk_size, chunk_overlap, device, is_enable=True):
         if is_enable == False:
             return (None,)
         if device == "auto":
             device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
 
-        if self.embeddings_path !=model_path:
+        if self.embeddings_path != model_path:
             model_kwargs = {"device": device}
             encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度
             self.bge_embeddings = HuggingFaceBgeEmbeddings(

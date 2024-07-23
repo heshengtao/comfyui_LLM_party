@@ -3,7 +3,6 @@ import os
 import time
 
 import requests
-from dotenv import load_dotenv
 
 
 def get_tenant_access_token(token_url, app_id, app_secret):
@@ -19,18 +18,9 @@ def get_tenant_access_token(token_url, app_id, app_secret):
 
 class FeishuGetHistory:
     def __init__(self):
-        load_dotenv()
         self.last_ts = 0
-        self.url_msg = os.getenv("MESSAGE_URL")
-        self.tenant_access_token_url = os.getenv("TENANT_ACCESS_TOKEN_URL")
-
-        # self.app_id = os.getenv("APP_ID")
-        # self.app_secret = os.getenv("APP_SECRET")
-        # self.chat_type = os.getenv("CHAT_TYPE")
-        # self.chat_id = os.getenv("CHAT_ID")
-
-        # self.receive_id = os.getenv("CHAT_ID")
-        # self.receive_id_type = "chat_id"
+        self.url_msg = "https://open.feishu.cn/open-apis/im/v1/messages"
+        self.tenant_access_token_url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/"
 
     @classmethod
     def INPUT_TYPES(s):

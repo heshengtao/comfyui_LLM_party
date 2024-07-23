@@ -101,7 +101,7 @@ from .tools.KG_neo4j import (
     New_entities_neo4j,
     New_relationships_neo4j,
 )
-from .tools.load_ebd import data_base, ebd_tool, load_embeddings,save_ebd_database
+from .tools.load_ebd import data_base, ebd_tool, load_embeddings, save_ebd_database
 from .tools.load_file import load_file, load_file_folder, load_url, start_workflow
 from .tools.load_model_name import load_name
 from .tools.load_persona import load_persona
@@ -1798,7 +1798,7 @@ NODE_CLASS_MAPPINGS = {
     "list_extend": list_extend,
     "list_extend_plus": list_extend_plus,
     "clear_model": clear_model,
-    "save_ebd_database":save_ebd_database,
+    "save_ebd_database": save_ebd_database,
 }
 
 
@@ -1890,7 +1890,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "list_extend": "列表扩展(list_extend)",
     "list_extend_plus": "超大列表扩展(list_extend_plus)",
     "clear_model": "清空模型(clear_model)",
-    "save_ebd_database":" 保存向量数据库(save_ebd_database)",
+    "save_ebd_database": " 保存向量数据库(save_ebd_database)",
 }
 
 
