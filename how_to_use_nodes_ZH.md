@@ -185,12 +185,69 @@
 2. 节点会在执行到这个节点时，将模型退出显存。
 
 ### chatTTS语音合成
+**1. 节点输入**
+输入名称      | 描述
+-------------|-----
+text         | 需要被转成语音的文字
+model_path   | TTS的模型路径
+save_path    | 音频的保存路径
+seed         | 种子固定音色
+temperature  | 效果与LLM一致
+top_P        | 效果与LLM一致
+top_K        | 效果与LLM一致
+enableRefine | 是否开启优化功能
+oral_param   | 优化功能开启后，控制口语化程度的参数
+laugh_param  | 优化功能开启后，控制笑声程度的参数
+break_param  | 优化功能开启后，控制停顿长度的参数
+is_enable    | 是否启用该节点
+load_mode    | **HF**:从huggingface下载模型<br>**custom**: 从model_path调用模型<br>**local**: 直接调用当前workspace路径下的模型文件（通常为ComfyUI的根目录）
+
+**2. 节点输出**
+
+输出名称      | 描述
+-------------|-----
+audio   | 语音文件的保存路径
+
 
 ### json文件解析
+![alt text](img/json_parser.png)
+1. show_json_file: 读取json文件并以字符串形式输出
+2. value_by_key: 通过设定参数key获取json文件中对应键的值
 
 ### json取值
+![alt text](img/json_get_value.png)
+通过设定参数key获取字符串中对应键的值（字符串必须符合json格式否则无法解析）
 
 ### 字符串段落转json
+![alt text](img/txt2json.png)
+![alt text](img/txt2json2.png)
+节点将根据输入的字符sep对字符串进行分割，将文本转为json格式的字符串
+
+### 飞书机器人发消息 & 飞书机器人读群历史
+![alt text](img/feishuapi.png)
+
+注：读取历史的mode分两种
+    1. auto：自动提取两次运行该节点之间发的消息
+    2. fixed_time_diff: 提取运行该节点的时间向前推time_diff_sec时间内的消息
+
+**前置工作**
+
+1. 飞书应用建立
+    1.1 https://open.feishu.cn/app?lang=zh-CN 中创建自建应用
+    1.2 进入应用获取app_id与app_secret
+    1.3 添加应用能力 -> 开启机器人应用能力
+    1.4 权限管理 -> 消息与群组 -> 选择需要的权限打开
+    1.5 安全设置 -> 将comfyUI运行的电脑IP加入白名单
+    1.6 发布机器人以应用生效
+2. 获取群组或用户id
+    2.0 要先把创建的机器人拉到群组中或者拉进私聊
+    2.1 飞书开发平台找到发送消息的开发文档
+    2.2 右侧点击获取token
+    2.3 选择receive id type, chat_id对应群组，open_id与user_id对应个人, 点击选择成员，复制对应的id即可
+3. 如果需要让机器人发送语音，需要自行在电脑上安装ffmpeg
+
+
+
 
 ## 组合
 
