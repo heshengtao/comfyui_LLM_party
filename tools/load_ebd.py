@@ -73,7 +73,7 @@ class ebd_tool:
         if base_path != "" and base_path is not None and self.base_path!=base_path:
             knowledge_base = FAISS.load_local(base_path, bge_embeddings)
             self.base_path =base_path
-        elif self.file_content!=files_load:
+        else:
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size=c_size,
                 chunk_overlap=c_overlap,
@@ -153,7 +153,7 @@ class load_embeddings:
         if base_path != "" and base_path is not None and self.base_path!=base_path:
             base = FAISS.load_local(base_path, bge_embeddings)
             self.base_path =base_path
-        elif self.file_content!=files_load:
+        else:
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size=c_size,
                 chunk_overlap=c_overlap,
