@@ -2,7 +2,6 @@ import json
 import os
 
 import requests
-from dotenv import load_dotenv
 from pydub import AudioSegment
 from requests_toolbelt import MultipartEncoder
 
@@ -19,30 +18,11 @@ def get_tenant_access_token(token_url, app_id, app_secret):
 
 class FeishuSendMsg:
     def __init__(self):
-        load_dotenv()
-        self.url_img = os.getenv("IMAGE_UPLOAD_URL")
-        self.url_file = os.getenv("FILE_UPLOAD_URL")
-        self.url_msg = os.getenv("MESSAGE_URL")
-        self.tenant_access_token_url = os.getenv("TENANT_ACCESS_TOKEN_URL")
+        self.url_img = "https://open.feishu.cn/open-apis/im/v1/images"
+        self.url_file = "https://open.feishu.cn/open-apis/im/v1/files"
+        self.url_msg = "https://open.feishu.cn/open-apis/im/v1/messages"
+        self.tenant_access_token_url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/"
 
-        # self.app_id = os.getenv("APP_ID")
-        # self.app_secret = os.getenv("APP_SECRET")
-        # self.chat_type = os.getenv("CHAT_TYPE")
-        # self.chat_type = os.getenv("CHAT_TYPE")
-        # self.chat_id = os.getenv("CHAT_ID")
-        # self.user_id = os.getenv("USER_ID")
-        # self.open_id = os.getenv("OPEN_ID")
-
-        # if (self.chat_type == "group"):
-        #     self.receive_id = os.getenv("CHAT_ID")
-        #     self.receive_id_type = "chat_id"
-        # elif self.chat_type == "single":
-        #     if self.user_id != "":
-        #         self.receive_id = os.getenv("USER_ID")
-        #         self.receive_id_type = "user_id"
-        #     else:
-        #         self.receive_id = os.getenv("OPEN_ID")
-        #         self.receive_id_type = "open_id"
 
     @classmethod
     def INPUT_TYPES(s):

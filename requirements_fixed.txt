@@ -40,4 +40,3 @@ neo4j
 ChatTTS
 soundfile
 jax
-python-dotenv
