@@ -18,7 +18,7 @@ class custom_persona:
                     "STRING",
                     {
                         "multiline": True,
-                        "default":"{\"主题\":\"人工智能\"}",
+                        "default": '{"主题":"人工智能"}',
                     },
                 ),
             },

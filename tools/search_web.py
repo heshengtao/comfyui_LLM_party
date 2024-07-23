@@ -8,13 +8,14 @@ from ..config import config_path, load_api_keys
 api_keys = load_api_keys(config_path)
 g_api_key = api_keys.get("google_api_key")
 g_CSE_ID = api_keys.get("CSE_ID")
-g_searchType="web"
+g_searchType = "web"
+
 
 def search_web(keywords, paper_num=1):
     if paper_num == "":
         paper_num = 1
     today = str(date.today())
-    global g_api_key, g_CSE_ID,g_searchType
+    global g_api_key, g_CSE_ID, g_searchType
     num_results = 10
     start = num_results * (int(paper_num) - 1) + 1
     try:
@@ -26,7 +27,7 @@ def search_web(keywords, paper_num=1):
                 "num": num_results,
                 "q": keywords if isinstance(keywords, str) else " ".join(keywords),
                 "start": start,
-                "searchType": g_searchType
+                "searchType": g_searchType,
             }
         else:
             params = {
@@ -35,7 +36,7 @@ def search_web(keywords, paper_num=1):
                 "num": num_results,
                 "q": keywords if isinstance(keywords, str) else " ".join(keywords),
                 "start": start,
-            }  
+            }
 
         response = requests.get(base_url, params=params, timeout=10)
         # 打印HTTP状态码和响应内容以供调试
@@ -74,7 +75,7 @@ class google_tool:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "searchType":(["web","image"],{"default": "web"}),
+                "searchType": (["web", "image"], {"default": "web"}),
             },
             "optional": {
                 "google_api_key": ("STRING", {}),
@@ -91,10 +92,10 @@ class google_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def web(self,searchType="web",google_api_key=None, google_CSE_ID=None, is_enable=True):
+    def web(self, searchType="web", google_api_key=None, google_CSE_ID=None, is_enable=True):
         if is_enable == False:
             return (None,)
-        global g_api_key, g_CSE_ID,g_searchType
+        global g_api_key, g_CSE_ID, g_searchType
         g_searchType = searchType
         if google_api_key is not None and google_api_key != "":
             g_api_key = google_api_key
@@ -128,14 +129,15 @@ class google_tool:
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
 
+
 class google_loader:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "searchType":(["web","image"],{"default": "web"}),
-                "keywords":("STRING", {}),
+                "searchType": (["web", "image"], {"default": "web"}),
+                "keywords": ("STRING", {}),
                 "paper_num": ("INT", {"default": "1"}),
             },
             "optional": {
@@ -153,10 +155,10 @@ class google_loader:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def web(self,keywords, paper_num=1,searchType="web",google_api_key=None, google_CSE_ID=None, is_enable=True):
+    def web(self, keywords, paper_num=1, searchType="web", google_api_key=None, google_CSE_ID=None, is_enable=True):
         if is_enable == False:
             return (None,)
-        global g_api_key, g_CSE_ID,g_searchType
+        global g_api_key, g_CSE_ID, g_searchType
         g_searchType = searchType
         if google_api_key is not None and google_api_key != "":
             g_api_key = google_api_key
@@ -166,17 +168,18 @@ class google_loader:
             g_CSE_ID = google_CSE_ID
         else:
             g_CSE_ID = api_keys.get("CSE_ID")
-        out=search_web(keywords, paper_num)
+        out = search_web(keywords, paper_num)
         return (out,)
 
 
 api_keys = load_api_keys(config_path)
 b_api_key = api_keys.get("bing_api_key")
-b_searchType= "web"
+b_searchType = "web"
+
 
 def search_web_bing(keywords, paper_num):
     today = str(date.today())
-    global b_api_key,b_searchType
+    global b_api_key, b_searchType
     num_results = 10
     start = num_results * (int(paper_num) - 1) + 1
     try:
@@ -233,7 +236,7 @@ class bing_tool:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "searchType":(["web", "image", "video", "news"], {"default": "web"}),
+                "searchType": (["web", "image", "video", "news"], {"default": "web"}),
             },
             "optional": {
                 "bing_api_key": ("STRING", {}),
@@ -249,10 +252,10 @@ class bing_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def web(self,searchType="web", bing_api_key=None, is_enable=True):
+    def web(self, searchType="web", bing_api_key=None, is_enable=True):
         if is_enable == False:
             return (None,)
-        global b_api_key,b_searchType
+        global b_api_key, b_searchType
         b_searchType = searchType
         if bing_api_key is not None and bing_api_key != "":
             b_api_key = bing_api_key
@@ -282,14 +285,15 @@ class bing_tool:
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
 
+
 class bing_loader:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "searchType":(["web", "image", "video", "news"], {"default": "web"}),
-                "keywords":("STRING", {}),
+                "searchType": (["web", "image", "video", "news"], {"default": "web"}),
+                "keywords": ("STRING", {}),
                 "paper_num": ("INT", {"default": "1"}),
             },
             "optional": {
@@ -306,10 +310,10 @@ class bing_loader:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def web(self,keywords, paper_num=1,searchType="web", bing_api_key=None, is_enable=True):
+    def web(self, keywords, paper_num=1, searchType="web", bing_api_key=None, is_enable=True):
         if is_enable == False:
             return (None,)
-        global b_api_key,b_searchType
+        global b_api_key, b_searchType
         b_searchType = searchType
         if bing_api_key is not None and bing_api_key != "":
             b_api_key = bing_api_key

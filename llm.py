@@ -30,11 +30,23 @@ if torch.cuda.is_available():
 from torchvision.transforms import ToPILImage
 
 from .config import config_key, config_path, current_dir_path, load_api_keys
-from .tools.api_tool import api_tool, use_api_tool,api_function,parameter_function,parameter_combine, parameter_combine_plus,list_append,list_append_plus,list_extend,list_extend_plus
+from .tools.api_tool import (
+    api_function,
+    api_tool,
+    list_append,
+    list_append_plus,
+    list_extend,
+    list_extend_plus,
+    parameter_combine,
+    parameter_combine_plus,
+    parameter_function,
+    use_api_tool,
+)
 from .tools.arxiv import arxiv_tool, get_arxiv
 from .tools.check_web import check_web, check_web_tool
 from .tools.classify_function import classify_function, classify_function_plus
 from .tools.classify_persona import classify_persona, classify_persona_plus
+from .tools.clear_model import clear_model
 from .tools.CosyVoice import CosyVoice
 from .tools.custom_persona import custom_persona
 from .tools.dialog import end_dialog, start_dialog
@@ -96,7 +108,14 @@ from .tools.load_persona import load_persona
 from .tools.logic import get_string, replace_string, string_logic, substring
 from .tools.new_interpreter import new_interpreter, new_interpreter_tool
 from .tools.omost import omost_decode, omost_setting
-from .tools.search_web import bing_tool, google_tool, search_web, search_web_bing,google_loader,bing_loader
+from .tools.search_web import (
+    bing_loader,
+    bing_tool,
+    google_loader,
+    google_tool,
+    search_web,
+    search_web_bing,
+)
 from .tools.show_text import About_us, show_text_party
 from .tools.story import read_story_json, story_json_tool
 from .tools.text_iterator import text_iterator
@@ -107,7 +126,7 @@ from .tools.wechat import send_wechat, work_wechat, work_wechat_tool
 from .tools.whisper import listen_audio, openai_whisper
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import work_flow, workflow_tool, workflow_transfer
-from .tools.clear_model import clear_model
+
 _TOOL_HOOKS = [
     "get_time",
     "get_weather",
@@ -916,6 +935,7 @@ def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="u
 
 class LLM_local_loader:
     original_IS_CHANGED = None
+
     def __init__(self):
         self.id = hash(str(self))
         self.device = ""
@@ -926,6 +946,7 @@ class LLM_local_loader:
         self.model = ""
         self.tokenizer = ""
         self.is_locked = False
+
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -961,7 +982,7 @@ class LLM_local_loader:
                         "default": "float32",
                     },
                 ),
-                "is_locked": ("BOOLEAN", {"default":True}),
+                "is_locked": ("BOOLEAN", {"default": True}),
             }
         }
 
@@ -980,7 +1001,7 @@ class LLM_local_loader:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def chatbot(self, model_name, model_type, model_path, tokenizer_path, device, dtype,is_locked=False):
+    def chatbot(self, model_name, model_type, model_path, tokenizer_path, device, dtype, is_locked=False):
         self.is_locked = is_locked
         if LLM_local_loader.original_IS_CHANGED is None:
             # 保存原始的IS_CHANGED方法的引用
@@ -1140,11 +1161,13 @@ class LLM_local_loader:
             self.model,
             self.tokenizer,
         )
+
     @classmethod
     def IS_CHANGED(s):
         # 生成当前时间的哈希值
         hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
         return hash_value
+
 
 class LLM_local:
     original_IS_CHANGED = None
@@ -1763,18 +1786,18 @@ NODE_CLASS_MAPPINGS = {
     "load_excel": load_excel,
     "text_iterator": text_iterator,
     "image_iterator": image_iterator,
-    "google_loader":google_loader,
-    "bing_loader":bing_loader,
-    "api_function":api_function,
-    "parameter_function":parameter_function,
+    "google_loader": google_loader,
+    "bing_loader": bing_loader,
+    "api_function": api_function,
+    "parameter_function": parameter_function,
     "get_string": get_string,
-    "parameter_combine":parameter_combine,
-    "parameter_combine_plus":parameter_combine_plus,
-    "list_append":list_append,
-    "list_append_plus":list_append_plus,
-    "list_extend":list_extend,
-    "list_extend_plus":list_extend_plus,
-    "clear_model":clear_model,
+    "parameter_combine": parameter_combine,
+    "parameter_combine_plus": parameter_combine_plus,
+    "list_append": list_append,
+    "list_append_plus": list_append_plus,
+    "list_extend": list_extend,
+    "list_extend_plus": list_extend_plus,
+    "clear_model": clear_model,
 }
 
 
@@ -1854,18 +1877,18 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "load_excel": "Excel迭代器(Excel_iterator)",
     "text_iterator": "文本迭代器(text_iterator)",
     "image_iterator": "图片迭代器(image_iterator)",
-    "google_loader":"Google搜索加载器(Google_image_loader)",
-    "bing_loader":"Bing搜索加载器(Bing_image_loader)",
-    "api_function":" API函数(api_function)",
-    "parameter_function":"参数字典函数(parameter_function)",
+    "google_loader": "Google搜索加载器(Google_image_loader)",
+    "bing_loader": "Bing搜索加载器(Bing_image_loader)",
+    "api_function": " API函数(api_function)",
+    "parameter_function": "参数字典函数(parameter_function)",
     "get_string": "获取字符串(get_string)",
-    "parameter_combine":"参数字典组合(parameter_combine)",
-    "parameter_combine_plus":"超大参数字典组合(parameter_combine_plus)",
-    "list_append":"列表追加(list_append)",
-    "list_append_plus":"超大列表追加(list_append_plus)",
-    "list_extend":"列表扩展(list_extend)",
-    "list_extend_plus":"超大列表扩展(list_extend_plus)",
-    "clear_model":"清空模型(clear_model)",
+    "parameter_combine": "参数字典组合(parameter_combine)",
+    "parameter_combine_plus": "超大参数字典组合(parameter_combine_plus)",
+    "list_append": "列表追加(list_append)",
+    "list_append_plus": "超大列表追加(list_append_plus)",
+    "list_extend": "列表扩展(list_extend)",
+    "list_extend_plus": "超大列表扩展(list_extend_plus)",
+    "clear_model": "清空模型(clear_model)",
 }
 
 

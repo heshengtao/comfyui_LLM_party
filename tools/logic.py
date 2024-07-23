@@ -103,8 +103,14 @@ class substring:
             },
         }
 
-    RETURN_TYPES = ("STRING","STRING",)
-    RETURN_NAMES = ("substring","remaining_string",)
+    RETURN_TYPES = (
+        "STRING",
+        "STRING",
+    )
+    RETURN_NAMES = (
+        "substring",
+        "remaining_string",
+    )
 
     FUNCTION = "substr"
 
@@ -119,16 +125,18 @@ class substring:
         elif start_string == "":
             end_index = input_string.find(end_string)
             out = input_string[:end_index]
-            remaining_string = input_string[end_index + len(end_string):]
+            remaining_string = input_string[end_index + len(end_string) :]
         elif end_string == "":
             start_index = input_string.find(start_string) + len(start_string)
             out = input_string[start_index:]
-            remaining_string = input_string[:start_index - len(start_string)]
+            remaining_string = input_string[: start_index - len(start_string)]
         else:
             start_index = input_string.find(start_string) + len(start_string)
             end_index = input_string.find(end_string, start_index)
             out = input_string[start_index:end_index]
-            remaining_string = input_string[:start_index - len(start_string)] + input_string[end_index + len(end_string):]
+            remaining_string = (
+                input_string[: start_index - len(start_string)] + input_string[end_index + len(end_string) :]
+            )
 
         out = out.strip()
         remaining_string = remaining_string.strip()
