@@ -28,7 +28,6 @@ class ebd_tool:
             "required": {
                 "path": ("STRING", {"default": None}),
                 "is_enable": (["enable", "disable"], {"default": "enable"}),
-                "file_content": ("STRING", {"forceInput": True}),
                 "k": ("INT", {"default": 5}),
                 "device": (
                     ["auto", "cuda", "mps", "cpu"],
@@ -37,7 +36,10 @@ class ebd_tool:
                 "chunk_size": ("INT", {"default": 200}),
                 "chunk_overlap": ("INT", {"default": 50}),
             },
-            "optional": {},
+            "optional": {
+                "file_content": ("STRING", {"forceInput": True}),
+                "base_path": ("STRING", {"default": ""}),
+            },
         }
 
     RETURN_TYPES = ("STRING",)
@@ -49,7 +51,7 @@ class ebd_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, path, file_content, k, chunk_size, chunk_overlap, device, is_enable="enable"):
+    def file(self, path, k, chunk_size, chunk_overlap, device, file_content="", is_enable="enable",base_path=""):
         if is_enable == "disable":
             return (None,)
         global files_load, bge_embeddings, c_size, c_overlap, knowledge_base, k_setting
@@ -65,13 +67,15 @@ class ebd_tool:
             bge_embeddings = HuggingFaceBgeEmbeddings(
                 model_name=path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
             )
-        if knowledge_base == "":
-            text_splitter = RecursiveCharacterTextSplitter(
-                chunk_size=c_size,
-                chunk_overlap=c_overlap,
-            )
-            chunks = text_splitter.split_text(files_load)
-            knowledge_base = FAISS.from_texts(chunks, bge_embeddings)
+        if base_path != "":
+            knowledge_base = FAISS.load_local(base_path, bge_embeddings, allow_dangerous_deserialization=True)
+        elif knowledge_base == "":
+                text_splitter = RecursiveCharacterTextSplitter(
+                    chunk_size=c_size,
+                    chunk_overlap=c_overlap,
+                )
+                chunks = text_splitter.split_text(files_load)
+                knowledge_base = FAISS.from_texts(chunks, bge_embeddings)
         output = [
             {
                 "type": "function",
@@ -104,7 +108,6 @@ class load_embeddings:
                 "path": ("STRING", {"default": None}),
                 "question": ("STRING", {"default": "question"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "file_content": ("STRING", {"forceInput": True}),
                 "device": (
                     ["auto", "cuda", "mps", "cpu"],
                     {"default": ("auto")},
@@ -113,7 +116,10 @@ class load_embeddings:
                 "chunk_size": ("INT", {"default": 200}),
                 "chunk_overlap": ("INT", {"default": 50}),
             },
-            "optional": {},
+            "optional": {
+                "file_content": ("STRING", {"forceInput": True}),
+                "base_path": ("STRING", {"default": ""}),
+            },
         }
 
     RETURN_TYPES = ("STRING",)
@@ -125,7 +131,7 @@ class load_embeddings:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, path, question, file_content, k, chunk_size, chunk_overlap, device, is_enable=True):
+    def file(self, path, question, k, chunk_size, chunk_overlap, device, file_content="", is_enable=True,base_path=""):
         if is_enable == False:
             return (None,)
         if device == "auto":
@@ -138,12 +144,15 @@ class load_embeddings:
                 model_name=path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
             )
             self.embeddings_path = path
-        text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=chunk_size,
-            chunk_overlap=chunk_overlap,
-        )
-        chunks = text_splitter.split_text(file_content)
-        base = FAISS.from_texts(chunks, self.bge_embeddings)
+        if base_path != "":
+            base = FAISS.load_local(base_path, self.bge_embeddings, allow_dangerous_deserialization=True)
+        else:
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=chunk_size,
+                chunk_overlap=chunk_overlap,
+            )
+            chunks = text_splitter.split_text(file_content)
+            base = FAISS.from_texts(chunks, self.bge_embeddings)
         docs = base.similarity_search(question, k=k)
         combined_content = "".join(doc.page_content + "\n\n" for doc in docs)
         output = "文件中的相关信息如下：\n" + combined_content
