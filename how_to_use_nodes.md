@@ -13,7 +13,7 @@
 8. is_locked can lock the results of the previous round of conversation, allowing the large model to directly return the answer from the previous round of conversation.
 9. main_brain determines whether the large model is the model that interfaces with the user. If disabled, the LLM node can serve as a tool for another LLM node.
 10. LLM is compatible with GPT-4’s visual features. The imgbb_api_key can be entered with imgbb’s API key. After filling it in, your image will be input into GPT in URL format. If not filled, it will be input in the form of image encoding.
-11. `conversation_rounds` determines the number of conversation rounds for the LLM. When the number of rounds is exceeded, only the most recent rounds will be read.
+11. `conversation_rounds` determines the number of remembered conversation rounds for the LLM. When the number of rounds is exceeded, only the most recent rounds will be read.
 12. `historical_record` can load previous conversation records into the LLM to continue the last chat.
 13. `assistant_response` is the text output of the LLM.
 14. `history` is the conversation record of the LLM.
