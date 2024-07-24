@@ -1,6 +1,6 @@
 {
   "last_node_id": 21,
-  "last_link_id": 38,
+  "last_link_id": 39,
   "nodes": [
     {
       "id": 7,
@@ -38,7 +38,7 @@
         {
           "name": "tool3",
           "type": "STRING",
-          "link": 38,
+          "link": 39,
           "widget": {
             "name": "tool3"
           },
@@ -108,7 +108,7 @@
       },
       "widgets_values": [
         "",
-        "当前北京时间为 2024 年 5 月 14 日 17 时 46 分 59 秒，明天北京的天气预报如下：\n- 白天天气：阴，气温 31°C，风向北风，风力等级4\n- 夜间天气：多云，气温 15°C，风向北风，风力等级4\n\n如有其他问题，欢迎继续提问。"
+        "Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-XXXXX. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}"
       ],
       "color": "#233",
       "bgcolor": "#355"
@@ -297,169 +297,16 @@
       "bgcolor": "#335"
     },
     {
-      "id": 19,
-      "type": "LLM_api_loader",
-      "pos": [
-        482,
-        36
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            32,
-            33,
-            36
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "gpt-3.5-turbo-1106",
-        "https://api.openai.com/v1",
-        "sk-XXXXX"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 21,
-      "type": "LLM",
-      "pos": [
-        854,
-        777
-      ],
-      "size": [
-        404.30642196468307,
-        454.80160120067467
-      ],
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 36,
-          "label": "model"
-        },
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": null,
-          "label": "images"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "system_prompt_input"
-          }
-        },
-        {
-          "name": "user_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "user_prompt_input"
-          }
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": 37,
-          "widget": {
-            "name": "tools"
-          }
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            38
-          ],
-          "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": null,
-          "shape": 3,
-          "label": "image"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你可以查天气",
-        "",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        1920,
-        "",
-        "",
-        "",
-        "",
-        "",
-        100,
-        ""
-      ]
-    },
-    {
       "id": 20,
       "type": "LLM",
       "pos": [
         851,
         229
       ],
-      "size": [
-        398.63979598812057,
-        464.13494470653393
-      ],
+      "size": {
+        "0": 398.6398010253906,
+        "1": 464.13494873046875
+      },
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -563,6 +410,160 @@
         100,
         ""
       ]
+    },
+    {
+      "id": 19,
+      "type": "LLM_api_loader",
+      "pos": [
+        482,
+        36
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            32,
+            33,
+            36
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "",
+        ""
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 21,
+      "type": "LLM",
+      "pos": [
+        854,
+        777
+      ],
+      "size": {
+        "0": 404.3064270019531,
+        "1": 454.8016052246094
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 36,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            39
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 2
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你可以查天气",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
     }
   ],
   "links": [
@@ -631,9 +632,9 @@
       "STRING"
     ],
     [
-      38,
+      39,
       21,
-      0,
+      2,
       7,
       2,
       "STRING"
@@ -643,10 +644,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.6830134553650705,
+      "scale": 0.7513148009015777,
       "offset": {
-        "0": -344.1630668255228,
-        "1": 90.44825983448186
+        "0": -317.11102851431036,
+        "1": -193.8423627779344
       }
     }
   },
