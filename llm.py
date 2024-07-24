@@ -326,7 +326,7 @@ class Chat:
         self.apikey = apikey
         self.baseurl = baseurl
 
-    def send(self, user_prompt, temperature, max_length, history, tools=None):
+    def send(self, user_prompt, temperature, max_length, history, tools=None,is_tools_in_sys_prompt="disable"):
         try:
             openai.api_key = self.apikey
             openai.base_url = self.baseurl
@@ -430,6 +430,14 @@ class Chat:
                     )
                 response_content = response.choices[0].message.content
                 print(response)
+            elif is_tools_in_sys_prompt =="enable":
+                response = openai.chat.completions.create(
+                    model=self.model_name,
+                    messages=history,
+                    temperature=temperature,
+                    max_tokens=max_length,
+                )
+                response_content = response.choices[0].message.content
                 # 正则表达式匹配
                 pattern = r'\{\s*"tool":\s*"(.*?)",\s*"parameters":\s*\{(.*?)\}\s*\}'
                 while re.search(pattern, response_content, re.DOTALL) != None:
@@ -748,6 +756,7 @@ class LLM:
                     GPT_INSTRUCTION = ""
                     if tools is not None:
                         tools_dis = json.loads(tools)
+                        tools=None
                         for tool_dis in tools_dis:
                             tools_list.append(tool_dis["function"])
                         tools_instructions = ""
@@ -858,7 +867,7 @@ class LLM:
                         ]
                         user_prompt = img_json
 
-                response, history = model.send(user_prompt, temperature, max_length, history, tools)
+                response, history = model.send(user_prompt, temperature, max_length, history, tools,is_tools_in_sys_prompt)
                 print(response)
                 # 修改prompt.json文件
                 history_get = [history[0]]
