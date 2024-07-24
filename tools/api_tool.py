@@ -493,3 +493,28 @@ class list_extend_plus:
             lists.extend(list10)
 
         return (lists,)
+
+
+class json2text:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "JSON": (any_type, {}),
+            },
+            "optional": {},
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("text",)
+
+    FUNCTION = "parameter"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/函数（function）"
+
+    def parameter(self,JSON=""):
+        # 把 json 转换成 text
+        out = json.dumps(JSON, ensure_ascii=False, indent=4)
+        return (out,)

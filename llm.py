@@ -40,6 +40,7 @@ from .tools.api_tool import (
     parameter_combine,
     parameter_combine_plus,
     parameter_function,
+    json2text,
     use_api_tool,
 )
 from .tools.arxiv import arxiv_tool, get_arxiv
@@ -1800,6 +1801,7 @@ NODE_CLASS_MAPPINGS = {
     "clear_model": clear_model,
     "save_ebd_database": save_ebd_database,
     "load_openai_ebd":load_openai_ebd,
+    "json2text":json2text,
 }
 
 
@@ -1892,7 +1894,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "list_extend_plus": "超大列表扩展(list_extend_plus)",
     "clear_model": "清空模型(clear_model)",
     "save_ebd_database": " 保存向量数据库(save_ebd_database)",
-    "load_openai_ebd":"加载openai词嵌入模型(load_openai_ebd)"
+    "load_openai_ebd":"加载openai词嵌入模型(load_openai_ebd)",
+    "json2text":"JSON转文本(json2text)",
 }
 
 
