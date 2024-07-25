@@ -13,6 +13,7 @@ import torch
 from requests import get
 from server import PromptServer
 
+
 def latest_lamacpp():
     try:
         response = get("https://api.github.com/repos/abetlen/llama-cpp-python/releases/latest")
@@ -67,7 +68,8 @@ def install_llama(system_info):
 
         # 执行安装命令
         install_package("llama-cpp-python", custom_command=custom_command)
-        
+
+
 def get_comfy_dir(subpath=None, mkdir=False):
     dir = os.path.dirname(inspect.getfile(PromptServer))
     if subpath is not None:
@@ -78,6 +80,7 @@ def get_comfy_dir(subpath=None, mkdir=False):
     if mkdir and not os.path.exists(dir):
         os.makedirs(dir)
     return dir
+
 
 def copy_js_files():
     # 设置当前文件夹路径和目标文件夹路径
