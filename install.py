@@ -82,7 +82,6 @@ def get_comfy_dir(subpath=None, mkdir=False):
 def copy_js_files():
     # 设置当前文件夹路径和目标文件夹路径
     current_folder = os.path.dirname(os.path.abspath(__file__))
-    print(current_folder)
     target_folder = get_comfy_dir("web/extensions/party")
 
     # 确保目标文件夹存在
