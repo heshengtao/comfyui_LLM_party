@@ -1,3 +1,5 @@
+import datetime
+import hashlib
 import json
 import os
 import time
@@ -119,11 +121,15 @@ class FeishuGetHistory:
             )
 
         return (
-            json.dumps(response.json(),indent=4,ensure_ascii=False),
+            response.json()["data"]["items"][0]["body"]["content"],
             response.text,
             show_help,
         )
-
+    @classmethod
+    def IS_CHANGED(s):
+        # 生成当前时间的哈希值
+        hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+        return hash_value
 
 NODE_CLASS_MAPPINGS = {
     "FeishuGetHistory": FeishuGetHistory,

@@ -42,7 +42,7 @@ class FeishuSendMsg:
 
     RETURN_TYPES = ("STRING", "STRING", "STRING")
     RETURN_NAMES = ("file_key", "msg_id", "show_help")
-
+    OUTPUT_NODE = True
     FUNCTION = "send_msg"
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
