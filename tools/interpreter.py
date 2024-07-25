@@ -80,7 +80,7 @@ class interpreter_function:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "code_str": ("STRING", {"default": "print('Hello, party!')"}),
+                "code_str": ("STRING", {"multiline": True,"default": "print('Hello, party!')"}),
             }
         }
 
