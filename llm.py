@@ -65,7 +65,7 @@ from .tools.get_weather import (
 )
 from .tools.git_tool import github_tool, search_github_repositories
 from .tools.image import CLIPTextEncode_party, KSampler_party, VAEDecode_party
-from .tools.interpreter import interpreter, interpreter_tool
+from .tools.interpreter import interpreter, interpreter_tool,interpreter_function
 from .tools.keyword import keyword_tool, load_keyword, search_keyword
 from .tools.KG import (
     Delete_entities,
@@ -1811,6 +1811,7 @@ NODE_CLASS_MAPPINGS = {
     "save_ebd_database": save_ebd_database,
     "load_openai_ebd":load_openai_ebd,
     "json2text":json2text,
+    "interpreter_function":interpreter_function,
 }
 
 
@@ -1905,6 +1906,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "save_ebd_database": " 保存向量数据库(save_ebd_database)",
     "load_openai_ebd":"加载openai词嵌入模型(load_openai_ebd)",
     "json2text":"JSON转文本(json2text)",
+    "interpreter_function":"解释器函数(interpreter_function)",
 }
 
 

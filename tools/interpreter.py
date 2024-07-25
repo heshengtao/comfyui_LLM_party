@@ -72,3 +72,29 @@ class interpreter_tool:
         ]
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
+
+
+class interpreter_function:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "code_str": ("STRING", {"default": "print('Hello, party!')"}),
+            }
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("code_result",)
+
+    FUNCTION = "code"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/函数（function）"
+
+    def code(self, is_enable=True,code_str="print('Hello, party!')"):
+        if is_enable == False:
+            return (None,)
+        out = interpreter(code_str)
+        return (out,)
