@@ -29,7 +29,7 @@ class FeishuGetHistory:
                 "app_id": ("STRING", {}),
                 "app_secret": ("STRING", {}),
                 "chat_id": ("STRING", {}),  # for group chat
-                "mode": (["auto", "fixed_time_diff"], {"default": "fixed_time_diff"}),
+                "mode": (["auto", "fixed_time_diff"], {"default": "auto"}),
                 "time_diff_sec": ("INT", {"default": 60}),
             }
         }
@@ -41,7 +41,7 @@ class FeishuGetHistory:
     )
     RETURN_NAMES = (
         "response",
-        "last_ts",
+        "log_info",
         "show_help",
     )
 
@@ -53,7 +53,6 @@ class FeishuGetHistory:
         self, app_id=None, app_secret=None, chat_type=None, chat_id=None, mode="auto", time_diff_sec=60  # oc_xxx
     ):
         show_help = "placeholder for help text"
-        print(f"timestamp initialized to {self.last_ts}")
         if app_id is not None:
             self.app_id = app_id
         if app_secret is not None:
@@ -73,24 +72,45 @@ class FeishuGetHistory:
         }
 
         end_time = int(time.time())
-        if mode == "auto":
-            if end_time - self.last_ts > 60:
-                start_time = end_time - 60
-            else:
-                start_time = self.last_ts
-        else:
+        if mode == "fixed_time_diff":
             start_time = end_time - time_diff_sec
-        params = {
+            params = {
             "receive_id_type": self.receive_id_type,
             "container_id_type": "chat",
             "container_id": self.receive_id,
             "sort_type": "ByCreateTimeAsc",
             "start_time": start_time,
             "end_time": end_time,
-            "page_size": 10,
-        }
-
-        response = requests.get(url=self.url_msg, headers=headers, params=params)
+            "page_size": 50,
+            }
+            response = requests.get(url=self.url_msg, headers=headers, params=params)
+        
+        elif mode == "auto":
+            start_time = int(time.time())
+            end_time = int(time.time())
+            while True:
+                params = {
+                "receive_id_type": self.receive_id_type,
+                "container_id_type": "chat",
+                "container_id": self.receive_id,
+                "sort_type": "ByCreateTimeAsc",
+                "start_time": start_time,
+                "end_time": end_time,
+                "page_size": 50,
+                }
+                response = requests.get(url=self.url_msg, headers=headers, params=params)
+                items = response.json().get("data").get("items")
+                if items:
+                    # while response.json().get("data").get("has_more") == True:
+                    #     params["page_token"] = response.json().get("data").get("page_token")
+                    #     response = requests.get(url=self.url_msg, headers=headers, params=params)
+                    break
+                elif response.status_code != 200:
+                    break
+                else:
+                    start_time = end_time
+                    end_time = int(time.time())
+        
 
         if response.status_code != 200:
             print(f"Error: {response.text}")
@@ -99,15 +119,9 @@ class FeishuGetHistory:
                 show_help,
             )
 
-        while response.json().get("data").get("has_more") == True:
-            params["page_token"] = response.json().get("data").get("page_token")
-            response = requests.get(url=self.url_msg, headers=headers, params=params)
-            print(response.json())
-        tmp_last_ts = self.last_ts
-        self.last_ts = end_time
         return (
             json.dumps(response.json()),
-            str(tmp_last_ts),
+            response.text,
             show_help,
         )
 
