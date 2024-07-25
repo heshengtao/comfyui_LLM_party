@@ -103,10 +103,14 @@ class FeishuGetHistory:
                 response = requests.get(url=self.url_msg, headers=headers, params=params)
                 items = response.json().get("data").get("items")
                 if items:
+                    if response.json()["data"]["items"][0]["sender"]["sender_type"]=="user":
+                        break
+                    else:
+                        start_time = end_time
+                        end_time = int(time.time())
                     # while response.json().get("data").get("has_more") == True:
                     #     params["page_token"] = response.json().get("data").get("page_token")
                     #     response = requests.get(url=self.url_msg, headers=headers, params=params)
-                    break
                 elif response.status_code != 200:
                     break
                 else:
