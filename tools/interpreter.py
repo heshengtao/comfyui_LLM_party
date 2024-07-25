@@ -5,7 +5,7 @@ from io import StringIO
 original_stdout = sys.stdout
 
 
-def interpreter(code_str,tool=True):
+def interpreter(code_str, tool=True):
     local_vars = globals().copy()
     try:
         # Redirect stdout to capture console output
@@ -28,7 +28,7 @@ def interpreter(code_str,tool=True):
             for key, value in local_vars.items()
             if key not in globals() or (key in globals() and globals()[key] != value)
         }
-        if tool==True:
+        if tool == True:
             return "代码执行成功，输出结果为：" + console_output + str(defined_variables)
         else:
             return console_output + str(defined_variables)
@@ -84,7 +84,7 @@ class interpreter_function:
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "include_text": ("BOOLEAN", {"default": False}),
-                "code_str": ("STRING", {"multiline": True,"default": "print('Hello, party!')"}),
+                "code_str": ("STRING", {"multiline": True, "default": "print('Hello, party!')"}),
             }
         }
 
@@ -97,7 +97,7 @@ class interpreter_function:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def code(self, is_enable=True,code_str="print('Hello, party!')",include_text=False):
+    def code(self, is_enable=True, code_str="print('Hello, party!')", include_text=False):
         if is_enable == False:
             return (None,)
         out = interpreter(code_str, tool=include_text)

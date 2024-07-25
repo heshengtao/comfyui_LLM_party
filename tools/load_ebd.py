@@ -1,12 +1,14 @@
 import json
 import os
+
 import openai
-from openai import OpenAI
 import requests
 import torch
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from openai import OpenAI
+
 from ..config import config_path, current_dir_path, load_api_keys
 
 bge_embeddings = ""
@@ -217,13 +219,14 @@ class save_ebd_database:
         base.save_local(save_path)
         return ()
 
+
 class load_openai_ebd:
 
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name":("STRING", {"default": "text-embedding-3-small"}),
+                "model_name": ("STRING", {"default": "text-embedding-3-small"}),
                 "question": ("STRING", {"default": "question"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "k": ("INT", {"default": 5}),
@@ -257,10 +260,22 @@ class load_openai_ebd:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, model_name, question, k, chunk_size, chunk_overlap, file_content="", is_enable=True, base_path="", base_url=None, api_key=None):
+    def file(
+        self,
+        model_name,
+        question,
+        k,
+        chunk_size,
+        chunk_overlap,
+        file_content="",
+        is_enable=True,
+        base_path="",
+        base_url=None,
+        api_key=None,
+    ):
         if is_enable == False:
             return (None,)
-        
+
         api_keys = load_api_keys(config_path)
         if api_key != "":
             openai.api_key = api_key
@@ -283,25 +298,30 @@ class load_openai_ebd:
         client = OpenAI(api_key=openai.api_key, base_url=openai.base_url)
 
         # 将文件内容按段落分割
-        paragraphs = file_content.split('\n')
-        
+        paragraphs = file_content.split("\n")
+
         # 根据chunk_size和chunk_overlap处理段落
         chunks = []
         for i in range(0, len(paragraphs), chunk_size - chunk_overlap):
-            chunk = "\n".join(paragraphs[i:i + chunk_size])
+            chunk = "\n".join(paragraphs[i : i + chunk_size])
             chunks.append(chunk)
-        
-        paragraph_embeddings = [client.embeddings.create(model=model_name, input=[chunk]).data[0].embedding for chunk in chunks]
-        
+
+        paragraph_embeddings = [
+            client.embeddings.create(model=model_name, input=[chunk]).data[0].embedding for chunk in chunks
+        ]
+
         # 获取问题的嵌入表示
         question_embedding = client.embeddings.create(model=model_name, input=[question]).data[0].embedding
-        
+
         # 计算每个段落与问题的相似度
-        similarities = [torch.cosine_similarity(torch.tensor(question_embedding), torch.tensor(pe), dim=0).item() for pe in paragraph_embeddings]
-        
+        similarities = [
+            torch.cosine_similarity(torch.tensor(question_embedding), torch.tensor(pe), dim=0).item()
+            for pe in paragraph_embeddings
+        ]
+
         # 获取相似度最高的 k 个段落
         most_relevant_paragraphs = sorted(zip(similarities, chunks), reverse=True)[:k]
         combined_content = "\n".join([p for _, p in most_relevant_paragraphs])
-        
+
         output = "文件中的相关信息如下：\n" + combined_content
         return (output,)

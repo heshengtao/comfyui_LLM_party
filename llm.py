@@ -33,6 +33,7 @@ from .config import config_key, config_path, current_dir_path, load_api_keys
 from .tools.api_tool import (
     api_function,
     api_tool,
+    json2text,
     list_append,
     list_append_plus,
     list_extend,
@@ -40,7 +41,6 @@ from .tools.api_tool import (
     parameter_combine,
     parameter_combine_plus,
     parameter_function,
-    json2text,
     use_api_tool,
 )
 from .tools.arxiv import arxiv_tool, get_arxiv
@@ -65,7 +65,7 @@ from .tools.get_weather import (
 )
 from .tools.git_tool import github_tool, search_github_repositories
 from .tools.image import CLIPTextEncode_party, KSampler_party, VAEDecode_party
-from .tools.interpreter import interpreter, interpreter_tool,interpreter_function
+from .tools.interpreter import interpreter, interpreter_function, interpreter_tool
 from .tools.keyword import keyword_tool, load_keyword, search_keyword
 from .tools.KG import (
     Delete_entities,
@@ -102,7 +102,13 @@ from .tools.KG_neo4j import (
     New_entities_neo4j,
     New_relationships_neo4j,
 )
-from .tools.load_ebd import data_base, ebd_tool, load_embeddings, save_ebd_database,load_openai_ebd
+from .tools.load_ebd import (
+    data_base,
+    ebd_tool,
+    load_embeddings,
+    load_openai_ebd,
+    save_ebd_database,
+)
 from .tools.load_file import load_file, load_file_folder, load_url, start_workflow
 from .tools.load_model_name import load_name
 from .tools.load_persona import load_persona
@@ -326,7 +332,7 @@ class Chat:
         self.apikey = apikey
         self.baseurl = baseurl
 
-    def send(self, user_prompt, temperature, max_length, history, tools=None,is_tools_in_sys_prompt="disable"):
+    def send(self, user_prompt, temperature, max_length, history, tools=None, is_tools_in_sys_prompt="disable"):
         try:
             openai.api_key = self.apikey
             openai.base_url = self.baseurl
@@ -430,7 +436,7 @@ class Chat:
                     )
                 response_content = response.choices[0].message.content
                 print(response)
-            elif is_tools_in_sys_prompt =="enable":
+            elif is_tools_in_sys_prompt == "enable":
                 response = openai.chat.completions.create(
                     model=self.model_name,
                     messages=history,
@@ -756,7 +762,7 @@ class LLM:
                     GPT_INSTRUCTION = ""
                     if tools is not None:
                         tools_dis = json.loads(tools)
-                        tools=None
+                        tools = None
                         for tool_dis in tools_dis:
                             tools_list.append(tool_dis["function"])
                         tools_instructions = ""
@@ -867,7 +873,9 @@ class LLM:
                         ]
                         user_prompt = img_json
 
-                response, history = model.send(user_prompt, temperature, max_length, history, tools,is_tools_in_sys_prompt)
+                response, history = model.send(
+                    user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt
+                )
                 print(response)
                 # 修改prompt.json文件
                 history_get = [history[0]]
@@ -1809,9 +1817,9 @@ NODE_CLASS_MAPPINGS = {
     "list_extend_plus": list_extend_plus,
     "clear_model": clear_model,
     "save_ebd_database": save_ebd_database,
-    "load_openai_ebd":load_openai_ebd,
-    "json2text":json2text,
-    "interpreter_function":interpreter_function,
+    "load_openai_ebd": load_openai_ebd,
+    "json2text": json2text,
+    "interpreter_function": interpreter_function,
 }
 
 
@@ -1904,9 +1912,9 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "list_extend_plus": "超大列表扩展(list_extend_plus)",
     "clear_model": "清空模型(clear_model)",
     "save_ebd_database": " 保存向量数据库(save_ebd_database)",
-    "load_openai_ebd":"加载openai词嵌入模型(load_openai_ebd)",
-    "json2text":"JSON转文本(json2text)",
-    "interpreter_function":"解释器函数(interpreter_function)",
+    "load_openai_ebd": "加载openai词嵌入模型(load_openai_ebd)",
+    "json2text": "JSON转文本(json2text)",
+    "interpreter_function": "解释器函数(interpreter_function)",
 }
 
 

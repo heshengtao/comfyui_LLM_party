@@ -75,21 +75,6 @@ class FeishuGetHistory:
         if mode == "fixed_time_diff":
             start_time = end_time - time_diff_sec
             params = {
-            "receive_id_type": self.receive_id_type,
-            "container_id_type": "chat",
-            "container_id": self.receive_id,
-            "sort_type": "ByCreateTimeAsc",
-            "start_time": start_time,
-            "end_time": end_time,
-            "page_size": 50,
-            }
-            response = requests.get(url=self.url_msg, headers=headers, params=params)
-        
-        elif mode == "auto":
-            start_time = int(time.time())
-            end_time = int(time.time())
-            while True:
-                params = {
                 "receive_id_type": self.receive_id_type,
                 "container_id_type": "chat",
                 "container_id": self.receive_id,
@@ -97,6 +82,21 @@ class FeishuGetHistory:
                 "start_time": start_time,
                 "end_time": end_time,
                 "page_size": 50,
+            }
+            response = requests.get(url=self.url_msg, headers=headers, params=params)
+
+        elif mode == "auto":
+            start_time = int(time.time())
+            end_time = int(time.time())
+            while True:
+                params = {
+                    "receive_id_type": self.receive_id_type,
+                    "container_id_type": "chat",
+                    "container_id": self.receive_id,
+                    "sort_type": "ByCreateTimeAsc",
+                    "start_time": start_time,
+                    "end_time": end_time,
+                    "page_size": 50,
                 }
                 response = requests.get(url=self.url_msg, headers=headers, params=params)
                 items = response.json().get("data").get("items")
@@ -110,7 +110,6 @@ class FeishuGetHistory:
                 else:
                     start_time = end_time
                     end_time = int(time.time())
-        
 
         if response.status_code != 200:
             print(f"Error: {response.text}")
