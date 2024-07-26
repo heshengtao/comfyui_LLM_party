@@ -100,6 +100,8 @@ class img2path:
     CATEGORY = "大模型派对（llm_party）/绘图（image）"
 
     def save_all(self, images=None, filename_prefix="ComfyUI", prompt=None, extra_pnginfo=None):
+        if images is None or len(images) == 0:
+            return (None,)
         results = list()
         all_results = {}
         if images is not None:

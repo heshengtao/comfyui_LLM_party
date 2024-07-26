@@ -48,6 +48,9 @@ class string_logic:
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
     def str_logic(self, option, stringA=None, stringB=None):
+        if stringA is None or stringA=="":
+            return (None, None, False, True,)
+
         if option == "A contain B":
             out = stringA.find(stringB) >= 0
         elif option == "A not contain B":
