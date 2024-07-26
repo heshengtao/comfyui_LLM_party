@@ -70,50 +70,6 @@
       "bgcolor": "#593930"
     },
     {
-      "id": 11,
-      "type": "show_text_party",
-      "pos": [
-        2242,
-        280
-      ],
-      "size": {
-        "0": 317.6808776855469,
-        "1": 96.57373809814453
-      },
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 29,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        "",
-        "Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-XXXXX. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
       "id": 3,
       "type": "time_tool",
       "pos": [
@@ -278,7 +234,7 @@
       },
       "widgets_values": [
         "你一个强大的人工智能助手。",
-        "你好",
+        "你好，现在几点了",
         0.7,
         "enable",
         "disable",
@@ -295,6 +251,89 @@
       ],
       "color": "#223",
       "bgcolor": "#335"
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        2242,
+        280
+      ],
+      "size": [
+        392.279847158537,
+        318.38313862205075
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 29,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "当前时间是 Asia/Shanghai 时区的 2024 年 7 月 26 日 22:12。"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 19,
+      "type": "LLM_api_loader",
+      "pos": [
+        482,
+        36
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            32,
+            33,
+            36
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "",
+        ""
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
     },
     {
       "id": 20,
@@ -400,7 +439,7 @@
         "enable",
         "disable",
         "disable",
-        "enable",
+        "disable",
         1920,
         "",
         "",
@@ -410,45 +449,6 @@
         100,
         ""
       ]
-    },
-    {
-      "id": 19,
-      "type": "LLM_api_loader",
-      "pos": [
-        482,
-        36
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            32,
-            33,
-            36
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "gpt-3.5-turbo-1106",
-        "",
-        ""
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
     },
     {
       "id": 21,
@@ -554,7 +554,7 @@
         "enable",
         "disable",
         "disable",
-        "enable",
+        "disable",
         1920,
         "",
         "",
@@ -644,10 +644,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.7513148009015777,
+      "scale": 0.6830134553650705,
       "offset": {
-        "0": -317.11102851431036,
-        "1": -193.8423627779344
+        "0": -405.0308050928863,
+        "1": -94.76550026417397
       }
     }
   },
