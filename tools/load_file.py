@@ -158,7 +158,9 @@ class load_url:
                 "url": ("STRING", {"default": "https://example.com"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             },
-            "optional": {},
+            "optional": {
+                "with_jina": ("BOOLEAN", {"default": True}),
+            },
         }
 
     RETURN_TYPES = ("STRING",)
@@ -170,13 +172,14 @@ class load_url:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, url, is_enable=True):
+    def file(self, url,with_jina=True, is_enable=True):
         if is_enable == False:
             return (None,)
         try:
 
             jina = "https://r.jina.ai/"
-            url = jina + url
+            if with_jina:
+                url = jina + url
 
             response = requests.get(url, timeout=10)
             response.raise_for_status()  # 确保请求成功

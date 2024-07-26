@@ -71,7 +71,7 @@ class check_web_tool:
             "optional": {
                 "web_url": ("STRING", {}),
                 "embedding_path": ("STRING", {"default": None}),
-                "jina": ("BOOLEAN", {"default": True}),
+                "with_jina": ("BOOLEAN", {"default": True}),
             },
         }
 
@@ -84,11 +84,11 @@ class check_web_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def read_web(self, chunk_size, chunk_overlap, device,jina=True, is_enable=True, web_url=None, embedding_path=None):
+    def read_web(self, chunk_size, chunk_overlap, device,with_jina=True, is_enable=True, web_url=None, embedding_path=None):
         if is_enable == False:
             return (None,)
         global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base,is_jina
-        is_jina=jina
+        is_jina=with_jina
         c_size = chunk_size
         c_overlap = chunk_overlap
         if device == "auto":
