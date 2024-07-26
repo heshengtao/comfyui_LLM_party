@@ -161,7 +161,24 @@ class FeishuGetHistory:
             flag_text = True
         elif msg_type == "image":
             flag_image = True
-
+        elif msg_type == "post":
+            msg_content=json.loads(msg_content)
+            msg_list=msg_content["content"]
+            msg_content={}
+            for msg in msg_list:
+                if msg[0]["tag"] == "text":
+                    # 添加text元素到msg_content
+                    msg_content["text"] = msg[0]["text"]
+                    flag_text = True
+                    print(msg_content)
+                elif msg[0]["tag"] == "img":
+                    msg_content["image_key"] = msg[0]["image_key"]
+                    flag_image = True
+                    print(msg_content)
+                elif msg[0]["tag"] == "audio":
+                    msg_content["file_key"] = msg[0]["file_key"]
+                    flag_audio = True
+            msg_content= json.dumps(msg_content, ensure_ascii=False)
         return (
             msg_content,
             json.dumps(response.json(), indent=4, ensure_ascii=False),
