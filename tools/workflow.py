@@ -23,7 +23,7 @@ from pygments.lexers import get_lexer_by_name
 
 from ..config import current_dir_path
 
-server_address = "127.0.0.1:8189"
+server_address = "127.0.0.1:8190"
 client_id = str(uuid.uuid4())
 
 
@@ -224,7 +224,7 @@ class workflow_transfer:
         # 获取main.py的绝对路径
         root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "main.py"))
 
-        execute_command_in_new_window(interpreter, root_path, 8189)
+        execute_command_in_new_window(interpreter, root_path, 8190)
 
         output_images, output_text = api(
             file_content,
@@ -338,8 +338,8 @@ def work_flow(
 
     # 构建在新控制台窗口中执行main.py的命令
     # 使用'cmd /c'在新窗口中执行命令，并且'cmd /k'保持窗口打开
-    command = f'cmd /c start cmd /k "{interpreter} {root_path} --port 8189"'
-    check_port_and_execute_bat(8189, command)
+    command = f'cmd /c start cmd /k "{interpreter} {root_path} --port 8190"'
+    check_port_and_execute_bat(8190, command)
     global current_dir_path
     WF_path = os.path.join(current_dir_path, "workflow_api", workflow_name)
     with open(WF_path, "r", encoding="utf-8") as f:

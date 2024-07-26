@@ -183,15 +183,66 @@
 1. Connect the two `any` interfaces to any connection line in the workflow.
 2. The node will exit the model from memory when it is executed.
 
-### chatTTS Text-to-Speech
+### chatTTS Voice Synthesis
+**1. Node Input**
+Input Name   | Description
+-------------|-----
+text         | Text to be converted to speech
+model_path   | Path to the TTS model
+save_path    | Path to save the audio file
+seed         | Seed for fixed voice tone
+temperature  | Effect similar to LLM
+top_P        | Effect similar to LLM
+top_K        | Effect similar to LLM
+enableRefine | Whether to enable optimization
+oral_param   | Parameter to control the degree of orality when optimization is enabled
+laugh_param  | Parameter to control the degree of laughter when optimization is enabled
+break_param  | Parameter to control the length of pauses when optimization is enabled
+is_enable    | Whether to enable this node
+load_mode    | **HF**: Download model from Huggingface<br>**custom**: Call model from model_path<br>**local**: Directly call the model file in the current workspace path (usually the root directory of ComfyUI)
+
+**2. Node Output**
+
+Output Name  | Description
+-------------|-----
+audio        | Path to save the audio file
 
 ### JSON File Parsing
+![alt text](img/json_parser.png)
+1. show_json_file: Read the JSON file and output it as a string
+2. value_by_key: Get the value corresponding to the key in the JSON file by setting the parameter key
 
 ### JSON Value Extraction
+![alt text](img/json_get_value.png)
+Get the value corresponding to the key in the string by setting the parameter key (the string must be in JSON format, otherwise it cannot be parsed)
 
 ### Convert String Paragraph to JSON
+![alt text](img/txt2json.png)
+![alt text](img/txt2json2.png)
+The node will split the string based on the input character sep and convert the text to a JSON formatted string
 
-## Combinations
+### Feishu Bot Send Message & Feishu Bot Read Group History
+![alt text](img/feishuapi.png)
+
+Note: There are two modes for reading history
+    1. auto: Automatically extract messages sent between two runs of this node. If it keeps calling in this mode and the developer backend call passes, it may be because your local time is not synchronized
+    2. fixed_time_diff: Extract messages within the time_diff_sec before the time of running this node
+
+**Prerequisite Work**
+
+1. Create a Feishu Application
+    1.1 Create a self-built application at https://open.feishu.cn/app?lang=zh-CN
+    1.2 Enter the application to get app_id and app_secret
+    1.3 Add application capabilities -> Enable bot application capabilities
+    1.4 Permission management -> Messages and groups -> Select the required permissions to open
+    1.5 Security settings -> Add the IP of the computer running ComfyUI to the whitelist
+    1.6 Publish the bot to make the application effective
+2. Get group or user id
+    2.0 First, add the created bot to the group or private chat
+    2.1 Find the developer documentation for sending messages on the Feishu development platform
+    2.2 Click to get the token on the right
+    2.3 Select receive id type, chat_id corresponds to the group, open_id and user_id correspond to individuals, click to select members, and copy the corresponding id
+3. If you need the bot to send voice messages, you need to install ffmpeg on your computer
 
 ### File Combination, Super Large File Combination Nodes
 1. Used to combine multiple strings into one string.
