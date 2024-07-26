@@ -1,7 +1,9 @@
-import requests
 import json
 import os
+
+import requests
 from pydub import AudioSegment
+
 
 def get_tenant_access_token(token_url, app_id, app_secret):
     token_data = {"app_id": app_id, "app_secret": app_secret}
@@ -12,6 +14,7 @@ def get_tenant_access_token(token_url, app_id, app_secret):
     else:
         print(token_response.text)
         raise Exception("Failed to get tenant_access_token")
+
 
 class FeishuDownloadAudio:
     def __init__(self):
@@ -26,11 +29,14 @@ class FeishuDownloadAudio:
                 "app_secret": ("STRING", {}),
                 "message_id": ("STRING", {}),
                 "file_key": ("STRING", {}),
-                "is_enable": ("BOOLEAN", {"default": True})
+                "is_enable": ("BOOLEAN", {"default": True}),
             }
         }
-    
-    RETURN_TYPES = ("AUDIO", "STRING",)
+
+    RETURN_TYPES = (
+        "AUDIO",
+        "STRING",
+    )
     RETURN_NAMES = ("audio", "show_help")
 
     FUNCTION = "download_audio"
@@ -39,27 +45,26 @@ class FeishuDownloadAudio:
     def download_audio(self, app_id, app_secret, message_id, file_key, is_enable):
         show_help = "This function retrieves a file resource from a Feishu message."
         if not is_enable:
-            return (None, show_help,)
+            return (
+                None,
+                show_help,
+            )
         self.tenant_access_token = get_tenant_access_token(self.tenant_access_token_url, app_id, app_secret)
 
-        headers = {
-            "Authorization": f"Bearer {self.tenant_access_token}",
-            "Content-Type": "application/json"
-        }
+        headers = {"Authorization": f"Bearer {self.tenant_access_token}", "Content-Type": "application/json"}
 
         url = f"{self.url_prefix}{message_id}/resources/{file_key}?type=file"
-        payload = ''
+        payload = ""
         response = requests.request("GET", url, headers=headers, data=payload)
-
 
         if response.status_code == 200:
             file_name = f"downloaded_file.opus"  # 你可能需要一个更好的方式来确定文件扩展名
             file_path = os.path.join(os.getcwd(), file_name)
-            with open(file_path, 'wb') as file:
+            with open(file_path, "wb") as file:
                 file.write(response.content)
             wav_file_name = "converted_file.wav"
             wav_file_path = os.path.join(os.getcwd(), wav_file_name)
-            
+
             # 使用pydub转换音频格式
             audio = AudioSegment.from_file(file_path)
             audio.export(wav_file_path, format="wav")
@@ -70,6 +75,7 @@ class FeishuDownloadAudio:
             print("错误信息:", response.text)
             return (None, show_help)
 
+
 NODE_CLASS_MAPPINGS = {
     "FeishuDownloadAudio": FeishuDownloadAudio,
 }
@@ -79,9 +85,4 @@ NODE_DISPLAY_NAME_MAPPINGS = {
 
 if __name__ == "__main__":
     obj = FeishuDownloadAudio()
-    obj.download_audio(
-        app_id="", 
-        app_secret="", 
-        message_id="",
-        file_key="",
-        is_enable=True)
+    obj.download_audio(app_id="", app_secret="", message_id="", file_key="", is_enable=True)

@@ -122,7 +122,7 @@ class FeishuGetHistory:
                     )
                 items = response.json().get("data").get("items")
                 if items:
-                    if response.json()["data"]["items"][0]["sender"]["sender_type"]=="user":
+                    if response.json()["data"]["items"][0]["sender"]["sender_type"] == "user":
                         break
                     else:
                         start_time = end_time
@@ -155,27 +155,29 @@ class FeishuGetHistory:
         flag_audio = False
         flag_text = False
         flag_image = False
-        if msg_type == 'audio':
+        if msg_type == "audio":
             flag_audio = True
-        elif msg_type == 'text':
+        elif msg_type == "text":
             flag_text = True
-        elif msg_type == 'image':
+        elif msg_type == "image":
             flag_image = True
-        
+
         return (
             msg_content,
-            json.dumps(response.json(),indent=4,ensure_ascii=False),
+            json.dumps(response.json(), indent=4, ensure_ascii=False),
             msg_id,
             flag_text,
             flag_audio,
             flag_image,
             show_help,
         )
+
     @classmethod
     def IS_CHANGED(s):
         # 生成当前时间的哈希值
         hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
         return hash_value
+
 
 NODE_CLASS_MAPPINGS = {
     "FeishuGetHistory": FeishuGetHistory,
