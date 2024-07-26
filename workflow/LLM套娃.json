@@ -1,6 +1,6 @@
 {
-  "last_node_id": 21,
-  "last_link_id": 39,
+  "last_node_id": 22,
+  "last_link_id": 40,
   "nodes": [
     {
       "id": 7,
@@ -100,42 +100,6 @@
       },
       "widgets_values": [
         "Asia/Shanghai",
-        "enable"
-      ],
-      "color": "#323",
-      "bgcolor": "#535"
-    },
-    {
-      "id": 9,
-      "type": "weather_tool",
-      "pos": [
-        480,
-        780
-      ],
-      "size": {
-        "0": 315,
-        "1": 82
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            37
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "weather_tool"
-      },
-      "widgets_values": [
-        "上海市",
         "enable"
       ],
       "color": "#323",
@@ -259,10 +223,10 @@
         2242,
         280
       ],
-      "size": [
-        392.279847158537,
-        318.38313862205075
-      ],
+      "size": {
+        "0": 392.27984619140625,
+        "1": 318.3831481933594
+      },
       "flags": {},
       "order": 7,
       "mode": 0,
@@ -308,7 +272,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 2,
+      "order": 1,
       "mode": 0,
       "outputs": [
         {
@@ -451,6 +415,41 @@
       ]
     },
     {
+      "id": 22,
+      "type": "weekday_tool",
+      "pos": [
+        464,
+        831
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "weekday_tool"
+      },
+      "widgets_values": [
+        "Asia/Shanghai",
+        true
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
       "id": 21,
       "type": "LLM",
       "pos": [
@@ -496,7 +495,7 @@
         {
           "name": "tools",
           "type": "STRING",
-          "link": 37,
+          "link": 40,
           "widget": {
             "name": "tools"
           }
@@ -548,7 +547,7 @@
         "Node name for S&R": "LLM"
       },
       "widgets_values": [
-        "你可以查天气",
+        "你可以查星期",
         "",
         0.7,
         "enable",
@@ -624,19 +623,19 @@
       "CUSTOM"
     ],
     [
-      37,
-      9,
-      0,
-      21,
-      4,
-      "STRING"
-    ],
-    [
       39,
       21,
       2,
       7,
       2,
+      "STRING"
+    ],
+    [
+      40,
+      22,
+      0,
+      21,
+      4,
       "STRING"
     ]
   ],
@@ -644,10 +643,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.6830134553650705,
+      "scale": 0.6830134553650706,
       "offset": {
-        "0": -405.0308050928863,
-        "1": -94.76550026417397
+        "0": -331.60462635120905,
+        "1": -78.95481856767395
       }
     }
   },
