@@ -82,4 +82,3 @@ NODE_CLASS_MAPPINGS = {
 NODE_DISPLAY_NAME_MAPPINGS = {
     "FeishuDownloadAudio": "飞书获下载音频🐶（FeishuDownloadAudio）",
 }
-
