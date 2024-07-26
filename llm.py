@@ -596,6 +596,7 @@ class LLM:
                 "is_locked": (["enable", "disable"], {"default": "disable"}),
                 "main_brain": (["enable", "disable"], {"default": "enable"}),
                 "max_length": ("FLOAT", {"default": 1920, "min": 256, "max": 128000, "step": 128}),
+                "is_enable": ("BOOLEAN", {"default": True}),
             },
             "optional": {
                 "system_prompt_input": ("STRING", {"forceInput": True}),
@@ -652,7 +653,10 @@ class LLM:
         imgbb_api_key=None,
         conversation_rounds=100,
         historical_record="",
+        is_enable=True,
     ):
+        if not is_enable:
+            return (None, None, None, None,)
         self.list = [
             main_brain,
             system_prompt,
