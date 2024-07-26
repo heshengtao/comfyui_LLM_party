@@ -321,3 +321,68 @@ class start_workflow:
             negative_out,
             model_name_out,
         )
+
+
+class load_img_path:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required":{
+                "img_path": ("STRING", {"default": None, "image_upload": True}),
+            },
+        }
+
+    RETURN_TYPES = (
+        "IMAGE",
+    )
+    RETURN_NAMES = (
+        "image",
+    )
+
+    FUNCTION = "load_all"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+    def load_all(
+        self,
+        img_path
+    ):
+        img_out = []
+        if img_path is not None and img_path != "":
+            # 检查img_path是否是一个目录
+            if os.path.isdir(img_path):
+                # 遍历目录中的所有文件
+                for filename in os.listdir(img_path):
+                    # 检查文件是否是图片
+                    if filename.lower().endswith((".png", ".jpg", ".jpeg", ".tiff", ".bmp", ".gif")):
+                        img_full_path = os.path.join(img_path, filename)
+                        img = Image.open(img_full_path)
+                        img = ImageOps.exif_transpose(img)
+                        if img.mode == "I":
+                            img = img.point(lambda i: i * (1 / 256)).convert("L")
+                        image = img.convert("RGB")
+                        image = np.array(image).astype(np.float32) / 255.0
+                        image = torch.from_numpy(image).unsqueeze(0)
+                        img_out.append(image)
+            else:
+                img = Image.open(img_path)
+                for i in ImageSequence.Iterator(img):
+                    i = ImageOps.exif_transpose(i)
+                    if i.mode == "I":
+                        i = i.point(lambda i: i * (1 / 256)).convert("L")
+                    image = i.convert("RGB")
+                    image = np.array(image).astype(np.float32) / 255.0
+                    image = torch.from_numpy(image).unsqueeze(0)
+                    img_out.append(image)
+
+        if len(img_out) > 1:
+            img_out = torch.cat(img_out, dim=0)
+        elif img_out:
+            img_out = img_out[0]
+        if img_out == []:
+            img_out = None
+        return (
+            img_out,
+        )

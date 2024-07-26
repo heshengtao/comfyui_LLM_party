@@ -109,7 +109,7 @@ from .tools.load_ebd import (
     load_openai_ebd,
     save_ebd_database,
 )
-from .tools.load_file import load_file, load_file_folder, load_url, start_workflow
+from .tools.load_file import load_file, load_file_folder, load_url, start_workflow,load_img_path
 from .tools.load_model_name import load_name
 from .tools.load_persona import load_persona
 from .tools.logic import get_string, replace_string, string_logic, substring
@@ -673,7 +673,7 @@ class LLM:
         ]
         if user_prompt is None:
             user_prompt = user_prompt_input
-        else:
+        elif user_prompt_input is not None:
             user_prompt = user_prompt + user_prompt_input
         if historical_record != "":
             temp_path = os.path.join(current_dir_path, "temp")
@@ -1312,7 +1312,7 @@ class LLM_local:
         ]
         if user_prompt is None:
             user_prompt = user_prompt_input
-        else:
+        elif user_prompt_input is not None:
             user_prompt = user_prompt + user_prompt_input
         if historical_record != "":
             temp_path = os.path.join(current_dir_path, "temp")
@@ -1820,6 +1820,7 @@ NODE_CLASS_MAPPINGS = {
     "load_openai_ebd": load_openai_ebd,
     "json2text": json2text,
     "interpreter_function": interpreter_function,
+    "load_img_path":load_img_path,
 }
 
 
@@ -1915,6 +1916,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "load_openai_ebd": "加载openai词嵌入模型(load_openai_ebd)",
     "json2text": "JSON转文本(json2text)",
     "interpreter_function": "解释器函数(interpreter_function)",
+    "load_img_path": "从图片路径加载(load_img_from_path)",
 }
 
 
