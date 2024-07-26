@@ -40,10 +40,18 @@ class FeishuGetHistory:
         "STRING",
         "STRING",
         "STRING",
+        "BOOLEAN",
+        "BOOLEAN",
+        "BOOLEAN",
+        "STRING",
     )
     RETURN_NAMES = (
         "response",
         "log_info",
+        "message_id",
+        "output_is_text",
+        "output_is_audio",
+        "output_is_image",
         "show_help",
     )
 
@@ -101,6 +109,17 @@ class FeishuGetHistory:
                     "page_size": 50,
                 }
                 response = requests.get(url=self.url_msg, headers=headers, params=params)
+                if response.status_code != 200:
+                    print(f"Error: {response.text}")
+                    return (
+                        None,
+                        response.text,
+                        None,
+                        False,
+                        False,
+                        False,
+                        show_help,
+                    )
                 items = response.json().get("data").get("items")
                 if items:
                     if response.json()["data"]["items"][0]["sender"]["sender_type"]=="user":
@@ -121,12 +140,35 @@ class FeishuGetHistory:
             print(f"Error: {response.text}")
             return (
                 None,
+                response.text,
+                None,
+                False,
+                False,
+                False,
                 show_help,
             )
 
+        msg = response.json()["data"]["items"][0]
+        msg_type = msg["msg_type"]
+        msg_id = msg["message_id"]
+        msg_content = msg["body"]["content"]
+        flag_audio = False
+        flag_text = False
+        flag_image = False
+        if msg_type == 'audio':
+            flag_audio = True
+        elif msg_type == 'text':
+            flag_text = True
+        elif msg_type == 'image':
+            flag_image = True
+        
         return (
-            response.json()["data"]["items"][0]["body"]["content"],
-            response.text,
+            msg_content,
+            json.dumps(response.json(),indent=4,ensure_ascii=False),
+            msg_id,
+            flag_text,
+            flag_audio,
+            flag_image,
             show_help,
         )
     @classmethod
