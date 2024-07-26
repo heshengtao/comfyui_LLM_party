@@ -7,6 +7,7 @@ import importlib
 import io
 import json
 import os
+import random
 import re
 import sys
 import time
@@ -553,8 +554,8 @@ class LLM:
 
     def __init__(self):
         current_time = datetime.datetime.now()
-        # 以时间戳作为ID，字符串格式 XX年XX月XX日XX时XX分XX秒
-        self.id = current_time.strftime("%Y_%m_%d_%H_%M_%S")
+        # 以时间戳作为ID，字符串格式 XX年XX月XX日XX时XX分XX秒并加上一个哈希值防止重复
+        self.id = current_time.strftime("%Y_%m_%d_%H_%M_%S")+str(hash(random.randint(0, 1000000)))
         global instances
         instances.append(self)
         # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
@@ -1193,7 +1194,7 @@ class LLM_local:
     def __init__(self):
         # 生成一个hash值作为id
         current_time = datetime.datetime.now()
-        self.id = current_time.strftime("%Y_%m_%d_%H_%M_%S")
+        self.id = current_time.strftime("%Y_%m_%d_%H_%M_%S")+str(hash(random.randint(0, 1000000)))
         global instances
         instances.append(self)
         # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
