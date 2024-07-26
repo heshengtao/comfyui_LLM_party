@@ -1,6 +1,6 @@
 {
-  "last_node_id": 33,
-  "last_link_id": 43,
+  "last_node_id": 34,
+  "last_link_id": 45,
   "nodes": [
     {
       "id": 17,
@@ -41,7 +41,7 @@
       },
       "widgets_values": [
         "",
-        "文件中的相关信息如下：\n- Streaming mode is also useful if your downstream LLM/agent system requires immediate content delivery or needs to process data in chunks to interleave I/O and LLM processing times. This allows for\n- Streaming mode is useful when you find that the standard mode provides an incomplete result. This is because the Reader will wait a bit longer until the page is _stablely_ rendered. Use the\n- Streaming mode: [Link](https://github.com/jina-ai/reader#streaming-mode) until the page is _stablely_ rendered. Use the accept-header to toggle the streaming mode:\n- For example, compare these two curl commands below. You can see streaming one gives you complete information at last, whereas standard mode does not. This is because the content loading on this"
+        "文件中关于Streaming mode的信息如下：\n- Streaming mode在页面渲染不稳定时很有用，它会等待页面稳定后才提供完整的结果。\n- 使用accept-header来切换流式传输模式。\n- 如果下游的LLM/agent系统需要立即获取内容或需要以数据块的方式处理数据以交错I/O和LLM处理时间，流式传输模式也很有用。\n- 通过比较curl命令的两个示例，可以看到流式传输模式可以提供完整的信息，而标准模式则不行。"
       ],
       "color": "#233",
       "bgcolor": "#355"
@@ -85,7 +85,7 @@
       },
       "widgets_values": [
         "",
-        "**System:** 你是一个强大的人工智能助手。\n\n**User:** 查一下这个文件里Streaming mode相关的内容\n\n**Assistant:** Function(arguments='{\"question\":\"Streaming mode\"}', name='data_base')\n\n**Tool:** 文件中的相关信息如下：\nStreaming mode is also useful if your downstream LLM/agent system requires immediate content delivery or needs to process data in chunks to interleave I/O and LLM processing times. This allows for\nStreaming mode is useful when you find that the standard mode provides an incomplete result. This is because the Reader will wait a bit longer until the page is _stablely_ rendered. Use the\n### Streaming mode\n\n[](https://github.com/jina-ai/reader#streaming-mode)\nuntil the page is _stablely_ rendered. Use the accept-header to toggle the streaming mode:\nFor example, compare these two curl commands below. You can see streaming one gives you complete information at last, whereas standard mode does not. This is because the content loading on this\n\n\n**Assistant:** 文件中的相关信息如下：\n- Streaming mode is also useful if your downstream LLM/agent system requires immediate content delivery or needs to process data in chunks to interleave I/O and LLM processing times. This allows for\n- Streaming mode is useful when you find that the standard mode provides an incomplete result. This is because the Reader will wait a bit longer until the page is _stablely_ rendered. Use the\n- Streaming mode: [Link](https://github.com/jina-ai/reader#streaming-mode) until the page is _stablely_ rendered. Use the accept-header to toggle the streaming mode:\n- For example, compare these two curl commands below. You can see streaming one gives you complete information at last, whereas standard mode does not. This is because the content loading on this\n\n"
+        "**System:** 你一个强大的人工智能助手。\n\n**User:** 查一下这个文件里Streaming mode相关的内容\n\n**Assistant:** Function(arguments='{\"question\":\"Streaming mode\"}', name='data_base')\n\n**Tool:** 文件中的相关信息如下：\nStreaming mode is useful when you find that the standard mode provides an incomplete result. This is because the Reader will wait a bit longer until the page is _stablely_ rendered. Use the\nheader to toggle the streaming mode:\nuntil the page is _stablely_ rendered. Use the accept-header to toggle the streaming mode:\nStreaming mode is also useful if your downstream LLM/agent system requires immediate content delivery or needs to process data in chunks to interleave I/O and LLM processing times. This allows for\nFor example, compare these two curl commands below. You can see streaming one gives you complete information at last, whereas standard mode does not. This is because the content loading on this\n\n\n**Assistant:** 文件中关于Streaming mode的信息如下：\n- Streaming mode在页面渲染不稳定时很有用，它会等待页面稳定后才提供完整的结果。\n- 使用accept-header来切换流式传输模式。\n- 如果下游的LLM/agent系统需要立即获取内容或需要以数据块的方式处理数据以交错I/O和LLM处理时间，流式传输模式也很有用。\n- 通过比较curl命令的两个示例，可以看到流式传输模式可以提供完整的信息，而标准模式则不行。\n\n"
       ],
       "color": "#233",
       "bgcolor": "#355"
@@ -109,7 +109,7 @@
           "name": "file_content",
           "type": "STRING",
           "links": [
-            42
+            44
           ],
           "shape": 3,
           "label": "file_content",
@@ -174,7 +174,7 @@
         {
           "name": "tools",
           "type": "STRING",
-          "link": 43,
+          "link": 45,
           "widget": {
             "name": "tools"
           },
@@ -285,15 +285,15 @@
       "bgcolor": "#3f5159"
     },
     {
-      "id": 33,
+      "id": 34,
       "type": "ebd_tool",
       "pos": [
         188,
         306
       ],
       "size": [
-        326.305724447604,
-        218.4169567501326
+        315,
+        226
       ],
       "flags": {},
       "order": 2,
@@ -302,7 +302,7 @@
         {
           "name": "file_content",
           "type": "STRING",
-          "link": 42,
+          "link": 44,
           "widget": {
             "name": "file_content"
           }
@@ -313,7 +313,7 @@
           "name": "tool",
           "type": "STRING",
           "links": [
-            43
+            45
           ],
           "shape": 3,
           "label": "tool",
@@ -324,13 +324,14 @@
         "Node name for S&R": "ebd_tool"
       },
       "widgets_values": [
-        "D:\\AI\\mychat\\model\\bge-large-zh",
+        "D:\\AI\\mychat\\model\\bge",
         "enable",
-        "",
         5,
         "auto",
         200,
-        50
+        50,
+        "",
+        ""
       ]
     }
   ],
@@ -360,16 +361,16 @@
       "STRING"
     ],
     [
-      42,
+      44,
       27,
       0,
-      33,
+      34,
       0,
       "STRING"
     ],
     [
-      43,
-      33,
+      45,
+      34,
       0,
       32,
       4,
@@ -380,10 +381,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.9090909090909091,
+      "scale": 1,
       "offset": {
-        "0": 106.71539815537889,
-        "1": -38.01696063418801
+        "0": 92.9590068619724,
+        "1": -91.34593798028587
       }
     }
   },
