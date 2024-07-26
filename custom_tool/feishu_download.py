@@ -83,12 +83,3 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "FeishuDownloadAudio": "飞书获下载音频🐶（FeishuDownloadAudio）",
 }
 
-if __name__ == "__main__":
-    obj = FeishuDownloadAudio()
-    obj.download_audio(
-        app_id="cli_a612a3a341f9100b",
-        app_secret="b9VZqUG1qtTvlDPCtdfR2ezFuXvbfZgp",
-        message_id="om_ea38e580f0c0ae7e1fd0d1696fb097d8",
-        file_key="file_v3_00d5_65f46b8d-c620-4c0b-a34a-76de3b0f377g",
-        is_enable=True,
-    )
