@@ -40,7 +40,7 @@ class openai_tts:
             },
         }
 
-    RETURN_TYPES = ("AUDIO",)
+    RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("audio",)
 
     FUNCTION = "tts"
@@ -109,12 +109,12 @@ class play_audio:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "audio": ("AUDIO", {}),
+                "audio": ("STRING", {}),
             },
         }
 
-    RETURN_TYPES = ("AUDIO",)
-    RETURN_NAMES = ("audio",)
+    RETURN_TYPES = ()
+    RETURN_NAMES = ()
 
     FUNCTION = "tts"
 

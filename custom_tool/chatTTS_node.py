@@ -51,7 +51,7 @@ class ChatTTS_Node:
             },
         }
 
-    RETURN_TYPES = ("AUDIO",)
+    RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("audio",)
     FUNCTION = "chattts"
     CATEGORY = "大模型派对（llm_party）/函数（function）"

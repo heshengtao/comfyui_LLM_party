@@ -26,7 +26,7 @@ class CosyVoice:
             },
         }
 
-    RETURN_TYPES = ("AUDIO",)
+    RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("audio",)
 
     FUNCTION = "tts"

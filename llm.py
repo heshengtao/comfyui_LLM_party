@@ -52,7 +52,7 @@ from .tools.CosyVoice import CosyVoice
 from .tools.custom_persona import custom_persona
 from .tools.dialog import end_dialog, start_dialog
 from .tools.dingding import Dingding, Dingding_tool, send_dingding
-from .tools.end_work import end_workflow
+from .tools.end_work import end_workflow,img2path
 from .tools.excel import image_iterator, load_excel
 from .tools.feishu import feishu, feishu_tool, send_feishu
 from .tools.file_combine import file_combine, file_combine_plus
@@ -1821,6 +1821,7 @@ NODE_CLASS_MAPPINGS = {
     "json2text": json2text,
     "interpreter_function": interpreter_function,
     "load_img_path":load_img_path,
+    "img2path":img2path,
 }
 
 
@@ -1917,6 +1918,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "json2text": "JSON转文本(json2text)",
     "interpreter_function": "解释器函数(interpreter_function)",
     "load_img_path": "从图片路径加载(load_img_from_path)",
+    "img2path":"图片存至路径(img2path)",
 }
 
 

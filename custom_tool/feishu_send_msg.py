@@ -4,7 +4,14 @@ import os
 import requests
 from pydub import AudioSegment
 from requests_toolbelt import MultipartEncoder
+class AnyType(str):
+    """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
 
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+
+any_type = AnyType("*")
 
 def get_tenant_access_token(token_url, app_id, app_secret):
     token_data = {"app_id": app_id, "app_secret": app_secret}
@@ -29,7 +36,6 @@ class FeishuSendMsg:
             "required": {
                 "msg_type": (["text", "image", "audio"], {"default": "text"}),
                 "text": ("STRING", {"default": "Hello. I am an AI from LLM_Party."}),
-                "file_path": ("STRING", {"default": "image & audio file only"}),
                 "app_id": ("STRING", {}),
                 "app_secret": ("STRING", {}),
                 "chat_type": (["group", "single"], {"default": "group"}),
@@ -37,6 +43,9 @@ class FeishuSendMsg:
                 "user_id": ("STRING", {}),  # for single chat
                 "open_id": ("STRING", {}),  # for single chat
                 "is_enable": ("BOOLEAN", {"default": True}),
+            },
+            "optional":{
+                "file_path": ("STRING",  {"default": "only image path or audio path"}),
             }
         }
 
