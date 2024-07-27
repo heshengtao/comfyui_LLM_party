@@ -87,42 +87,6 @@
       ]
     },
     {
-      "id": 24,
-      "type": "load_file",
-      "pos": [
-        1028,
-        261
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "links": [
-            26,
-            29
-          ],
-          "shape": 3,
-          "slot_index": 0,
-          "label": "file_content"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_file"
-      },
-      "widgets_values": [
-        "test.xlsx",
-        true,
-        "Relative_Path"
-      ]
-    },
-    {
       "id": 26,
       "type": "LLM_api_loader",
       "pos": [
@@ -134,7 +98,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 1,
+      "order": 0,
       "mode": 0,
       "outputs": [
         {
@@ -164,10 +128,10 @@
         1386,
         270
       ],
-      "size": [
-        407.131370295097,
-        466.4996130667299
-      ],
+      "size": {
+        "0": 407.1313781738281,
+        "1": 466.4996032714844
+      },
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -190,7 +154,8 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
-          }
+          },
+          "label": "system_prompt_input"
         },
         {
           "name": "user_prompt_input",
@@ -198,7 +163,8 @@
           "link": null,
           "widget": {
             "name": "user_prompt_input"
-          }
+          },
+          "label": "user_prompt_input"
         },
         {
           "name": "tools",
@@ -206,7 +172,8 @@
           "link": null,
           "widget": {
             "name": "tools"
-          }
+          },
+          "label": "tools"
         },
         {
           "name": "file_content",
@@ -214,7 +181,8 @@
           "link": 29,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
@@ -268,7 +236,44 @@
         "",
         "",
         100,
-        ""
+        "",
+        true
+      ]
+    },
+    {
+      "id": 24,
+      "type": "load_file",
+      "pos": [
+        1028,
+        261
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": [
+            26,
+            29
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "file_content"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_file"
+      },
+      "widgets_values": [
+        "",
+        "test.xlsx",
+        "Relative_Path"
       ]
     }
   ],
@@ -310,10 +315,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.9090909090909091,
+      "scale": 1.2100000000000002,
       "offset": {
-        "0": -795.6979962716593,
-        "1": 65.2671166695982
+        "0": -873.1329782940315,
+        "1": 50.6472668261709
       }
     }
   },
