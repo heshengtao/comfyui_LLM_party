@@ -120,7 +120,10 @@ class api_function:
                     {"forceInput": True},
                 ),
             },
-            "optional": {},
+            "optional": {
+                "request_type": (["get", "post"], {"default": "get"}),
+                "timeout": ("INT", {"default": 60}),
+            },
         }
 
     RETURN_TYPES = ("STRING",)
@@ -132,12 +135,13 @@ class api_function:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def api(self, url, parameters, api_key=""):
-        if api_key:
-            headers = {"Authorization": f"Bearer {api_key}"}
-            response = requests.get(url, params=parameters, headers=headers, timeout=10)
-        else:
-            response = requests.get(url, params=parameters, timeout=10)
+    def api(self, url, parameters, api_key="", request_type="get",timeout=60):
+        headers = {"Authorization": f"Bearer {api_key}"} if api_key else {}
+        
+        if request_type.lower() == "post":
+            response = requests.post(url, json=parameters, headers=headers, timeout=timeout)
+        else:  # 默认使用 GET 请求
+            response = requests.get(url, params=parameters, headers=headers, timeout=timeout)
 
         if response.status_code == 200:
             # 解析 JSON 响应并自动处理 Unicode 转义字符
