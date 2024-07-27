@@ -1,0 +1,488 @@
+{
+  "last_node_id": 36,
+  "last_link_id": 58,
+  "nodes": [
+    {
+      "id": 32,
+      "type": "LLM",
+      "pos": [
+        2665,
+        146
+      ],
+      "size": {
+        "0": 421.9468078613281,
+        "1": 507.3160705566406
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 51,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 57,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 55,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "slot_index": 3,
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 58,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            53
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
+    },
+    {
+      "id": 31,
+      "type": "LLM_api_loader",
+      "pos": [
+        2301,
+        -24
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            51
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo-1106",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 35,
+      "type": "load_persona",
+      "pos": [
+        2308,
+        141
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            57
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "麦洛薇",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 29,
+      "type": "json_get_value",
+      "pos": [
+        2305,
+        304
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 56,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0,
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "links": [
+            55
+          ],
+          "shape": 3,
+          "label": "content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "text",
+        true
+      ]
+    },
+    {
+      "id": 36,
+      "type": "KG_json_toolkit_developer",
+      "pos": [
+        2310,
+        467
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            58
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KG_json_toolkit_developer"
+      },
+      "widgets_values": [
+        "",
+        "麦洛薇.json",
+        true
+      ]
+    },
+    {
+      "id": 24,
+      "type": "FeishuGetHistory",
+      "pos": [
+        1961,
+        308
+      ],
+      "size": {
+        "0": 315,
+        "1": 274
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "response",
+          "type": "STRING",
+          "links": [
+            56
+          ],
+          "shape": 3,
+          "label": "response",
+          "slot_index": 0
+        },
+        {
+          "name": "log_info",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "label": "log_info",
+          "slot_index": 1
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "show_help"
+        },
+        {
+          "name": "output_is_text",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "output_is_audio",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "output_is_image",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FeishuGetHistory"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "",
+        "auto",
+        60
+      ]
+    },
+    {
+      "id": 33,
+      "type": "FeishuSendMsg",
+      "pos": [
+        3109,
+        148
+      ],
+      "size": {
+        "0": 359.4790344238281,
+        "1": 316.7920837402344
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 53,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0,
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "file_key",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "file_key"
+        },
+        {
+          "name": "msg_id",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "msg_id"
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "show_help"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FeishuSendMsg"
+      },
+      "widgets_values": [
+        "text",
+        "Hello. I am an AI from LLM_Party.",
+        "image & audio file only",
+        "",
+        "",
+        "group",
+        "",
+        "",
+        "",
+        true
+      ]
+    }
+  ],
+  "links": [
+    [
+      51,
+      31,
+      0,
+      32,
+      0,
+      "CUSTOM"
+    ],
+    [
+      53,
+      32,
+      0,
+      33,
+      0,
+      "STRING"
+    ],
+    [
+      55,
+      29,
+      0,
+      32,
+      3,
+      "STRING"
+    ],
+    [
+      56,
+      24,
+      0,
+      29,
+      0,
+      "STRING"
+    ],
+    [
+      57,
+      35,
+      0,
+      32,
+      2,
+      "STRING"
+    ],
+    [
+      58,
+      36,
+      0,
+      32,
+      4,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": {
+        "0": -1936.2712784685802,
+        "1": 104.38366599444663
+      }
+    }
+  },
+  "version": 0.4
+}
