@@ -31,6 +31,7 @@ if torch.cuda.is_available():
 from torchvision.transforms import ToPILImage
 
 from .config import config_key, config_path, current_dir_path, load_api_keys
+from .tools.smalltool import load_int
 from .tools.api_tool import (
     api_function,
     api_tool,
@@ -213,6 +214,8 @@ def another_llm(id, type, question):
             imgbb_api_key,
             conversation_rounds,
             historical_record,
+            is_enable,
+            extra_parameters,
         ) = llm.list
         res, _, _, _ = llm.chatbot(
             question,
@@ -232,6 +235,8 @@ def another_llm(id, type, question):
             imgbb_api_key,
             conversation_rounds,
             historical_record,
+            is_enable,
+            extra_parameters,
         )
     elif type == "local":
         try:
@@ -259,6 +264,8 @@ def another_llm(id, type, question):
             image,
             conversation_rounds,
             historical_record,
+            is_enable,
+            extra_parameters,
         ) = llm.list
         res, _, _, _ = llm.chatbot(
             question,
@@ -278,6 +285,8 @@ def another_llm(id, type, question):
             image,
             conversation_rounds,
             historical_record,
+            is_enable,
+            extra_parameters,
         )
     else:
         return "type参数错误，请使用api或local"
@@ -333,7 +342,7 @@ class Chat:
         self.apikey = apikey
         self.baseurl = baseurl
 
-    def send(self, user_prompt, temperature, max_length, history, tools=None, is_tools_in_sys_prompt="disable"):
+    def send(self, user_prompt, temperature, max_length, history, tools=None, is_tools_in_sys_prompt="disable",**extra_parameters):
         try:
             openai.api_key = self.apikey
             openai.base_url = self.baseurl
@@ -347,6 +356,7 @@ class Chat:
                     temperature=temperature,
                     tools=tools,
                     max_tokens=max_length,
+                    **extra_parameters
                 )
                 while response.choices[0].message.tool_calls:
                     assistant_message = response.choices[0].message
@@ -386,6 +396,7 @@ class Chat:
                             tools=tools,
                             temperature=temperature,
                             max_tokens=max_length,
+                            **extra_parameters
                         )
                         print(response)
                     except Exception as e:
@@ -410,6 +421,7 @@ class Chat:
                             tools=tools,
                             temperature=temperature,
                             max_tokens=max_length,
+                            **extra_parameters
                         )
                         print(response)
                 while response.choices[0].message.function_call:
@@ -434,6 +446,7 @@ class Chat:
                         tools=tools,
                         temperature=temperature,
                         max_tokens=max_length,
+                        **extra_parameters
                     )
                 response_content = response.choices[0].message.content
                 print(response)
@@ -443,6 +456,7 @@ class Chat:
                     messages=history,
                     temperature=temperature,
                     max_tokens=max_length,
+                    **extra_parameters
                 )
                 response_content = response.choices[0].message.content
                 # 正则表达式匹配
@@ -468,7 +482,11 @@ class Chat:
                         }
                     )
                     response = openai.chat.completions.create(
-                        model=self.model_name, messages=history, temperature=temperature, max_tokens=max_length
+                        model=self.model_name,
+                        messages=history, 
+                        temperature=temperature, 
+                        max_tokens=max_length,
+                        **extra_parameters
                     )
                     response_content = response.choices[0].message.content
             else:
@@ -477,6 +495,7 @@ class Chat:
                     messages=history,
                     temperature=temperature,
                     max_tokens=max_length,
+                    **extra_parameters
                 )
             response_content = response.choices[0].message.content
             history.append({"role": "assistant", "content": response_content})
@@ -612,6 +631,8 @@ class LLM:
                 ),
                 "conversation_rounds": ("INT", {"default": 100, "min": 1, "max": 10000}),
                 "historical_record": (paths, {"default": ""}),
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "extra_parameters": ("DICT", {"forceInput": True}),
             },
         }
 
@@ -653,7 +674,11 @@ class LLM:
         imgbb_api_key=None,
         conversation_rounds=100,
         historical_record="",
+        is_enable=True,
+        extra_parameters=None,
     ):
+        if not is_enable:
+            return (None, None, None,[],)
         self.list = [
             main_brain,
             system_prompt,
@@ -671,6 +696,8 @@ class LLM:
             imgbb_api_key,
             conversation_rounds,
             historical_record,
+            is_enable,
+            extra_parameters,
         ]
         if user_prompt is None:
             user_prompt = user_prompt_input
@@ -873,10 +900,14 @@ class LLM:
                             },
                         ]
                         user_prompt = img_json
-
-                response, history = model.send(
-                    user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt
+                if extra_parameters is not None and extra_parameters !={}:
+                    response, history = model.send(
+                    user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,**extra_parameters
                 )
+                else:
+                    response, history = model.send(
+                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt
+                    )
                 print(response)
                 # 修改prompt.json文件
                 history_get = [history[0]]
@@ -937,12 +968,12 @@ class LLM:
         return hash_value
 
 
-def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="user", temperature=0.7):
+def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="user", temperature=0.7,**extra_parameters):
     history.append({"role": role, "content": user_prompt.strip()})
     text = tokenizer.apply_chat_template(history, tokenize=False, add_generation_prompt=True)
     model_inputs = tokenizer([text], return_tensors="pt").to(device)
     generated_ids = model.generate(
-        model_inputs.input_ids, max_new_tokens=max_length, temperature=temperature  # Add the eos_token_id parameter
+        model_inputs.input_ids, max_new_tokens=max_length, temperature=temperature,**extra_parameters  # Add the eos_token_id parameter
     )
     generated_ids = [
         output_ids[len(input_ids) :] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
@@ -1251,6 +1282,8 @@ class LLM_local:
                 "file_content": ("STRING", {"forceInput": True}),
                 "conversation_rounds": ("INT", {"default": 100, "min": 1, "max": 10000}),
                 "historical_record": (paths, {"default": ""}),
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "extra_parameters": ("DICT", {"forceInput": True}),
             },
         }
 
@@ -1292,7 +1325,11 @@ class LLM_local:
         image=None,
         conversation_rounds=100,
         historical_record=None,
+        is_enable=True,
+        extra_parameters=None,
     ):
+        if not is_enable:
+            return (None, None, None,[],)
         self.list = [
             main_brain,
             system_prompt,
@@ -1310,6 +1347,8 @@ class LLM_local:
             image,
             conversation_rounds,
             historical_record,
+            is_enable,
+            extra_parameters,
         ]
         if user_prompt is None:
             user_prompt = user_prompt_input
@@ -1475,21 +1514,38 @@ class LLM_local:
                 if model_type not in ["llaVa", "llama-guff"]:
                     device = next(model.parameters()).device
                 if model_type == "GLM":
-                    response, history = model.chat(
-                        tokenizer, user_prompt, history, temperature=temperature, max_length=max_length, role="user"
+                    if extra_parameters is not None and extra_parameters !={}:
+                        response, history = model.chat(
+                        tokenizer, user_prompt, history, temperature=temperature, max_length=max_length, role="user",
+                        **extra_parameters
                     )
+                    else:
+                        response, history = model.chat(
+                            tokenizer, user_prompt, history, temperature=temperature, max_length=max_length, role="user"
+                        )
                     while type(response) == dict:
                         if response["name"] == "interpreter":
                             result = interpreter(str(response["content"]))
-                            response, history = model.chat(tokenizer, result, history=history, role="observation")
+                            if extra_parameters is not None and extra_parameters !={}:
+                                response, history = model.chat(tokenizer, result, history=history, temperature=temperature, max_length=max_length, role="observation", **extra_parameters)
+                            else:
+                                response, history = model.chat(tokenizer, result, history=history, temperature=temperature, max_length=max_length, role="observation")
                         else:
                             result = dispatch_tool(response["name"], response["parameters"])
                             print(result)
-                            response, history = model.chat(tokenizer, result, history=history, role="observation")
+                            if extra_parameters is not None and extra_parameters !={}:
+                                response, history = model.chat(tokenizer, result, history=history, temperature=temperature, max_length=max_length, role="observation", **extra_parameters)
+                            else:
+                                response, history = model.chat(tokenizer, result, history=history, temperature=temperature, max_length=max_length, role="observation")
                 elif model_type in ["llama", "Qwen"]:
-                    response, history = llm_chat(
-                        model, tokenizer, user_prompt, history, device, max_length, temperature=temperature
-                    )
+                    if extra_parameters is not None and extra_parameters !={}:
+                        response, history = llm_chat(
+                            model, tokenizer, user_prompt, history, device, max_length, temperature=temperature, **extra_parameters
+                        )
+                    else:
+                        response, history = llm_chat(
+                            model, tokenizer, user_prompt, history, device, max_length, temperature=temperature
+                        )
                     # 正则表达式匹配
                     pattern = r'\{\s*"tool":\s*"(.*?)",\s*"parameters":\s*\{(.*?)\}\s*\}'
                     while re.search(pattern, response, re.DOTALL) != None:
@@ -1502,25 +1558,45 @@ class LLM_local:
                         parameters = json.loads("{" + parameters + "}")
                         results = dispatch_tool(tool, parameters)
                         print(results)
-                        response, history = llm_chat(
-                            model,
-                            tokenizer,
-                            results,
-                            history,
-                            device,
-                            max_length,
-                            role="observation",
-                            temperature=temperature,
+                        if extra_parameters is not None and extra_parameters !={}:
+                            response, history = llm_chat(
+                                model,
+                                tokenizer,
+                                results,
+                                history,
+                                device,
+                                max_length,
+                                temperature=temperature,
+                                **extra_parameters
                         )
+                        else:
+                            response, history = llm_chat(
+                                model,
+                                tokenizer,
+                                results,
+                                history,
+                                device,
+                                max_length,
+                                role="observation",
+                                temperature=temperature,
+                            )
                 elif model_type == "llama-guff":
                     from llama_cpp import Llama
 
                     history.append({"role": "user", "content": user_prompt.strip()})
-                    response = model.create_chat_completion(
-                        messages=history,
-                        max_tokens=max_length,
-                        temperature=temperature,
+                    if extra_parameters is not None and extra_parameters !={}:
+                        response = model.create_chat_completion(
+                            messages=history,
+                            max_tokens=max_length,
+                            temperature=temperature,
+                            **extra_parameters
                     )
+                    else:
+                        response = model.create_chat_completion(
+                            messages=history,
+                            max_tokens=max_length,
+                            temperature=temperature,
+                        )
                     response_content = response["choices"][0]["message"]["content"]
                     print(response_content)
                     # 正则表达式匹配
@@ -1535,11 +1611,19 @@ class LLM_local:
                         print(results)
                         history.append({"role": "assistant", "content": json_str})
                         history.append({"role": "observation", "content": results})
-                        response = model.create_chat_completion(
+                        if extra_parameters is not None and extra_parameters !={}:
+                            response = model.create_chat_completion(
                             messages=history,
                             max_tokens=max_length,
                             temperature=temperature,
+                            **extra_parameters
                         )
+                        else:
+                            response = model.create_chat_completion(
+                                messages=history,
+                                max_tokens=max_length,
+                                temperature=temperature,
+                            )
                         response_content = response.choices[0].message.content
                 elif model_type == "llaVa":
                     if image is not None:
@@ -1559,15 +1643,21 @@ class LLM_local:
                             ],
                         }
                         history.append(user_content)
-                        response = model.create_chat_completion(
+                        if extra_parameters is not None and extra_parameters !={}:
+                            response = model.create_chat_completion(
                             messages=history,
                             temperature=temperature,
                             max_tokens=max_length,
-                            frequency_penalty=1,
-                            presence_penalty=0,
-                            repeat_penalty=1.1,
                             stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
+                            **extra_parameters
                         )
+                        else:
+                            response = model.create_chat_completion(
+                                messages=history,
+                                temperature=temperature,
+                                max_tokens=max_length,
+                                stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
+                            )
                         response = f"{response['choices'][0]['message']['content']}"
                         print(response)
                         assistant_content = {"role": "assistant", "content": response}
@@ -1575,15 +1665,20 @@ class LLM_local:
                     else:
                         user_content = {"role": "user", "content": user_prompt}
                         history.append(user_content)
-                        response = model.create_chat_completion(
+                        if extra_parameters is not None and extra_parameters !={}:
+                            response = model.create_chat_completion(
                             messages=history,
                             temperature=temperature,
                             max_tokens=max_length,
-                            frequency_penalty=1,
-                            presence_penalty=1,
-                            repeat_penalty=1.1,
                             stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
                         )
+                        else:
+                            response = model.create_chat_completion(
+                                messages=history,
+                                temperature=temperature,
+                                max_tokens=max_length,
+                                stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
+                            )
                         response = f"{response['choices'][0]['message']['content']}"
                         assistant_content = {"role": "assistant", "content": response}
                         history.append(assistant_content)
@@ -1823,6 +1918,7 @@ NODE_CLASS_MAPPINGS = {
     "interpreter_function": interpreter_function,
     "load_img_path":load_img_path,
     "img2path":img2path,
+    "load_int":load_int,
 }
 
 
@@ -1920,6 +2016,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "interpreter_function": "解释器函数(interpreter_function)",
     "load_img_path": "从图片路径加载(load_img_from_path)",
     "img2path":"图片存至路径(img2path)",
+    "load_int":"加载整数(load_int)",
 }
 
 
