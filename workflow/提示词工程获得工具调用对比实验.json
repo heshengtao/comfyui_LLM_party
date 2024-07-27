@@ -1,0 +1,534 @@
+{
+  "last_node_id": 26,
+  "last_link_id": 37,
+  "nodes": [
+    {
+      "id": 21,
+      "type": "LLM",
+      "pos": [
+        907,
+        270
+      ],
+      "size": {
+        "0": 395.04949951171875,
+        "1": 454.66143798828125
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 32,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 34,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            33
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "你好，现在北京天气如何",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
+    },
+    {
+      "id": 22,
+      "type": "weather_tool",
+      "pos": [
+        505,
+        454
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            34
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "weather_tool"
+      },
+      "widgets_values": [
+        "上海市",
+        true
+      ]
+    },
+    {
+      "id": 25,
+      "type": "weather_tool",
+      "pos": [
+        504,
+        1042
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            36
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "weather_tool"
+      },
+      "widgets_values": [
+        "上海市",
+        true
+      ]
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1373,
+        263
+      ],
+      "size": {
+        "0": 454.6876220703125,
+        "1": 290.2985534667969
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 33,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "Error code: 400 - {'error': {'message': 'gemma2 does not support tools', 'type': 'api_error', 'param': None, 'code': None}}"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 26,
+      "type": "show_text_party",
+      "pos": [
+        1384,
+        878
+      ],
+      "size": [
+        454.6876220703125,
+        290.2985534667969
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "现在北京天气是多云，最高温度32度，最低温度25度。  \n"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 24,
+      "type": "LLM",
+      "pos": [
+        933,
+        875
+      ],
+      "size": [
+        395.04949951171875,
+        454.66143798828125
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 35,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 36,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "你好，现在北京天气如何",
+        0.7,
+        "disable",
+        "enable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        ""
+      ]
+    },
+    {
+      "id": 23,
+      "type": "LLM_api_loader",
+      "pos": [
+        515,
+        851
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gemma2",
+        "http://127.0.0.1:11434/v1/",
+        "ollama"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 20,
+      "type": "LLM_api_loader",
+      "pos": [
+        513,
+        268
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            32
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gemma2",
+        "http://127.0.0.1:11434/v1/",
+        "ollama"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    }
+  ],
+  "links": [
+    [
+      32,
+      20,
+      0,
+      21,
+      0,
+      "CUSTOM"
+    ],
+    [
+      33,
+      21,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      34,
+      22,
+      0,
+      21,
+      4,
+      "STRING"
+    ],
+    [
+      35,
+      23,
+      0,
+      24,
+      0,
+      "CUSTOM"
+    ],
+    [
+      36,
+      25,
+      0,
+      24,
+      4,
+      "STRING"
+    ],
+    [
+      37,
+      24,
+      0,
+      26,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": {
+        "0": -199.30146913083564,
+        "1": -256.012688188004
+      }
+    }
+  },
+  "version": 0.4
+}
