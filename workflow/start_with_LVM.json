@@ -1,6 +1,6 @@
 {
-  "last_node_id": 10,
-  "last_link_id": 16,
+  "last_node_id": 11,
+  "last_link_id": 17,
   "nodes": [
     {
       "id": 8,
@@ -134,55 +134,16 @@
       "bgcolor": "#355"
     },
     {
-      "id": 6,
-      "type": "LLavaLoader",
-      "pos": [
-        290,
-        47
-      ],
-      "size": {
-        "0": 343.800048828125,
-        "1": 158.80001831054688
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            13
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLavaLoader"
-      },
-      "widgets_values": [
-        "E:\\GitHub\\model\\llava-llama-3-8b-v1_1-int4.gguf",
-        "E:\\GitHub\\model\\llava-llama-3-8b-v1_1-mmproj-f16.gguf",
-        512,
-        27,
-        8
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
       "id": 10,
       "type": "LLM_local",
       "pos": [
         678,
         173
       ],
-      "size": [
-        402.3828818035504,
-        445.3281153852449
-      ],
+      "size": {
+        "0": 402.38287353515625,
+        "1": 445.328125
+      },
       "flags": {},
       "order": 2,
       "mode": 0,
@@ -190,7 +151,7 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 13,
+          "link": 17,
           "label": "model"
         },
         {
@@ -293,17 +254,46 @@
         100,
         ""
       ]
+    },
+    {
+      "id": 11,
+      "type": "LLavaLoader",
+      "pos": [
+        290,
+        47
+      ],
+      "size": {
+        "0": 315,
+        "1": 178
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            17
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLavaLoader"
+      },
+      "widgets_values": [
+        "",
+        "E:\\GitHub\\model\\llava-llama-3-8b-v1_1-int4.gguf",
+        "E:\\GitHub\\model\\llava-llama-3-8b-v1_1-int4.gguf",
+        2048,
+        27,
+        8
+      ]
     }
   ],
   "links": [
-    [
-      13,
-      6,
-      0,
-      10,
-      0,
-      "CUSTOM"
-    ],
     [
       14,
       8,
@@ -327,16 +317,24 @@
       4,
       0,
       "STRING"
+    ],
+    [
+      17,
+      11,
+      0,
+      10,
+      0,
+      "CUSTOM"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.9090909090909091,
+      "scale": 0.7513148009015777,
       "offset": {
-        "0": -38.28286349300349,
-        "1": 63.13857162647382
+        "0": -5.830783458417226,
+        "1": 162.26172015139426
       }
     }
   },
