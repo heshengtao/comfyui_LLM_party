@@ -4,6 +4,8 @@ import os
 import requests
 from pydub import AudioSegment
 from requests_toolbelt import MultipartEncoder
+
+
 class AnyType(str):
     """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
 
@@ -12,6 +14,7 @@ class AnyType(str):
 
 
 any_type = AnyType("*")
+
 
 def get_tenant_access_token(token_url, app_id, app_secret):
     token_data = {"app_id": app_id, "app_secret": app_secret}
@@ -44,9 +47,9 @@ class FeishuSendMsg:
                 "open_id": ("STRING", {}),  # for single chat
                 "is_enable": ("BOOLEAN", {"default": True}),
             },
-            "optional":{
-                "file_path": ("STRING",  {"default": "only image path or audio path"}),
-            }
+            "optional": {
+                "file_path": ("STRING", {"default": "only image path or audio path"}),
+            },
         }
 
     RETURN_TYPES = ("STRING", "STRING", "STRING")

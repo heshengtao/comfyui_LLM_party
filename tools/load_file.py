@@ -172,7 +172,7 @@ class load_url:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, url,with_jina=True, is_enable=True):
+    def file(self, url, with_jina=True, is_enable=True):
         if is_enable == False:
             return (None,)
         try:
@@ -330,17 +330,13 @@ class load_img_path:
     @classmethod
     def INPUT_TYPES(s):
         return {
-            "required":{
+            "required": {
                 "img_path": ("STRING", {"default": None, "image_upload": True}),
             },
         }
 
-    RETURN_TYPES = (
-        "IMAGE",
-    )
-    RETURN_NAMES = (
-        "image",
-    )
+    RETURN_TYPES = ("IMAGE",)
+    RETURN_NAMES = ("image",)
 
     FUNCTION = "load_all"
 
@@ -348,10 +344,7 @@ class load_img_path:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def load_all(
-        self,
-        img_path
-    ):
+    def load_all(self, img_path):
         img_out = []
         if img_path is not None and img_path != "":
             # 检查img_path是否是一个目录
@@ -386,6 +379,4 @@ class load_img_path:
             img_out = img_out[0]
         if img_out == []:
             img_out = None
-        return (
-            img_out,
-        )
+        return (img_out,)
