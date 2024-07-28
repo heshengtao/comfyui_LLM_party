@@ -31,7 +31,6 @@ if torch.cuda.is_available():
 from torchvision.transforms import ToPILImage
 
 from .config import config_key, config_path, current_dir_path, load_api_keys
-from .tools.smalltool import load_int
 from .tools.api_tool import (
     api_function,
     api_tool,
@@ -54,7 +53,7 @@ from .tools.CosyVoice import CosyVoice
 from .tools.custom_persona import custom_persona
 from .tools.dialog import end_dialog, start_dialog
 from .tools.dingding import Dingding, Dingding_tool, send_dingding
-from .tools.end_work import end_workflow,img2path
+from .tools.end_work import end_workflow, img2path
 from .tools.excel import image_iterator, load_excel
 from .tools.feishu import feishu, feishu_tool, send_feishu
 from .tools.file_combine import file_combine, file_combine_plus
@@ -111,7 +110,13 @@ from .tools.load_ebd import (
     load_openai_ebd,
     save_ebd_database,
 )
-from .tools.load_file import load_file, load_file_folder, load_url, start_workflow,load_img_path
+from .tools.load_file import (
+    load_file,
+    load_file_folder,
+    load_img_path,
+    load_url,
+    start_workflow,
+)
 from .tools.load_model_name import load_name
 from .tools.load_persona import load_persona
 from .tools.logic import get_string, replace_string, string_logic, substring
@@ -126,6 +131,7 @@ from .tools.search_web import (
     search_web_bing,
 )
 from .tools.show_text import About_us, show_text_party
+from .tools.smalltool import load_int
 from .tools.story import read_story_json, story_json_tool
 from .tools.text_iterator import text_iterator
 from .tools.tool_combine import tool_combine, tool_combine_plus
@@ -342,7 +348,16 @@ class Chat:
         self.apikey = apikey
         self.baseurl = baseurl
 
-    def send(self, user_prompt, temperature, max_length, history, tools=None, is_tools_in_sys_prompt="disable",**extra_parameters):
+    def send(
+        self,
+        user_prompt,
+        temperature,
+        max_length,
+        history,
+        tools=None,
+        is_tools_in_sys_prompt="disable",
+        **extra_parameters,
+    ):
         try:
             openai.api_key = self.apikey
             openai.base_url = self.baseurl
@@ -356,7 +371,7 @@ class Chat:
                     temperature=temperature,
                     tools=tools,
                     max_tokens=max_length,
-                    **extra_parameters
+                    **extra_parameters,
                 )
                 while response.choices[0].message.tool_calls:
                     assistant_message = response.choices[0].message
@@ -396,7 +411,7 @@ class Chat:
                             tools=tools,
                             temperature=temperature,
                             max_tokens=max_length,
-                            **extra_parameters
+                            **extra_parameters,
                         )
                         print(response)
                     except Exception as e:
@@ -421,7 +436,7 @@ class Chat:
                             tools=tools,
                             temperature=temperature,
                             max_tokens=max_length,
-                            **extra_parameters
+                            **extra_parameters,
                         )
                         print(response)
                 while response.choices[0].message.function_call:
@@ -446,7 +461,7 @@ class Chat:
                         tools=tools,
                         temperature=temperature,
                         max_tokens=max_length,
-                        **extra_parameters
+                        **extra_parameters,
                     )
                 response_content = response.choices[0].message.content
                 print(response)
@@ -456,7 +471,7 @@ class Chat:
                     messages=history,
                     temperature=temperature,
                     max_tokens=max_length,
-                    **extra_parameters
+                    **extra_parameters,
                 )
                 response_content = response.choices[0].message.content
                 # 正则表达式匹配
@@ -483,10 +498,10 @@ class Chat:
                     )
                     response = openai.chat.completions.create(
                         model=self.model_name,
-                        messages=history, 
-                        temperature=temperature, 
+                        messages=history,
+                        temperature=temperature,
                         max_tokens=max_length,
-                        **extra_parameters
+                        **extra_parameters,
                     )
                     response_content = response.choices[0].message.content
             else:
@@ -495,7 +510,7 @@ class Chat:
                     messages=history,
                     temperature=temperature,
                     max_tokens=max_length,
-                    **extra_parameters
+                    **extra_parameters,
                 )
             response_content = response.choices[0].message.content
             history.append({"role": "assistant", "content": response_content})
@@ -574,7 +589,7 @@ class LLM:
     def __init__(self):
         current_time = datetime.datetime.now()
         # 以时间戳作为ID，字符串格式 XX年XX月XX日XX时XX分XX秒并加上一个哈希值防止重复
-        self.id = current_time.strftime("%Y_%m_%d_%H_%M_%S")+str(hash(random.randint(0, 1000000)))
+        self.id = current_time.strftime("%Y_%m_%d_%H_%M_%S") + str(hash(random.randint(0, 1000000)))
         global instances
         instances.append(self)
         # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
@@ -678,7 +693,12 @@ class LLM:
         extra_parameters=None,
     ):
         if not is_enable:
-            return (None, None, None,[],)
+            return (
+                None,
+                None,
+                None,
+                [],
+            )
         self.list = [
             main_brain,
             system_prompt,
@@ -747,7 +767,7 @@ class LLM:
         ]
 
         llm_tools_json = json.dumps(llm_tools, ensure_ascii=False, indent=4)
-        if (user_prompt is None or user_prompt.strip() == "") and (images is None or images== []):
+        if (user_prompt is None or user_prompt.strip() == "") and (images is None or images == []):
             with open(self.prompt_path, "r", encoding="utf-8") as f:
                 history = json.load(f)
             return (
@@ -900,10 +920,10 @@ class LLM:
                             },
                         ]
                         user_prompt = img_json
-                if extra_parameters is not None and extra_parameters !={}:
+                if extra_parameters is not None and extra_parameters != {}:
                     response, history = model.send(
-                    user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,**extra_parameters
-                )
+                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt, **extra_parameters
+                    )
                 else:
                     response, history = model.send(
                         user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt
@@ -968,12 +988,17 @@ class LLM:
         return hash_value
 
 
-def llm_chat(model, tokenizer, user_prompt, history, device, max_length, role="user", temperature=0.7,**extra_parameters):
+def llm_chat(
+    model, tokenizer, user_prompt, history, device, max_length, role="user", temperature=0.7, **extra_parameters
+):
     history.append({"role": role, "content": user_prompt.strip()})
     text = tokenizer.apply_chat_template(history, tokenize=False, add_generation_prompt=True)
     model_inputs = tokenizer([text], return_tensors="pt").to(device)
     generated_ids = model.generate(
-        model_inputs.input_ids, max_new_tokens=max_length, temperature=temperature,**extra_parameters  # Add the eos_token_id parameter
+        model_inputs.input_ids,
+        max_new_tokens=max_length,
+        temperature=temperature,
+        **extra_parameters,  # Add the eos_token_id parameter
     )
     generated_ids = [
         output_ids[len(input_ids) :] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
@@ -1225,7 +1250,7 @@ class LLM_local:
     def __init__(self):
         # 生成一个hash值作为id
         current_time = datetime.datetime.now()
-        self.id = current_time.strftime("%Y_%m_%d_%H_%M_%S")+str(hash(random.randint(0, 1000000)))
+        self.id = current_time.strftime("%Y_%m_%d_%H_%M_%S") + str(hash(random.randint(0, 1000000)))
         global instances
         instances.append(self)
         # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
@@ -1329,7 +1354,12 @@ class LLM_local:
         extra_parameters=None,
     ):
         if not is_enable:
-            return (None, None, None,[],)
+            return (
+                None,
+                None,
+                None,
+                [],
+            )
         self.list = [
             main_brain,
             system_prompt,
@@ -1397,7 +1427,7 @@ class LLM_local:
             }
         ]
         llm_tools_json = json.dumps(llm_tools, ensure_ascii=False, indent=4)
-        if (user_prompt is None or user_prompt.strip() == "") and (image is None or image== []):
+        if (user_prompt is None or user_prompt.strip() == "") and (image is None or image == []):
             with open(self.prompt_path, "r", encoding="utf-8") as f:
                 history = json.load(f)
             return (
@@ -1514,11 +1544,16 @@ class LLM_local:
                 if model_type not in ["llaVa", "llama-guff"]:
                     device = next(model.parameters()).device
                 if model_type == "GLM":
-                    if extra_parameters is not None and extra_parameters !={}:
+                    if extra_parameters is not None and extra_parameters != {}:
                         response, history = model.chat(
-                        tokenizer, user_prompt, history, temperature=temperature, max_length=max_length, role="user",
-                        **extra_parameters
-                    )
+                            tokenizer,
+                            user_prompt,
+                            history,
+                            temperature=temperature,
+                            max_length=max_length,
+                            role="user",
+                            **extra_parameters,
+                        )
                     else:
                         response, history = model.chat(
                             tokenizer, user_prompt, history, temperature=temperature, max_length=max_length, role="user"
@@ -1526,21 +1561,58 @@ class LLM_local:
                     while type(response) == dict:
                         if response["name"] == "interpreter":
                             result = interpreter(str(response["content"]))
-                            if extra_parameters is not None and extra_parameters !={}:
-                                response, history = model.chat(tokenizer, result, history=history, temperature=temperature, max_length=max_length, role="observation", **extra_parameters)
+                            if extra_parameters is not None and extra_parameters != {}:
+                                response, history = model.chat(
+                                    tokenizer,
+                                    result,
+                                    history=history,
+                                    temperature=temperature,
+                                    max_length=max_length,
+                                    role="observation",
+                                    **extra_parameters,
+                                )
                             else:
-                                response, history = model.chat(tokenizer, result, history=history, temperature=temperature, max_length=max_length, role="observation")
+                                response, history = model.chat(
+                                    tokenizer,
+                                    result,
+                                    history=history,
+                                    temperature=temperature,
+                                    max_length=max_length,
+                                    role="observation",
+                                )
                         else:
                             result = dispatch_tool(response["name"], response["parameters"])
                             print(result)
-                            if extra_parameters is not None and extra_parameters !={}:
-                                response, history = model.chat(tokenizer, result, history=history, temperature=temperature, max_length=max_length, role="observation", **extra_parameters)
+                            if extra_parameters is not None and extra_parameters != {}:
+                                response, history = model.chat(
+                                    tokenizer,
+                                    result,
+                                    history=history,
+                                    temperature=temperature,
+                                    max_length=max_length,
+                                    role="observation",
+                                    **extra_parameters,
+                                )
                             else:
-                                response, history = model.chat(tokenizer, result, history=history, temperature=temperature, max_length=max_length, role="observation")
+                                response, history = model.chat(
+                                    tokenizer,
+                                    result,
+                                    history=history,
+                                    temperature=temperature,
+                                    max_length=max_length,
+                                    role="observation",
+                                )
                 elif model_type in ["llama", "Qwen"]:
-                    if extra_parameters is not None and extra_parameters !={}:
+                    if extra_parameters is not None and extra_parameters != {}:
                         response, history = llm_chat(
-                            model, tokenizer, user_prompt, history, device, max_length, temperature=temperature, **extra_parameters
+                            model,
+                            tokenizer,
+                            user_prompt,
+                            history,
+                            device,
+                            max_length,
+                            temperature=temperature,
+                            **extra_parameters,
                         )
                     else:
                         response, history = llm_chat(
@@ -1558,7 +1630,7 @@ class LLM_local:
                         parameters = json.loads("{" + parameters + "}")
                         results = dispatch_tool(tool, parameters)
                         print(results)
-                        if extra_parameters is not None and extra_parameters !={}:
+                        if extra_parameters is not None and extra_parameters != {}:
                             response, history = llm_chat(
                                 model,
                                 tokenizer,
@@ -1567,8 +1639,8 @@ class LLM_local:
                                 device,
                                 max_length,
                                 temperature=temperature,
-                                **extra_parameters
-                        )
+                                **extra_parameters,
+                            )
                         else:
                             response, history = llm_chat(
                                 model,
@@ -1584,13 +1656,10 @@ class LLM_local:
                     from llama_cpp import Llama
 
                     history.append({"role": "user", "content": user_prompt.strip()})
-                    if extra_parameters is not None and extra_parameters !={}:
+                    if extra_parameters is not None and extra_parameters != {}:
                         response = model.create_chat_completion(
-                            messages=history,
-                            max_tokens=max_length,
-                            temperature=temperature,
-                            **extra_parameters
-                    )
+                            messages=history, max_tokens=max_length, temperature=temperature, **extra_parameters
+                        )
                     else:
                         response = model.create_chat_completion(
                             messages=history,
@@ -1611,13 +1680,10 @@ class LLM_local:
                         print(results)
                         history.append({"role": "assistant", "content": json_str})
                         history.append({"role": "observation", "content": results})
-                        if extra_parameters is not None and extra_parameters !={}:
+                        if extra_parameters is not None and extra_parameters != {}:
                             response = model.create_chat_completion(
-                            messages=history,
-                            max_tokens=max_length,
-                            temperature=temperature,
-                            **extra_parameters
-                        )
+                                messages=history, max_tokens=max_length, temperature=temperature, **extra_parameters
+                            )
                         else:
                             response = model.create_chat_completion(
                                 messages=history,
@@ -1643,14 +1709,14 @@ class LLM_local:
                             ],
                         }
                         history.append(user_content)
-                        if extra_parameters is not None and extra_parameters !={}:
+                        if extra_parameters is not None and extra_parameters != {}:
                             response = model.create_chat_completion(
-                            messages=history,
-                            temperature=temperature,
-                            max_tokens=max_length,
-                            stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
-                            **extra_parameters
-                        )
+                                messages=history,
+                                temperature=temperature,
+                                max_tokens=max_length,
+                                stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
+                                **extra_parameters,
+                            )
                         else:
                             response = model.create_chat_completion(
                                 messages=history,
@@ -1665,13 +1731,13 @@ class LLM_local:
                     else:
                         user_content = {"role": "user", "content": user_prompt}
                         history.append(user_content)
-                        if extra_parameters is not None and extra_parameters !={}:
+                        if extra_parameters is not None and extra_parameters != {}:
                             response = model.create_chat_completion(
-                            messages=history,
-                            temperature=temperature,
-                            max_tokens=max_length,
-                            stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
-                        )
+                                messages=history,
+                                temperature=temperature,
+                                max_tokens=max_length,
+                                stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
+                            )
                         else:
                             response = model.create_chat_completion(
                                 messages=history,
@@ -1916,9 +1982,9 @@ NODE_CLASS_MAPPINGS = {
     "load_openai_ebd": load_openai_ebd,
     "json2text": json2text,
     "interpreter_function": interpreter_function,
-    "load_img_path":load_img_path,
-    "img2path":img2path,
-    "load_int":load_int,
+    "load_img_path": load_img_path,
+    "img2path": img2path,
+    "load_int": load_int,
 }
 
 
@@ -2015,8 +2081,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "json2text": "JSON转文本(json2text)",
     "interpreter_function": "解释器函数(interpreter_function)",
     "load_img_path": "从图片路径加载(load_img_from_path)",
-    "img2path":"图片存至路径(img2path)",
-    "load_int":"加载整数(load_int)",
+    "img2path": "图片存至路径(img2path)",
+    "load_int": "加载整数(load_int)",
 }
 
 

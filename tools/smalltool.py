@@ -17,5 +17,5 @@ class load_int:
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
     def tts(self, text):
-        text=int(text)
+        text = int(text)
         return (text,)

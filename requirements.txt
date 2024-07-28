@@ -40,5 +40,6 @@ neo4j
 ChatTTS
 soundfile
 jax
+discord
 # Linux 系统特定依赖项
 ffmpeg; sys_platform == 'linux'

@@ -164,3 +164,6 @@ temp/
 WeChat_temp/
 audio/
 record/
+run_bot.py
+discord_temp
+discord_send
