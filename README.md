@@ -19,10 +19,11 @@
 C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​﻿‎‍​﻿‍‏​‍﻿‌​﻿‌‏omfyui_llm_party aims to develop a complete set of nodes for LLM workflow construction based on [comfyui](https://github.com/comfyanonymous/ComfyUI) as the front end. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.
 
 ## Latest update
-1. Added the function of connecting the agent to Feishu, thank you very much [guobalove](https://github.com/guobalove) for your contribution! Refer to the workflow [Feishu robot](workflow/飞书机器人.json).
-2. Added universal API call node and a large number of auxiliary nodes for constructing the request body and grabbing the information in the response.
-3. Added empty model node, you can uninstall LLM from video memory at any location!
-4. The [chatTTS](https://github.com/2noise/ChatTTS) node has been added, thank you very much for the contribution of [guobalove](https://github.com/guobalove)! `model_path` parameter can be empty! It is recommended to use `HF` mode to load the model, the model will be automatically downloaded from hugging face, no need to download manually; if using `local` loading, please put the model's`asset` and `config` folders in the root directory. [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu; if using `custom` mode to load, please put the model's `asset` and `config` folders under `model_path`.
+1. Added the function of connecting the agent to discord. (still testing)
+2. Added the function of connecting the agent to Feishu, thank you very much [guobalove](https://github.com/guobalove) for your contribution! Refer to the workflow [Feishu robot](workflow/飞书机器人.json).
+3. Added universal API call node and a large number of auxiliary nodes for constructing the request body and grabbing the information in the response.
+4. Added empty model node, you can uninstall LLM from video memory at any location!
+5. The [chatTTS](https://github.com/2noise/ChatTTS) node has been added, thank you very much for the contribution of [guobalove](https://github.com/guobalove)! `model_path` parameter can be empty! It is recommended to use `HF` mode to load the model, the model will be automatically downloaded from hugging face, no need to download manually; if using `local` loading, please put the model's`asset` and `config` folders in the root directory. [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu; if using `custom` mode to load, please put the model's `asset` and `config` folders under `model_path`.
 
 ## User Guide
 1. For the instructions for using the node, please refer to: [how to use nodes](how_to_use_nodes.md)
