@@ -135,9 +135,9 @@ class api_function:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def api(self, url, parameters, api_key="", request_type="get",timeout=60):
+    def api(self, url, parameters, api_key="", request_type="get", timeout=60):
         headers = {"Authorization": f"Bearer {api_key}"} if api_key else {}
-        
+
         if request_type.lower() == "post":
             response = requests.post(url, json=parameters, headers=headers, timeout=timeout)
         else:  # 默认使用 GET 请求
