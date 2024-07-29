@@ -100,12 +100,13 @@ class json_get_value:
             return (None,)
         try:
             data = json.loads(text)
-            # 如果是字典，按key取值
-            if isinstance(data, dict):
-                out = data[key]
-            # 如果是列表，按索引取值
-            elif isinstance(data, list):
-                out = data[int(key)]
+            try:
+                if isinstance(data, dict):
+                    out = data[key]
+                elif isinstance(data, list):
+                    out = data[int(key)]
+            except (KeyError, IndexError, ValueError):
+                return (None,)
             # 判断是否为列表或者是字典
             if isinstance(out, list) or isinstance(out, dict):
                 out = json.dumps(out, ensure_ascii=False, indents=4)

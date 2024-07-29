@@ -131,7 +131,7 @@ from .tools.search_web import (
     search_web_bing,
 )
 from .tools.show_text import About_us, show_text_party
-from .tools.smalltool import load_int
+from .tools.smalltool import load_int,none2false
 from .tools.story import read_story_json, story_json_tool
 from .tools.text_iterator import text_iterator
 from .tools.tool_combine import tool_combine, tool_combine_plus
@@ -1985,6 +1985,7 @@ NODE_CLASS_MAPPINGS = {
     "load_img_path": load_img_path,
     "img2path": img2path,
     "load_int": load_int,
+    "none2false":none2false,
 }
 
 
@@ -2083,6 +2084,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "load_img_path": "从图片路径加载(load_img_from_path)",
     "img2path": "图片存至路径(img2path)",
     "load_int": "加载整数(load_int)",
+    "none2false":" None转False(None2false)",
 }
 
 

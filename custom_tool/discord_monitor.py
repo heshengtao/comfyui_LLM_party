@@ -44,7 +44,7 @@ class discord_file_monitor:
                 earliest_file = min(json_files, key=lambda f: os.path.getctime(os.path.join(discord_temp_dir, f)))
                 file_path = os.path.join(discord_temp_dir, earliest_file)
                 # 读取文件内容并转换为字符串
-                with open(file_path, 'r') as file:
+                with open(file_path, 'r', encoding='utf-8') as file:
                     content = json.load(file)
                 # 删除文件
                 os.remove(file_path)

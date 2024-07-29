@@ -20,7 +20,7 @@ class discord_bot:
             "required": {
                 "token": ("STRING", {"default": ""}),
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "function_name": ("STRING", {"default": '["ping", "add"]'}),
+                "function_name": ("STRING", {"default": '["text","draw", "speak"]'}),
             }
         }
 
@@ -33,7 +33,7 @@ class discord_bot:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def bot(self, token, function_name='["ping", "add"]', is_enable=True):
+    def bot(self, token, function_name='["text","draw", "speak"]', is_enable=True):
         if not is_enable:
             return ()
         
@@ -85,7 +85,7 @@ def read_res():
             earliest_file = min(json_files, key=lambda f: os.path.getctime(os.path.join(discord_send_dir, f)))
             file_path = os.path.join(discord_send_dir, earliest_file)
             # 读取文件内容并转换为字符串
-            with open(file_path, 'r') as file:
+            with open(file_path, 'r', encoding='utf-8') as file:
                 content = json.load(file)
             # 删除文件
             os.remove(file_path)
@@ -125,7 +125,7 @@ async def process_task(ctx):
 @bot.hybrid_command()
 async def {command}(ctx, input):
     await save_input("{command}", input)
-    await ctx.send("正在处理，请稍候...")
+    await ctx.send(f"Thinking about {{input}} ...")
     process_task.start(ctx)
 """)
             

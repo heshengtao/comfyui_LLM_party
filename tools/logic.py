@@ -127,6 +127,8 @@ class substring:
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
     def substr(self, input_string, start_string="", end_string=""):
+        if input_string =="" or input_string is None:
+            return (None, None)
         if start_string == "" and end_string == "":
             out = input_string
             remaining_string = ""
