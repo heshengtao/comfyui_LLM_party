@@ -49,12 +49,12 @@ def install_llama(system_info):
         avx = "AVX2" if system_info["avx2"] else "AVX"
 
         # 根据不同操作系统构建安装命令
-        if system_info["os"] == "Linux" or system_info["os"] == "Windows":
+        if system_info["os"] in ["Linux", "Windows"]:
             if system_info["gpu"]:
                 cuda_version = system_info["cuda_version"]
                 custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
             else:
-                custom_command = f"llama-cpp-python=={lcpp_version}"
+                custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{platform_tag}.whl"
         elif system_info["os"] == "Darwin":
             if "arm64" in platform.machine():
                 # MPS设备，使用Metal后端
@@ -68,6 +68,10 @@ def install_llama(system_info):
 
         # 执行安装命令
         install_package("llama-cpp-python", custom_command=custom_command)
+
+        # 清除环境变量
+        if "CMAKE_ARGS" in os.environ:
+            del os.environ["CMAKE_ARGS"]
 
 
 def get_comfy_dir(subpath=None, mkdir=False):
