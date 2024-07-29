@@ -61,6 +61,16 @@ async def synccommands(ctx):
     await bot.tree.sync()
     await ctx.send("Commands synced")
 
+@bot.hybrid_command()
+async def join(ctx):
+    await ctx.defer()
+    if ctx.author.voice:
+        channel = ctx.author.voice.channel
+        await channel.connect()
+        await ctx.send("已成功连接到语音频道！")
+    else:
+        await ctx.send("你需要在语音频道中才能使用这个命令。")
+
 # 保存输入到 JSON 文件的函数
 async def save_input(command, input):
     timestamp = int(time.time())
