@@ -168,3 +168,7 @@ run_bot.py
 discord_temp
 discord_send
 QQ_temp
+QQ_bot.py
+QQ_get_chat_id.py
+QQ_monitor.py
+qq_send_msg.py
