@@ -54,11 +54,27 @@ def install_package(package_name, custom_command=None):
 def package_is_installed(package_name):
     return importlib.util.find_spec(package_name) is not None
 
+def install_visual_studio_cpp():
+    print("请确保已安装 Visual Studio 并选择了 C++ 开发组件。")
+    user_input = input("是否需要自动下载和安装 Visual Studio 的 C++ 开发组件？(y/n): ")
+    if user_input.lower() == 'y':
+        try:
+            # 下载 Visual Studio 安装程序
+            subprocess.run(["curl", "-o", "vs_installer.exe", "https://aka.ms/vs/17/release/vs_installer.exe"], check=True)
+            # 运行 Visual Studio 安装程序并选择 C++ 开发组件
+            subprocess.run(["vs_installer.exe", "--add", "Microsoft.VisualStudio.Workload.NativeDesktop", "--includeRecommended", "--quiet", "--wait"], check=True)
+            print("Visual Studio 的 C++ 开发组件已成功安装。")
+        except subprocess.CalledProcessError as e:
+            print(f"安装过程中出现错误: {e}")
+    else:
+        print("请手动安装 Visual Studio 并选择 C++ 开发组件。")
+
 def install_llama(system_info):
     imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
     if imported:
         print("llama-cpp installed")
     else:
+        install_visual_studio_cpp()
         lcpp_version = latest_lamacpp(system_info)
         base_url = "https://github.com/abetlen/llama-cpp-python/releases/download/v"
         avx = "AVX2" if system_info['avx2'] else "AVX"
