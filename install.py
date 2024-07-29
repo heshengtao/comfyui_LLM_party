@@ -63,10 +63,10 @@ def install_llama(system_info):
         base_url = "https://github.com/abetlen/llama-cpp-python/releases/download/v"
         avx = "AVX2" if system_info['avx2'] else "AVX"
         python_version = get_python_version()
-        if system_info['gpu']:
+        if system_info.get('gpu', False):
             cuda_version = system_info['cuda_version']
             custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
-        elif system_info['metal']:
+        elif system_info.get('metal', False):
             custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
         else:
             custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
