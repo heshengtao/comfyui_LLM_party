@@ -44,7 +44,6 @@ from .tools.api_tool import (
     parameter_function,
     use_api_tool,
 )
-from .tools.arxiv import arxiv_tool, get_arxiv
 from .tools.check_web import check_web, check_web_tool
 from .tools.classify_function import classify_function, classify_function_plus
 from .tools.classify_persona import classify_persona, classify_persona_plus
@@ -131,7 +130,7 @@ from .tools.search_web import (
     search_web_bing,
 )
 from .tools.show_text import About_us, show_text_party
-from .tools.smalltool import load_int,none2false
+from .tools.smalltool import load_int,none2false,bool_logic
 from .tools.story import read_story_json, story_json_tool
 from .tools.text_iterator import text_iterator
 from .tools.tool_combine import tool_combine, tool_combine_plus
@@ -155,7 +154,6 @@ _TOOL_HOOKS = [
     "use_api_tool",
     "get_accuweather",
     "get_wikipedia",
-    "get_arxiv",
     "work_flow",
     "search_github_repositories",
     "send_wechat",
@@ -1932,7 +1930,6 @@ NODE_CLASS_MAPPINGS = {
     "api_tool": api_tool,
     "wikipedia_tool": wikipedia_tool,
     "load_wikipedia": load_wikipedia,
-    "arxiv_tool": arxiv_tool,
     "workflow_transfer": workflow_transfer,
     "About_us": About_us,
     "workflow_tool": workflow_tool,
@@ -1986,6 +1983,7 @@ NODE_CLASS_MAPPINGS = {
     "img2path": img2path,
     "load_int": load_int,
     "none2false":none2false,
+    "bool_logic":bool_logic,
 }
 
 
@@ -2031,7 +2029,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "api_tool": "API工具(api_tool)",
     "wikipedia_tool": "维基百科工具(wikipedia_tool)",
     "load_wikipedia": "加载维基百科(load_wikipedia)",
-    "arxiv_tool": "arxiv工具(arxiv_tool)",
     "workflow_transfer": "工作流中转器(workflow_transfer)",
     "About_us": "关于我们(About_us)",
     "workflow_tool": "工作流工具(workflow_tool)",
@@ -2084,7 +2081,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "load_img_path": "从图片路径加载(load_img_from_path)",
     "img2path": "图片存至路径(img2path)",
     "load_int": "加载整数(load_int)",
-    "none2false":" None转False(None2false)",
+    "none2false":"None转False(None2false)",
+    "bool_logic":"布尔逻辑(bool_logic)"
 }
 
 
