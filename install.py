@@ -163,7 +163,7 @@ def install_llama(system_info):
     if imported:
         print("llama-cpp installed")
     else:
-        install_cmake()
+        #install_cmake()
         lcpp_version = latest_lamacpp(system_info)
         base_url = "https://github.com/abetlen/llama-cpp-python/releases/download/v"
         avx = "AVX2" if system_info['avx2'] else "AVX"
