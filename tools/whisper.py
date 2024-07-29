@@ -49,7 +49,7 @@ class listen_audio:
             },
         }
 
-    RETURN_TYPES = ("AUDIO",)
+    RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("audio",)
 
     FUNCTION = "listen"
@@ -88,7 +88,7 @@ class openai_whisper:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "audio": ("AUDIO", {}),
+                "audio": ("STRING", {}),
             },
             "optional": {
                 "base_url": (
