@@ -29,13 +29,13 @@ def latest_lamacpp(system_info):
         for release in releases:
             tag_name = release["tag_name"].lower()
             if system_info.get('gpu', False):
-                if "cuda" in tag_name:
+                if "cu" in tag_name:
                     return release["tag_name"].replace("v", "")
             elif system_info.get('metal', False):
                 if "metal" in tag_name:
                     return release["tag_name"].replace("v", "")
             else:
-                if "cuda" not in tag_name and "metal" not in tag_name:
+                if "cu" not in tag_name and "metal" not in tag_name:
                     return release["tag_name"].replace("v", "")
         return "0.2.20"
     except Exception:
