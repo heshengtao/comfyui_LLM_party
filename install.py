@@ -69,8 +69,14 @@ def install_visual_studio_cpp():
         print("Visual Studio 的 C++ 开发组件已安装。")
     else:
         print("请确保已安装 Visual Studio 并选择了 C++ 开发组件。")
-        user_input = input("是否需要自动下载和安装 Visual Studio 的 C++ 开发组件？(y/n): ")
-        if user_input.lower() == 'y':
+        while True:
+            user_input = input("是否需要自动下载和安装 Visual Studio 的 C++ 开发组件？(y/n): ").strip().lower()
+            if user_input in ['y', 'n']:
+                break
+            else:
+                print("无效输入，请输入 'y' 或 'n'。")
+        
+        if user_input == 'y':
             try:
                 # 下载 Visual Studio 安装程序
                 subprocess.run(["curl", "-o", "vs_installer.exe", "https://aka.ms/vs/17/release/vs_installer.exe"], check=True)
