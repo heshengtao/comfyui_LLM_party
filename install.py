@@ -28,10 +28,10 @@ def latest_lamacpp(system_info):
         releases = response.json()
         for release in releases:
             tag_name = release["tag_name"].lower()
-            if system_info['gpu']:
+            if system_info.get('gpu', False):
                 if "cuda" in tag_name:
                     return release["tag_name"].replace("v", "")
-            elif system_info['metal']:
+            elif system_info.get('metal', False):
                 if "metal" in tag_name:
                     return release["tag_name"].replace("v", "")
             else:
@@ -67,7 +67,7 @@ def install_llama(system_info):
             cuda_version = system_info['cuda_version']
             custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
         elif system_info['metal']:
-            custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-macosx_11_0_arm64.whl"
+            custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
         else:
             custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
         install_package("llama-cpp-python", custom_command=custom_command)
