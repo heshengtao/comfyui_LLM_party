@@ -22,16 +22,20 @@ def get_python_version():
     else:
         return None
 
-def latest_lamacpp(gpu=False):
+def latest_lamacpp(system_info):
     try:
         response = get("https://api.github.com/repos/abetlen/llama-cpp-python/releases")
         releases = response.json()
         for release in releases:
-            if gpu:
-                if "cuda" in release["tag_name"].lower():
+            tag_name = release["tag_name"].lower()
+            if system_info['gpu']:
+                if "cuda" in tag_name:
+                    return release["tag_name"].replace("v", "")
+            elif system_info['metal']:
+                if "metal" in tag_name:
                     return release["tag_name"].replace("v", "")
             else:
-                if "cuda" not in release["tag_name"].lower():
+                if "cuda" not in tag_name and "metal" not in tag_name:
                     return release["tag_name"].replace("v", "")
         return "0.2.20"
     except Exception:
@@ -55,15 +59,17 @@ def install_llama(system_info):
     if imported:
         print("llama-cpp installed")
     else:
-        lcpp_version = latest_lamacpp(system_info['gpu'])
+        lcpp_version = latest_lamacpp(system_info)
         base_url = "https://github.com/abetlen/llama-cpp-python/releases/download/v"
         avx = "AVX2" if system_info['avx2'] else "AVX"
         python_version = get_python_version()
         if system_info['gpu']:
             cuda_version = system_info['cuda_version']
             custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
+        elif system_info['metal']:
+            custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-macosx_11_0_arm64.whl"
         else:
-            custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}-none-any.whl"
+            custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
         install_package("llama-cpp-python", custom_command=custom_command)
 
 
