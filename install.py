@@ -40,38 +40,17 @@ def package_is_installed(package_name):
 def install_llama(system_info):
     imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
     if imported:
-        # 如果已经安装，则不执行任何操作
-        pass
+        print("llama-cpp installed")
     else:
         lcpp_version = latest_lamacpp()
         base_url = "https://github.com/abetlen/llama-cpp-python/releases/download/v"
-        platform_tag = system_info["platform_tag"]
-        avx = "AVX2" if system_info["avx2"] else "AVX"
-
-        # 根据不同操作系统构建安装命令
-        if system_info["os"] in ["Linux", "Windows"]:
-            if system_info["gpu"]:
-                cuda_version = system_info["cuda_version"]
-                custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
-            else:
-                custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{platform_tag}.whl"
-        elif system_info["os"] == "Darwin":
-            if "arm64" in platform.machine():
-                # MPS设备，使用Metal后端
-                os.environ["CMAKE_ARGS"] = "-DLLAMA_METAL=on"
-                custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{platform_tag}.whl"
-            else:
-                # 非MPS设备，使用AVX指令集
-                custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{avx}-{platform_tag}.whl"
+        avx = "AVX2" if system_info['avx2'] else "AVX"
+        if system_info['gpu']:
+            cuda_version = system_info['cuda_version']
+            custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
         else:
-            raise ValueError("不支持的操作系统")
-
-        # 执行安装命令
+            custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{system_info['platform_tag']}.whl"
         install_package("llama-cpp-python", custom_command=custom_command)
-
-        # 清除环境变量
-        if "CMAKE_ARGS" in os.environ:
-            del os.environ["CMAKE_ARGS"]
 
 
 def get_comfy_dir(subpath=None, mkdir=False):
