@@ -54,23 +54,20 @@ def install_package(package_name, custom_command=None):
 def package_is_installed(package_name):
     return importlib.util.find_spec(package_name) is not None
 
-def is_visual_studio_cpp_installed():
+def is_cmake_installed_win():
     try:
-        # 检查是否安装了 Visual Studio 的 C++ 开发组件
-        result = subprocess.run(["vswhere", "-products", "*", "-requires", "Microsoft.VisualStudio.Component.VC.Tools.x86.x64", "-property", "installationPath"], capture_output=True, text=True)
-        return result.stdout.strip() != ""
+        result = subprocess.run(["cmake", "--version"], capture_output=True, text=True)
+        return result.returncode == 0
     except FileNotFoundError:
-        # 如果 vswhere 工具未找到，提示用户安装 Visual Studio Installer
-        print("未找到 vswhere 工具，请确保已安装 Visual Studio Installer。")
         return False
 
-def install_visual_studio_cpp():
-    if is_visual_studio_cpp_installed():
-        print("Visual Studio 的 C++ 开发组件已安装。")
+def install_cmake_win():
+    if is_cmake_installed_win():
+        print("CMake 已安装。")
     else:
-        print("请确保已安装 Visual Studio 并选择了 C++ 开发组件。")
+        print("请确保已安装 CMake。")
         while True:
-            user_input = input("是否需要自动下载和安装 Visual Studio 的 C++ 开发组件？(y/n): ").strip().lower()
+            user_input = input("是否需要自动下载和安装 CMake？(y/n): ").strip().lower()
             if user_input in ['y', 'n']:
                 break
             else:
@@ -78,15 +75,15 @@ def install_visual_studio_cpp():
         
         if user_input == 'y':
             try:
-                # 下载 Visual Studio 安装程序
-                subprocess.run(["curl", "-o", "vs_installer.exe", "https://aka.ms/vs/17/release/vs_installer.exe"], check=True)
-                # 运行 Visual Studio 安装程序并选择 C++ 开发组件
-                subprocess.run(["vs_installer.exe", "--add", "Microsoft.VisualStudio.Workload.NativeDesktop", "--includeRecommended", "--quiet", "--wait"], check=True)
-                print("Visual Studio 的 C++ 开发组件已成功安装。")
+                # 下载 CMake 安装程序
+                subprocess.run(["curl", "-o", "cmake_installer.msi", "https://cmake.org/files/v3.26/cmake-3.26.0-windows-x86_64.msi"], check=True)
+                # 运行 CMake 安装程序
+                subprocess.run(["msiexec", "/i", "cmake_installer.msi", "/quiet", "/norestart"], check=True)
+                print("CMake 已成功安装。")
             except subprocess.CalledProcessError as e:
                 print(f"安装过程中出现错误: {e}")
         else:
-            print("请手动安装 Visual Studio 并选择 C++ 开发组件。")
+            print("请手动安装 CMake。")
 
 def is_cmake_installed_mac():
     try:
@@ -100,7 +97,12 @@ def install_cmake_mac():
         print("CMake 已安装。")
     else:
         print("请确保已安装 Homebrew。")
-        user_input = input("是否需要自动下载和安装 CMake？(y/n): ").strip().lower()
+        while True:
+            user_input = input("是否需要自动下载和安装 CMake？(y/n): ").strip().lower()
+            if user_input in ['y', 'n']:
+                break
+            else:
+                print("无效输入，请输入 'y' 或 'n'。")
         if user_input == 'y':
             try:
                 subprocess.run(["brew", "install", "cmake"], check=True)
@@ -122,10 +124,23 @@ def install_cmake_linux():
         print("CMake 已安装。")
     else:
         print("请确保已安装包管理器（如 apt 或 yum）。")
-        user_input = input("是否需要自动下载和安装 CMake？(y/n): ").strip().lower()
+        while True:
+            user_input = input("是否需要自动下载和安装 CMake？(y/n): ").strip().lower()
+            if user_input in ['y', 'n']:
+                break
+            else:
+                print("无效输入，请输入 'y' 或 'n'。")
+        
         if user_input == 'y':
             try:
-                subprocess.run(["sudo", "apt-get", "install", "-y", "cmake"], check=True)
+                # 检查并使用适当的包管理器进行安装
+                if subprocess.run(["which", "apt-get"], capture_output=True, text=True).returncode == 0:
+                    subprocess.run(["apt-get", "update"], check=True)
+                    subprocess.run(["apt-get", "install", "-y", "cmake"], check=True)
+                elif subprocess.run(["which", "yum"], capture_output=True, text=True).returncode == 0:
+                    subprocess.run(["yum", "install", "-y", "cmake"], check=True)
+                else:
+                    print("未找到适用的包管理器，请手动安装 CMake。")
                 print("CMake 已成功安装。")
             except subprocess.CalledProcessError as e:
                 print(f"安装过程中出现错误: {e}")
@@ -135,14 +150,14 @@ def install_cmake_linux():
 def install_cmake():
     os_name = platform.system()
     if os_name == "Windows":
-        install_visual_studio_cpp()
+        install_cmake_win()
     elif os_name == "Darwin":  # macOS
         install_cmake_mac()
     elif os_name == "Linux":
         install_cmake_linux()
     else:
         print(f"不支持的操作系统: {os_name}")
-        
+
 def install_llama(system_info):
     imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
     if imported:
