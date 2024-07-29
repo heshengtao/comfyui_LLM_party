@@ -14,13 +14,20 @@ from requests import get
 from server import PromptServer
 
 
+def get_python_version():
+    """Return the Python version in a concise format, e.g., '39' for Python 3.9."""
+    version_match = re.match(r"3\.(\d+)", platform.python_version())
+    if version_match:
+        return "3" + version_match.group(1)
+    else:
+        return None
+
 def latest_lamacpp():
     try:
         response = get("https://api.github.com/repos/abetlen/llama-cpp-python/releases/latest")
         return response.json()["tag_name"].replace("v", "")
     except Exception:
         return "0.2.20"
-
 
 def install_package(package_name, custom_command=None):
     if not package_is_installed(package_name):
@@ -32,10 +39,8 @@ def install_package(package_name, custom_command=None):
     else:
         print(f"{package_name} is already installed.")
 
-
 def package_is_installed(package_name):
     return importlib.util.find_spec(package_name) is not None
-
 
 def install_llama(system_info):
     imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
@@ -45,11 +50,12 @@ def install_llama(system_info):
         lcpp_version = latest_lamacpp()
         base_url = "https://github.com/abetlen/llama-cpp-python/releases/download/v"
         avx = "AVX2" if system_info['avx2'] else "AVX"
+        python_version = get_python_version()
         if system_info['gpu']:
             cuda_version = system_info['cuda_version']
             custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
         else:
-            custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-{system_info['platform_tag']}.whl"
+            custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
         install_package("llama-cpp-python", custom_command=custom_command)
 
 
@@ -91,16 +97,6 @@ def copy_js_files():
         source_file = os.path.join(current_folder, "web", file_name)
         target_file = os.path.join(target_folder, file_name)
         shutil.copy2(source_file, target_file)
-
-
-def get_python_version():
-    """Return the Python version in a concise format, e.g., '39' for Python 3.9."""
-    version_match = re.match(r"3\.(\d+)", platform.python_version())
-    if version_match:
-        return "3" + version_match.group(1)
-    else:
-        return None
-
 
 def get_system_info():
     """Gather system information related to NVIDIA GPU, CUDA version, AVX2 support, Python version, OS, and platform tag."""
