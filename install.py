@@ -88,12 +88,67 @@ def install_visual_studio_cpp():
         else:
             print("请手动安装 Visual Studio 并选择 C++ 开发组件。")
 
+def is_cmake_installed_mac():
+    try:
+        result = subprocess.run(["cmake", "--version"], capture_output=True, text=True)
+        return result.returncode == 0
+    except FileNotFoundError:
+        return False
+
+def install_cmake_mac():
+    if is_cmake_installed_mac():
+        print("CMake 已安装。")
+    else:
+        print("请确保已安装 Homebrew。")
+        user_input = input("是否需要自动下载和安装 CMake？(y/n): ").strip().lower()
+        if user_input == 'y':
+            try:
+                subprocess.run(["brew", "install", "cmake"], check=True)
+                print("CMake 已成功安装。")
+            except subprocess.CalledProcessError as e:
+                print(f"安装过程中出现错误: {e}")
+        else:
+            print("请手动安装 CMake。")
+
+def is_cmake_installed_linux():
+    try:
+        result = subprocess.run(["cmake", "--version"], capture_output=True, text=True)
+        return result.returncode == 0
+    except FileNotFoundError:
+        return False
+
+def install_cmake_linux():
+    if is_cmake_installed_linux():
+        print("CMake 已安装。")
+    else:
+        print("请确保已安装包管理器（如 apt 或 yum）。")
+        user_input = input("是否需要自动下载和安装 CMake？(y/n): ").strip().lower()
+        if user_input == 'y':
+            try:
+                subprocess.run(["sudo", "apt-get", "install", "-y", "cmake"], check=True)
+                print("CMake 已成功安装。")
+            except subprocess.CalledProcessError as e:
+                print(f"安装过程中出现错误: {e}")
+        else:
+            print("请手动安装 CMake。")
+
+def install_cmake():
+    os_name = platform.system()
+    if os_name == "Windows":
+        install_visual_studio_cpp()
+    elif os_name == "Darwin":  # macOS
+        install_cmake_mac()
+    elif os_name == "Linux":
+        install_cmake_linux()
+    else:
+        print(f"不支持的操作系统: {os_name}")
+        
 def install_llama(system_info):
     imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
     if imported:
         print("llama-cpp installed")
     else:
-        install_visual_studio_cpp()
+        install_cmake()
         lcpp_version = latest_lamacpp(system_info)
         base_url = "https://github.com/abetlen/llama-cpp-python/releases/download/v"
         avx = "AVX2" if system_info['avx2'] else "AVX"
