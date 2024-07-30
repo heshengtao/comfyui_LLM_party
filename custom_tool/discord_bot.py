@@ -152,7 +152,17 @@ if __name__ == "__main__":
         elif sys.platform == "darwin":  # macOS
             subprocess.Popen(["open", "-a", "Terminal", sys.executable, run_bot_code], start_new_session=True)
         else:  # Linux
-            subprocess.Popen(["gnome-terminal", "--", sys.executable, run_bot_code], start_new_session=True)
+            # Try gnome-terminal, then xterm, then konsole
+            try:
+                subprocess.Popen(["gnome-terminal", "--", sys.executable, run_bot_code], start_new_session=True)
+            except FileNotFoundError:
+                try:
+                    subprocess.Popen(["xterm", "-e", sys.executable, run_bot_code], start_new_session=True)
+                except FileNotFoundError:
+                    try:
+                        subprocess.Popen(["konsole", "-e", sys.executable, run_bot_code], start_new_session=True)
+                    except FileNotFoundError:
+                        print("No compatible terminal emulator found. Please install gnome-terminal, xterm, or konsole.")
         
         return ()
     
