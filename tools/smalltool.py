@@ -58,8 +58,8 @@ class bool_logic:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "boolA": ("BOOLEAN", {}),
-                "boolB": ("BOOLEAN", {}),
+                "A": ("BOOLEAN", {}),
+                "B": ("BOOLEAN", {}),
                 "logic_type":(["and", "or", "not","Nor", "Nand", "Xor", "Xnor"], {"default": "and"}),
             },
         }
