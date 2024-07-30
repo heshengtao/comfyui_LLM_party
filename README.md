@@ -173,3 +173,7 @@ This open-source project and its contents (hereinafter referred to as "Project")
 </div>
 
 ### If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [Bilibili artificial intelligence robot](https://space.bilibili.com/26978344)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)

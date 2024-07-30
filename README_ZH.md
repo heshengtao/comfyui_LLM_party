@@ -173,3 +173,7 @@ C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​�
 </div>
 
 ### 如果想持续关注本项目的最新功能，欢迎关注B站账号：[哔哩哔哩人工智能机器人](https://space.bilibili.com/26978344)
+
+## 星标历史
+
+[![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)
