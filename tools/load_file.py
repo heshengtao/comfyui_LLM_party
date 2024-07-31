@@ -92,7 +92,7 @@ class load_file:
         return {
             "required": {
                 "absolute_path": ("STRING", {"default": ""}),
-                "relative_path": (paths, {"default": "test.json"}),
+                "relative_path": (paths, {"default": "test.txt"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             },
             "optional": {},
