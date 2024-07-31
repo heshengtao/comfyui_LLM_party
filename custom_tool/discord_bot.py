@@ -20,7 +20,7 @@ class discord_bot:
             "required": {
                 "token": ("STRING", {"default": ""}),
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "function_name": ("STRING", {"default": '["text","draw", "speak"]'}),
+                "function_name": ("STRING", {"default": '["ping", "add"]'}),
             }
         }
 
@@ -33,7 +33,7 @@ class discord_bot:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def bot(self, token, function_name='["text","draw", "speak"]', is_enable=True):
+    def bot(self, token, function_name='["ping", "add"]', is_enable=True):
         if not is_enable:
             return ()
         
@@ -61,16 +61,6 @@ async def synccommands(ctx):
     await bot.tree.sync()
     await ctx.send("Commands synced")
 
-@bot.hybrid_command()
-async def join(ctx):
-    await ctx.defer()
-    if ctx.author.voice:
-        channel = ctx.author.voice.channel
-        await channel.connect()
-        await ctx.send("已成功连接到语音频道！")
-    else:
-        await ctx.send("你需要在语音频道中才能使用这个命令。")
-
 # 保存输入到 JSON 文件的函数
 async def save_input(command, input):
     timestamp = int(time.time())
@@ -95,7 +85,7 @@ def read_res():
             earliest_file = min(json_files, key=lambda f: os.path.getctime(os.path.join(discord_send_dir, f)))
             file_path = os.path.join(discord_send_dir, earliest_file)
             # 读取文件内容并转换为字符串
-            with open(file_path, 'r', encoding='utf-8') as file:
+            with open(file_path, 'r') as file:
                 content = json.load(file)
             # 删除文件
             os.remove(file_path)
@@ -135,7 +125,7 @@ async def process_task(ctx):
 @bot.hybrid_command()
 async def {command}(ctx, input):
     await save_input("{command}", input)
-    await ctx.send(f"Thinking about {{input}} ...")
+    await ctx.send("正在处理，请稍候...")
     process_task.start(ctx)
 """)
             
@@ -152,17 +142,13 @@ if __name__ == "__main__":
         elif sys.platform == "darwin":  # macOS
             subprocess.Popen(["open", "-a", "Terminal", sys.executable, run_bot_code], start_new_session=True)
         else:  # Linux
-            # Try gnome-terminal, then xterm, then konsole
             try:
-                subprocess.Popen(["gnome-terminal", "--", sys.executable, run_bot_code], start_new_session=True)
+                subprocess.Popen(["screen", "-dmS", "bot_session", sys.executable, run_bot_code], start_new_session=True)
             except FileNotFoundError:
                 try:
-                    subprocess.Popen(["xterm", "-e", sys.executable, run_bot_code], start_new_session=True)
+                    subprocess.Popen(["tmux", "new-session", "-d", sys.executable, run_bot_code], start_new_session=True)
                 except FileNotFoundError:
-                    try:
-                        subprocess.Popen(["konsole", "-e", sys.executable, run_bot_code], start_new_session=True)
-                    except FileNotFoundError:
-                        print("No compatible terminal emulator found. Please install gnome-terminal, xterm, or konsole.")
+                    print("No compatible terminal multiplexer found. Please install screen or tmux.")
         
         return ()
     
