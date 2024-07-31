@@ -1,6 +1,6 @@
 {
-  "last_node_id": 77,
-  "last_link_id": 100,
+  "last_node_id": 78,
+  "last_link_id": 102,
   "nodes": [
     {
       "id": 72,
@@ -83,58 +83,6 @@
       "bgcolor": "#3f5159"
     },
     {
-      "id": 75,
-      "type": "ebd_tool",
-      "pos": [
-        387,
-        339
-      ],
-      "size": {
-        "0": 315,
-        "1": 202
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": 97,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": [
-            99
-          ],
-          "shape": 3,
-          "label": "tool",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ebd_tool"
-      },
-      "widgets_values": [
-        "D:\\AI\\mychat\\model\\bge-large-zh",
-        "enable",
-        "",
-        5,
-        "auto",
-        200,
-        50
-      ],
-      "color": "#323",
-      "bgcolor": "#535"
-    },
-    {
       "id": 76,
       "type": "load_file",
       "pos": [
@@ -153,7 +101,7 @@
           "name": "file_content",
           "type": "STRING",
           "links": [
-            97
+            101
           ],
           "shape": 3,
           "label": "file_content",
@@ -178,10 +126,10 @@
         740,
         330
       ],
-      "size": [
-        404.95622575718266,
-        464.72863657723076
-      ],
+      "size": {
+        "0": 404.95623779296875,
+        "1": 466
+      },
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -217,7 +165,7 @@
         {
           "name": "tools",
           "type": "STRING",
-          "link": 99,
+          "link": 102,
           "widget": {
             "name": "tools"
           }
@@ -282,19 +230,61 @@
         "",
         "",
         100,
+        "",
+        true
+      ]
+    },
+    {
+      "id": 78,
+      "type": "ebd_tool",
+      "pos": [
+        387,
+        339
+      ],
+      "size": [
+        315,
+        226
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 101,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            102
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ebd_tool"
+      },
+      "widgets_values": [
+        "",
+        "enable",
+        5,
+        "auto",
+        200,
+        50,
+        "",
         ""
       ]
     }
   ],
   "links": [
-    [
-      97,
-      76,
-      0,
-      75,
-      0,
-      "STRING"
-    ],
     [
       98,
       74,
@@ -304,19 +294,27 @@
       "CUSTOM"
     ],
     [
-      99,
-      75,
-      0,
-      77,
-      4,
-      "STRING"
-    ],
-    [
       100,
       77,
       0,
       72,
       0,
+      "STRING"
+    ],
+    [
+      101,
+      76,
+      0,
+      78,
+      0,
+      "STRING"
+    ],
+    [
+      102,
+      78,
+      0,
+      77,
+      4,
       "STRING"
     ]
   ],
@@ -324,10 +322,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.7513148009015777,
+      "scale": 0.8264462809917354,
       "offset": {
-        "0": 13.538023876606491,
-        "1": 147.4177459911288
+        "0": 26.162674638991078,
+        "1": 6.341303652705278
       }
     }
   },
