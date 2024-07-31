@@ -11,7 +11,6 @@ import packaging.tags
 import pkg_resources
 import torch
 from requests import get
-from server import PromptServer
 
 
 def get_python_version():
@@ -178,22 +177,21 @@ def install_llama(system_info):
         install_package("llama-cpp-python", custom_command=custom_command)
 
 
-def get_comfy_dir(subpath=None, mkdir=False):
-    dir = os.path.dirname(inspect.getfile(PromptServer))
-    if subpath is not None:
-        dir = os.path.join(dir, subpath)
-
-    dir = os.path.abspath(dir)
-
-    if mkdir and not os.path.exists(dir):
-        os.makedirs(dir)
-    return dir
-
+def get_comfy_dir():
+    # 获取当前脚本文件的绝对路径
+    current_file_path = os.path.abspath(__file__)
+    # 获取当前脚本文件所在目录
+    current_dir = os.path.dirname(current_file_path)
+    # 获取目标目录的绝对路径
+    comfy_dir = os.path.abspath(os.path.join(current_dir, '..', '..'))
+    # 获取"web/extensions/party"目录的绝对路径
+    comfy_dir = os.path.join(comfy_dir, "web/extensions/party")
+    return comfy_dir
 
 def copy_js_files():
     # 设置当前文件夹路径和目标文件夹路径
     current_folder = os.path.dirname(os.path.abspath(__file__))
-    target_folder = get_comfy_dir("web/extensions/party")
+    target_folder = get_comfy_dir()
 
     # 确保目标文件夹存在
     os.makedirs(target_folder, exist_ok=True)
