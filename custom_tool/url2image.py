@@ -10,7 +10,8 @@ class URL2IMG:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "url": ("STRING", {})
+                "url": ("STRING", {}),
+                "is_enable": ("BOOLEAN", {"default": True}),
             }
         }
 
@@ -20,7 +21,10 @@ class URL2IMG:
     FUNCTION = "url_to_img"
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def url_to_img(self, url):
+    def url_to_img(self, url, is_enable=True):
+        if not is_enable:
+            return (None, None, "Function is disabled")
+            
         if not url:
             return (None, None, "URL is None")
 
