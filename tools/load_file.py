@@ -215,7 +215,8 @@ class start_workflow:
             "required": {},
             "optional": {
                 "file_content": ("STRING", {"forceInput": True}),
-                "image_input": ("IMAGE", {}),
+                "image_input1": ("IMAGE", {}),
+                "image_input2": ("IMAGE", {}),
                 "file_path": ("STRING", {"default": None}),
                 "img_path": ("STRING", {"default": None, "image_upload": True}),
                 "system_prompt": ("STRING", {"default": "你是一个强大的智能助手"}),
@@ -229,6 +230,7 @@ class start_workflow:
     RETURN_TYPES = (
         "STRING",
         "IMAGE",
+        "IMAGE",
         "STRING",
         "STRING",
         "STRING",
@@ -237,7 +239,8 @@ class start_workflow:
     )
     RETURN_NAMES = (
         "file_content",
-        "image",
+        "image1",
+        "image2",
         "system_prompt",
         "user_prompt",
         "positive_prompt",
@@ -254,7 +257,8 @@ class start_workflow:
     def load_all(
         self,
         file_content="",
-        image_input=None,
+        image_input1=None,
+        image_input2=None,
         file_path=None,
         img_path=None,
         system_prompt="你是一个强大的智能助手",
@@ -275,9 +279,13 @@ class start_workflow:
                 path = os.path.join(file_path, path)
                 file_out = read_one(path)
         img_out = []
-        if image_input is not None:
-            for image in image_input:
+        if image_input1 is not None:
+            for image in image_input1:
                 img_out.append(image)
+        img_out2 = []   
+        if image_input2 is not None:
+            for image in image_input2:
+                img_out2.append(image)
         if img_path is not None and img_path != "":
             # 检查img_path是否是一个目录
             if os.path.isdir(img_path):
@@ -318,6 +326,7 @@ class start_workflow:
         return (
             file_out,
             img_out,
+            img_out2,
             system_out,
             user_out,
             positive_out,

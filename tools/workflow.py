@@ -79,7 +79,8 @@ def get_all(ws, prompt):
 
 def api(
     file_content="",
-    image_input=None,
+    image_input1=None,
+    image_input2=None,
     file_path="",
     img_path="",
     system_prompt="你是一个强大的智能助手",
@@ -102,8 +103,10 @@ def api(
         if prompt[p]["class_type"] == "start_workflow":
             if file_content != "":
                 prompt[p]["inputs"]["file_content"] = file_content
-            if image_input is not None and image_input != []:
-                prompt[p]["inputs"]["image_input"] = image_input
+            if image_input1 is not None and image_input1 != []:
+                prompt[p]["inputs"]["image_input1"] = image_input1
+            if image_input2 is not None and image_input2 != []:
+                prompt[p]["inputs"]["image_input2"] = image_input2
             prompt[p]["inputs"]["file_path"] = file_path
             prompt[p]["inputs"]["img_path"] = img_path
             prompt[p]["inputs"]["system_prompt"] = system_prompt
@@ -153,13 +156,16 @@ def execute_command_in_new_window(interpreter, root_path, port):
         # 使用 AppleScript 打开新的 Terminal 窗口
         command = f'osascript -e \'tell application "Terminal" to do script "{interpreter} {root_path} --port {port}"\''
     else:
-        # 对于 Linux，检查 'gnome-terminal' 或 'xterm'
-        if os.path.exists("/usr/bin/gnome-terminal"):
-            command = f"gnome-terminal -- {interpreter} {root_path} --port {port}"
-        elif os.path.exists("/usr/bin/xterm"):
-            command = f'xterm -e "{interpreter} {root_path} --port {port}"'
-        else:
-            print("错误：未找到合适的终端程序。")
+        # 对于 Linux，检查 'screen' 或 'tmux'
+        try:
+            command = ["screen", "-dmS", "mysession", interpreter, root_path, "--port", str(port)]
+            subprocess.Popen(command, start_new_session=True)
+        except FileNotFoundError:
+            try:
+                command = ["tmux", "new-session", "-d", interpreter, root_path, "--port", str(port)]
+                subprocess.Popen(command, start_new_session=True)
+            except FileNotFoundError:
+                print("错误：未找到合适的终端复用器。请安装 screen 或 tmux。")
             return
 
     check_port_and_execute_bat(port, command)
@@ -175,7 +181,8 @@ class workflow_transfer:
             },
             "optional": {
                 "file_content": ("STRING", {"forceInput": True}),
-                "image_input": ("IMAGE", {}),
+                "image_input1": ("IMAGE", {}),
+                "image_input2": ("IMAGE", {}),
                 "file_path": ("STRING", {}),
                 "img_path": ("STRING", {}),
                 "system_prompt": ("STRING", {}),
@@ -205,7 +212,8 @@ class workflow_transfer:
     def transfer(
         self,
         file_content="",
-        image_input=None,
+        image_input1=None,
+        image_input2=None,
         file_path="",
         img_path="",
         system_prompt="你是一个强大的智能助手",
@@ -228,7 +236,8 @@ class workflow_transfer:
 
         output_images, output_text = api(
             file_content,
-            image_input,
+            image_input1,
+            image_input2,
             file_path,
             img_path,
             system_prompt,

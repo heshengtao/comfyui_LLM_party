@@ -1,6 +1,6 @@
 {
-  "last_node_id": 217,
-  "last_link_id": 64,
+  "last_node_id": 218,
+  "last_link_id": 68,
   "nodes": [
     {
       "id": 162,
@@ -42,7 +42,7 @@
           "name": "response2",
           "type": "STRING",
           "links": [
-            39
+            68
           ],
           "shape": 3,
           "label": "response2",
@@ -87,7 +87,7 @@
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 41,
+          "link": 65,
           "label": "images"
         },
         {
@@ -209,101 +209,6 @@
       "bgcolor": "#000"
     },
     {
-      "id": 203,
-      "type": "workflow_transfer",
-      "pos": [
-        2293,
-        -26
-      ],
-      "size": {
-        "0": 315,
-        "1": 270
-      },
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image_input",
-          "type": "IMAGE",
-          "link": null,
-          "label": "image_input"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        },
-        {
-          "name": "positive_prompt",
-          "type": "STRING",
-          "link": 45,
-          "widget": {
-            "name": "positive_prompt"
-          },
-          "label": "positive_prompt"
-        },
-        {
-          "name": "negative_prompt",
-          "type": "STRING",
-          "link": 39,
-          "widget": {
-            "name": "negative_prompt"
-          },
-          "label": "negative_prompt"
-        },
-        {
-          "name": "is_enable",
-          "type": "BOOLEAN",
-          "link": 43,
-          "widget": {
-            "name": "is_enable"
-          },
-          "label": "is_enable"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "links": [
-            41
-          ],
-          "shape": 3,
-          "label": "images",
-          "slot_index": 0
-        },
-        {
-          "name": "text",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "text"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "workflow_transfer"
-      },
-      "widgets_values": [
-        true,
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "绘图app.json"
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
       "id": 214,
       "type": "LLM_api_loader",
       "pos": [
@@ -340,78 +245,6 @@
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
-    },
-    {
-      "id": 206,
-      "type": "string_logic",
-      "pos": [
-        1883,
-        -134
-      ],
-      "size": {
-        "0": 315,
-        "1": 146
-      },
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "stringA",
-          "type": "STRING",
-          "link": 44,
-          "widget": {
-            "name": "stringA"
-          },
-          "label": "stringA"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "if",
-          "type": "STRING",
-          "links": [
-            45
-          ],
-          "shape": 3,
-          "label": "if",
-          "slot_index": 0
-        },
-        {
-          "name": "else",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "else"
-        },
-        {
-          "name": "is_true",
-          "type": "BOOLEAN",
-          "links": [
-            43
-          ],
-          "shape": 3,
-          "label": "is_true",
-          "slot_index": 2
-        },
-        {
-          "name": "is_false",
-          "type": "BOOLEAN",
-          "links": null,
-          "shape": 3,
-          "label": "is_false"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "string_logic"
-      },
-      "widgets_values": [
-        "A is not null",
-        "",
-        ""
-      ],
-      "color": "#332922",
-      "bgcolor": "#593930"
     },
     {
       "id": 202,
@@ -567,10 +400,10 @@
         515,
         130
       ],
-      "size": [
-        399.2422504270578,
-        456.6284936541357
-      ],
+      "size": {
+        "0": 399.24224853515625,
+        "1": 466
+      },
       "flags": {},
       "order": 4,
       "mode": 0,
@@ -671,7 +504,8 @@
         "",
         "",
         100,
-        ""
+        "",
+        true
       ]
     },
     {
@@ -681,10 +515,10 @@
         1015,
         130
       ],
-      "size": [
-        400.842250427057,
-        455.895137941245
-      ],
+      "size": {
+        "0": 400.8422546386719,
+        "1": 466
+      },
       "flags": {},
       "order": 5,
       "mode": 0,
@@ -785,7 +619,175 @@
         "",
         "",
         100,
+        "",
+        true
+      ]
+    },
+    {
+      "id": 206,
+      "type": "string_logic",
+      "pos": [
+        1883,
+        -134
+      ],
+      "size": {
+        "0": 315,
+        "1": 146
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "stringA",
+          "type": "STRING",
+          "link": 44,
+          "widget": {
+            "name": "stringA"
+          },
+          "label": "stringA"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "if",
+          "type": "STRING",
+          "links": [
+            67
+          ],
+          "shape": 3,
+          "label": "if",
+          "slot_index": 0
+        },
+        {
+          "name": "else",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "else"
+        },
+        {
+          "name": "is_true",
+          "type": "BOOLEAN",
+          "links": [
+            66
+          ],
+          "shape": 3,
+          "label": "is_true",
+          "slot_index": 2
+        },
+        {
+          "name": "is_false",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3,
+          "label": "is_false"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "string_logic"
+      },
+      "widgets_values": [
+        "A is not null",
+        "",
         ""
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 218,
+      "type": "workflow_transfer",
+      "pos": [
+        2293,
+        -26
+      ],
+      "size": [
+        315,
+        294
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_input1",
+          "type": "IMAGE",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "image_input2",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        },
+        {
+          "name": "is_enable",
+          "type": "BOOLEAN",
+          "link": 66,
+          "widget": {
+            "name": "is_enable"
+          }
+        },
+        {
+          "name": "positive_prompt",
+          "type": "STRING",
+          "link": 67,
+          "widget": {
+            "name": "positive_prompt"
+          },
+          "slot_index": 4
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "link": 68,
+          "widget": {
+            "name": "negative_prompt"
+          },
+          "slot_index": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            65
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "workflow_transfer"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "fastapi.json"
       ]
     }
   ],
@@ -799,22 +801,6 @@
       "STRING"
     ],
     [
-      39,
-      162,
-      1,
-      203,
-      3,
-      "STRING"
-    ],
-    [
-      41,
-      203,
-      0,
-      205,
-      0,
-      "IMAGE"
-    ],
-    [
       42,
       202,
       0,
@@ -823,27 +809,11 @@
       "STRING"
     ],
     [
-      43,
-      206,
-      2,
-      203,
-      4,
-      "BOOLEAN"
-    ],
-    [
       44,
       162,
       0,
       206,
       0,
-      "STRING"
-    ],
-    [
-      45,
-      206,
-      0,
-      203,
-      2,
       "STRING"
     ],
     [
@@ -901,16 +871,48 @@
       162,
       0,
       "STRING"
+    ],
+    [
+      65,
+      218,
+      0,
+      205,
+      0,
+      "IMAGE"
+    ],
+    [
+      66,
+      206,
+      2,
+      218,
+      3,
+      "BOOLEAN"
+    ],
+    [
+      67,
+      206,
+      0,
+      218,
+      4,
+      "STRING"
+    ],
+    [
+      68,
+      162,
+      1,
+      218,
+      5,
+      "STRING"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.7513148009015791,
+      "scale": 0.5644739300537773,
       "offset": {
-        "0": 67.02899216327265,
-        "1": 311.5284656048956
+        "0": 3.932693890723292,
+        "1": 376.22557980930407
       }
     }
   },
