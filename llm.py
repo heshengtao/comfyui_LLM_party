@@ -561,8 +561,6 @@ class LLM_api_loader:
             openai.api_key = api_keys.get("api_key")
         elif api_keys.get("openai_api_key") != "":
             openai.api_key = api_keys.get("openai_api_key")
-        else:
-            openai.api_key = os.environ.get("OPENAI_API_KEY")
         if base_url != "":
             openai.base_url = base_url
         elif model_name in config_key:
@@ -570,8 +568,6 @@ class LLM_api_loader:
             openai.base_url = api_keys.get("base_url")
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
-        else:
-            openai.base_url = os.environ.get("OPENAI_API_BASE")
         if openai.api_key == "":
             return ("请输入API_KEY",)
         if openai.base_url != "":

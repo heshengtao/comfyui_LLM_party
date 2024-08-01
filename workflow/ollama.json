@@ -1,6 +1,6 @@
 {
-  "last_node_id": 81,
-  "last_link_id": 45,
+  "last_node_id": 82,
+  "last_link_id": 47,
   "nodes": [
     {
       "id": 76,
@@ -20,7 +20,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 45,
+          "link": 47,
           "widget": {
             "name": "text"
           },
@@ -41,60 +41,21 @@
       },
       "widgets_values": [
         "",
-        "😊 你好！我是强大的人工智能助手，很高兴地见到你！有什么请求或问题吗？我会尽力帮助你的！ 👋"
+        "Error code: 503"
       ],
       "color": "#233",
       "bgcolor": "#355"
     },
     {
-      "id": 80,
-      "type": "LLM_api_loader",
-      "pos": [
-        429,
-        320
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {
-        "pinned": false
-      },
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            44
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "llama3",
-        "http://localhost:11434/v1/",
-        "ollama"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 81,
+      "id": 82,
       "type": "LLM",
       "pos": [
         824,
         314
       ],
       "size": [
-        398.38282076839414,
-        468.3281153852449
+        437.31617037776914,
+        486
       ],
       "flags": {},
       "order": 1,
@@ -103,14 +64,17 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 44,
-          "label": "model"
+          "link": 46
         },
         {
           "name": "images",
           "type": "IMAGE",
-          "link": null,
-          "label": "images"
+          "link": null
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null
         },
         {
           "name": "system_prompt_input",
@@ -150,32 +114,28 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            45
+            47
           ],
           "shape": 3,
-          "label": "assistant_response",
           "slot_index": 0
         },
         {
           "name": "history",
           "type": "STRING",
           "links": null,
-          "shape": 3,
-          "label": "history"
+          "shape": 3
         },
         {
           "name": "tool",
           "type": "STRING",
           "links": null,
-          "shape": 3,
-          "label": "tool"
+          "shape": 3
         },
         {
           "name": "image",
           "type": "IMAGE",
           "links": null,
-          "shape": 3,
-          "label": "image"
+          "shape": 3
         }
       ],
       "properties": {
@@ -196,22 +156,62 @@
         "",
         "",
         100,
-        ""
+        "",
+        true
       ]
+    },
+    {
+      "id": 80,
+      "type": "LLM_api_loader",
+      "pos": [
+        429,
+        320
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {
+        "pinned": false
+      },
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            46
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "qwen2",
+        "http://localhost:11434/v1/",
+        "ollama"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
     }
   ],
   "links": [
     [
-      44,
+      46,
       80,
       0,
-      81,
+      82,
       0,
       "CUSTOM"
     ],
     [
-      45,
-      81,
+      47,
+      82,
       0,
       76,
       0,
@@ -224,8 +224,8 @@
     "ds": {
       "scale": 1,
       "offset": {
-        "0": -274.7161337566754,
-        "1": -58.994741361807456
+        "0": -269.1161581707379,
+        "1": -163.79469863719808
       }
     }
   },
