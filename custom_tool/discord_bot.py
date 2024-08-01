@@ -1,4 +1,5 @@
 import json
+import locale
 import os
 import subprocess
 import sys
@@ -199,7 +200,14 @@ NODE_CLASS_MAPPINGS = {
     "discord_bot": discord_bot,
     "discord_send": discord_send,
     }
-NODE_DISPLAY_NAME_MAPPINGS = {
-    "discord_bot": "启动discord机器人（discord_bot）",
-    "discord_send": "发送消息到discord（discord_send）",
-    } 
+lang = locale.getdefaultlocale()[0]
+if lang == "zh_CN":
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "discord_bot": "启动discord机器人",
+        "discord_send": "发送消息到discord"
+    }
+else:
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "discord_bot": "Start Discord Bot",
+        "discord_send": "Send Message to Discord"
+    }

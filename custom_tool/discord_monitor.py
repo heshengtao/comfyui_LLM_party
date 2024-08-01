@@ -2,6 +2,7 @@
 import datetime
 import hashlib
 import json
+import locale
 import os
 import time
 
@@ -65,4 +66,12 @@ class discord_file_monitor:
 
 
 NODE_CLASS_MAPPINGS = {"discord_file_monitor": discord_file_monitor}
-NODE_DISPLAY_NAME_MAPPINGS = {"discord_file_monitor": "discord文件夹监听节点(discord_file_monitor)"}
+lang = locale.getdefaultlocale()[0]
+if lang == "zh_CN":
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "discord_file_monitor": "discord文件夹监听节点"
+    }
+else:
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "discord_file_monitor": "Discord File Monitor Node"
+    }

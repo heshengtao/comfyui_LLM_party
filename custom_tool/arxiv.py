@@ -1,4 +1,5 @@
 import json
+import locale
 
 import arxiv
 
@@ -71,4 +72,12 @@ class arxiv_tool:
         return (out,)
 _TOOL_HOOKS = ["get_arxiv"]
 NODE_CLASS_MAPPINGS = {"arxiv_tool": arxiv_tool}
-NODE_DISPLAY_NAME_MAPPINGS = {    "arxiv_tool": "arxiv工具(arxiv_tool)",}
+lang = locale.getdefaultlocale()[0]
+if lang == "zh_CN":
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "arxiv_tool": "arxiv工具"
+    }
+else:
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "arxiv_tool": "arxiv Tool"
+    }

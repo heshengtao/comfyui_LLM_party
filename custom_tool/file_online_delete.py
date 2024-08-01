@@ -1,4 +1,5 @@
 import base64
+import locale
 import os
 from datetime import datetime
 
@@ -58,9 +59,16 @@ class FileOnlineDelete_gitee:
 NODE_CLASS_MAPPINGS = {
     "FileOnlineDelete_gitee": FileOnlineDelete_gitee,
 }
-NODE_DISPLAY_NAME_MAPPINGS = {
-    "FileOnlineDelete_gitee": "清理Gitee文件床🐶（FileOnlineDelete_gitee）",
-}
+lang = locale.getdefaultlocale()[0]
+if lang == "zh_CN":
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "FileOnlineDelete_gitee": "清理Gitee文件床🐶"
+    }
+else:
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "FileOnlineDelete_gitee": "Clean Gitee File Bed🐶"
+    }
+
 
 if __name__ == "__main__":
     file_path = "image.jpg"

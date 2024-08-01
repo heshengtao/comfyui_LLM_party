@@ -1,4 +1,5 @@
 import base64
+import locale
 import os
 from datetime import datetime
 
@@ -85,7 +86,7 @@ class FileOnlineStorage_gitee:
 
         if not self.check_repo_initialized():
             print("Repository is not initialized. Initializing...")
-            if not initialize_repo(repo_owner, repo_name, access_token):
+            if not self.initialize_repo():
                 print("Failed to initialize repository")
                 return (
                     None,
@@ -142,9 +143,16 @@ class FileOnlineStorage_gitee:
 NODE_CLASS_MAPPINGS = {
     "FileOnlineStorage_gitee": FileOnlineStorage_gitee,
 }
-NODE_DISPLAY_NAME_MAPPINGS = {
-    "FileOnlineStorage_gitee": "上传Gitee文件床🐶（FileOnlineStorage_gitee）",
-}
+lang = locale.getdefaultlocale()[0]
+if lang == "zh_CN":
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "FileOnlineStorage_gitee": "上传Gitee文件床🐶"
+    }
+else:
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "FileOnlineStorage_gitee": "Upload to Gitee File Bed🐶"
+    }
+
 
 if __name__ == "__main__":
     obj = FileOnlineStorage_gitee()

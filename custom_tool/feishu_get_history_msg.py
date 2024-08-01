@@ -1,6 +1,7 @@
 import datetime
 import hashlib
 import json
+import locale
 import os
 import time
 
@@ -199,9 +200,15 @@ class FeishuGetHistory:
 NODE_CLASS_MAPPINGS = {
     "FeishuGetHistory": FeishuGetHistory,
 }
-NODE_DISPLAY_NAME_MAPPINGS = {
-    "FeishuGetHistory": "飞书机器人读群历史🐶（FeishuGetHistory）",
-}
+lang = locale.getdefaultlocale()[0]
+if lang == "zh_CN":
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "FeishuGetHistory": "飞书机器人读群历史🐶"
+    }
+else:
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "FeishuGetHistory": "Feishu Bot Read Group History🐶"
+    }
 
 if __name__ == "__main__":
     feishu = FeishuGetHistory()

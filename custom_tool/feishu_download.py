@@ -1,4 +1,5 @@
 import json
+import locale
 import os
 
 import requests
@@ -79,9 +80,16 @@ class FeishuDownloadAudio:
 NODE_CLASS_MAPPINGS = {
     "FeishuDownloadAudio": FeishuDownloadAudio,
 }
-NODE_DISPLAY_NAME_MAPPINGS = {
-    "FeishuDownloadAudio": "飞书获下载音频🐶（FeishuDownloadAudio）",
-}
+lang = locale.getdefaultlocale()[0]
+if lang == "zh_CN":
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "FeishuDownloadAudio": "飞书下载音频🐶"
+    }
+else:
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "FeishuDownloadAudio": "Feishu Download Audio🐶"
+    }
+
 
 if __name__ == "__main__":
     obj = FeishuDownloadAudio()

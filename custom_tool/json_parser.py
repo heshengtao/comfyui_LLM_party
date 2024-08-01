@@ -1,4 +1,5 @@
 import json
+import locale
 
 
 def load_json_file(file_path) -> dict:
@@ -121,10 +122,18 @@ NODE_CLASS_MAPPINGS = {
     "json_parser": json_parser,
     "json_get_value": json_get_value,
 }
-NODE_DISPLAY_NAME_MAPPINGS = {
-    "json_parser": "JSON文件解析🐶（json_parser）",
-    "json_get_value": "JSON取值🐶（json_get_value）",
-}
+lang = locale.getdefaultlocale()[0]
+if lang == "zh_CN":
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "json_parser": "JSON文件解析🐶",
+        "json_get_value": "JSON取值🐶"
+    }
+else:
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "json_parser": "JSON File Parser🐶",
+        "json_get_value": "JSON Get Value🐶"
+    }
+
 
 # if __name__ == "__main__":
 #     file_path_ = "E:\\project\\comfyui_LLM_party\\file\\量子永生教.json"

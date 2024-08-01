@@ -1,3 +1,4 @@
+import locale
 import os
 import requests
 import torch
@@ -64,6 +65,12 @@ class URL2IMG:
 NODE_CLASS_MAPPINGS = {
     "URL2IMG": URL2IMG,
 }
-NODE_DISPLAY_NAME_MAPPINGS = {
-    "URL2IMG": "下载图片🐶（URL2IMG）",
-}
+lang = locale.getdefaultlocale()[0]
+if lang == "zh_CN":
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "URL2IMG": "下载图片🐶"
+    }
+else:
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "URL2IMG": "Download Image🐶"
+    }

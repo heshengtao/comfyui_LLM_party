@@ -1,3 +1,4 @@
+import locale
 import os
 import time
 
@@ -135,9 +136,16 @@ class ChatTTS_Node:
 NODE_CLASS_MAPPINGS = {
     "ChatTTS_Node": ChatTTS_Node,
 }
-NODE_DISPLAY_NAME_MAPPINGS = {
-    "ChatTTS_Node": "本地文字转语音🐶（ChatTTS）",
-}
+lang = locale.getdefaultlocale()[0]
+if lang == "zh_CN":
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "ChatTTS_Node": "本地文字转语音🐶"
+    }
+else:
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "ChatTTS_Node": "Local Text-to-Speech🐶"
+    }
+
 
 if __name__ == "__main__":
     input1 = """
