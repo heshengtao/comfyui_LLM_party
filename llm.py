@@ -540,7 +540,7 @@ class LLM_api_loader:
                         "default": "sk-XXXXX",
                     },
                 ),
-                "is_ollama": ("BOOL", {"default": False}),
+                "is_ollama": ("BOOLEAN", {"default": False}),
             },
         }
 
