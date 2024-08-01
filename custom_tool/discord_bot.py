@@ -48,6 +48,7 @@ class discord_bot:
 # -*- coding: utf-8 -*-
 import discord
 from discord.ext import commands, tasks
+from discord import File
 import json
 import os
 import time
@@ -63,13 +64,13 @@ async def synccommands(ctx):
     await ctx.send("Commands synced")
 
 # 保存输入到 JSON 文件的函数
-async def save_input(command, input):
+async def save_input(command,type, input):
     timestamp = int(time.time())
     current_dir = os.path.dirname(os.path.abspath(__file__))
     discord_temp_dir = os.path.join(current_dir, 'discord_temp')
     os.makedirs(discord_temp_dir, exist_ok=True)
     with open(f"{{discord_temp_dir}}/{{timestamp}}.json", "w", encoding='utf-8') as f:
-        json.dump({{command: input}}, f, ensure_ascii=False, indent=4)
+        json.dump({{"command":command,type:input}}, f, ensure_ascii=False, indent=4)
 
 # 读取 JSON 文件的函数
 def read_res():
@@ -124,9 +125,15 @@ async def process_task(ctx):
             for command in function_name:
                 f.write(f"""
 @bot.hybrid_command()
-async def {command}(ctx, input):
-    await save_input("{command}", input)
-    await ctx.send("正在处理，请稍候...")
+async def {command}(ctx, input: str = None, attachment: File = None):
+    if input:
+        await save_input("{command}","text", input)
+        await ctx.send(f"Thinking about {{input}} ...")
+    if attachment:
+        await save_input("{command}","image", attachment.url)
+        await ctx.send(f"Received an image: {{attachment.filename}}", file=attachment)
+    if not input and not attachment:
+        await ctx.send("Please provide either text or an image.")
     process_task.start(ctx)
 """)
             
