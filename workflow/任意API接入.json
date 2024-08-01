@@ -1,0 +1,389 @@
+{
+  "last_node_id": 9,
+  "last_link_id": 8,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "api_function",
+      "pos": [
+        225,
+        403
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "parameters",
+          "type": "DICT",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            3
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "api_function"
+      },
+      "widgets_values": [
+        "被请求的网址",
+        "",
+        "get",
+        60
+      ]
+    },
+    {
+      "id": 6,
+      "type": "show_text_party",
+      "pos": [
+        626,
+        608
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 4,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 5,
+      "type": "json_get_value",
+      "pos": [
+        235,
+        606
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 3,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "天气",
+        true
+      ]
+    },
+    {
+      "id": 7,
+      "type": "parameter_combine",
+      "pos": [
+        -110,
+        400
+      ],
+      "size": {
+        "0": 267,
+        "1": 66
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "parameter1",
+          "type": "DICT",
+          "link": 6
+        },
+        {
+          "name": "parameter2",
+          "type": "DICT",
+          "link": 7
+        },
+        {
+          "name": "parameter3",
+          "type": "DICT",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "parameters",
+          "type": "DICT",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "parameter_combine"
+      }
+    },
+    {
+      "id": 3,
+      "type": "parameter_function",
+      "pos": [
+        -457,
+        205
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "*",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "parameter",
+          "type": "DICT",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "parameter_function"
+      },
+      "widgets_values": [
+        "城市"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "parameter_function",
+      "pos": [
+        -497,
+        385
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "*",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "parameter",
+          "type": "DICT",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "parameter_function"
+      },
+      "widgets_values": [
+        "时间"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "get_string",
+      "pos": [
+        -858,
+        203
+      ],
+      "size": [
+        312.72731711647737,
+        76.00000858306885
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "get_string"
+      },
+      "widgets_values": [
+        "北京"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "get_string",
+      "pos": [
+        -876,
+        386
+      ],
+      "size": {
+        "0": 312.7273254394531,
+        "1": 76.00000762939453
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "get_string"
+      },
+      "widgets_values": [
+        "8:00"
+      ]
+    }
+  ],
+  "links": [
+    [
+      2,
+      4,
+      0,
+      3,
+      0,
+      "*"
+    ],
+    [
+      3,
+      2,
+      0,
+      5,
+      0,
+      "STRING"
+    ],
+    [
+      4,
+      5,
+      0,
+      6,
+      0,
+      "STRING"
+    ],
+    [
+      5,
+      7,
+      0,
+      2,
+      0,
+      "DICT"
+    ],
+    [
+      6,
+      3,
+      0,
+      7,
+      0,
+      "DICT"
+    ],
+    [
+      7,
+      8,
+      0,
+      7,
+      1,
+      "DICT"
+    ],
+    [
+      8,
+      9,
+      0,
+      8,
+      0,
+      "*"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6830134553650706,
+      "offset": [
+        947.1053968992208,
+        127.24023327292713
+      ]
+    }
+  },
+  "version": 0.4
+}
