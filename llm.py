@@ -540,6 +540,7 @@ class LLM_api_loader:
                         "default": "sk-XXXXX",
                     },
                 ),
+                "is_ollama": ("BOOL", {"default": False}),
             },
         }
 
@@ -552,7 +553,7 @@ class LLM_api_loader:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def chatbot(self, model_name, base_url=None, api_key=None):
+    def chatbot(self, model_name, base_url=None, api_key=None,is_ollama=False):
         api_keys = load_api_keys(config_path)
         if api_key != "":
             openai.api_key = api_key
@@ -573,6 +574,9 @@ class LLM_api_loader:
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
+        if is_ollama:
+            openai.api_key="ollama"
+            openai.base_url="http://127.0.0.1:11434/v1/"
         chat = Chat(model_name, openai.api_key, openai.base_url)
         return (chat,)
 
