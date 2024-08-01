@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+import locale
 
 import pytz
 
@@ -61,7 +62,12 @@ class weekday_tool:
 
 _TOOL_HOOKS = ["get_weekday"]
 NODE_CLASS_MAPPINGS = {"weekday_tool": weekday_tool}
-NODE_DISPLAY_NAME_MAPPINGS = {"weekday_tool": "星期查询工具（weekday_tool）"}
+# 获取系统语言
+lang = locale.getdefaultlocale()[0]
+if lang == "zh_CN":
+    NODE_DISPLAY_NAME_MAPPINGS = {"weekday_tool": "星期查询工具"}
+else:
+    NODE_DISPLAY_NAME_MAPPINGS = {"weekday_tool": "Weekday Query Tool"}
 
 
 if __name__ == "__main__":
