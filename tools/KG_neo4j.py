@@ -405,8 +405,9 @@ def Modify_entities_neo4j(name, attributes=None):
         
         # 查询所有属性并删除未包含在 attributes 中的属性
         query = f"MATCH (n:{name.replace(' ', '_')} {{name: $name}}) SET {set_attr_str} " + \
-                " ".join([f"REMOVE n.{key}" for key in attributes.keys() if key not in attributes])
-        
+                " ".join([f"REMOVE n.{key}" for key in attributes.keys() if key not in attributes]) + \
+                ""  # 添加闭合的引号
+
         # 运行查询
         result = session.run(query, name=name, **attributes)
         if not result.single():
@@ -414,6 +415,7 @@ def Modify_entities_neo4j(name, attributes=None):
 
     driver.close()
     return "修改成功"
+
 
 
 def Delete_entities_neo4j(name):
