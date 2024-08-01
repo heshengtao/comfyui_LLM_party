@@ -48,7 +48,7 @@ class discord_bot:
 # -*- coding: utf-8 -*-
 import discord
 from discord.ext import commands, tasks
-from discord import File
+from discord import Attachment
 import json
 import os
 import time
@@ -125,7 +125,7 @@ async def process_task(ctx):
             for command in function_name:
                 f.write(f"""
 @bot.hybrid_command()
-async def {command}(ctx, input: str = None, attachment: File = None):
+async def {command}(ctx, input: str = None, attachment: Attachment = None):
     if input:
         await save_input("{command}","text", input)
         await ctx.send(f"Thinking about {{input}} ...")
