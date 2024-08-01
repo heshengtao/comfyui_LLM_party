@@ -393,20 +393,21 @@ def New_entities_neo4j(name, attributes=None):
 def Modify_entities_neo4j(name, attributes=None):
     global database_url_hold, database_name_hold, password_hold
     driver = GraphDatabase.driver(database_url_hold, auth=(database_name_hold, password_hold))
+    
     if attributes is None:
         attributes = {}
     else:
         attributes = json.loads(attributes)
 
     with driver.session() as session:
-        # Create the query string with dynamic attributes
-        attr_str = ", ".join([f"n.{key} = ${key}" for key in attributes.keys()])
-        if attr_str:
-            query = f"MATCH (n:{name.replace(' ', '_')} {{name: $name}}) SET {attr_str} RETURN n"
-        else:
-            query = f"MATCH (n:{name.replace(' ', '_')} {{name: $name}}) RETURN n"
-
-        # Run the query with the attributes
+        # 创建包含动态属性的查询字符串
+        set_attr_str = ", ".join([f"n.{key} = ${key}" for key in attributes.keys()])
+        
+        # 查询所有属性并删除未包含在 attributes 中的属性
+        query = f"MATCH (n:{name.replace(' ', '_')} {{name: $name}}) SET {set_attr_str} " + \
+                " ".join([f"REMOVE n.{key}" for key in attributes.keys() if key not in attributes])
+        
+        # 运行查询
         result = session.run(query, name=name, **attributes)
         if not result.single():
             return "该实体节点不存在"
