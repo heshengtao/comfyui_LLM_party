@@ -51,7 +51,11 @@ def install_package(package_name, custom_command=None):
         print(f"{package_name} is already installed.")
 
 def package_is_installed(package_name):
-    return importlib.util.find_spec(package_name) is not None
+    try:
+        pkg_resources.get_distribution(package_name)
+        return True
+    except pkg_resources.DistributionNotFound:
+        return False
 
 def is_cmake_installed_win():
     try:
@@ -322,6 +326,35 @@ def install_portaudio():
         print(f"安装 PortAudio 库时出错: {e}")
 
 
+def uninstall_package(package_name):
+    result = subprocess.run([sys.executable, "-m", "pip", "uninstall", "-y", package_name], capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"Failed to uninstall {package_name}: {result.stderr}")
+    else:
+        print(f"Successfully uninstalled {package_name}")
+
+def install_package(package_name):
+    result = subprocess.run([sys.executable, "-m", "pip", "install", package_name], capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"Failed to install {package_name}: {result.stderr}")
+    else:
+        print(f"Successfully installed {package_name}")
+
+def manage_discord_packages():
+    # 检查并卸载 discord.py 和 discord.py[voice]
+    if package_is_installed("discord.py"):
+        uninstall_package("discord.py")
+
+    if package_is_installed("discord.py[voice]"):
+        uninstall_package("discord.py[voice]")
+
+    # 检查并安装 py-cord[voice]
+    if not package_is_installed("py-cord[voice]"):
+        install_package("py-cord[voice]")
+    else:
+        print("py-cord[voice] is already installed")
+
+
 install_portaudio()
 check_and_uninstall_websocket()
 
@@ -330,3 +363,5 @@ copy_js_files()
 system_info = get_system_info()
 install_llama(system_info)
 init_temp()
+# 调用函数
+manage_discord_packages()

@@ -6,10 +6,8 @@ import time
 import openai
 import requests
 
-if os.name == "nt":
-    import winsound
-else:
-    from playsound import playsound
+
+from playsound3 import playsound
 
 from ..config import config_path, current_dir_path, load_api_keys
 
@@ -123,19 +121,5 @@ class play_audio:
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
     def tts(self, audio):
-        # 判断当前目录是否存在audio文件夹，如果不存在则创建
-        if not os.path.exists(os.path.join(current_dir_path, "audio")):
-            os.makedirs(os.path.join(current_dir_path, "audio"))
-        # 如果这个audio音频不在audio文件夹下，剪切这个文件到audio文件夹下，然后播放这个音频
-        if not os.path.dirname(audio) == os.path.join(current_dir_path, "audio"):
-            shutil.move(audio, os.path.join(current_dir_path, "audio", os.path.basename(audio)))
-            audio = os.path.join(current_dir_path, "audio", os.path.basename(audio))
-        # 播放音频文件
-        audio = os.path.normpath(audio)
-        print("[playsound]:", audio)
-        if os.name == "nt":
-            winsound.PlaySound(audio, winsound.SND_FILENAME)
-        else:
-            playsound(audio)
-
+        playsound(audio)
         return ()

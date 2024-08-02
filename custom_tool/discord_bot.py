@@ -47,24 +47,19 @@ class discord_bot:
             f.write(f"""
 # -*- coding: utf-8 -*-
 import discord
-from discord.ext import commands, tasks
+from discord.ext import tasks
 from discord import Attachment
 import json
 import os
 import time
 import asyncio
-                    
+                
 intents = discord.Intents.default()
 intents.message_content = True
-bot = commands.Bot(command_prefix="!", intents=intents)
-
-@bot.command()
-async def synccommands(ctx):
-    await bot.tree.sync()
-    await ctx.send("Commands synced")
+bot = discord.Bot(intents=intents)
 
 # 保存输入到 JSON 文件的函数
-async def save_input(command, type, input, timestamp):
+async def save_input(command, input, timestamp):
     current_dir = os.path.dirname(os.path.abspath(__file__))
     discord_temp_dir = os.path.join(current_dir, 'discord_temp')
     os.makedirs(discord_temp_dir, exist_ok=True)
@@ -117,35 +112,52 @@ async def process_task(ctx):
 """)
             for command in function_name:
                 f.write(f"""
-@bot.hybrid_command()
-async def {command}(ctx, text1: str = None, text2: str = None, file1: Attachment = None, file2: Attachment = None):
-    timestamp = int(time.time())
-    inputs = [text1, text2]
-    attachments = [file1, file2]
-
-    # 如果 text1 和 text2 都为空，则使用用户输入的完整消息内容
-    if not any(inputs):
-        inputs = [ctx.message.content.replace(f'!{{ctx.command}}', '').strip()]    
-
-    for input in inputs:
-        if input:
-            await save_input("{command}", "text", input, timestamp)
+@bot.slash_command()
+async def {command}(ctx, text1: str = "", text2: str = "", file1: discord.Attachment = None, file2: discord.Attachment = None):
+    try:
+        timestamp = int(time.time())
+        inputs = [text1, text2]
+        if file1:
+            file1 = file1.url
         else:
-            await save_input("{command}", "text", "", timestamp)
-    
-    for attachment in attachments:
-        if attachment:
-            await save_input("{command}", "image", attachment.url, timestamp)
+            file1 = ""
+        if file2:
+            file2 = file2.url
         else:
-            await save_input("{command}", "image", "", timestamp)
-    
-    if not any(inputs) and not any(attachments):
-        await ctx.send("Please provide either text or an image.")
+            file2 = ""
+        attachments = [file1, file2]
 
-    await ctx.send(f"Thinking about ...")
-    process_task.start(ctx)
+        # 如果 text1 和 text2 都为空，则使用用户输入的完整消息内容
+        if not any(inputs):
+            inputs = [ctx.interaction.data.get('options', [{{}}])[0].get('value', '').strip(), ""]
+
+        for input in inputs:
+            if input:
+                await save_input(f"{command}", input, timestamp)
+            else:
+                await save_input(f"{command}", "", timestamp)
+
+        for attachment in attachments:
+            if attachment:
+                await save_input(f"{command}", attachment, timestamp)
+            else:
+                await save_input(f"{command}", "", timestamp)
+
+        if not any(inputs) and not any(attachments):
+            await ctx.send("Please provide either text or an image.")
+
+        await ctx.send(f"Thinking about ...")
+        process_task.start(ctx)
+
+    except Exception as e:
+        print(f"An error occurred: {{e}}")
+        await ctx.send("An error occurred while processing your request. Please try again later.")
+
+    finally:
+        # 这里可以放置任何需要在无论是否发生异常的情况下都要执行的代码
+        print("Command execution completed.")
 """)
-            
+        
             f.write(f"""
 if __name__ == "__main__":
     bot.run("{token}")

@@ -26,7 +26,7 @@ fastapi
 py-cpuinfo
 diskcache
 requests_toolbelt
-playsound
+playsound3
 tabulate
 chardet
 tenacity
@@ -40,5 +40,4 @@ neo4j
 ChatTTS
 soundfile
 jax
-discord.py[voice]
 ffmpeg; sys_platform == 'linux'
