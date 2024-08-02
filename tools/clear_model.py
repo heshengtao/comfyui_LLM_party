@@ -37,7 +37,7 @@ class clear_model:
 
     FUNCTION = "clear"
 
-    # OUTPUT_NODE = False
+    OUTPUT_NODE = True
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
