@@ -122,7 +122,11 @@ async def {command}(ctx, text1: str = None, text2: str = None, file1: Attachment
     timestamp = int(time.time())
     inputs = [text1, text2]
     attachments = [file1, file2]
-    
+
+    # 如果 text1 和 text2 都为空，则使用用户输入的完整消息内容
+    if not any(inputs):
+        inputs = [ctx.message.content.replace(f'!{{ctx.command}}', '').strip()]    
+
     for input in inputs:
         if input:
             await save_input("{command}", "text", input, timestamp)
