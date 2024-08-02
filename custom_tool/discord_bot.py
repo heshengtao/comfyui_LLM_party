@@ -64,42 +64,43 @@ async def synccommands(ctx):
     await ctx.send("Commands synced")
 
 # 保存输入到 JSON 文件的函数
-async def save_input(command,type, input):
-    timestamp = int(time.time())
+async def save_input(command, type, input, timestamp):
     current_dir = os.path.dirname(os.path.abspath(__file__))
     discord_temp_dir = os.path.join(current_dir, 'discord_temp')
     os.makedirs(discord_temp_dir, exist_ok=True)
-    with open(f"{{discord_temp_dir}}/{{timestamp}}.json", "w", encoding='utf-8') as f:
-        json.dump({{"command":command,type:input}}, f, ensure_ascii=False, indent=4)
+    file_path = os.path.join(discord_temp_dir, f"{{timestamp}}.json")
+    
+    # 如果文件存在，读取现有内容
+    if os.path.exists(file_path):
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    else:
+        data = []
 
-# 读取 JSON 文件的函数
+    # 添加新的输入到字典列表中
+    data.append({{command:input}})
+    
+    # 写入更新后的内容到文件
+    with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+        
+
 def read_res():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     discord_send_dir = os.path.join(current_dir, 'discord_send')
     os.makedirs(discord_send_dir, exist_ok=True)
     while True:
-        # 获取discord_send_dir目录下的所有文件
         files = os.listdir(discord_send_dir)
-        # 过滤出JSON文件
         json_files = [f for f in files if f.endswith('.json')]
         if json_files:
-            # 找到最早的JSON文件
             earliest_file = min(json_files, key=lambda f: os.path.getctime(os.path.join(discord_send_dir, f)))
             file_path = os.path.join(discord_send_dir, earliest_file)
-            # 读取文件内容并转换为字符串
-            with open(file_path, 'r') as file:
+            with open(file_path, 'r', encoding='utf-8') as file:
                 content = json.load(file)
-            # 删除文件
             os.remove(file_path)
-            text = None
-            image = None
-            audio = None
-            if 'text' in content:
-                text = content['text']
-            if 'image' in content:
-                image = content['image']
-            if 'audio' in content:
-                audio = content['audio']
+            text = content.get('text')
+            image = content.get('image')
+            audio = content.get('audio')
             return text, image, audio
 
 @tasks.loop(count=1)
@@ -125,15 +126,27 @@ async def process_task(ctx):
             for command in function_name:
                 f.write(f"""
 @bot.hybrid_command()
-async def {command}(ctx, input: str = None, attachment: Attachment = None):
-    if input:
-        await save_input("{command}","text", input)
-        await ctx.send(f"Thinking about {{input}} ...")
-    if attachment:
-        await save_input("{command}","image", attachment.url)
-        await ctx.send(f"Received an image: {{attachment.filename}}", file=attachment)
-    if not input and not attachment:
+async def {command}(ctx, text1: str = None, text2: str = None, file1: Attachment = None, file2: Attachment = None):
+    timestamp = int(time.time())
+    inputs = [text1, text2]
+    attachments = [file1, file2]
+    
+    for input in inputs:
+        if input:
+            await save_input("{command}", "text", input, timestamp)
+        else:
+            await save_input("{command}", "text", "", timestamp)
+    
+    for attachment in attachments:
+        if attachment:
+            await save_input("{command}", "image", attachment.url, timestamp)
+        else:
+            await save_input("{command}", "image", "", timestamp)
+    
+    if not any(inputs) and not any(attachments):
         await ctx.send("Please provide either text or an image.")
+
+    await ctx.send(f"Thinking about ...")
     process_task.start(ctx)
 """)
             

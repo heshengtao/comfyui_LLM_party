@@ -110,7 +110,7 @@ class json_get_value:
                 return (None,)
             # 判断是否为列表或者是字典
             if isinstance(out, list) or isinstance(out, dict):
-                out = json.dumps(out, ensure_ascii=False, indents=4)
+                out = json.dumps(out, ensure_ascii=False, indent=4)
             return (out.strip(),)
         except json.JSONDecodeError:
             print("Invalid JSON format.")
