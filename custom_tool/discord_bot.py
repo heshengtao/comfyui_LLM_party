@@ -111,15 +111,7 @@ async def process_task(ctx):
     if image is not None:
         await ctx.send(file=discord.File(image))
     if audio is not None:
-        if ctx.voice_client is None:
-            if ctx.author.voice:
-                channel = ctx.author.voice.channel
-                await channel.connect()
-            else:
-                await ctx.send("你需要在语音频道中才能播放音频。")
-                return
-        source = discord.FFmpegPCMAudio(audio)
-        ctx.voice_client.play(source)                    
+        await ctx.send(file=discord.File(audio))                   
 
 # 动态生成命令函数
 """)
