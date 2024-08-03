@@ -100,13 +100,31 @@ def read_res():
 
 @tasks.loop(count=1)
 async def process_task(ctx):
-    text, image, audio = read_res()
+    text, image, audio = await read_res()
+    
+    # 处理 text
     if text is not None:
-        await ctx.send(text)
+        if isinstance(text, list):
+            for t in text:
+                await ctx.send(t)
+        else:
+            await ctx.send(text)
+    
+    # 处理 image
     if image is not None:
-        await ctx.send(file=discord.File(image))
+        if isinstance(image, list):
+            for img in image:
+                await ctx.send(file=discord.File(img))
+        else:
+            await ctx.send(file=discord.File(image))
+    
+    # 处理 audio
     if audio is not None:
-        await ctx.send(file=discord.File(audio))                   
+        if isinstance(audio, list):
+            for aud in audio:
+                await ctx.send(file=discord.File(aud))
+        else:
+            await ctx.send(file=discord.File(audio))                 
 
 # 动态生成命令函数
 """)
@@ -181,6 +199,14 @@ if __name__ == "__main__":
         
         return ()
     
+class AnyType(str):
+    """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
+
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+
+any_type = AnyType("*")
 
 class discord_send:
     @classmethod
@@ -188,9 +214,9 @@ class discord_send:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "text": ("STRING", {"default": ""}),
-                "img_path": ("STRING", {"default": ""}),
-                "audio_path": ("STRING", {"default": ""}),
+                "text": (any_type, {"default": ""}),
+                "img_path": (any_type, {"default": ""}),
+                "audio_path": (any_type, {"default": ""}),
             }
         }
 
