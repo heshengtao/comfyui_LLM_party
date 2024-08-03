@@ -40,7 +40,7 @@ def latest_lamacpp(system_info):
     except Exception:
         return "0.2.20"
 
-def install_package(package_name, custom_command=None):
+def install_llama_package(package_name, custom_command=None):
     if not package_is_installed(package_name):
         print(f"Installing {package_name}...")
         command = [sys.executable, "-m", "pip", "install", package_name, "--no-cache-dir"]
@@ -178,7 +178,7 @@ def install_llama(system_info):
             custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
         else:
             custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
-        install_package("llama-cpp-python", custom_command=custom_command)
+        install_llama_package("llama-cpp-python", custom_command=custom_command)
 
 
 def get_comfy_dir():
