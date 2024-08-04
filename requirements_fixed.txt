@@ -40,5 +40,4 @@ neo4j
 ChatTTS
 soundfile
 jax
-discord.py[voice]
 ffmpeg; sys_platform == 'linux'
