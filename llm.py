@@ -526,7 +526,7 @@ class LLM_api_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name": ("STRING", {"default": "gpt-3.5-turbo-1106"}),
+                "model_name": ("STRING", {"default": "gpt-4o-mini"}),
             },
             "optional": {
                 "base_url": (

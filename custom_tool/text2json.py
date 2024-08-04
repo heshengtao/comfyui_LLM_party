@@ -19,7 +19,7 @@ class text2json:
         return {"required": {"text": ("STRING", {}), "sep": ("STRING", {"default": "\n"})}}
 
     RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("JSON",)
+    RETURN_NAMES = ("DICT",)
 
     FUNCTION = "convert_txt2json"
 
