@@ -173,7 +173,7 @@ This open-source project and its contents (hereinafter referred to as "Project")
     <img src="img/Q群.jpg" style="width: 48%;" />
 </div>
 
-### If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [Bilibili artificial intelligence robot](https://space.bilibili.com/26978344)
+### If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [Party host BB machine](https://space.bilibili.com/26978344)
 
 ## Star History
 
