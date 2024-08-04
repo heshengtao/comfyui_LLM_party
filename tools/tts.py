@@ -5,8 +5,8 @@ import time
 
 import openai
 import requests
-
-
+import folder_paths
+import torchaudio
 from playsound3 import playsound
 
 from ..config import config_path, current_dir_path, load_api_keys
@@ -38,8 +38,8 @@ class openai_tts:
             },
         }
 
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("audio",)
+    RETURN_TYPES = ("STRING","AUDIO",)
+    RETURN_NAMES = ("audio_path","audio",)
 
     FUNCTION = "tts"
 
@@ -50,7 +50,7 @@ class openai_tts:
     def tts(self, is_enable=True, input_string="", base_url=None, api_key=None, model_name="tts-1", voice="alloy"):
         if is_enable == False:
             return (None,)
-
+        audio_out=None
         api_keys = load_api_keys(config_path)
         if api_key != "":
             openai.api_key = api_key
@@ -97,9 +97,12 @@ class openai_tts:
                 f.write(response.content)
 
             out = full_audio_path
+            audio_path = folder_paths.get_annotated_filepath(out)
+            waveform, sample_rate = torchaudio.load(audio_path)
+            audio_out = {"waveform": waveform.unsqueeze(0), "sample_rate": sample_rate}
         else:
             out = None
-        return (out,)
+        return (out,audio_out,)
 
 
 class play_audio:
@@ -107,7 +110,7 @@ class play_audio:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "audio": ("STRING", {}),
+                "audio_path": ("STRING", {}),
             },
         }
 
@@ -120,6 +123,6 @@ class play_audio:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def tts(self, audio):
-        playsound(audio)
+    def tts(self, audio_path):
+        playsound(audio_path)
         return ()
