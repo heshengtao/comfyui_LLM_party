@@ -1,16 +1,10 @@
 import json
-import os
 
-import openai
-import requests
+
 import torch
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from openai import OpenAI
-from langchain_openai import OpenAIEmbeddings
-import pickle
-from ..config import config_path, current_dir_path, load_api_keys
 
 bge_embeddings = ""
 files_load = ""

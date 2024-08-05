@@ -126,7 +126,10 @@ def check_port_and_execute_bat(port, command):
     result = sock.connect_ex(("localhost", port))
     if result != 0:
         print(f"端口 {port} 未被占用，正在执行命令...")
-        subprocess.Popen(command, shell=True)
+        if platform.system() == "Windows" or platform.system() == "Darwin":
+            subprocess.Popen(command, shell=True)
+        else:
+            subprocess.Popen(command)
         while True:
             result = sock.connect_ex(("localhost", port))
             if result == 0:
@@ -140,16 +143,14 @@ def check_port_and_execute_bat(port, command):
         print(f"端口 {port} 已被占用。")
     sock.close()
 
-
 api_path = os.path.join(current_dir_path, "workflow_api")
 # 获取apipath文件夹下的所有json文件名
 json_files = [f for f in os.listdir(api_path) if f.endswith(".json")]
 
-
 def execute_command_in_new_window(interpreter, root_path, port):
     os_type = platform.system()
     command = ""
-
+    
     if os_type == "Windows":
         command = f'start cmd /k "{interpreter} {root_path} --port {port}"'
     elif os_type == "Darwin":  # 'Darwin' 是 macOS 的系统类型
@@ -159,15 +160,12 @@ def execute_command_in_new_window(interpreter, root_path, port):
         # 对于 Linux，检查 'screen' 或 'tmux'
         try:
             command = ["screen", "-dmS", "mysession", interpreter, root_path, "--port", str(port)]
-            subprocess.Popen(command, start_new_session=True)
         except FileNotFoundError:
             try:
                 command = ["tmux", "new-session", "-d", interpreter, root_path, "--port", str(port)]
-                subprocess.Popen(command, start_new_session=True)
             except FileNotFoundError:
                 print("错误：未找到合适的终端复用器。请安装 screen 或 tmux。")
-            return
-
+                return
     check_port_and_execute_bat(port, command)
 
 
