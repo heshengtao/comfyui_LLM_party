@@ -92,7 +92,7 @@ class openai_whisper:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "audio": ("STRING", {}),
+                "audio_path": ("STRING", {}),
             },
             "optional": {
                 "base_url": (

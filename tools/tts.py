@@ -7,7 +7,6 @@ import openai
 import requests
 import folder_paths
 import torchaudio
-from playsound3 import playsound
 
 from ..config import config_path, current_dir_path, load_api_keys
 
@@ -104,25 +103,3 @@ class openai_tts:
             out = None
         return (out,audio_out,)
 
-
-class play_audio:
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "audio_path": ("STRING", {}),
-            },
-        }
-
-    RETURN_TYPES = ()
-    RETURN_NAMES = ()
-
-    FUNCTION = "tts"
-
-    OUTPUT_NODE = True
-
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
-
-    def tts(self, audio_path):
-        playsound(audio_path)
-        return ()

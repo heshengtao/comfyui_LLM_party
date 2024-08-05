@@ -26,7 +26,6 @@ fastapi
 py-cpuinfo
 diskcache
 requests_toolbelt
-playsound3
 tabulate
 chardet
 tenacity

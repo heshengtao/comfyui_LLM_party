@@ -11,11 +11,6 @@ torch.compile = lambda *args, **kwargs: args[0]
 import torchaudio
 import folder_paths
 import torchaudio
-if os.name == "nt":
-
-    import winsound
-else:
-    from playsound import playsound
 
 
 def deterministic(seed=0):
@@ -150,29 +145,3 @@ else:
         "ChatTTS_Node": "chatTTS Text-to-Speech🐶"
     }
 
-
-if __name__ == "__main__":
-    input1 = """
-    chat T T S is a text to speech model designed for dialogue applications.
-    [uv_break]it supports mixed language input [uv_break]and offers multi speaker
-    capabilities with precise control over prosodic elements like
-    [uv_break]laughter[uv_break][laugh], [uv_break]pauses, [uv_break]and intonation.
-    [uv_break]it delivers natural and expressive speech,[uv_break]so please
-    [uv_break] use the project responsibly at your own risk.[uv_break]
-    """  # English is still experimental.
-
-    input2 = """
-    《乌鸦喝水》（英语：The Crow and the Pitcher，或译为《乌鸦和水壶》）是《伊索寓言》里的一则故事。
-    故事描绘了一只乌鸦通过向水壶中投掷小石块而喝到壶中的水。
-    现代科学证明，鸦科动物拥有一定的推理和解决问题能力，而非简单的工具性条件反射。
-    """
-
-    chat = ChatTTS_Node()
-    output = chat.chattts(input1, seed=2048, enableRefine=False)
-    print(output)
-    # playsound(output[0])
-    if os.name == "nt":
-        winsound.PlaySound(output[0], winsound.SND_FILENAME)
-    output = chat.chattts(input2, seed=2048)
-    print(output)
-    output = chat.chattts(input1, seed=2048)

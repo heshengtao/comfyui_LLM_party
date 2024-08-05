@@ -136,7 +136,7 @@ from .tools.story import read_story_json, story_json_tool
 from .tools.text_iterator import text_iterator
 from .tools.tool_combine import tool_combine, tool_combine_plus
 from .tools.translate_persona import translate_persona
-from .tools.tts import openai_tts, play_audio
+from .tools.tts import openai_tts
 from .tools.wechat import send_wechat, work_wechat, work_wechat_tool
 from .tools.whisper import listen_audio, openai_whisper
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
@@ -1943,7 +1943,6 @@ NODE_CLASS_MAPPINGS = {
     "feishu": feishu,
     "substring": substring,
     "openai_tts": openai_tts,
-    "play_audio": play_audio,
     "load_name": load_name,
     "omost_decode": omost_decode,
     "omost_setting": omost_setting,
@@ -2044,7 +2043,6 @@ if lang == "zh_CN":
         "feishu": "发送到飞书",
         "substring": "提取字符串",
         "openai_tts": "OpenAI语音合成",
-        "play_audio": "播放音频",
         "load_name": "加载模型名称",
         "omost_decode": "omost解码器",
         "omost_setting": "omost设置",
@@ -2142,7 +2140,6 @@ else:
         "feishu": "Send to Feishu",
         "substring": "Extract Substring",
         "openai_tts": "OpenAI TTS",
-        "play_audio": "Play Audio",
         "load_name": "Load Model Name",
         "omost_decode": "omost Decoder",
         "omost_setting": "omost Setting",

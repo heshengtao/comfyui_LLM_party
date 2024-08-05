@@ -1,57 +1,7 @@
 {
-  "last_node_id": 28,
-  "last_link_id": 41,
+  "last_node_id": 32,
+  "last_link_id": 46,
   "nodes": [
-    {
-      "id": 24,
-      "type": "openai_tts",
-      "pos": [
-        1346,
-        259
-      ],
-      "size": {
-        "0": 315,
-        "1": 178
-      },
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "input_string",
-          "type": "STRING",
-          "link": 40,
-          "widget": {
-            "name": "input_string"
-          },
-          "slot_index": 0,
-          "label": "input_string"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "audio",
-          "type": "AUDIO",
-          "links": [
-            35
-          ],
-          "shape": 3,
-          "slot_index": 0,
-          "label": "audio"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "openai_tts"
-      },
-      "widgets_values": [
-        true,
-        "",
-        "tts-1",
-        "alloy",
-        "",
-        ""
-      ]
-    },
     {
       "id": 26,
       "type": "show_text_party",
@@ -64,7 +14,7 @@
         "1": 185.43215942382812
       },
       "flags": {},
-      "order": 6,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
@@ -95,39 +45,6 @@
       ]
     },
     {
-      "id": 21,
-      "type": "listen_audio",
-      "pos": [
-        230,
-        333
-      ],
-      "size": {
-        "0": 239.18804931640625,
-        "1": 58
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "audio",
-          "type": "AUDIO",
-          "links": [
-            32
-          ],
-          "shape": 3,
-          "slot_index": 0,
-          "label": "audio"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "listen_audio"
-      },
-      "widgets_values": [
-        "shift"
-      ]
-    },
-    {
       "id": 27,
       "type": "show_text_party",
       "pos": [
@@ -139,13 +56,13 @@
         "1": 170.9775848388672
       },
       "flags": {},
-      "order": 3,
+      "order": 4,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 37,
+          "link": 44,
           "widget": {
             "name": "text"
           },
@@ -178,10 +95,10 @@
       ],
       "size": {
         "0": 315,
-        "1": 106
+        "1": 130
       },
       "flags": {},
-      "order": 1,
+      "order": 0,
       "mode": 0,
       "outputs": [
         {
@@ -201,51 +118,8 @@
       "widgets_values": [
         "gpt-3.5-turbo",
         "",
-        ""
-      ]
-    },
-    {
-      "id": 22,
-      "type": "openai_whisper",
-      "pos": [
-        512,
-        337
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "audio",
-          "type": "AUDIO",
-          "link": 32,
-          "label": "audio"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "links": [
-            37,
-            39
-          ],
-          "shape": 3,
-          "slot_index": 0,
-          "label": "text"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "openai_whisper"
-      },
-      "widgets_values": [
-        true,
         "",
-        ""
+        false
       ]
     },
     {
@@ -255,12 +129,12 @@
         889,
         248
       ],
-      "size": [
-        393.4008792678578,
-        458.8365291367379
-      ],
+      "size": {
+        "0": 393.40087890625,
+        "1": 466
+      },
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
       "inputs": [
         {
@@ -281,15 +155,17 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
-          }
+          },
+          "label": "system_prompt_input"
         },
         {
           "name": "user_prompt_input",
           "type": "STRING",
-          "link": 39,
+          "link": 43,
           "widget": {
             "name": "user_prompt_input"
-          }
+          },
+          "label": "user_prompt_input"
         },
         {
           "name": "tools",
@@ -297,7 +173,8 @@
           "link": null,
           "widget": {
             "name": "tools"
-          }
+          },
+          "label": "tools"
         },
         {
           "name": "file_content",
@@ -305,7 +182,8 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
@@ -313,8 +191,8 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            40,
-            41
+            41,
+            45
           ],
           "shape": 3,
           "label": "assistant_response",
@@ -360,32 +238,35 @@
         "",
         "",
         100,
-        ""
+        "",
+        true
       ]
     },
     {
-      "id": 25,
-      "type": "play_audio",
+      "id": 29,
+      "type": "listen_audio",
       "pos": [
-        1712,
-        270
+        115,
+        334
       ],
       "size": {
-        "0": 210,
-        "1": 26
+        "0": 315,
+        "1": 78
       },
       "flags": {},
-      "order": 7,
+      "order": 1,
       "mode": 0,
-      "inputs": [
-        {
-          "name": "audio",
-          "type": "AUDIO",
-          "link": 35,
-          "label": "audio"
-        }
-      ],
       "outputs": [
+        {
+          "name": "audio_path",
+          "type": "STRING",
+          "links": [
+            42
+          ],
+          "shape": 3,
+          "label": "audio_path",
+          "slot_index": 0
+        },
         {
           "name": "audio",
           "type": "AUDIO",
@@ -395,35 +276,147 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "play_audio"
-      }
+        "Node name for S&R": "listen_audio"
+      },
+      "widgets_values": [
+        "shift"
+      ]
+    },
+    {
+      "id": 30,
+      "type": "openai_whisper",
+      "pos": [
+        512,
+        337
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio_path",
+          "type": "STRING",
+          "link": 42,
+          "widget": {
+            "name": "audio_path"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            43,
+            44
+          ],
+          "shape": 3,
+          "label": "text",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "openai_whisper"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "https://api.openai.com/v1/",
+        "sk-XXXXX"
+      ]
+    },
+    {
+      "id": 31,
+      "type": "openai_tts",
+      "pos": [
+        1345,
+        230
+      ],
+      "size": [
+        315,
+        198
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 45,
+          "widget": {
+            "name": "input_string"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio_path",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "audio_path"
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            46
+          ],
+          "shape": 3,
+          "label": "audio",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "openai_tts"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "tts-1",
+        "alloy",
+        "https://api.openai.com/v1/",
+        "sk-XXXXX"
+      ]
+    },
+    {
+      "id": 32,
+      "type": "PreviewAudio",
+      "pos": [
+        1756,
+        248
+      ],
+      "size": {
+        "0": 315,
+        "1": 76
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 46,
+          "label": "audio"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAudio"
+      },
+      "widgets_values": [
+        null
+      ]
     }
   ],
   "links": [
-    [
-      32,
-      21,
-      0,
-      22,
-      0,
-      "AUDIO"
-    ],
-    [
-      35,
-      24,
-      0,
-      25,
-      0,
-      "AUDIO"
-    ],
-    [
-      37,
-      22,
-      0,
-      27,
-      0,
-      "STRING"
-    ],
     [
       38,
       20,
@@ -433,38 +426,62 @@
       "CUSTOM"
     ],
     [
-      39,
-      22,
-      0,
-      28,
-      3,
-      "STRING"
-    ],
-    [
-      40,
-      28,
-      0,
-      24,
-      0,
-      "STRING"
-    ],
-    [
       41,
       28,
       0,
       26,
       0,
       "STRING"
+    ],
+    [
+      42,
+      29,
+      0,
+      30,
+      0,
+      "STRING"
+    ],
+    [
+      43,
+      30,
+      0,
+      28,
+      3,
+      "STRING"
+    ],
+    [
+      44,
+      30,
+      0,
+      27,
+      0,
+      "STRING"
+    ],
+    [
+      45,
+      28,
+      0,
+      31,
+      0,
+      "STRING"
+    ],
+    [
+      46,
+      31,
+      1,
+      32,
+      0,
+      "AUDIO"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.6830134553650705,
+      "scale": 0.8264462809917354,
       "offset": {
-        "0": 58.420669786097775,
-        "1": 219.98933981467815
+        "0": -75.51237461697824,
+        "1": 143.68492610007846
       }
     }
   },
