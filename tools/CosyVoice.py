@@ -1,6 +1,7 @@
-from gradio_client import Client
 import folder_paths
 import torchaudio
+from gradio_client import Client
+
 
 def CosyVoice_audio(text, voice="中文女", voice_seed=1, api_name="/generate_audio"):
     client = Client("https://s5k.cn/api/v1/studio/iic/CosyVoice-300M/gradio/")
@@ -27,8 +28,14 @@ class CosyVoice:
             },
         }
 
-    RETURN_TYPES = ("STRING","AUDIO",)
-    RETURN_NAMES = ("audio_path","audio",)
+    RETURN_TYPES = (
+        "STRING",
+        "AUDIO",
+    )
+    RETURN_NAMES = (
+        "audio_path",
+        "audio",
+    )
 
     FUNCTION = "tts"
 
@@ -45,4 +52,7 @@ class CosyVoice:
         audio_path = folder_paths.get_annotated_filepath(out)
         waveform, sample_rate = torchaudio.load(audio_path)
         audio_out = {"waveform": waveform.unsqueeze(0), "sample_rate": sample_rate}
-        return (out,audio_out,)
+        return (
+            out,
+            audio_out,
+        )

@@ -228,13 +228,9 @@ NODE_CLASS_MAPPINGS = {
 }
 lang = locale.getdefaultlocale()[0]
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "FeishuSendMsg": "飞书机器人发消息🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"FeishuSendMsg": "飞书机器人发消息🐶"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "FeishuSendMsg": "Feishu Bot Send Message🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"FeishuSendMsg": "Feishu Bot Send Message🐶"}
 
 
 if __name__ == "__main__":

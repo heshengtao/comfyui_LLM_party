@@ -70,14 +70,12 @@ class arxiv_tool:
         ]
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
+
+
 _TOOL_HOOKS = ["get_arxiv"]
 NODE_CLASS_MAPPINGS = {"arxiv_tool": arxiv_tool}
 lang = locale.getdefaultlocale()[0]
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "arxiv_tool": "arxiv工具"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"arxiv_tool": "arxiv工具"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "arxiv_tool": "arxiv Tool"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"arxiv_tool": "arxiv Tool"}

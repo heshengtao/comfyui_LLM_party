@@ -285,7 +285,7 @@ class start_workflow:
         if image_input1 is not None:
             for image in image_input1:
                 img_out.append(image)
-        img_out2 = []   
+        img_out2 = []
         if image_input2 is not None:
             for image in image_input2:
                 img_out2.append(image)

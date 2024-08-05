@@ -143,14 +143,16 @@ def check_port_and_execute_bat(port, command):
         print(f"端口 {port} 已被占用。")
     sock.close()
 
+
 api_path = os.path.join(current_dir_path, "workflow_api")
 # 获取apipath文件夹下的所有json文件名
 json_files = [f for f in os.listdir(api_path) if f.endswith(".json")]
 
+
 def execute_command_in_new_window(interpreter, root_path, port):
     os_type = platform.system()
     command = ""
-    
+
     if os_type == "Windows":
         command = f'start cmd /k "{interpreter} {root_path} --port {port}"'
     elif os_type == "Darwin":  # 'Darwin' 是 macOS 的系统类型

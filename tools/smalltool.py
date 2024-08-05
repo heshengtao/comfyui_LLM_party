@@ -20,6 +20,7 @@ class load_int:
         text = int(text)
         return (text,)
 
+
 class AnyType(str):
     """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
 
@@ -28,6 +29,8 @@ class AnyType(str):
 
 
 any_type = AnyType("*")
+
+
 class none2false:
     @classmethod
     def INPUT_TYPES(s):
@@ -51,7 +54,7 @@ class none2false:
             return (False,)
         else:
             return (True,)
-        
+
 
 class bool_logic:
     @classmethod
@@ -60,7 +63,7 @@ class bool_logic:
             "required": {
                 "A": ("BOOLEAN", {}),
                 "B": ("BOOLEAN", {}),
-                "logic_type":(["and", "or", "not","Nor", "Nand", "Xor", "Xnor"], {"default": "and"}),
+                "logic_type": (["and", "or", "not", "Nor", "Nand", "Xor", "Xnor"], {"default": "and"}),
             },
         }
 
@@ -73,18 +76,18 @@ class bool_logic:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def tts(self, A,B,logic_type):
-        if logic_type=="and":
+    def tts(self, A, B, logic_type):
+        if logic_type == "and":
             return (A and B,)
-        elif logic_type=="or":
+        elif logic_type == "or":
             return (A or B,)
-        elif logic_type=="not":
+        elif logic_type == "not":
             return (not A,)
-        elif logic_type=="Nor":
+        elif logic_type == "Nor":
             return (not (A or B),)
-        elif logic_type=="Nand":
+        elif logic_type == "Nand":
             return (not (A and B),)
-        elif logic_type=="Xor":
+        elif logic_type == "Xor":
             return (A ^ B,)
-        elif logic_type=="Xnor":
+        elif logic_type == "Xnor":
             return (not (A ^ B),)

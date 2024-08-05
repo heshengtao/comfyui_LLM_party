@@ -1,14 +1,15 @@
 import json
 import os
 
+import openai
 import requests
 import torch
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
-import openai
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from openai import OpenAI
+
 from ..config import config_path, current_dir_path, load_api_keys
 
 ebd_model = ""
@@ -46,7 +47,9 @@ def check_web(url, keyword=None):
             combined_content = str(response.text)
             return "该网页的相关信息为：" + str(combined_content)
         elif bge_embeddings == "":
-            embeddings = OpenAIEmbeddings(model="text-embedding-3-small",api_key=openai.api_key, base_url=openai.base_url)
+            embeddings = OpenAIEmbeddings(
+                model="text-embedding-3-small", api_key=openai.api_key, base_url=openai.base_url
+            )
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size=c_size,
                 chunk_overlap=c_overlap,
@@ -114,7 +117,16 @@ class check_web_tool:
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
     def read_web(
-        self, chunk_size, chunk_overlap, device, with_jina=True, is_enable=True, web_url=None, embedding_path=None,api_key=None, base_url=None,
+        self,
+        chunk_size,
+        chunk_overlap,
+        device,
+        with_jina=True,
+        is_enable=True,
+        web_url=None,
+        embedding_path=None,
+        api_key=None,
+        base_url=None,
     ):
         if is_enable == False:
             return (None,)
@@ -132,7 +144,7 @@ class check_web_tool:
                 model_name=embedding_path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
             )
         if embedding_path is None or embedding_path == "":
-            os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
+            os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
             api_keys = load_api_keys(config_path)
             if api_key:
                 openai.api_key = api_key
@@ -140,14 +152,14 @@ class check_web_tool:
                 openai.api_key = api_keys.get("openai_api_key")
             else:
                 openai.api_key = os.environ.get("OPENAI_API_KEY")
-            
+
             if base_url:
                 openai.base_url = base_url.rstrip("/") + "/"
             elif api_keys.get("base_url"):
                 openai.base_url = api_keys.get("base_url")
             else:
                 openai.base_url = os.environ.get("OPENAI_API_BASE")
-            
+
             if not openai.api_key:
                 return ("请输入API_KEY",)
 

@@ -202,13 +202,9 @@ NODE_CLASS_MAPPINGS = {
 }
 lang = locale.getdefaultlocale()[0]
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "FeishuGetHistory": "飞书机器人读群历史🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"FeishuGetHistory": "飞书机器人读群历史🐶"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "FeishuGetHistory": "Feishu Bot Read Group History🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"FeishuGetHistory": "Feishu Bot Read Group History🐶"}
 
 if __name__ == "__main__":
     feishu = FeishuGetHistory()

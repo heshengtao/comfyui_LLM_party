@@ -8,7 +8,6 @@ import numpy as np
 import torch
 
 torch.compile = lambda *args, **kwargs: args[0]
-import torchaudio
 import folder_paths
 import torchaudio
 
@@ -48,8 +47,14 @@ class ChatTTS_Node:
             },
         }
 
-    RETURN_TYPES = ("STRING","AUDIO",)
-    RETURN_NAMES = ("audio_path","audio",)
+    RETURN_TYPES = (
+        "STRING",
+        "AUDIO",
+    )
+    RETURN_NAMES = (
+        "audio_path",
+        "audio",
+    )
     FUNCTION = "chattts"
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
@@ -129,7 +134,10 @@ class ChatTTS_Node:
         audio_path = folder_paths.get_annotated_filepath(full_audio_path)
         waveform, sample_rate = torchaudio.load(audio_path)
         audio_out = {"waveform": waveform.unsqueeze(0), "sample_rate": sample_rate}
-        return (full_audio_path,audio_out,)
+        return (
+            full_audio_path,
+            audio_out,
+        )
 
 
 NODE_CLASS_MAPPINGS = {
@@ -137,11 +145,6 @@ NODE_CLASS_MAPPINGS = {
 }
 lang = locale.getdefaultlocale()[0]
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "ChatTTS_Node": "chatTTS语音合成🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"ChatTTS_Node": "chatTTS语音合成🐶"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "ChatTTS_Node": "chatTTS Text-to-Speech🐶"
-    }
-
+    NODE_DISPLAY_NAME_MAPPINGS = {"ChatTTS_Node": "chatTTS Text-to-Speech🐶"}
