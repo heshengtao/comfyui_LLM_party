@@ -174,3 +174,5 @@ QQ_monitor.py
 qq_send_msg.py
 mylover_api.json
 server_api.py
+discord_monitor_await.py
+discord_bot_await.py
