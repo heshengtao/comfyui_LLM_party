@@ -107,7 +107,6 @@ from .tools.load_ebd import (
     data_base,
     ebd_tool,
     load_embeddings,
-    load_openai_ebd,
     save_ebd_database,
 )
 from .tools.load_file import (
@@ -1976,7 +1975,6 @@ NODE_CLASS_MAPPINGS = {
     "list_extend_plus": list_extend_plus,
     "clear_model": clear_model,
     "save_ebd_database": save_ebd_database,
-    "load_openai_ebd": load_openai_ebd,
     "json2text": json2text,
     "interpreter_function": interpreter_function,
     "load_img_path": load_img_path,
@@ -2076,14 +2074,13 @@ if lang == "zh_CN":
         "list_extend_plus": "超大列表扩展",
         "clear_model": "清空模型",
         "save_ebd_database": "保存向量数据库",
-        "load_openai_ebd": "加载openai词嵌入模型",
         "json2text": "JSON转文本",
         "interpreter_function": "解释器函数",
         "load_img_path": "从图片路径加载",
         "img2path": "图片存至路径",
         "load_int": "加载整数",
         "none2false": "None转False",
-        "bool_logic": "布尔逻辑"
+        "bool_logic": "布尔逻辑",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2173,14 +2170,13 @@ else:
         "list_extend_plus": "Large List Extend",
         "clear_model": "Clear Model",
         "save_ebd_database": "Save Embeddings Database",
-        "load_openai_ebd": "Load OpenAI Embeddings",
         "json2text": "JSON to Text",
         "interpreter_function": "Interpreter Function",
         "load_img_path": "Load Image from Path",
         "img2path": "Image to Path",
         "load_int": "Load Integer",
         "none2false": "None to False",
-        "bool_logic": "Boolean Logic"
+        "bool_logic": "Boolean Logic",
     }
 
 

@@ -1,10 +1,15 @@
 import json
+import os
 
 import requests
 import torch
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings
+import openai
+from openai import OpenAI
+from ..config import config_path, current_dir_path, load_api_keys
 
 ebd_model = ""
 bge_embeddings = ""
@@ -37,8 +42,19 @@ def check_web(url, keyword=None):
         # 设置响应内容的编码，确保文本不会出现编码问题
         response.encoding = response.apparent_encoding
 
-        if keyword == None or keyword == "" or bge_embeddings == "":
+        if keyword == None or keyword == "":
             combined_content = str(response.text)
+            return "该网页的相关信息为：" + str(combined_content)
+        elif bge_embeddings == "":
+            embeddings = OpenAIEmbeddings(model="text-embedding-3-small",api_key=openai.api_key, base_url=openai.base_url)
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=c_size,
+                chunk_overlap=c_overlap,
+            )
+            chunks = text_splitter.split_text(str(response.text))
+            url_base = FAISS.from_texts(chunks, embeddings)
+            docs = url_base.similarity_search(keyword, k=5)
+            combined_content = "".join(doc.page_content + "\n" for doc in docs)
             return "该网页的相关信息为：" + str(combined_content)
         else:
             text_splitter = RecursiveCharacterTextSplitter(
@@ -73,6 +89,18 @@ class check_web_tool:
                 "web_url": ("STRING", {}),
                 "embedding_path": ("STRING", {"default": None}),
                 "with_jina": ("BOOLEAN", {"default": True}),
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": "https://api.openai.com/v1/",
+                    },
+                ),
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": "sk-XXXXX",
+                    },
+                ),
             },
         }
 
@@ -86,7 +114,7 @@ class check_web_tool:
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
     def read_web(
-        self, chunk_size, chunk_overlap, device, with_jina=True, is_enable=True, web_url=None, embedding_path=None
+        self, chunk_size, chunk_overlap, device, with_jina=True, is_enable=True, web_url=None, embedding_path=None,api_key=None, base_url=None,
     ):
         if is_enable == False:
             return (None,)
@@ -103,6 +131,25 @@ class check_web_tool:
             bge_embeddings = HuggingFaceBgeEmbeddings(
                 model_name=embedding_path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
             )
+        if embedding_path is None or embedding_path == "":
+            os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
+            api_keys = load_api_keys(config_path)
+            if api_key:
+                openai.api_key = api_key
+            elif api_keys.get("openai_api_key"):
+                openai.api_key = api_keys.get("openai_api_key")
+            else:
+                openai.api_key = os.environ.get("OPENAI_API_KEY")
+            
+            if base_url:
+                openai.base_url = base_url.rstrip("/") + "/"
+            elif api_keys.get("base_url"):
+                openai.base_url = api_keys.get("base_url")
+            else:
+                openai.base_url = os.environ.get("OPENAI_API_BASE")
+            
+            if not openai.api_key:
+                return ("请输入API_KEY",)
 
         if web_url is not None and web_url != "":
             output = [

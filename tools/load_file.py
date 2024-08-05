@@ -22,6 +22,9 @@ def read_one(path):
     text = ""
     if path.endswith(".docx"):
         text += docx2txt.process(path)
+    elif path.endswith(".md"):
+        with open(path, "r", encoding="utf-8") as f:
+            text += f.read()
     elif path.endswith(".pdf"):
         with pdfplumber.open(path) as pdf:
             for page in pdf.pages:
