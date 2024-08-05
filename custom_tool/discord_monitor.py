@@ -6,6 +6,8 @@ import locale
 import os
 import time
 
+from filelock import FileLock, Timeout
+
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 discord_temp_dir = os.path.join(current_dir, 'discord_temp')
@@ -41,14 +43,23 @@ class discord_file_monitor:
             # 过滤出JSON文件
             json_files = [f for f in files if f.endswith('.json')]
             if json_files:
-                # 找到最早的JSON文件
-                earliest_file = min(json_files, key=lambda f: os.path.getctime(os.path.join(discord_temp_dir, f)))
-                file_path = os.path.join(discord_temp_dir, earliest_file)
-                # 读取文件内容并转换为字符串
-                with open(file_path, 'r', encoding='utf-8') as file:
-                    content = json.load(file)
-                # 删除文件
-                os.remove(file_path)
+                for file in sorted(json_files, key=lambda f: os.path.getctime(os.path.join(discord_temp_dir, f))):
+                    file_path = os.path.join(discord_temp_dir, file)
+                    lock_path = file_path + ".lock"
+                    lock = FileLock(lock_path, timeout=0.1)  # 设置一个较短的超时时间
+
+                    try:
+                        with lock:
+                            # 读取文件内容并转换为字典
+                            with open(file_path, 'r', encoding='utf-8') as f:
+                                content = json.load(f)
+                            # 删除文件
+                            os.remove(file_path)
+                            print(content)
+                            break  # 找到并处理一个文件后退出循环
+                    except Timeout:
+                        # 文件被锁定，跳过
+                        continue
                 msg_content= json.dumps(content, ensure_ascii=False,indent=4)
                 return (
                     msg_content,
