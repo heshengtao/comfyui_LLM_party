@@ -25,8 +25,8 @@ class discord_bot:
             }
         }
 
-    RETURN_TYPES = ()
-    RETURN_NAMES = ()
+    RETURN_TYPES = ("BOOLEAN",)
+    RETURN_NAMES = ("is_success",)
 
     FUNCTION = "bot"
 
@@ -196,8 +196,8 @@ if __name__ == "__main__":
                     subprocess.Popen(["tmux", "new-session", "-d", sys.executable, run_bot_code], start_new_session=True)
                 except FileNotFoundError:
                     print("No compatible terminal multiplexer found. Please install screen or tmux.")
-        
-        return ()
+        out=True
+        return (out,)
     
 class AnyType(str):
     """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""

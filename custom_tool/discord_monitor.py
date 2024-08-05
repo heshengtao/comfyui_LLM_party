@@ -19,6 +19,7 @@ class discord_file_monitor:
         return {
             "required": {
                 "interval":("FLOAT",{"default":0.1}),
+                "is_success":("BOOLEAN",{"default":True}),
             }
         }
 
@@ -35,7 +36,7 @@ class discord_file_monitor:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def monitor(self, interval=0.1):
+    def monitor(self, interval=0.1,is_success=True):
         show_help = "placeholder for help text"
         while True:
             # 获取feishu_temp_dir目录下的所有文件
