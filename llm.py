@@ -103,7 +103,7 @@ from .tools.KG_neo4j import (
     New_entities_neo4j,
     New_relationships_neo4j,
 )
-from .tools.load_ebd import data_base, ebd_tool, load_embeddings, save_ebd_database
+from .tools.load_ebd import data_base, ebd_tool, embeddings_function, save_ebd_database,load_ebd
 from .tools.load_file import (
     load_file,
     load_file_folder,
@@ -1890,7 +1890,8 @@ NODE_CLASS_MAPPINGS = {
     "LLM_local_loader": LLM_local_loader,
     "LLavaLoader": LLavaLoader,
     "llama_guff_loader": llama_guff_loader,
-    "load_embeddings": load_embeddings,
+    "load_ebd":load_ebd,
+    "embeddings_function": embeddings_function,
     "load_file": load_file,
     "load_persona": load_persona,
     "classify_persona": classify_persona,
@@ -1989,7 +1990,8 @@ if lang == "zh_CN":
         "LLM_local_loader": "本地大语言模型加载器",
         "LLavaLoader": "LVM加载器",
         "llama_guff_loader": "llama-guff加载器",
-        "load_embeddings": "词嵌入模型加载器",
+        "load_ebd": "加载词嵌入",
+        "embeddings_function": "词向量检索",
         "load_file": "加载文件",
         "load_persona": "加载人格面具",
         "classify_persona": "分类器面具",
@@ -2085,7 +2087,8 @@ else:
         "LLM_local_loader": "Local Large Language Model Loader",
         "LLavaLoader": "LVM Loader",
         "llama_guff_loader": "llama-guff Loader",
-        "load_embeddings": "Embeddings Model Loader",
+        "load_ebd": "Load Embeddings",
+        "embeddings_function": "Word Vector Search",
         "load_file": "Load File",
         "load_persona": "Load Persona",
         "classify_persona": "Classify Persona",

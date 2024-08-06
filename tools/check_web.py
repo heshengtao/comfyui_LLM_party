@@ -12,7 +12,6 @@ from openai import OpenAI
 
 from ..config import config_path, current_dir_path, load_api_keys
 
-ebd_model = ""
 bge_embeddings = ""
 files_load = ""
 c_size = 200
@@ -104,6 +103,7 @@ class check_web_tool:
                         "default": "sk-XXXXX",
                     },
                 ),
+                "ebd_model": ("EBD_MODEL", {"default": None}),
             },
         }
 
@@ -127,23 +127,26 @@ class check_web_tool:
         embedding_path=None,
         api_key=None,
         base_url=None,
+        ebd_model=None,
     ):
         if is_enable == False:
             return (None,)
-        global ebd_model, files_load, bge_embeddings, c_size, c_overlap, knowledge_base, is_jina
+        global  files_load, bge_embeddings, c_size, c_overlap, knowledge_base, is_jina
         is_jina = with_jina
         c_size = chunk_size
         c_overlap = chunk_overlap
         if device == "auto":
             device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
-        if ebd_model == "":
+        if ebd_model is None:
             model_kwargs = {"device": device}
             encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度
-        if bge_embeddings == "" and embedding_path is not None and embedding_path != "":
-            bge_embeddings = HuggingFaceBgeEmbeddings(
-                model_name=embedding_path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
-            )
-        if embedding_path is None or embedding_path == "":
+            if bge_embeddings == "" and embedding_path is not None and embedding_path != "":
+                bge_embeddings = HuggingFaceBgeEmbeddings(
+                    model_name=embedding_path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
+                )
+        else:
+            bge_embeddings = ebd_model
+        if (embedding_path is None or embedding_path == "") and ebd_model is None:
             os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
             api_keys = load_api_keys(config_path)
             if api_key:
