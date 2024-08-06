@@ -3,9 +3,9 @@ import os
 import shutil
 import time
 
+import folder_paths
 import openai
 import requests
-import folder_paths
 import torchaudio
 
 from ..config import config_path, current_dir_path, load_api_keys
@@ -37,8 +37,14 @@ class openai_tts:
             },
         }
 
-    RETURN_TYPES = ("STRING","AUDIO",)
-    RETURN_NAMES = ("audio_path","audio",)
+    RETURN_TYPES = (
+        "STRING",
+        "AUDIO",
+    )
+    RETURN_NAMES = (
+        "audio_path",
+        "audio",
+    )
 
     FUNCTION = "tts"
 
@@ -49,7 +55,7 @@ class openai_tts:
     def tts(self, is_enable=True, input_string="", base_url=None, api_key=None, model_name="tts-1", voice="alloy"):
         if is_enable == False:
             return (None,)
-        audio_out=None
+        audio_out = None
         api_keys = load_api_keys(config_path)
         if api_key != "":
             openai.api_key = api_key
@@ -101,5 +107,7 @@ class openai_tts:
             audio_out = {"waveform": waveform.unsqueeze(0), "sample_rate": sample_rate}
         else:
             out = None
-        return (out,audio_out,)
-
+        return (
+            out,
+            audio_out,
+        )

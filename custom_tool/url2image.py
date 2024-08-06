@@ -7,11 +7,16 @@ import ssl
 from PIL import Image, ImageOps, ImageSequence
 import numpy as np
 class URL2IMG:
+    def __init__(self):
+        self.img_path = None
+        self.img_data = None
+
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "url": ("STRING", {}),
+                "file_name": ("STRING", {}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             }
         }
@@ -22,9 +27,9 @@ class URL2IMG:
     FUNCTION = "url_to_img"
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def url_to_img(self, url, is_enable=True):
+    def url_to_img(self, url, file_name=None, is_enable=True):
         if not is_enable:
-            return (None, None, "Function is disabled")
+            return (self.img_path, self.img_data, "Function is disabled")
             
         if not url:
             return (None, None, "URL is None")
@@ -45,7 +50,10 @@ class URL2IMG:
         else:
             return (None, None, "Unknown image extension based on base64")
 
-        img_path = f'image.{ext}'
+        if file_name == None:
+            img_path = f'image.{ext}'
+        else:
+            img_path = f'{file_name}.{ext}'
         with open(img_path, 'wb') as f:
             f.write(response.data)
 
@@ -60,6 +68,8 @@ class URL2IMG:
             image = torch.from_numpy(image).unsqueeze(0)
             img_out.append(image)
         img_out = img_out[0]
+        self.img_path = img_path
+        self.img_data = img_out
         return (img_path, img_out, f"Image file saved as {img_path}")
 
 NODE_CLASS_MAPPINGS = {
@@ -72,5 +82,5 @@ if lang == "zh_CN":
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "URL2IMG": "Download Image🐶"
+        "URL2IMG": "URL 2 IMG🐶"
     }

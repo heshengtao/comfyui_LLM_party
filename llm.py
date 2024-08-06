@@ -103,12 +103,7 @@ from .tools.KG_neo4j import (
     New_entities_neo4j,
     New_relationships_neo4j,
 )
-from .tools.load_ebd import (
-    data_base,
-    ebd_tool,
-    load_embeddings,
-    save_ebd_database,
-)
+from .tools.load_ebd import data_base, ebd_tool, load_embeddings, save_ebd_database
 from .tools.load_file import (
     load_file,
     load_file_folder,
@@ -130,7 +125,7 @@ from .tools.search_web import (
     search_web_bing,
 )
 from .tools.show_text import About_us, show_text_party
-from .tools.smalltool import load_int,none2false,bool_logic
+from .tools.smalltool import bool_logic, load_int, none2false
 from .tools.story import read_story_json, story_json_tool
 from .tools.text_iterator import text_iterator
 from .tools.tool_combine import tool_combine, tool_combine_plus
@@ -553,7 +548,7 @@ class LLM_api_loader:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def chatbot(self, model_name, base_url=None, api_key=None,is_ollama=False):
+    def chatbot(self, model_name, base_url=None, api_key=None, is_ollama=False):
         api_keys = load_api_keys(config_path)
         if api_key != "":
             openai.api_key = api_key
@@ -575,8 +570,8 @@ class LLM_api_loader:
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
         if is_ollama:
-            openai.api_key="ollama"
-            openai.base_url="http://127.0.0.1:11434/v1/"
+            openai.api_key = "ollama"
+            openai.base_url = "http://127.0.0.1:11434/v1/"
         chat = Chat(model_name, openai.api_key, openai.base_url)
         return (chat,)
 
@@ -1980,8 +1975,8 @@ NODE_CLASS_MAPPINGS = {
     "load_img_path": load_img_path,
     "img2path": img2path,
     "load_int": load_int,
-    "none2false":none2false,
-    "bool_logic":bool_logic,
+    "none2false": none2false,
+    "bool_logic": bool_logic,
 }
 
 
@@ -2178,7 +2173,6 @@ else:
         "none2false": "None to False",
         "bool_logic": "Boolean Logic",
     }
-
 
 
 def load_custom_tools():

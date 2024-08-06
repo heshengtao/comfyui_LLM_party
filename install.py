@@ -21,16 +21,17 @@ def get_python_version():
     else:
         return None
 
+
 def latest_lamacpp(system_info):
     try:
         response = get("https://api.github.com/repos/abetlen/llama-cpp-python/releases")
         releases = response.json()
         for release in releases:
             tag_name = release["tag_name"].lower()
-            if system_info.get('gpu', False):
+            if system_info.get("gpu", False):
                 if "cu" in tag_name:
                     return release["tag_name"].replace("v", "")
-            elif system_info.get('metal', False):
+            elif system_info.get("metal", False):
                 if "metal" in tag_name:
                     return release["tag_name"].replace("v", "")
             else:
@@ -39,6 +40,7 @@ def latest_lamacpp(system_info):
         return "0.2.20"
     except Exception:
         return "0.2.20"
+
 
 def install_llama_package(package_name, custom_command=None):
     if not package_is_installed(package_name):
@@ -50,12 +52,14 @@ def install_llama_package(package_name, custom_command=None):
     else:
         print(f"{package_name} is already installed.")
 
+
 def package_is_installed(package_name):
     try:
         pkg_resources.get_distribution(package_name)
         return True
     except pkg_resources.DistributionNotFound:
         return False
+
 
 def is_cmake_installed_win():
     try:
@@ -64,6 +68,7 @@ def is_cmake_installed_win():
     except FileNotFoundError:
         return False
 
+
 def install_cmake_win():
     if is_cmake_installed_win():
         print("CMake 已安装。")
@@ -71,15 +76,23 @@ def install_cmake_win():
         print("请确保已安装 CMake。")
         while True:
             user_input = input("是否需要自动下载和安装 CMake？(y/n): ").strip().lower()
-            if user_input in ['y', 'n']:
+            if user_input in ["y", "n"]:
                 break
             else:
                 print("无效输入，请输入 'y' 或 'n'。")
-        
-        if user_input == 'y':
+
+        if user_input == "y":
             try:
                 # 下载 CMake 安装程序
-                subprocess.run(["curl", "-o", "cmake_installer.msi", "https://cmake.org/files/v3.26/cmake-3.26.0-windows-x86_64.msi"], check=True)
+                subprocess.run(
+                    [
+                        "curl",
+                        "-o",
+                        "cmake_installer.msi",
+                        "https://cmake.org/files/v3.26/cmake-3.26.0-windows-x86_64.msi",
+                    ],
+                    check=True,
+                )
                 # 运行 CMake 安装程序
                 subprocess.run(["msiexec", "/i", "cmake_installer.msi", "/quiet", "/norestart"], check=True)
                 print("CMake 已成功安装。")
@@ -88,12 +101,14 @@ def install_cmake_win():
         else:
             print("请手动安装 CMake。")
 
+
 def is_cmake_installed_mac():
     try:
         result = subprocess.run(["cmake", "--version"], capture_output=True, text=True)
         return result.returncode == 0
     except FileNotFoundError:
         return False
+
 
 def install_cmake_mac():
     if is_cmake_installed_mac():
@@ -102,11 +117,11 @@ def install_cmake_mac():
         print("请确保已安装 Homebrew。")
         while True:
             user_input = input("是否需要自动下载和安装 CMake？(y/n): ").strip().lower()
-            if user_input in ['y', 'n']:
+            if user_input in ["y", "n"]:
                 break
             else:
                 print("无效输入，请输入 'y' 或 'n'。")
-        if user_input == 'y':
+        if user_input == "y":
             try:
                 subprocess.run(["brew", "install", "cmake"], check=True)
                 print("CMake 已成功安装。")
@@ -115,12 +130,14 @@ def install_cmake_mac():
         else:
             print("请手动安装 CMake。")
 
+
 def is_cmake_installed_linux():
     try:
         result = subprocess.run(["cmake", "--version"], capture_output=True, text=True)
         return result.returncode == 0
     except FileNotFoundError:
         return False
+
 
 def install_cmake_linux():
     if is_cmake_installed_linux():
@@ -129,12 +146,12 @@ def install_cmake_linux():
         print("请确保已安装包管理器（如 apt 或 yum）。")
         while True:
             user_input = input("是否需要自动下载和安装 CMake？(y/n): ").strip().lower()
-            if user_input in ['y', 'n']:
+            if user_input in ["y", "n"]:
                 break
             else:
                 print("无效输入，请输入 'y' 或 'n'。")
-        
-        if user_input == 'y':
+
+        if user_input == "y":
             try:
                 # 检查并使用适当的包管理器进行安装
                 if subprocess.run(["which", "apt-get"], capture_output=True, text=True).returncode == 0:
@@ -150,6 +167,7 @@ def install_cmake_linux():
         else:
             print("请手动安装 CMake。")
 
+
 def install_cmake():
     os_name = platform.system()
     if os_name == "Windows":
@@ -161,20 +179,21 @@ def install_cmake():
     else:
         print(f"不支持的操作系统: {os_name}")
 
+
 def install_llama(system_info):
     imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
     if imported:
         print("llama-cpp installed")
     else:
-        #install_cmake()
+        # install_cmake()
         lcpp_version = latest_lamacpp(system_info)
         base_url = "https://github.com/abetlen/llama-cpp-python/releases/download/v"
-        avx = "AVX2" if system_info['avx2'] else "AVX"
+        avx = "AVX2" if system_info["avx2"] else "AVX"
         python_version = get_python_version()
-        if system_info.get('gpu', False):
-            cuda_version = system_info['cuda_version']
+        if system_info.get("gpu", False):
+            cuda_version = system_info["cuda_version"]
             custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
-        elif system_info.get('metal', False):
+        elif system_info.get("metal", False):
             custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
         else:
             custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
@@ -187,10 +206,11 @@ def get_comfy_dir():
     # 获取当前脚本文件所在目录
     current_dir = os.path.dirname(current_file_path)
     # 获取目标目录的绝对路径
-    comfy_dir = os.path.abspath(os.path.join(current_dir, '..', '..'))
+    comfy_dir = os.path.abspath(os.path.join(current_dir, "..", ".."))
     # 获取"web/extensions/party"目录的绝对路径
     comfy_dir = os.path.join(comfy_dir, "web/extensions/party")
     return comfy_dir
+
 
 def copy_js_files():
     # 设置当前文件夹路径和目标文件夹路径
@@ -218,6 +238,7 @@ def copy_js_files():
         source_file = os.path.join(current_folder, "web", file_name)
         target_file = os.path.join(target_folder, file_name)
         shutil.copy2(source_file, target_file)
+
 
 def get_system_info():
     """Gather system information related to NVIDIA GPU, CUDA version, AVX2 support, Python version, OS, and platform tag."""
@@ -327,11 +348,14 @@ def install_portaudio():
 
 
 def uninstall_package(package_name):
-    result = subprocess.run([sys.executable, "-m", "pip", "uninstall", "-y", package_name], capture_output=True, text=True)
+    result = subprocess.run(
+        [sys.executable, "-m", "pip", "uninstall", "-y", package_name], capture_output=True, text=True
+    )
     if result.returncode != 0:
         print(f"Failed to uninstall {package_name}: {result.stderr}")
     else:
         print(f"Successfully uninstalled {package_name}")
+
 
 def install_package(package_name):
     result = subprocess.run([sys.executable, "-m", "pip", "install", package_name], capture_output=True, text=True)
@@ -339,6 +363,7 @@ def install_package(package_name):
         print(f"Failed to install {package_name}: {result.stderr}")
     else:
         print(f"Successfully installed {package_name}")
+
 
 def manage_discord_packages():
     # 检查并卸载 discord.py 和 discord.py[voice]

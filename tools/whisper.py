@@ -4,12 +4,13 @@ import hashlib
 import io
 import os
 import time
+
 import folder_paths
-import torchaudio
 import keyboard
 import openai
 import requests
 import sounddevice as sd
+import torchaudio
 from openai import OpenAI
 from scipy.io.wavfile import write
 
@@ -50,8 +51,14 @@ class listen_audio:
             },
         }
 
-    RETURN_TYPES = ("STRING","AUDIO",)
-    RETURN_NAMES = ("audio_path","audio",)
+    RETURN_TYPES = (
+        "STRING",
+        "AUDIO",
+    )
+    RETURN_NAMES = (
+        "audio_path",
+        "audio",
+    )
 
     FUNCTION = "listen"
 
@@ -77,7 +84,10 @@ class listen_audio:
         audio_path = folder_paths.get_annotated_filepath(full_audio_path)
         waveform, sample_rate = torchaudio.load(audio_path)
         audio_out = {"waveform": waveform.unsqueeze(0), "sample_rate": sample_rate}
-        return (full_audio_path,audio_out,)
+        return (
+            full_audio_path,
+            audio_out,
+        )
 
     @classmethod
     def IS_CHANGED(s):

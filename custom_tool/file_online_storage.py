@@ -145,13 +145,9 @@ NODE_CLASS_MAPPINGS = {
 }
 lang = locale.getdefaultlocale()[0]
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "FileOnlineStorage_gitee": "上传Gitee文件床🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"FileOnlineStorage_gitee": "上传Gitee文件床🐶"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "FileOnlineStorage_gitee": "Upload to Gitee File Bed🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"FileOnlineStorage_gitee": "Upload to Gitee File Bed🐶"}
 
 
 if __name__ == "__main__":

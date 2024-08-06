@@ -92,13 +92,9 @@ NODE_CLASS_MAPPINGS = {
 }
 lang = locale.getdefaultlocale()[0]
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "FeishuDownloadImage": "飞书下载图片🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"FeishuDownloadImage": "飞书下载图片🐶"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "FeishuDownloadImage": "Feishu Download Image🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"FeishuDownloadImage": "Feishu Download Image🐶"}
 
 
 if __name__ == "__main__":
