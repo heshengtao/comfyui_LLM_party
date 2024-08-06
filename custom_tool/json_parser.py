@@ -124,15 +124,9 @@ NODE_CLASS_MAPPINGS = {
 }
 lang = locale.getdefaultlocale()[0]
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "json_parser": "JSON文件解析🐶",
-        "json_get_value": "JSON取值🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"json_parser": "JSON文件解析🐶", "json_get_value": "JSON取值🐶"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "json_parser": "JSON File Parser🐶",
-        "json_get_value": "JSON Get Value🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"json_parser": "JSON File Parser🐶", "json_get_value": "JSON Get Value🐶"}
 
 
 # if __name__ == "__main__":

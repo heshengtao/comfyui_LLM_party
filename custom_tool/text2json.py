@@ -43,14 +43,9 @@ class text2json:
 NODE_CLASS_MAPPINGS = {"text2json": text2json}
 lang = locale.getdefaultlocale()[0]
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "text2json": "文本分割成json🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"text2json": "文本分割成json🐶"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "text2json": "Text to JSON🐶"
-    }
-
+    NODE_DISPLAY_NAME_MAPPINGS = {"text2json": "Text to JSON🐶"}
 
 
 if __name__ == "__main__":

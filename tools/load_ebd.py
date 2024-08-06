@@ -1,6 +1,5 @@
 import json
 
-
 import torch
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import FAISS
@@ -13,12 +12,12 @@ c_overlap = 50
 knowledge_base = ""
 k_setting = 5
 
+
 def data_base(question):
     global knowledge_base, k_setting
     docs = knowledge_base.similarity_search(question, k=k_setting)
     combined_content = "".join(doc.page_content + "\n" for doc in docs)
     return "文件中的相关信息如下：\n" + combined_content
-
 
 
 class ebd_tool:
@@ -213,5 +212,3 @@ class save_ebd_database:
         # 保存 FAISS 数据库到本地 save_path
         base.save_local(save_path)
         return ()
-
-
