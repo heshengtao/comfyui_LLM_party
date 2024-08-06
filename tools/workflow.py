@@ -79,10 +79,9 @@ def get_all(ws, prompt):
 
 def api(
     file_content="",
-    image_input1=None,
-    image_input2=None,
     file_path="",
-    img_path="",
+    img_path1="",
+    img_path2="",
     system_prompt="你是一个强大的智能助手",
     user_prompt="",
     positive_prompt="",
@@ -103,12 +102,9 @@ def api(
         if prompt[p]["class_type"] == "start_workflow":
             if file_content != "":
                 prompt[p]["inputs"]["file_content"] = file_content
-            if image_input1 is not None and image_input1 != []:
-                prompt[p]["inputs"]["image_input1"] = image_input1
-            if image_input2 is not None and image_input2 != []:
-                prompt[p]["inputs"]["image_input2"] = image_input2
             prompt[p]["inputs"]["file_path"] = file_path
-            prompt[p]["inputs"]["img_path"] = img_path
+            prompt[p]["inputs"]["img_path1"] = img_path1
+            prompt[p]["inputs"]["img_path2"] = img_path2
             prompt[p]["inputs"]["system_prompt"] = system_prompt
             prompt[p]["inputs"]["user_prompt"] = user_prompt
             prompt[p]["inputs"]["positive_prompt"] = positive_prompt
@@ -181,10 +177,9 @@ class workflow_transfer:
             },
             "optional": {
                 "file_content": ("STRING", {"forceInput": True}),
-                "image_input1": ("IMAGE", {}),
-                "image_input2": ("IMAGE", {}),
                 "file_path": ("STRING", {}),
-                "img_path": ("STRING", {}),
+                "img_path1": ("STRING", {}),
+                "img_path2": ("STRING", {}),
                 "system_prompt": ("STRING", {}),
                 "user_prompt": ("STRING", {}),
                 "positive_prompt": ("STRING", {}),
@@ -212,10 +207,9 @@ class workflow_transfer:
     def transfer(
         self,
         file_content="",
-        image_input1=None,
-        image_input2=None,
         file_path="",
-        img_path="",
+        img_path1="",
+        img_path2="",
         system_prompt="你是一个强大的智能助手",
         user_prompt="",
         positive_prompt="",
@@ -236,10 +230,9 @@ class workflow_transfer:
 
         output_images, output_text = api(
             file_content,
-            image_input1,
-            image_input2,
             file_path,
-            img_path,
+            img_path1,
+            img_path2,
             system_prompt,
             user_prompt,
             positive_prompt,

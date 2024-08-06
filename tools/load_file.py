@@ -221,7 +221,8 @@ class start_workflow:
                 "image_input1": ("IMAGE", {}),
                 "image_input2": ("IMAGE", {}),
                 "file_path": ("STRING", {"default": None}),
-                "img_path": ("STRING", {"default": None, "image_upload": True}),
+                "img_path1": ("STRING", {"default": None, "image_upload": True}),
+                "img_path2": ("STRING", {"default": None, "image_upload": True}),
                 "system_prompt": ("STRING", {"default": "你是一个强大的智能助手"}),
                 "user_prompt": ("STRING", {"default": "你好"}),
                 "positive_prompt": ("STRING", {"default": ""}),
@@ -263,7 +264,8 @@ class start_workflow:
         image_input1=None,
         image_input2=None,
         file_path=None,
-        img_path=None,
+        img_path1=None,
+        img_path2=None,
         system_prompt="你是一个强大的智能助手",
         user_prompt="你好",
         positive_prompt="",
@@ -289,14 +291,14 @@ class start_workflow:
         if image_input2 is not None:
             for image in image_input2:
                 img_out2.append(image)
-        if img_path is not None and img_path != "":
+        if img_path1 is not None and img_path1 != "":
             # 检查img_path是否是一个目录
-            if os.path.isdir(img_path):
+            if os.path.isdir(img_path1):
                 # 遍历目录中的所有文件
-                for filename in os.listdir(img_path):
+                for filename in os.listdir(img_path1):
                     # 检查文件是否是图片
                     if filename.lower().endswith((".png", ".jpg", ".jpeg", ".tiff", ".bmp", ".gif")):
-                        img_full_path = os.path.join(img_path, filename)
+                        img_full_path = os.path.join(img_path1, filename)
                         img = Image.open(img_full_path)
                         img = ImageOps.exif_transpose(img)
                         if img.mode == "I":
@@ -306,7 +308,7 @@ class start_workflow:
                         image = torch.from_numpy(image).unsqueeze(0)
                         img_out.append(image)
             else:
-                img = Image.open(img_path)
+                img = Image.open(img_path1)
                 for i in ImageSequence.Iterator(img):
                     i = ImageOps.exif_transpose(i)
                     if i.mode == "I":
@@ -320,6 +322,38 @@ class start_workflow:
             img_out = torch.cat(img_out, dim=0)
         elif img_out:
             img_out = img_out[0]
+
+        if img_path2 is not None and img_path2 != "":
+            # 检查img_path是否是一个目录
+            if os.path.isdir(img_path2):
+                # 遍历目录中的所有文件
+                for filename in os.listdir(img_path2):
+                    # 检查文件是否是图片
+                    if filename.lower().endswith((".png", ".jpg", ".jpeg", ".tiff", ".bmp", ".gif")):
+                        img_full_path = os.path.join(img_path2, filename)
+                        img = Image.open(img_full_path)
+                        img = ImageOps.exif_transpose(img)
+                        if img.mode == "I":
+                            img = img.point(lambda i: i * (1 / 256)).convert("L")
+                        image = img.convert("RGB")
+                        image = np.array(image).astype(np.float32) / 255.0
+                        image = torch.from_numpy(image).unsqueeze(0)
+                        img_out.append(image)
+            else:
+                img = Image.open(img_path2)
+                for i in ImageSequence.Iterator(img):
+                    i = ImageOps.exif_transpose(i)
+                    if i.mode == "I":
+                        i = i.point(lambda i: i * (1 / 256)).convert("L")
+                    image = i.convert("RGB")
+                    image = np.array(image).astype(np.float32) / 255.0
+                    image = torch.from_numpy(image).unsqueeze(0)
+                    img_out2.append(image)
+
+        if len(img_out2) > 1:
+            img_out2 = torch.cat(img_out2, dim=0)
+        elif img_out2:
+            img_out2 = img_out2[0]
 
         system_out = system_prompt
         user_out = user_prompt

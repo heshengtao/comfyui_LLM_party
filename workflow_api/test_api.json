@@ -1,0 +1,44 @@
+{
+  "3": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "end_workflow",
+    "_meta": {
+      "title": "结束工作流"
+    }
+  },
+  "9": {
+    "inputs": {
+      "amount": 4,
+      "image": [
+        "12",
+        1
+      ]
+    },
+    "class_type": "RepeatImageBatch",
+    "_meta": {
+      "title": "复制图像批次"
+    }
+  },
+  "12": {
+    "inputs": {
+      "file_path": "",
+      "img_path1": "",
+      "img_path2": "",
+      "system_prompt": "你是一个强大的智能助手",
+      "user_prompt": "你好",
+      "positive_prompt": "",
+      "negative_prompt": "",
+      "model_name": ""
+    },
+    "class_type": "start_workflow",
+    "_meta": {
+      "title": "开始工作流"
+    }
+  }
+}

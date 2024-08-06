@@ -62,9 +62,11 @@ class bool_logic:
         return {
             "required": {
                 "A": ("BOOLEAN", {}),
-                "B": ("BOOLEAN", {}),
                 "logic_type": (["and", "or", "not", "Nor", "Nand", "Xor", "Xnor"], {"default": "and"}),
             },
+            "optional": {
+                "B": ("BOOLEAN", {}),
+            }
         }
 
     RETURN_TYPES = ("BOOLEAN",)
@@ -76,7 +78,7 @@ class bool_logic:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def tts(self, A, B, logic_type):
+    def tts(self, A, B=True, logic_type="and"):
         if logic_type == "and":
             return (A and B,)
         elif logic_type == "or":
