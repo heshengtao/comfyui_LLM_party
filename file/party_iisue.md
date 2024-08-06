@@ -1,0 +1,1 @@
+1. 使用GLM模型时，出现Error code: 400 - {'error': {'code': '1210', 'message': 'API 调用参数有误，请检查文档。'}}，很可能是温度BUG，调整LLM的temperature参数即可。
