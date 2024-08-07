@@ -325,26 +325,34 @@ def install_portaudio():
     try:
         if os.name == "posix":
             if sys.platform == "linux" or sys.platform == "linux2":
-                # Linux
-                result = subprocess.run(["dpkg", "-s", "libportaudio2"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                if result.returncode != 0:
-                    os.system("apt-get update")
-                    os.system("apt-get install -y libportaudio2 libasound-dev")
+                result = subprocess.run(["cat", "/etc/os-release"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                if "EndeavourOS" in result.stdout or "Arch" in result.stdout:
+                    result = subprocess.run(["pacman", "-Q", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    if result.returncode != 0:
+                        os.system("sudo pacman -Sy")
+                        os.system("sudo pacman -S --noconfirm portaudio")
+                    else:
+                        print("portaudio is already installed.")
                 else:
-                    print("libportaudio2 已经安装")
+                    result = subprocess.run(["dpkg", "-s", "libportaudio2"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    if result.returncode != 0:
+                        os.system("sudo apt-get update")
+                        os.system("sudo apt-get install -y libportaudio2 libasound-dev")
+                    else:
+                        print("libportaudio2 is already installed.")
             elif sys.platform == "darwin":
                 # macOS
                 result = subprocess.run(["brew", "list", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 if result.returncode != 0:
                     subprocess.check_call(["brew", "install", "portaudio"])
                 else:
-                    print("portaudio 已经安装")
+                    print("portaudio is already installed.")
         elif os.name == "nt":
             pass
         else:
-            print("不支持的操作系统")
+            print("Unsupported operating system")
     except subprocess.CalledProcessError as e:
-        print(f"安装 PortAudio 库时出错: {e}")
+        print(f"Error installing PortAudio library: {e}")
 
 
 def uninstall_package(package_name):
