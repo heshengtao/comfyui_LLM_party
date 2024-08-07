@@ -9,6 +9,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 file_list={}
 def data_base_advance(question,file_name, k=5):
     global file_list
+    k=int(k)
     knowledge_base= file_list[file_name]
     docs = knowledge_base.similarity_search(question, k=k)
     combined_content = "".join(doc.page_content + "\n" for doc in docs)
