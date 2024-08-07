@@ -30,8 +30,8 @@ class URL2IMG:
     def url_to_img(self, url, file_name=None, is_enable=True):
         if not is_enable:
             return (self.img_path, self.img_data, "Function is disabled")
-            
-        if not url:
+        print(url)
+        if not url.strip() and "http" not in url:
             return (None, None, "URL is None")
 
         context = ssl.create_default_context()

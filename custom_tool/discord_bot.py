@@ -101,7 +101,7 @@ def read_res():
 
 @tasks.loop(count=1)
 async def process_task(ctx):
-    text, image, audio = await read_res()
+    text, image, audio = read_res()
 
     # 处理 text
     if text is not None:
