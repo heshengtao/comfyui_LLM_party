@@ -135,6 +135,7 @@ async def process_task(ctx):
                     f"""
 @bot.slash_command()
 async def {command}(ctx, text1: str = "", text2: str = "", file1: discord.Attachment = None, file2: discord.Attachment = None):
+    await ctx.defer()
     try:
         timestamp = int(time.time())
         inputs = [text1, text2]
@@ -169,7 +170,7 @@ async def {command}(ctx, text1: str = "", text2: str = "", file1: discord.Attach
 
         await ctx.send(f"Thinking about ...")
         asyncio.create_task(process_task(ctx, timestamp))
-
+        await ctx.followup.send("Processing complete.")
     except Exception as e:
         print(f"An error occurred: {{e}}")
         await ctx.send("An error occurred while processing your request. Please try again later.")
