@@ -1,0 +1,561 @@
+{
+  "last_node_id": 190,
+  "last_link_id": 184,
+  "nodes": [
+    {
+      "id": 184,
+      "type": "LLM",
+      "pos": [
+        460,
+        210
+      ],
+      "size": [
+        454.52975767758585,
+        586.8365448342441
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 175,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": 178,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 176,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            177
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "画一个美丽的女人",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ]
+    },
+    {
+      "id": 187,
+      "type": "json_get_value",
+      "pos": [
+        1490,
+        380
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 182,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "links": [
+            184
+          ],
+          "shape": 3,
+          "label": "content"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "negative",
+        true
+      ]
+    },
+    {
+      "id": 179,
+      "type": "show_text_party",
+      "pos": [
+        1001,
+        235
+      ],
+      "size": [
+        396.90190173096016,
+        295.54065612564034
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 177,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            181,
+            182
+          ],
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "{\n  \"positive\": \"(best quality,4k,8k,highres,masterpiece:1.2),ultra-detailed,(realistic,photorealistic,photo-realistic:1.37),beautiful woman,flowing long hair,elegant dress,standing in a lush garden,soft smile,sparkling eyes,detailed eyes,beautiful detailed lips,gentle sunlight filtering through leaves,vibrant flowers around,serene atmosphere,portrait,soft skin texture,silky dress fabric,gentle breeze,morning dew on grass,tranquil,graceful posture,artistic lighting,high fashion,ethereal\",\n  \"negative\": \"nsfw,(low quality,normal quality,worst quality,jpeg artifacts),cropped,monochrome,lowres,low saturation,((watermark)),(white letters),skin spots,acnes,skin blemishes,age spot,mutated hands,mutated fingers,deformed,bad anatomy,disfigured,poorly drawn face,extra limb,ugly,poorly drawn hands,missing limb,floating limbs,disconnected limbs,out of focus,long neck,long body,extra fingers,fewer fingers,(multi nipples),bad hands,signature,username,bad feet,blurry,bad body\"\n}"
+      ]
+    },
+    {
+      "id": 186,
+      "type": "json_get_value",
+      "pos": [
+        1484,
+        196
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 181,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "links": [
+            183
+          ],
+          "shape": 3,
+          "label": "content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "positive",
+        true
+      ]
+    },
+    {
+      "id": 189,
+      "type": "show_text_party",
+      "pos": [
+        1896,
+        -9
+      ],
+      "size": [
+        396.90190173096016,
+        295.54065612564034
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 183,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "(best quality,4k,8k,highres,masterpiece:1.2),ultra-detailed,(realistic,photorealistic,photo-realistic:1.37),beautiful woman,flowing long hair,elegant dress,standing in a lush garden,soft smile,sparkling eyes,detailed eyes,beautiful detailed lips,gentle sunlight filtering through leaves,vibrant flowers around,serene atmosphere,portrait,soft skin texture,silky dress fabric,gentle breeze,morning dew on grass,tranquil,graceful posture,artistic lighting,high fashion,ethereal"
+      ]
+    },
+    {
+      "id": 190,
+      "type": "show_text_party",
+      "pos": [
+        1888,
+        396
+      ],
+      "size": [
+        396.90190173096016,
+        295.54065612564034
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 184,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "nsfw,(low quality,normal quality,worst quality,jpeg artifacts),cropped,monochrome,lowres,low saturation,((watermark)),(white letters),skin spots,acnes,skin blemishes,age spot,mutated hands,mutated fingers,deformed,bad anatomy,disfigured,poorly drawn face,extra limb,ugly,poorly drawn hands,missing limb,floating limbs,disconnected limbs,out of focus,long neck,long body,extra fingers,fewer fingers,(multi nipples),bad hands,signature,username,bad feet,blurry,bad body"
+      ]
+    },
+    {
+      "id": 185,
+      "type": "extra_parameters",
+      "pos": [
+        47,
+        457
+      ],
+      "size": {
+        "0": 342.5999755859375,
+        "1": 346
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "logit_bias",
+          "type": "DICT",
+          "link": null,
+          "label": "logit_bias"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "links": [
+            178
+          ],
+          "shape": 3,
+          "label": "extra_parameters",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "extra_parameters"
+      },
+      "widgets_values": [
+        true,
+        1,
+        "",
+        0,
+        0,
+        1,
+        0,
+        false,
+        false,
+        1,
+        "",
+        1,
+        50
+      ]
+    },
+    {
+      "id": 172,
+      "type": "load_persona",
+      "pos": [
+        62,
+        266
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            176
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "图片提示词生成器jsonout版",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 176,
+      "type": "LLM_api_loader",
+      "pos": [
+        71,
+        63
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            175
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4-turbo",
+        "",
+        "",
+        false
+      ]
+    }
+  ],
+  "links": [
+    [
+      175,
+      176,
+      0,
+      184,
+      0,
+      "CUSTOM"
+    ],
+    [
+      176,
+      172,
+      0,
+      184,
+      3,
+      "STRING"
+    ],
+    [
+      177,
+      184,
+      0,
+      179,
+      0,
+      "STRING"
+    ],
+    [
+      178,
+      185,
+      0,
+      184,
+      2,
+      "DICT"
+    ],
+    [
+      181,
+      179,
+      0,
+      186,
+      0,
+      "STRING"
+    ],
+    [
+      182,
+      179,
+      0,
+      187,
+      0,
+      "STRING"
+    ],
+    [
+      183,
+      186,
+      0,
+      189,
+      0,
+      "STRING"
+    ],
+    [
+      184,
+      187,
+      0,
+      190,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.620921323059155,
+      "offset": {
+        "0": 11.95628702414977,
+        "1": 376.93525194547306
+      }
+    }
+  },
+  "version": 0.4
+}
