@@ -1,6 +1,7 @@
 import json
 import os
 
+from bs4 import BeautifulSoup
 import openai
 import requests
 import torch
@@ -36,14 +37,31 @@ def check_web(url, keyword=None):
         if is_jina:
             url = jina + url
 
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()  # 确保请求成功
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()  # 确保请求成功
 
-        # 设置响应内容的编码，确保文本不会出现编码问题
-        response.encoding = response.apparent_encoding
+            # 设置响应内容的编码，确保文本不会出现编码问题
+            response.encoding = response.apparent_encoding
+            res=response.text
+        else:
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()  # 确保请求成功
+
+            # 设置响应内容的编码，确保文本不会出现编码问题
+            response.encoding = response.apparent_encoding
+            # 假设response.text包含你的HTML内容
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            # 移除所有script和style元素
+            for script in soup(["script", "style"]):
+                script.extract()
+
+            # 获取纯文本内容
+            res = soup.get_text()
+
 
         if keyword == None or keyword == "":
-            combined_content = str(response.text)
+            combined_content = str(res)
             return "该网页的相关信息为：" + str(combined_content)
         elif bge_embeddings == "":
             embeddings = OpenAIEmbeddings(
