@@ -31,12 +31,6 @@
 3. gpu_layers是LVM模型在GPU上的层数。
 4. n_threads是LVM模型在CPU上的线程数。
 
-### llama_guff模型加载器
-1. model_path如果填写了，就由本地路径加载，否则根据model_name从config.ini上加载，如果config.ini也没有配置，则从HF上直接加载。
-2. max_ctx是guff模型的最大上下文长度，如果超过这个长度，模型会自动截断。
-3. gpu_layers是guff模型在GPU上的层数。
-4. n_threads是guff模型在CPU上的线程数。
-
 ### 词嵌入模型加载器
 1. file_content节点可以输入一个字符串，该字符串会被作为词嵌入模型的输入，模型会在这个字符串上进行搜索，根据question来返回最相关的文本内容。
 2. k是返回的段落数量，chuck_size为文本分割时，每个文本块的大小，默认为200，chuck_overlap为文本分割时，每个文本块之间的重叠大小，默认为50。

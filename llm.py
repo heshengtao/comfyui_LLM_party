@@ -1021,9 +1021,9 @@ class LLM_local_loader:
             "required": {
                 "model_name": ("STRING", {"default": ""}),
                 "model_type": (
-                    ["GLM", "llama", "Qwen"],
+                    ["","GLM3",  "Qwen"],
                     {
-                        "default": "GLM",
+                        "default": "llama",
                     },
                 ),
                 "model_path": (
@@ -1114,7 +1114,7 @@ class LLM_local_loader:
             self.tokenizer_path = tokenizer_path
             self.device = device
             self.dtype = dtype
-        if model_type == "GLM":
+        if model_type == "GLM3":
             if self.tokenizer == "":
                 self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
             if self.model == "":
@@ -1280,9 +1280,9 @@ class LLM_local:
                     },
                 ),
                 "model_type": (
-                    ["GLM", "llama", "Qwen", "llaVa", "llama-guff"],
+                    ["llama", "GLM3", "Qwen", "llaVa"],
                     {
-                        "default": "GLM",
+                        "default": "llama",
                     },
                 ),
                 "temperature": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0, "step": 0.1}),
@@ -1497,7 +1497,7 @@ class LLM_local:
                     if message["role"] == "system":
                         message["content"] = system_prompt
                         if tools_list != []:
-                            if model_type == "GLM":
+                            if model_type == "GLM3":
                                 message["content"] += "\n" + "你可以使用以下工具："
                                 message["tools"] = tools_list
                             elif model_type in ["llama", "Qwen", "llaVa", "llama-guff"]:
@@ -1536,7 +1536,7 @@ class LLM_local:
                 # 获得model存放的设备
                 if model_type not in ["llaVa", "llama-guff"]:
                     device = next(model.parameters()).device
-                if model_type == "GLM":
+                if model_type == "GLM3":
                     if extra_parameters is not None and extra_parameters != {}:
                         response, history = model.chat(
                             tokenizer,
@@ -1645,45 +1645,6 @@ class LLM_local:
                                 role="observation",
                                 temperature=temperature,
                             )
-                elif model_type == "llama-guff":
-                    from llama_cpp import Llama
-
-                    history.append({"role": "user", "content": user_prompt.strip()})
-                    if extra_parameters is not None and extra_parameters != {}:
-                        response = model.create_chat_completion(
-                            messages=history, max_tokens=max_length, temperature=temperature, **extra_parameters
-                        )
-                    else:
-                        response = model.create_chat_completion(
-                            messages=history,
-                            max_tokens=max_length,
-                            temperature=temperature,
-                        )
-                    response_content = response["choices"][0]["message"]["content"]
-                    print(response_content)
-                    # 正则表达式匹配
-                    pattern = r'\{\s*"tool":\s*"(.*?)",\s*"parameters":\s*\{(.*?)\}\s*\}'
-                    while re.search(pattern, response_content, re.DOTALL) != None:
-                        match = re.search(pattern, response_content, re.DOTALL)
-                        tool = match.group(1)
-                        parameters = match.group(2)
-                        json_str = '{"tool": "' + tool + '", "parameters": {' + parameters + "}}"
-                        print("正在调用" + tool + "工具")
-                        results = dispatch_tool(tool, parameters)
-                        print(results)
-                        history.append({"role": "assistant", "content": json_str})
-                        history.append({"role": "observation", "content": results})
-                        if extra_parameters is not None and extra_parameters != {}:
-                            response = model.create_chat_completion(
-                                messages=history, max_tokens=max_length, temperature=temperature, **extra_parameters
-                            )
-                        else:
-                            response = model.create_chat_completion(
-                                messages=history,
-                                max_tokens=max_length,
-                                temperature=temperature,
-                            )
-                        response_content = response.choices[0].message.content
                 elif model_type == "llaVa":
                     if image is not None:
                         pil_image = ToPILImage()(image[0].permute(2, 0, 1))
@@ -1851,45 +1812,12 @@ class LLavaLoader:
         return (llm,)
 
 
-class llama_guff_loader:
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "model_name": ("STRING", {"default": ""}),
-                "model_path": ("STRING", {"default": ""}),
-                "max_ctx": ("INT", {"default": 512, "min": 300, "max": 100000, "step": 64}),
-                "gpu_layers": ("INT", {"default": 41, "min": 0, "max": 100, "step": 1}),
-                "n_threads": ("INT", {"default": 16, "min": 1, "max": 100, "step": 1}),
-            }
-        }
-
-    RETURN_TYPES = ("CUSTOM",)
-    RETURN_NAMES = ("model",)
-    FUNCTION = "load_llama_checkpoint"
-
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
-
-    def load_llama_checkpoint(self, model_name, model_path, max_ctx, gpu_layers, n_threads):
-        from llama_cpp import Llama
-
-        if model_path != "":
-            model_name = ""
-        if model_name in config_key:
-            model_path = config_key[model_name].get("model_path")
-        model = Llama(
-            model_path=model_path, chat_format="llama-2", n_ctx=max_ctx, n_threads=n_threads, n_gpu_layers=gpu_layers
-        )
-        return (model,)
-
-
 NODE_CLASS_MAPPINGS = {
     "LLM": LLM,
     "LLM_local": LLM_local,
     "LLM_api_loader": LLM_api_loader,
     "LLM_local_loader": LLM_local_loader,
     "LLavaLoader": LLavaLoader,
-    "llama_guff_loader": llama_guff_loader,
     "load_ebd":load_ebd,
     "embeddings_function": embeddings_function,
     "load_file": load_file,
@@ -1989,7 +1917,6 @@ if lang == "zh_CN":
         "LLM_api_loader": "API大语言模型加载器",
         "LLM_local_loader": "本地大语言模型加载器",
         "LLavaLoader": "LVM加载器",
-        "llama_guff_loader": "llama-guff加载器",
         "load_ebd": "加载词嵌入",
         "embeddings_function": "词向量检索",
         "load_file": "加载文件",

@@ -31,12 +31,6 @@
 3. `gpu_layers` is the number of layers of the LVM model on the GPU.
 4. `n_threads` is the number of threads of the LVM model on the CPU.
 
-### llama_guff Model Loader
-1. If `model_path` is filled in, it will be loaded from the local path. Otherwise, it will be loaded from `model_name` in `config.ini`. If `config.ini` is not configured, it will be loaded directly from HF.
-2. `max_ctx` is the maximum context length of the guff model. If this length is exceeded, the model will automatically truncate.
-3. `gpu_layers` is the number of layers of the guff model on the GPU.
-4. `n_threads` is the number of threads of the guff model on the CPU.
-
 ### Word Embedding Model Loader
 1. The `file_content` node can input a string, which will be used as the input of the word embedding model. The model will search this string and return the most relevant text content based on the question.
 2. `k` is the number of paragraphs returned. `chuck_size` is the size of each text block when splitting the text, with a default of 200. `chuck_overlap` is the overlap size between each text block when splitting the text, with a default of 50.

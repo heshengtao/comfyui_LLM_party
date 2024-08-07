@@ -47,7 +47,7 @@ C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​�
 
 ## 模型支持
 1. 支持所有openai格式的API调用，base_url的选择参考[config.ini.example](config.ini.example)，目前已测试的有：
-* [ollama](https://github.com/ollama/ollama)
+* [ollama](https://github.com/ollama/ollama)（推荐！如果你是本地调用，非常推荐使用ollama方式托管你的本地模型！）
 * [通义千问/qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [智谱清言/glm](https://open.bigmodel.cn/dev/api#http_auth)
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)
@@ -55,7 +55,7 @@ C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​�
 * [豆包](https://www.volcengine.com/docs/82379/1263482)
 
 2. 兼容transformer库支持的大部分本地模型，目前已测试的有：
-* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b)
+* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b)（由于GLM4换了新的调用格式，开发者无力维持所有本地大模型的调用，因为推荐大家使用ollama的方式本地调用！）
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
@@ -133,7 +133,7 @@ C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​�
 23. 兼容[Omost](https://github.com/lllyasviel/Omost)啦！！！请下载[omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)立即体验吧！示例工作流参考：[start_with_OMOST](workflow/start_with_OMOST.json)
 24. 新增了将消息发送到企业微信、钉钉和飞书的LLM工具以及可供调用的外部函数。
 25. 新增了一个文本迭代器，可以每次只输出一部分的字符，是根据回车符号和chunk size来安全分割文本的，不会从文本中间分割。chunk_overlap是指分割的文本重叠多少字符。这样可以批量输入超长文本，只要无脑点击，或者开启comfyui里的循环执行就行了，就可以自动执行完了。记得开启is_locked属性，可以在输入结束时，自动锁住工作流，不会继续执行。示例工作流：[文本迭代输入](workflow/文本迭代输入.json)
-26. 在本地LLM加载器、本地llava加载器、本地guff加载器上添加了model name属性，如果为空，则使用节点中的各类本地path加载。如果不为空，则会使用`config.ini`中你自己填写的路径参数加载。如果不为空且不在`config.ini`中，则会从huggingface上下载或则从huggingface的模型保存目录中加载。如果你想从huggingface上下载，请按照例如：`THUDM/glm-4-9b-chat`的格式填写model name属性。注意！这样子加载的模型必须适配transformer库。
+26. 在本地LLM加载器、本地llava加载器上添加了model name属性，如果为空，则使用节点中的各类本地path加载。如果不为空，则会使用`config.ini`中你自己填写的路径参数加载。如果不为空且不在`config.ini`中，则会从huggingface上下载或则从huggingface的模型保存目录中加载。如果你想从huggingface上下载，请按照例如：`THUDM/glm-4-9b-chat`的格式填写model name属性。注意！这样子加载的模型必须适配transformer库。
 27. 适配了[CosyVoice](https://github.com/FunAudioLLM/CosyVoice)，现在可以无需下载任何模型或者任何API key，直接使用TTS功能。目前该接口只适配了中文。
 26. 新增了JSON文件解析节点和JSON取值节点，可以让你从文件或者文本中获取某一个键的值。感谢[guobalove](https://github.com/guobalove)的贡献！
 29. 改进了工具调用的代码，现在没有工具调用功能的LLM也可以开启is_tools_in_sys_prompt属性（本地LLM默认无需开启，自动适配），开启之后，工具信息会添加到系统提示词中，这样LLM就可以调用工具了。实现原理的相关论文：[Achieving Tool Calling Functionality in LLMs Using Only Prompt Engineering Without Fine-Tuning](https://arxiv.org/abs/2407.04997)

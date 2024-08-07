@@ -46,7 +46,7 @@ C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌�
 
 ## Model support
 1. Support all API calls in openai format, base_url selection reference [config.ini.example](config.ini.example), which has been tested so far:
-* [ollama](https://github.com/ollama/ollama)
+* [ollama](https://github.com/ollama/ollama)(Recommended! If you are calling locally, it is highly recommended to use ollama to host your local model!)
 * [Tongyi Qianwen /qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [zhipu qingyan/glm](https://open.bigmodel.cn/dev/api#http_auth)
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)
@@ -54,7 +54,7 @@ C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌�
 * [doubao](https://www.volcengine.com/docs/82379/1263482)
 
 2. Most of the local models supported by the transformer library have been tested so far:
-* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b)
+* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b)(Due to the new calling format of GLM4, developers cannot maintain all local large model calls, because it is recommended that everyone use ollama to call locally!)
 * [meta-llama/llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
@@ -133,7 +133,7 @@ APIKEY can be configured using one of the following methods
 23. Compatible with [Omost](https://github.com/lllyasviel/Omost)!!! Please download [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) to experience it now! Sample workflow reference: [start_with_OMOST](workflow/start_with_OMOST)
 24. Added LLM tools to send messages to WeCom, DingTalk, and Feishu, as well as external functions to call.
 25. Added a new text iterator, which can output only part of the characters at a time. It is safe to split the text according to Carriage Return and chunk size, and will not be divided from the middle of the text. chunk_overlap refers to how many characters the divided text overlaps. In this way, you can enter super long text in batches, as long as you don't have a brain to click, or open the loop in comfyui to execute, it can be automatically executed. Remember to turn on the is_locked property, which can automatically lock the workflow at the end of the input and will not continue to execute. Example workflow: [text iteration input](workflow/文本迭代输入.json)
-26. Added the model name attribute to the local LLM loader, local llava loader, and local guff loader. If it is empty, it will be loaded using various local paths in the node. If it is not empty, it will be loaded using the path parameters you fill in yourself in `config.ini`. If it is not empty and not in `config.ini`, it will be downloaded from huggingface or loaded from the model save directory of huggingface. If you want to download from huggingface, please fill in the format of for example: `THUDM/glm-4-9b-chat`.Attention! Models loaded in this way must be adapted to the transformer library.
+26. Added the model name attribute to the local LLM loader, local llava loader. If it is empty, it will be loaded using various local paths in the node. If it is not empty, it will be loaded using the path parameters you fill in yourself in `config.ini`. If it is not empty and not in `config.ini`, it will be downloaded from huggingface or loaded from the model save directory of huggingface. If you want to download from huggingface, please fill in the format of for example: `THUDM/glm-4-9b-chat`.Attention! Models loaded in this way must be adapted to the transformer library.
 27. Adapted to [CosyVoice](https://github.com/FunAudioLLM/CosyVoice), now you can use the TTS function directly without downloading any model or any API key. Currently the interface is only adapted to Chinese.
 28. Added JSON file parsing node and JSON value node, which allows you to get the value of a key from a file or text. Thanks to [guobalove](https://github.com/guobalove) for your contribution!
 29. Improved the code of tool call. Now LLM without tool call function can also open is_tools_in_sys_prompt attribute (local LLM does not need to be opened by default, automatic adaptation). After opening, the tool information will be added to the system prompt word, so that LLM can call the tool.Related papers on implementation principles: [Achieving Tool Calling Functionality in LLMs Using Only Prompt Engineering Without Fine-Tuning](https://arxiv.org/abs/2407.04997)
