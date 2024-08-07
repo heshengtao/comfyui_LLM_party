@@ -19,15 +19,16 @@
 C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​﻿‎‍​﻿‍‏​‍﻿‌​﻿‌‏omfyui_llm_party希望基于[comfyui](https://github.com/comfyanonymous/ComfyUI)这一个极为简约的UI界面作为前端，开发一套完整的用于LLM工作流搭建的节点库。可以让用户更便捷快速地搭建自己的LLM工作流，并且更方便地接入自己的SD工作流中。
 
 ## 最新更新
-1. 支持了duckduckgo搜索，但是有很大的限制，似乎只能输入英文关键词，关键词也不能出现多个概念，优势在于没有任何APIkey的限制。
-2. 支持了多个知识库分开调用的功能，可以在提示词内明确是使用哪个知识库的知识回答问题。示例工作流：[多知识库分别调用](workflow/多知识库分别调用.json)。
-3. 支持LLM输入额外参数，包括json out等高级参数。示例工作流：[LLM输入额外参数](workflow/LLM额外参数eg_JSON_OUT.json)。
-4. 新增将智能体接入discord的功能。(还在测试中)
-5. 新增将智能体接入飞书的功能，超级感谢[guobalove](https://github.com/guobalove)的贡献！参考工作流
+1. 可以使用这个LLM工具制造机自动生成LLM工具，把你生成的工具代码保存为一个python文件中，然后把代码复制到custom_tool文件夹下，然后你就创造了一个新的节点。示例工作流：[LL工具生成器](workflow/LLM工具制造机.json)。
+2. 支持了duckduckgo搜索，但是有很大的限制，似乎只能输入英文关键词，关键词也不能出现多个概念，优势在于没有任何APIkey的限制。
+3. 支持了多个知识库分开调用的功能，可以在提示词内明确是使用哪个知识库的知识回答问题。示例工作流：[多知识库分别调用](workflow/多知识库分别调用.json)。
+4. 支持LLM输入额外参数，包括json out等高级参数。示例工作流：[LLM输入额外参数](workflow/LLM额外参数eg_JSON_OUT.json)。
+5. 新增将智能体接入discord的功能。(还在测试中)
+6. 新增将智能体接入飞书的功能，超级感谢[guobalove](https://github.com/guobalove)的贡献！参考工作流
 [飞书机器人](workflow/飞书机器人.json)。
-6. 新增了万能API调用节点以及大量的辅助节点，用于构造请求体和抓取响应中的信息。
-7. 新增了清空模型节点，可以在任意位置将LLM从显存中卸载！
-8. 已添加了[chatTTS](https://github.com/2noise/ChatTTS)节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！`model_path`参数可以为空！推荐使用HF模式加载模型，模型会自动从hugging face上下载，无需手动下载；如果使用local加载，请将模型的`asset`和`config`文件夹放到根目录下。[百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu；如果使用`custom`模式加载，请将模型的`asset`和`config`文件夹放到`model_path`下。
+7. 新增了万能API调用节点以及大量的辅助节点，用于构造请求体和抓取响应中的信息。
+8. 新增了清空模型节点，可以在任意位置将LLM从显存中卸载！
+9. 已添加了[chatTTS](https://github.com/2noise/ChatTTS)节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！`model_path`参数可以为空！推荐使用HF模式加载模型，模型会自动从hugging face上下载，无需手动下载；如果使用local加载，请将模型的`asset`和`config`文件夹放到根目录下。[百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu；如果使用`custom`模式加载，请将模型的`asset`和`config`文件夹放到`model_path`下。
 
 ## 使用说明
 1. 节点的使用说明请参考：[怎么使用节点](how_to_use_nodes_ZH.md)
