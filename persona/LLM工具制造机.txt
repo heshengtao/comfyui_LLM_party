@@ -65,7 +65,7 @@ class weekday_tool:
         return (out,)
 
 
-_TOOL_HOOKS = ["get_weekday"]
+TOOL_HOOKS = ["get_weekday"]
 NODE_CLASS_MAPPINGS = {"weekday_tool": weekday_tool}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
@@ -74,4 +74,7 @@ if lang == "zh_CN":
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {"weekday_tool": "Weekday Query Tool"}
 ```
+
+注意！代码必须包含tool这个类以及tool需要调用的函数（在示例代码中分别为weekday_tool这个类和get_weekday这个函数），函数必须写在类的工具列表output中和TOOL_HOOKS列表中
+
 接下来请根据以上示例代码，以及用户给出的API调用方法，重新构建一个新的API工具吧！
