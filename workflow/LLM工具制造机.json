@@ -1,0 +1,350 @@
+{
+  "last_node_id": 10,
+  "last_link_id": 11,
+  "nodes": [
+    {
+      "id": 7,
+      "type": "load_persona",
+      "pos": [
+        -41,
+        454
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "LLM工具制造机",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 8,
+      "type": "check_web_tool",
+      "pos": [
+        -35,
+        601
+      ],
+      "size": {
+        "0": 315,
+        "1": 250
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "ebd_model",
+          "type": "EBD_MODEL",
+          "link": null,
+          "label": "ebd_model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "check_web_tool"
+      },
+      "widgets_values": [
+        true,
+        1000,
+        400,
+        "auto",
+        "https://lbs.amap.com/api/webservice/guide/api/georegeo",
+        "D:\\AI\\mychat\\model\\bge-large-zh",
+        false,
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 1,
+      "type": "LLM",
+      "pos": [
+        325,
+        258
+      ],
+      "size": {
+        "0": 471.9311828613281,
+        "1": 584.6425170898438
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 1,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 10,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 11,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "https://lbs.amap.com/api/webservice/guide/api/georegeo   根据这个接口文档，写一个逆地理编码 API 工具",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ]
+    },
+    {
+      "id": 2,
+      "type": "LLM_api_loader",
+      "pos": [
+        -29,
+        270
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4-turbo",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 4,
+      "type": "show_text_party",
+      "pos": [
+        841,
+        245
+      ],
+      "size": {
+        "0": 574.8762817382812,
+        "1": 870.7109985351562
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 3,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "根据所提供的接口文档，我们可以构建一个逆地理编码API工具。以下是基于API文档的工具实现：\n\n```python\nimport json\nimport locale\nimport requests\n\ndef get_amap_regeo(location, api_key, extensions=\"all\", radius=1000):\n    url = \"https://restapi.amap.com/v3/geocode/regeo\"\n    params = {\n        'key': api_key,\n        'location': location,\n        'extensions': extensions,\n        'radius': str(radius)\n    }\n    response = requests.get(url, params=params)\n    if response.status_code == 200:\n        return response.json()\n    else:\n        return None\n\nclass AmapRegeoTool:\n    @classmethod\n    def INPUT_TYPES(cls):\n        return {\n            \"required\": {\n                \"location\": (\"STRING\", {\"default\": \"116.310003,39.991957\"}),  # 默认位置坐标\n                \"api_key\": (\"STRING\", {\"default\": \"你的高德API密钥\"}),\n                \"extensions\": (\"STRING\", {\"default\": \"all\"}),\n                \"radius\": (\"INTEGER\", {\"default\": 1000}),\n                \"is_enable\": (\"BOOLEAN\", {\"default\": True}),\n            }\n        }\n\n    RETURN_TYPES = (\"STRING\",)\n    RETURN_NAMES = (\"tool\",)\n\n    FUNCTION = \"amap_regeo\"\n\n    CATEGORY = \"大模型派对（llm_party）/工具（tools）\"\n\n    def amap_regeo(self, location, api_key, extensions=\"all\", radius=1000, is_enable=True):\n        if not is_enable:\n            return (None,)\n        regeo_info = get_amap_regeo(location, api_key, extensions, radius)\n        if regeo_info:\n            output = [\n                {\n                    \"type\": \"function\",\n                    \"function\": {\n                        \"name\": \"get_amap_regeo\",\n                        \"description\": \"用于根据坐标获取逆地理编码信息\",\n                        \"parameters\": {\n                            \"type\": \"object\",\n                            \"properties\": {\n                                \"location\": {\n                                    \"type\": \"string\",\n                                    \"description\": \"需要查询的经纬度坐标，例如：116.310003,39.991957\",\n                                    \"default\": str(location),\n                                },\n                                \"api_key\": {\n                                    \"type\": \"string\",\n                                    \"description\": \"高德API密钥\",\n                                    \"default\": str(api_key),\n                                },\n                                \"extensions\": {\n                                    \"type\": \"string\",\n                                    \"description\": \"返回结果控制\",\n                                    \"default\": str(extensions),\n                                },\n                                \"radius\": {\n                                    \"type\": \"integer\",\n                                    \"description\": \"搜索半径（单位：米）\",\n                                    \"default\": radius,\n                                }\n                            },\n                            \"required\": [\"location\", \"api_key\"],\n                        },\n                    },\n                }\n            ]\n            out = json.dumps(output, ensure_ascii=False)\n            return (out,)\n        else:\n            return (None,)\n\n_TOOL_HOOKS = [\"get_amap_regeo\"]\nNODE_CLASS_MAPPINGS = {\"AmapRegeoTool\": AmapRegeoTool}\n# 获取系统语言\nlang = locale.getdefaultlocale()[0]\nif lang == \"zh_CN\":\n    NODE_DISPLAY_NAME_MAPPINGS = {\"AmapRegeoTool\": \"高德逆地理编码工具\"}\nelse:\n    NODE_DISPLAY_NAME_MAPPINGS = {\"AmapRegeoTool\": \"Amap Reverse Geocoding Tool\"}\n```\n\n这个工具提供了逆地理编码功能，能够根据经纬度坐标返回相关的地理位置信息。"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "CUSTOM"
+    ],
+    [
+      3,
+      1,
+      0,
+      4,
+      0,
+      "STRING"
+    ],
+    [
+      10,
+      7,
+      0,
+      1,
+      3,
+      "STRING"
+    ],
+    [
+      11,
+      8,
+      0,
+      1,
+      5,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": [
+        25.738162874196632,
+        -85.54565039080774
+      ]
+    }
+  },
+  "version": 0.4
+}
