@@ -230,9 +230,9 @@ class discord_send:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "text": (any_type, {"default": ""}),
-                "img_path": (any_type, {"default": ""}),
-                "audio_path": (any_type, {"default": ""}),
+                "text": ("STRING", {"default": ""}),
+                "img_path": ("STRING", {"default": ""}),
+                "audio_path": ("STRING", {"default": ""}),
             }
         }
 
