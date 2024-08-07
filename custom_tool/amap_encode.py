@@ -21,7 +21,7 @@ class GeocodeTool:
         return {
             "required": {
                 "address": ("STRING", {"default": "北京市朝阳区阜通东大街6号"}),
-                "api_key": ("STRING", {"default": ""}),
+                "api_key": ("STRING", {"default": "你的高德API密钥"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             }
         }
@@ -70,6 +70,6 @@ NODE_CLASS_MAPPINGS = {"GeocodeTool": GeocodeTool}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"GeocodeTool": "地理编码工具"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"GeocodeTool": "高德地理编码工具"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"GeocodeTool": "Geocode Tool"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"GeocodeTool": "Amap Geocode Tool"}
