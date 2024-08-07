@@ -1,0 +1,590 @@
+{
+  "last_node_id": 91,
+  "last_link_id": 117,
+  "nodes": [
+    {
+      "id": 76,
+      "type": "load_file",
+      "pos": [
+        19,
+        413
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": [
+            105
+          ],
+          "shape": 3,
+          "label": "file_content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_file"
+      },
+      "widgets_values": [
+        "",
+        "test.txt",
+        true
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 81,
+      "type": "load_ebd",
+      "pos": [
+        13,
+        228
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "ebd_model",
+          "type": "EBD_MODEL",
+          "links": [
+            106,
+            109
+          ],
+          "shape": 3,
+          "label": "ebd_model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_ebd"
+      },
+      "widgets_values": [
+        "D:\\AI\\mychat\\model\\bge-large-zh",
+        true,
+        "auto"
+      ]
+    },
+    {
+      "id": 84,
+      "type": "load_file",
+      "pos": [
+        27,
+        704
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": [
+            108
+          ],
+          "shape": 3,
+          "label": "file_content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_file"
+      },
+      "widgets_values": [
+        "",
+        "README_ZH.txt",
+        true
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 90,
+      "type": "LLM_api_loader",
+      "pos": [
+        899,
+        170
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            115
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 87,
+      "type": "tool_combine",
+      "pos": [
+        899,
+        381
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tool1",
+          "type": "STRING",
+          "link": 112,
+          "widget": {
+            "name": "tool1"
+          },
+          "label": "tool1"
+        },
+        {
+          "name": "tool2",
+          "type": "STRING",
+          "link": 113,
+          "widget": {
+            "name": "tool2"
+          },
+          "label": "tool2"
+        },
+        {
+          "name": "tool3",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tool3"
+          },
+          "label": "tool3"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            116
+          ],
+          "shape": 3,
+          "label": "tools",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "tool_combine"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 79,
+      "type": "advance_ebd_tool",
+      "pos": [
+        400,
+        360
+      ],
+      "size": {
+        "0": 315,
+        "1": 250
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "ebd_model",
+          "type": "EBD_MODEL",
+          "link": 106,
+          "label": "ebd_model",
+          "slot_index": 0
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 105,
+          "widget": {
+            "name": "file_content"
+          },
+          "slot_index": 1,
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            112
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "advance_ebd_tool"
+      },
+      "widgets_values": [
+        "",
+        "enable",
+        5,
+        "auto",
+        200,
+        50,
+        "test",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 82,
+      "type": "advance_ebd_tool",
+      "pos": [
+        410,
+        683
+      ],
+      "size": {
+        "0": 315,
+        "1": 250
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "ebd_model",
+          "type": "EBD_MODEL",
+          "link": 109,
+          "label": "ebd_model",
+          "slot_index": 0
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 108,
+          "widget": {
+            "name": "file_content"
+          },
+          "slot_index": 1,
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            113
+          ],
+          "shape": 3,
+          "label": "tool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "advance_ebd_tool"
+      },
+      "widgets_values": [
+        "",
+        "enable",
+        5,
+        "auto",
+        200,
+        50,
+        "readme",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 89,
+      "type": "LLM",
+      "pos": [
+        1326,
+        377
+      ],
+      "size": {
+        "0": 443.629638671875,
+        "1": 504.7779235839844
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 115,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 116,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            117
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "你好，readme中，comfyui llm party是个什么项目",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ]
+    },
+    {
+      "id": 91,
+      "type": "show_text_party",
+      "pos": [
+        1925,
+        406
+      ],
+      "size": [
+        342.1161873960218,
+        279.9752897725548
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 117,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "**COMFYUI LLM PARTY** 是一个面向 ComfyUI 开发的 LLM （大语言模型）工具节点库。该项目旨在基于 ComfyUI 创建一个完整的节点库，以便用户更便捷地搭建自己的 LLM 工作流，并能够与自己的 SD （Stable Diffusion）工作流方便地接入。\n\n### 项目特点：\n- **简约界面**：ComfyUI 提供了一个极为简约的用户界面，主要用于 AI 绘图等基于 SD 模型的工作流搭建。\n- **节点库**：本项目希望为 LLM 工作流搭建提供更多的工具节点，以扩展用户的操作能力。\n- **方便安装**：用户可以通过终端命令或 ComfyUI 管理器快速安装该项目。\n\n### 下一步计划：\n- 添加更多常用的工具节点，如代码解释器、文字转语音等功能。\n- 实现 LLM 内部调用附属 LLM 的能力。\n- 增加与 ComfyUI 中其他 SD 节点连接的新节点，以提供更多的工作流可能性。"
+      ]
+    }
+  ],
+  "links": [
+    [
+      105,
+      76,
+      0,
+      79,
+      1,
+      "STRING"
+    ],
+    [
+      106,
+      81,
+      0,
+      79,
+      0,
+      "EBD_MODEL"
+    ],
+    [
+      108,
+      84,
+      0,
+      82,
+      1,
+      "STRING"
+    ],
+    [
+      109,
+      81,
+      0,
+      82,
+      0,
+      "EBD_MODEL"
+    ],
+    [
+      112,
+      79,
+      0,
+      87,
+      0,
+      "STRING"
+    ],
+    [
+      113,
+      82,
+      0,
+      87,
+      1,
+      "STRING"
+    ],
+    [
+      115,
+      90,
+      0,
+      89,
+      0,
+      "CUSTOM"
+    ],
+    [
+      116,
+      87,
+      0,
+      89,
+      5,
+      "STRING"
+    ],
+    [
+      117,
+      89,
+      0,
+      91,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.1,
+      "offset": {
+        "0": -1068.7739677138488,
+        "1": -136.82074431800953
+      }
+    }
+  },
+  "version": 0.4
+}
