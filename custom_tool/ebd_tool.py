@@ -49,6 +49,7 @@ class advance_ebd_tool:
     def file(self, path, k, chunk_size, chunk_overlap, device,file_name, file_content="", is_enable="enable", base_path="",ebd_model=None):
         if is_enable == "disable":
             return (None,)
+        knowledge_base=""
         global  file_list
         if device == "auto":
             device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
@@ -62,7 +63,7 @@ class advance_ebd_tool:
             bge_embeddings = ebd_model
         if base_path != "":
             knowledge_base = FAISS.load_local(base_path, bge_embeddings, allow_dangerous_deserialization=True)
-        elif knowledge_base == "":
+        else:
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size=chunk_size,
                 chunk_overlap=chunk_overlap,

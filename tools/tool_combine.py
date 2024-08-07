@@ -43,6 +43,24 @@ class tool_combine:
                 tool = json.loads(tool)
                 output.extend(tool)
         if output != []:
+            # 保留 dict_keys 更多的 data_base_advance 工具
+            filtered_tools = []
+            max_dict_keys = 0
+
+            for tool in output:
+                if tool["function"]["name"] == "data_base_advance":
+                    file_names = tool["function"]["parameters"]["properties"]["file_name"]["description"]
+                    dict_keys_count = file_names.count("dict_keys")
+
+                    if dict_keys_count > max_dict_keys:
+                        filtered_tools = [tool]
+                        max_dict_keys = dict_keys_count
+                    elif dict_keys_count == max_dict_keys:
+                        filtered_tools.append(tool)
+                else:
+                    filtered_tools.append(tool)
+            output = filtered_tools
+        if output != []:
             output = remove_duplicates(output)
             out = json.dumps(output, ensure_ascii=False)
         else:
@@ -104,6 +122,24 @@ class tool_combine_plus:
                     output.extend(tool)
                 except json.JSONDecodeError as e:
                     print(f"JSONDecodeError: {e}")
+        if output != []:
+            # 保留 dict_keys 更多的 data_base_advance 工具
+            filtered_tools = []
+            max_dict_keys = 0
+
+            for tool in output:
+                if tool["function"]["name"] == "data_base_advance":
+                    file_names = tool["function"]["parameters"]["properties"]["file_name"]["description"]
+                    dict_keys_count = file_names.count("dict_keys")
+
+                    if dict_keys_count > max_dict_keys:
+                        filtered_tools = [tool]
+                        max_dict_keys = dict_keys_count
+                    elif dict_keys_count == max_dict_keys:
+                        filtered_tools.append(tool)
+                else:
+                    filtered_tools.append(tool)
+            output = filtered_tools
         if output != []:
             output = remove_duplicates(output)
             out = json.dumps(output, ensure_ascii=False)
