@@ -322,3 +322,137 @@ class bing_loader:
 
         out = search_web_bing(keywords, paper_num)
         return (out,)
+
+
+
+ddg_searchType = "web"
+
+def search_duckduckgo(keywords, paper_num=1):
+    if paper_num == "":
+        paper_num = 1
+    today = str(date.today())
+    global ddg_searchType
+    num_results = 10
+    start = num_results * (int(paper_num) - 1) + 1
+    try:
+        base_url = "https://api.duckduckgo.com/"
+        params = {
+            "q": keywords if isinstance(keywords, str) else " ".join(keywords),
+            "format": "json",
+            "no_redirect": 1,
+            "no_html": 1,
+            "skip_disambig": 1,
+        }
+        if ddg_searchType == "image":
+            params["ia"] = "images"
+        else:
+            params["ia"] = "web"
+
+        response = requests.get(base_url, params=params, timeout=10)
+        print("Status code:", response.status_code)
+        print("Response body:", response.text)
+
+        data = response.json()
+        all_content = ""
+        if response.status_code == 200:
+            if "RelatedTopics" in data:
+                for item in data["RelatedTopics"]:
+                    if "Text" in item and "FirstURL" in item:
+                        keyword = item["Text"]
+                        url = item["FirstURL"]
+                        all_content += "\n\n" + json.dumps({"snippet": keyword, "link": url}, ensure_ascii=False, indent=4)
+            elif "ImageResults" in data:
+                for item in data["ImageResults"]:
+                    if "Title" in item and "Image" in item:
+                        keyword = item["Title"]
+                        url = item["Image"]
+                        all_content += "\n\n" + json.dumps({"snippet": keyword, "link": url}, ensure_ascii=False, indent=4)
+            else:
+                print("No relevant data found in the response.")
+        else:
+            return f"Error: {response.status_code} - {response.text}"
+
+    except Exception as e:
+        return f"Exception occurred: {e}"
+
+    print(all_content)
+    return (
+        "今天的日期是"
+        + today
+        + "，当前网络的信息和信息来源的网址为：“"
+        + str(all_content)
+        + "”。\n如果以上信息中没有相关信息，你可以改变paper_num，查看下一页的信息。"
+    )
+
+class duckduckgo_tool:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "searchType": (["web", "image"], {"default": "web"}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("tool",)
+
+    FUNCTION = "web"
+
+    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+
+    def web(self, searchType="web", is_enable=True):
+        if is_enable == False:
+            return (None,)
+        global ddg_searchType
+        ddg_searchType = searchType
+        output = [
+            {
+                "type": "function",
+                "function": {
+                    "name": "search_duckduckgo",
+                    "description": f"通过关键词获得DuckDuckGo搜索上的{ddg_searchType}信息。",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "keywords": {
+                                "type": "string",
+                                "description": "需要搜索的关键词，可以是多个词语，多个词语之间用空格隔开，但是多个词语只能是一个概念，而不是多个概念，如果有多个概念应拆分开来，多次调用duckduckgo。duckduckgo只支持英文搜索！关键词必须是英文。",
+                            },
+                            "paper_num": {"type": "string", "description": "DuckDuckGo搜索的页码，可以改变paper_num用于翻页"},
+                        },
+                        "required": ["keywords", "paper_num"],
+                    },
+                },
+            }
+        ]
+
+        out = json.dumps(output, ensure_ascii=False)
+        return (out,)
+    
+class duckduckgo_loader:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "searchType": (["web", "image"], {"default": "web"}),
+                "keywords": ("STRING", {}),
+                "paper_num": ("INT", {"default": 1}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("text",)
+
+    FUNCTION = "web"
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+    def web(self, keywords, paper_num=1, searchType="web", is_enable=True):
+        if is_enable == False:
+            return (None,)
+        global ddg_searchType
+        ddg_searchType = searchType
+        out = search_duckduckgo(keywords, paper_num)
+        return (out,)
