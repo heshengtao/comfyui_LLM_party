@@ -123,6 +123,9 @@ from .tools.search_web import (
     google_tool,
     search_web,
     search_web_bing,
+    duckduckgo_tool,
+    duckduckgo_loader,
+    search_duckduckgo,
 )
 from .tools.show_text import About_us, show_text_party
 from .tools.smalltool import bool_logic, load_int, none2false
@@ -179,6 +182,7 @@ _TOOL_HOOKS = [
     "Delete_relationships_neo4j",
     "Inquire_entity_relationships_neo4j",
     "Inquire_entity_list_neo4j",
+    "search_duckduckgo",
 ]
 instances = []
 image_buffer = []
@@ -549,29 +553,31 @@ class LLM_api_loader:
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
     def chatbot(self, model_name, base_url=None, api_key=None, is_ollama=False):
-        api_keys = load_api_keys(config_path)
-        if api_key != "":
-            openai.api_key = api_key
-        elif model_name in config_key:
-            api_keys = config_key[model_name]
-            openai.api_key = api_keys.get("api_key")
-        elif api_keys.get("openai_api_key") != "":
-            openai.api_key = api_keys.get("openai_api_key")
-        if base_url != "":
-            openai.base_url = base_url
-        elif model_name in config_key:
-            api_keys = config_key[model_name]
-            openai.base_url = api_keys.get("base_url")
-        elif api_keys.get("base_url") != "":
-            openai.base_url = api_keys.get("base_url")
-        if openai.api_key == "":
-            return ("请输入API_KEY",)
-        if openai.base_url != "":
-            if openai.base_url[-1] != "/":
-                openai.base_url = openai.base_url + "/"
         if is_ollama:
             openai.api_key = "ollama"
             openai.base_url = "http://127.0.0.1:11434/v1/"
+        else:
+            api_keys = load_api_keys(config_path)
+            if api_key != "":
+                openai.api_key = api_key
+            elif model_name in config_key:
+                api_keys = config_key[model_name]
+                openai.api_key = api_keys.get("api_key")
+            elif api_keys.get("openai_api_key") != "":
+                openai.api_key = api_keys.get("openai_api_key")
+            if base_url != "":
+                openai.base_url = base_url
+            elif model_name in config_key:
+                api_keys = config_key[model_name]
+                openai.base_url = api_keys.get("base_url")
+            elif api_keys.get("base_url") != "":
+                openai.base_url = api_keys.get("base_url")
+            if openai.api_key == "":
+                return ("请输入API_KEY",)
+            if openai.base_url != "":
+                if openai.base_url[-1] != "/":
+                    openai.base_url = openai.base_url + "/"
+
         chat = Chat(model_name, openai.api_key, openai.base_url)
         return (chat,)
 
@@ -1906,6 +1912,8 @@ NODE_CLASS_MAPPINGS = {
     "load_int": load_int,
     "none2false": none2false,
     "bool_logic": bool_logic,
+    "duckduckgo_tool":duckduckgo_tool,
+    "duckduckgo_loader":duckduckgo_loader,
 }
 
 
@@ -2005,6 +2013,8 @@ if lang == "zh_CN":
         "load_int": "加载整数",
         "none2false": "None转False",
         "bool_logic": "布尔逻辑",
+        "duckduckgo_tool": "DuckDuckGo工具",
+        "duckduckgo_loader": "DuckDuckGo加载器",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2102,6 +2112,8 @@ else:
         "load_int": "Load Integer",
         "none2false": "None to False",
         "bool_logic": "Boolean Logic",
+        "duckduckgo_tool": "DuckDuckGo Tool",
+        "duckduckgo_loader":"DuckDuckGo Loader",
     }
 
 
