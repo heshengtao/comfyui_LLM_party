@@ -19,7 +19,8 @@
 C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​﻿‎‍​﻿‍‏​‍﻿‌​﻿‌‏omfyui_llm_party aims to develop a complete set of nodes for LLM workflow construction based on [comfyui](https://github.com/comfyanonymous/ComfyUI) as the front end. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.
 
 ## Latest update
-1. Support LLM input extra parameters, including advanced parameters such as json out. Example workflow: [LLM input extra parameters](workflow/LLM额外参数eg_JSON_OUT.json).
+1. It supports the function of calling multiple knowledge bases separately, and it is possible to specify which knowledge base is used to answer questions in the prompt word. Example workflow: [multiple knowledge bases are called separately](workflow/多知识库分别调用.json).
+2. Support LLM input extra parameters, including advanced parameters such as json out. Example workflow: [LLM input extra parameters](workflow/LLM额外参数eg_JSON_OUT.json).
 2. Added the function of connecting the agent to discord. (still testing)
 3. Added the function of connecting the agent to Feishu, thank you very much [guobalove](https://github.com/guobalove) for your contribution! Refer to the workflow [Feishu robot](workflow/飞书机器人.json).
 4. Added universal API call node and a large number of auxiliary nodes for constructing the request body and grabbing the information in the response.
