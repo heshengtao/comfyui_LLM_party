@@ -3,16 +3,62 @@
   "last_link_id": 7,
   "nodes": [
     {
+      "id": 7,
+      "type": "load_persona",
+      "pos": [
+        -29,
+        479
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "LLM工具制造机",
+        true,
+        ""
+      ]
+    },
+    {
       "id": 4,
       "type": "show_text_party",
       "pos": [
         825,
         237
       ],
-      "size": [
-        574.8763108736655,
-        870.7110154009315
-      ],
+      "size": {
+        "0": 574.8762817382812,
+        "1": 870.7109985351562
+      },
       "flags": {},
       "order": 4,
       "mode": 0,
@@ -41,7 +87,43 @@
       },
       "widgets_values": [
         "",
-        "根据您提供的API调用方法和URL，我将为您构建一个全新的API工具，以便查询地理编码信息。下面是生成的代码：\n\n```python\nimport json\nimport locale\n\nclass geocode_tool:\n    @classmethod\n    def INPUT_TYPES(s):\n        return {\n            \"required\": {\n                \"keyword\": (\"STRING\", {\"default\": \"\"}),\n                \"url\": (\"STRING\", {\"default\": \"https://lbs.amap.com/api/webservice/guide/api/georegeo\"}),\n                \"is_enable\": (\"BOOLEAN\", {\"default\": True}),\n            }\n        }\n\n    RETURN_TYPES = (\"STRING\",)\n    RETURN_NAMES = (\"tool\",)\n\n    FUNCTION = \"geocode\"\n\n    CATEGORY = \"大模型派对（llm_party）/工具（tools）\"\n\n    def geocode(self, keyword, url, is_enable=True):\n        if not is_enable:\n            return (None,)\n        output = [\n            {\n                \"type\": \"function\",\n                \"function\": {\n                    \"name\": \"check_web\",\n                    \"description\": \"通过关键词搜索一个给定url的网页上的信息。\",\n                    \"parameters\": {\n                        \"type\": \"object\",\n                        \"properties\": {\n                            \"keyword\": {\n                                \"type\": \"string\",\n                                \"description\": \"需要搜索的关键词，如果没有关键词，则搜索网页上的所有内容\",\n                                \"default\": str(keyword),\n                            },\n                            \"url\": {\n                                \"type\": \"string\",\n                                \"description\": \"要被搜索的网页的URL\",\n                                \"default\": str(url),\n                            }\n                        },\n                        \"required\": [\"url\"],\n                    },\n                },\n            }\n        ]\n        out = json.dumps(output, ensure_ascii=False)\n        return (out,)\n\n\n_TOOL_HOOKS = [\"check_web\"]\nNODE_CLASS_MAPPINGS = {\"geocode_tool\": geocode_tool}\n# 获取系统语言\nlang = locale.getdefaultlocale()[0]\nif lang == \"zh_CN\":\n    NODE_DISPLAY_NAME_MAPPINGS = {\"geocode_tool\": \"地理编码查询工具\"}\nelse:\n    NODE_DISPLAY_NAME_MAPPINGS = {\"geocode_tool\": \"Geocoding Query Tool\"}\n```\n\n以上代码定义了一个名为`geocode_tool`的工具，允许用户通过关键词查询指定URL的内容。您可以根据需要进行调整和使用。"
+        "根据查询的结果，我们可以得出地理编码/逆地理编码 API 的基本使用方法。现在，我们将构建一个Python API工具来实现地理编码的查询功能。\n\n```python\nimport requests\n\ndef geocode(address, key):\n    # 地理编码 API URL\n    url = f\"https://restapi.amap.com/v3/geocode/geo?address={address}&key={key}\"\n    # 发送HTTP请求\n    response = requests.get(url)\n    # 解析JSON响应\n    if response.status_code == 200:\n        return response.json()\n    else:\n        return None\n\nclass GeoCodingTool:\n    @classmethod\n    def INPUT_TYPES(s):\n        return {\n            \"required\": {\n                \"address\": (\"STRING\", {\"default\": \"北京市朝阳区阜通东大街6号\"}),\n                \"key\": (\"STRING\", {\"default\": \"your_key_here\"}),\n            }\n        }\n\n    RETURN_TYPES = (\"STRING\",)\n    RETURN_NAMES = (\"tool\",)\n\n    FUNCTION = \"geocode\"\n\n    CATEGORY = \"地理编码工具\"\n\n    def geocode(self, address, key):\n        # 调用地理编码API函数\n        result = geocode(address, key)\n        if result:\n            return (json.dumps(result, ensure_ascii=False),)\n        else:\n            return (None,)\n\nTOOL_HOOKS = [\"geocode\"]\nNODE_CLASS_MAPPINGS = {\"GeoCodingTool\": GeoCodingTool}\nlang = locale.getdefaultlocale()[0]\nif lang == \"zh_CN\":\n    NODE_DISPLAY_NAME_MAPPINGS = {\"GeoCodingTool\": \"地理编码查询工具\"}\nelse:\n    NODE_DISPLAY_NAME_MAPPINGS = {\"GeoCodingTool\": \"Geocoding Query Tool\"}\n```\n\n这段代码定义了一个Python类 `GeoCodingTool`，它提供了地理编码API的封装。函数 `geocode` 负责发送HTTP请求到高德地图的地理编码API，并返回解析后的JSON数据。该工具类还定义了输入类型和返回类型，以在API工具库中使用。"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "LLM_api_loader",
+      "pos": [
+        -29,
+        270
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4-turbo",
+        "",
+        "",
+        false
       ]
     },
     {
@@ -152,9 +234,9 @@
       },
       "widgets_values": [
         "",
-        "https://lbs.amap.com/api/webservice/guide/api/georegeo   查询这个网址，生成地理编码 API 的工具代码",
+        "使用checkweb工具查询接口文档后，生成地理编码 API 的代码",
         0.7,
-        "enable",
+        "disable",
         "disable",
         "disable",
         "enable",
@@ -181,7 +263,7 @@
         "1": 250
       },
       "flags": {},
-      "order": 0,
+      "order": 2,
       "mode": 0,
       "inputs": [
         {
@@ -213,91 +295,9 @@
         "auto",
         "https://lbs.amap.com/api/webservice/guide/api/georegeo",
         "D:\\AI\\mychat\\model\\bge-large-zh",
-        true,
+        false,
         "",
         ""
-      ]
-    },
-    {
-      "id": 7,
-      "type": "load_persona",
-      "pos": [
-        -29,
-        479
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "system_prompt",
-          "type": "STRING",
-          "links": [
-            6
-          ],
-          "shape": 3,
-          "label": "system_prompt",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_persona"
-      },
-      "widgets_values": [
-        "LLM工具制造机",
-        true,
-        ""
-      ]
-    },
-    {
-      "id": 2,
-      "type": "LLM_api_loader",
-      "pos": [
-        -29,
-        270
-      ],
-      "size": {
-        "0": 315,
-        "1": 130
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            1
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "gpt-4o-mini",
-        "",
-        "",
-        false
       ]
     }
   ],
@@ -339,10 +339,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.9090909090909091,
+      "scale": 1.2100000000000002,
       "offset": [
-        90.94989646276025,
-        -125.96830473046015
+        113.77484351706573,
+        -266.0124920007506
       ]
     }
   },
