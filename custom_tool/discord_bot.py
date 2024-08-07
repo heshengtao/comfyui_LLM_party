@@ -81,7 +81,7 @@ async def save_input(command, input, timestamp):
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 
-def read_res():
+async def read_res():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     discord_send_dir = os.path.join(current_dir, 'discord_send')
     os.makedirs(discord_send_dir, exist_ok=True)
@@ -101,7 +101,7 @@ def read_res():
 
 @tasks.loop(count=1)
 async def process_task(ctx):
-    text, image, audio = read_res()
+    text, image, audio = await read_res()
 
     # 处理 text
     if text is not None:
@@ -168,7 +168,7 @@ async def {command}(ctx, text1: str = "", text2: str = "", file1: discord.Attach
             await ctx.send("Please provide either text or an image.")
 
         await ctx.send(f"Thinking about ...")
-        process_task.start(ctx)
+        asyncio.create_task(process_task(ctx, timestamp))
 
     except Exception as e:
         print(f"An error occurred: {{e}}")
