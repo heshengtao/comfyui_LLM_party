@@ -101,7 +101,6 @@ class json_get_value:
             return (None,)
         try:
             data = json.loads(text)
-            out = None
             try:
                 if isinstance(data, dict):
                     out = data[key]
