@@ -106,11 +106,7 @@ C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​�
 4. 如果你要使用图片输入LLM，推荐使用图床imgbb，在节点上输入你的`imgbb_api_key`。
 
 ## 使用效果展示
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=0xe3-9tffes">
-    <img src="https://img.youtube.com/vi/0xe3-9tffes/0.jpg" alt="效果演示">
-  </a>
-</div>
+https://github.com/user-attachments/assets/45910cc9-2025-4cb8-a173-f63c70ed5c31
 
 
 ## 功能
