@@ -1,0 +1,1558 @@
+{
+  "last_node_id": 105,
+  "last_link_id": 127,
+  "nodes": [
+    {
+      "id": 76,
+      "type": "easy getNode",
+      "pos": [
+        1750,
+        -280
+      ],
+      "size": {
+        "0": 230,
+        "1": 60
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            81
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "Get_prompt",
+      "properties": {},
+      "widgets_values": [
+        "prompt"
+      ],
+      "color": "#223",
+      "shape": 1
+    },
+    {
+      "id": 63,
+      "type": "load_persona",
+      "pos": [
+        -30,
+        10
+      ],
+      "size": {
+        "0": 320,
+        "1": 110
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            72
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "omost",
+        true,
+        ""
+      ],
+      "shape": 1
+    },
+    {
+      "id": 75,
+      "type": "easy setNode",
+      "pos": [
+        80,
+        170
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 80
+        }
+      ],
+      "title": "Set_prompt",
+      "properties": {
+        "previousName": "prompt"
+      },
+      "widgets_values": [
+        "prompt"
+      ],
+      "color": "#223",
+      "shape": 1
+    },
+    {
+      "id": 74,
+      "type": "easy negative",
+      "pos": [
+        1240,
+        230
+      ],
+      "size": {
+        "0": 470,
+        "1": 240
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "negative",
+          "type": "STRING",
+          "links": [
+            78
+          ],
+          "shape": 3,
+          "label": "负面提示词",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy negative"
+      },
+      "widgets_values": [
+        "NSFW,(text), animal ears, (logo), (watermark), ((big hands, un-detailed skin, sketch, cartoon, drawing)), ((ugly mouth, ugly eyes, missing teeth, crooked teeth, cropped, out of frame)), worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck,(more than two arm per body:1.5), (more than two leg per body:1.5), (more than five fingers on one hand:1.5), multi arms, multi legs, bad arm anatomy, bad leg anatomy, bad hand anatomy, bad finger anatomy, bad detailed background, unclear architectural outline, non-linear background, elf-ears, hair crosses the screen border, obesity, fat, lowres, worst quality, low quality, blurry, mutated hands and fingers, disfigured, fused, cloned, duplicate, artist name, giantess, odd eyes, long fingers, long neck, handrail,paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, bad eyes, asymmetric eyes, tattoo,"
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 1
+    },
+    {
+      "id": 69,
+      "type": "MaskToImage",
+      "pos": [
+        1760,
+        -20
+      ],
+      "size": {
+        "0": 230,
+        "1": 50
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 68,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            69
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MaskToImage"
+      },
+      "shape": 1
+    },
+    {
+      "id": 70,
+      "type": "PreviewImage",
+      "pos": [
+        1740,
+        100
+      ],
+      "size": {
+        "0": 250,
+        "1": 290
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 69,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "shape": 1
+    },
+    {
+      "id": 67,
+      "type": "show_text_party",
+      "pos": [
+        780,
+        -300
+      ],
+      "size": {
+        "0": 410,
+        "1": 600
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 74,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "```python\n# Initialize the canvas\ncanvas = Canvas()\n\n# Set a global description for the canvas\ncanvas.set_global_description(\n    description='A Mario character made out of cheese.',\n    detailed_descriptions=[\n        'The image showcases a Mario character intricately crafted from various types of cheese.',\n        'The character retains the iconic red cap and blue overalls, but they are made from a combination of melted mozzarella, cheddar, and feta.',\n        'The red cap resembles a perfectly melted mozzarella cap, with the blue overalls crafted from shredded cheddar and feta.',\n        'The background is a playful cheese board, with a variety of cheeses, crackers, and grapes scattered around.',\n        'The lighting highlights the textures and colors of the cheese, making the character look deliciously realistic.',\n        'The overall atmosphere is whimsical and fun, capturing the playful essence of Mario while emphasizing the creative use of cheese.',\n    ],\n    tags='Mario, cheese, mozzarella, cheddar, feta, red cap, blue overalls, cheese board, crackers, grapes, whimsical, playful, iconic, character, melted, shredded, textures, colors, realistic, fun, creative, delicious, intricate, craftsmanship, lighting, highlights, background',\n    HTML_web_color_name='wheat',\n)\n\n# Add mario character made from cheese\ncanvas.add_local_description(\n    location='in the center',\n    offset='no offset',\n    area='a medium-sized square area',\n    distance_to_viewer=1.5,\n    description='Mario character made from cheese',\n    detailed_descriptions=[\n        'The Mario character is made from a combination of melted mozzarella, cheddar, and feta.',\n        'The red cap is crafted from melted mozzarella, forming a perfect, rounded cap.',\n        'The blue overalls are made from shredded cheddar and feta, creating a textured, patchwork effect.',\n        \"The character's facial features are defined by the use of different cheese types, with the eyes made from cheddar and the mustache from feta.\",\n        'The textures and colors of the cheese are highlighted by the lighting, making the character look both delicious and iconic.',\n    ],\n    tags='Mario, cheese, mozzarella, cheddar, feta, red cap, blue overalls, melted, shredded, textures, colors, iconic, character, facial features, eyes, mustache, lighting, delicious',\n    atmosphere='Whimsical and fun, emphasizing creativity and playful essence.',\n    style='Intricate and detailed, focusing on textures and colors.',\n    quality_meta='High-quality craftsmanship, with attention to detail and texture.',\n    HTML_web_color_name='saddlebrown',\n)\n\n# Add cheese board with various cheeses\ncanvas.add_local_description(\n    location='on the left',\n    offset='slightly to the lower-left',\n    area='a small square area',\n    distance_to_viewer=1.0,\n    description='Cheese board with various cheeses',\n    detailed_descriptions=[\n        'The cheese board is filled with a variety of cheeses, including cheddar, gouda, and brie.',\n        'The cheeses are placed in a way that creates an aesthetically pleasing arrangement.',\n        'Crackers and grapes are also scattered around, adding to the realistic feel of the board.',\n        'The lighting highlights the different textures and colors of the cheeses, making them look appetizing and inviting.',\n        'The board itself is made from dark wood, complementing the colors and textures of the cheeses.',\n    ],\n    tags='cheese board, cheddar, gouda, brie, crackers, grapes, aesthetically pleasing, arrangement, realistic, textures, colors, appetizing, inviting, dark wood, complementing',\n    atmosphere='Inviting and appetizing, with a focus on the variety and texture of cheeses.',\n    style='Aesthetically pleasing arrangement, with attention to detail and texture.',\n    quality_meta='High-quality presentation, with a focus on creating an appetizing scene.',\n    HTML_web_color_name='darkgoldenrod',\n)\n\n# Add melted mozzarella cap\ncanvas.add_local_description(\n    location='on the top-left',\n    offset='slightly to the lower-right',\n    area='a small horizontal area',\n    distance_to_viewer=2.0,\n    description='Melted mozzarella cap',\n    detailed_descriptions=[\n        'The melted mozzarella cap is a key feature of the Mario character.',\n        'It is crafted to resemble a perfectly rounded cap, with the melted cheese forming a smooth, glossy surface.',\n        'The lighting highlights the glossy texture, making the cap look both realistic and delicious.',\n        'The cap is an iconic part of Mario’s character, and its creation from melted mozzarella adds a creative and playful twist to the character.',\n    ],\n    tags='melted mozzarella, cap, smooth, glossy, surface, lighting, realistic, delicious, iconic, Mario, character, creative, playful',\n    atmosphere='Playful and creative, focusing on the iconic features of Mario.',\n    style='Realistic and detailed, with a focus on the glossy texture of melted cheese.',\n    quality_meta='High-quality craftsmanship, with attention to creating a realistic and iconic cap.',\n    HTML_web_color_name='goldenrod',\n)\n\n# Add shredded cheddar and feta overalls\ncanvas.add_local_description(\n    location='on the bottom-right',\n    offset='slightly to the upper-left',\n    area='a small vertical area',\n    distance_to_viewer=1.75,\n    description='Shredded cheddar and feta overalls',\n    detailed_descriptions=[\n        'The blue overalls are made from shredded cheddar and feta, creating a patchwork effect.',\n        'The shredded cheese is arranged to form the iconic blue overalls, with the lighting highlighting the textures and colors.',\n        'The combination of cheddar and feta creates a unique and textured appearance, making the overalls both visually appealing and creative.',\n        'This patchwork effect adds to the whimsical and playful nature of the character.',\n    ],\n    tags='blue overalls, shredded cheddar, feta, patchwork, textures, colors, lighting, unique, textured, appearance, visually appealing, creative, whimsical, playful, character',\n    atmosphere='Whimsical and playful, with a focus on the unique textures and colors.',\n    style='Creative and detailed, with attention to the patchwork effect and lighting.',\n    quality_meta='High-quality craftsmanship, with attention to creating a unique and textured appearance.',\n    HTML_web_color_name='skyblue',\n)\n\n# Add grapes scattered around\ncanvas.add_local_description(\n    location='on the top-right',\n    offset='slightly to the lower-left',\n    area='a small square area',\n    distance_to_viewer=2.5,\n    description='Grapes scattered around',\n    detailed_descriptions=[\n        'The grapes are scattered around the cheese board, adding a pop of color and freshness to the scene.',\n        'The grapes are a deep purple, with a glossy and shiny surface that catches the light.',\n        'They are arranged in a natural and random manner, enhancing the realistic feel of the scene.',\n        'The grapes add a touch of sweetness and freshness, balancing the savory elements of the cheese.',\n    ],\n    tags='grapes, scattered, cheese board, pop of color, freshness, deep purple, glossy, shiny, surface, lighting, natural, random, realistic, sweetness, savory, balance',\n    atmosphere='Fresh and inviting, with a focus on the natural and random arrangement.',\n    style='Natural and detailed, with attention to the glossy and shiny surface of the grapes.',\n    quality_meta='High-quality presentation, with attention to creating a realistic and balanced scene.',\n    HTML_web_color_name='purple',\n)\n```"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 72,
+      "type": "easy fullLoader",
+      "pos": [
+        1230,
+        -300
+      ],
+      "size": {
+        "0": 480,
+        "1": 484
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_override",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "clip_override",
+          "type": "CLIP",
+          "link": null,
+          "label": "CLIP（可选）"
+        },
+        {
+          "name": "vae_override",
+          "type": "VAE",
+          "link": null,
+          "label": "VAE（可选）"
+        },
+        {
+          "name": "optional_lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "Lora堆（可选）"
+        },
+        {
+          "name": "optional_controlnet_stack",
+          "type": "CONTROL_NET_STACK",
+          "link": null
+        },
+        {
+          "name": "negative",
+          "type": "STRING",
+          "link": 78,
+          "widget": {
+            "name": "negative"
+          },
+          "label": "负面提示词",
+          "slot_index": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": [
+            76
+          ],
+          "shape": 3,
+          "label": "节点束",
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": [
+            75
+          ],
+          "shape": 3,
+          "slot_index": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            116
+          ],
+          "shape": 3
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullLoader"
+      },
+      "widgets_values": [
+        "1-SDXL模型/wuhaXL_realisticMix_4.0.safetensors",
+        "Default",
+        "Baked VAE",
+        -1,
+        "None",
+        1,
+        1,
+        "1024 x 1024",
+        512,
+        512,
+        "",
+        "none",
+        "A1111",
+        "",
+        "none",
+        "A1111",
+        4,
+        false
+      ],
+      "shape": 1
+    },
+    {
+      "id": 68,
+      "type": "omost_decode",
+      "pos": [
+        1750,
+        -170
+      ],
+      "size": {
+        "0": 240,
+        "1": 100
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 75,
+          "label": "clip"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 81,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            107
+          ],
+          "shape": 3,
+          "label": "conditioning",
+          "slot_index": 0
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [
+            68
+          ],
+          "shape": 3,
+          "label": "mask",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "omost_decode"
+      },
+      "widgets_values": [
+        "",
+        "greedy",
+        1
+      ],
+      "shape": 1
+    },
+    {
+      "id": 97,
+      "type": "ControlNetLoader",
+      "pos": [
+        2710,
+        -280
+      ],
+      "size": [
+        320,
+        70
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            117
+          ],
+          "shape": 3,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "mistoLine_line_cn_models/mistoLine_fp16.safetensors"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 95,
+      "type": "ControlNetApplyAdvanced",
+      "pos": [
+        2710,
+        -160
+      ],
+      "size": {
+        "0": 320,
+        "1": 170
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 107,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 116,
+          "label": "负面条件",
+          "slot_index": 1
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 117,
+          "label": "ControlNet",
+          "slot_index": 2
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 121,
+          "label": "图像",
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            113
+          ],
+          "shape": 3,
+          "label": "正面条件",
+          "slot_index": 0
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            112
+          ],
+          "shape": 3,
+          "label": "负面条件",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApplyAdvanced"
+      },
+      "widgets_values": [
+        0.5,
+        0,
+        1
+      ],
+      "shape": 1
+    },
+    {
+      "id": 98,
+      "type": "ControlNetLoader",
+      "pos": [
+        2710,
+        150
+      ],
+      "size": {
+        "0": 320,
+        "1": 60
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            118
+          ],
+          "shape": 3,
+          "label": "ControlNet",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "diffusers_xl_depth_full.safetensors"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 96,
+      "type": "ControlNetApplyAdvanced",
+      "pos": [
+        2710,
+        260
+      ],
+      "size": {
+        "0": 320,
+        "1": 170
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 113,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 112,
+          "label": "负面条件"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 118,
+          "label": "ControlNet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 122,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            114
+          ],
+          "shape": 3,
+          "label": "正面条件",
+          "slot_index": 0
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            115
+          ],
+          "shape": 3,
+          "label": "负面条件",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApplyAdvanced"
+      },
+      "widgets_values": [
+        0.5,
+        0,
+        1
+      ],
+      "shape": 1
+    },
+    {
+      "id": 100,
+      "type": "AIO_Preprocessor",
+      "pos": [
+        2350,
+        -290
+      ],
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 120,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            121,
+            125
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AIO_Preprocessor"
+      },
+      "widgets_values": [
+        "AnyLineArtPreprocessor_aux",
+        1024
+      ],
+      "shape": 1
+    },
+    {
+      "id": 73,
+      "type": "easy fullkSampler",
+      "pos": [
+        3100,
+        -270
+      ],
+      "size": [
+        350,
+        600
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "link": 76,
+          "label": "节点束"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 114,
+          "label": "正面条件（可选）"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 115,
+          "label": "负面条件（可选）"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": null,
+          "label": "Latent（可选）"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "xyPlot",
+          "type": "XYPLOT",
+          "link": null
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": null,
+          "shape": 3,
+          "label": "节点束"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            79
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 1
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "随机种"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullkSampler"
+      },
+      "widgets_values": [
+        20,
+        5,
+        "dpmpp_3m_sde_gpu",
+        "karras",
+        1,
+        "Preview",
+        0,
+        "ComfyUI",
+        628998377594690,
+        "randomize"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 103,
+      "type": "PreviewImage",
+      "pos": [
+        2360,
+        -170
+      ],
+      "size": [
+        310,
+        250
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 125,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "shape": 1
+    },
+    {
+      "id": 101,
+      "type": "AIO_Preprocessor",
+      "pos": [
+        2360,
+        120
+      ],
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 127,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            122,
+            126
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AIO_Preprocessor"
+      },
+      "widgets_values": [
+        "Zoe_DepthAnythingPreprocessor",
+        512
+      ],
+      "shape": 1
+    },
+    {
+      "id": 104,
+      "type": "PreviewImage",
+      "pos": [
+        2360,
+        230
+      ],
+      "size": [
+        310,
+        250
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 126,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "shape": 1
+    },
+    {
+      "id": 57,
+      "type": "PreviewImage",
+      "pos": [
+        3490,
+        -300
+      ],
+      "size": {
+        "0": 770,
+        "1": 770
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 79,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "shape": 1
+    },
+    {
+      "id": 99,
+      "type": "LoadImage",
+      "pos": [
+        2030,
+        -290
+      ],
+      "size": [
+        290,
+        310
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            120
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "4 (2).jpg",
+        "image"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 105,
+      "type": "LoadImage",
+      "pos": [
+        2030,
+        150
+      ],
+      "size": [
+        290,
+        310
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            127
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "4 (2).jpg",
+        "image"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 61,
+      "type": "LLM_local_loader",
+      "pos": [
+        -30,
+        -270
+      ],
+      "size": {
+        "0": 320,
+        "1": 220
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            70
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "links": [
+            71
+          ],
+          "shape": 3,
+          "label": "tokenizer",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local_loader"
+      },
+      "widgets_values": [
+        "llama",
+        "llama",
+        "/hy-tmp/AI_files/models/omost",
+        "/hy-tmp/AI_files/models/omost",
+        "cuda",
+        "float32",
+        true
+      ],
+      "shape": 1
+    },
+    {
+      "id": 71,
+      "type": "LLM_local",
+      "pos": [
+        310,
+        -290
+      ],
+      "size": {
+        "0": 450,
+        "1": 500
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 70,
+          "label": "model"
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "link": 71,
+          "label": "tokenizer"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null,
+          "label": "image"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 72,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            74,
+            80
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local"
+      },
+      "widgets_values": [
+        "",
+        "请画一个可爱的小狗，眼睛是蓝色的，毛发是白色的",
+        "llama",
+        0.7,
+        2048,
+        "disable",
+        "disable",
+        "enable",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ],
+      "shape": 1
+    }
+  ],
+  "links": [
+    [
+      68,
+      68,
+      1,
+      69,
+      0,
+      "MASK"
+    ],
+    [
+      69,
+      69,
+      0,
+      70,
+      0,
+      "IMAGE"
+    ],
+    [
+      70,
+      61,
+      0,
+      71,
+      0,
+      "CUSTOM"
+    ],
+    [
+      71,
+      61,
+      1,
+      71,
+      1,
+      "CUSTOM"
+    ],
+    [
+      72,
+      63,
+      0,
+      71,
+      3,
+      "STRING"
+    ],
+    [
+      74,
+      71,
+      0,
+      67,
+      0,
+      "STRING"
+    ],
+    [
+      75,
+      72,
+      3,
+      68,
+      0,
+      "CLIP"
+    ],
+    [
+      76,
+      72,
+      0,
+      73,
+      0,
+      "PIPE_LINE"
+    ],
+    [
+      78,
+      74,
+      0,
+      72,
+      5,
+      "STRING"
+    ],
+    [
+      79,
+      73,
+      1,
+      57,
+      0,
+      "IMAGE"
+    ],
+    [
+      80,
+      71,
+      0,
+      75,
+      0,
+      "*"
+    ],
+    [
+      81,
+      76,
+      0,
+      68,
+      1,
+      "STRING"
+    ],
+    [
+      107,
+      68,
+      0,
+      95,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      112,
+      95,
+      1,
+      96,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      113,
+      95,
+      0,
+      96,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      114,
+      96,
+      0,
+      73,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      115,
+      96,
+      1,
+      73,
+      3,
+      "CONDITIONING"
+    ],
+    [
+      116,
+      72,
+      5,
+      95,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      117,
+      97,
+      0,
+      95,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      118,
+      98,
+      0,
+      96,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      120,
+      99,
+      0,
+      100,
+      0,
+      "IMAGE"
+    ],
+    [
+      121,
+      100,
+      0,
+      95,
+      3,
+      "IMAGE"
+    ],
+    [
+      122,
+      101,
+      0,
+      96,
+      3,
+      "IMAGE"
+    ],
+    [
+      125,
+      100,
+      0,
+      103,
+      0,
+      "IMAGE"
+    ],
+    [
+      126,
+      101,
+      0,
+      104,
+      0,
+      "IMAGE"
+    ],
+    [
+      127,
+      105,
+      0,
+      101,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Omost for Prompt ",
+      "bounding": [
+        -40,
+        -370,
+        1240,
+        690
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Basic Setting",
+      "bounding": [
+        1220,
+        -370,
+        500,
+        860
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Omost Decode",
+      "bounding": [
+        1730,
+        -370,
+        270,
+        860
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Sampling",
+      "bounding": [
+        3090,
+        -370,
+        370,
+        860
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "OutPut",
+      "bounding": [
+        3470,
+        -370,
+        800,
+        860
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "LLM_Party for Omost（CN）",
+      "bounding": [
+        -40,
+        350,
+        1240,
+        140
+      ],
+      "color": "#3f789e",
+      "font_size": 100,
+      "locked": true
+    },
+    {
+      "title": "ControlNet",
+      "bounding": [
+        2010,
+        -370,
+        1070,
+        860
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7247295000000195,
+      "offset": {
+        "0": 779.7071124508225,
+        "1": 162.88199372390173
+      }
+    }
+  },
+  "version": 0.4
+}
