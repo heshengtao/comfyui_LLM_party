@@ -1,0 +1,583 @@
+{
+  "last_node_id": 10,
+  "last_link_id": 9,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "LLM_api_loader",
+      "pos": [
+        -158,
+        72
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 1,
+      "type": "LLM",
+      "pos": [
+        241.10688958166497,
+        247.78271528417923
+      ],
+      "size": {
+        "0": 471.9311828613281,
+        "1": 584.6425170898438
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 1,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": 4,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 5,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你是一个查询专家，可以通过",
+        "苹果、梨子、香蕉、狗狗、猫咪、123、七十五、蟑螂、椰子、荔枝、灰熊、老鼠、廿二、808、3.1415926、蚊子",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ]
+    },
+    {
+      "id": 4,
+      "type": "show_text_party",
+      "pos": [
+        763,
+        265
+      ],
+      "size": [
+        321.40258322317527,
+        131.3725306056714
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 3,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            6
+          ],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "{\n    \"1\": \"苹果、梨子、香蕉、椰子、荔枝\",\n    \"2\": \"123、七十五、廿二、808、3.1415926\",\n    \"3\": \"狗狗、猫咪、蟑螂、灰熊、老鼠、蚊子\"\n}"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "classify_function",
+      "pos": [
+        1118,
+        265
+      ],
+      "size": [
+        315,
+        122
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 6,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "response1",
+          "type": "STRING",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "label": "response1",
+          "slot_index": 0
+        },
+        {
+          "name": "response2",
+          "type": "STRING",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "label": "response2",
+          "slot_index": 1
+        },
+        {
+          "name": "response3",
+          "type": "STRING",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "label": "response3",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "classify_function"
+      },
+      "widgets_values": [
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 8,
+      "type": "show_text_party",
+      "pos": [
+        1447,
+        92
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 7,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "苹果、梨子、香蕉、椰子、荔枝"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "show_text_party",
+      "pos": [
+        1473,
+        277
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 8,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "123、七十五、廿二、808、3.1415926"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "show_text_party",
+      "pos": [
+        1474,
+        453
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 9,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "狗狗、猫咪、蟑螂、灰熊、老鼠、蚊子"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "extra_parameters",
+      "pos": [
+        -159,
+        492
+      ],
+      "size": {
+        "0": 342.5999755859375,
+        "1": 346
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "logit_bias",
+          "type": "DICT",
+          "link": null,
+          "label": "logit_bias"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "label": "extra_parameters",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "extra_parameters"
+      },
+      "widgets_values": [
+        true,
+        1,
+        "",
+        0,
+        0,
+        1,
+        0,
+        false,
+        false,
+        1,
+        "",
+        1,
+        50
+      ]
+    },
+    {
+      "id": 6,
+      "type": "classify_persona",
+      "pos": [
+        -146,
+        261
+      ],
+      "size": [
+        315,
+        154
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "classify_persona"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "水果",
+        "数字",
+        "动物"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "CUSTOM"
+    ],
+    [
+      3,
+      1,
+      0,
+      4,
+      0,
+      "STRING"
+    ],
+    [
+      4,
+      5,
+      0,
+      1,
+      2,
+      "DICT"
+    ],
+    [
+      5,
+      6,
+      0,
+      1,
+      3,
+      "STRING"
+    ],
+    [
+      6,
+      4,
+      0,
+      7,
+      0,
+      "STRING"
+    ],
+    [
+      7,
+      7,
+      0,
+      8,
+      0,
+      "STRING"
+    ],
+    [
+      8,
+      7,
+      1,
+      9,
+      0,
+      "STRING"
+    ],
+    [
+      9,
+      7,
+      2,
+      10,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6830134553650705,
+      "offset": [
+        273.7942132306825,
+        152.17701052897226
+      ]
+    }
+  },
+  "version": 0.4
+}
