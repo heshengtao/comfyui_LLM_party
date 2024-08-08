@@ -106,7 +106,12 @@ C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​�
 4. 如果你要使用图片输入LLM，推荐使用图床imgbb，在节点上输入你的`imgbb_api_key`。
 
 ## 使用效果展示
-[![效果演示](https://img.youtube.com/vi/0xe3-9tffes/0.jpg)](https://www.youtube.com/watch?v=0xe3-9tffes)
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=0xe3-9tffes">
+    <img src="https://img.youtube.com/vi/0xe3-9tffes/0.jpg" alt="效果演示">
+  </a>
+</div>
+
 
 ## 功能
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)
