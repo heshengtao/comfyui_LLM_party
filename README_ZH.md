@@ -19,6 +19,9 @@
 
 C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​﻿‎‍​﻿‍‏​‍﻿‌​﻿‌‏omfyui_llm_party希望基于[comfyui](https://github.com/comfyanonymous/ComfyUI)这一个极为简约的UI界面作为前端，开发一套完整的用于LLM工作流搭建的节点库。可以让用户更便捷快速地搭建自己的LLM工作流，并且更方便地接入自己的SD工作流中。
 
+## 效果展示
+https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
+
 ## 最新更新
 1. 可以使用这个LLM工具制造机自动生成LLM工具，把你生成的工具代码保存为一个python文件中，然后把代码复制到custom_tool文件夹下，然后你就创造了一个新的节点。示例工作流：[LL工具生成器](workflow/LLM工具制造机.json)。
 2. 支持了duckduckgo搜索，但是有很大的限制，似乎只能输入英文关键词，关键词也不能出现多个概念，优势在于没有任何APIkey的限制。
@@ -104,10 +107,6 @@ C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​�
 2. 新建大语言模型（LLM）节点，在节点中直接输入你的`openai_api_key`、`base_url`。
 3. 如果你使用ollama模型，请使用LLM_api节点，在节点的`base_url`填入`http://127.0.0.1:11434/v1/`，在`api_key`填入`ollama`，在`model_name`填入你的模型名称，例如:llama3。。
 4. 如果你要使用图片输入LLM，推荐使用图床imgbb，在节点上输入你的`imgbb_api_key`。
-
-## 使用效果展示
-https://github.com/user-attachments/assets/45910cc9-2025-4cb8-a173-f63c70ed5c31
-
 
 ## 功能
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)

@@ -74,6 +74,9 @@ def read_one(path):
     elif path.endswith(".txt"):
         with open(path, "r", encoding="utf-8") as f:
             text += f.read()
+    elif path.endswith(".json"):
+        with open(path, "r", encoding="utf-8") as f:
+            text += json.dumps(json.load(f), ensure_ascii=False, indent=4)
     elif any(path.endswith(extension) for extension in programming_languages_extensions):
         try:
             with open(path, "r", encoding="utf-8") as file:

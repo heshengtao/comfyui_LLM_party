@@ -19,6 +19,9 @@
 
 C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​﻿‎‍​﻿‍‏​‍﻿‌​﻿‌‏omfyui_llm_party aims to develop a complete set of nodes for LLM workflow construction based on [comfyui](https://github.com/comfyanonymous/ComfyUI) as the front end. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows.
 
+## Effect display
+https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
+
 ## Latest update
 1. You can use this LLM tool maker to automatically generate LLM tools, save the tool code you generated as a python file, and then copy the code to the custom_tool folder, and then you create a new node. Example workflow: [LLM tool generator](workflow/LLM工具制造机.json).
 2. It supports duckduckgo search, but it has significant limitations. It seems that only English keywords can be entered, and multiple concepts cannot appear in keywords. The advantage is that there are no APIkey restrictions.
@@ -104,9 +107,6 @@ APIKEY can be configured using one of the following methods
 2. Create a Large Language Model (LLM) node and enter your openai_api_key and base_url directly in the node.
 3. If you use the ollama model, use LLM_api node, fill in `http://127.0.0.1:11434/v1/` in `base_url` node, fill in `ollama` in `api_key`, and fill in your model name in `model_name`, for example: `llama3`.
 4. If you want to use image input LLM, it is recommended to use graph bed imgbb and enter your `imgbb_api_key` on the node.
-
-## Use effect display
-![图片](img/多工具调用.png)
 
 ## Features
 1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
