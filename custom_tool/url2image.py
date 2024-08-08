@@ -31,7 +31,7 @@ class URL2IMG:
         if not is_enable:
             return (self.img_path, self.img_data, "Function is disabled")
         print(url)
-        if not url.strip() and "http" not in url:
+        if not url and "http" not in url:
             return (None, None, "URL is None")
 
         context = ssl.create_default_context()
