@@ -1,0 +1,999 @@
+{
+  "last_node_id": 94,
+  "last_link_id": 106,
+  "nodes": [
+    {
+      "id": 76,
+      "type": "easy getNode",
+      "pos": [
+        1750,
+        -280
+      ],
+      "size": {
+        "0": 230,
+        "1": 60
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            81
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "Get_prompt",
+      "properties": {},
+      "widgets_values": [
+        "prompt"
+      ],
+      "color": "#223",
+      "shape": 1
+    },
+    {
+      "id": 63,
+      "type": "load_persona",
+      "pos": [
+        -30,
+        10
+      ],
+      "size": {
+        "0": 320,
+        "1": 110
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            72
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "omost",
+        true,
+        ""
+      ],
+      "shape": 1
+    },
+    {
+      "id": 61,
+      "type": "LLM_local_loader",
+      "pos": [
+        -30,
+        -270
+      ],
+      "size": {
+        "0": 320,
+        "1": 220
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            70
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "links": [
+            71
+          ],
+          "shape": 3,
+          "label": "tokenizer",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local_loader"
+      },
+      "widgets_values": [
+        "llama",
+        "llama",
+        "/hy-tmp/AI_files/models/omost",
+        "/hy-tmp/AI_files/models/omost",
+        "cuda",
+        "float32",
+        true
+      ],
+      "shape": 1
+    },
+    {
+      "id": 75,
+      "type": "easy setNode",
+      "pos": [
+        80,
+        170
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 80
+        }
+      ],
+      "title": "Set_prompt",
+      "properties": {
+        "previousName": "prompt"
+      },
+      "widgets_values": [
+        "prompt"
+      ],
+      "color": "#223",
+      "shape": 1
+    },
+    {
+      "id": 74,
+      "type": "easy negative",
+      "pos": [
+        1240,
+        230
+      ],
+      "size": {
+        "0": 470,
+        "1": 240
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "negative",
+          "type": "STRING",
+          "links": [
+            78
+          ],
+          "shape": 3,
+          "label": "负面提示词",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy negative"
+      },
+      "widgets_values": [
+        "NSFW,(text), animal ears, (logo), (watermark), ((big hands, un-detailed skin, sketch, cartoon, drawing)), ((ugly mouth, ugly eyes, missing teeth, crooked teeth, cropped, out of frame)), worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck,(more than two arm per body:1.5), (more than two leg per body:1.5), (more than five fingers on one hand:1.5), multi arms, multi legs, bad arm anatomy, bad leg anatomy, bad hand anatomy, bad finger anatomy, bad detailed background, unclear architectural outline, non-linear background, elf-ears, hair crosses the screen border, obesity, fat, lowres, worst quality, low quality, blurry, mutated hands and fingers, disfigured, fused, cloned, duplicate, artist name, giantess, odd eyes, long fingers, long neck, handrail,paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, bad eyes, asymmetric eyes, tattoo,"
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 1
+    },
+    {
+      "id": 69,
+      "type": "MaskToImage",
+      "pos": [
+        1760,
+        -20
+      ],
+      "size": {
+        "0": 230,
+        "1": 50
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 68,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            69
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MaskToImage"
+      },
+      "shape": 1
+    },
+    {
+      "id": 70,
+      "type": "PreviewImage",
+      "pos": [
+        1740,
+        100
+      ],
+      "size": {
+        "0": 250,
+        "1": 290
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 69,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "shape": 1
+    },
+    {
+      "id": 67,
+      "type": "show_text_party",
+      "pos": [
+        780,
+        -300
+      ],
+      "size": {
+        "0": 410,
+        "1": 600
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 74,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "```python\n# Initialize the canvas\ncanvas = Canvas()\n\n# Set a global description for the canvas\ncanvas.set_global_description(\n    description='A Disney 3D cartoon-style image of a small dog wearing a red hat, with blue eyes and white fur.',\n    detailed_descriptions=[\n        'The image showcases a small dog rendered in a Disney 3D cartoon style, characterized by its playful and charming appearance.',\n        'The dog is wearing a bright red hat, adding a touch of whimsy and personality to its overall look.',\n        'Its eyes are a striking blue, giving it a unique and endearing expression.',\n        'The fur of the dog is predominantly white, soft and fluffy, contributing to its adorable appearance.',\n        \"The background is simple and uncluttered, ensuring that the focus remains on the dog's charming features.\",\n        'The lighting is soft, enhancing the cartoonish and friendly atmosphere of the image.',\n    ],\n    tags='Disney, 3D, cartoon, dog, small dog, red hat, blue eyes, white fur, whimsical, charming, playful, endearing, soft lighting, uncluttered background, adorable, friendly, unique expression, bright red hat, fluffy fur, character design, animation',\n    HTML_web_color_name='white',\n)\n\n# Add the dog wearing a red hat\ncanvas.add_local_description(\n    location='in the center',\n    offset='no offset',\n    area='a medium-sized square area',\n    distance_to_viewer=1.5,\n    description='The dog wearing a red hat',\n    detailed_descriptions=[\n        'The dog is positioned centrally, wearing a bright red hat that adds a playful and whimsical touch to its appearance.',\n        'The hat is slightly oversized, with a small black band around the base.',\n        'The dog’s fur is white and fluffy, giving it a soft and cuddly look.',\n        'Its eyes are a striking blue, full of life and curiosity.',\n        'The overall design of the dog is reminiscent of classic Disney characters, with exaggerated features that make it look endearing and friendly.',\n    ],\n    tags='dog, red hat, central position, white fur, blue eyes, playful, whimsical, cuddly, Disney, cartoon, character design, exaggerated features, endearing, friendly, small dog, bright red hat, fluffy fur, central position, lively eyes, black band',\n    atmosphere='The atmosphere is playful and whimsical, with a touch of charm.',\n    style='The style is Disney 3D cartoon, with exaggerated and endearing features.',\n    quality_meta='High-quality rendering with attention to detail in character design.',\n    HTML_web_color_name='red',\n)\n\n# Add the dog's fluffy white fur\ncanvas.add_local_description(\n    location='on the left',\n    offset='slightly to the upper',\n    area='a small vertical area',\n    distance_to_viewer=2.0,\n    description=\"The dog's fluffy white fur\",\n    detailed_descriptions=[\n        \"The dog's fur is depicted as soft and fluffy, with a bright white color that stands out.\",\n        'The fur is detailed with individual strands, giving it a realistic yet cartoonish appearance.',\n        'The texture is smooth and plush, making the dog look cuddly and approachable.',\n        'The fur’s brightness contrasts well with the red hat, making the dog’s appearance even more striking.',\n        'The fur is meticulously rendered, with attention to detail in each strand, adding to the overall charm of the character.',\n    ],\n    tags='dog fur, fluffy, white fur, soft texture, plush, realistic, cartoonish, detailed, individual strands, bright white, cuddly, approachable, contrast, red hat, striking appearance, meticulous rendering, charming, detailed fur, Disney, 3D cartoon',\n    atmosphere='The atmosphere is soft and cuddly, adding to the charm.',\n    style='Disney 3D cartoon style with attention to detail in fur texture.',\n    quality_meta='High-quality rendering with detailed fur strands.',\n    HTML_web_color_name='white',\n)\n\n# Add the dog's bright blue eyes\ncanvas.add_local_description(\n    location='on the right',\n    offset='slightly to the lower',\n    area='a small vertical area',\n    distance_to_viewer=2.0,\n    description=\"The dog's bright blue eyes\",\n    detailed_descriptions=[\n        \"The dog's eyes are a striking blue, with a glossy and lively appearance.\",\n        'The eyes are large and expressive, with a slight sparkle that adds to their charm.',\n        'The pupils are round and well-defined, giving the eyes a realistic yet cartoonish look.',\n        'The blue color of the eyes contrasts well with the white fur and red hat, making them a focal point of the character’s design.',\n        'The eyes are carefully detailed, with reflections that enhance their lifelike appearance.',\n    ],\n    tags='dog eyes, blue eyes, glossy, lively, large eyes, expressive, sparkle, charming, pupils, well-defined, realistic, cartoonish, contrast, white fur, red hat, focal point, detailed, reflections, lifelike, Disney, 3D cartoon',\n    atmosphere='The atmosphere is lively and charming, with a touch of whimsy.',\n    style='Disney 3D cartoon style with expressive and detailed eyes.',\n    quality_meta='High-quality rendering with detailed eye reflections.',\n    HTML_web_color_name='blue',\n)\n\n# Add the red hat worn by the dog\ncanvas.add_local_description(\n    location='on the top',\n    offset='slightly to the right',\n    area='a small horizontal area',\n    distance_to_viewer=2.5,\n    description='The red hat worn by the dog',\n    detailed_descriptions=[\n        'The red hat worn by the dog is bright and eye-catching, with a small black band around the base.',\n        'The hat is slightly oversized, adding to the playful and whimsical appearance of the dog.',\n        'The red color of the hat contrasts well with the white fur, making it stand out.',\n        'The hat is rendered with attention to detail, including subtle shadows and highlights that give it a three-dimensional look.',\n        'The small black band around the base of the hat is neatly rendered, adding to the overall charm of the character.',\n    ],\n    tags='red hat, dog hat, bright red, eye-catching, black band, oversized hat, playful, whimsical, contrast, white fur, stand out, detailed, subtle shadows, highlights, three-dimensional, charming, Disney, 3D cartoon, attention to detail',\n    atmosphere='The atmosphere is playful and whimsical, with a touch of charm.',\n    style='Disney 3D cartoon style with detailed rendering of the hat.',\n    quality_meta='High-quality rendering with attention to detail in shadows and highlights.',\n    HTML_web_color_name='red',\n)\n```"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 68,
+      "type": "omost_decode",
+      "pos": [
+        1750,
+        -170
+      ],
+      "size": {
+        "0": 240,
+        "1": 100
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 75,
+          "label": "clip"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 81,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            77
+          ],
+          "shape": 3,
+          "label": "conditioning",
+          "slot_index": 0
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [
+            68
+          ],
+          "shape": 3,
+          "label": "mask",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "omost_decode"
+      },
+      "widgets_values": [
+        "",
+        "greedy",
+        1
+      ],
+      "shape": 1
+    },
+    {
+      "id": 71,
+      "type": "LLM_local",
+      "pos": [
+        310,
+        -290
+      ],
+      "size": {
+        "0": 450,
+        "1": 500
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 70,
+          "label": "model"
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "link": 71,
+          "label": "tokenizer"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null,
+          "label": "image"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 72,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            74,
+            80
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local"
+      },
+      "widgets_values": [
+        "",
+        "请画一个迪士尼3D卡通风格的，戴着红色帽子的小狗，眼睛是蓝色的，毛发是白色的",
+        "llama",
+        0.7,
+        2048,
+        "disable",
+        "disable",
+        "enable",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ],
+      "shape": 1
+    },
+    {
+      "id": 73,
+      "type": "easy fullkSampler",
+      "pos": [
+        2030,
+        -300
+      ],
+      "size": [
+        350,
+        600
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "link": 76,
+          "label": "节点束"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 77,
+          "label": "正面条件（可选）"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": null,
+          "label": "负面条件（可选）"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": null,
+          "label": "Latent（可选）"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "xyPlot",
+          "type": "XYPLOT",
+          "link": null
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": null,
+          "shape": 3,
+          "label": "节点束"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            79
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 1
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "随机种"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullkSampler"
+      },
+      "widgets_values": [
+        20,
+        2,
+        "euler_ancestral",
+        "align_your_steps",
+        1,
+        "Preview",
+        0,
+        "ComfyUI",
+        675110861369170,
+        "fixed"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 57,
+      "type": "PreviewImage",
+      "pos": [
+        2430,
+        -300
+      ],
+      "size": {
+        "0": 770,
+        "1": 770
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 79,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "shape": 1
+    },
+    {
+      "id": 72,
+      "type": "easy fullLoader",
+      "pos": [
+        1230,
+        -300
+      ],
+      "size": {
+        "0": 480,
+        "1": 484
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_override",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "clip_override",
+          "type": "CLIP",
+          "link": null,
+          "label": "CLIP（可选）"
+        },
+        {
+          "name": "vae_override",
+          "type": "VAE",
+          "link": null,
+          "label": "VAE（可选）"
+        },
+        {
+          "name": "optional_lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "Lora堆（可选）"
+        },
+        {
+          "name": "optional_controlnet_stack",
+          "type": "CONTROL_NET_STACK",
+          "link": null
+        },
+        {
+          "name": "negative",
+          "type": "STRING",
+          "link": 78,
+          "widget": {
+            "name": "negative"
+          },
+          "label": "负面提示词",
+          "slot_index": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": [
+            76
+          ],
+          "shape": 3,
+          "label": "节点束",
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": [
+            75
+          ],
+          "shape": 3,
+          "slot_index": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullLoader"
+      },
+      "widgets_values": [
+        "1-SDXL模型/juggernautXL_v9Rundiffusionphoto2.safetensors",
+        "Default",
+        "Baked VAE",
+        -1,
+        "None",
+        1,
+        1,
+        "1024 x 1024",
+        512,
+        512,
+        "",
+        "none",
+        "A1111",
+        "",
+        "none",
+        "A1111",
+        4,
+        false
+      ],
+      "shape": 1
+    }
+  ],
+  "links": [
+    [
+      68,
+      68,
+      1,
+      69,
+      0,
+      "MASK"
+    ],
+    [
+      69,
+      69,
+      0,
+      70,
+      0,
+      "IMAGE"
+    ],
+    [
+      70,
+      61,
+      0,
+      71,
+      0,
+      "CUSTOM"
+    ],
+    [
+      71,
+      61,
+      1,
+      71,
+      1,
+      "CUSTOM"
+    ],
+    [
+      72,
+      63,
+      0,
+      71,
+      3,
+      "STRING"
+    ],
+    [
+      74,
+      71,
+      0,
+      67,
+      0,
+      "STRING"
+    ],
+    [
+      75,
+      72,
+      3,
+      68,
+      0,
+      "CLIP"
+    ],
+    [
+      76,
+      72,
+      0,
+      73,
+      0,
+      "PIPE_LINE"
+    ],
+    [
+      77,
+      68,
+      0,
+      73,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      78,
+      74,
+      0,
+      72,
+      5,
+      "STRING"
+    ],
+    [
+      79,
+      73,
+      1,
+      57,
+      0,
+      "IMAGE"
+    ],
+    [
+      80,
+      71,
+      0,
+      75,
+      0,
+      "*"
+    ],
+    [
+      81,
+      76,
+      0,
+      68,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Omost for Prompt ",
+      "bounding": [
+        -40,
+        -370,
+        1240,
+        690
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Basic Setting",
+      "bounding": [
+        1220,
+        -370,
+        500,
+        854
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Omost Decode",
+      "bounding": [
+        1730,
+        -370,
+        270,
+        860
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Sampling",
+      "bounding": [
+        2020,
+        -370,
+        370,
+        860
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "OutPut",
+      "bounding": [
+        2420,
+        -370,
+        800,
+        860
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "LLM_Party for Omost",
+      "bounding": [
+        -40,
+        350,
+        1240,
+        140
+      ],
+      "color": "#3f789e",
+      "font_size": 100,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7972024500000272,
+      "offset": {
+        "0": 174.79487027481764,
+        "1": 347.5696729329537
+      }
+    }
+  },
+  "version": 0.4
+}

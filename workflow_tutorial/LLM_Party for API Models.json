@@ -1,0 +1,313 @@
+{
+  "last_node_id": 22,
+  "last_link_id": 33,
+  "nodes": [
+    {
+      "id": 20,
+      "type": "LLM_api_loader",
+      "pos": [
+        520,
+        270
+      ],
+      "size": {
+        "0": 350,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            32
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "qwen2:latest",
+        "http://127.0.0.1:11434/v1",
+        "ollama",
+        false
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "shape": 1
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1340,
+        280
+      ],
+      "size": {
+        "0": 410,
+        "1": 460
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 33,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "大型语言模型派对"
+      ],
+      "color": "#233",
+      "bgcolor": "#355",
+      "shape": 1
+    },
+    {
+      "id": 21,
+      "type": "LLM",
+      "pos": [
+        910,
+        270
+      ],
+      "size": {
+        "0": 400,
+        "1": 470
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 32,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            33
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你是一个翻译专家",
+        "把以下内容翻译为中文：“large language model party”，只需要输出翻译内容，不需要回复其他内容。",
+        0.7,
+        "enable",
+        "enable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ],
+      "shape": 1
+    },
+    {
+      "id": 22,
+      "type": "Note",
+      "pos": [
+        522,
+        445
+      ],
+      "size": {
+        "0": 355.907958984375,
+        "1": 302.81817626953125
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "##介绍：\n支持API接入或者本地大模型接入，模块化实现工具调用功能。\n\n##Step 1：\n·base_url：参考以下[api_key合辑]中的填写规范；\n·api_hey：不同的LLM的api_key不同，填写方式同参照[API_KEYS]\n\n##Step 2：\n·models_name：输入你需要调用的大模型名称，如：qwen2:latest。\n\n##注：\n·可以用[ollama](https://github.com/ollama/ollama)来管理你的模型；\n·在api_key填入ollama，base_url填入http://127.0.0.1:11434/v1，在model_name填入你的模型名称，例如:llama3、qwen2:latest；或者直接开启is_ollama属性，这样你就是只需要填入model_name就能使用ollama了。\n·以ollama的方式加载的部分模型并没有工具调用功能（例如：llama3），当你连入tool后会报错，这时你可以将LLM_api节点上的·is_tool_in_sys_prompt属性打开，工具信息将以系统提示词的方式输入LLM，让LLM临时获得工具调用能力。\n---------------------------------------------------------------\n\n##[api_key合辑]\n[API_KEYS]\nbase_url = https://api.openai.com/v1/\nopenai_api_key = sk-XXXXX\n\n[deepseek-chat]\nbase_url=https://api.deepseek.com/v1/\napi_key=\n\n[glm-4]\nbase_url=https://open.bigmodel.cn/api/paas/v4/\napi_key=\n\n[qwen-max]\nbase_url=https://dashscope.aliyuncs.com/compatible-mode/v1/\napi_key=\n\n[moonshot-v1-8k]\nbase_url=https://api.moonshot.cn/v1/\napi_key=\n\n[general]\nbase_url=https://spark-api-open.xf-yun.com/v1/\napi_key=\n\n[doubao_YOUR_ENDPOINT_ID]\nbase_url=https://ark.cn-beijing.volces.com/api/v3/\napi_key=\n\n[your_ollama_model_name]\nbase_url=http://127.0.0.1:11434/v1/\napi_key=ollama\n\n---------------------------------------------------------------\n##写在最后：\n·LLM_Party正在用心经营一片AI时代的后花园，我们希望能够在AI时代下成为众多参与者的一员，我们从开源社区中走来，也希望回到社区中去。\n·欢迎大家来到我们用心经营的后花园：\n - QQ交流群：931057213\n - 微信交流群：Choo-Yong（添加小助理微信，统一通过后会添加至交流群）\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "shape": 1
+    }
+  ],
+  "links": [
+    [
+      32,
+      20,
+      0,
+      21,
+      0,
+      "CUSTOM"
+    ],
+    [
+      33,
+      21,
+      0,
+      11,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "API Config",
+      "bounding": [
+        510,
+        200,
+        379,
+        555
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "LLM Apply",
+      "bounding": [
+        900,
+        200,
+        420,
+        554
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "OutPut",
+      "bounding": [
+        1330,
+        200,
+        437,
+        554
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "LLM_Party for API Models",
+      "bounding": [
+        510,
+        50,
+        1260,
+        140
+      ],
+      "color": "#3f789e",
+      "font_size": 100,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.4122927695244514,
+      "offset": {
+        "0": 248.82942889828666,
+        "1": -349.5198383278648
+      }
+    }
+  },
+  "version": 0.4
+}
