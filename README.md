@@ -38,7 +38,9 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 
 2. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg).
 
-3. More workflows please refer to the [workflow](workflow) folder.
+3. Please refer to the workflow tutorial: [Workflow Tutorial](workflow_tutorial/), thanks to [HuangYuChuh](https://github.com/HuangYuChuh) for your contribution!
+
+4. More workflows please refer to the [workflow](workflow) folder.
 
 ## Vedio tutorial
 1. [Building a Modular AI with ComfyUI×LLM: A Step-by-Step Tutorial (Super Easy!)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)

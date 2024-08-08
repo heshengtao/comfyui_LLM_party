@@ -39,7 +39,9 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 
 2. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：[931057213](img/Q群.jpg)
 
-3. 更多的工作流可以参考[workflow](workflow)文件夹.
+3. 工作流教程请参考：[工作流教程](workflow_tutorial/)，感谢[HuangYuChuh](https://github.com/HuangYuChuh)的贡献！
+
+4. 更多的工作流可以参考[workflow](workflow)文件夹
 
 ## 视频教程
 1. [手把手教你如何搭建积木化智能体（超简单！）](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
