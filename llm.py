@@ -1027,7 +1027,7 @@ class LLM_local_loader:
             "required": {
                 "model_name": ("STRING", {"default": ""}),
                 "model_type": (
-                    ["","GLM3",  "Qwen"],
+                    ["llama","GLM3",  "Qwen"],
                     {
                         "default": "llama",
                     },
