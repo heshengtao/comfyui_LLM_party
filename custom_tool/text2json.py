@@ -18,8 +18,8 @@ class text2json:
     def INPUT_TYPES(s):
         return {"required": {"text": ("STRING", {}), "sep": ("STRING", {"default": "\n"})}}
 
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("DICT",)
+    RETURN_TYPES = ("DICT",)
+    RETURN_NAMES = ("json_data",)
 
     FUNCTION = "convert_txt2json"
 
@@ -40,12 +40,34 @@ class text2json:
         return (json_data,)
 
 
-NODE_CLASS_MAPPINGS = {"text2json": text2json}
+import json
+
+class text2parameters:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {"text": ("STRING", {"multiline": True})}}
+
+    RETURN_TYPES = ("DICT",)
+    RETURN_NAMES = ("json_data",)
+
+    FUNCTION = "convert_txt2json"
+
+    CATEGORY = "大模型派对（llm_party）/函数（function）"
+
+    def convert_txt2json(self, text):
+        # 统一成json的引号
+        text = text.replace("'", '"')
+        # 把json字符串转换为字典
+        json_data = json.loads(text)
+        return (json_data,)
+
+
+NODE_CLASS_MAPPINGS = {"text2json": text2json,"text2parameters": text2parameters}
 lang = locale.getdefaultlocale()[0]
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"text2json": "文本分割成json🐶"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"text2json": "文本分割成json🐶", "text2parameters": "文本转参数"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"text2json": "Text to JSON🐶"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"text2json": "Split text into JSON🐶", "text2parameters": "Text to parameters"}
 
 
 if __name__ == "__main__":
