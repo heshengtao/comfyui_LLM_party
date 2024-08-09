@@ -209,36 +209,36 @@ def install_portaudio():
                 if "EndeavourOS" in result.stdout or "Arch" in result.stdout:
                     result = subprocess.run(["pacman", "-Q", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                     if result.returncode != 0:
-                        os.system("sudo pacman -Sy")
-                        os.system("sudo pacman -S --noconfirm portaudio")
+                        os.system("pacman -Sy")
+                        os.system("pacman -S --noconfirm portaudio")
                     else:
                         print("portaudio is already installed.")
                 elif "CentOS" in result.stdout or "Red Hat" in result.stdout:
                     result = subprocess.run(["rpm", "-q", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                     if result.returncode != 0:
-                        os.system("sudo yum update")
-                        os.system("sudo yum install -y portaudio")
+                        os.system("yum update")
+                        os.system("yum install -y portaudio")
                     else:
                         print("portaudio is already installed.")
                 elif "Fedora" in result.stdout:
                     result = subprocess.run(["rpm", "-q", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                     if result.returncode != 0:
-                        os.system("sudo dnf update")
-                        os.system("sudo dnf install -y portaudio")
+                        os.system("dnf update")
+                        os.system("dnf install -y portaudio")
                     else:
                         print("portaudio is already installed.")
                 elif "openSUSE" in result.stdout:
                     result = subprocess.run(["rpm", "-q", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                     if result.returncode != 0:
-                        os.system("sudo zypper refresh")
-                        os.system("sudo zypper install -y portaudio")
+                        os.system("zypper refresh")
+                        os.system("zypper install -y portaudio")
                     else:
                         print("portaudio is already installed.")
                 else:
                     result = subprocess.run(["dpkg", "-s", "libportaudio2"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                     if result.returncode != 0:
-                        os.system("sudo apt-get update")
-                        os.system("sudo apt-get install -y libportaudio2 libasound-dev")
+                        os.system("apt-get update")
+                        os.system("apt-get install -y libportaudio2 libasound-dev")
                     else:
                         print("libportaudio2 is already installed.")
             elif sys.platform == "darwin":
