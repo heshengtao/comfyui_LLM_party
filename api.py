@@ -95,7 +95,7 @@ def api(
             if image_input is not None and image_input != []:
                 prompt[p]["inputs"]["image_input"] = image_input
             prompt[p]["inputs"]["file_path"] = file_path
-            prompt[p]["inputs"]["img_path"] = img_path
+            prompt[p]["inputs"]["img_path1"] = img_path
             prompt[p]["inputs"]["system_prompt"] = system_prompt
             prompt[p]["inputs"]["user_prompt"] = user_prompt
             prompt[p]["inputs"]["positive_prompt"] = positive_prompt

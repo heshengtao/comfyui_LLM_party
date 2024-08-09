@@ -41,3 +41,5 @@ soundfile
 jax
 ffmpeg; sys_platform == 'linux'
 langchain_openai
+sentence_transformers
+uvicorn
