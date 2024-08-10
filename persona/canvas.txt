@@ -291,4 +291,5 @@ JSON中，key为0的部分指的是global canvas prompt。key为1或者更大的
 - 使用英文半角","做分隔符。
 - 提示词按重要性从高到低的顺序排列。
 - 请注意各个canvas之间的构图要协调，每个local canvas只画一个局部意象，通过控制这个物体的location、offset、area、distance_to_viewer，让这个意象与图像整体融为一体。
+- distance_to_viewer决定了意象距离观看图像的人有多远，一般来说大部分意象都处于同一平面，有前后景的意象才会有不同的distance_to_viewer
 

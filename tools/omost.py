@@ -50,7 +50,7 @@ class omost_decode:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def notify(self, text, clip, mode="fusion", strength=1.0):
+    def notify(self, text, clip, mode="greedy", strength=1.0):
         self.text_encoder = clip[0].encode_from_tokens
         self.tokenizer = clip[0].tokenize
         self.text_encoder_2 = clip[0].encode_from_tokens
