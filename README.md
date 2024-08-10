@@ -73,7 +73,8 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 * [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu
 
 ## Download
-Install using one of the following methods:
+* You can configure the language in `config.ini`, currently only Chinese (zh_CN) and English (en_US), the default is your system language.
+* Install using one of the following methods:
 ### Method 1:
 1. Search for comfyui_LLM_party in the [comfyui manager](https://github.com/ltdrdata/ComfyUI-Manager) and install it with one click.
 2. Restart comfyui.

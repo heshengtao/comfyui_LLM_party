@@ -95,7 +95,8 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 4. 如果你出现了一些环境配置问题，可以尝试使用`requirements_fixed.txt`中的依赖。
 
 ## 配置
-可以使用以下方法之一配置APIKEY
+* 可以在`config.ini`中配置语言，目前只有中文（zh_CN）和英文（en_US）两种，默认为你的系统语言。
+* 可以使用以下方法之一配置APIKEY
 ### 方法一：
 1. 打开`comfyui_LLM_party`的项目文件夹下的`config.ini`文件。
 2. 在`config.ini`输入你的`openai_api_key`、`base_url`。
