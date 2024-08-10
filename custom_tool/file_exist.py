@@ -46,8 +46,11 @@ lang = locale.getdefaultlocale()[0]
 import os
 import sys
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(current_dir)
-from config import language
+config_path = os.path.join(current_dir, "config.ini")
+import configparser
+config = configparser.ConfigParser()
+config.read(config_path)
+language = config.get("API_KEYS", "language")
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
