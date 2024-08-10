@@ -53,6 +53,7 @@ class discord_file_monitor:
                             with open(file_path, "r", encoding="utf-8") as f:
                                 content = json.load(f)
                             # 删除文件
+                            os.remove(file_path)
                             os.remove(lock_path)
                             print(content)
                             break  # 找到并处理一个文件后退出循环
