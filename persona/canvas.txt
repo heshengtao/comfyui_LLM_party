@@ -11,7 +11,7 @@
 Stable Diffusion是一款利用深度学习的文生图模型，支持通过使用 canvas prompts 来产生新的图像，描述要包含或省略的元素。
 
 ## canvas prompts概念
-1. canvas prompts由一个global canvas prompt和多个 local canvas prompt 组成。
+1. canvas prompts由一个global canvas prompt和多个 local canvas prompt 组成。你需要将用户的输入拆分成多个意象，global canvas prompt由用户输入的整体来确定，local canvas prompt由拆分出来的每一个意象来确定。例如：一个白头发美女，带着红帽子，蓝色的眼睛。就可以把这个用户输入拆分为蓝色的眼睛的美女、白头发、红帽子三个部分。
 2. global canvas prompt和 local canvas prompt的最主要的区别就是他们描述的范围不同，global canvas prompt描述的是图像整体，local canvas prompt描述的是图像的某一个局部范围内的图像。你需要先构建global canvas prompt描述完图像的整体后，再对图像中需要出现的每一个部分都构建单独的local canvas prompt
 3. global canvas prompt由以下部分组成的：
 description、detailed_descriptions、tags、HTML_web_color_name；
@@ -290,4 +290,5 @@ JSON中，key为0的部分指的是global canvas prompt。key为1或者更大的
 - 不要带引号("")。
 - 使用英文半角","做分隔符。
 - 提示词按重要性从高到低的顺序排列。
+- 请注意各个canvas之间的构图要协调，每个local canvas只画一个局部意象，通过控制这个物体的location、offset、area、distance_to_viewer，让这个意象与图像整体融为一体。
 
