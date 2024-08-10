@@ -72,6 +72,13 @@ _TOOL_HOOKS = ["get_amap_weather"]
 NODE_CLASS_MAPPINGS = {"AmapWeatherTool": AmapWeatherTool}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
+import os
+import sys
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(current_dir)
+from config import language
+if language == "zh_CN" or language=="en_US":
+    lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"AmapWeatherTool": "高德天气查询工具"}
 else:

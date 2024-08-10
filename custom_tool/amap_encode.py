@@ -69,6 +69,13 @@ _TOOL_HOOKS = ["geocode"]
 NODE_CLASS_MAPPINGS = {"GeocodeTool": GeocodeTool}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
+import os
+import sys
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(current_dir)
+from config import language
+if language == "zh_CN" or language=="en_US":
+    lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"GeocodeTool": "高德地理编码工具"}
 else:

@@ -13,9 +13,9 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from openai import OpenAI
 
-# 当前脚本目录
-current_dir = os.path.dirname(os.path.abspath(__file__))
-config_path = os.path.join(current_dir, "config.ini")
+# 当前脚本目录的上级目录
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+config_path = os.path.join(current_dir, "config.py")
 
 
 def load_api_keys(config_file):
@@ -353,6 +353,13 @@ NODE_CLASS_MAPPINGS = {
 }
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
+import os
+import sys
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(current_dir)
+from config import language
+if language == "zh_CN" or language=="en_US":
+    lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "load_openai_ebd": "加载openai词嵌入模型",

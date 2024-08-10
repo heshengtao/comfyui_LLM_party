@@ -64,6 +64,13 @@ class text2parameters:
 
 NODE_CLASS_MAPPINGS = {"text2json": text2json,"text2parameters": text2parameters}
 lang = locale.getdefaultlocale()[0]
+import os
+import sys
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(current_dir)
+from config import language
+if language == "zh_CN" or language=="en_US":
+    lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"text2json": "文本分割成json🐶", "text2parameters": "文本转参数"}
 else:

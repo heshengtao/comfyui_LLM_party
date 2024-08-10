@@ -64,6 +64,13 @@ _TOOL_HOOKS = ["get_weekday"]
 NODE_CLASS_MAPPINGS = {"weekday_tool": weekday_tool}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
+import os
+import sys
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(current_dir)
+from config import language
+if language == "zh_CN" or language=="en_US":
+    lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"weekday_tool": "星期查询工具"}
 else:

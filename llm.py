@@ -1918,6 +1918,10 @@ NODE_CLASS_MAPPINGS = {
 
 
 lang = locale.getdefaultlocale()[0]
+api_keys = load_api_keys(config_path)
+lang_config=api_keys.get("language")
+if lang_config=="en_US" or lang_config=="zh_CN":
+    lang=lang_config
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "LLM": "API大语言模型",

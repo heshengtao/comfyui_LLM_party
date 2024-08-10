@@ -272,6 +272,13 @@ NODE_CLASS_MAPPINGS = {
     "discord_send": discord_send,
 }
 lang = locale.getdefaultlocale()[0]
+import os
+import sys
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(current_dir)
+from config import language
+if language == "zh_CN" or language=="en_US":
+    lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"discord_bot": "启动discord机器人", "discord_send": "发送消息到discord"}
 else:

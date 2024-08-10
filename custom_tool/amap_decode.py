@@ -1,7 +1,8 @@
 import json
 import locale
-import requests
 
+
+import requests
 def get_amap_regeo(location, api_key, extensions="all", radius=1000):
     url = "https://restapi.amap.com/v3/geocode/regeo"
     params = {
@@ -85,6 +86,13 @@ _TOOL_HOOKS = ["get_amap_regeo"]
 NODE_CLASS_MAPPINGS = {"AmapRegeoTool": AmapRegeoTool}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
+import os
+import sys
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(current_dir)
+from config import language
+if language == "zh_CN" or language=="en_US":
+    lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"AmapRegeoTool": "高德逆地理编码工具"}
 else:

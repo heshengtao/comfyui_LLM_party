@@ -40,3 +40,4 @@ def load_api_keys(config_file):
         api_keys = config["API_KEYS"]
 
     return api_keys
+language=  load_api_keys(config_path).get("language")

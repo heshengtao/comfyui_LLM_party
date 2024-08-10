@@ -76,6 +76,13 @@ class discord_file_monitor:
 
 NODE_CLASS_MAPPINGS = {"discord_file_monitor": discord_file_monitor}
 lang = locale.getdefaultlocale()[0]
+import os
+import sys
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(current_dir)
+from config import language
+if language == "zh_CN" or language=="en_US":
+    lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"discord_file_monitor": "discord文件夹监听节点"}
 else:
