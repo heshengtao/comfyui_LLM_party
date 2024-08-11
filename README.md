@@ -22,6 +22,11 @@ C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌�
 ## Effect display
 https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 
+## Functional Overview
+
+ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quickly build your own exclusive AI assistant, to the industry-specific word vector RAG and GraphRAG to localize the management of the industry knowledge base; from a single agent pipeline, to the construction of complex agent-agent radial interaction mode and ring interaction mode; from the access to their own social APP (QQ, Feishu, Discord) required by individual users, to the one-stop LLM + TTS + ComfyUI workflow required by streaming media workers; from the simple start of the first LLM application required by ordinary students, to the various parameter debugging interfaces commonly used by scientific researchers, model adaptation. All of this, you can find the answer in ComfyUI LLM Party.
+
+
 ## Latest update
 1. You can use this LLM tool maker to automatically generate LLM tools, save the tool code you generated as a python file, and then copy the code to the custom_tool folder, and then you create a new node. Example workflow: [LLM tool generator](workflow/LLM工具制造机.json).
 2. It supports duckduckgo search, but it has significant limitations. It seems that only English keywords can be entered, and multiple concepts cannot appear in keywords. The advantage is that there are no APIkey restrictions.
@@ -111,7 +116,7 @@ APIKEY can be configured using one of the following methods
 3. If you use the ollama model, use LLM_api node, fill in `http://127.0.0.1:11434/v1/` in `base_url` node, fill in `ollama` in `api_key`, and fill in your model name in `model_name`, for example: `llama3`.
 4. If you want to use image input LLM, it is recommended to use graph bed imgbb and enter your `imgbb_api_key` on the node.
 
-## Features
+## Changelog
 1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
 2. Supports API integration or local large model integration. Modular implementation for tool invocation.When entering the base_url, please use a URL that ends with `/v1/`.You can use [ollama](https://github.com/ollama/ollama) to manage your model. Then, enter `http://127.0.0.1:11434/v1/` for the base_url, `ollama` for the api_key, and your model name for the model_name, such as: llama3.
 - API access sample workflow: [start_with_LLM_api](workflow/start_with_LLM_api)
@@ -171,19 +176,30 @@ This open-source project and its contents (hereinafter referred to as "Project")
 
 ## Support:
 
-### If my work has brought value to your day, consider fueling it with a coffee! Your support not only energizes the project but also warms the heart of the creator. ☕💖 Every cup makes a difference!
+### Join the community
+If there is a problem with the plugin or you have any other questions, please join our community.
+
+1. QQ group: `931057213`
+
+<div style="display: flex; justify-content: center;">
+    <img src="img/Q群.jpg" style="width: 48%;" />
+</div>
+
+2. WeChat group: `Choo-Yong` (enter the group after adding the small assistant WeChat)
+
+### Follow us
+1. If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [Party host BB machine](https://space.bilibili.com/26978344)
+2. The OpenArt/liblib/esheep account is continuously updated with the most useful party workflows:
+* [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
+* [liblib](https://www.liblib.art/userpage/4378612c5b3341c79c0deab3101aeabb/publish/workflow)
+* [esheep](https://www.esheep.com/app/12502)
+
+### Donation support
+If my work has brought value to your day, consider fueling it with a coffee! Your support not only energizes the project but also warms the heart of the creator. ☕💖 Every cup makes a difference!
 <div style="display:flex; justify-content:space-between;">
     <img src="img/zhifubao.jpg" style="width: 48%;" />
     <img src="img/wechat.jpg" style="width: 48%;" />
 </div>
-
-### If there is a problem with the plug-in or you have other questions, welcome to join the QQ group: 931057213
-
-<div style="display:flex; justify-content:space-between;">
-    <img src="img/Q群.jpg" style="width: 48%;" />
-</div>
-
-### If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [Party host BB machine](https://space.bilibili.com/26978344)
 
 ## Star History
 

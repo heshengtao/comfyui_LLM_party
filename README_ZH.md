@@ -22,6 +22,10 @@ C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​�
 ## 效果展示
 https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 
+## 功能综述
+
+ComfyUI LLM Party,从最基础的 LLM 多工具调用、角色设定快速搭建自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库;从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建;从个人用户需要的接入自己的社交APP(QQ、飞书、Discord)，到流媒体工作者需要的一站式LLM+TTS+ComfyUI工作流;从普通学生所需要的第一个LLM应用的简单上手起步，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在ComfyUI LLM Party中找到答案。
+
 ## 最新更新
 1. 可以使用这个LLM工具制造机自动生成LLM工具，把你生成的工具代码保存为一个python文件中，然后把代码复制到custom_tool文件夹下，然后你就创造了一个新的节点。示例工作流：[LL工具生成器](workflow/LLM工具制造机.json)。
 2. 支持了duckduckgo搜索，但是有很大的限制，似乎只能输入英文关键词，关键词也不能出现多个概念，优势在于没有任何APIkey的限制。
@@ -111,7 +115,7 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 3. 如果你使用ollama模型，请使用LLM_api节点，在节点的`base_url`填入`http://127.0.0.1:11434/v1/`，在`api_key`填入`ollama`，在`model_name`填入你的模型名称，例如:llama3。。
 4. 如果你要使用图片输入LLM，推荐使用图床imgbb，在节点上输入你的`imgbb_api_key`。
 
-## 功能
+## 更新日志
 1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)
 2. 支持API接入或者本地大模型接入。模块化实现工具调用功能。在填入base_url时，请填入以`/v1/`结尾的网址。你可以用[ollama](https://github.com/ollama/ollama)来管理你的模型，然后在base_url填入`http://127.0.0.1:11434/v1/`，在api_key填入ollama，在model_name填入你的模型名称，例如:llama3。
 - API接入示例工作流：[start_with_LLM_api](workflow/start_with_LLM_api.json)
@@ -171,19 +175,30 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 
 ## 支持：
 
-### 如果我的工作给您带来了价值，请考虑请我喝一杯咖啡吧！您的支持不仅为项目注入活力，也温暖了创作者的心。☕💖 每一杯都有意义！
+### 加入社群
+如果插件存在问题或者您有其他的疑问，欢迎加入我们的社群。
+
+1. QQ群：`931057213`
+
+<div style="display: flex; justify-content: center;">
+    <img src="img/Q群.jpg" style="width: 48%;" />
+</div>
+
+2. 微信群：`Choo-Yong`（添加小助手微信后进群）
+
+### 关注我们
+1. 如果想持续关注本项目的最新功能，欢迎关注B站账号：[派对主持BB机](https://space.bilibili.com/26978344)
+2. OpenArt/liblib/esheep账号持续更新最有用的party工作流：
+* [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
+* [liblib](https://www.liblib.art/userpage/4378612c5b3341c79c0deab3101aeabb/publish/workflow)
+* [esheep](https://www.esheep.com/app/12502)
+
+### 捐赠支持
+如果我的工作给您带来了价值，请考虑请我喝一杯咖啡吧！您的支持不仅为项目注入活力，也温暖了创作者的心。☕💖 每一杯都有意义！
 <div style="display:flex; justify-content:space-between;">
     <img src="img/zhifubao.jpg" style="width: 48%;" />
     <img src="img/wechat.jpg" style="width: 48%;" />
 </div>
-
-### 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：931057213
-
-<div style="display:flex; justify-content:space-between;">
-    <img src="img/Q群.jpg" style="width: 48%;" />
-</div>
-
-### 如果想持续关注本项目的最新功能，欢迎关注B站账号：[派对主持BB机](https://space.bilibili.com/26978344)
 
 ## 星标历史
 
