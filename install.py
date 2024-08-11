@@ -121,7 +121,6 @@ def copy_js_files():
 
 
 def get_system_info():
-    """Gather system information related to NVIDIA GPU, CUDA version, AVX2 support, Python version, OS, and platform tag."""
     system_info = {
         "gpu": False,
         "cuda_version": None,
@@ -130,37 +129,40 @@ def get_system_info():
         "os": platform.system(),
         "os_bit": platform.architecture()[0].replace("bit", ""),
         "platform_tag": None,
+        "metal": False  # 添加metal参数
     }
 
-    # Check for NVIDIA GPU and CUDA version
+    # 检查NVIDIA GPU和CUDA版本
     if importlib.util.find_spec("torch"):
+        import torch
         system_info["gpu"] = torch.cuda.is_available()
         if system_info["gpu"]:
             system_info["cuda_version"] = "cu" + torch.version.cuda.replace(".", "").strip()
 
-    # Check for AVX2 support
+    # 检查AVX2支持
     if importlib.util.find_spec("cpuinfo"):
         try:
-            # Attempt to import the cpuinfo module
             import cpuinfo
-
-            # Safely attempt to retrieve CPU flags
             cpu_info = cpuinfo.get_cpu_info()
             if cpu_info and "flags" in cpu_info:
-                # Check if 'avx2' is among the CPU flags
                 system_info["avx2"] = "avx2" in cpu_info["flags"]
             else:
-                # Handle the case where CPU info is unavailable or does not contain 'flags'
                 system_info["avx2"] = False
         except Exception as e:
-            # Handle unexpected errors gracefully
             print(f"Error retrieving CPU information: {e}")
             system_info["avx2"] = False
     else:
-        # Handle the case where the cpuinfo module is not installed
         print("cpuinfo module not available.")
         system_info["avx2"] = False
-    # Determine the platform tag
+
+    # 使用PyTorch检查macOS上的Metal支持
+    if system_info["os"] == "Darwin":
+        if torch.backends.mps.is_available():
+            system_info["metal"] = True
+        else:
+            system_info["metal"] = False
+
+    # 确定平台标签
     if importlib.util.find_spec("packaging.tags"):
         system_info["platform_tag"] = next(packaging.tags.sys_tags()).platform
 
