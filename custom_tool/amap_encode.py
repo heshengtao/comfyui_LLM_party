@@ -76,7 +76,10 @@ config_path = os.path.join(current_dir, "config.ini")
 import configparser
 config = configparser.ConfigParser()
 config.read(config_path)
-language = config.get("API_KEYS", "language")
+try:
+    language = config.get("API_KEYS", "language")
+except:
+    language = ""
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
