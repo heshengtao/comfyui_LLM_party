@@ -22,7 +22,7 @@ C‌‌﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌�
 ## Effect display
 https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 
-## Functional Overview
+## Project Overview
 
 ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quickly build your own exclusive AI assistant, to the industry-specific word vector RAG and GraphRAG to localize the management of the industry knowledge base; from a single agent pipeline, to the construction of complex agent-agent radial interaction mode and ring interaction mode; from the access to their own social APP (QQ, Feishu, Discord) required by individual users, to the one-stop LLM + TTS + ComfyUI workflow required by streaming media workers; from the simple start of the first LLM application required by ordinary students, to the various parameter debugging interfaces commonly used by scientific researchers, model adaptation. All of this, you can find the answer in ComfyUI LLM Party.
 
@@ -189,10 +189,7 @@ If there is a problem with the plugin or you have any other questions, please jo
 
 ### Follow us
 1. If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [Party host BB machine](https://space.bilibili.com/26978344)
-2. The OpenArt/liblib/esheep account is continuously updated with the most useful party workflows:
-* [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
-* [liblib](https://www.liblib.art/userpage/4378612c5b3341c79c0deab3101aeabb/publish/workflow)
-* [esheep](https://www.esheep.com/app/12502)
+2. The OpenArt account is continuously updated with the most useful party workflows:[openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
 
 ### Donation support
 If my work has brought value to your day, consider fueling it with a coffee! Your support not only energizes the project but also warms the heart of the creator. ☕💖 Every cup makes a difference!

@@ -22,7 +22,7 @@ C﻿​﻿‎﻿​﻿‎‏​﻿‍‎​﻿‎﻿​﻿‎‏​﻿‌‎​�
 ## 效果展示
 https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 
-## 功能综述
+## 项目综述
 
 ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭建自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建;从个人用户需要的接入自己的社交APP(QQ、飞书、Discord)，到流媒体工作者需要的一站式LLM+TTS+ComfyUI工作流；从普通学生所需要的第一个LLM应用的简单上手起步，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在ComfyUI LLM Party中找到答案。
 
@@ -188,10 +188,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 ### 关注我们
 1. 如果想持续关注本项目的最新功能，欢迎关注B站账号：[派对主持BB机](https://space.bilibili.com/26978344)
-2. OpenArt/liblib/esheep账号持续更新最有用的party工作流：
-* [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
-* [liblib](https://www.liblib.art/userpage/4378612c5b3341c79c0deab3101aeabb/publish/workflow)
-* [esheep](https://www.esheep.com/app/12502)
+2. OpenArt账号持续更新最有用的party工作流：[openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
 
 ### 捐赠支持
 如果我的工作给您带来了价值，请考虑请我喝一杯咖啡吧！您的支持不仅为项目注入活力，也温暖了创作者的心。☕💖 每一杯都有意义！
