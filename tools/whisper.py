@@ -129,7 +129,7 @@ class openai_whisper:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def whisper(self, is_enable=True, audio="", base_url=None, api_key=None):
+    def whisper(self, is_enable=True, audio_path="", base_url=None, api_key=None):
         if is_enable == False:
             return (None,)
 
@@ -153,9 +153,9 @@ class openai_whisper:
         if openai.api_key == "":
             return ("请输入API_KEY",)
 
-        if audio != "":
+        if audio_path != "":
             client = OpenAI(api_key=openai.api_key, base_url=openai.base_url)
-            audio_file = open(audio, "rb")
+            audio_file = open(audio_path, "rb")
             transcription = client.audio.transcriptions.create(model="whisper-1", file=audio_file)
             out = transcription.text
         else:
