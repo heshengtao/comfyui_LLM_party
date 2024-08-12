@@ -165,6 +165,10 @@ def get_system_info():
     # 确定平台标签
     if importlib.util.find_spec("packaging.tags"):
         system_info["platform_tag"] = next(packaging.tags.sys_tags()).platform
+    if "macosx" in system_info['platform_tag'] and system_info["metal"] == True:
+        system_info["platform_tag"] = "macosx_11_0_arm64"
+    elif "macosx" in system_info['platform_tag'] and system_info["metal"] == False:
+        system_info["platform_tag"] = "macosx_10_9_x86_64"
 
     return system_info
 
