@@ -20,7 +20,8 @@ Card Type: Includes minion, spell, weapon, etc., usually located in the upper mi
 Minion Attributes: Minion cards display attack and health, located at the bottom left and bottom right of the card, respectively.
 Card Effect Description: Located in the middle of the card, detailing the specific effect of the card.
 Card Artwork: Located in the center of the card, showcasing the card’s artistic design.
-Tribe or Class Identifier: Some cards indicate their tribe (e.g., Dragon, Mech, Demon, Elemental, Murloc, Pirate, Beast, Totem, Undead, Demon Hunter) or class (e.g., Mage, Warrior, Priest, Rogue, Shaman, Warlock, Hunter, Paladin, Druid, Demon Hunter).
+race: Located at the bottom of the card, Some cards indicate their race (e.g., Dragon, Mech, Demon, Elemental, Murloc, Pirate, Beast, Totem, Undead, Demon Hunter) 
+occupation: (e.g., Mage, Warrior, Priest, Rogue, Shaman, Warlock, Hunter, Paladin, Druid, Demon Hunter).
 Rarity Gem and Corresponding Color: Legendary (orange), Epic (purple), Rare (blue), Common (white).
 Common keywords in card effect descriptions:
 
@@ -45,12 +46,12 @@ Discover: Choose one of three random cards to add to your hand.
 {}中是你要生成填充的部分，对于我没有给出的信息，你需要自行丰富联想，然后设计出来。以下是你要输出的结构：
 
 This picture is a digital illustration of Hearthstone cards (especially card games). It depicts {image in card}.
-The text "{Card Name}" on the card is written in stylized fantasy font, and the text is located in the center of the card. In the middle is written "{Card Effect Description}" Below the text, there is a huge rectangular beige banner with a gold border. Below the banner is a glowing {rare gem color} small gem. There is a number in each of the upper left, lower left, and lower right corners of the card, and each number font color is white. The number "{mana value}" in the upper left corner is contained in a hexagonal blue border. The number "{attack power}" is located in the lower left corner, above the logo of a sword, and the number "{health point/durability value}" is located in the lower right corner, above the logo of a drop of blood. At the bottom of the card is the text of "{race}".
+The text "{Card Name}" on the card is written in stylized fantasy font, and the text is located in the center of the card. In the middle is written "{Card Effect Description}" Below the text, there is a huge rectangular beige banner with a gold border. Below the banner is a glowing {rare gem color} small gem. There is a number in each of the upper left, lower left, and lower right corners of the card, and each number font color is white. The number "{mana value}" in the upper left corner is contained in a hexagonal blue border. The number "{attack power}" is located in the lower left corner, above the logo of a sword, and the number "{health point/durability value}" is located in the lower right corner, above the logo of a drop of blood. In the middle of the two numbers at the bottom there is the text for "{race}".
 
 ## 示例
 
 This image is a digital illustration of Hearthstone cards (especially card games). It depicts a magma element holding explosives in one hand.
-The text on the card, "Blaster Rager," is written in stylized fantasy font, with the text located in the center of the card. The middle reads, "Battlecry: Appears on the opponent's field. Deathrattle: Deals 8 damage to your hero." Below the text, there is a large rectangular beige banner, and below the banner contains a small glowing orange gem. There is a number each in the upper left, lower left, and lower right corners of the card, and each number font color is white. The number "3" in the upper left corner is contained in a hexagonal blue border. The number "5" is located in the lower left corner, above the logo of a sword, and the number "1" is located in the lower right corner, above the logo of a drop of blood. The bottom of the card has the text for "Elements."
+The text on the card, "Blaster Rager," is written in stylized fantasy font, with the text located in the center of the card. The middle reads, "Battlecry: Appears on the opponent's field. Deathrattle: Deals 8 damage to your hero." Below the text, there is a large rectangular beige banner, and below the banner contains a small glowing orange gem. There is a number each in the upper left, lower left, and lower right corners of the card, and each number font color is white. The number "3" in the upper left corner is contained in a hexagonal blue border. The number "5" is located in the lower left corner, above the logo of a sword, and the number "1" is located in the lower right corner, above the logo of a drop of blood. In the middle of the two numbers at the bottom there is the text for "Elemental".
 
 ## 限制
 你必须使用英文来描述这个卡牌。
