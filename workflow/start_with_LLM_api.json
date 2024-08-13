@@ -1,13 +1,48 @@
 {
-  "last_node_id": 21,
-  "last_link_id": 33,
+  "last_node_id": 24,
+  "last_link_id": 37,
   "nodes": [
+    {
+      "id": 23,
+      "type": "LLM_api_loader",
+      "pos": [
+        540,
+        264
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            36
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
     {
       "id": 11,
       "type": "show_text_party",
       "pos": [
-        1403,
-        264
+        1385,
+        280
       ],
       "size": {
         "0": 454.6876220703125,
@@ -20,7 +55,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 33,
+          "link": 37,
           "widget": {
             "name": "text"
           },
@@ -41,58 +76,21 @@
       },
       "widgets_values": [
         "",
-        "你好！有什么我可以帮助你的吗？"
+        "你好！很高兴和你聊天。有什么想聊的或者需要帮助的地方吗？"
       ],
       "color": "#233",
       "bgcolor": "#355"
     },
     {
-      "id": 20,
-      "type": "LLM_api_loader",
-      "pos": [
-        513,
-        269
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            32
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "gpt-3.5-turbo",
-        "https://api.openai.com/v1/",
-        "sk-XXXXX"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 21,
+      "id": 24,
       "type": "LLM",
       "pos": [
-        907,
-        270
+        896,
+        276
       ],
       "size": [
-        395.0495077801129,
-        454.6614283735262
+        444.24951998714414,
+        548.9947566205965
       ],
       "flags": {},
       "order": 1,
@@ -101,14 +99,17 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 32,
-          "label": "model"
+          "link": 36
         },
         {
           "name": "images",
           "type": "IMAGE",
-          "link": null,
-          "label": "images"
+          "link": null
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null
         },
         {
           "name": "system_prompt_input",
@@ -148,32 +149,28 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            33
+            37
           ],
           "shape": 3,
-          "label": "assistant_response",
           "slot_index": 0
         },
         {
           "name": "history",
           "type": "STRING",
           "links": null,
-          "shape": 3,
-          "label": "history"
+          "shape": 3
         },
         {
           "name": "tool",
           "type": "STRING",
           "links": null,
-          "shape": 3,
-          "label": "tool"
+          "shape": 3
         },
         {
           "name": "image",
           "type": "IMAGE",
           "links": null,
-          "shape": 3,
-          "label": "image"
+          "shape": 3
         }
       ],
       "properties": {
@@ -194,22 +191,23 @@
         "",
         "",
         100,
-        ""
+        "",
+        true
       ]
     }
   ],
   "links": [
     [
-      32,
-      20,
+      36,
+      23,
       0,
-      21,
+      24,
       0,
       "CUSTOM"
     ],
     [
-      33,
-      21,
+      37,
+      24,
       0,
       11,
       0,
@@ -222,8 +220,8 @@
     "ds": {
       "scale": 1,
       "offset": {
-        "0": -436.0495077801129,
-        "1": 13.005258638192544
+        "0": -486.44947115901914,
+        "1": -201.39471999950277
       }
     }
   },
