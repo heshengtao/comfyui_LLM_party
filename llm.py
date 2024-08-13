@@ -138,6 +138,7 @@ from .tools.wechat import send_wechat, work_wechat, work_wechat_tool
 from .tools.whisper import listen_audio, openai_whisper
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import work_flow, workflow_tool, workflow_transfer
+from .tools.flux_persona import flux_persona
 
 _TOOL_HOOKS = [
     "get_time",
@@ -1914,6 +1915,7 @@ NODE_CLASS_MAPPINGS = {
     "bool_logic": bool_logic,
     "duckduckgo_tool":duckduckgo_tool,
     "duckduckgo_loader":duckduckgo_loader,
+    "flux_persona":flux_persona,
 }
 
 
@@ -2019,6 +2021,7 @@ if lang == "zh_CN":
         "bool_logic": "布尔逻辑",
         "duckduckgo_tool": "DuckDuckGo工具",
         "duckduckgo_loader": "DuckDuckGo加载器",
+        "flux_persona":"flux提示词生成器面具",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2118,6 +2121,7 @@ else:
         "bool_logic": "Boolean Logic",
         "duckduckgo_tool": "DuckDuckGo Tool",
         "duckduckgo_loader":"DuckDuckGo Loader",
+        "flux_persona":"flux prompt word generator",
     }
 
 
