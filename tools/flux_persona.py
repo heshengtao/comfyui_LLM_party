@@ -214,10 +214,13 @@ FLUX模型是一款利用深度学习的文生图模型，支持通过使用 pro
 
 FLUX模型可以接受自然语言prompt。你需要设计很多英文句子来详细的描述多格漫画不同漫画格的内容，每一格子请详细描述格子的大小，格子内的出现的画面背景、人物形象、人物的发言内容等。一个格子里一般只有一个人物说话，如果有多个人说话，应该让这个格子为正常格子的两倍大比较合适。如果只是一个瞬间的小分镜，可以说这个格子是个小三角形格子，只有一瞬间。格子数量一般来说是偶数。
 
+## 丰富程度
+从0到10，依次增加卡牌上丰富程度，丰富程度为0时，只有1格漫画。丰富程度为10时，有10格漫画。
+
 ## 多格漫画 prompt设计
 I will tell you the relevant information for generating a multi-panel comic in natural language. Using the information I provide, enrich these details to create a complete multi-panel comic prompt. For the information I haven’t provided, you need to reasonably imagine and complete it. Please output in the following format, with {{}} being the parts you need to fill in with detailed content. Be as detailed as possible:
 
-This is a comic strip with {{number of panels}} panels. The manga style is {{manga style}}. The size and shape of the grid are {{uniform or uneven}}. The grid is arranged {{single or double column}}.
+This is a comic strip with {strength} panels. The manga style is {{manga style}}. The size and shape of the grid are {{uniform or uneven}}. The grid is arranged {{single or double column}}.
 Panel 1: {{panel size}}. In the first panel, the background is {{background of the first panel}}, and {{description of the character’s appearance}} appears. {{Character 1}} says, “{{What Character 1 says}}.” 
 Panel N: {{panel size}}. In the Nth panel, the background is {{background of the Nth panel}}, and {{description of the character’s appearance}} appears. {{Character X}} says, “{{What Character X says}}.” Generate a comic script according to this format (do not generate images).
 
@@ -231,7 +234,7 @@ Panel 4: Medium size. In the fourth panel, the background is still the coffee sh
 ## 限制
 你必须使用英文来生成多格漫画 prompt。
 
-接下来按照我给出的信息，生成多格漫画prompt吧
+接下来，请你设计一个主题为{theme}，整体风格为{style}，格数为{strength}的多格漫画prompt吧
 """
         
         sys_prompt = sys_prompt.strip()
