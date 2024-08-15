@@ -28,7 +28,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 
 
 ## Latest update
-1. Added FLUX prompt word generator mask node, which can generate Hearthstone cards, Game King cards, posters, comics and other styles of prompt words, which can make the FLUX model straight out. Reference workflow: [FLUX prompt word] (https://openart.ai/workflows/comfyui_llm_party/llm-party-for-flux/beJz4wLacBOblWVVjg6G)
+1. Added FLUX prompt word generator mask node, which can generate Hearthstone cards, Game King cards, posters, comics and other styles of prompt words, which can make the FLUX model straight out. Reference workflow: [FLUX prompt word](https://openart.ai/workflows/comfyui_llm_party/llm-party-for-flux/beJz4wLacBOblWVVjg6G)
 2. You can use this LLM tool maker to automatically generate LLM tools, save the tool code you generated as a python file, and then copy the code to the custom_tool folder, and then you create a new node. Example workflow: [LLM tool generator](workflow/LLM工具制造机.json).
 3. It supports duckduckgo search, but it has significant limitations. It seems that only English keywords can be entered, and multiple concepts cannot appear in keywords. The advantage is that there are no APIkey restrictions.
 4. It supports the function of calling multiple knowledge bases separately, and it is possible to specify which knowledge base is used to answer questions in the prompt word. Example workflow: [multiple knowledge bases are called separately](workflow/多知识库分别调用.json).
