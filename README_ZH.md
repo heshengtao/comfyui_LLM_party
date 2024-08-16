@@ -29,7 +29,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 ## 最新更新
 1. 新增了FLUX提示词生成器面具节点，可以生成炉石卡牌、游戏王卡牌、海报、漫画等多种风格的提示词，可以让FLUX模型直出。参考工作流：[FLUX提示词](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
-2. 可以使用这个LLM工具制造机自动生成LLM工具，把你生成的工具代码保存为一个python文件中，然后把代码复制到custom_tool文件夹下，然后你就创造了一个新的节点。示例工作流：[LL工具生成器](workflow/LLM工具制造机.json)。
+2. 可以使用这个LLM工具制造机自动生成LLM工具，把你生成的工具代码保存为一个python文件中，然后把代码复制到custom_tool文件夹下，然后你就创造了一个新的节点。示例工作流：[LLM工具生成器](workflow/LLM工具制造机.json)。
 3. 支持了duckduckgo搜索，但是有很大的限制，似乎只能输入英文关键词，关键词也不能出现多个概念，优势在于没有任何APIkey的限制。
 4. 支持了多个知识库分开调用的功能，可以在提示词内明确是使用哪个知识库的知识回答问题。示例工作流：[多知识库分别调用](workflow/多知识库分别调用.json)。
 5. 支持LLM输入额外参数，包括json out等高级参数。示例工作流：[LLM输入额外参数](workflow/LLM额外参数eg_JSON_OUT.json)。[用json_out分离提示词](workflow/用json_out分离提示词.json)。
