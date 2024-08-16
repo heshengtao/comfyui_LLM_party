@@ -5,7 +5,7 @@
   <a href="how_to_use_nodes_ZH.md">文字教程</a> ·
   <a href="workflow_tutorial/">工作流教程</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">度盘链接</a> ·
-  <a href="img/Q群.jpg">加入Q群</a> ·
+  <a href="img/Q群.jpg">QQ群</a> ·
   <a href="https://discord.gg/gxrQAYy6">discord</a>
 </div>
 
