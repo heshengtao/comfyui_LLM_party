@@ -107,7 +107,7 @@ class check_web_tool:
             },
             "optional": {
                 "web_url": ("STRING", {}),
-                "embedding_path": ("STRING", {"default": None}),
+                "embedding_path": ("STRING", {"default": ""}),
                 "with_jina": ("BOOLEAN", {"default": True}),
                 "base_url": (
                     "STRING",
@@ -141,10 +141,10 @@ class check_web_tool:
         device,
         with_jina=True,
         is_enable=True,
-        web_url=None,
-        embedding_path=None,
-        api_key=None,
-        base_url=None,
+        web_url="",
+        embedding_path="",
+        api_key="sk-XXXXX",
+        base_url="https://api.openai.com/v1/",
         ebd_model=None,
     ):
         if is_enable == False:
