@@ -48,6 +48,7 @@ from .tools.api_tool import (
 from .tools.check_web import check_web, check_web_tool
 from .tools.classify_function import classify_function, classify_function_plus
 from .tools.classify_persona import classify_persona, classify_persona_plus
+from .tools.clear_file import clear_file
 from .tools.clear_model import clear_model
 from .tools.CosyVoice import CosyVoice
 from .tools.custom_persona import custom_persona
@@ -1916,6 +1917,7 @@ NODE_CLASS_MAPPINGS = {
     "duckduckgo_tool":duckduckgo_tool,
     "duckduckgo_loader":duckduckgo_loader,
     "flux_persona":flux_persona,
+    "clear_file":clear_file,
 }
 
 
@@ -2022,6 +2024,7 @@ if lang == "zh_CN":
         "duckduckgo_tool": "DuckDuckGo工具",
         "duckduckgo_loader": "DuckDuckGo加载器",
         "flux_persona":"flux提示词生成器面具",
+        "clear_file":"清理文件",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2122,6 +2125,7 @@ else:
         "duckduckgo_tool": "DuckDuckGo Tool",
         "duckduckgo_loader":"DuckDuckGo Loader",
         "flux_persona":"flux prompt word generator",
+        "clear_file":"clear file",
     }
 
 

@@ -16,7 +16,7 @@ class AnyType(str):
 any_type = AnyType("*")
 
 
-class clear_model:
+class clear_file:
     @classmethod
     def INPUT_TYPES(s):
         return {
