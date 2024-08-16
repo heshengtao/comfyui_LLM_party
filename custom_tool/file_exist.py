@@ -3,8 +3,7 @@ import os
 
 class FilePathExists:
     def __init__(self):
-        self.exists = False
-
+        self.file_path = ""
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -21,21 +20,15 @@ class FilePathExists:
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
     def file_exists(self, file_path="", is_enable=True):
-        if is_enable == False:
-            return (self.exists)
-
-        if self.exists == True:
-            return (True,)
-
-        if file_path == None or file_path=="":
+        if is_enable:
+            self.file_path = file_path
+        if self.file_path == None or self.file_path=="":
             return (False,)
-
-        if not isinstance(file_path, (str, bytes, os.PathLike)):
-            print(f"Path is not a valid type: {type(file_path)}")
-            return False
-
-        self.exists = os.path.exists(file_path)
-        return (self.exists,)
+        if not isinstance(self.file_path, (str, bytes, os.PathLike)):
+            print(f"Path is not a valid type: {type(self.file_path)}")
+            return (False,)
+        exists = os.path.exists(self.file_path)
+        return (exists,)
 
         
 
