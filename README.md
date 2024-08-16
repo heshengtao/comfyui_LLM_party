@@ -5,7 +5,7 @@
   <a href="how_to_use_nodes.md">text tutorial</a> ·
   <a href="workflow_tutorial/">workflow tutorial</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baidu cloud</a> ·
-  <a href="img/Q群.jpg">QQ group</a>
+  <a href="img/Q群.jpg">QQ group</a>·
   <a href="https://discord.gg/gxrQAYy6">discord</a>
 </div>
 
