@@ -47,6 +47,8 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 3. 工作流教程请参考：[工作流教程](workflow_tutorial/)，感谢[HuangYuChuh](https://github.com/HuangYuChuh)的贡献！
 
+4. 高阶工作流玩法账号：[openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
+
 4. 更多的工作流可以参考[workflow](workflow)文件夹
 
 ## 视频教程

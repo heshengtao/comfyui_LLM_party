@@ -47,7 +47,9 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 
 3. Please refer to the workflow tutorial: [Workflow Tutorial](workflow_tutorial/), thanks to [HuangYuChuh](https://github.com/HuangYuChuh) for your contribution!
 
-4. More workflows please refer to the [workflow](workflow) folder.
+4. Advanced workflow gameplay account:[openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
+
+5. More workflows please refer to the [workflow](workflow) folder.
 
 ## Vedio tutorial
 1. [Building a Modular AI with ComfyUI×LLM: A Step-by-Step Tutorial (Super Easy!)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
