@@ -180,13 +180,14 @@ This open-source project and its contents (hereinafter referred to as "Project")
 ### Join the community
 If there is a problem with the plugin or you have any other questions, please join our community.
 
-1. QQ group: `931057213`
+1. discord:[discord link](https://discord.gg/gxrQAYy6)
+2. QQ group: `931057213`
 
 <div style="display: flex; justify-content: center;">
     <img src="img/Q群.jpg" style="width: 48%;" />
 </div>
 
-2. WeChat group: `Choo-Yong` (enter the group after adding the small assistant WeChat)
+3. WeChat group: `Choo-Yong` (enter the group after adding the small assistant WeChat)
 
 ### Follow us
 1. If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [Party host BB machine](https://space.bilibili.com/26978344)

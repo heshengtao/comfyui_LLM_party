@@ -187,6 +187,8 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 2. 微信群：`Choo-Yong`（添加小助手微信后进群）
 
+3. discord:[discord链接](https://discord.gg/gxrQAYy6)
+
 ### 关注我们
 1. 如果想持续关注本项目的最新功能，欢迎关注B站账号：[派对主持BB机](https://space.bilibili.com/26978344)
 2. OpenArt账号持续更新最有用的party工作流：[openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
