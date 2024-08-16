@@ -3,7 +3,6 @@ import os
 import time
 
 import ChatTTS
-import jax
 import numpy as np
 import torch
 
