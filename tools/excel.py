@@ -36,6 +36,7 @@ class load_excel:
                 "path": ("STRING", {"default": "test.xlsx"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "is_reload": ("BOOLEAN", {"default": False}),
+                "load_all": ("BOOLEAN", {"default": False}),
             },
             "optional": {},
         }
@@ -49,9 +50,15 @@ class load_excel:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, path, is_enable=True, is_reload=False):
+    def file(self, path, is_enable=True, is_reload=False,load_all=False):
         if not is_enable:
             return (None,)
+        if load_all:
+            # 返回这个表格，以json字符串格式返回
+            df = pd.read_excel(path, header=0)
+            data_list = df.to_dict(orient='records')
+            data = json.dumps(data_list, ensure_ascii=False, indent=4)
+            return (data,)
         if self.path != path or is_reload == True:
             self.index = 0  # 重置索引为0，因为我们要从第二行开始读取数据
             self.path = path
@@ -64,7 +71,7 @@ class load_excel:
             # 将Series对象转换为字典
             data_dict = data_row.to_dict()
             # 返回JSON格式的数据
-            data = json.dumps(data_dict, ensure_ascii=False)
+            data = json.dumps(data_dict, ensure_ascii=False,indent=4)
             # 增加索引，准备读取下一行
             self.index += 1
             return (data,)
