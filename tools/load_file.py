@@ -223,9 +223,9 @@ class start_workflow:
                 "file_content": ("STRING", {"forceInput": True}),
                 "image_input1": ("IMAGE", {}),
                 "image_input2": ("IMAGE", {}),
-                "file_path": ("STRING", {"default": None}),
-                "img_path1": ("STRING", {"default": None, "image_upload": True}),
-                "img_path2": ("STRING", {"default": None, "image_upload": True}),
+                "file_path": ("STRING", {"default": ""}),
+                "img_path1": ("STRING", {"default": "", "image_upload": True}),
+                "img_path2": ("STRING", {"default": "", "image_upload": True}),
                 "system_prompt": ("STRING", {"default": "你是一个强大的智能助手"}),
                 "user_prompt": ("STRING", {"default": "你好"}),
                 "positive_prompt": ("STRING", {"default": ""}),
@@ -264,11 +264,11 @@ class start_workflow:
     def load_all(
         self,
         file_content="",
-        image_input1=None,
-        image_input2=None,
-        file_path=None,
-        img_path1=None,
-        img_path2=None,
+        image_input1="",
+        image_input2="",
+        file_path="",
+        img_path1="",
+        img_path2="",
         system_prompt="你是一个强大的智能助手",
         user_prompt="你好",
         positive_prompt="",
@@ -380,7 +380,7 @@ class load_img_path:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "img_path": ("STRING", {"default": None, "image_upload": True}),
+                "img_path": ("STRING", {"default": "", "image_upload": True}),
             },
         }
 

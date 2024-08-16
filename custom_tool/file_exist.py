@@ -20,14 +20,14 @@ class FilePathExists:
     FUNCTION = "file_exists"
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def file_exists(self, file_path=None, is_enable=True):
+    def file_exists(self, file_path="", is_enable=True):
         if is_enable == False:
             return (self.exists)
 
         if self.exists == True:
             return (True,)
 
-        if file_path == None:
+        if file_path == None or file_path=="":
             return (False,)
 
         if not isinstance(file_path, (str, bytes, os.PathLike)):

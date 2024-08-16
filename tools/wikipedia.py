@@ -63,7 +63,7 @@ class wikipedia_tool:
                 ),
             },
             "optional": {
-                "embedding_path": ("STRING", {"default": None}),
+                "embedding_path": ("STRING", {"default": ""}),
             },
         }
 

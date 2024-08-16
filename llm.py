@@ -1036,13 +1036,13 @@ class LLM_local_loader:
                 "model_path": (
                     "STRING",
                     {
-                        "default": None,
+                        "default": "",
                     },
                 ),
                 "tokenizer_path": (
                     "STRING",
                     {
-                        "default": None,
+                        "default": "",
                     },
                 ),
                 "device": (
@@ -1345,11 +1345,11 @@ class LLM_local:
         is_locked="disable",
         system_prompt_input="",
         user_prompt_input="",
-        tools=None,
-        file_content=None,
+        tools="",
+        file_content="",
         image=None,
         conversation_rounds=100,
-        historical_record=None,
+        historical_record="",
         is_enable=True,
         extra_parameters=None,
     ):

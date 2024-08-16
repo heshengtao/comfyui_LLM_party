@@ -37,7 +37,7 @@ class extra_parameters:
         stop="",
         presence_penalty=0.0,
         frequency_penalty=0.0,
-        logprobs=None,
+        logprobs=False,
         echo=False,
         best_of=1,
         logit_bias={},

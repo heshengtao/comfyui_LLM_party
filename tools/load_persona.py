@@ -11,7 +11,7 @@ class load_persona:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "persona_name": (txt_filenames, {"default": None}),
+                "persona_name": (txt_filenames, {"default": ""}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             },
             "optional": {
