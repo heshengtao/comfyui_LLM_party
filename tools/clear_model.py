@@ -21,6 +21,7 @@ class clear_model:
             "required": {
                 "any": (any_type, {}),
                 "model": ("CUSTOM", {}),
+                "is_enable": ("BOOLEAN", {"default": True}),
             },
             "optional": {
                 "tokenizer": (
@@ -41,7 +42,9 @@ class clear_model:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def clear(self, any, model, tokenizer=None):
+    def clear(self, any, model,is_enable, tokenizer=None):
+        if not is_enable:
+            return (None,)
         out = any
         print(f"After function call, reference count: {sys.getrefcount(model)}")
 

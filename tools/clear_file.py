@@ -23,6 +23,7 @@ class clear_file:
             "required": {
                 "any": (any_type, {}),
                 "path": ("STRING", {}),
+                "is_enable": ("BOOLEAN", {"default": True}),
             },
         }
 
@@ -35,7 +36,9 @@ class clear_file:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def clear(self, any, path):
+    def clear(self, any, path,is_enable):
+        if not is_enable:
+            return (None,)
         out = any
         # 如果path存在，删除这个文件或文件夹
         if os.path.exists(path):
