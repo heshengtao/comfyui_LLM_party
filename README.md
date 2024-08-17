@@ -71,7 +71,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [doubao](https://www.volcengine.com/docs/82379/1263482)
 
-2. Most of the local models supported by the transformer library AutoModelForCausalLM class have been tested so far:
+2. Most of the local models supported by the transformer library AutoModelForCausalLM class have been tested so far(If the model type on the local model node does not know what to choose, choose llama, which can be adapted with high probability):
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay)(Recommended! Role-playing model)
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(Recommended! Rich prompt model)
 * [meta-llama/llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
