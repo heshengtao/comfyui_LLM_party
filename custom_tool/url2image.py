@@ -54,7 +54,7 @@ class URL2IMG:
         # 构建img_temp目录路径
         img_temp_dir = os.path.join(current_dir, 'img_temp')
         # 如果img_temp目录不存在，则创建
-        os.makedirs(img_temp_dir,is_exist_ok=True)
+        os.makedirs(img_temp_dir, exist_ok=True)
         if file_name == None:
             img_path = os.path.join(img_temp_dir,f'image.{ext}')
         else:
