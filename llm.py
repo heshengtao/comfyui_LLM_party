@@ -999,6 +999,7 @@ def llm_chat(
         model_inputs.input_ids,
         max_new_tokens=max_length,
         temperature=temperature,
+        eos_token_id=tokenizer.eos_token_id,
         **extra_parameters,  # Add the eos_token_id parameter
     )
     generated_ids = [
