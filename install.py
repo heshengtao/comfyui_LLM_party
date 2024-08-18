@@ -263,8 +263,7 @@ def install_portaudio():
             elif sys.platform == "darwin":
                 # macOS
                 # 检查 Homebrew 是否已安装
-                brew_check = subprocess.run(["brew", "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                if brew_check.returncode != 0:
+                if shutil.which("brew") is None:
                     print("Homebrew is not installed. Attempting to install Homebrew...")
                     if not install_homebrew():
                         print("Please install Homebrew manually and try again.")
