@@ -282,10 +282,8 @@ def install_portaudio():
                 # macOS
                 # 检查 Homebrew 是否已安装
                 if shutil.which("brew") is None:
-                    print("Homebrew is not installed. Attempting to install Homebrew...")
-                    if not install_homebrew():
-                        print("Please install Homebrew manually and try again.")
-                        return
+                    print("Homebrew is not installed. ")
+                    return
 
                 # 检查 portaudio 是否已安装
                 result = subprocess.run(["brew", "list", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
