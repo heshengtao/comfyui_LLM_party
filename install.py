@@ -223,10 +223,10 @@ def install_homebrew():
         
         # 尝试访问 GitHub
         if subprocess.call(["curl", "-fsSL", github_url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0:
-            command = f'sudo /bin/bash -c "$(curl -fsSL {github_url})"'
+            command = f'/bin/bash -c "$(curl -fsSL {github_url})"'
         else:
             print("无法访问 GitHub，尝试使用国内镜像源...")
-            command = f'sudo /bin/bash -c "$(curl -fsSL {gitee_url})"'
+            command = f'/bin/bash -c "$(curl -fsSL {gitee_url})"'
         
         subprocess.check_call(shlex.split(command))
         print("Homebrew 已成功安装。")
