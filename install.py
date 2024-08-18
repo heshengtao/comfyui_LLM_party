@@ -262,16 +262,17 @@ def install_portaudio():
                         print("libportaudio2 is already installed.")
             elif sys.platform == "darwin":
                 # macOS
+                # 检查 Homebrew 是否已安装
+                brew_check = subprocess.run(["brew", "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                if brew_check.returncode != 0:
+                    print("Homebrew is not installed. Attempting to install Homebrew...")
+                    if not install_homebrew():
+                        print("Please install Homebrew manually and try again.")
+                        return
+
                 # 检查 portaudio 是否已安装
                 result = subprocess.run(["brew", "list", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 if result.returncode != 0:
-                    # portaudio 未安装，检查 Homebrew 是否已安装
-                    brew_check = subprocess.run(["brew", "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                    if brew_check.returncode != 0:
-                        print("Homebrew is not installed. Attempting to install Homebrew...")
-                        if not install_homebrew():
-                            print("Please install Homebrew manually and try again.")
-                            return
                     # 安装 portaudio
                     subprocess.check_call(["brew", "install", "portaudio"])
                     print("portaudio has been installed.")
