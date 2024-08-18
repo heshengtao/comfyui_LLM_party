@@ -21,32 +21,22 @@ def get_python_version():
     else:
         return None
 
-def extract_version(tag_name):
-    pattern = r'v(\d+\.\d+\.\d+)-'
-    match = re.search(pattern, tag_name)
-    if match:
-        return match.group(1)
-    return None
+
 def latest_lamacpp(system_info):
     try:
         response = get("https://api.github.com/repos/abetlen/llama-cpp-python/releases")
         releases = response.json()
         for release in releases:
             tag_name = release["tag_name"].lower()
-
             if system_info.get("gpu", False):
                 if "cu" in tag_name:
-                    version = extract_version(release["tag_name"])
-                    if version:
-                        return version
+                    return release["tag_name"].replace("v", "")
             elif system_info.get("metal", False):
                 if "metal" in tag_name:
-                    version = extract_version(release["tag_name"])
-                    if version:
-                        return version
-                else:
-                    if "cu" not in tag_name and "metal" not in tag_name:
-                        return release["tag_name"].replace("v", "")
+                    return release["tag_name"].replace("v", "")
+            else:
+                if "cu" not in tag_name and "metal" not in tag_name:
+                    return release["tag_name"].replace("v", "")
         return "0.2.20"
     except Exception:
         return "0.2.20"
@@ -69,7 +59,12 @@ def package_is_installed(package_name):
         return True
     except pkg_resources.DistributionNotFound:
         return False
-
+def extract_version(tag_name):
+    pattern = r'v(\d+\.\d+\.\d+)-'
+    match = re.search(pattern, tag_name)
+    if match:
+        return match.group(1)
+    return None
 
 def install_llama(system_info):
     imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
@@ -84,7 +79,8 @@ def install_llama(system_info):
             cuda_version = system_info["cuda_version"]
             custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
         elif system_info.get("metal", False):
-            custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
+            tag=extract_version(lcpp_version)
+            custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{tag}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
         else:
             custom_command = f"{base_url}{lcpp_version}/llama_cpp_python-{lcpp_version}-cp{python_version}-cp{python_version}-{system_info['platform_tag']}.whl"
         install_llama_package("llama-cpp-python", custom_command=custom_command)
@@ -224,14 +220,12 @@ def install_homebrew():
         
         # 尝试访问 GitHub
         if subprocess.call(["curl", "-fsSL", github_url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0:
-            command = f'/bin/bash -c "$(curl -fsSL {github_url})"'
+            command = f'sudo /bin/bash -c "$(curl -fsSL {github_url})"'
         else:
             print("无法访问 GitHub，尝试使用国内镜像源...")
-            command = f'/bin/bash -c "$(curl -fsSL {gitee_url})"'
+            command = f'sudo /bin/bash -c "$(curl -fsSL {gitee_url})"'
         
-        # 设置环境变量以在用户目录中安装 Homebrew
-        env = {"HOMEBREW_PREFIX": "/Users/$(whoami)/.homebrew"}
-        subprocess.check_call(shlex.split(command), env=env)
+        subprocess.check_call(shlex.split(command))
         print("Homebrew 已成功安装。")
     except subprocess.CalledProcessError as e:
         print(f"安装 Homebrew 失败: {e}")
