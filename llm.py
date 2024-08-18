@@ -1133,6 +1133,8 @@ class LLM_local_loader:
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).cuda()
                     elif dtype == "float16":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().cuda()
+                    elif dtype == "bfloat16":      
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True,torch_dtype=torch.bfloat16).cuda()
                     elif dtype == "int8":
                         self.model = (
                             AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().cuda()
@@ -1182,6 +1184,10 @@ class LLM_local_loader:
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="cuda"
                         ).half()
+                    elif dtype == "bfloat16":
+                        self.model = AutoModelForCausalLM.from_pretrained(
+                            model_path, trust_remote_code=True, device_map="cuda",torch_dtype=torch.bfloat16
+                        )
                     elif dtype == "int8":
                         quantization_config = BitsAndBytesConfig(
                             load_in_8bit=True,
@@ -1205,18 +1211,11 @@ class LLM_local_loader:
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="cpu"
                         )
-                    elif dtype == "float16":
+                    elif dtype in ["float16", "bfloat16", "int8", "int4"]:
+                        print(f"{dtype} is not supported on CPU. Using float32 instead.")
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="cpu"
-                        ).half()
-                    elif dtype == "int8":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cpu"
-                        ).half()
-                    elif dtype == "int4":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cpu"
-                        ).half()
+                        )
                 elif device == "mps":
                     if dtype == "float32":
                         self.model = AutoModelForCausalLM.from_pretrained(
@@ -1226,11 +1225,8 @@ class LLM_local_loader:
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="mps"
                         ).half()
-                    elif dtype == "int8":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="mps"
-                        ).half()
-                    elif dtype == "int4":
+                    elif dtype in ["bfloat16", "int8", "int4"]:
+                        print(f"{dtype} is not supported on MPS. Using float32 instead.")
                         self.model = AutoModelForCausalLM.from_pretrained(
                             model_path, trust_remote_code=True, device_map="mps"
                         ).half()
