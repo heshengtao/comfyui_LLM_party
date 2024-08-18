@@ -28,12 +28,24 @@ def latest_lamacpp(system_info):
         releases = response.json()
         for release in releases:
             tag_name = release["tag_name"].lower()
-            if system_info.get("gpu", False):
-                if "cu" in tag_name:
-                    return release["tag_name"].replace("v", "")
-            elif system_info.get("metal", False):
-                if "metal" in tag_name:
-                    return release["tag_name"].replace("v", "")
+
+        def extract_version(tag_name):
+            pattern = r'v(\d+\.\d+\.\d+)-'
+            match = re.search(pattern, tag_name)
+            if match:
+                return match.group(1)
+            return None
+
+        if system_info.get("gpu", False):
+            if "cu" in tag_name:
+                version = extract_version(release["tag_name"])
+                if version:
+                    return version
+        elif system_info.get("metal", False):
+            if "metal" in tag_name:
+                version = extract_version(release["tag_name"])
+                if version:
+                    return version
             else:
                 if "cu" not in tag_name and "metal" not in tag_name:
                     return release["tag_name"].replace("v", "")
@@ -208,8 +220,17 @@ def init_temp():
 import shlex
 def install_homebrew():
     try:
-        # 安装 Homebrew
-        command = '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+        # 检查是否能访问 GitHub
+        github_url = "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+        gitee_url = "https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh"
+        
+        # 尝试访问 GitHub
+        if subprocess.call(["curl", "-fsSL", github_url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0:
+            command = f'sudo /bin/bash -c "$(curl -fsSL {github_url})"'
+        else:
+            print("无法访问 GitHub，尝试使用国内镜像源...")
+            command = f'sudo /bin/bash -c "$(curl -fsSL {gitee_url})"'
+        
         subprocess.check_call(shlex.split(command))
         print("Homebrew 已成功安装。")
     except subprocess.CalledProcessError as e:
