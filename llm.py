@@ -1055,7 +1055,7 @@ class LLM_local_loader:
                     },
                 ),
                 "dtype": (
-                    ["float32", "float16", "int8", "int4"],
+                    ["float32", "float16","bfloat16", "int8", "int4"],
                     {
                         "default": "float32",
                     },
@@ -1125,50 +1125,36 @@ class LLM_local_loader:
             self.device = device
             self.dtype = dtype
         if model_type == "GLM3":
-            if self.tokenizer == "":
+            if not self.tokenizer:
                 self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
-            if self.model == "":
+            if not self.model:
                 if device == "cuda":
                     if dtype == "float32":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).cuda()
                     elif dtype == "float16":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().cuda()
-                    elif dtype == "bfloat16":      
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True,torch_dtype=torch.bfloat16).cuda()
-                    elif dtype == "int8":
-                        self.model = (
-                            AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().cuda()
-                        )
-                    elif dtype == "int4":
-                        self.model = (
-                            AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().cuda()
-                        )
+                    elif dtype == "bfloat16":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16).cuda()
+                    elif dtype in ["int8", "int4"]:
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(int(dtype[-1])).half().cuda()
                 elif device == "cpu":
                     if dtype == "float32":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).float()
                     elif dtype == "float16":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().float()
-                    elif dtype == "int8":
-                        self.model = (
-                            AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().float()
-                        )
-                    elif dtype == "int4":
-                        self.model = (
-                            AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().float()
-                        )
+                    elif dtype == "bfloat16":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16).half().float()
+                    elif dtype in ["int8", "int4"]:
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(int(dtype[-1])).half().float()
                 elif device == "mps":
                     if dtype == "float32":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).to("mps")
                     elif dtype == "float16":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().to("mps")
-                    elif dtype == "int8":
-                        self.model = (
-                            AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(8).half().to("mps")
-                        )
-                    elif dtype == "int4":
-                        self.model = (
-                            AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(4).half().to("mps")
-                        )
+                    elif dtype == "bfloat16":
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16).half().to("mps")
+                    elif dtype in ["int8", "int4"]:
+                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(int(dtype[-1])).half().to("mps")
                 self.model = self.model.eval()
 
         elif model_type in ["llama", "Qwen"]:
