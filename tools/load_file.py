@@ -288,12 +288,10 @@ class start_workflow:
                 file_out = read_one(path)
         img_out = []
         if image_input1 is not None:
-            for image in image_input1:
-                img_out.append(image)
+            img_out=image_input1
         img_out2 = []
         if image_input2 is not None:
-            for image in image_input2:
-                img_out2.append(image)
+            img_out2=image_input2
         if img_path1 is not None and img_path1 != "":
             # 检查img_path是否是一个目录
             if os.path.isdir(img_path1):
