@@ -60,10 +60,12 @@ def package_is_installed(package_name):
     except pkg_resources.DistributionNotFound:
         return False
 def extract_version(tag_name):
-    pattern = r'v(\d+\.\d+\.\d+)-'
+    pattern = r'(\d+\.\d+\.\d+)-'
     match = re.search(pattern, tag_name)
     if match:
         return match.group(1)
+    else:
+        print(f"No match found for: {tag_name}")
     return None
 
 def install_llama(system_info):
