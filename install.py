@@ -21,7 +21,12 @@ def get_python_version():
     else:
         return None
 
-
+def extract_version(tag_name):
+    pattern = r'v(\d+\.\d+\.\d+)-'
+    match = re.search(pattern, tag_name)
+    if match:
+        return match.group(1)
+    return None
 def latest_lamacpp(system_info):
     try:
         response = get("https://api.github.com/repos/abetlen/llama-cpp-python/releases")
@@ -29,26 +34,19 @@ def latest_lamacpp(system_info):
         for release in releases:
             tag_name = release["tag_name"].lower()
 
-        def extract_version(tag_name):
-            pattern = r'v(\d+\.\d+\.\d+)-'
-            match = re.search(pattern, tag_name)
-            if match:
-                return match.group(1)
-            return None
-
-        if system_info.get("gpu", False):
-            if "cu" in tag_name:
-                version = extract_version(release["tag_name"])
-                if version:
-                    return version
-        elif system_info.get("metal", False):
-            if "metal" in tag_name:
-                version = extract_version(release["tag_name"])
-                if version:
-                    return version
-            else:
-                if "cu" not in tag_name and "metal" not in tag_name:
-                    return release["tag_name"].replace("v", "")
+            if system_info.get("gpu", False):
+                if "cu" in tag_name:
+                    version = extract_version(release["tag_name"])
+                    if version:
+                        return version
+            elif system_info.get("metal", False):
+                if "metal" in tag_name:
+                    version = extract_version(release["tag_name"])
+                    if version:
+                        return version
+                else:
+                    if "cu" not in tag_name and "metal" not in tag_name:
+                        return release["tag_name"].replace("v", "")
         return "0.2.20"
     except Exception:
         return "0.2.20"
