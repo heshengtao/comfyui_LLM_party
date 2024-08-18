@@ -205,7 +205,20 @@ def init_temp():
     # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
     current_dir_path = os.path.dirname(os.path.abspath(__file__))
     os.makedirs(os.path.join(current_dir_path, "temp"), exist_ok=True)
-
+import shlex
+def install_homebrew():
+    try:
+        # 安装 Homebrew
+        command = '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+        subprocess.check_call(shlex.split(command))
+        print("Homebrew 已成功安装。")
+    except subprocess.CalledProcessError as e:
+        print(f"安装 Homebrew 失败: {e}")
+        return False
+    except Exception as e:
+        print(f"发生了意外错误: {e}")
+        return False
+    return True
 
 def install_portaudio():
     try:
@@ -249,9 +262,19 @@ def install_portaudio():
                         print("libportaudio2 is already installed.")
             elif sys.platform == "darwin":
                 # macOS
+                # 检查 portaudio 是否已安装
                 result = subprocess.run(["brew", "list", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 if result.returncode != 0:
+                    # portaudio 未安装，检查 Homebrew 是否已安装
+                    brew_check = subprocess.run(["brew", "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    if brew_check.returncode != 0:
+                        print("Homebrew is not installed. Attempting to install Homebrew...")
+                        if not install_homebrew():
+                            print("Please install Homebrew manually and try again.")
+                            return
+                    # 安装 portaudio
                     subprocess.check_call(["brew", "install", "portaudio"])
+                    print("portaudio has been installed.")
                 else:
                     print("portaudio is already installed.")
         elif os.name == "nt":
