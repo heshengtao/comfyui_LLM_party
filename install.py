@@ -224,12 +224,14 @@ def install_homebrew():
         
         # 尝试访问 GitHub
         if subprocess.call(["curl", "-fsSL", github_url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0:
-            command = f'sudo /bin/bash -c "$(curl -fsSL {github_url})"'
+            command = f'/bin/bash -c "$(curl -fsSL {github_url})"'
         else:
             print("无法访问 GitHub，尝试使用国内镜像源...")
-            command = f'sudo /bin/bash -c "$(curl -fsSL {gitee_url})"'
+            command = f'/bin/bash -c "$(curl -fsSL {gitee_url})"'
         
-        subprocess.check_call(shlex.split(command))
+        # 设置环境变量以在用户目录中安装 Homebrew
+        env = {"HOMEBREW_PREFIX": "/Users/$(whoami)/.homebrew"}
+        subprocess.check_call(shlex.split(command), env=env)
         print("Homebrew 已成功安装。")
     except subprocess.CalledProcessError as e:
         print(f"安装 Homebrew 失败: {e}")
