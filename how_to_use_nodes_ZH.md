@@ -22,7 +22,7 @@
 ### 本地LLM节点及其加载节点
 1. model_path和tokenizer_path如果填写了，就由本地路径加载，否则根据model_name从config.ini上加载，如果config.ini也没有配置，则从HF上直接加载。
 2. 目前支持GLM/Llama/Qwen，不过只有GLM的工具调用是完美适配的，其他两个需要大参数版本才能正常工具调用
-3. model_path和tokenizer_path填入模型的项目文件夹即可，适配所以可以被transformer兼容的型号。
+3. model_path和tokenizer_path填入模型的项目文件夹即可，适配所有可以被transformer兼容的型号。
 4. 其余参数与APILLM节点一致
 
 ### LVM模型加载器

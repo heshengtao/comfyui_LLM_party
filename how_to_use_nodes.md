@@ -22,7 +22,7 @@
 ### Local LLM Node and Its Loading Node
 1. If `model_path` and `tokenizer_path` are filled in, they will be loaded from the local path. Otherwise, they will be loaded from `model_name` in `config.ini`. If `config.ini` is not configured, they will be loaded directly from HF.
 2. Currently supports GLM/Llama/Qwen, but only GLM's tool calls are perfectly adapted. The other two require large parameter versions to call tools normally.
-3. Fill in the project folder of the model for `model_path` and `tokenizer_path`, compatible with all models that can be transformed by transformers.
+3. `model_path` and `tokenizer_path` can be filled in the project folder of the model, and all models that can be compatible with the transformer can be adapted.
 4. Other parameters are consistent with the APILLM node.
 
 ### LVM Model Loader
