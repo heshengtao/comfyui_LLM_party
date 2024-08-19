@@ -293,6 +293,7 @@ class start_workflow:
         if image_input2 is not None:
             img_out2=image_input2
         if img_path1 is not None and img_path1 != "":
+            img_out = []
             # 检查img_path是否是一个目录
             if os.path.isdir(img_path1):
                 # 遍历目录中的所有文件
@@ -325,6 +326,7 @@ class start_workflow:
                 img_out = img_out[0]
 
         if img_path2 is not None and img_path2 != "":
+            img_out2 = []
             # 检查img_path是否是一个目录
             if os.path.isdir(img_path2):
                 # 遍历目录中的所有文件
