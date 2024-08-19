@@ -63,7 +63,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 5. [AI girlfriend, and is your shape | comfyui on the implementation of graphRAG, linkage neoa4j | comfyui workflow access streamlit front-end](https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 
 ## Model support
-1. Support all API calls in openai format, base_url selection reference [config.ini.example](config.ini.example), which has been tested so far:
+1. Support all API calls in openai format(Combined with [oneapi](https://github.com/songquanpeng/one-api) can call almost all LLM APIs, also supports all transit APIs), base_url selection reference [config.ini.example](config.ini.example), which has been tested so far:
 * [ollama](https://github.com/ollama/ollama)(Recommended! If you are calling locally, it is highly recommended to use ollama to host your local model!)
 * [Tongyi Qianwen /qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [zhipu qingyan/glm](https://open.bigmodel.cn/dev/api#http_auth)
