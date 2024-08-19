@@ -16,7 +16,6 @@ class extra_parameters:
                 "logprobs": ("BOOLEAN", {"default": False}),
                 "echo": ("BOOLEAN", {"default": False}),
                 "best_of": ("INT", {"default": 1}),
-                "logit_bias": ("DICT", {"default": {}}),
                 "user": ("STRING", {"default": ""}),
                 "top_p": ("FLOAT", {"default": 1.0}),
                 "top_k": ("INT", {"default": 50}),
@@ -40,7 +39,6 @@ class extra_parameters:
         logprobs=False,
         echo=False,
         best_of=1,
-        logit_bias={},
         user="",
         json_out=False,
         top_k=50,
@@ -64,8 +62,6 @@ class extra_parameters:
             json_data["echo"] = echo
         if best_of != 1:
             json_data["best_of"] = best_of
-        if logit_bias:
-            json_data["logit_bias"] = logit_bias
         if user:
             json_data["user"] = user
         if json_out:
