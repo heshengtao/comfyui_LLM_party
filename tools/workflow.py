@@ -1,3 +1,5 @@
+import datetime
+import hashlib
 import io
 import json
 import os
@@ -264,7 +266,11 @@ class workflow_transfer:
             img_out,
             output_text,
         )
-
+    @classmethod
+    def IS_CHANGED(s):
+        # 生成当前时间的哈希值
+        hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+        return hash_value
 
 class workflow_tool:
     @classmethod
