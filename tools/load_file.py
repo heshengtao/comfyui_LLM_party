@@ -319,10 +319,10 @@ class start_workflow:
                     image = torch.from_numpy(image).unsqueeze(0)
                     img_out.append(image)
 
-        if len(img_out) > 1:
-            img_out = torch.cat(img_out, dim=0)
-        elif img_out:
-            img_out = img_out[0]
+            if len(img_out) > 1:
+                img_out = torch.cat(img_out, dim=0)
+            elif img_out:
+                img_out = img_out[0]
 
         if img_path2 is not None and img_path2 != "":
             # 检查img_path是否是一个目录
@@ -351,10 +351,10 @@ class start_workflow:
                     image = torch.from_numpy(image).unsqueeze(0)
                     img_out2.append(image)
 
-        if len(img_out2) > 1:
-            img_out2 = torch.cat(img_out2, dim=0)
-        elif img_out2:
-            img_out2 = img_out2[0]
+            if len(img_out2) > 1:
+                img_out2 = torch.cat(img_out2, dim=0)
+            elif img_out2:
+                img_out2 = img_out2[0]
 
         system_out = system_prompt
         user_out = user_prompt
