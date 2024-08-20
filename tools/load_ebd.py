@@ -102,7 +102,7 @@ class load_ebd:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "path": ("STRING", {"default": None}),
+                "path": ("STRING", {"default": ""}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "device": (
                     ["auto", "cuda", "mps", "cpu"],
