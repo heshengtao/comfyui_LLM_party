@@ -6,7 +6,8 @@
   <a href="workflow_tutorial/">工作流教程</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">度盘链接</a> ·
   <a href="img/Q群.jpg">QQ群</a> ·
-  <a href="https://discord.gg/gxrQAYy6">discord</a>
+  <a href="https://discord.gg/gxrQAYy6">discord</a> ·
+  <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/OVigwLEGdilS84kjcFXcRP9In5g">关于我们</a>
 </div>
 
 ####
