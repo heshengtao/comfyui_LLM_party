@@ -1,3 +1,19 @@
+[project]
+name = "comfyui_llm_party"
+description = ""
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["beautifulsoup4", "docx2txt", "langchain", "langchain_community", "langchain_text_splitters", "openai", "openpyxl", "pandas", "pytz", "Requests", "xlrd", "faiss-cpu", "websocket-client", "streamlit", "virtualenv", "tiktoken", "transformers", "transformers_stream_generator", "optimum", "pdfplumber", "wikipedia", "arxiv", "bitsandbytes", "accelerate", "fastapi", "py-cpuinfo", "diskcache", "requests_toolbelt", "tabulate", "chardet", "tenacity", "cpm_kernels", "pydub", "keyboard", "sounddevice", "scipy", "gradio_client", "neo4j", "ChatTTS", "soundfile", "jax", "ffmpeg; sys_platform == 'linux'", "langchain_openai", "sentence_transformers", "uvicorn"]
+
+[project.urls]
+Repository = "https://github.com/heshengtao/comfyui_LLM_party"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = "heshengtao"
+DisplayName = "comfyui_LLM_party"
+Icon = ""
+
 [tool.black]
 line-length = 120
 preview = true
