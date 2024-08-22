@@ -1,6 +1,6 @@
 [project]
 name = "comfyui_llm_party"
-description = ""
+description = "A set of block-based LLM agent node libraries designed for ComfyUI.This project aims to develop a complete set of nodes for LLM workflow construction based on comfyui. It allows users to quickly and conveniently build their own LLM workflows and easily integrate them into their existing SD workflows."
 version = "1.0.0"
 license = {file = "LICENSE"}
 dependencies = ["beautifulsoup4", "docx2txt", "langchain", "langchain_community", "langchain_text_splitters", "openai", "openpyxl", "pandas", "pytz", "Requests", "xlrd", "faiss-cpu", "websocket-client", "streamlit", "virtualenv", "tiktoken", "transformers", "transformers_stream_generator", "optimum", "pdfplumber", "wikipedia", "arxiv", "bitsandbytes", "accelerate", "fastapi", "py-cpuinfo", "diskcache", "requests_toolbelt", "tabulate", "chardet", "tenacity", "cpm_kernels", "pydub", "keyboard", "sounddevice", "scipy", "gradio_client", "neo4j", "ChatTTS", "soundfile", "jax", "ffmpeg; sys_platform == 'linux'", "langchain_openai", "sentence_transformers", "uvicorn"]
