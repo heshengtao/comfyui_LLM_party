@@ -1,6 +1,7 @@
 import gc
 import sys
 
+import requests
 import torch
 
 
@@ -30,6 +31,7 @@ class clear_model:
                         "default": None,
                     },
                 ),
+                "is_ollama": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -42,10 +44,19 @@ class clear_model:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def clear(self, any, model,is_enable, tokenizer=None):
+    def clear(self, any, model,is_enable, tokenizer=None,is_ollama=False):
         if not is_enable:
             return (None,)
         out = any
+        if is_ollama:
+            url = "http://127.0.0.1:11434/api/generate"
+            payload = {
+                "model": model.model_name,
+                "keep_alive": 0
+            }
+            response = requests.post(url, json=payload)
+            print(response.json())
+            return (out,)
         print(f"After function call, reference count: {sys.getrefcount(model)}")
 
         # 查找所有引用
