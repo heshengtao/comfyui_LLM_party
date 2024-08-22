@@ -216,29 +216,21 @@ def init_temp():
     # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
     current_dir_path = os.path.dirname(os.path.abspath(__file__))
     os.makedirs(os.path.join(current_dir_path, "temp"), exist_ok=True)
-import shlex
+
 def install_homebrew():
     try:
-        # 检查是否能访问 GitHub
-        github_url = "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
-        gitee_url = "https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh"
-        
-        # 尝试访问 GitHub
-        if subprocess.call(["curl", "-fsSL", github_url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0:
-            command = f'/bin/bash -c "$(curl -fsSL {github_url})"'
+        result = subprocess.run(["brew", "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if result.returncode != 0:
+            print("Homebrew is not installed. Please install Homebrew first.")
+            print("You can install Homebrew by running the following command:")
+            print('/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"')
+            return False
         else:
-            print("无法访问 GitHub，尝试使用国内镜像源...")
-            command = f'/bin/bash -c "$(curl -fsSL {gitee_url})"'
-        
-        subprocess.check_call(shlex.split(command))
-        print("Homebrew 已成功安装。")
+            print("Homebrew is already installed.")
+            return True
     except subprocess.CalledProcessError as e:
-        print(f"安装 Homebrew 失败: {e}")
+        print(f"Error checking Homebrew installation: {e}")
         return False
-    except Exception as e:
-        print(f"发生了意外错误: {e}")
-        return False
-    return True
 
 def install_portaudio():
     try:
@@ -281,7 +273,13 @@ def install_portaudio():
                     else:
                         print("libportaudio2 is already installed.")
             elif sys.platform == "darwin":
-                pass
+                if install_homebrew():
+                    result = subprocess.run(["brew", "list", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    if result.returncode != 0:
+                        os.system("brew update")
+                        os.system("brew install portaudio")
+                    else:
+                        print("portaudio is already installed.")
         elif os.name == "nt":
             pass
         else:
