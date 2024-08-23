@@ -35,9 +35,9 @@ class classify_function:
             return (None,)
         # text转成字典
         text=json.loads(text)
-        response1=text['1']
-        response2=text['2']
-        response3=text['3']
+        response1 = text.get('1')
+        response2 = text.get('2')
+        response3 = text.get('3')
         return (
             response1,
             response2,
@@ -91,16 +91,16 @@ class classify_function_plus:
         if is_enable == False:
             return (None,)
         text=json.loads(text)
-        response1=text['1']
-        response2=text['2']
-        response3=text['3']
-        response4=text['4']
-        response5=text['5']
-        response6=text['6']
-        response7=text['7']
-        response8=text['8']
-        response9=text['9']
-        response10=text['10']
+        response1 = text.get('1')
+        response2 = text.get('2')
+        response3 = text.get('3')
+        response4 = text.get('4')
+        response5 = text.get('5')
+        response6 = text.get('6')
+        response7 = text.get('7')
+        response8 = text.get('8')
+        response9 = text.get('9')
+        response10 = text.get('10')
         return (
             response1,
             response2,
