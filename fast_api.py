@@ -19,7 +19,7 @@ import torch
 import websocket  # NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
 from fastapi import Depends, FastAPI, HTTPException, Request
 from PIL import Image, ImageOps
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import get_lexer_by_name
 
@@ -132,7 +132,7 @@ class MessageContent(BaseModel):
     image_url: Optional[Union[str, dict]] = None
 
     # 自定义验证器来处理image_url字段
-    @validator("image_url", pre=True)
+    @field_validator("image_url", pre=True)
     def parse_image_url(cls, value):
         if isinstance(value, dict) and "url" in value:
             return value["url"]
@@ -157,6 +157,40 @@ async def verify_api_key(request: Request):
     # 从请求头中获取 API 密钥
     api_key = request.headers.get("Authorization").split("Bearer ")[-1]
     # 这里应该有验证api_key的逻辑
+
+# 获取模型名称的端点
+@app.get("/v1/models")
+async def get_models():
+    try:
+        # 设置当前目录路径
+        current_dir_path = os.path.dirname(os.path.abspath(__file__))
+        workflow_api_path = os.path.join(current_dir_path, "workflow_api")
+
+        # 获取所有 JSON 文件的名称（不含 .json 扩展名）
+        model_names = [
+            os.path.splitext(file)[0]
+            for file in os.listdir(workflow_api_path)
+            if file.endswith(".json")
+        ]
+
+        # 构造返回的结构体
+        response = {
+            "data": [
+                {
+                    "id": model_name,
+                    "object": "model",
+                    "created": int(time.time()),  # 使用当前时间戳
+                    "owned_by": "comfyui-LLM-party",
+                    "permission": []
+                }
+                for model_name in model_names
+            ],
+            "object": "list"
+        }
+
+        return response
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # 创建路由处理函数
