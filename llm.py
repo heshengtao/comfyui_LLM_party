@@ -140,7 +140,7 @@ from .tools.whisper import listen_audio, openai_whisper
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import work_flow, workflow_tool, workflow_transfer
 from .tools.flux_persona import flux_persona
-
+from .tools.workflow_V2 import workflow_transfer_v2
 _TOOL_HOOKS = [
     "get_time",
     "get_weather",
@@ -1902,6 +1902,7 @@ NODE_CLASS_MAPPINGS = {
     "duckduckgo_loader":duckduckgo_loader,
     "flux_persona":flux_persona,
     "clear_file":clear_file,
+    "workflow_transfer_v2":workflow_transfer_v2,
 }
 
 
@@ -2009,6 +2010,7 @@ if lang == "zh_CN":
         "duckduckgo_loader": "DuckDuckGo加载器",
         "flux_persona":"flux提示词生成器面具",
         "clear_file":"清理文件",
+        "workflow_transfer_v2":"工作流中转器V2",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2110,6 +2112,7 @@ else:
         "duckduckgo_loader":"DuckDuckGo Loader",
         "flux_persona":"flux prompt word generator",
         "clear_file":"clear file",
+        "workflow_transfer_v2": "Workflow Transfer V2",
     }
 
 
