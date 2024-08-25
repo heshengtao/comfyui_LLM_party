@@ -19,7 +19,7 @@ import torch
 import websocket  # NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
 from fastapi import Depends, FastAPI, HTTPException, Request
 from PIL import Image, ImageOps
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, model_validator
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import get_lexer_by_name
 
@@ -132,7 +132,7 @@ class MessageContent(BaseModel):
     image_url: Optional[Union[str, dict]] = None
 
     # 自定义验证器来处理image_url字段
-    @field_validator("image_url", pre=True)
+    @model_validator(mode="before")
     def parse_image_url(cls, value):
         if isinstance(value, dict) and "url" in value:
             return value["url"]
