@@ -1,6 +1,5 @@
 import base64
 import configparser
-import io
 import json
 import os
 import time
@@ -8,20 +7,16 @@ import urllib.parse
 import urllib.request
 import uuid
 from io import BytesIO
-from typing import Any, List, Optional, Union
+from typing import Any, List
 
 import httpx
 import numpy as np
-import openai
-import pandas as pd
 import requests
 import torch
 import websocket  # NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
 from fastapi import Depends, FastAPI, HTTPException, Request
 from PIL import Image, ImageOps
-from pydantic import BaseModel, model_validator
-from pygments.formatters import HtmlFormatter
-from pygments.lexers import get_lexer_by_name
+from pydantic import BaseModel
 
 current_dir_path = os.path.dirname(os.path.realpath(__file__))
 server_address = "127.0.0.1:8188"
@@ -123,20 +118,6 @@ def api(
 
 
 app = FastAPI()
-
-
-# 定义请求中的消息内容
-class MessageContent(BaseModel):
-    type: str
-    text: Optional[str] = None
-    image_url: Optional[Union[str, dict]] = None
-
-    # 自定义验证器来处理image_url字段
-    @model_validator(mode="before")
-    def parse_image_url(cls, value):
-        if isinstance(value, dict) and "url" in value:
-            return value["url"]
-        return value
 
 
 # 定义请求中的消息
