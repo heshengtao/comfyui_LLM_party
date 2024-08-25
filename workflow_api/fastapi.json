@@ -1,16 +1,4 @@
 {
-  "11": {
-    "inputs": {
-      "text": [
-        "21",
-        0
-      ]
-    },
-    "class_type": "show_text_party",
-    "_meta": {
-      "title": "显示文本(show_text)"
-    }
-  },
   "21": {
     "inputs": {
       "system_prompt": "你一个强大的人工智能助手。",
@@ -18,12 +6,15 @@
         "24",
         3
       ],
-      "model_type": "GLM",
+      "model_type": "GLM3",
       "temperature": 0.7000000000000001,
       "max_length": 2048,
       "is_memory": "enable",
       "is_locked": "disable",
       "main_brain": "enable",
+      "conversation_rounds": 100,
+      "historical_record": "",
+      "is_enable": true,
       "model": [
         "22",
         0
@@ -40,11 +31,13 @@
   },
   "22": {
     "inputs": {
-      "model_type": "GLM",
+      "model_name": "",
+      "model_type": "GLM3",
       "model_path": "D:\\AI\\mychat\\model\\chatglm3-6b\\",
       "tokenizer_path": "D:\\AI\\mychat\\model\\chatglm3-6b\\",
       "device": "auto",
-      "dtype": "float32"
+      "dtype": "float32",
+      "is_locked": true
     },
     "class_type": "LLM_local_loader",
     "_meta": {
@@ -54,7 +47,8 @@
   "24": {
     "inputs": {
       "file_path": "",
-      "img_path": "",
+      "img_path1": "",
+      "img_path2": "",
       "system_prompt": "你是一个强大的智能助手",
       "user_prompt": "你好",
       "positive_prompt": "",
@@ -70,7 +64,7 @@
     "inputs": {
       "filename_prefix": "ComfyUI",
       "text": [
-        "11",
+        "21",
         0
       ]
     },
