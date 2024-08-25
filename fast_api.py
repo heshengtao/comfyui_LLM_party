@@ -352,7 +352,7 @@ if __name__ == "__main__":
     import uvicorn
     parser = argparse.ArgumentParser(description="Run the server with specified host and port.")
     parser.add_argument("--host", type=str, default="127.0.0.1", help="Host address to bind the server.")
-    parser.add_argument("--port", type=int, default=8188, help="Port number to bind the server.")
+    parser.add_argument("--port", type=int, default=8187, help="Port number to bind the server.")
     
     args = parser.parse_args()
     uvicorn.run(app, host=args.host, port=args.port)
