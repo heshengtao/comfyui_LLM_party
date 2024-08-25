@@ -11,6 +11,7 @@ wechat_url=work_wechat_url_put_here
 dingding_url=dingding_url_put_here
 feishu_url=feishu_url_put_here
 language=#zh_CN or en_US
+fastapi_api_key=
 
 [your_model_name]
 base_url=

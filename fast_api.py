@@ -10,6 +10,7 @@ import uuid
 from io import BytesIO
 from typing import Any, List
 
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 import httpx
 import numpy as np
 import requests
@@ -20,6 +21,10 @@ from PIL import Image, ImageOps
 from pydantic import BaseModel
 
 current_dir_path = os.path.dirname(os.path.realpath(__file__))
+config = configparser.ConfigParser()
+config.read(os.path.join(current_dir_path, "config.ini"))
+# 获取配置文件中的参数
+fastapi_api_key = config.get("API_KEYS", "fastapi_api_key", fallback="")
 server_address = "127.0.0.1:8188"
 client_id = str(uuid.uuid4())
 
@@ -134,11 +139,16 @@ class CompletionRequest(BaseModel):
     max_tokens: int = 150  # 添加了默认值
 
 
-# 中间件或依赖项来验证 API 密钥
-async def verify_api_key(request: Request):
-    # 从请求头中获取 API 密钥
-    api_key = request.headers.get("Authorization").split("Bearer ")[-1]
-    # 这里应该有验证api_key的逻辑
+VALID_API_KEY = fastapi_api_key
+
+# 使用 FastAPI 的 HTTPBearer 进行认证
+security = HTTPBearer()
+
+async def verify_api_key(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    if VALID_API_KEY == "":
+        return  # 如果 fastapi_api_key 为空字符串，就不校验
+    if credentials.credentials != VALID_API_KEY:
+        raise HTTPException(status_code=403, detail="Invalid API Key")
 
 # 获取模型名称的端点
 @app.get("/v1/models")
@@ -174,19 +184,15 @@ async def get_models():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
 # 创建路由处理函数
 @app.post("/v1/chat/completions")
 async def create_completion(request_data: CompletionRequest, dependency=Depends(verify_api_key)):
-    # 这里可以添加您的处理逻辑
-    # 例如，解析文本和图片URL，并生成相应的响应
     try:
         # 处理请求并生成响应
         response = await process_request(request_data)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-    # 返回生成的响应
     return response
 
 
