@@ -179,6 +179,13 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
   <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
 
+## 借物表
+本项目中的一些节点借鉴了以下项目，感谢他们在开源社区中的贡献！
+1. [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
+2. [omost](https://github.com/lllyasviel/Omost)
+3. [chatTTS](https://github.com/2noise/ChatTTS)
+4. [CosyVoice](https://github.com/FunAudioLLM/CosyVoice)
+
 ## 支持：
 
 ### 加入社群

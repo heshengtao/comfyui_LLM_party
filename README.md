@@ -180,6 +180,13 @@ This open-source project and its contents (hereinafter referred to as "Project")
   <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
 
+## loan list 
+Some of the nodes in this project have borrowed from the following projects. Thank you for your contributions to the open-source community!
+1. [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
+2. [omost](https://github.com/lllyasviel/Omost)
+3. [chatTTS](https://github.com/2noise/ChatTTS)
+4. [CosyVoice](https://github.com/FunAudioLLM/CosyVoice)
+
 ## Support:
 
 ### Join the community
