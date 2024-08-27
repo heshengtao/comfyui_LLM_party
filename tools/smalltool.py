@@ -93,3 +93,25 @@ class bool_logic:
             return (A ^ B,)
         elif logic_type == "Xnor":
             return (not (A ^ B),)
+
+
+class str2float:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "text": ("STRING", {}),
+            },
+        }
+
+    RETURN_TYPES = ("FLOAT",)
+    RETURN_NAMES = ("float",)
+
+    FUNCTION = "tts"
+
+    OUTPUT_NODE = True
+
+    CATEGORY = "大模型派对（llm_party）/函数（function）"
+
+    def tts(self, text):
+        return (float(text),)

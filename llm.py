@@ -55,7 +55,7 @@ from .tools.custom_persona import custom_persona
 from .tools.dialog import end_dialog, start_dialog
 from .tools.dingding import Dingding, Dingding_tool, send_dingding
 from .tools.end_work import end_workflow, img2path
-from .tools.excel import image_iterator, load_excel
+from .tools.excel import image_iterator, load_excel,json_iterator
 from .tools.feishu import feishu, feishu_tool, send_feishu
 from .tools.file_combine import file_combine, file_combine_plus
 from .tools.get_time import get_time, time_tool
@@ -129,7 +129,7 @@ from .tools.search_web import (
     search_duckduckgo,
 )
 from .tools.show_text import About_us, show_text_party
-from .tools.smalltool import bool_logic, load_int, none2false
+from .tools.smalltool import bool_logic, load_int, none2false,str2float
 from .tools.story import read_story_json, story_json_tool
 from .tools.text_iterator import text_iterator
 from .tools.tool_combine import tool_combine, tool_combine_plus
@@ -1903,6 +1903,8 @@ NODE_CLASS_MAPPINGS = {
     "flux_persona":flux_persona,
     "clear_file":clear_file,
     "workflow_transfer_v2":workflow_transfer_v2,
+    "str2float":str2float,
+    "json_iterator":json_iterator,
 }
 
 
@@ -2011,6 +2013,8 @@ if lang == "zh_CN":
         "flux_persona":"flux提示词生成器面具",
         "clear_file":"清理文件",
         "workflow_transfer_v2":"工作流中转器V2",
+        "str2float":"字符串转浮点数",
+        "json_iterator":"JSON迭代器",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2113,6 +2117,8 @@ else:
         "flux_persona":"flux prompt word generator",
         "clear_file":"clear file",
         "workflow_transfer_v2": "Workflow Transfer V2",
+        "str2float": "String to Float",
+        "json_iterator": "JSON Iterator",
     }
 
 

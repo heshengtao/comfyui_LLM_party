@@ -168,3 +168,67 @@ class image_iterator:
     def IS_CHANGED(self, s):
         self.record = self.index
         return self.record
+
+
+class json_iterator:
+    def __init__(self):
+        self.index = 0
+        self.record = 0
+        self.json_str = None
+        self.data = None
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "json_str": ("STRING", {"default": '{"key": "value"}'}),
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "is_reload": ("BOOLEAN", {"default": False}),
+                "load_all": ("BOOLEAN", {"default": False}),
+            },
+            "optional": {},
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("file_content",)
+
+    FUNCTION = "file"
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+    def file(self, json_str, is_enable=True, is_reload=False, load_all=False):
+        if not is_enable:
+            return (None,)
+        if self.json_str != json_str or is_reload:
+            self.index = 0  # 重置索引为0
+            self.json_str = json_str
+            self.data = json.loads(self.json_str)
+        
+        if load_all:
+            # 返回整个JSON数据作为字符串
+            return (json.dumps(self.data, ensure_ascii=False, indent=4),)
+        
+        if isinstance(self.data, list):
+            if self.index < len(self.data):
+                data_item = self.data[self.index]
+                self.index += 1
+                return (json.dumps(data_item, ensure_ascii=False, indent=4),)
+            else:
+                return (None,)
+        
+        elif isinstance(self.data, dict):
+            keys = list(self.data.keys())
+            if self.index < len(keys):
+                key = keys[self.index]
+                data_item = self.data[key]
+                self.index += 1
+                return (json.dumps(data_item, ensure_ascii=False, indent=4),)
+            else:
+                return (None,)
+        
+        return (None,)
+
+    @classmethod
+    def IS_CHANGED(self, s):
+        self.record = self.index
+        return self.record
