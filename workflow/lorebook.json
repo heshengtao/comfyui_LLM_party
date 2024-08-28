@@ -1,0 +1,283 @@
+{
+  "last_node_id": 25,
+  "last_link_id": 38,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1385,
+        280
+      ],
+      "size": {
+        "0": 454.6876220703125,
+        "1": 290.2985534667969
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "LLM Party 是一个基于 ComfyUI 的工具集，旨在帮助用户快速构建和集成大语言模型（LLM）工作流。ComfyUI 是一个用户友好的界面，允许用户以可视化的方式创建和管理复杂的机器学习和人工智能项目。\n\nLLM Party 的主要特点包括：\n\n1. **易于使用**：通过可视化界面，用户可以轻松地设计和调整大语言模型的工作流程，而无需深入编程。\n\n2. **灵活性**：支持多种大语言模型，用户可以根据自己的需求选择合适的模型进行集成。\n\n3. **高效性**：提供了一系列预设的组件和工具，帮助用户快速搭建工作流，减少开发时间。\n\n4. **社区支持**：通常具有活跃的用户社区，用户可以共享经验、组件和最佳实践，从而进一步提高工作效率。\n\n总之，LLM Party 是一个旨在简化大语言模型开发和集成过程的工具，适合各种水平的用户，从初学者到经验丰富的开发者都能从中受益。"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 23,
+      "type": "LLM_api_loader",
+      "pos": [
+        462,
+        236
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            36
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 24,
+      "type": "LLM",
+      "pos": [
+        896,
+        276
+      ],
+      "size": {
+        "0": 444.24951171875,
+        "1": 548.9947509765625
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 36,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 38,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ]
+    },
+    {
+      "id": 25,
+      "type": "Lorebook",
+      "pos": [
+        444,
+        451
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "links": [
+            38
+          ],
+          "shape": 3,
+          "label": "user_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Lorebook"
+      },
+      "widgets_values": [
+        "什么是LLM party？",
+        "lorebook:Lorebook（也称为世界信息或Memory Books）是一种工具，用于增强AI对世界细节的理解。\nLLM party:ComfyUI LLM Party 是一个基于 ComfyUI 的工具集，旨在帮助用户快速构建和集成大语言模型（LLM）工作流。"
+      ]
+    }
+  ],
+  "links": [
+    [
+      36,
+      23,
+      0,
+      24,
+      0,
+      "CUSTOM"
+    ],
+    [
+      37,
+      24,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      38,
+      25,
+      0,
+      24,
+      4,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": [
+        -425.3878523950058,
+        -170.14520042527022
+      ]
+    }
+  },
+  "version": 0.4
+}

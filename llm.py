@@ -32,6 +32,7 @@ if torch.cuda.is_available():
 from torchvision.transforms import ToPILImage
 
 from .config import config_key, config_path, current_dir_path, load_api_keys
+from .tools.lorebook import Lorebook
 from .tools.api_tool import (
     api_function,
     api_tool,
@@ -1905,6 +1906,7 @@ NODE_CLASS_MAPPINGS = {
     "workflow_transfer_v2":workflow_transfer_v2,
     "str2float":str2float,
     "json_iterator":json_iterator,
+    "Lorebook":Lorebook,
 }
 
 
@@ -2015,6 +2017,7 @@ if lang == "zh_CN":
         "workflow_transfer_v2":"工作流中转器V2",
         "str2float":"字符串转浮点数",
         "json_iterator":"JSON迭代器",
+        "Lorebook":"Lorebook传说书",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2119,6 +2122,7 @@ else:
         "workflow_transfer_v2": "Workflow Transfer V2",
         "str2float": "String to Float",
         "json_iterator": "JSON Iterator",
+        "Lorebook":"Lore book",
     }
 
 

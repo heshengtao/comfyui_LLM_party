@@ -150,7 +150,7 @@ class substring:
 
         out = out.strip()
         remaining_string = remaining_string.strip()
-        return (out, remaining_string)
+        return (out, remaining_string,)
 
 
 class get_string:
