@@ -25,7 +25,8 @@ class start_dialog:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"start_dialog": ("STRING", {})}}
+        return {"required": {"start_dialog": ("STRING", {})},
+                "is_reload": ("BOOLEAN", {"default": False}),}
 
     RETURN_TYPES = (
         "STRING",
@@ -42,9 +43,8 @@ class start_dialog:
 
     CATEGORY = "大模型派对（llm_party）/工作流（workflow）"
 
-    def dialog(self, start_dialog):
-        if self.start_dialog != start_dialog:
-            self.start_dialog= start_dialog
+    def dialog(self, start_dialog,is_reload):
+        if is_reload:
             self.start = True
         if self.start == False:
             # 读取prompt.txt文件内容
