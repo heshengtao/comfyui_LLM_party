@@ -25,8 +25,11 @@ class start_dialog:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"start_dialog": ("STRING", {})},
-                "is_reload": ("BOOLEAN", {"default": False}),}
+        return {"required": 
+                {"start_dialog": ("STRING", {}),
+                 "is_reload": ("BOOLEAN", {"default": False})
+                 }
+                }
 
     RETURN_TYPES = (
         "STRING",
