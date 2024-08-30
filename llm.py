@@ -13,7 +13,7 @@ import re
 import sys
 import time
 import traceback
-
+import google.generativeai as genai
 import numpy as np
 import openai
 import requests
@@ -340,6 +340,119 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
     except:
         ret = traceback.format_exc()
     return str(ret)
+def convert_to_gemini(openai_history):
+    for entry in openai_history:
+        role = entry["role"]
+        if role == "system":
+            role = "user"
+            content = entry["content"]
+            gemini_history = []
+            gemini_history.append({"role": role, "parts": [{"text": content}]})
+            return gemini_history
+    return openai_history
+
+def convert_tool_to_gemini(openai_tools):
+    gemini_tools = []
+    for tool in openai_tools:
+        gemini_tool = {
+            "name": tool["function"]["name"],
+            "description": tool["function"]["description"],
+            "parameters": {
+                "type": "OBJECT",
+                "properties": {}
+            }
+        }
+        for prop_name, prop_details in tool["function"]["parameters"]["properties"].items():
+            gemini_tool["parameters"]["properties"][prop_name] = {
+                "type": prop_details["type"].upper(),
+                "description": prop_details["description"]
+            }
+        gemini_tool["parameters"]["required"] = tool["function"]["parameters"]["required"]
+        gemini_tools.append(gemini_tool)
+    return gemini_tools
+
+class genChat:
+    def __init__(self, model_name, apikey) -> None:
+        self.model_name = model_name
+        self.apikey = apikey
+
+    def send(
+        self,
+        user_prompt,
+        temperature,
+        max_length,
+        history,
+        tools=None,
+        is_tools_in_sys_prompt="disable",
+        **extra_parameters,
+    ):
+        try:
+            if tools is None:
+                tools = []
+            genai.configure(api_key=self.apikey)
+            # Function to convert OpenAI history to Gemini history
+            history= convert_to_gemini(history)
+            new_message = {"role": "user", "parts": [{"text": user_prompt}]}
+            
+            history.append(new_message)
+            tools = convert_tool_to_gemini(tools)
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model_name}:generateContent?key={self.apikey}"
+            headers = {
+                'Content-Type': 'application/json'
+            }
+            data = {
+                "contents": history,
+                "tools": [{
+                    "functionDeclarations": tools
+                }],
+                "generation_config":{
+                    "temperature": temperature,
+                    "max_output_tokens": max_length,
+                    **extra_parameters
+                }
+            }
+
+            response = requests.post(url, headers=headers, json=data)
+            response=response.json()
+            while 'functionCall' in response['candidates'][0]['content']['parts'][0]:
+                history.append(response['candidates'][0]['content'])
+                name = response['candidates'][0]['content']['parts'][0]['functionCall']['name']
+                args = response['candidates'][0]['content']['parts'][0]['functionCall']['args']
+                print("正在调用" + name + "工具")
+                results = dispatch_tool(name, args)
+                res={
+        "role": "function",
+        "parts": [{
+        "functionResponse": {
+            "name": name,
+            "response": {
+            "name": name,
+            "content": results
+            }
+        }
+        }]
+    }
+                print("调用结果：" + str(results))
+                history.append(res)
+                data = {
+                    "contents": history,
+                    "tools": [{
+                        "functionDeclarations": tools
+                    }],
+                    "generation_config":{
+                        "temperature": temperature,
+                        "max_output_tokens": max_length,
+                        **extra_parameters
+                    }
+                }
+                response = requests.post(url, headers=headers, json=data)
+                response=response.json()
+            text = response['candidates'][0]['content']['parts'][0]['text']
+            res=response['candidates'][0]['content']
+            history.append(res)
+        except Exception as e:
+            return str(e), history
+        return text, history
 
 
 class Chat:
@@ -584,6 +697,50 @@ class LLM_api_loader:
         chat = Chat(model_name, openai.api_key, openai.base_url)
         return (chat,)
 
+
+class genai_api_loader:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "model_name": ("STRING", {"default": "gpt-4o-mini"}),
+            },
+            "optional": {
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": "AI-XXXXX",
+                    },
+                ),
+            },
+        }
+
+    RETURN_TYPES = ("CUSTOM",)
+    RETURN_NAMES = ("model",)
+
+    FUNCTION = "chatbot"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+    def chatbot(self, model_name, api_key=None):
+        api_keys = load_api_keys(config_path)
+        if api_key != "":
+            api_key = api_key
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            api_key = api_keys.get("api_key")
+        elif api_keys.get("openai_api_key") != "":
+            api_key = api_keys.get("openai_api_key")
+        if api_key == "":
+            return ("请输入API_KEY",)
+
+        chat = genChat(model_name, api_key)
+        return (chat,)
 
 class LLM:
     original_IS_CHANGED = None
@@ -938,31 +1095,7 @@ class LLM:
                 history = history_get
                 with open(self.prompt_path, "w", encoding="utf-8") as f:
                     json.dump(history, f, indent=4, ensure_ascii=False)
-                for his in history:
-                    if his["role"] == "user":
-                        # 如果his["content"]是个列表，则只保留"type" : "text"时的"text"属性内容
-                        if isinstance(his["content"], list):
-                            for item in his["content"]:
-                                if item.get("type") == "text" and item.get("text"):
-                                    his["content"] = item["text"]
-                                    break
-                historys = ""
-                # 将history中的消息转换成便于用户阅读的markdown格式
-                for his in history:
-                    if his["role"] == "user":
-                        historys += f"**User:** {his['content']}\n\n"
-                    elif his["role"] == "assistant":
-                        historys += f"**Assistant:** {his['content']}\n\n"
-                    elif his["role"] == "system":
-                        historys += f"**System:** {his['content']}\n\n"
-                    elif his["role"] == "observation":
-                        historys += f"**Observation:** {his['content']}\n\n"
-                    elif his["role"] == "tool":
-                        historys += f"**Tool:** {his['content']}\n\n"
-                    elif his["role"] == "function":
-                        historys += f"**Function:** {his['content']}\n\n"
-
-                history = str(historys)
+                history = json.dumps(history, ensure_ascii=False,indent=4)
                 global image_buffer
                 image_out = image_buffer.copy()
                 image_buffer = []
@@ -1907,6 +2040,7 @@ NODE_CLASS_MAPPINGS = {
     "str2float":str2float,
     "json_iterator":json_iterator,
     "Lorebook":Lorebook,
+    "genai_api_loader":genai_api_loader,
 }
 
 
@@ -2018,6 +2152,7 @@ if lang == "zh_CN":
         "str2float":"字符串转浮点数",
         "json_iterator":"JSON迭代器",
         "Lorebook":"Lorebook传说书",
+        "genai_api_loader":"Gemini API加载器",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2123,6 +2258,7 @@ else:
         "str2float": "String to Float",
         "json_iterator": "JSON Iterator",
         "Lorebook":"Lore book",
+        "genai_api_loader":"Gemini API Loader",
     }
 
 
