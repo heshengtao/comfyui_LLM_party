@@ -401,7 +401,6 @@ class genChat:
                 'Content-Type': 'application/json'
             }
             data = {
-                "system_instruction": "You are a helpful assistant.",
                 "contents": history,
                 "tools": [{
                     "functionDeclarations": tools
