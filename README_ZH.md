@@ -29,7 +29,7 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭建自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建;从个人用户需要的接入自己的社交APP(QQ、飞书、Discord)，到流媒体工作者需要的一站式LLM+TTS+ComfyUI工作流；从普通学生所需要的第一个LLM应用的简单上手起步，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在ComfyUI LLM Party中找到答案。
 
 ## 最新更新
-1. 新增了Gemini API加载器节点，现在兼容Gemini官方的API啦！由于Gemini在工具调用时，如果返回的参数中包含中文字符会出现返回码为500的报错，因此部分工具节点不可用。示例工作流：[start_with_gemini](workflow/start_with_gemini.json)
+1. 新增了Gemini API加载器节点，现在兼容Gemini官方的API啦！如果你是国内网络环境，如果出现API地区受限制的问题，请将节点切换到美国，并使用TUN模式。由于Gemini在工具调用时，如果返回的参数中包含中文字符会出现返回码为500的报错，因此部分工具节点不可用。示例工作流：[start_with_gemini](workflow/start_with_gemini.json)
 2. 新增lore book节点，可以在与LLM对话时插入你的背景设定，示例工作流：[lorebook](workflow/lorebook.json)
 3. 新增了FLUX提示词生成器面具节点，可以生成炉石卡牌、游戏王卡牌、海报、漫画等多种风格的提示词，可以让FLUX模型直出。参考工作流：[FLUX提示词](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
 4. 可以使用这个LLM工具制造机自动生成LLM工具，把你生成的工具代码保存为一个python文件中，然后把代码复制到custom_tool文件夹下，然后你就创造了一个新的节点。示例工作流：[LLM工具生成器](workflow/LLM工具制造机.json)。
