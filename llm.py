@@ -401,6 +401,7 @@ class genChat:
                 'Content-Type': 'application/json'
             }
             data = {
+                "system_instruction": "You are a helpful assistant.",
                 "contents": history,
                 "tools": [{
                     "functionDeclarations": tools
@@ -706,7 +707,7 @@ class genai_api_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name": ("STRING", {"default": "gpt-4o-mini"}),
+                "model_name": ("STRING", {"default": "gemini-pro"}),
             },
             "optional": {
                 "api_key": (
