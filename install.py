@@ -104,10 +104,14 @@ def get_comfy_dir():
 def copy_js_files():
     # 设置当前文件夹路径和目标文件夹路径
     current_folder = os.path.dirname(os.path.abspath(__file__))
-    target_folder = get_comfy_dir()
+    target_folder = os.path.expanduser("~/comfy_dir")  # 改为用户目录下的文件夹
 
     # 确保目标文件夹存在
-    os.makedirs(target_folder, exist_ok=True)
+    try:
+        os.makedirs(target_folder, exist_ok=True)
+    except PermissionError:
+        print(f"没有权限创建目录 {target_folder}")
+        return
 
     # 清空目标文件夹里所有文件
     for filename in os.listdir(target_folder):
@@ -115,7 +119,6 @@ def copy_js_files():
         try:
             if os.path.isfile(file_path) or os.path.islink(file_path):
                 os.unlink(file_path)
-
         except Exception as e:
             print(f"无法删除文件 {file_path}: {e}")
 
@@ -126,7 +129,10 @@ def copy_js_files():
     for file_name in js_files:
         source_file = os.path.join(current_folder, "web", file_name)
         target_file = os.path.join(target_folder, file_name)
-        shutil.copy2(source_file, target_file)
+        try:
+            shutil.copy2(source_file, target_file)
+        except Exception as e:
+            print(f"无法复制文件 {source_file} 到 {target_file}: {e}")
 
 
 def get_system_info():
