@@ -1,0 +1,331 @@
+{
+  "last_node_id": 34,
+  "last_link_id": 45,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1403,
+        196
+      ],
+      "size": {
+        "0": 454.6876220703125,
+        "1": 290.2985534667969
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 36,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "The image shows a young woman with long, flowing white hair. She has blue eyes and is wearing a white dress with a star-shaped design. The background is a starry night sky."
+      ]
+    },
+    {
+      "id": 31,
+      "type": "show_text_party",
+      "pos": [
+        1405,
+        551
+      ],
+      "size": {
+        "0": 454.6876220703125,
+        "1": 290.2985534667969
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 43,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "[\n    {\n        \"role\": \"user\",\n        \"parts\": [\n            {\n                \"text\": \"你是一个强大的智能助手\"\n            }\n        ]\n    },\n    {\n        \"role\": \"user\",\n        \"parts\": [\n            {\n                \"text\": \"图中有什么\"\n            }\n        ]\n    },\n    {\n        \"role\": \"model\",\n        \"parts\": [\n            {\n                \"text\": \"The image shows a young woman with long, flowing white hair. She has blue eyes and is wearing a white dress with a star-shaped design. The background is a starry night sky.\"\n            }\n        ]\n    }\n]"
+      ]
+    },
+    {
+      "id": 32,
+      "type": "LoadImage",
+      "pos": [
+        551,
+        404
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "00616-2386738147-{{best_quality}},{{masterpiece}},{{ultra-detailed}},{illustration},{detailed_light},{an_extremely_delicate_and_beautiful},a_girl.png",
+        "image"
+      ]
+    },
+    {
+      "id": 34,
+      "type": "genai_api_loader",
+      "pos": [
+        554,
+        240
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "genai_api_loader"
+      },
+      "widgets_values": [
+        "gemini-1.5-flash-latest",
+        "AI-XXXXX"
+      ]
+    },
+    {
+      "id": 23,
+      "type": "LLM",
+      "pos": [
+        949,
+        247
+      ],
+      "size": {
+        "0": 401.7856750488281,
+        "1": 469.7105407714844
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 45,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 44,
+          "label": "images"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            36
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [
+            43
+          ],
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你是一个强大的智能助手",
+        "你好，图中画了什么",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ]
+    }
+  ],
+  "links": [
+    [
+      36,
+      23,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      43,
+      23,
+      1,
+      31,
+      0,
+      "STRING"
+    ],
+    [
+      44,
+      32,
+      0,
+      23,
+      1,
+      "IMAGE"
+    ],
+    [
+      45,
+      34,
+      0,
+      23,
+      0,
+      "CUSTOM"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7972024500000091,
+      "offset": [
+        -254.8572533671734,
+        28.330435418339974
+      ]
+    }
+  },
+  "version": 0.4
+}

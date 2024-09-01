@@ -25,10 +25,10 @@ from transformers import (
     AutoTokenizer,
     GenerationConfig,
 )
-
+import PIL.Image
 if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
-
+from google.protobuf.struct_pb2 import Struct
 from torchvision.transforms import ToPILImage
 
 from .config import config_key, config_path, current_dir_path, load_api_keys
@@ -384,71 +384,77 @@ class genChat:
         history,
         tools=None,
         is_tools_in_sys_prompt="disable",
+        images=None,
+        imgbb_api_key="",
         **extra_parameters,
     ):
         try:
             if tools is None:
                 tools = []
-            genai.configure(api_key=self.apikey)
             # Function to convert OpenAI history to Gemini history
             history= convert_to_gemini(history)
-            new_message = {"role": "user", "parts": [{"text": user_prompt}]}
+            if images is not None:
+                i = 255.0 * images[0].cpu().numpy()
+                img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+                new_message = {"role": "user", "parts": [{"text": "图中有什么"},{"inline_data": img}]}
+            else:
+                new_message = {"role": "user", "parts": [{"text": user_prompt}]}
             
             history.append(new_message)
             tools = convert_tool_to_gemini(tools)
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model_name}:generateContent?key={self.apikey}"
-            headers = {
-                'Content-Type': 'application/json'
+            genai.configure(api_key=self.apikey)
+            tool_list={
+                'function_declarations':  tools
             }
-            data = {
-                "contents": history,
-                "tools": [{
-                    "functionDeclarations": tools
-                }],
-                "generation_config":{
+            model = genai.GenerativeModel(self.model_name,tools=tool_list)
+            response = model.generate_content(
+                contents= history,
+                generation_config={
                     "temperature": temperature,
                     "max_output_tokens": max_length,
                     **extra_parameters
                 }
-            }
+            )
+            if images is not None:
+                # 移除包含 "inline_data" 的部分
+                for message in history:
+                    if "parts" in message:
+                        message["parts"] = [part for part in message["parts"] if "inline_data" not in part]
 
-            response = requests.post(url, headers=headers, json=data)
-            response=response.json()
-            while 'functionCall' in response['candidates'][0]['content']['parts'][0]:
-                history.append(response['candidates'][0]['content'])
-                name = response['candidates'][0]['content']['parts'][0]['functionCall']['name']
-                args = response['candidates'][0]['content']['parts'][0]['functionCall']['args']
+            while response.candidates[0].content.parts[0].function_call:
+                function_call =response.candidates[0].content.parts[0].function_call
+                name = function_call.name
+                args = {key:value for key, value in function_call.args.items()}
+                res={"role": "model", "parts": response.candidates[0].content.parts}
+                history.append(res)
                 print("正在调用" + name + "工具")
                 results = dispatch_tool(name, args)
+                
+                s = Struct()
+                s.update({"result": results})
+
+                function_response = genai.protos.Part(
+                    function_response=genai.protos.FunctionResponse(name=name, response=s)
+                )
                 res={
-        "role": "function",
-        "parts": [{
-        "functionResponse": {
-            "name": name,
-            "response": {
-            "name": name,
-            "content": results
-            }
-        }
-        }]
-    }
+                    "role": "user",
+                    "parts": [function_response]
+                }
                 print("调用结果：" + str(results))
                 history.append(res)
-                data = {
-                    "contents": history,
-                    "tools": [{
-                        "functionDeclarations": tools
-                    }],
-                    "generation_config":{
+                response = model.generate_content(
+                    contents= history,
+                    generation_config={
                         "temperature": temperature,
                         "max_output_tokens": max_length,
                         **extra_parameters
                     }
-                }
-                response = requests.post(url, headers=headers, json=data)
-                response=response.json()
-            text = response['candidates'][0]['content']['parts'][0]['text']
-            res=response['candidates'][0]['content']
+                )
+                # 移除history最后两个元素
+                history.pop()
+                history.pop()
+            text = response.candidates[0].content.parts[0].text
+            res={"role": "model", "parts": [{"text": text}]}
             history.append(res)
         except Exception as e:
             return str(e), history
@@ -469,9 +475,59 @@ class Chat:
         history,
         tools=None,
         is_tools_in_sys_prompt="disable",
+        images=None,
+        imgbb_api_key="",
         **extra_parameters,
     ):
         try:
+            if images is not None:
+                if imgbb_api_key == "" or imgbb_api_key is None:
+                    imgbb_api_key = api_keys.get("imgbb_api")
+                if imgbb_api_key == "" or imgbb_api_key is None:
+                    i = 255.0 * images[0].cpu().numpy()
+                    img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+                    # 将图片保存到缓冲区
+                    buffered = io.BytesIO()
+                    img.save(buffered, format="PNG")
+                    # 将图片编码为base64
+                    img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+                    img_json = [
+                        {"type": "text", "text": user_prompt},
+                        {
+                            "type": "image_url",
+                            "image_url": {"url": f"data:image/jpeg;base64,{img_str}"},
+                        },
+                    ]
+                    user_prompt = img_json
+                else:
+                    i = 255.0 * images[0].cpu().numpy()
+                    img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+                    # 将图片保存到缓冲区
+                    buffered = io.BytesIO()
+                    img.save(buffered, format="PNG")
+                    # 将图片编码为base64
+                    img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+                    url = "https://api.imgbb.com/1/upload"
+                    payload = {"key": imgbb_api_key, "image": img_str}
+                    # 向API发送POST请求
+                    response = requests.post(url, data=payload)
+                    # 检查请求是否成功
+                    if response.status_code == 200:
+                        # 解析响应以获取图片URL
+                        result = response.json()
+                        img_url = result["data"]["url"]
+                    else:
+                        return "Error: " + response.text
+                    img_json = [
+                        {"type": "text", "text": user_prompt},
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": img_url,
+                            },
+                        },
+                    ]
+                    user_prompt = img_json
             openai.api_key = self.apikey
             openai.base_url = self.baseurl
             new_message = {"role": "user", "content": user_prompt}
@@ -706,7 +762,7 @@ class genai_api_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name": ("STRING", {"default": "gemini-pro"}),
+                "model_name": (["gemini-1.0-pro","gemini-1.0-pro-001","gemini-1.5-flash-latest","gemini-1.5-pro-latest"], {"default": "gemini-1.5-flash-latest"}),
             },
             "optional": {
                 "api_key": (
@@ -1030,62 +1086,13 @@ class LLM:
                         + "请根据文件内容回答用户问题。\n"
                         + "如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
                     )
-
-                if images is not None:
-                    if imgbb_api_key == "" or imgbb_api_key is None:
-                        imgbb_api_key = api_keys.get("imgbb_api")
-                    if imgbb_api_key == "" or imgbb_api_key is None:
-                        i = 255.0 * images[0].cpu().numpy()
-                        img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
-                        # 将图片保存到缓冲区
-                        buffered = io.BytesIO()
-                        img.save(buffered, format="PNG")
-                        # 将图片编码为base64
-                        img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
-                        img_json = [
-                            {"type": "text", "text": user_prompt},
-                            {
-                                "type": "image_url",
-                                "image_url": {"url": f"data:image/jpeg;base64,{img_str}"},
-                            },
-                        ]
-                        user_prompt = img_json
-                    else:
-                        i = 255.0 * images[0].cpu().numpy()
-                        img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
-                        # 将图片保存到缓冲区
-                        buffered = io.BytesIO()
-                        img.save(buffered, format="PNG")
-                        # 将图片编码为base64
-                        img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
-                        url = "https://api.imgbb.com/1/upload"
-                        payload = {"key": imgbb_api_key, "image": img_str}
-                        # 向API发送POST请求
-                        response = requests.post(url, data=payload)
-                        # 检查请求是否成功
-                        if response.status_code == 200:
-                            # 解析响应以获取图片URL
-                            result = response.json()
-                            img_url = result["data"]["url"]
-                        else:
-                            return "Error: " + response.text
-                        img_json = [
-                            {"type": "text", "text": user_prompt},
-                            {
-                                "type": "image_url",
-                                "image_url": {
-                                    "url": img_url,
-                                },
-                            },
-                        ]
-                        user_prompt = img_json
                 if extra_parameters is not None and extra_parameters != {}:
                     response, history = model.send(
-                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt, **extra_parameters
+                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,images,imgbb_api_key, **extra_parameters
                     )
                 else:
                     response, history = model.send(
-                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt
+                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,images,imgbb_api_key
                     )
                 print(response)
                 # 修改prompt.json文件
@@ -1942,6 +1949,7 @@ NODE_CLASS_MAPPINGS = {
     "LLM": LLM,
     "LLM_local": LLM_local,
     "LLM_api_loader": LLM_api_loader,
+    "genai_api_loader":genai_api_loader,
     "LLM_local_loader": LLM_local_loader,
     "LLavaLoader": LLavaLoader,
     "load_ebd":load_ebd,
@@ -2040,7 +2048,6 @@ NODE_CLASS_MAPPINGS = {
     "str2float":str2float,
     "json_iterator":json_iterator,
     "Lorebook":Lorebook,
-    "genai_api_loader":genai_api_loader,
 }
 
 
@@ -2054,6 +2061,7 @@ if lang == "zh_CN":
         "LLM": "API大语言模型",
         "LLM_local": "本地大语言模型",
         "LLM_api_loader": "API大语言模型加载器",
+        "genai_api_loader":"Gemini API加载器",
         "LLM_local_loader": "本地大语言模型加载器",
         "LLavaLoader": "LVM加载器",
         "load_ebd": "加载词嵌入",
@@ -2152,13 +2160,13 @@ if lang == "zh_CN":
         "str2float":"字符串转浮点数",
         "json_iterator":"JSON迭代器",
         "Lorebook":"Lorebook传说书",
-        "genai_api_loader":"Gemini API加载器",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
         "LLM": "API Large Language Model",
         "LLM_local": "Local Large Language Model",
         "LLM_api_loader": "API Large Language Model Loader",
+        "genai_api_loader":"Gemini API Loader",
         "LLM_local_loader": "Local Large Language Model Loader",
         "LLavaLoader": "LVM Loader",
         "llama_guff_loader": "llama-guff Loader",
@@ -2258,7 +2266,6 @@ else:
         "str2float": "String to Float",
         "json_iterator": "JSON Iterator",
         "Lorebook":"Lore book",
-        "genai_api_loader":"Gemini API Loader",
     }
 
 
