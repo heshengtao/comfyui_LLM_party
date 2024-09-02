@@ -15,6 +15,7 @@
 <div align="center">
   <a href="./README.md"><img src="https://img.shields.io/badge/English-d9d9d9"></a>
   <a href="./README_ZH.md"><img src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
+  <a href="./README_JP.md"><img src="https://img.shields.io/badge/日本語-d9d9d9"></a>
 </div>
 
 ####
