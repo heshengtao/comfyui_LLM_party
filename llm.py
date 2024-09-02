@@ -2321,7 +2321,5 @@ load_custom_tools()
 
 
 if __name__ == "__main__":
-    llm = LLM()
-    res = llm.chatbot(
-        "你好", "你是一个强大的人工智能助手。", "gpt-3.5-turbo", 0.7, tools=time_tool().time("Asia/Shanghai")
-    )
+    print("hello llm party!")
+
