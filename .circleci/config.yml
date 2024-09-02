@@ -22,3 +22,10 @@ jobs:
           command: |
             source venv/bin/activate
             python install.py
+
+workflows:
+  version: 2
+  test-workflow:
+    jobs:
+      - test
+
