@@ -74,7 +74,10 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [豆包](https://www.volcengine.com/docs/82379/1263482)
 
-2. 兼容transformer库AutoModelForCausalLM类支持的大部分本地模型（本地模型节点上的model type不知道选什么就选llama，大概率可以适配），目前已测试的有：
+2. 支持Gemini格式的API调用：
+* [Gemini](https://aistudio.google.com/app/prompts/new_chat)
+
+3. 兼容transformer库AutoModelForCausalLM类支持的大部分本地模型（本地模型节点上的model type不知道选什么就选llama，大概率可以适配），目前已测试的有：
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay)(推荐！角色扮演模型)
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(推荐！丰富提示词模型)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
@@ -82,7 +85,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
 * [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b)（由于GLM4换了新的调用格式，开发者无力维持所有本地大模型的调用，因为推荐大家使用ollama的方式本地调用！）
 
-3. 模型下载：
+4. 模型下载：
 * [百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu
 
 ## 下载
