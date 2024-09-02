@@ -201,6 +201,7 @@ async def process_request(request_data: CompletionRequest):
     model_name = request_data.model
     print(model_name)
     base64_encoded_list = []
+    system_prompt = ""
     # 遍历消息
     for message in request_data.messages:
         # 检查 content 是否为字符串
