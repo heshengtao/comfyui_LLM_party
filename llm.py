@@ -13,9 +13,11 @@ import re
 import sys
 import time
 import traceback
+
 import google.generativeai as genai
 import numpy as np
 import openai
+import PIL.Image
 import requests
 import torch
 from PIL import Image
@@ -25,14 +27,14 @@ from transformers import (
     AutoTokenizer,
     GenerationConfig,
 )
-import PIL.Image
+
 if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
+
 from google.protobuf.struct_pb2 import Struct
 from torchvision.transforms import ToPILImage
 
 from .config import config_key, config_path, current_dir_path, load_api_keys
-from .tools.lorebook import Lorebook
 from .tools.api_tool import (
     api_function,
     api_tool,
@@ -56,9 +58,10 @@ from .tools.custom_persona import custom_persona
 from .tools.dialog import end_dialog, start_dialog
 from .tools.dingding import Dingding, Dingding_tool, send_dingding
 from .tools.end_work import end_workflow, img2path
-from .tools.excel import image_iterator, load_excel,json_iterator
+from .tools.excel import image_iterator, json_iterator, load_excel
 from .tools.feishu import feishu, feishu_tool, send_feishu
 from .tools.file_combine import file_combine, file_combine_plus
+from .tools.flux_persona import flux_persona
 from .tools.get_time import get_time, time_tool
 from .tools.get_weather import (
     accuweather_tool,
@@ -105,7 +108,13 @@ from .tools.KG_neo4j import (
     New_entities_neo4j,
     New_relationships_neo4j,
 )
-from .tools.load_ebd import data_base, ebd_tool, embeddings_function, save_ebd_database,load_ebd
+from .tools.load_ebd import (
+    data_base,
+    ebd_tool,
+    embeddings_function,
+    load_ebd,
+    save_ebd_database,
+)
 from .tools.load_file import (
     load_file,
     load_file_folder,
@@ -116,21 +125,22 @@ from .tools.load_file import (
 from .tools.load_model_name import load_name
 from .tools.load_persona import load_persona
 from .tools.logic import get_string, replace_string, string_logic, substring
+from .tools.lorebook import Lorebook
 from .tools.new_interpreter import new_interpreter, new_interpreter_tool
 from .tools.omost import omost_decode, omost_setting
 from .tools.search_web import (
     bing_loader,
     bing_tool,
+    duckduckgo_loader,
+    duckduckgo_tool,
     google_loader,
     google_tool,
+    search_duckduckgo,
     search_web,
     search_web_bing,
-    duckduckgo_tool,
-    duckduckgo_loader,
-    search_duckduckgo,
 )
 from .tools.show_text import About_us, show_text_party
-from .tools.smalltool import bool_logic, load_int, none2false,str2float
+from .tools.smalltool import bool_logic, load_int, none2false, str2float
 from .tools.story import read_story_json, story_json_tool
 from .tools.text_iterator import text_iterator
 from .tools.tool_combine import tool_combine, tool_combine_plus
@@ -140,8 +150,8 @@ from .tools.wechat import send_wechat, work_wechat, work_wechat_tool
 from .tools.whisper import listen_audio, openai_whisper
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import work_flow, workflow_tool, workflow_transfer
-from .tools.flux_persona import flux_persona
 from .tools.workflow_V2 import workflow_transfer_v2
+
 _TOOL_HOOKS = [
     "get_time",
     "get_weather",
@@ -340,6 +350,8 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
     except:
         ret = traceback.format_exc()
     return str(ret)
+
+
 def convert_to_gemini(openai_history):
     for entry in openai_history:
         role = entry["role"]
@@ -351,25 +363,24 @@ def convert_to_gemini(openai_history):
             return gemini_history
     return openai_history
 
+
 def convert_tool_to_gemini(openai_tools):
     gemini_tools = []
     for tool in openai_tools:
         gemini_tool = {
             "name": tool["function"]["name"],
             "description": tool["function"]["description"],
-            "parameters": {
-                "type": "OBJECT",
-                "properties": {}
-            }
+            "parameters": {"type": "OBJECT", "properties": {}},
         }
         for prop_name, prop_details in tool["function"]["parameters"]["properties"].items():
             gemini_tool["parameters"]["properties"][prop_name] = {
                 "type": prop_details["type"].upper(),
-                "description": prop_details["description"]
+                "description": prop_details["description"],
             }
         gemini_tool["parameters"]["required"] = tool["function"]["parameters"]["required"]
         gemini_tools.append(gemini_tool)
     return gemini_tools
+
 
 class genChat:
     def __init__(self, model_name, apikey) -> None:
@@ -392,28 +403,22 @@ class genChat:
             if tools is None:
                 tools = []
             # Function to convert OpenAI history to Gemini history
-            history= convert_to_gemini(history)
+            history = convert_to_gemini(history)
             if images is not None:
                 i = 255.0 * images[0].cpu().numpy()
                 img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
-                new_message = {"role": "user", "parts": [{"text": "图中有什么"},{"inline_data": img}]}
+                new_message = {"role": "user", "parts": [{"text": "图中有什么"}, {"inline_data": img}]}
             else:
                 new_message = {"role": "user", "parts": [{"text": user_prompt}]}
-            
+
             history.append(new_message)
             tools = convert_tool_to_gemini(tools)
             genai.configure(api_key=self.apikey)
-            tool_list={
-                'function_declarations':  tools
-            }
-            model = genai.GenerativeModel(self.model_name,tools=tool_list)
+            tool_list = {"function_declarations": tools}
+            model = genai.GenerativeModel(self.model_name, tools=tool_list)
             response = model.generate_content(
-                contents= history,
-                generation_config={
-                    "temperature": temperature,
-                    "max_output_tokens": max_length,
-                    **extra_parameters
-                }
+                contents=history,
+                generation_config={"temperature": temperature, "max_output_tokens": max_length, **extra_parameters},
             )
             if images is not None:
                 # 移除包含 "inline_data" 的部分
@@ -422,39 +427,32 @@ class genChat:
                         message["parts"] = [part for part in message["parts"] if "inline_data" not in part]
 
             while response.candidates[0].content.parts[0].function_call:
-                function_call =response.candidates[0].content.parts[0].function_call
+                function_call = response.candidates[0].content.parts[0].function_call
                 name = function_call.name
-                args = {key:value for key, value in function_call.args.items()}
-                res={"role": "model", "parts": response.candidates[0].content.parts}
+                args = {key: value for key, value in function_call.args.items()}
+                res = {"role": "model", "parts": response.candidates[0].content.parts}
                 history.append(res)
                 print("正在调用" + name + "工具")
                 results = dispatch_tool(name, args)
-                
+
                 s = Struct()
                 s.update({"result": results})
 
                 function_response = genai.protos.Part(
                     function_response=genai.protos.FunctionResponse(name=name, response=s)
                 )
-                res={
-                    "role": "user",
-                    "parts": [function_response]
-                }
+                res = {"role": "user", "parts": [function_response]}
                 print("调用结果：" + str(results))
                 history.append(res)
                 response = model.generate_content(
-                    contents= history,
-                    generation_config={
-                        "temperature": temperature,
-                        "max_output_tokens": max_length,
-                        **extra_parameters
-                    }
+                    contents=history,
+                    generation_config={"temperature": temperature, "max_output_tokens": max_length, **extra_parameters},
                 )
                 # 移除history最后两个元素
                 history.pop()
                 history.pop()
             text = response.candidates[0].content.parts[0].text
-            res={"role": "model", "parts": [{"text": text}]}
+            res = {"role": "model", "parts": [{"text": text}]}
             history.append(res)
         except Exception as e:
             return str(e), history
@@ -762,7 +760,10 @@ class genai_api_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name": (["gemini-1.0-pro","gemini-1.0-pro-001","gemini-1.5-flash-latest","gemini-1.5-pro-latest"], {"default": "gemini-1.5-flash-latest"}),
+                "model_name": (
+                    ["gemini-1.0-pro", "gemini-1.0-pro-001", "gemini-1.5-flash-latest", "gemini-1.5-pro-latest"],
+                    {"default": "gemini-1.5-flash-latest"},
+                ),
             },
             "optional": {
                 "api_key": (
@@ -797,6 +798,7 @@ class genai_api_loader:
 
         chat = genChat(model_name, api_key)
         return (chat,)
+
 
 class LLM:
     original_IS_CHANGED = None
@@ -1088,11 +1090,26 @@ class LLM:
                     )
                 if extra_parameters is not None and extra_parameters != {}:
                     response, history = model.send(
-                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,images,imgbb_api_key, **extra_parameters
+                        user_prompt,
+                        temperature,
+                        max_length,
+                        history,
+                        tools,
+                        is_tools_in_sys_prompt,
+                        images,
+                        imgbb_api_key,
+                        **extra_parameters,
                     )
                 else:
                     response, history = model.send(
-                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,images,imgbb_api_key
+                        user_prompt,
+                        temperature,
+                        max_length,
+                        history,
+                        tools,
+                        is_tools_in_sys_prompt,
+                        images,
+                        imgbb_api_key,
                     )
                 print(response)
                 # 修改prompt.json文件
@@ -1102,7 +1119,7 @@ class LLM:
                 history = history_get
                 with open(self.prompt_path, "w", encoding="utf-8") as f:
                     json.dump(history, f, indent=4, ensure_ascii=False)
-                history = json.dumps(history, ensure_ascii=False,indent=4)
+                history = json.dumps(history, ensure_ascii=False, indent=4)
                 global image_buffer
                 image_out = image_buffer.copy()
                 image_buffer = []
@@ -1172,7 +1189,7 @@ class LLM_local_loader:
             "required": {
                 "model_name": ("STRING", {"default": ""}),
                 "model_type": (
-                    ["llama","GLM3",  "Qwen"],
+                    ["llama", "GLM3", "Qwen"],
                     {
                         "default": "llama",
                     },
@@ -1196,7 +1213,7 @@ class LLM_local_loader:
                     },
                 ),
                 "dtype": (
-                    ["float32", "float16","bfloat16", "int8", "int4"],
+                    ["float32", "float16", "bfloat16", "int8", "int4"],
                     {
                         "default": "float32",
                     },
@@ -1275,27 +1292,52 @@ class LLM_local_loader:
                     elif dtype == "float16":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().cuda()
                     elif dtype == "bfloat16":
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16).cuda()
+                        self.model = AutoModel.from_pretrained(
+                            model_path, trust_remote_code=True, torch_dtype=torch.bfloat16
+                        ).cuda()
                     elif dtype in ["int8", "int4"]:
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(int(dtype[-1])).half().cuda()
+                        self.model = (
+                            AutoModel.from_pretrained(model_path, trust_remote_code=True)
+                            .quantize(int(dtype[-1]))
+                            .half()
+                            .cuda()
+                        )
                 elif device == "cpu":
                     if dtype == "float32":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).float()
                     elif dtype == "float16":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().float()
                     elif dtype == "bfloat16":
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16).half().float()
+                        self.model = (
+                            AutoModel.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16)
+                            .half()
+                            .float()
+                        )
                     elif dtype in ["int8", "int4"]:
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(int(dtype[-1])).half().float()
+                        self.model = (
+                            AutoModel.from_pretrained(model_path, trust_remote_code=True)
+                            .quantize(int(dtype[-1]))
+                            .half()
+                            .float()
+                        )
                 elif device == "mps":
                     if dtype == "float32":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).to("mps")
                     elif dtype == "float16":
                         self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().to("mps")
                     elif dtype == "bfloat16":
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16).half().to("mps")
+                        self.model = (
+                            AutoModel.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16)
+                            .half()
+                            .to("mps")
+                        )
                     elif dtype in ["int8", "int4"]:
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(int(dtype[-1])).half().to("mps")
+                        self.model = (
+                            AutoModel.from_pretrained(model_path, trust_remote_code=True)
+                            .quantize(int(dtype[-1]))
+                            .half()
+                            .to("mps")
+                        )
                 self.model = self.model.eval()
 
         elif model_type in ["llama", "Qwen"]:
@@ -1313,7 +1355,7 @@ class LLM_local_loader:
                         ).half()
                     elif dtype == "bfloat16":
                         self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cuda",torch_dtype=torch.bfloat16
+                            model_path, trust_remote_code=True, device_map="cuda", torch_dtype=torch.bfloat16
                         )
                     elif dtype == "int8":
                         quantization_config = BitsAndBytesConfig(
@@ -1949,10 +1991,10 @@ NODE_CLASS_MAPPINGS = {
     "LLM": LLM,
     "LLM_local": LLM_local,
     "LLM_api_loader": LLM_api_loader,
-    "genai_api_loader":genai_api_loader,
+    "genai_api_loader": genai_api_loader,
     "LLM_local_loader": LLM_local_loader,
     "LLavaLoader": LLavaLoader,
-    "load_ebd":load_ebd,
+    "load_ebd": load_ebd,
     "embeddings_function": embeddings_function,
     "load_file": load_file,
     "load_persona": load_persona,
@@ -2040,28 +2082,28 @@ NODE_CLASS_MAPPINGS = {
     "load_int": load_int,
     "none2false": none2false,
     "bool_logic": bool_logic,
-    "duckduckgo_tool":duckduckgo_tool,
-    "duckduckgo_loader":duckduckgo_loader,
-    "flux_persona":flux_persona,
-    "clear_file":clear_file,
-    "workflow_transfer_v2":workflow_transfer_v2,
-    "str2float":str2float,
-    "json_iterator":json_iterator,
-    "Lorebook":Lorebook,
+    "duckduckgo_tool": duckduckgo_tool,
+    "duckduckgo_loader": duckduckgo_loader,
+    "flux_persona": flux_persona,
+    "clear_file": clear_file,
+    "workflow_transfer_v2": workflow_transfer_v2,
+    "str2float": str2float,
+    "json_iterator": json_iterator,
+    "Lorebook": Lorebook,
 }
 
 
 lang = locale.getdefaultlocale()[0]
 api_keys = load_api_keys(config_path)
-lang_config=api_keys.get("language")
-if lang_config=="en_US" or lang_config=="zh_CN":
-    lang=lang_config
+lang_config = api_keys.get("language")
+if lang_config == "en_US" or lang_config == "zh_CN":
+    lang = lang_config
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "LLM": "API大语言模型",
         "LLM_local": "本地大语言模型",
         "LLM_api_loader": "API大语言模型加载器",
-        "genai_api_loader":"Gemini API加载器",
+        "genai_api_loader": "Gemini API加载器",
         "LLM_local_loader": "本地大语言模型加载器",
         "LLavaLoader": "LVM加载器",
         "load_ebd": "加载词嵌入",
@@ -2154,19 +2196,19 @@ if lang == "zh_CN":
         "bool_logic": "布尔逻辑",
         "duckduckgo_tool": "DuckDuckGo工具",
         "duckduckgo_loader": "DuckDuckGo加载器",
-        "flux_persona":"flux提示词生成器面具",
-        "clear_file":"清理文件",
-        "workflow_transfer_v2":"工作流中转器V2",
-        "str2float":"字符串转浮点数",
-        "json_iterator":"JSON迭代器",
-        "Lorebook":"Lorebook传说书",
+        "flux_persona": "flux提示词生成器面具",
+        "clear_file": "清理文件",
+        "workflow_transfer_v2": "工作流中转器V2",
+        "str2float": "字符串转浮点数",
+        "json_iterator": "JSON迭代器",
+        "Lorebook": "Lorebook传说书",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
         "LLM": "API Large Language Model",
         "LLM_local": "Local Large Language Model",
         "LLM_api_loader": "API Large Language Model Loader",
-        "genai_api_loader":"Gemini API Loader",
+        "genai_api_loader": "Gemini API Loader",
         "LLM_local_loader": "Local Large Language Model Loader",
         "LLavaLoader": "LVM Loader",
         "llama_guff_loader": "llama-guff Loader",
@@ -2259,13 +2301,13 @@ else:
         "none2false": "None to False",
         "bool_logic": "Boolean Logic",
         "duckduckgo_tool": "DuckDuckGo Tool",
-        "duckduckgo_loader":"DuckDuckGo Loader",
-        "flux_persona":"flux prompt word generator",
-        "clear_file":"clear file",
+        "duckduckgo_loader": "DuckDuckGo Loader",
+        "flux_persona": "flux prompt word generator",
+        "clear_file": "clear file",
         "workflow_transfer_v2": "Workflow Transfer V2",
         "str2float": "String to Float",
         "json_iterator": "JSON Iterator",
-        "Lorebook":"Lore book",
+        "Lorebook": "Lore book",
     }
 
 

@@ -6,14 +6,17 @@ from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-file_list={}
-def data_base_advance(question,file_name, k=5):
+file_list = {}
+
+
+def data_base_advance(question, file_name, k=5):
     global file_list
-    k=int(k)
-    knowledge_base= file_list[file_name]
+    k = int(k)
+    knowledge_base = file_list[file_name]
     docs = knowledge_base.similarity_search(question, k=k)
     combined_content = "".join(doc.page_content + "\n" for doc in docs)
     return "文件中的相关信息如下：\n" + combined_content
+
 
 class advance_ebd_tool:
     @classmethod
@@ -29,7 +32,7 @@ class advance_ebd_tool:
                 ),
                 "chunk_size": ("INT", {"default": 200}),
                 "chunk_overlap": ("INT", {"default": 50}),
-                "file_name": ("STRING", {"default":""}),
+                "file_name": ("STRING", {"default": ""}),
             },
             "optional": {
                 "file_content": ("STRING", {"forceInput": True}),
@@ -47,11 +50,23 @@ class advance_ebd_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, path, k, chunk_size, chunk_overlap, device,file_name, file_content="", is_enable="enable", base_path="",ebd_model=None):
+    def file(
+        self,
+        path,
+        k,
+        chunk_size,
+        chunk_overlap,
+        device,
+        file_name,
+        file_content="",
+        is_enable="enable",
+        base_path="",
+        ebd_model=None,
+    ):
         if is_enable == "disable":
             return (None,)
-        knowledge_base=""
-        global  file_list
+        knowledge_base = ""
+        global file_list
         if device == "auto":
             device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
         if ebd_model is None:
@@ -82,7 +97,10 @@ class advance_ebd_tool:
                         "type": "object",
                         "properties": {
                             "question": {"type": "string", "description": "要查询的关键词"},
-                            "file_name": {"type": "string", "description": f"要查询的文件名，只能从{file_list.keys()}中选择。"},
+                            "file_name": {
+                                "type": "string",
+                                "description": f"要查询的文件名，只能从{file_list.keys()}中选择。",
+                            },
                             "k": {"type": "string", "description": f"返回的段落数量，默认为{k}。"},
                         },
                         "required": ["question", "file_name", "k"],
@@ -92,22 +110,26 @@ class advance_ebd_tool:
         ]
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
+
+
 _TOOL_HOOKS = ["data_base_advance"]
 NODE_CLASS_MAPPINGS = {"advance_ebd_tool": advance_ebd_tool}
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"advance_ebd_tool": "高级词嵌入工具"}
 else:

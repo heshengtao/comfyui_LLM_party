@@ -50,13 +50,13 @@ class load_excel:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, path, is_enable=True, is_reload=False,load_all=False):
+    def file(self, path, is_enable=True, is_reload=False, load_all=False):
         if not is_enable:
             return (None,)
         if load_all:
             # 返回这个表格，以json字符串格式返回
             df = pd.read_excel(path, header=0)
-            data_list = df.to_dict(orient='records')
+            data_list = df.to_dict(orient="records")
             data = json.dumps(data_list, ensure_ascii=False, indent=4)
             return (data,)
         if self.path != path or is_reload == True:
@@ -71,7 +71,7 @@ class load_excel:
             # 将Series对象转换为字典
             data_dict = data_row.to_dict()
             # 返回JSON格式的数据
-            data = json.dumps(data_dict, ensure_ascii=False,indent=4)
+            data = json.dumps(data_dict, ensure_ascii=False, indent=4)
             # 增加索引，准备读取下一行
             self.index += 1
             return (data,)
@@ -203,11 +203,11 @@ class json_iterator:
             self.index = 0  # 重置索引为0
             self.json_str = json_str
             self.data = json.loads(self.json_str)
-        
+
         if load_all:
             # 返回整个JSON数据作为字符串
             return (json.dumps(self.data, ensure_ascii=False, indent=4),)
-        
+
         if isinstance(self.data, list):
             if self.index < len(self.data):
                 data_item = self.data[self.index]
@@ -215,7 +215,7 @@ class json_iterator:
                 return (json.dumps(data_item, ensure_ascii=False, indent=4),)
             else:
                 return (None,)
-        
+
         elif isinstance(self.data, dict):
             keys = list(self.data.keys())
             if self.index < len(keys):
@@ -225,7 +225,7 @@ class json_iterator:
                 return (json.dumps(data_item, ensure_ascii=False, indent=4),)
             else:
                 return (None,)
-        
+
         return (None,)
 
     @classmethod

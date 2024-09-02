@@ -146,17 +146,19 @@ NODE_CLASS_MAPPINGS = {
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"FileOnlineStorage_gitee": "上传Gitee文件床🐶"}
 else:

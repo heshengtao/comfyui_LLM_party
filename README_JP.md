@@ -7,7 +7,7 @@
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baiduクラウド</a> ·
   <a href="img/Q群.jpg">QQグループ</a> ·
   <a href="https://discord.gg/gxrQAYy6">ディスコード</a> ·
-  <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">私たちについて</a>  
+  <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">私たちについて</a>
 </div>
 
 ####

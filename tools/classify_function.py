@@ -34,10 +34,10 @@ class classify_function:
         if is_enable == False:
             return (None,)
         # text转成字典
-        text=json.loads(text)
-        response1 = text.get('1')
-        response2 = text.get('2')
-        response3 = text.get('3')
+        text = json.loads(text)
+        response1 = text.get("1")
+        response2 = text.get("2")
+        response3 = text.get("3")
         return (
             response1,
             response2,
@@ -90,17 +90,17 @@ class classify_function_plus:
     def condition(self, text, is_enable=True):
         if is_enable == False:
             return (None,)
-        text=json.loads(text)
-        response1 = text.get('1')
-        response2 = text.get('2')
-        response3 = text.get('3')
-        response4 = text.get('4')
-        response5 = text.get('5')
-        response6 = text.get('6')
-        response7 = text.get('7')
-        response8 = text.get('8')
-        response9 = text.get('9')
-        response10 = text.get('10')
+        text = json.loads(text)
+        response1 = text.get("1")
+        response2 = text.get("2")
+        response3 = text.get("3")
+        response4 = text.get("4")
+        response5 = text.get("5")
+        response6 = text.get("6")
+        response7 = text.get("7")
+        response8 = text.get("8")
+        response9 = text.get("9")
+        response10 = text.get("10")
         return (
             response1,
             response2,
