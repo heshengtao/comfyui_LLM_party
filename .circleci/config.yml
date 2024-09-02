@@ -22,6 +22,8 @@ jobs:
           command: |
             source venv/bin/activate
             python install.py
+            python llm.py
+
 
 workflows:
   version: 2
