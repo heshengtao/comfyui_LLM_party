@@ -1,3 +1,6 @@
+torch
+torchvision 
+torchaudio
 beautifulsoup4
 docx2txt
 langchain
