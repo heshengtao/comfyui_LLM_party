@@ -11,7 +11,7 @@ import packaging.tags
 import pkg_resources
 import torch
 from requests import get
-
+from server import PromptServer
 
 def get_python_version():
     """Return the Python version in a concise format, e.g., '39' for Python 3.9."""
@@ -89,22 +89,29 @@ def install_llama(system_info):
         install_llama_package("llama-cpp-python", custom_command=custom_command)
 
 
-def get_comfy_dir():
-    # 获取当前脚本文件的绝对路径
-    current_file_path = os.path.abspath(__file__)
-    # 获取当前脚本文件所在目录
-    current_dir = os.path.dirname(current_file_path)
-    # 获取目标目录的绝对路径
-    comfy_dir = os.path.abspath(os.path.join(current_dir, "..", ".."))
-    # 获取"web/extensions/party"目录的绝对路径
-    comfy_dir = os.path.join(comfy_dir, "web/extensions/party")
-    return comfy_dir
+def get_comfy_dir(subpath=None, mkdir=False):
+    dir = os.path.dirname(inspect.getfile(PromptServer))
+    if subpath is not None:
+        dir = os.path.join(dir, subpath)
+
+    dir = os.path.abspath(dir)
+
+    if mkdir and not os.path.exists(dir):
+        os.makedirs(dir)
+    return dir
+
+
+def get_web_ext_dir():
+    dir = get_comfy_dir("web/extensions/party")
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+    return dir
 
 
 def copy_js_files():
     # 设置当前文件夹路径和目标文件夹路径
     current_folder = os.path.dirname(os.path.abspath(__file__))
-    target_folder = os.path.expanduser("~/comfy_dir")  # 改为用户目录下的文件夹
+    target_folder = get_web_ext_dir()  # 改为用户目录下的文件夹
 
     # 确保目标文件夹存在
     try:
@@ -123,11 +130,11 @@ def copy_js_files():
             print(f"无法删除文件 {file_path}: {e}")
 
     # 获取当前文件夹中web子文件夹下的所有.js文件
-    js_files = [f for f in os.listdir(os.path.join(current_folder, "web")) if f.endswith(".js")]
+    js_files = [f for f in os.listdir(os.path.join(current_folder, "web","js")) if f.endswith(".js")]
 
     # 复制文件
     for file_name in js_files:
-        source_file = os.path.join(current_folder, "web", file_name)
+        source_file = os.path.join(current_folder, "web","js", file_name)
         target_file = os.path.join(target_folder, file_name)
         try:
             shutil.copy2(source_file, target_file)
