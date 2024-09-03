@@ -6,7 +6,6 @@ import subprocess
 import sys
 
 import packaging.tags
-import pkg_resources
 from requests import get
 
 
@@ -52,10 +51,11 @@ def install_llama_package(package_name, custom_command=None):
 
 def package_is_installed(package_name):
     try:
-        pkg_resources.get_distribution(package_name)
+        importlib.metadata.version(package_name)
         return True
-    except pkg_resources.DistributionNotFound:
+    except importlib.metadata.PackageNotFoundError:
         return False
+    
 def extract_version(tag_name):
     pattern = r'(\d+\.\d+\.\d+)-'
     match = re.search(pattern, tag_name)
@@ -145,7 +145,7 @@ def check_and_uninstall_websocket():
     interpreter = sys.executable
 
     # 检查websocket库是否已安装
-    installed_packages = {pkg.key for pkg in pkg_resources.working_set}
+    installed_packages = {dist.metadata['Name'].lower() for dist in importlib.metadata.distributions()}
     websocket_installed = "websocket" in installed_packages
     websocket_client_installed = "websocket-client" in installed_packages
 
