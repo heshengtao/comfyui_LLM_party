@@ -2,6 +2,7 @@ import base64
 import datetime
 import hashlib
 import io
+import locale
 import os
 import time
 
@@ -14,8 +15,11 @@ import torchaudio
 from openai import OpenAI
 from scipy.io.wavfile import write
 
-from ..config import config_path, current_dir_path, load_api_keys
-
+current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+config_path = os.path.join(current_dir_path, "config.ini")
+import configparser
+config = configparser.ConfigParser()
+config.read(config_path)
 # 设置录音参数
 fs = 44100  # 采样率
 
@@ -132,12 +136,10 @@ class openai_whisper:
     def whisper(self, is_enable=True, audio_path="", base_url=None, api_key=None):
         if is_enable == False:
             return (None,)
-
-        api_keys = load_api_keys(config_path)
         if api_key != "":
             openai.api_key = api_key
-        elif api_keys.get("openai_api_key") != "":
-            openai.api_key = api_keys.get("openai_api_key")
+        elif config.get("API_KEYS", "openai_api_key") != "":
+            openai.api_key = config.get("API_KEYS", "openai_api_key")
         else:
             openai.api_key = os.environ.get("OPENAI_API_KEY")
         if base_url != "":
@@ -146,8 +148,8 @@ class openai_whisper:
                 openai.base_url = base_url
             else:
                 openai.base_url = base_url + "/"
-        elif api_keys.get("base_url") != "":
-            openai.base_url = api_keys.get("base_url")
+        elif config.get("API_KEYS", "base_url") != "":
+            openai.base_url = config.get("API_KEYS", "base_url")
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
         if openai.api_key == "":
@@ -162,3 +164,29 @@ class openai_whisper:
             out = None
 
         return (out,)
+
+NODE_CLASS_MAPPINGS = {
+    "listen_audio": listen_audio,
+    "openai_whisper": openai_whisper,
+}
+lang = locale.getdefaultlocale()[0]
+import os
+import sys
+
+
+try:
+    language = config.get("API_KEYS", "language")
+except:
+    language = ""
+if language == "zh_CN" or language=="en_US":
+    lang=language
+if lang == "zh_CN":
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "listen_audio": "监听音频",
+        "openai_whisper": "OpenAI语音识别",
+    }
+else:
+    NODE_DISPLAY_NAME_MAPPINGS = {
+        "listen_audio": "Listen Audio",
+        "openai_whisper": "OpenAI Whisper",
+    }

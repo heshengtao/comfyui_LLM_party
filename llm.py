@@ -137,7 +137,6 @@ from .tools.tool_combine import tool_combine, tool_combine_plus
 from .tools.translate_persona import translate_persona
 from .tools.tts import openai_tts
 from .tools.wechat import send_wechat, work_wechat, work_wechat_tool
-from .tools.whisper import listen_audio, openai_whisper
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import work_flow, workflow_tool, workflow_transfer
 from .tools.flux_persona import flux_persona
@@ -2010,8 +2009,6 @@ NODE_CLASS_MAPPINGS = {
     "omost_setting": omost_setting,
     "keyword_tool": keyword_tool,
     "load_keyword": load_keyword,
-    "listen_audio": listen_audio,
-    "openai_whisper": openai_whisper,
     "story_json_tool": story_json_tool,
     "KG_json_toolkit_developer": KG_json_toolkit_developer,
     "KG_json_toolkit_user": KG_json_toolkit_user,
@@ -2122,8 +2119,6 @@ if lang == "zh_CN":
         "omost_setting": "omost设置",
         "keyword_tool": "搜索关键词工具",
         "load_keyword": "加载关键词检索器",
-        "listen_audio": "监听音频",
-        "openai_whisper": "OpenAI语音识别",
         "story_json_tool": "故事JSON工具",
         "KG_json_toolkit_developer": "知识图谱JSON工具包开发者版",
         "KG_json_toolkit_user": "知识图谱JSON工具包用户版",
@@ -2228,8 +2223,6 @@ else:
         "omost_setting": "omost Setting",
         "keyword_tool": "Search Keyword Tool",
         "load_keyword": "Load Keyword Searcher",
-        "listen_audio": "Listen Audio",
-        "openai_whisper": "OpenAI Whisper",
         "story_json_tool": "Story JSON Tool",
         "KG_json_toolkit_developer": "KG JSON Toolkit Developer",
         "KG_json_toolkit_user": "KG JSON Toolkit User",
