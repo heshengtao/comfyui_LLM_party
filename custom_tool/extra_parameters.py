@@ -92,6 +92,6 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "openai额外参数"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "额外参数"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "openai Extra Parameters"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "Extra Parameters"}
