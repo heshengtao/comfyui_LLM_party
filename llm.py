@@ -344,12 +344,9 @@ def convert_to_gemini(openai_history):
     for entry in openai_history:
         role = entry["role"]
         if role == "system":
-            role = "user"
             content = entry["content"]
-            gemini_history = []
-            gemini_history.append({"role": role, "parts": [{"text": content}]})
-            return gemini_history
-    return openai_history
+            return content
+    return ""
 
 def convert_tool_to_gemini(openai_tools):
     gemini_tools = []
@@ -392,7 +389,7 @@ class genChat:
             if tools is None:
                 tools = []
             # Function to convert OpenAI history to Gemini history
-            history= convert_to_gemini(history)
+            System_prompt= convert_to_gemini(history)
             if images is not None:
                 i = 255.0 * images[0].cpu().numpy()
                 img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
@@ -409,11 +406,11 @@ class genChat:
             # 如果extra_parameters["response_format"]存在就删除它
             if "response_format" in extra_parameters:
                 del extra_parameters["response_format"]
-                model = genai.GenerativeModel(self.model_name,tools=tool_list,generation_config={"response_mime_type": "application/json"})
+                model = genai.GenerativeModel(self.model_name,tools=tool_list,system_instruction=System_prompt,generation_config={"response_mime_type": "application/json"})
             else:
-                model = genai.GenerativeModel(self.model_name,tools=tool_list)
+                model = genai.GenerativeModel(self.model_name,tools=tool_list,system_instruction=System_prompt)
             response = model.generate_content(
-                contents= history,
+                contents= history[1:],
                 generation_config={
                     "temperature": temperature,
                     "max_output_tokens": max_length,
@@ -448,7 +445,7 @@ class genChat:
                 print("调用结果：" + str(results))
                 history.append(res)
                 response = model.generate_content(
-                    contents= history,
+                    contents= history[1:],
                     generation_config={
                         "temperature": temperature,
                         "max_output_tokens": max_length,
