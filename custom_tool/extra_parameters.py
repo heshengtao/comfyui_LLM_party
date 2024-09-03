@@ -9,15 +9,15 @@ class extra_parameters:
                 "json_out": ("BOOLEAN", {"default": False}),
                 "n": ("INT", {"default": 1}),
                 "stop": ("STRING", {"default": ""}),
-                "presence_penalty": ("FLOAT", {"default": 0.0}),
-                "frequency_penalty": ("FLOAT", {"default": 0.0}),
-                "repetition_penalty": ("FLOAT", {"default": 1.0}),
+                "presence_penalty": ("FLOAT", {"default": 0.0,"min": 0.0, "max": 1.0,"step": 0.1}),
+                "frequency_penalty": ("FLOAT", {"default": 0.0,"min": 0.0, "max": 1.0,"step": 0.1}),
+                "repetition_penalty": ("FLOAT", {"default": 1.0,"min": 0.0, "max": 1.0,"step": 0.1}),
                 "min_length": ("INT", {"default": 0}),
                 "logprobs": ("BOOLEAN", {"default": False}),
                 "echo": ("BOOLEAN", {"default": False}),
                 "best_of": ("INT", {"default": 1}),
                 "user": ("STRING", {"default": ""}),
-                "top_p": ("FLOAT", {"default": 1.0}),
+                "top_p": ("FLOAT", {"default": 1.0,"min": 0.0, "max": 1.0,"step": 0.1}),
                 "top_k": ("INT", {"default": 50}),
             }
         }
@@ -92,6 +92,6 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "额外参数"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "openai额外参数"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "Extra Parameters"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "openai Extra Parameters"}

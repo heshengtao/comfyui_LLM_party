@@ -396,7 +396,7 @@ class genChat:
             if images is not None:
                 i = 255.0 * images[0].cpu().numpy()
                 img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
-                new_message = {"role": "user", "parts": [{"text": "图中有什么"},{"inline_data": img}]}
+                new_message = {"role": "user", "parts": [{"text": user_prompt},{"inline_data": img}]}
             else:
                 new_message = {"role": "user", "parts": [{"text": user_prompt}]}
             
@@ -406,7 +406,12 @@ class genChat:
             tool_list={
                 'function_declarations':  tools
             }
-            model = genai.GenerativeModel(self.model_name,tools=tool_list)
+            # 如果extra_parameters["response_format"]存在就删除它
+            if "response_format" in extra_parameters:
+                del extra_parameters["response_format"]
+                model = genai.GenerativeModel(self.model_name,tools=tool_list,generation_config={"response_mime_type": "application/json"})
+            else:
+                model = genai.GenerativeModel(self.model_name,tools=tool_list)
             response = model.generate_content(
                 contents= history,
                 generation_config={
