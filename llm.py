@@ -403,6 +403,9 @@ class genChat:
             tool_list={
                 'function_declarations':  tools
             }
+            if "n" in extra_parameters:
+                extra_parameters["candidate_count"]= extra_parameters["n"]
+                del extra_parameters["n"]
             # 如果extra_parameters["response_format"]存在就删除它
             if "response_format" in extra_parameters:
                 del extra_parameters["response_format"]
