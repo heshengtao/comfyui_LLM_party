@@ -13,7 +13,7 @@ import requests
 import sounddevice as sd
 import torchaudio
 from openai import OpenAI
-from scipy.io.wavfile import write
+import soundfile as sf
 
 current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir_path, "config.ini")
@@ -37,7 +37,7 @@ def record_audio():
 
 # 保存录音文件
 def save_recording(recording, file_path):
-    write(file_path, fs, recording)  # 直接保存为wav文件
+    sf.write(file_path, recording, fs)  # 直接保存为wav文件
     print(f"录音已保存到：{file_path}")
 
 

@@ -27,14 +27,12 @@ py-cpuinfo
 diskcache
 requests_toolbelt
 tabulate
-chardet
+charamel
 tenacity
 cpm_kernels
 pydub
 keyboard
 sounddevice
-scipy
-gradio_client
 neo4j
 ChatTTS
 soundfile

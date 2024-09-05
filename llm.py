@@ -51,7 +51,6 @@ from .tools.classify_function import classify_function, classify_function_plus
 from .tools.classify_persona import classify_persona, classify_persona_plus
 from .tools.clear_file import clear_file
 from .tools.clear_model import clear_model
-from .tools.CosyVoice import CosyVoice
 from .tools.custom_persona import custom_persona
 from .tools.dialog import end_dialog, start_dialog
 from .tools.dingding import Dingding, Dingding_tool, send_dingding
@@ -2015,7 +2014,6 @@ NODE_CLASS_MAPPINGS = {
     "KG_csv_toolkit_developer": KG_csv_toolkit_developer,
     "KG_csv_toolkit_user": KG_csv_toolkit_user,
     "replace_string": replace_string,
-    "CosyVoice": CosyVoice,
     "KG_neo_toolkit_developer": KG_neo_toolkit_developer,
     "KG_neo_toolkit_user": KG_neo_toolkit_user,
     "translate_persona": translate_persona,
@@ -2125,7 +2123,6 @@ if lang == "zh_CN":
         "KG_csv_toolkit_developer": "知识图谱CSV工具包开发者版",
         "KG_csv_toolkit_user": "知识图谱CSV工具包用户版",
         "replace_string": "替换字符串",
-        "CosyVoice": "CosyVoice语音合成",
         "KG_neo_toolkit_developer": "知识图谱Neo4j工具包开发者版",
         "KG_neo_toolkit_user": "知识图谱Neo4j工具包用户版",
         "translate_persona": "翻译面具",
@@ -2229,7 +2226,6 @@ else:
         "KG_csv_toolkit_developer": "KG CSV Toolkit Developer",
         "KG_csv_toolkit_user": "KG CSV Toolkit User",
         "replace_string": "Replace String",
-        "CosyVoice": "CosyVoice TTS",
         "KG_neo_toolkit_developer": "KG Neo4j Toolkit Developer",
         "KG_neo_toolkit_user": "KG Neo4j Toolkit User",
         "translate_persona": "Translate Persona",

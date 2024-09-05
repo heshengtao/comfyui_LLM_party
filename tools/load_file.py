@@ -1,7 +1,8 @@
 import json
 import os
 
-import chardet
+import pandas as pd
+from charamel import Detector
 import docx2txt
 import numpy as np
 import openpyxl
@@ -66,9 +67,10 @@ def read_one(path):
                     text += "| " + " | ".join([str(cell) for cell in sheet.row_values(row_num)]) + " |\n"
     elif path.endswith(".csv"):
         # 检测文件编码
+        detector = Detector()
         with open(path, "rb") as file:
-            result = chardet.detect(file.read())
-            encoding = result["encoding"]
+            content = file.read()
+        encoding = detector.detect(content)
         df = pd.read_csv(path, encoding=encoding)
         text += df.to_markdown(index=True)
     elif path.endswith(".txt"):
