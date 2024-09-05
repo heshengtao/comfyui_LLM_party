@@ -29,19 +29,10 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭建自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建;从个人用户需要的接入自己的社交APP(QQ、飞书、Discord)，到流媒体工作者需要的一站式LLM+TTS+ComfyUI工作流；从普通学生所需要的第一个LLM应用的简单上手起步，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在ComfyUI LLM Party中找到答案。
 
 ## 最新更新
-1. 新增了Gemini API加载器节点，现在兼容Gemini官方的API啦！如果你是国内网络环境，如果出现API地区受限制的问题，请将节点切换到美国，并使用TUN模式。由于Gemini在工具调用时，如果返回的参数中包含中文字符会出现返回码为500的报错，因此部分工具节点不可用。示例工作流：[start_with_gemini](workflow/start_with_gemini.json)
-2. 新增lore book节点，可以在与LLM对话时插入你的背景设定，示例工作流：[lorebook](workflow/lorebook.json)
-3. 新增了FLUX提示词生成器面具节点，可以生成炉石卡牌、游戏王卡牌、海报、漫画等多种风格的提示词，可以让FLUX模型直出。参考工作流：[FLUX提示词](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
-4. 可以使用这个LLM工具制造机自动生成LLM工具，把你生成的工具代码保存为一个python文件中，然后把代码复制到custom_tool文件夹下，然后你就创造了一个新的节点。示例工作流：[LLM工具生成器](workflow/LLM工具制造机.json)。
-5. 支持了duckduckgo搜索，但是有很大的限制，似乎只能输入英文关键词，关键词也不能出现多个概念，优势在于没有任何APIkey的限制。
-6. 支持了多个知识库分开调用的功能，可以在提示词内明确是使用哪个知识库的知识回答问题。示例工作流：[多知识库分别调用](workflow/多知识库分别调用.json)。
-7. 支持LLM输入额外参数，包括json out等高级参数。示例工作流：[LLM输入额外参数](workflow/LLM额外参数eg_JSON_OUT.json)。[用json_out分离提示词](workflow/用json_out分离提示词.json)。
-8. 新增将智能体接入discord的功能。(还在测试中)
-9. 新增将智能体接入飞书的功能，超级感谢[guobalove](https://github.com/guobalove)的贡献！参考工作流
-[飞书机器人](workflow/飞书机器人.json)。
-10. 新增了万能API调用节点以及大量的辅助节点，用于构造请求体和抓取响应中的信息。
-11. 新增了清空模型节点，可以在任意位置将LLM从显存中卸载！
-12. 已添加了[chatTTS](https://github.com/2noise/ChatTTS)节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！`model_path`参数可以为空！推荐使用HF模式加载模型，模型会自动从hugging face上下载，无需手动下载；如果使用local加载，请将模型的`asset`和`config`文件夹放到根目录下。[百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu；如果使用`custom`模式加载，请将模型的`asset`和`config`文件夹放到`model_path`下。
+1. 更新了4个迭代器节点（文字迭代器、图片迭代器、表格迭代器、json迭代器），迭代器模式有：顺序、随机和无限三种模式。顺序会按顺序依次输出，直到超出索引上限自动中止进程，随机会选择一个随机索引输出，无限会无限循环输出。
+2. 新增了Gemini API加载器节点，现在兼容Gemini官方的API啦！如果你是国内网络环境，如果出现API地区受限制的问题，请将节点切换到美国，并使用TUN模式。由于Gemini在工具调用时，如果返回的参数中包含中文字符会出现返回码为500的报错，因此部分工具节点不可用。示例工作流：[start_with_gemini](workflow/start_with_gemini.json)
+3. 新增lore book节点，可以在与LLM对话时插入你的背景设定，示例工作流：[lorebook](workflow/lorebook.json)
+4. 新增了FLUX提示词生成器面具节点，可以生成炉石卡牌、游戏王卡牌、海报、漫画等多种风格的提示词，可以让FLUX模型直出。参考工作流：[FLUX提示词](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
 
 ## 使用说明
 1. 节点的使用说明请参考：[怎么使用节点](how_to_use_nodes_ZH.md)
@@ -162,6 +153,16 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 30. 新建了custom_tool文件夹，用于存放自定义工具的代码，可以参考[custom_tool](custom_tool)文件夹中的代码，将自定义工具的代码放入custom_tool文件夹中，即可在LLM中调用自定义工具。
 31. 新增了知识图谱工具，让LLM与知识图谱可以完美交互，LLM可以根据你的输入修改知识图谱，可以在知识图谱上推理以获取你需要的答案。示例工作流参考：[graphRAG_neo4j](workflow/graphRAG_neo4j.json)
 32. 新增了人格AI功能，0代码开发自己的女友AI或男友AI，无限对话，永久记忆，人设稳定。示例工作流参考：[麦洛薇人格AI](workflow/麦洛薇人格AI.json)
+33. 可以使用这个LLM工具制造机自动生成LLM工具，把你生成的工具代码保存为一个python文件中，然后把代码复制到custom_tool文件夹下，然后你就创造了一个新的节点。示例工作流：[LLM工具生成器](workflow/LLM工具制造机.json)。
+34. 支持了duckduckgo搜索，但是有很大的限制，似乎只能输入英文关键词，关键词也不能出现多个概念，优势在于没有任何APIkey的限制。
+35. 支持了多个知识库分开调用的功能，可以在提示词内明确是使用哪个知识库的知识回答问题。示例工作流：[多知识库分别调用](workflow/多知识库分别调用.json)。
+36. 支持LLM输入额外参数，包括json out等高级参数。示例工作流：[LLM输入额外参数](workflow/LLM额外参数eg_JSON_OUT.json)。[用json_out分离提示词](workflow/用json_out分离提示词.json)。
+37. 新增将智能体接入discord的功能。(还在测试中)
+38. 新增将智能体接入飞书的功能，超级感谢[guobalove](https://github.com/guobalove)的贡献！参考工作流
+[飞书机器人](workflow/飞书机器人.json)。
+39. 新增了万能API调用节点以及大量的辅助节点，用于构造请求体和抓取响应中的信息。
+40. 新增了清空模型节点，可以在任意位置将LLM从显存中卸载！
+41. 已添加了[chatTTS](https://github.com/2noise/ChatTTS)节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！`model_path`参数可以为空！推荐使用HF模式加载模型，模型会自动从hugging face上下载，无需手动下载；如果使用local加载，请将模型的`asset`和`config`文件夹放到根目录下。[百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu；如果使用`custom`模式加载，请将模型的`asset`和`config`文件夹放到`model_path`下。
 
 ## 下一步计划：
 1. 更多的模型适配，至少可以覆盖主流的大模型API接口和主流的开源模型的本地调用，以及更多的LVM模型的适配，目前我还只适配了GPT4的视觉功能的调用；
