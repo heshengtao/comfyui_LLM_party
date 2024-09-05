@@ -30,7 +30,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 
 
 ## Latest update
-1. Updated 4 iterator nodes (text iterator, picture iterator, table iterator, json iterator). The iterator modes are: sequential, random, and infinite. The order will be output in sequence until the index limit is exceeded, the process will be automatically aborted, and the index value will be reset to 0. Random will choose a random index output, and infinite will loop output.
+1. Updated 4 iterator nodes (text iterator, picture iterator, excel iterator, json iterator). The iterator modes are: sequential, random, and infinite. The order will be output in sequence until the index limit is exceeded, the process will be automatically aborted, and the index value will be reset to 0. Random will choose a random index output, and infinite will loop output.
 2. Added Gemini API loader node, now compatible with Gemini official API!Since Gemini generates an error with a return code of 500 if the returned parameter contains Chinese characters during the tool call, some tool nodes are unavailable.example workflow:[start_with_gemini](workflow/start_with_gemini.json)
 3. Added lore book node, you can insert your background settings when talking to LLM, example workflow: [lorebook](workflow/lorebook.json)
 4. Added FLUX prompt word generator mask node, which can generate Hearthstone cards, Game King cards, posters, comics and other styles of prompt words, which can make the FLUX model straight out. Reference workflow: [FLUX prompt word](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
