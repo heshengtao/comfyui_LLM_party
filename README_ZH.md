@@ -147,22 +147,21 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 24. 新增了将消息发送到企业微信、钉钉和飞书的LLM工具以及可供调用的外部函数。
 25. 新增了一个文本迭代器，可以每次只输出一部分的字符，是根据回车符号和chunk size来安全分割文本的，不会从文本中间分割。chunk_overlap是指分割的文本重叠多少字符。这样可以批量输入超长文本，只要无脑点击，或者开启comfyui里的循环执行就行了，就可以自动执行完了。记得开启is_locked属性，可以在输入结束时，自动锁住工作流，不会继续执行。示例工作流：[文本迭代输入](workflow/文本迭代输入.json)
 26. 在本地LLM加载器、本地llava加载器上添加了model name属性，如果为空，则使用节点中的各类本地path加载。如果不为空，则会使用`config.ini`中你自己填写的路径参数加载。如果不为空且不在`config.ini`中，则会从huggingface上下载或则从huggingface的模型保存目录中加载。如果你想从huggingface上下载，请按照例如：`THUDM/glm-4-9b-chat`的格式填写model name属性。注意！这样子加载的模型必须适配transformer库。
-27. 适配了[CosyVoice](https://github.com/FunAudioLLM/CosyVoice)，现在可以无需下载任何模型或者任何API key，直接使用TTS功能。目前该接口只适配了中文。
-26. 新增了JSON文件解析节点和JSON取值节点，可以让你从文件或者文本中获取某一个键的值。感谢[guobalove](https://github.com/guobalove)的贡献！
-29. 改进了工具调用的代码，现在没有工具调用功能的LLM也可以开启is_tools_in_sys_prompt属性（本地LLM默认无需开启，自动适配），开启之后，工具信息会添加到系统提示词中，这样LLM就可以调用工具了。实现原理的相关论文：[Achieving Tool Calling Functionality in LLMs Using Only Prompt Engineering Without Fine-Tuning](https://arxiv.org/abs/2407.04997)
-30. 新建了custom_tool文件夹，用于存放自定义工具的代码，可以参考[custom_tool](custom_tool)文件夹中的代码，将自定义工具的代码放入custom_tool文件夹中，即可在LLM中调用自定义工具。
-31. 新增了知识图谱工具，让LLM与知识图谱可以完美交互，LLM可以根据你的输入修改知识图谱，可以在知识图谱上推理以获取你需要的答案。示例工作流参考：[graphRAG_neo4j](workflow/graphRAG_neo4j.json)
-32. 新增了人格AI功能，0代码开发自己的女友AI或男友AI，无限对话，永久记忆，人设稳定。示例工作流参考：[麦洛薇人格AI](workflow/麦洛薇人格AI.json)
-33. 可以使用这个LLM工具制造机自动生成LLM工具，把你生成的工具代码保存为一个python文件中，然后把代码复制到custom_tool文件夹下，然后你就创造了一个新的节点。示例工作流：[LLM工具生成器](workflow/LLM工具制造机.json)。
-34. 支持了duckduckgo搜索，但是有很大的限制，似乎只能输入英文关键词，关键词也不能出现多个概念，优势在于没有任何APIkey的限制。
-35. 支持了多个知识库分开调用的功能，可以在提示词内明确是使用哪个知识库的知识回答问题。示例工作流：[多知识库分别调用](workflow/多知识库分别调用.json)。
-36. 支持LLM输入额外参数，包括json out等高级参数。示例工作流：[LLM输入额外参数](workflow/LLM额外参数eg_JSON_OUT.json)。[用json_out分离提示词](workflow/用json_out分离提示词.json)。
-37. 新增将智能体接入discord的功能。(还在测试中)
-38. 新增将智能体接入飞书的功能，超级感谢[guobalove](https://github.com/guobalove)的贡献！参考工作流
+27. 新增了JSON文件解析节点和JSON取值节点，可以让你从文件或者文本中获取某一个键的值。感谢[guobalove](https://github.com/guobalove)的贡献！
+28. 改进了工具调用的代码，现在没有工具调用功能的LLM也可以开启is_tools_in_sys_prompt属性（本地LLM默认无需开启，自动适配），开启之后，工具信息会添加到系统提示词中，这样LLM就可以调用工具了。实现原理的相关论文：[Achieving Tool Calling Functionality in LLMs Using Only Prompt Engineering Without Fine-Tuning](https://arxiv.org/abs/2407.04997)
+29. 新建了custom_tool文件夹，用于存放自定义工具的代码，可以参考[custom_tool](custom_tool)文件夹中的代码，将自定义工具的代码放入custom_tool文件夹中，即可在LLM中调用自定义工具。
+30. 新增了知识图谱工具，让LLM与知识图谱可以完美交互，LLM可以根据你的输入修改知识图谱，可以在知识图谱上推理以获取你需要的答案。示例工作流参考：[graphRAG_neo4j](workflow/graphRAG_neo4j.json)
+31. 新增了人格AI功能，0代码开发自己的女友AI或男友AI，无限对话，永久记忆，人设稳定。示例工作流参考：[麦洛薇人格AI](workflow/麦洛薇人格AI.json)
+32. 可以使用这个LLM工具制造机自动生成LLM工具，把你生成的工具代码保存为一个python文件中，然后把代码复制到custom_tool文件夹下，然后你就创造了一个新的节点。示例工作流：[LLM工具生成器](workflow/LLM工具制造机.json)。
+33. 支持了duckduckgo搜索，但是有很大的限制，似乎只能输入英文关键词，关键词也不能出现多个概念，优势在于没有任何APIkey的限制。
+34. 支持了多个知识库分开调用的功能，可以在提示词内明确是使用哪个知识库的知识回答问题。示例工作流：[多知识库分别调用](workflow/多知识库分别调用.json)。
+35. 支持LLM输入额外参数，包括json out等高级参数。示例工作流：[LLM输入额外参数](workflow/LLM额外参数eg_JSON_OUT.json)。[用json_out分离提示词](workflow/用json_out分离提示词.json)。
+36. 新增将智能体接入discord的功能。(还在测试中)
+37. 新增将智能体接入飞书的功能，超级感谢[guobalove](https://github.com/guobalove)的贡献！参考工作流
 [飞书机器人](workflow/飞书机器人.json)。
-39. 新增了万能API调用节点以及大量的辅助节点，用于构造请求体和抓取响应中的信息。
-40. 新增了清空模型节点，可以在任意位置将LLM从显存中卸载！
-41. 已添加了[chatTTS](https://github.com/2noise/ChatTTS)节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！`model_path`参数可以为空！推荐使用HF模式加载模型，模型会自动从hugging face上下载，无需手动下载；如果使用local加载，请将模型的`asset`和`config`文件夹放到根目录下。[百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu；如果使用`custom`模式加载，请将模型的`asset`和`config`文件夹放到`model_path`下。
+38. 新增了万能API调用节点以及大量的辅助节点，用于构造请求体和抓取响应中的信息。
+39. 新增了清空模型节点，可以在任意位置将LLM从显存中卸载！
+40. 已添加了[chatTTS](https://github.com/2noise/ChatTTS)节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！`model_path`参数可以为空！推荐使用HF模式加载模型，模型会自动从hugging face上下载，无需手动下载；如果使用local加载，请将模型的`asset`和`config`文件夹放到根目录下。[百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu；如果使用`custom`模式加载，请将模型的`asset`和`config`文件夹放到`model_path`下。
 
 ## 下一步计划：
 1. 更多的模型适配，至少可以覆盖主流的大模型API接口和主流的开源模型的本地调用，以及更多的LVM模型的适配，目前我还只适配了GPT4的视觉功能的调用；
@@ -187,10 +186,9 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 ## 借物表
 本项目中的一些节点借鉴了以下项目，感谢他们在开源社区中的贡献！
-1. [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
-2. [omost](https://github.com/lllyasviel/Omost)
-3. [chatTTS](https://github.com/2noise/ChatTTS)
-4. [CosyVoice](https://github.com/FunAudioLLM/CosyVoice)
+1. [pythongosssss/ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
+2. [lllyasviel/Omost](https://github.com/lllyasviel/Omost)
+3. [2noise/ChatTTS](https://github.com/2noise/ChatTTS)
 
 ## 支持：
 
