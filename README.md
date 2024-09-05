@@ -7,7 +7,7 @@
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baidu cloud</a> ·
   <a href="img/Q群.jpg">QQ group</a> ·
   <a href="https://discord.gg/gxrQAYy6">discord</a> ·
-  <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">About us</a>  
+  <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">About us</a>
 </div>
 
 ####
@@ -186,7 +186,7 @@ This open-source project and its contents (hereinafter referred to as "Project")
   <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
 
-## loan list 
+## loan list
 Some of the nodes in this project have borrowed from the following projects. Thank you for your contributions to the open-source community!
 1. [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
 2. [omost](https://github.com/lllyasviel/Omost)
@@ -220,7 +220,8 @@ If my work has brought value to your day, consider fueling it with a coffee! You
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fheshengtao%2Fcomfyui_LLM_party.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fheshengtao%2Fcomfyui_LLM_party?ref=badge_shield)
+[![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fheshengtao%2Fcomfyui_LLM_party.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fheshengtao%2Fcomfyui_LLM_party?ref=badge_shield)
 
 
 

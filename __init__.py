@@ -1,6 +1,9 @@
 import inspect
 import os
 import shutil
+
+from server import PromptServer
+
 from .install import (
     check_and_uninstall_websocket,
     get_system_info,
@@ -10,9 +13,6 @@ from .install import (
     manage_discord_packages,
 )
 from .llm import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
-from server import PromptServer
-
-
 
 
 def get_comfy_dir(subpath=None, mkdir=False):
@@ -56,16 +56,17 @@ def copy_js_files():
             print(f"无法删除文件 {file_path}: {e}")
 
     # 获取当前文件夹中web子文件夹下的所有.js文件
-    js_files = [f for f in os.listdir(os.path.join(current_folder, "web","js")) if f.endswith(".js")]
+    js_files = [f for f in os.listdir(os.path.join(current_folder, "web", "js")) if f.endswith(".js")]
 
     # 复制文件
     for file_name in js_files:
-        source_file = os.path.join(current_folder, "web","js", file_name)
+        source_file = os.path.join(current_folder, "web", "js", file_name)
         target_file = os.path.join(target_folder, file_name)
         try:
             shutil.copy2(source_file, target_file)
         except Exception as e:
             print(f"无法复制文件 {source_file} 到 {target_file}: {e}")
+
 
 install_portaudio()
 copy_js_files()

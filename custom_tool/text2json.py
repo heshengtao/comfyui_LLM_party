@@ -42,6 +42,7 @@ class text2json:
 
 import json
 
+
 class text2parameters:
     @classmethod
     def INPUT_TYPES(s):
@@ -62,21 +63,23 @@ class text2parameters:
         return (json_data,)
 
 
-NODE_CLASS_MAPPINGS = {"text2json": text2json,"text2parameters": text2parameters}
+NODE_CLASS_MAPPINGS = {"text2json": text2json, "text2parameters": text2parameters}
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"text2json": "文本分割成json🐶", "text2parameters": "文本转参数"}
 else:

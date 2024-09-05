@@ -18,6 +18,7 @@ from scipy.io.wavfile import write
 current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir_path, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 # 设置录音参数
@@ -165,6 +166,7 @@ class openai_whisper:
 
         return (out,)
 
+
 NODE_CLASS_MAPPINGS = {
     "listen_audio": listen_audio,
     "openai_whisper": openai_whisper,
@@ -173,13 +175,12 @@ lang = locale.getdefaultlocale()[0]
 import os
 import sys
 
-
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "listen_audio": "监听音频",
