@@ -220,4 +220,9 @@ If my work has brought value to your day, consider fueling it with a coffee! You
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fheshengtao%2Fcomfyui_LLM_party.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fheshengtao%2Fcomfyui_LLM_party?ref=badge_shield)
+
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fheshengtao%2Fcomfyui_LLM_party.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fheshengtao%2Fcomfyui_LLM_party?ref=badge_large)
