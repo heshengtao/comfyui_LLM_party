@@ -380,7 +380,7 @@ def New_entities(name, attributes=None):
             return "该实体节点已存在" + "\n" + "实体节点信息：" + "\n" + str(i)
     # 添加实体节点
     if attributes is None:
-        attributes = {}
+        attributes = "{}"
     data["entities"].append({"name": name, "attributes": json.loads(attributes)})
     with open(KG_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
@@ -392,7 +392,7 @@ def Modify_entities(name, attributes=None):
         data = json.load(f)
     is_exist = False
     if attributes is None:
-        attributes = {}
+        attributes = "{}"
     # 检查实体节点是否存在
     for i in data["entities"]:
         if i["name"] == name:
@@ -488,7 +488,7 @@ def New_relationships(source, target, type, attributes=None):
                 return "该关系边已存在" + "\n" + "关系边信息：" + "\n" + str(i)
     # 添加关系边
     if attributes is None:
-        attributes = {}
+        attributes = "{}"
     data["relationships"].append(
         {"type": type, "source": source, "target": target, "attributes": json.loads(attributes)}
     )
@@ -502,7 +502,7 @@ def Modify_relationships(source, target, type, attributes=None):
         data = json.load(f)
     is_exist = False
     if attributes is None:
-        attributes = {}
+        attributes = "{}"
     # 检查关系边是否存在
     for i in data["relationships"]:
         if i["source"] == source and i["target"] == target:
