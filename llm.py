@@ -1898,54 +1898,6 @@ class LLM_local:
         return hash_value
 
 
-class LLavaLoader:
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "model_name": ("STRING", {"default": ""}),
-                "ckpt_path": ("STRING", {"default": ""}),
-                "clip_path": ("STRING", {"default": ""}),
-                "max_ctx": ("INT", {"default": 2048, "min": 300, "max": 100000, "step": 64}),
-                "gpu_layers": ("INT", {"default": 27, "min": 0, "max": 100, "step": 1}),
-                "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
-            }
-        }
-
-    RETURN_TYPES = ("CUSTOM",)
-    RETURN_NAMES = ("model",)
-    FUNCTION = "load_llava_checkpoint"
-
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
-
-    def load_llava_checkpoint(self, model_name, ckpt_path, max_ctx, gpu_layers, n_threads, clip_path):
-        from llama_cpp import Llama
-        from llama_cpp.llama_chat_format import Llava15ChatHandler
-
-        if ckpt_path != "" and clip_path != "":
-            model_name = ""
-        if model_name in config_key:
-            ckpt_path = config_key[model_name].get("ckpt_path")
-            clip_path = config_key[model_name].get("clip_path")
-        clip = Llava15ChatHandler(clip_model_path=clip_path, verbose=False)
-        llm = Llama(
-            model_path=ckpt_path,
-            chat_handler=clip,
-            offload_kqv=True,
-            f16_kv=True,
-            use_mlock=False,
-            embedding=False,
-            n_batch=1024,
-            last_n_tokens_size=1024,
-            verbose=True,
-            seed=42,
-            n_ctx=max_ctx,
-            n_gpu_layers=gpu_layers,
-            n_threads=n_threads,
-            logits_all=True,
-            echo=False,
-        )
-        return (llm,)
 
 
 NODE_CLASS_MAPPINGS = {
@@ -1954,7 +1906,6 @@ NODE_CLASS_MAPPINGS = {
     "LLM_api_loader": LLM_api_loader,
     "genai_api_loader":genai_api_loader,
     "LLM_local_loader": LLM_local_loader,
-    "LLavaLoader": LLavaLoader,
     "load_ebd":load_ebd,
     "embeddings_function": embeddings_function,
     "load_file": load_file,
@@ -2064,7 +2015,6 @@ if lang == "zh_CN":
         "LLM_api_loader": "API大语言模型加载器",
         "genai_api_loader":"Gemini API加载器",
         "LLM_local_loader": "本地大语言模型加载器",
-        "LLavaLoader": "LVM加载器",
         "load_ebd": "加载词嵌入",
         "embeddings_function": "词向量检索",
         "load_file": "加载文件",
@@ -2167,7 +2117,6 @@ else:
         "LLM_api_loader": "API Large Language Model Loader",
         "genai_api_loader":"Gemini API Loader",
         "LLM_local_loader": "Local Large Language Model Loader",
-        "LLavaLoader": "LVM Loader",
         "llama_guff_loader": "llama-guff Loader",
         "load_ebd": "Load Embeddings",
         "embeddings_function": "Word Vector Search",

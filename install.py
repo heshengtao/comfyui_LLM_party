@@ -66,24 +66,27 @@ def extract_version(tag_name):
     return None
 
 def install_llama(system_info):
-    imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
-    if imported:
-        print("llama-cpp installed")
-    else:
-        avx = "AVX2" if system_info["avx2"] else "AVX"
-        
-        if system_info.get("gpu", False):
-            cuda_version = system_info["cuda_version"]
-            custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
-            print("cuda " + custom_command)
-        elif system_info.get("metal", False):
-            custom_command = f"--prefer-binary --extra-index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/basic/cpu"
-            print("mps " + custom_command)
+    try:
+        imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
+        if imported:
+            print("llama-cpp installed")
         else:
-            custom_command = f"--prefer-binary --extra-index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/cpu"
-            print("cpu " + custom_command)
-        
-        install_llama_package("llama-cpp-python", custom_command=custom_command)
+            avx = "AVX2" if system_info["avx2"] else "AVX"
+            
+            if system_info.get("gpu", False):
+                cuda_version = system_info["cuda_version"]
+                custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
+                print("cuda " + custom_command)
+            elif system_info.get("metal", False):
+                custom_command = f"--prefer-binary --extra-index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/basic/cpu"
+                print("mps " + custom_command)
+            else:
+                custom_command = f"--prefer-binary --extra-index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/cpu"
+                print("cpu " + custom_command)
+            
+            install_llama_package("llama-cpp-python", custom_command=custom_command)
+    except Exception as e:
+        print(f"Error installing llama-cpp-python: {e}")
 
 
 
