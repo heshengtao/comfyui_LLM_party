@@ -277,12 +277,4 @@ def manage_discord_packages():
         print("py-cord[voice] is already installed")
 
 
-install_portaudio()
-check_and_uninstall_websocket()
 
-# 调用函数
-system_info = get_system_info()
-install_llama(system_info)
-init_temp()
-# 调用函数
-manage_discord_packages()
