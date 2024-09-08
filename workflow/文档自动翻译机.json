@@ -1,0 +1,488 @@
+{
+  "last_node_id": 29,
+  "last_link_id": 41,
+  "nodes": [
+    {
+      "id": 23,
+      "type": "LLM_api_loader",
+      "pos": {
+        "0": 528,
+        "1": 264,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            36
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 26,
+      "type": "text_iterator",
+      "pos": {
+        "0": 534,
+        "1": 640,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 315,
+        "1": 178
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": [
+            38
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "file_content"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "text_iterator"
+      },
+      "widgets_values": [
+        "",
+        true,
+        false,
+        "sequential",
+        1024,
+        0
+      ]
+    },
+    {
+      "id": 27,
+      "type": "load_file",
+      "pos": {
+        "0": 131,
+        "1": 665,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": [
+            39
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "file_content"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_file"
+      },
+      "widgets_values": [
+        "E:\\GitHub\\readme\\README_ZH.md",
+        "test.txt",
+        true
+      ]
+    },
+    {
+      "id": 24,
+      "type": "LLM",
+      "pos": {
+        "0": 896,
+        "1": 276,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 444.24951171875,
+        "1": 548.9947509765625
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 36,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 40,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 38,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ]
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1381,
+        "1": 268,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 470.8409118652344,
+        "1": 572.3516235351562
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            41
+          ],
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "3. Kompatibel mit den meisten lokalen Modellen, die von der Klasse AutoModelForCausalLM der Transformer-Bibliothek unterstützt werden (wenn Sie unsicher sind, welchen Modelltyp Sie für lokale Modelle auswählen sollen, wählen Sie einfach llama, es sollte in den meisten Fällen kompatibel sein). Bisher getestete Modelle sind:\n* [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay) (empfohlen! Rollenspiel-Modell)\n* [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (empfohlen! Reichhaltiges Prompt-Modell)\n* [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)\n* [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)\n* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)\n* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (da GLM4 ein neues Aufrufformat verwendet, sind die Entwickler nicht in der Lage, alle lokalen großen Modelle aufrechtzuerhalten, da empfohlen wird, die lokale Aufrufmethode von ollama zu verwenden!)\n\n4. Modells download:\n* [Baidu Cloud Adresse](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), Entnahmecode: qyhu\n\n## Download\nVerwenden Sie eine der folgenden Methoden zur Installation\n### Methode eins:\n1. Suchen Sie im [ComfyUI-Manager](https://github.com/ltdrdata/ComfyUI-Manager) nach `comfyui_LLM_party` und installieren Sie es mit einem Klick.\n2. Starten Sie ComfyUI neu."
+      ]
+    },
+    {
+      "id": 28,
+      "type": "translate_persona",
+      "pos": {
+        "0": 536,
+        "1": 433,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 315,
+        "1": 154
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            40
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "system_prompt"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "translate_persona"
+      },
+      "widgets_values": [
+        true,
+        "中文",
+        "德语",
+        "正式",
+        5
+      ]
+    },
+    {
+      "id": 29,
+      "type": "text_writing",
+      "pos": {
+        "0": 1897,
+        "1": 279,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 41,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "text_writing"
+      },
+      "widgets_values": [
+        "",
+        "E:\\GitHub\\readme\\README_DE.md",
+        "a"
+      ]
+    }
+  ],
+  "links": [
+    [
+      36,
+      23,
+      0,
+      24,
+      0,
+      "CUSTOM"
+    ],
+    [
+      37,
+      24,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      38,
+      26,
+      0,
+      24,
+      4,
+      "STRING"
+    ],
+    [
+      39,
+      27,
+      0,
+      26,
+      0,
+      "STRING"
+    ],
+    [
+      40,
+      28,
+      0,
+      24,
+      3,
+      "STRING"
+    ],
+    [
+      41,
+      11,
+      0,
+      29,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6830134553650705,
+      "offset": [
+        -141.9012126528007,
+        30.203022894273484
+      ]
+    }
+  },
+  "version": 0.4
+}

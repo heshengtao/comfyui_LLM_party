@@ -131,7 +131,7 @@ from .tools.search_web import (
 from .tools.show_text import About_us, show_text_party
 from .tools.smalltool import bool_logic, load_int, none2false,str2float
 from .tools.story import read_story_json, story_json_tool
-from .tools.text_iterator import text_iterator
+from .tools.text_iterator import text_iterator,text_writing
 from .tools.tool_combine import tool_combine, tool_combine_plus
 from .tools.translate_persona import translate_persona
 from .tools.tts import openai_tts
@@ -2048,6 +2048,7 @@ NODE_CLASS_MAPPINGS = {
     "str2float":str2float,
     "json_iterator":json_iterator,
     "Lorebook":Lorebook,
+    "text_writing":text_writing,
 }
 
 
@@ -2157,6 +2158,7 @@ if lang == "zh_CN":
         "str2float":"字符串转浮点数",
         "json_iterator":"JSON迭代器",
         "Lorebook":"Lorebook传说书",
+        "text_writing":"文本写入",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2260,6 +2262,7 @@ else:
         "str2float": "String to Float",
         "json_iterator": "JSON Iterator",
         "Lorebook":"Lore book",
+        "text_writing":"Text write",
     }
 
 

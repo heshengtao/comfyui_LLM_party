@@ -72,3 +72,33 @@ class text_iterator:
     def IS_CHANGED(self, s):
         self.record = self.index
         return self.record
+
+class text_writing:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "text": ("STRING", {"default": ""}),
+                "file_path": ("STRING", {"default": ""}),
+                "mode": (["a","w"], {"default": "a"}),
+            },
+        }
+
+    RETURN_TYPES = ()
+    RETURN_NAMES = ()
+
+    FUNCTION = "file"
+
+    OUTPUT_NODE = True
+
+    CATEGORY = "大模型派对（llm_party）/函数（function）"
+
+    def file(self, text, file_path, mode="w"):
+        try:
+            # 根据模式打开文件，并指定编码为UTF-8
+            with open(file_path, mode, encoding="utf-8") as f:
+                f.write(text+"\n")
+        except Exception as e:
+            # 捕获并处理异常
+            raise ValueError(f"写入文件失败: {e}")
+        return ()

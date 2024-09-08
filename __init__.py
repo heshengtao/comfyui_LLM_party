@@ -27,17 +27,17 @@ def get_comfy_dir(subpath=None, mkdir=False):
     return dir
 
 
-def get_web_ext_dir():
-    dir = get_comfy_dir("web/extensions/party")
+def get_web_ext_dir(path):
+    dir = get_comfy_dir(path)
     if not os.path.exists(dir):
         os.makedirs(dir)
     return dir
 
 
-def copy_js_files():
+def copy_js_files(ext_path):
     # 设置当前文件夹路径和目标文件夹路径
     current_folder = os.path.dirname(os.path.abspath(__file__))
-    target_folder = get_web_ext_dir()  # 改为用户目录下的文件夹
+    target_folder = get_web_ext_dir(ext_path)  # 改为用户目录下的文件夹
 
     # 确保目标文件夹存在
     try:
@@ -68,7 +68,10 @@ def copy_js_files():
             print(f"无法复制文件 {source_file} 到 {target_file}: {e}")
 
 install_portaudio()
-copy_js_files()
+dir = get_comfy_dir("web_custom_versions")
+if os.path.exists(dir):
+    copy_js_files("web_custom_versions/party")
+copy_js_files("web/extensions/party")
 system_info = get_system_info()
 install_llama(system_info)
 check_and_uninstall_websocket()
