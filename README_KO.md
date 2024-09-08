@@ -35,13 +35,14 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정을 통해 나만의 AI 도우미를 신속하게 구축하고, 산업에 적용 가능한 단어 벡터 RAG, GraphRAG를 통해 산업 내 지식 관리 시스템을 로컬화합니다. 단일 지능체 파이프라인에서 복잡한 지능체 간의 방사형 상호작용 모드, 순환 상호작용 모드를 구성하는 것까지; 개인 사용자가 자신의 사회적 APP(QQ, Feishu, Discord)에 접속할 필요가 있는 것부터, 스트리밍 작업자가 필요로 하는 원스톱 LLM+TTS+ComfyUI 워크플로우까지; 일반 학생들이 필요로 하는 첫 번째 LLM 응용 프로그램의 간단한 시작부터, 연구자들이 자주 사용하는 다양한 파라미터 조정 인터페이스, 모델 적응까지. 이 모든 것을 ComfyUI LLM Party에서 확인할 수 있습니다.
 
 ## 최신 업데이트
-1. 4개의 반복기 노드(텍스트 반복기, 이미지 반복기, 표 반복기, json 반복기)가 업데이트되었습니다. 반복기 모드는 순차, 무작위 및 무한의 세 가지 모드가 있습니다. 순차 모드는 순서대로 출력을 하며, 인덱스 한계를 초과하면 자동으로 프로세스가 중단되고 인덱스 값이 0으로 재설정됩니다. 무작위 모드는 무작위 인덱스를 선택하여 출력을 하며, 무한 모드는 무한 반복 출력을 진행합니다.
-2. Gemini API 로더 노드가 추가되어 이제 Gemini 공식 API와 호환됩니다! 국내 네트워크 환경에서 API 지역 제한 문제가 발생하면 노드를 미국으로 전환하고 TUN 모드를 사용해 주십시오. Gemini에서 도구 호출 시 반환된 파라미터에 중국어 문자가 포함되면 반환 코드 500 오류가 발생할 수 있어 일부 도구 노드가 사용 불가능합니다. 예시 워크플로우: [start_with_gemini](workflow/start_with_gemini.json)
-3. LLM과 대화할 때 배경 설정을 삽입할 수 있는 lore book 노드가 추가되었습니다. 예시 워크플로우: [lorebook](workflow/lorebook.json)
-4. FLUX 프롬프트 생성기 마스크 노드가 추가되어 하스스톤 카드, 유희왕 카드, 포스터, 만화 등 다양한 스타일의 프롬프트를 생성할 수 있으며, FLUX 모델이 직접 출력할 수 있게 해줍니다. 참고 워크플로우: [FLUX 프롬프트](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
+1. README의 다국어 버전을 업데이트했습니다. README 문서를 번역하는 워크플로우: [translate_readme](workflow/文档自动翻译机.json)
+2. 4개의 반복기 노드(텍스트 반복기, 이미지 반복기, 표 반복기, json 반복기)가 업데이트되었습니다. 반복기 모드는 순차, 무작위 및 무한의 세 가지 모드가 있습니다. 순차 모드는 순서대로 출력을 하며, 인덱스 한계를 초과하면 자동으로 프로세스가 중단되고 인덱스 값이 0으로 재설정됩니다. 무작위 모드는 무작위 인덱스를 선택하여 출력을 하며, 무한 모드는 무한 반복 출력을 진행합니다.
+3. Gemini API 로더 노드가 추가되어 이제 Gemini 공식 API와 호환됩니다! 국내 네트워크 환경에서 API 지역 제한 문제가 발생하면 노드를 미국으로 전환하고 TUN 모드를 사용해 주십시오. Gemini에서 도구 호출 시 반환된 파라미터에 중국어 문자가 포함되면 반환 코드 500 오류가 발생할 수 있어 일부 도구 노드가 사용 불가능합니다. 예시 워크플로우: [start_with_gemini](workflow/start_with_gemini.json)
+4. LLM과 대화할 때 배경 설정을 삽입할 수 있는 lore book 노드가 추가되었습니다. 예시 워크플로우: [lorebook](workflow/lorebook.json)
+5. FLUX 프롬프트 생성기 마스크 노드가 추가되어 하스스톤 카드, 유희왕 카드, 포스터, 만화 등 다양한 스타일의 프롬프트를 생성할 수 있으며, FLUX 모델이 직접 출력할 수 있게 해줍니다. 참고 워크플로우: [FLUX 프롬프트](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
 
 ## 사용 설명
-1. 노드 사용 설명서는 다음을 참고하십시오: [노드 사용 방법](how_to_use_nodes_ZH.md)
+1. 노드 사용 설명서는 다음을 참고하십시오: [노드 사용 방법](how_to_use_nodes.md)
 
 2. 플러그인에 문제가 있거나 다른 질문이 있으시면 QQ 그룹에 참여해 주십시오: [931057213](img/Q群.jpg)
 3. 워크플로우 튜토리얼은 다음을 참조하시기 바랍니다: [워크플로우 튜토리얼](workflow_tutorial/), [HuangYuChuh](https://github.com/HuangYuChuh)님의 기여에 감사드립니다!
