@@ -39,14 +39,17 @@ def latest_lamacpp(system_info):
 
 
 def install_llama_package(package_name, custom_command=None):
-    if not package_is_installed(package_name):
-        print(f"Installing {package_name}...")
-        command = [sys.executable, "-m", "pip", "install", package_name, "--no-cache-dir"]
-        if custom_command:
-            command += custom_command.split()
-        subprocess.check_call(command)
-    else:
-        print(f"{package_name} is already installed.")
+    try:
+        if not package_is_installed(package_name):
+            print(f"Installing {package_name}...")
+            command = [sys.executable, "-m", "pip", "install", package_name, "--no-cache-dir"]
+            if custom_command:
+                command += custom_command.split()
+            subprocess.check_call(command)
+        else:
+            print(f"{package_name} is already installed.")
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to install {package_name}: {e}")
 
 
 def package_is_installed(package_name):

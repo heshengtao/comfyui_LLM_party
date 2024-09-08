@@ -67,14 +67,33 @@ def copy_js_files(ext_path):
         except Exception as e:
             print(f"无法复制文件 {source_file} 到 {target_file}: {e}")
 
-install_portaudio()
-dir = get_comfy_dir("web_custom_versions")
-if os.path.exists(dir):
-    copy_js_files("web_custom_versions/party")
-copy_js_files("web/extensions/party")
-system_info = get_system_info()
-install_llama(system_info)
-check_and_uninstall_websocket()
-init_temp()
-manage_discord_packages()
+try:
+    install_portaudio()
+except Exception as e:
+    print(f"Error: {e}")
+try:
+    dir = get_comfy_dir("web_custom_versions")
+    if os.path.exists(dir):
+        copy_js_files("web_custom_versions/party")
+    copy_js_files("web/extensions/party")
+except Exception as e:
+    print(f"Error: {e}")
+try:
+    system_info = get_system_info()
+    install_llama(system_info)
+except Exception as e:
+    print(f"Error: {e}")
+try:
+    check_and_uninstall_websocket()
+except Exception as e:
+    print(f"Error: {e}")
+try:
+    init_temp()
+except Exception as e:
+    print(f"Error: {e}")
+try:
+    manage_discord_packages()
+except Exception as e:
+    print(f"Error: {e}")
+
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]
