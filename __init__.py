@@ -1,5 +1,6 @@
 import inspect
 import os
+import re
 import shutil
 from .install import (
     check_and_uninstall_websocket,
@@ -67,14 +68,35 @@ def copy_js_files(ext_path):
         except Exception as e:
             print(f"无法复制文件 {source_file} 到 {target_file}: {e}")
 
+
+def get_latest_version_folder(directory):
+    version_pattern = re.compile(r'(\d+\.\d+\.\d+)')
+    latest_version = None
+    latest_folder = None
+
+    for folder_name in os.listdir(directory):
+        folder_path = os.path.join(directory, folder_name)
+        if os.path.isdir(folder_path):
+            match = version_pattern.search(folder_name)
+            if match:
+                version = match.group(1)
+                if latest_version is None or version > latest_version:
+                    latest_version = version
+                    latest_folder = folder_path
+
+    return latest_folder
+
+
 try:
     install_portaudio()
 except Exception as e:
     print(f"Error: {e}")
 try:
-    dir = get_comfy_dir("web_custom_versions")
+    dir = get_comfy_dir("web_custom_versions/Comfy-Org_ComfyUI_frontend")
     if os.path.exists(dir):
-        copy_js_files("web_custom_versions/party")
+        latest_folder = get_latest_version_folder(dir)
+        party_path= os.path.join(latest_folder,"extensions", "party")
+        copy_js_files(party_path)
     copy_js_files("web/extensions/party")
 except Exception as e:
     print(f"Error: {e}")
