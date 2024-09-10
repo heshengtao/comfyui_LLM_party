@@ -27,7 +27,7 @@ py-cpuinfo
 diskcache
 requests_toolbelt
 tabulate
-charamel
+charset_normalizer
 tenacity>=8.1.0,<8.4.0
 cpm_kernels
 pydub
