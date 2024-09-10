@@ -48,11 +48,12 @@ def get_history(prompt_id):
         return json.loads(response.read())
 
 
-def get_all(ws, prompt):
+def get_all(prompt):
     prompt_id = queue_prompt(prompt)["prompt_id"]
     output_images = {}
     output_text = ""
     while True:
+        """
         out = ws.recv()
         if isinstance(out, str):
             message = json.loads(out)
@@ -62,8 +63,13 @@ def get_all(ws, prompt):
                     break  # Execution is done
         else:
             continue  # previews are binary data
-
-    history = get_history(prompt_id)[prompt_id]
+            """
+        history_all=get_history(prompt_id)
+        # 如果history中有outputs，则跳出循环
+        if prompt_id in history_all:
+            break
+        time.sleep(0.1)
+    history=get_history(prompt_id)[prompt_id]
     for o in history["outputs"]:
         for node_id in history["outputs"]:
             node_output = history["outputs"][node_id]
@@ -117,9 +123,7 @@ def api(
             prompt[p]["inputs"]["negative_prompt"] = negative_prompt
             prompt[p]["inputs"]["model_name"] = model_name
 
-    ws = websocket.WebSocket()
-    ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
-    images, res = get_all(ws, prompt)
+    images, res = get_all(prompt)
     return images, res
 
 
