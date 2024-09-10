@@ -40,3 +40,4 @@ langchain_openai
 sentence_transformers
 uvicorn
 google.generativeai
+llama_index
