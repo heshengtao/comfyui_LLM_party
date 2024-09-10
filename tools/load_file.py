@@ -2,7 +2,7 @@ import json
 import os
 
 import pandas as pd
-from charamel import Detector
+import charset_normalizer
 import docx2txt
 import numpy as np
 import openpyxl
@@ -67,10 +67,11 @@ def read_one(path):
                     text += "| " + " | ".join([str(cell) for cell in sheet.row_values(row_num)]) + " |\n"
     elif path.endswith(".csv"):
         # 检测文件编码
-        detector = Detector()
         with open(path, "rb") as file:
             content = file.read()
-        encoding = detector.detect(content)
+        result = charset_normalizer.from_bytes(content)
+        encoding = result.best().encoding if result else 'utf-8'
+        # 读取 CSV 文件
         df = pd.read_csv(path, encoding=encoding)
         text += df.to_markdown(index=True)
     elif path.endswith(".txt"):
