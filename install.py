@@ -58,15 +58,17 @@ def package_is_installed(package_name):
         return True
     except importlib.metadata.PackageNotFoundError:
         return False
-    
+
+
 def extract_version(tag_name):
-    pattern = r'(\d+\.\d+\.\d+)-'
+    pattern = r"(\d+\.\d+\.\d+)-"
     match = re.search(pattern, tag_name)
     if match:
         return match.group(1)
     else:
         print(f"No match found for: {tag_name}")
     return None
+
 
 def install_llama(system_info):
     try:
@@ -75,7 +77,7 @@ def install_llama(system_info):
             print("llama-cpp installed")
         else:
             avx = "AVX2" if system_info["avx2"] else "AVX"
-            
+
             if system_info.get("gpu", False):
                 cuda_version = system_info["cuda_version"]
                 custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
@@ -86,11 +88,10 @@ def install_llama(system_info):
             else:
                 custom_command = f"--prefer-binary --extra-index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/cpu"
                 print("cpu " + custom_command)
-            
+
             install_llama_package("llama-cpp-python", custom_command=custom_command)
     except Exception as e:
         print(f"Error installing llama-cpp-python: {e}")
-
 
 
 def get_system_info():
@@ -102,12 +103,13 @@ def get_system_info():
         "os": platform.system(),
         "os_bit": platform.architecture()[0].replace("bit", ""),
         "platform_tag": None,
-        "metal": False  # 添加metal参数
+        "metal": False,  # 添加metal参数
     }
 
     # 检查NVIDIA GPU和CUDA版本
     if importlib.util.find_spec("torch"):
         import torch
+
         system_info["gpu"] = torch.cuda.is_available()
         if system_info["gpu"]:
             system_info["cuda_version"] = "cu" + torch.version.cuda.replace(".", "").strip()
@@ -116,6 +118,7 @@ def get_system_info():
     if importlib.util.find_spec("cpuinfo"):
         try:
             import cpuinfo
+
             cpu_info = cpuinfo.get_cpu_info()
             if cpu_info and "flags" in cpu_info:
                 system_info["avx2"] = "avx2" in cpu_info["flags"]
@@ -138,9 +141,9 @@ def get_system_info():
     # 确定平台标签
     if importlib.util.find_spec("packaging.tags"):
         system_info["platform_tag"] = next(packaging.tags.sys_tags()).platform
-    if "macosx" in system_info['platform_tag'] and system_info["metal"] == True:
+    if "macosx" in system_info["platform_tag"] and system_info["metal"] == True:
         system_info["platform_tag"] = "macosx_11_0_arm64"
-    elif "macosx" in system_info['platform_tag'] and system_info["metal"] == False:
+    elif "macosx" in system_info["platform_tag"] and system_info["metal"] == False:
         system_info["platform_tag"] = "macosx_10_9_x86_64"
 
     return system_info
@@ -151,7 +154,7 @@ def check_and_uninstall_websocket():
     interpreter = sys.executable
 
     # 检查websocket库是否已安装
-    installed_packages = {dist.metadata['Name'].lower() for dist in importlib.metadata.distributions()}
+    installed_packages = {dist.metadata["Name"].lower() for dist in importlib.metadata.distributions()}
     websocket_installed = "websocket" in installed_packages
     websocket_client_installed = "websocket-client" in installed_packages
 
@@ -179,6 +182,7 @@ def init_temp():
     current_dir_path = os.path.dirname(os.path.abspath(__file__))
     os.makedirs(os.path.join(current_dir_path, "temp"), exist_ok=True)
 
+
 def install_homebrew():
     try:
         result = subprocess.run(["brew", "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -194,13 +198,18 @@ def install_homebrew():
         print(f"Error checking Homebrew installation: {e}")
         return False
 
+
 def install_portaudio():
     try:
         if os.name == "posix":
             if sys.platform == "linux" or sys.platform == "linux2":
-                result = subprocess.run(["cat", "/etc/os-release"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                result = subprocess.run(
+                    ["cat", "/etc/os-release"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+                )
                 if "EndeavourOS" in result.stdout or "Arch" in result.stdout:
-                    result = subprocess.run(["pacman", "-Q", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    result = subprocess.run(
+                        ["pacman", "-Q", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+                    )
                     if result.returncode != 0:
                         os.system("pacman -Sy")
                         os.system("pacman -S --noconfirm portaudio")
@@ -228,7 +237,9 @@ def install_portaudio():
                     else:
                         print("portaudio is already installed.")
                 else:
-                    result = subprocess.run(["dpkg", "-s", "libportaudio2"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    result = subprocess.run(
+                        ["dpkg", "-s", "libportaudio2"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+                    )
                     if result.returncode != 0:
                         os.system("apt-get update")
                         os.system("apt-get install -y libportaudio2 libasound-dev")
@@ -236,7 +247,9 @@ def install_portaudio():
                         print("libportaudio2 is already installed.")
             elif sys.platform == "darwin":
                 if install_homebrew():
-                    result = subprocess.run(["brew", "list", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    result = subprocess.run(
+                        ["brew", "list", "portaudio"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+                    )
                     if result.returncode != 0:
                         os.system("brew update")
                         os.system("brew install portaudio")
@@ -281,6 +294,3 @@ def manage_discord_packages():
         install_package("py-cord[voice]")
     else:
         print("py-cord[voice] is already installed")
-
-
-

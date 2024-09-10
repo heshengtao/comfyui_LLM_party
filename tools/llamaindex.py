@@ -1,9 +1,10 @@
-import os
 import json
+import os
+
 from llama_index.core import SQLDatabase
+from llama_index.core.query_engine import NLSQLTableQueryEngine
 from llama_index.llms.openai import OpenAI
 from sqlalchemy import create_engine
-from llama_index.core.query_engine import NLSQLTableQueryEngine
 
 
 def query_database(openai_key, db_connection_string, query_str):
@@ -74,7 +75,7 @@ class db_tool:
                                 "type": "string",
                                 "description": "要查询的自然语言查询语句",
                                 "default": str(query_str),
-                            }
+                            },
                         },
                         "required": ["openai_key", "db_connection_string", "query_str"],
                     },
@@ -86,8 +87,10 @@ class db_tool:
 
 
 if __name__ == "__main__":
-    print(db_tool().query_db(
-        "sk-your-openai-api-key",
-        "postgresql://fpi4xT8tDYnzwT90H4qJ:FrK6mgLmkC4qFAwZ0FLJ@120.24.88.99:15432/postgres",
-        "在2024年5月之前创建的设备有哪些？"
-    ))
+    print(
+        db_tool().query_db(
+            "sk-your-openai-api-key",
+            "postgresql://fpi4xT8tDYnzwT90H4qJ:FrK6mgLmkC4qFAwZ0FLJ@120.24.88.99:15432/postgres",
+            "在2024年5月之前创建的设备有哪些？",
+        )
+    )

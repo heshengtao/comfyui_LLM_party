@@ -1,21 +1,18 @@
 import json
 import locale
 
-
 import requests
+
+
 def get_amap_regeo(location, api_key, extensions="all", radius=1000):
     url = "https://restapi.amap.com/v3/geocode/regeo"
-    params = {
-        'key': api_key,
-        'location': location,
-        'extensions': extensions,
-        'radius': str(radius)
-    }
+    params = {"key": api_key, "location": location, "extensions": extensions, "radius": str(radius)}
     response = requests.get(url, params=params)
     if response.status_code == 200:
         return response.json()
     else:
         return None
+
 
 class AmapRegeoTool:
     @classmethod
@@ -70,7 +67,7 @@ class AmapRegeoTool:
                                     "type": "integer",
                                     "description": "搜索半径（单位：米）",
                                     "default": radius,
-                                }
+                                },
                             },
                             "required": ["location", "api_key"],
                         },
@@ -82,23 +79,26 @@ class AmapRegeoTool:
         else:
             return (None,)
 
+
 _TOOL_HOOKS = ["get_amap_regeo"]
 NODE_CLASS_MAPPINGS = {"AmapRegeoTool": AmapRegeoTool}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"AmapRegeoTool": "高德逆地理编码工具"}
 else:

@@ -1,5 +1,6 @@
 import json
 import locale
+
 import requests
 
 
@@ -8,8 +9,8 @@ def geocode(address, api_key):
     url = f"https://restapi.amap.com/v3/geocode/geo?address={address}&key={api_key}"
     response = requests.get(url)
     data = response.json()
-    if data['status'] == '1' and data['geocodes']:
-        location = data['geocodes'][0]['location']
+    if data["status"] == "1" and data["geocodes"]:
+        location = data["geocodes"][0]["location"]
         return location
     else:
         return None
@@ -54,7 +55,7 @@ class GeocodeTool:
                                 "type": "string",
                                 "description": "高德地图API密钥",
                                 "default": str(api_key),
-                            }
+                            },
                         },
                         "required": ["address", "api_key"],
                     },
@@ -71,17 +72,19 @@ NODE_CLASS_MAPPINGS = {"GeocodeTool": GeocodeTool}
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"GeocodeTool": "高德地理编码工具"}
 else:

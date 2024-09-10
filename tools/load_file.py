@@ -1,8 +1,6 @@
 import json
 import os
 
-import pandas as pd
-from charamel import Detector
 import docx2txt
 import numpy as np
 import openpyxl
@@ -11,6 +9,7 @@ import pdfplumber
 import requests
 import torch
 import xlrd
+from charamel import Detector
 from PIL import Image, ImageOps, ImageSequence
 
 from ..config import current_dir_path
@@ -290,10 +289,10 @@ class start_workflow:
                 file_out = read_one(path)
         img_out = []
         if image_input1 is not None:
-            img_out=image_input1
+            img_out = image_input1
         img_out2 = []
         if image_input2 is not None:
-            img_out2=image_input2
+            img_out2 = image_input2
         if img_path1 is not None and img_path1 != "":
             img_out = []
             # 检查img_path是否是一个目录
