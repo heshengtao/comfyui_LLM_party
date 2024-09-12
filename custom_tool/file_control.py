@@ -2,6 +2,7 @@ import datetime
 import hashlib
 import json
 import locale
+import shutil
 import pandas as pd
 import charset_normalizer
 import docx2txt
@@ -90,7 +91,7 @@ def read_one(path):
     return text
 
 global_file_path=""
-def file_control(file_path, mode="w", text=""):
+def file_control(file_path, mode="w", text_or_path=""):
     global global_file_path
     # file_path如果不在global_file_path目录以下
     if not file_path.startswith(global_file_path):
@@ -99,7 +100,7 @@ def file_control(file_path, mode="w", text=""):
         try:
             # 根据模式打开文件，并指定编码为UTF-8
             with open(file_path, mode, encoding="utf-8") as f:
-                f.write(text+"\n")
+                f.write(text_or_path+"\n")
         except Exception as e:
             # 捕获并处理异常
             raise ValueError(f"写入文件失败: {e}")
@@ -118,6 +119,33 @@ def file_control(file_path, mode="w", text=""):
         except Exception as e:
             # 捕获并处理异常
             raise ValueError(f"删除文件失败: {e}")
+    elif mode=="m":
+        if not text_or_path.startswith(global_file_path):
+            return "移动后的文件路径不在指定目录下"
+        # 移动文件
+        try:
+            shutil.move(file_path, text_or_path)
+        except Exception as e:
+            # 捕获并处理异常
+            raise ValueError(f"移动文件失败: {e}")
+    elif mode=="c":
+        if not text_or_path.startswith(global_file_path):
+            return "复制后的文件路径不在指定目录下"
+        # 复制文件
+        try:
+            shutil.copy(file_path, text_or_path)
+        except Exception as e:
+            # 捕获并处理异常
+            raise ValueError(f"复制文件失败: {e}")
+    elif mode=="n":
+        if not text_or_path.startswith(global_file_path):
+            return "重命名后的文件路径不在指定目录下"
+        # 重命名文件
+        try:
+            os.rename(file_path, text_or_path)
+        except Exception as e:
+            # 捕获并处理异常
+            raise ValueError(f"重命名文件失败: {e}")
     return "操作成功"
 
 
@@ -170,7 +198,7 @@ class files_control_tool:
                 "type": "function",
                 "function": {
                     "name": "file_control",
-                    "description": f"用于读取、写入、追加、删除在{folder_path}下的文件，注意！你不能操作其他路径下的文件，写入、追加时，最好是对一个新文件执行，除非用户给定了文件。文件树如下：\n{file_tree}",
+                    "description": f"用于读取、写入、追加、删除、移动、重命名、复制在{folder_path}下的文件，注意！你不能操作其他路径下的文件，写入、追加时，最好是对一个新文件执行，除非用户给定了文件。文件树如下：\n{file_tree}",
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -180,11 +208,11 @@ class files_control_tool:
                             },
                             "mode": {
                                 "type": "string",
-                                "description": "w:写入，a:追加，r:读取，d:删除",
+                                "description": "w:写入，a:追加，r:读取，d:删除，m:移动，n:重命名，c:复制",
                             },
-                            "text": {
+                            "text_or_path": {
                                 "type": "string",
-                                "description": "写入或追加的文本,读取和删除时不需要",
+                                "description": "写入或追加时，text_or_path为要写入或追加的文本,读取和删除时不需要,移动时，text_or_path为移动到的绝对路径，重命名时，text_or_path为新的文件名的绝对路径，复制时，text_or_path为复制到的绝对路径",
                             }
                         },
                         "required": ["file_path"],
