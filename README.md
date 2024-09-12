@@ -38,7 +38,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 
 
 ## Latest update
-1. Added a local file control tool that allows the LLM to control files in your specified folder, such as reading, writing, appending, deleting, renaming, moving, and copying files.
+1. Added a local file control tool that allows the LLM to control files in your specified folder, such as reading, writing, appending, deleting, renaming, moving, and copying files.Due to the potential danger of this node, it is included in [comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia).
 2. New SQL tools allow LLM to query SQL databases.
 3. Updated the multilingual version of the README. Workflow for translating the README document: [translate_readme](workflow/文档自动翻译机.json)
 4. Updated 4 iterator nodes (text iterator, picture iterator, excel iterator, json iterator). The iterator modes are: sequential, random, and infinite. The order will be output in sequence until the index limit is exceeded, the process will be automatically aborted, and the index value will be reset to 0. Random will choose a random index output, and infinite will loop output.
