@@ -41,3 +41,4 @@ sentence_transformers
 uvicorn
 google.generativeai
 llama_index
+html2image
