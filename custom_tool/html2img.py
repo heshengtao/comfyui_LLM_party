@@ -8,14 +8,11 @@ current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 在current_dir_path下创建一个名为output的文件夹
 output_dir_path = os.path.join(current_dir_path, 'output')
 
-def html2img(html_str):
+def html2img(html_str, width=800, height=600):
     hti = Html2Image()
-
     hti.output_path = output_dir_path
-    hti.screenshot(html_str=html_str, save_as='example.png')
-    # 图片绝对路径
+    hti.screenshot(html_str=html_str, save_as='example.png', size=(width, height))
     image_path = os.path.join(hti.output_path, 'example.png')
-
     return image_path
 
 class html2img_function:
@@ -24,6 +21,8 @@ class html2img_function:
         return {
             "required": {
                 "html_str": ("STRING", {"default": "HTML code string"}),
+                "width": ("INT", {"default": 800}),
+                "height": ("INT", {"default": 600}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             }
         }
@@ -37,11 +36,11 @@ class html2img_function:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def time(self, html_str, is_enable=True):
+    def time(self, html_str, width, height, is_enable=True):
         if is_enable == False:
             return (None,)
         img_out = []
-        image_path = html2img(html_str)
+        image_path = html2img(html_str, width, height)
         img = Image.open(image_path)
         for i in ImageSequence.Iterator(img):
             i = ImageOps.exif_transpose(i)
