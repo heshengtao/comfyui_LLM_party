@@ -243,9 +243,9 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"files_control_tool": "本地文件控制工具"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"files_control_tool": "(危险！)本地文件控制工具"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"files_control_tool": "local file control tool"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"files_control_tool": "(Danger!) local file control tool"}
 
 if __name__ == "__main__":
     # 示例用法

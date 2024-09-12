@@ -115,7 +115,6 @@ from .tools.load_file import (
 from .tools.load_model_name import load_name
 from .tools.load_persona import load_persona
 from .tools.logic import get_string, replace_string, string_logic, substring
-from .tools.new_interpreter import new_interpreter, new_interpreter_tool
 from .tools.omost import omost_decode, omost_setting
 from .tools.search_web import (
     bing_loader,
@@ -149,7 +148,6 @@ _TOOL_HOOKS = [
     "interpreter",
     "data_base",
     "another_llm",
-    "new_interpreter",
     "use_api_tool",
     "get_accuweather",
     "get_wikipedia",
@@ -1931,7 +1929,6 @@ NODE_CLASS_MAPPINGS = {
     "custom_persona": custom_persona,
     "start_workflow": start_workflow,
     "end_workflow": end_workflow,
-    "new_interpreter_tool": new_interpreter_tool,
     "CLIPTextEncode_party": CLIPTextEncode_party,
     "KSampler_party": KSampler_party,
     "VAEDecode_party": VAEDecode_party,
@@ -2040,7 +2037,6 @@ if lang == "zh_CN":
         "custom_persona": "自定义面具",
         "start_workflow": "开始工作流",
         "end_workflow": "结束工作流",
-        "new_interpreter_tool": "(危险！)万能解释器工具",
         "CLIPTextEncode_party": "CLIP文本编码器",
         "KSampler_party": "KSampler采样器",
         "VAEDecode_party": "VAEDecode解码器",
@@ -2143,7 +2139,6 @@ else:
         "custom_persona": "Custom Persona",
         "start_workflow": "Start Workflow",
         "end_workflow": "End Workflow",
-        "new_interpreter_tool": "(Danger!) Omnipotent Interpreter Tool",
         "CLIPTextEncode_party": "CLIP Text Encoder",
         "KSampler_party": "KSampler",
         "VAEDecode_party": "VAEDecode",
