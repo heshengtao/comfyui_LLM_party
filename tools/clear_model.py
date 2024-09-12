@@ -72,9 +72,7 @@ class clear_model:
                         if value is obj:
                             refs.append((ref, i))
                 elif isinstance(ref, tuple):
-                    for i, value in enumerate(ref):
-                        if value is obj:
-                            refs.append((ref, i))
+                    pass
                 elif isinstance(ref, set):
                     for value in ref:
                         if value is obj:
