@@ -534,7 +534,62 @@ class Chat:
             new_message = {"role": "user", "content": user_prompt}
             history.append(new_message)
             print(history)
-            if tools is not None:
+            if "o1" in self.model_name:
+                # 移除history中的系统提示词部分
+                history = [msg for msg in history if msg["role"] != "system"]
+                if tools is not None:
+                    response = openai.chat.completions.create(
+                        model=self.model_name,
+                        messages=history,
+                        tools=tools,
+                        **extra_parameters,
+                    )
+                    while response.choices[0].message.tool_calls:
+                        assistant_message = response.choices[0].message
+                        response_content = assistant_message.tool_calls[0].function
+                        print("正在调用" + response_content.name + "工具")
+                        print(response_content.arguments)
+                        results = dispatch_tool(response_content.name, json.loads(response_content.arguments))
+                        print(results)
+                        history.append(
+                            {
+                                "tool_calls": [
+                                    {
+                                        "id": assistant_message.tool_calls[0].id,
+                                        "function": {
+                                            "arguments": response_content.arguments,
+                                            "name": response_content.name,
+                                        },
+                                        "type": assistant_message.tool_calls[0].type,
+                                    }
+                                ],
+                                "role": "assistant",
+                                "content": str(response_content),
+                            }
+                        )
+                        history.append(
+                            {
+                                "role": "tool",
+                                "tool_call_id": assistant_message.tool_calls[0].id,
+                                "name": response_content.name,
+                                "content": results,
+                            }
+                        )
+                        response = openai.chat.completions.create(
+                            model=self.model_name,
+                            messages=history,
+                            tools=tools,
+                            **extra_parameters,
+                        )
+                        print(response)
+                else:
+                    response = openai.chat.completions.create(
+                        model=self.model_name,
+                        messages=history,
+                        **extra_parameters,
+                    )
+                    print(response)
+            elif tools is not None:
                 response = openai.chat.completions.create(
                     model=self.model_name,
                     messages=history,
