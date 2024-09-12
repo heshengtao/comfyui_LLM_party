@@ -90,61 +90,58 @@ def read_one(path):
 
     return text
 
-global_file_path=""
+global_file_path = ""
+
 def file_control(file_path, mode="w", text_or_path=""):
     global global_file_path
-    # file_path如果不在global_file_path目录以下
+    # 规范化路径
+    file_path = os.path.abspath(file_path)
+    global_file_path = os.path.abspath(global_file_path)
+    
     if not file_path.startswith(global_file_path):
         return "文件路径不在指定目录下"
-    if mode=="w" or mode=="a":
+    
+    if mode in ["w", "a"]:
         try:
-            # 根据模式打开文件，并指定编码为UTF-8
             with open(file_path, mode, encoding="utf-8") as f:
-                f.write(text_or_path+"\n")
+                f.write(text_or_path + "\n")
         except Exception as e:
-            # 捕获并处理异常
             raise ValueError(f"写入文件失败: {e}")
-    elif mode=="r":
+    elif mode == "r":
         try:
-            # 根据模式打开文件，并指定编码为UTF-8
-            res=read_one(file_path)
-            return "读取成功,内容为："+res
+            with open(file_path, "r", encoding="utf-8") as f:
+                res = f.read()
+            return "读取成功,内容为：" + res
         except Exception as e:
-            # 捕获并处理异常
             raise ValueError(f"读取文件失败: {e}")
-    elif mode=="d":
-        # 删除文件
+    elif mode == "d":
         try:
             os.remove(file_path)
         except Exception as e:
-            # 捕获并处理异常
             raise ValueError(f"删除文件失败: {e}")
-    elif mode=="m":
+    elif mode == "m":
+        text_or_path = os.path.abspath(text_or_path)
         if not text_or_path.startswith(global_file_path):
             return "移动后的文件路径不在指定目录下"
-        # 移动文件
         try:
             shutil.move(file_path, text_or_path)
         except Exception as e:
-            # 捕获并处理异常
             raise ValueError(f"移动文件失败: {e}")
-    elif mode=="c":
+    elif mode == "c":
+        text_or_path = os.path.abspath(text_or_path)
         if not text_or_path.startswith(global_file_path):
             return "复制后的文件路径不在指定目录下"
-        # 复制文件
         try:
             shutil.copy(file_path, text_or_path)
         except Exception as e:
-            # 捕获并处理异常
             raise ValueError(f"复制文件失败: {e}")
-    elif mode=="n":
+    elif mode == "n":
+        text_or_path = os.path.abspath(text_or_path)
         if not text_or_path.startswith(global_file_path):
             return "重命名后的文件路径不在指定目录下"
-        # 重命名文件
         try:
             os.rename(file_path, text_or_path)
         except Exception as e:
-            # 捕获并处理异常
             raise ValueError(f"重命名文件失败: {e}")
     return "操作成功"
 
