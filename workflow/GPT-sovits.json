@@ -1,0 +1,346 @@
+{
+  "last_node_id": 11,
+  "last_link_id": 9,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        146.87492500452436,
+        182.22753290596853
+      ],
+      "size": [
+        310,
+        210
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 8,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            9
+          ],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "你好！有什么我可以帮助你的吗？"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "LLM_api_loader",
+      "pos": [
+        -800,
+        240
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            5
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 7,
+      "type": "LLM",
+      "pos": [
+        -410,
+        240
+      ],
+      "size": {
+        "0": 460,
+        "1": 510
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 5,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "你好",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ]
+    },
+    {
+      "id": 5,
+      "type": "gpt_sovits",
+      "pos": [
+        150,
+        460
+      ],
+      "size": [
+        320,
+        320
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 9,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            4
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "audio"
+        },
+        {
+          "name": "audio_path",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "audio_path"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gpt_sovits"
+      },
+      "widgets_values": [
+        "先帝创业未半而中道崩殂，今天下三分，益州疲弊，此诚危急存亡之秋也。",
+        "zh",
+        "D:\\AI\\AInisheng\\GPT-SoVITS\\hutao.wav",
+        "这是往生堂最重要的工作内容嘛，我也会稍微比平时认真一点。",
+        "zh",
+        "cut5",
+        1,
+        "wav",
+        "D:\\AI\\AInisheng\\GPT-SoVITS\\胡桃\\胡桃-e10.ckpt",
+        "D:\\AI\\AInisheng\\GPT-SoVITS\\胡桃\\胡桃_e10_s210.pth",
+        true
+      ]
+    },
+    {
+      "id": 6,
+      "type": "PreviewAudio",
+      "pos": [
+        610,
+        360
+      ],
+      "size": {
+        "0": 315,
+        "1": 76
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 4,
+          "label": "audio"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAudio"
+      },
+      "widgets_values": [
+        null
+      ]
+    }
+  ],
+  "links": [
+    [
+      4,
+      5,
+      0,
+      6,
+      0,
+      "AUDIO"
+    ],
+    [
+      5,
+      8,
+      0,
+      7,
+      0,
+      "CUSTOM"
+    ],
+    [
+      8,
+      7,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      9,
+      11,
+      0,
+      5,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7513148009015777,
+      "offset": [
+        977.2972543858783,
+        223.74991733757062
+      ]
+    }
+  },
+  "version": 0.4
+}
