@@ -190,7 +190,6 @@ Este projeto de código aberto e seu conteúdo (doravante denominado "projeto") 
 Alguns nós deste projeto foram inspirados pelos seguintes projetos, agradecemos suas contribuições à comunidade de código aberto!
 1. [pythongosssss/ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
 2. [lllyasviel/Omost](https://github.com/lllyasviel/Omost)
-3. [2noise/ChatTTS](https://github.com/2noise/ChatTTS)
 
 ## Suporte:
 

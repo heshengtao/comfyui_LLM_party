@@ -190,7 +190,6 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 بعض العقد في هذا المشروع مستوحاة من المشاريع التالية، نشكرهم على مساهماتهم في مجتمع المصادر المفتوحة!
 1. [pythongosssss/ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
 2. [lllyasviel/Omost](https://github.com/lllyasviel/Omost)
-3. [2noise/ChatTTS](https://github.com/2noise/ChatTTS)
 
 ## الدعم:
 

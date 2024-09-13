@@ -190,7 +190,6 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 본 프로젝트의 일부 노드는 아래 프로젝트를 참고하였으며, 오픈소스 커뮤니티에 대한 그들의 기여에 감사드립니다!
 1. [pythongosssss/ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
 2. [lllyasviel/Omost](https://github.com/lllyasviel/Omost)
-3. [2noise/ChatTTS](https://github.com/2noise/ChatTTS)
 
 ## 지원:
 

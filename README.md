@@ -202,7 +202,6 @@ This open-source project and its contents (hereinafter referred to as "Project")
 Some of the nodes in this project have borrowed from the following projects. Thank you for your contributions to the open-source community!
 1. [pythongosssss/ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
 2. [lllyasviel/Omost](https://github.com/lllyasviel/Omost)
-3. [2noise/ChatTTS](https://github.com/2noise/ChatTTS)
 
 ## Support:
 

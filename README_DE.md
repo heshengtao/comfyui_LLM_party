@@ -197,7 +197,6 @@ Dieses Open-Source-Projekt und seine Inhalte (im Folgenden „Projekt“) dienen
 Einige Knoten in diesem Projekt basieren auf den folgenden Projekten. Wir danken ihnen für ihren Beitrag zur Open-Source-Community!
 1. [pythongosssss/ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
 2. [lllyasviel/Omost](https://github.com/lllyasviel/Omost)
-3. [2noise/ChatTTS](https://github.com/2noise/ChatTTS)
 
 ## Unterstützung:
 

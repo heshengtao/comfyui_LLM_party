@@ -190,7 +190,6 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 Некоторые узлы в этом проекте заимствованы из следующих проектов, благодарим их за вклад в сообщество с открытым исходным кодом!
 1. [pythongosssss/ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
 2. [lllyasviel/Omost](https://github.com/lllyasviel/Omost)
-3. [2noise/ChatTTS](https://github.com/2noise/ChatTTS)
 
 ## Поддержка:
 

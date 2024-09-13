@@ -201,7 +201,6 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 本项目中的一些节点借鉴了以下项目，感谢他们在开源社区中的贡献！
 1. [pythongosssss/ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
 2. [lllyasviel/Omost](https://github.com/lllyasviel/Omost)
-3. [2noise/ChatTTS](https://github.com/2noise/ChatTTS)
 
 ## 支持：
 

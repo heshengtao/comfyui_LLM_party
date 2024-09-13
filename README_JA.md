@@ -197,7 +197,6 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 本プロジェクトのいくつかのノードは以下のプロジェクトを参考にしており、オープンソースコミュニティへの貢献に感謝します！
 1. [pythongosssss/ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
 2. [lllyasviel/Omost](https://github.com/lllyasviel/Omost)
-3. [2noise/ChatTTS](https://github.com/2noise/ChatTTS)
 
 ## サポート：
 
