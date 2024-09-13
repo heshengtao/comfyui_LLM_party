@@ -1,9 +1,11 @@
 import locale
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 
@@ -31,6 +33,7 @@ class LLavaLoader:
     def load_llava_checkpoint(self, model_name, ckpt_path, max_ctx, gpu_layers, n_threads, clip_path):
         from llama_cpp import Llama
         from llama_cpp.llama_chat_format import Llava15ChatHandler
+
         if ckpt_path != "" and clip_path != "":
             model_name = ""
         if model_name in config:
@@ -55,16 +58,17 @@ class LLavaLoader:
             echo=False,
         )
         return (llm,)
-    
-NODE_CLASS_MAPPINGS = {"LLavaLoader":LLavaLoader}
+
+
+NODE_CLASS_MAPPINGS = {"LLavaLoader": LLavaLoader}
 lang = locale.getdefaultlocale()[0]
 
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"LLavaLoader": "LLava加载器"}
 else:

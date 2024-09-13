@@ -1,10 +1,10 @@
 import json
 import os
 
-from bs4 import BeautifulSoup
 import openai
 import requests
 import torch
+from bs4 import BeautifulSoup
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
@@ -42,7 +42,7 @@ def check_web(url, keyword=None):
 
             # 设置响应内容的编码，确保文本不会出现编码问题
             response.encoding = response.apparent_encoding
-            res=response.text
+            res = response.text
         else:
             response = requests.get(url, timeout=10)
             response.raise_for_status()  # 确保请求成功
@@ -50,7 +50,7 @@ def check_web(url, keyword=None):
             # 设置响应内容的编码，确保文本不会出现编码问题
             response.encoding = response.apparent_encoding
             # 假设response.text包含你的HTML内容
-            soup = BeautifulSoup(response.text, 'html.parser')
+            soup = BeautifulSoup(response.text, "html.parser")
 
             # 移除所有script和style元素
             for script in soup(["script", "style"]):
@@ -58,7 +58,6 @@ def check_web(url, keyword=None):
 
             # 获取纯文本内容
             res = soup.get_text()
-
 
         if keyword == None or keyword == "":
             combined_content = str(res)
@@ -149,7 +148,7 @@ class check_web_tool:
     ):
         if is_enable == False:
             return (None,)
-        global  files_load, bge_embeddings, c_size, c_overlap, knowledge_base, is_jina
+        global files_load, bge_embeddings, c_size, c_overlap, knowledge_base, is_jina
         is_jina = with_jina
         c_size = chunk_size
         c_overlap = chunk_overlap

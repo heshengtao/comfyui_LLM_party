@@ -7,7 +7,7 @@
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baidu cloud</a> ·
   <a href="img/Q群.jpg">QQ group</a> ·
   <a href="https://discord.gg/gxrQAYy6">discord</a> ·
-  <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">About us</a>  
+  <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">About us</a>
 </div>
 
 ####
@@ -16,7 +16,7 @@
   <a href="./README_ZH.md"><img src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
   <a href="./README.md"><img src="https://img.shields.io/badge/English-d9d9d9"></a>
   <a href="./README_RU.md"><img src="https://img.shields.io/badge/Русский-d9d9d9"></a>
-  <a href="./README_FR.md"><img src="https://img.shields.io/badge/Français-d9d9d9"></a> 
+  <a href="./README_FR.md"><img src="https://img.shields.io/badge/Français-d9d9d9"></a>
   <a href="./README_DE.md"><img src="https://img.shields.io/badge/Deutsch-d9d9d9"></a>
   <a href="./README_JA.md"><img src="https://img.shields.io/badge/日本語-d9d9d9"></a>
   <a href="./README_KO.md"><img src="https://img.shields.io/badge/한국어-d9d9d9"></a>
@@ -197,7 +197,7 @@ This open-source project and its contents (hereinafter referred to as "Project")
   <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
 
-## loan list 
+## loan list
 Some of the nodes in this project have borrowed from the following projects. Thank you for your contributions to the open-source community!
 1. [pythongosssss/ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
 2. [lllyasviel/Omost](https://github.com/lllyasviel/Omost)

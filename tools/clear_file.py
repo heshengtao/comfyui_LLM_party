@@ -36,7 +36,7 @@ class clear_file:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def clear(self, any, path,is_enable):
+    def clear(self, any, path, is_enable):
         if not is_enable:
             return (None,)
         out = any

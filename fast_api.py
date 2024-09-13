@@ -10,13 +10,13 @@ import uuid
 from io import BytesIO
 from typing import Any, List
 
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 import httpx
 import numpy as np
 import requests
 import torch
 import websocket  # NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
 from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from PIL import Image, ImageOps
 from pydantic import BaseModel
 
@@ -63,13 +63,13 @@ def get_all(prompt):
                     break  # Execution is done
         else:
             continue  # previews are binary data
-            """
-        history_all=get_history(prompt_id)
+        """
+        history_all = get_history(prompt_id)
         # 如果history中有outputs，则跳出循环
         if prompt_id in history_all:
             break
         time.sleep(0.1)
-    history=get_history(prompt_id)[prompt_id]
+    history = get_history(prompt_id)[prompt_id]
     for o in history["outputs"]:
         for node_id in history["outputs"]:
             node_output = history["outputs"][node_id]
@@ -148,11 +148,13 @@ VALID_API_KEY = fastapi_api_key
 # 使用 FastAPI 的 HTTPBearer 进行认证
 security = HTTPBearer()
 
+
 async def verify_api_key(credentials: HTTPAuthorizationCredentials = Depends(security)):
     if VALID_API_KEY == "":
         return  # 如果 fastapi_api_key 为空字符串，就不校验
     if credentials.credentials != VALID_API_KEY:
         raise HTTPException(status_code=403, detail="Invalid API Key")
+
 
 # 获取模型名称的端点
 @app.get("/v1/models")
@@ -163,11 +165,7 @@ async def get_models():
         workflow_api_path = os.path.join(current_dir_path, "workflow_api")
 
         # 获取所有 JSON 文件的名称（不含 .json 扩展名）
-        model_names = [
-            os.path.splitext(file)[0]
-            for file in os.listdir(workflow_api_path)
-            if file.endswith(".json")
-        ]
+        model_names = [os.path.splitext(file)[0] for file in os.listdir(workflow_api_path) if file.endswith(".json")]
 
         # 构造返回的结构体
         response = {
@@ -177,16 +175,17 @@ async def get_models():
                     "object": "model",
                     "created": int(time.time()),  # 使用当前时间戳
                     "owned_by": "comfyui-LLM-party",
-                    "permission": []
+                    "permission": [],
                 }
                 for model_name in model_names
             ],
-            "object": "list"
+            "object": "list",
         }
 
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 # 创建路由处理函数
 @app.post("/v1/chat/completions")
@@ -361,9 +360,10 @@ async def process_request(request_data: CompletionRequest):
 
 if __name__ == "__main__":
     import uvicorn
+
     parser = argparse.ArgumentParser(description="Run the server with specified host and port.")
     parser.add_argument("--host", type=str, default="127.0.0.1", help="Host address to bind the server.")
     parser.add_argument("--port", type=int, default=8187, help="Port number to bind the server.")
-    
+
     args = parser.parse_args()
     uvicorn.run(app, host=args.host, port=args.port)

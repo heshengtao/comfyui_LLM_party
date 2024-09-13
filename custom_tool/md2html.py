@@ -1,9 +1,11 @@
 import locale
+
 import markdown
+
 
 def markdown_to_html(md_text):
     # Convert Markdown to HTML
-    html = markdown.markdown(md_text, extensions=['fenced_code', 'codehilite'])
+    html = markdown.markdown(md_text, extensions=["fenced_code", "codehilite"])
     # 把HTML插入到HTML模板中
     html_template = """
 <html>
@@ -47,6 +49,7 @@ def markdown_to_html(md_text):
     html_content = html_template.format(html_content=html)
     return html_content
 
+
 class md_to_html:
     @classmethod
     def INPUT_TYPES(s):
@@ -70,7 +73,6 @@ class md_to_html:
         if is_enable == False:
             return (None,)
         return (markdown_to_html(md_str),)
-        
 
 
 NODE_CLASS_MAPPINGS = {"md_to_html": md_to_html}
@@ -78,17 +80,19 @@ NODE_CLASS_MAPPINGS = {"md_to_html": md_to_html}
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"md_to_html": "Markdown转HTML"}
 else:

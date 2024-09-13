@@ -66,7 +66,7 @@ class bool_logic:
             },
             "optional": {
                 "B": ("BOOLEAN", {}),
-            }
+            },
         }
 
     RETURN_TYPES = ("BOOLEAN",)

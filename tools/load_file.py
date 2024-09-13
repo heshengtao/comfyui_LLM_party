@@ -1,7 +1,6 @@
 import json
 import os
 
-import pandas as pd
 import charset_normalizer
 import docx2txt
 import numpy as np
@@ -70,7 +69,7 @@ def read_one(path):
         with open(path, "rb") as file:
             content = file.read()
         result = charset_normalizer.from_bytes(content)
-        encoding = result.best().encoding if result else 'utf-8'
+        encoding = result.best().encoding if result else "utf-8"
         # 读取 CSV 文件
         df = pd.read_csv(path, encoding=encoding)
         text += df.to_markdown(index=True)
@@ -291,10 +290,10 @@ class start_workflow:
                 file_out = read_one(path)
         img_out = []
         if image_input1 is not None:
-            img_out=image_input1
+            img_out = image_input1
         img_out2 = []
         if image_input2 is not None:
-            img_out2=image_input2
+            img_out2 = image_input2
         if img_path1 is not None and img_path1 != "":
             img_out = []
             # 检查img_path是否是一个目录

@@ -25,7 +25,7 @@ class ebd_tool:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "path": ("STRING", {"default":""}),
+                "path": ("STRING", {"default": ""}),
                 "is_enable": (["enable", "disable"], {"default": "enable"}),
                 "k": ("INT", {"default": 5}),
                 "device": (
@@ -51,7 +51,18 @@ class ebd_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, path, k, chunk_size, chunk_overlap, device, file_content="", is_enable="enable", base_path="",ebd_model=None):
+    def file(
+        self,
+        path,
+        k,
+        chunk_size,
+        chunk_overlap,
+        device,
+        file_content="",
+        is_enable="enable",
+        base_path="",
+        ebd_model=None,
+    ):
         if is_enable == "disable":
             return (None,)
         global files_load, bge_embeddings, c_size, c_overlap, knowledge_base, k_setting
@@ -97,6 +108,8 @@ class ebd_tool:
         ]
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
+
+
 class load_ebd:
     @classmethod
     def INPUT_TYPES(s):
@@ -132,6 +145,7 @@ class load_ebd:
             model_name=path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
         )
         return (bge_embeddings,)
+
 
 class embeddings_function:
     def __init__(self):
@@ -169,12 +183,26 @@ class embeddings_function:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def file(self, path, question, k, chunk_size, chunk_overlap, device, file_content="", is_enable=True, base_path="",ebd_model=None):
+    def file(
+        self,
+        path,
+        question,
+        k,
+        chunk_size,
+        chunk_overlap,
+        device,
+        file_content="",
+        is_enable=True,
+        base_path="",
+        ebd_model=None,
+    ):
         if is_enable == False:
             return (None,)
         if ebd_model is None:
             if device == "auto":
-                device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
+                device = (
+                    "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
+                )
 
             if self.embeddings_path != path:
                 model_kwargs = {"device": device}

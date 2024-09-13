@@ -42,12 +42,12 @@ def get_all(prompt):
     output_images = {}
     output_text = ""
     while True:
-        history_all=get_history(prompt_id)
+        history_all = get_history(prompt_id)
         # 如果history中有outputs，则跳出循环
         if prompt_id in history_all:
             break
         time.sleep(0.1)
-    history=get_history(prompt_id)[prompt_id]
+    history = get_history(prompt_id)[prompt_id]
     for o in history["outputs"]:
         for node_id in history["outputs"]:
             node_output = history["outputs"][node_id]

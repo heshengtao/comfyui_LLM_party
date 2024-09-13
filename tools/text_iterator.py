@@ -1,10 +1,14 @@
 import random
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 import signal
 import sys
+
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+
 def interrupt_handler(signum, frame):
     print("Process interrupted")
     sys.exit(0)
+
 
 class text_iterator:
     def __init__(self):
@@ -21,7 +25,7 @@ class text_iterator:
                 "file_content": ("STRING", {"default": ""}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "is_reload": ("BOOLEAN", {"default": False}),
-                "iterator_mode": (["sequential","random","Infinite"], {"default": "sequential"}),
+                "iterator_mode": (["sequential", "random", "Infinite"], {"default": "sequential"}),
             },
             "optional": {"chunk_size": ("INT", {"default": 1024}), "chunk_overlap": ("INT", {"default": 0})},
         }
@@ -35,7 +39,7 @@ class text_iterator:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, file_content,iterator_mode, chunk_size=1024, chunk_overlap=0, is_enable=True, is_reload=False):
+    def file(self, file_content, iterator_mode, chunk_size=1024, chunk_overlap=0, is_enable=True, is_reload=False):
         if not is_enable:
             return (None,)
         if (
@@ -52,7 +56,7 @@ class text_iterator:
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=self.chunk_size, chunk_overlap=self.chunk_overlap
         )
-        text_len=len(self.text_splitter.split_text(self.file_content))
+        text_len = len(self.text_splitter.split_text(self.file_content))
         # 分段输出
         if self.index >= text_len:
             self.index = 0
@@ -62,7 +66,7 @@ class text_iterator:
         out = self.text_splitter.split_text(self.file_content)[self.index]
         print("当前索引：", self.index)
         print("当前输出：", out)
-        if iterator_mode == "sequential" or iterator_mode =="Infinite":
+        if iterator_mode == "sequential" or iterator_mode == "Infinite":
             self.index += 1
         elif iterator_mode == "random":
             self.index = random.randint(0, text_len - 1)
@@ -73,6 +77,7 @@ class text_iterator:
         self.record = self.index
         return self.record
 
+
 class text_writing:
     @classmethod
     def INPUT_TYPES(s):
@@ -80,7 +85,7 @@ class text_writing:
             "required": {
                 "text": ("STRING", {"default": ""}),
                 "file_path": ("STRING", {"default": ""}),
-                "mode": (["a","w"], {"default": "a"}),
+                "mode": (["a", "w"], {"default": "a"}),
             },
         }
 
@@ -97,7 +102,7 @@ class text_writing:
         try:
             # 根据模式打开文件，并指定编码为UTF-8
             with open(file_path, mode, encoding="utf-8") as f:
-                f.write(text+"\n")
+                f.write(text + "\n")
         except Exception as e:
             # 捕获并处理异常
             raise ValueError(f"写入文件失败: {e}")

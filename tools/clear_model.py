@@ -44,16 +44,13 @@ class clear_model:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def clear(self, any, model,is_enable, tokenizer=None,is_ollama=False):
+    def clear(self, any, model, is_enable, tokenizer=None, is_ollama=False):
         if not is_enable:
             return (None,)
         out = any
         if is_ollama:
             url = "http://127.0.0.1:11434/api/generate"
-            payload = {
-                "model": model.model_name,
-                "keep_alive": 0
-            }
+            payload = {"model": model.model_name, "keep_alive": 0}
             response = requests.post(url, json=payload)
             print(response.json())
             return (out,)

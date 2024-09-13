@@ -16,7 +16,7 @@
   <a href="./README_ZH.md"><img src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
   <a href="./README.md"><img src="https://img.shields.io/badge/English-d9d9d9"></a>
   <a href="./README_RU.md"><img src="https://img.shields.io/badge/Русский-d9d9d9"></a>
-  <a href="./README_FR.md"><img src="https://img.shields.io/badge/Français-d9d9d9"></a> 
+  <a href="./README_FR.md"><img src="https://img.shields.io/badge/Français-d9d9d9"></a>
   <a href="./README_DE.md"><img src="https://img.shields.io/badge/Deutsch-d9d9d9"></a>
   <a href="./README_JA.md"><img src="https://img.shields.io/badge/日本語-d9d9d9"></a>
   <a href="./README_KO.md"><img src="https://img.shields.io/badge/한국어-d9d9d9"></a>

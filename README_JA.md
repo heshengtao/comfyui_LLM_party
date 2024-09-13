@@ -16,7 +16,7 @@
   <a href="./README_ZH.md"><img src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
   <a href="./README.md"><img src="https://img.shields.io/badge/English-d9d9d9"></a>
   <a href="./README_RU.md"><img src="https://img.shields.io/badge/Русский-d9d9d9"></a>
-  <a href="./README_FR.md"><img src="https://img.shields.io/badge/Français-d9d9d9"></a> 
+  <a href="./README_FR.md"><img src="https://img.shields.io/badge/Français-d9d9d9"></a>
   <a href="./README_DE.md"><img src="https://img.shields.io/badge/Deutsch-d9d9d9"></a>
   <a href="./README_JA.md"><img src="https://img.shields.io/badge/日本語-d9d9d9"></a>
   <a href="./README_KO.md"><img src="https://img.shields.io/badge/한국어-d9d9d9"></a>
@@ -138,15 +138,15 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 11. API+streamlitを使用して、自分のWebアプリケーションを迅速に開発することができます。
 12. 危険な万能インタープリターノードが新たに追加され、大モデルにあらゆることをさせることができます。
 13. 右クリックメニューの関数（function）サブディレクトリ内の表示テキスト（show_text）ノードをLLMノードの出力表示として使用することをお勧めします。
-14. GPT-4Oの視覚機能をサポートしました！サンプルワークフロー：[GPT-4o](workflow/GPT-4o.json)  
-15. 他のワークフローを呼び出すことができるワークフロートランスファーを追加しました！サンプルワークフロー：[別のワークフローを呼び出す](workflow/调用另一个工作流.json)  
-16. openaiインターフェースに類似したすべてのモデルに対応しました。例：通義千問/qwen、智谱清言/GLM、deepseek、kimi/moonshot。これらのモデルのbase_url、api_key、model_nameをLLMノードに入力して呼び出してください。  
-17. LVMローダーを新たに追加し、ローカルでLVMモデルを呼び出すことができるようになりました。[llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)モデルをサポートしており、他のLVMモデルもGGUF形式であれば理論上は動作するはずです。サンプルワークフローはこちら: [start_with_LVM.json](workflow/start_with_LVM.json).  
-18. `fastapi.py`ファイルを作成しました。このファイルを直接実行すれば、`http://127.0.0.1:8817/v1/`においてopenaiインターフェースを取得でき、GPTを呼び出すことができるアプリケーションがあなたのcomfyuiワークフローを呼び出すことが可能です！具体的な操作方法については、チュートリアルを作成してご紹介いたします~  
-19. LLMローダーとLLMチェーンを分け、モデルの読み込みと設定を分離しました。これにより、異なるLLMノード間でモデルを共有できるようになりました！  
-20. 現在、macOSおよびmpsデバイスをサポートしています！[bigcat88](https://github.com/bigcat88)の貢献に感謝いたします！  
-21. ユーザーの選択に基づいて異なる結末に進むインタラクティブな小説ゲームを構築できるようになりました！サンプルワークフローの参考：[インタラクティブ小説](workflow/互动小说.json)  
-22. openaiのwhisperおよびtts機能に対応し、音声入力と出力を実現しました。サンプルワークフローの参考：[音声入力+音声出力](workflow/语音输入+语音输出.json)  
+14. GPT-4Oの視覚機能をサポートしました！サンプルワークフロー：[GPT-4o](workflow/GPT-4o.json)
+15. 他のワークフローを呼び出すことができるワークフロートランスファーを追加しました！サンプルワークフロー：[別のワークフローを呼び出す](workflow/调用另一个工作流.json)
+16. openaiインターフェースに類似したすべてのモデルに対応しました。例：通義千問/qwen、智谱清言/GLM、deepseek、kimi/moonshot。これらのモデルのbase_url、api_key、model_nameをLLMノードに入力して呼び出してください。
+17. LVMローダーを新たに追加し、ローカルでLVMモデルを呼び出すことができるようになりました。[llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)モデルをサポートしており、他のLVMモデルもGGUF形式であれば理論上は動作するはずです。サンプルワークフローはこちら: [start_with_LVM.json](workflow/start_with_LVM.json).
+18. `fastapi.py`ファイルを作成しました。このファイルを直接実行すれば、`http://127.0.0.1:8817/v1/`においてopenaiインターフェースを取得でき、GPTを呼び出すことができるアプリケーションがあなたのcomfyuiワークフローを呼び出すことが可能です！具体的な操作方法については、チュートリアルを作成してご紹介いたします~
+19. LLMローダーとLLMチェーンを分け、モデルの読み込みと設定を分離しました。これにより、異なるLLMノード間でモデルを共有できるようになりました！
+20. 現在、macOSおよびmpsデバイスをサポートしています！[bigcat88](https://github.com/bigcat88)の貢献に感謝いたします！
+21. ユーザーの選択に基づいて異なる結末に進むインタラクティブな小説ゲームを構築できるようになりました！サンプルワークフローの参考：[インタラクティブ小説](workflow/互动小说.json)
+22. openaiのwhisperおよびtts機能に対応し、音声入力と出力を実現しました。サンプルワークフローの参考：[音声入力+音声出力](workflow/语音输入+语音输出.json)
 23. [Omost](https://github.com/lllyasviel/Omost)に対応しました！！！ぜひ[omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)をダウンロードして、今すぐ体験してください！サンプルワークフローはこちら：[start_with_OMOST](workflow/start_with_OMOST.json)をご参照ください。
 24. 企業微信、钉钉、飛書にメッセージを送信するLLMツールと、呼び出し可能な外部関数を追加しました。
 25. テキストイテレータを新たに追加しました。これは、各回ごとに一部分の文字だけを出力し、改行記号とチャンクサイズに基づいてテキストを安全に分割します。テキストの途中で分割することはありません。chunk_overlapは、分割されたテキストの重複文字数を示します。これにより、超長テキストを一括入力でき、無心でクリックするか、comfyuiのループ実行を開始するだけで、自動的に完了します。is_locked属性を有効にすると、入力終了時にワークフローが自動的にロックされ、実行が続行されなくなります。サンプルワークフロー：[テキストイテレータ入力](workflow/文本迭代输入.json)をご覧ください。

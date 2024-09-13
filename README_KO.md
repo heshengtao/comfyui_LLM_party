@@ -16,7 +16,7 @@
   <a href="./README_ZH.md"><img src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
   <a href="./README.md"><img src="https://img.shields.io/badge/English-d9d9d9"></a>
   <a href="./README_RU.md"><img src="https://img.shields.io/badge/Русский-d9d9d9"></a>
-  <a href="./README_FR.md"><img src="https://img.shields.io/badge/Français-d9d9d9"></a> 
+  <a href="./README_FR.md"><img src="https://img.shields.io/badge/Français-d9d9d9"></a>
   <a href="./README_DE.md"><img src="https://img.shields.io/badge/Deutsch-d9d9d9"></a>
   <a href="./README_JA.md"><img src="https://img.shields.io/badge/日本語-d9d9d9"></a>
   <a href="./README_KO.md"><img src="https://img.shields.io/badge/한국어-d9d9d9"></a>
@@ -138,19 +138,19 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 11. API + streamlit를 통해 빠르게 웹 애플리케이션을 개발할 수 있습니다.
 12. 위험한 만능 해석기 노드를 추가하여 대모델이 다양한 작업을 수행할 수 있게 하였습니다.
 13. LLM 노드의 출력으로 사용하기 위해 오른쪽 클릭 메뉴의 함수(function) 하위 디렉토리에 있는 텍스트 표시(show_text) 노드를 사용하는 것을 추천합니다.
-14. GPT-4O의 시각적 기능을 지원합니다! 예시 워크플로우: [GPT-4o](workflow/GPT-4o.json)  
-15. 다른 워크플로우를 호출할 수 있는 워크플로우 중계기가 추가되었습니다! 예시 워크플로우: [다른 워크플로우 호출](workflow/调用另一个工作流.json)  
-16. 통의천문/qwen, 지표청언/GLM, deepseek, kimi/moonshot와 같은 유사한 openai 인터페이스를 가진 모든 모델에 적합합니다. 이 모델의 base_url, api_key, model_name을 LLM 노드에 입력하여 호출하시기 바랍니다.  
-17. LVM 로더가 추가되어 이제 로컬에서 LVM 모델을 호출할 수 있으며, [llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf) 모델을 지원합니다. 다른 LVM 모델이 GGUF 형식인 경우 이론적으로도 실행 가능해야 합니다. 예시 워크플로우는 여기에 있습니다: [start_with_LVM.json](workflow/start_with_LVM.json).  
-18. `fastapi.py` 파일을 작성하였습니다. 이를 직접 실행하면 `http://127.0.0.1:8817/v1/`에서 openai 인터페이스를 얻을 수 있으며, GPT를 호출할 수 있는 모든 애플리케이션이 귀하의 comfyui 워크플로우를 호출할 수 있습니다! 자세한 조작 방법은 별도의 튜토리얼을 통해 시연할 예정입니다~  
-19. LLM 로더와 LLM 체인을 분리하였으며, 모델 로드와 모델 설정을 분리하여 서로 다른 LLM 노드 간에 모델을 공유할 수 있게 되었습니다!  
-20. 현재 macOS 및 mps 장치를 지원합니다! 이에 대한 기여에 감사드립니다, [bigcat88](https://github.com/bigcat88)!  
-21. 사용자 선택에 따라 다양한 결말로 진행되는 인터랙티브 소설 게임을 구축할 수 있습니다! 예시 워크플로우 참고: [인터랙티브 소설](workflow/互动小说.json)  
-22. openai의 whisper 및 tts 기능에 적합하여 음성 입력 및 출력을 구현할 수 있습니다. 예시 워크플로우 참고: [음성 입력+음성 출력](workflow/语音输入+语音输出.json)  
-23. [Omost](https://github.com/lllyasviel/Omost)와 호환됩니다!!! [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)를 다운로드하여 즉시 체험해 보세요! 예시 워크플로우 참조: [start_with_OMOST](workflow/start_with_OMOST.json)  
-24. 기업 WeChat, DingTalk 및 Feishu로 메시지를 전송하는 LLM 도구와 호출 가능한 외부 함수가 추가되었습니다.  
-25. 텍스트 반복기를 새롭게 추가하였습니다. 이 반복기는 매번 일부 문자만 출력하며, 줄 바꿈 기호와 청크 크기를 기준으로 안전하게 텍스트를 분할합니다. 텍스트 중간에서 분할되지 않습니다. chunk_overlap은 분할된 텍스트가 얼마나 많은 문자를 겹치는지를 나타냅니다. 이를 통해 긴 텍스트를 일괄 입력할 수 있으며, 단순히 클릭하거나 comfyui의 루프 실행을 활성화하기만 하면 자동으로 실행됩니다. is_locked 속성을 활성화하는 것을 잊지 마세요. 입력이 끝날 때 워크플로우가 자동으로 잠기게 되어 계속 실행되지 않습니다. 예시 워크플로우: [텍스트 반복 입력](workflow/文本迭代输入.json)  
-26. 로컬 LLM 로더 및 로컬 llava 로더에 model name 속성을 추가하였습니다. 비어 있을 경우, 노드 내의 다양한 로컬 경로를 사용하여 로드합니다. 비어 있지 않을 경우, `config.ini`에서 입력한 경로 매개변수를 사용하여 로드합니다. 비어 있지 않지만 `config.ini`에 없다면, huggingface에서 다운로드하거나 huggingface의 모델 저장 디렉토리에서 로드합니다. huggingface에서 다운로드하려면, 예를 들어 `THUDM/glm-4-9b-chat` 형식으로 model name 속성을 입력하세요. 주의! 이렇게 로드된 모델은 transformer 라이브러리와 호환되어야 합니다.  
+14. GPT-4O의 시각적 기능을 지원합니다! 예시 워크플로우: [GPT-4o](workflow/GPT-4o.json)
+15. 다른 워크플로우를 호출할 수 있는 워크플로우 중계기가 추가되었습니다! 예시 워크플로우: [다른 워크플로우 호출](workflow/调用另一个工作流.json)
+16. 통의천문/qwen, 지표청언/GLM, deepseek, kimi/moonshot와 같은 유사한 openai 인터페이스를 가진 모든 모델에 적합합니다. 이 모델의 base_url, api_key, model_name을 LLM 노드에 입력하여 호출하시기 바랍니다.
+17. LVM 로더가 추가되어 이제 로컬에서 LVM 모델을 호출할 수 있으며, [llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf) 모델을 지원합니다. 다른 LVM 모델이 GGUF 형식인 경우 이론적으로도 실행 가능해야 합니다. 예시 워크플로우는 여기에 있습니다: [start_with_LVM.json](workflow/start_with_LVM.json).
+18. `fastapi.py` 파일을 작성하였습니다. 이를 직접 실행하면 `http://127.0.0.1:8817/v1/`에서 openai 인터페이스를 얻을 수 있으며, GPT를 호출할 수 있는 모든 애플리케이션이 귀하의 comfyui 워크플로우를 호출할 수 있습니다! 자세한 조작 방법은 별도의 튜토리얼을 통해 시연할 예정입니다~
+19. LLM 로더와 LLM 체인을 분리하였으며, 모델 로드와 모델 설정을 분리하여 서로 다른 LLM 노드 간에 모델을 공유할 수 있게 되었습니다!
+20. 현재 macOS 및 mps 장치를 지원합니다! 이에 대한 기여에 감사드립니다, [bigcat88](https://github.com/bigcat88)!
+21. 사용자 선택에 따라 다양한 결말로 진행되는 인터랙티브 소설 게임을 구축할 수 있습니다! 예시 워크플로우 참고: [인터랙티브 소설](workflow/互动小说.json)
+22. openai의 whisper 및 tts 기능에 적합하여 음성 입력 및 출력을 구현할 수 있습니다. 예시 워크플로우 참고: [음성 입력+음성 출력](workflow/语音输入+语音输出.json)
+23. [Omost](https://github.com/lllyasviel/Omost)와 호환됩니다!!! [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)를 다운로드하여 즉시 체험해 보세요! 예시 워크플로우 참조: [start_with_OMOST](workflow/start_with_OMOST.json)
+24. 기업 WeChat, DingTalk 및 Feishu로 메시지를 전송하는 LLM 도구와 호출 가능한 외부 함수가 추가되었습니다.
+25. 텍스트 반복기를 새롭게 추가하였습니다. 이 반복기는 매번 일부 문자만 출력하며, 줄 바꿈 기호와 청크 크기를 기준으로 안전하게 텍스트를 분할합니다. 텍스트 중간에서 분할되지 않습니다. chunk_overlap은 분할된 텍스트가 얼마나 많은 문자를 겹치는지를 나타냅니다. 이를 통해 긴 텍스트를 일괄 입력할 수 있으며, 단순히 클릭하거나 comfyui의 루프 실행을 활성화하기만 하면 자동으로 실행됩니다. is_locked 속성을 활성화하는 것을 잊지 마세요. 입력이 끝날 때 워크플로우가 자동으로 잠기게 되어 계속 실행되지 않습니다. 예시 워크플로우: [텍스트 반복 입력](workflow/文本迭代输入.json)
+26. 로컬 LLM 로더 및 로컬 llava 로더에 model name 속성을 추가하였습니다. 비어 있을 경우, 노드 내의 다양한 로컬 경로를 사용하여 로드합니다. 비어 있지 않을 경우, `config.ini`에서 입력한 경로 매개변수를 사용하여 로드합니다. 비어 있지 않지만 `config.ini`에 없다면, huggingface에서 다운로드하거나 huggingface의 모델 저장 디렉토리에서 로드합니다. huggingface에서 다운로드하려면, 예를 들어 `THUDM/glm-4-9b-chat` 형식으로 model name 속성을 입력하세요. 주의! 이렇게 로드된 모델은 transformer 라이브러리와 호환되어야 합니다.
 27. JSON 파일 파싱 노드와 JSON 값 추출 노드를 새롭게 추가하여, 파일이나 텍스트에서 특정 키의 값을 가져올 수 있게 하였습니다. [guobalove](https://github.com/guobalove)의 기여에 감사드립니다!
 28. 도구 호출 코드를 개선하여 이제 도구 호출 기능이 없는 LLM도 is_tools_in_sys_prompt 속성을 활성화할 수 있습니다(로컬 LLM은 기본적으로 활성화할 필요가 없으며 자동으로 조정됩니다). 활성화 후, 도구 정보가 시스템 프롬프트에 추가되어 LLM이 도구를 호출할 수 있게 됩니다. 구현 원리에 대한 관련 논문: [Achieving Tool Calling Functionality in LLMs Using Only Prompt Engineering Without Fine-Tuning](https://arxiv.org/abs/2407.04997)
 29. 사용자 정의 도구 코드를 저장할 수 있는 custom_tool 폴더를 새로 만들었습니다. [custom_tool](custom_tool) 폴더의 코드를 참고하여 사용자 정의 도구 코드를 custom_tool 폴더에 넣으면 LLM에서 사용자 정의 도구를 호출할 수 있습니다.
