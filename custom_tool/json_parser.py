@@ -111,7 +111,10 @@ class json_get_value:
             # 判断是否为列表或者是字典
             if isinstance(out, list) or isinstance(out, dict):
                 out = json.dumps(out, ensure_ascii=False, indent=4)
-            return (out.strip(),)
+                return (out.strip(),)
+            else:
+                return (out,)
+            
         except json.JSONDecodeError:
             print("Invalid JSON format.")
             return (None,)
