@@ -108,9 +108,15 @@ class json_get_value:
                     out = data[int(key)]
             except (KeyError, IndexError, ValueError):
                 return (None,)
+
+            # 判断是否为数值类型
+            if isinstance(out, (int, float)):
+                return (str(out),)
+
             # 判断是否为列表或者是字典
             if isinstance(out, list) or isinstance(out, dict):
                 out = json.dumps(out, ensure_ascii=False, indent=4)
+
             return (out.strip(),)
         except json.JSONDecodeError:
             print("Invalid JSON format.")
