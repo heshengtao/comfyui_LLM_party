@@ -34,7 +34,6 @@ pydub
 keyboard
 sounddevice
 neo4j
-ChatTTS
 soundfile
 langchain_openai
 sentence_transformers

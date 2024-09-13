@@ -37,14 +37,15 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭建自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建;从个人用户需要的接入自己的社交APP(QQ、飞书、Discord)，到流媒体工作者需要的一站式LLM+TTS+ComfyUI工作流；从普通学生所需要的第一个LLM应用的简单上手起步，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在ComfyUI LLM Party中找到答案。
 
 ## 最新更新
-1. 现已支持openai最新模型o1系列模型!!!!
-2. 新增了本地文件控制工具，让LLM可以控制你指定的文件夹的文件，例如：读取、写入、追加、删除、重命名、移动、复制文件等。由于该节点比较危险，收录在[comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)中。
-3. 新增SQL工具，可以让LLM查询SQL数据库。
-4. 更新了readme的多语言版本，翻译readme文档的工作流：[translate_readme](workflow/文档自动翻译机.json)
-5. 更新了4个迭代器节点（文字迭代器、图片迭代器、表格迭代器、json迭代器），迭代器模式有：顺序、随机和无限三种模式。顺序会按顺序依次输出，直到超出索引上限自动中止进程，并将索引值重置为0，随机会选择一个随机索引输出，无限会无限循环输出。
-6. 新增了Gemini API加载器节点，现在兼容Gemini官方的API啦！如果你是国内网络环境，如果出现API地区受限制的问题，请将节点切换到美国，并使用TUN模式。由于Gemini在工具调用时，如果返回的参数中包含中文字符会出现返回码为500的报错，因此部分工具节点不可用。示例工作流：[start_with_gemini](workflow/start_with_gemini.json)
-7. 新增lore book节点，可以在与LLM对话时插入你的背景设定，示例工作流：[lorebook](workflow/lorebook.json)
-8. 新增了FLUX提示词生成器面具节点，可以生成炉石卡牌、游戏王卡牌、海报、漫画等多种风格的提示词，可以让FLUX模型直出。参考工作流：[FLUX提示词](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
+1. 新增了GPT-sovits节点，可以调用GPT-sovits模型，将文字根据你的参考音频转换为语音，也可以将你微调后的模型路径填入（如果不填就是基底模型进行推理），获得你想要的任意音色。使用时，需要下载[GPT-sovits](https://github.com/RVC-Boss/GPT-SoVITS)项目和对应的基底模型到本地，然后在GPT-sovits项目文件夹下用`runtime\python.exe api_v2.py`启动API服务。此外，chatTTS节点被移动到了[comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)中。原因是chatTTS的依赖库较多，且在PyPi中的许可证为CC BY-NC 4.0，这是一个非商用许可证。即使chatTTS的github项目是AGPL协议的，我们还是为了避免不必要的麻烦，将chatTTS节点移到了comfyui LLM mafia中。希望大家能够理解！
+2. 现已支持openai最新模型o1系列模型!!!!
+3. 新增了本地文件控制工具，让LLM可以控制你指定的文件夹的文件，例如：读取、写入、追加、删除、重命名、移动、复制文件等。由于该节点比较危险，收录在[comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)中。
+4. 新增SQL工具，可以让LLM查询SQL数据库。
+5. 更新了readme的多语言版本，翻译readme文档的工作流：[translate_readme](workflow/文档自动翻译机.json)
+6. 更新了4个迭代器节点（文字迭代器、图片迭代器、表格迭代器、json迭代器），迭代器模式有：顺序、随机和无限三种模式。顺序会按顺序依次输出，直到超出索引上限自动中止进程，并将索引值重置为0，随机会选择一个随机索引输出，无限会无限循环输出。
+7. 新增了Gemini API加载器节点，现在兼容Gemini官方的API啦！如果你是国内网络环境，如果出现API地区受限制的问题，请将节点切换到美国，并使用TUN模式。由于Gemini在工具调用时，如果返回的参数中包含中文字符会出现返回码为500的报错，因此部分工具节点不可用。示例工作流：[start_with_gemini](workflow/start_with_gemini.json)
+8. 新增lore book节点，可以在与LLM对话时插入你的背景设定，示例工作流：[lorebook](workflow/lorebook.json)
+9. 新增了FLUX提示词生成器面具节点，可以生成炉石卡牌、游戏王卡牌、海报、漫画等多种风格的提示词，可以让FLUX模型直出。参考工作流：[FLUX提示词](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
 
 ## 使用说明
 1. 节点的使用说明请参考：[怎么使用节点](how_to_use_nodes_ZH.md)
