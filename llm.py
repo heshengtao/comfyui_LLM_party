@@ -587,6 +587,41 @@ class Chat:
                             **extra_parameters,
                         )
                         print(response)
+                elif is_tools_in_sys_prompt == "enable":
+                    response = openai.chat.completions.create(
+                        model=self.model_name,
+                        messages=history,
+                        **extra_parameters,
+                    )
+                    response_content = response.choices[0].message.content
+                    # 正则表达式匹配
+                    pattern = r'\{\s*"tool":\s*"(.*?)",\s*"parameters":\s*\{(.*?)\}\s*\}'
+                    while re.search(pattern, response_content, re.DOTALL) != None:
+                        match = re.search(pattern, response_content, re.DOTALL)
+                        tool = match.group(1)
+                        parameters = match.group(2)
+                        json_str = '{"tool": "' + tool + '", "parameters": {' + parameters + "}}"
+                        print("正在调用" + tool + "工具")
+                        parameters = json.loads("{" + parameters + "}")
+                        results = dispatch_tool(tool, parameters)
+                        print(results)
+                        history.append({"role": "assistant", "content": json_str})
+                        history.append(
+                            {
+                                "role": "user",
+                                "content": "调用"
+                                + tool
+                                + "工具返回的结果为："
+                                + results
+                                + "。请根据工具返回的结果继续回答我之前提出的问题。",
+                            }
+                        )
+                        response = openai.chat.completions.create(
+                            model=self.model_name,
+                            messages=history,
+                            **extra_parameters,
+                        )
+                        response_content = response.choices[0].message.content
                 else:
                     response = openai.chat.completions.create(
                         model=self.model_name,
