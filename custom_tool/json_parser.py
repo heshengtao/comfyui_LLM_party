@@ -79,6 +79,14 @@ class json_parser:
             out,
         )
 
+class AnyType(str):
+    """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
+
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+
+any_type = AnyType("*")
 
 class json_get_value:
     @classmethod
@@ -91,8 +99,8 @@ class json_get_value:
             }
         }
 
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("content",)
+    RETURN_TYPES = (any_type,)
+    RETURN_NAMES = ("any",)
     FUNCTION = "get_value"
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
