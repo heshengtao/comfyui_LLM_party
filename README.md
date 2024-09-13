@@ -38,13 +38,14 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 
 
 ## Latest update
-1. Added a local file control tool that allows the LLM to control files in your specified folder, such as reading, writing, appending, deleting, renaming, moving, and copying files.Due to the potential danger of this node, it is included in [comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia).
-2. New SQL tools allow LLM to query SQL databases.
-3. Updated the multilingual version of the README. Workflow for translating the README document: [translate_readme](workflow/文档自动翻译机.json)
-4. Updated 4 iterator nodes (text iterator, picture iterator, excel iterator, json iterator). The iterator modes are: sequential, random, and infinite. The order will be output in sequence until the index limit is exceeded, the process will be automatically aborted, and the index value will be reset to 0. Random will choose a random index output, and infinite will loop output.
-5. Added Gemini API loader node, now compatible with Gemini official API!Since Gemini generates an error with a return code of 500 if the returned parameter contains Chinese characters during the tool call, some tool nodes are unavailable.example workflow:[start_with_gemini](workflow/start_with_gemini.json)
-6. Added lore book node, you can insert your background settings when talking to LLM, example workflow: [lorebook](workflow/lorebook.json)
-7. Added FLUX prompt word generator mask node, which can generate Hearthstone cards, Game King cards, posters, comics and other styles of prompt words, which can make the FLUX model straight out. Reference workflow: [FLUX prompt word](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
+1. Now supports OpenAI’s latest model, the o1 series!
+2. Added a local file control tool that allows the LLM to control files in your specified folder, such as reading, writing, appending, deleting, renaming, moving, and copying files.Due to the potential danger of this node, it is included in [comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia).
+3. New SQL tools allow LLM to query SQL databases.
+4. Updated the multilingual version of the README. Workflow for translating the README document: [translate_readme](workflow/文档自动翻译机.json)
+5. Updated 4 iterator nodes (text iterator, picture iterator, excel iterator, json iterator). The iterator modes are: sequential, random, and infinite. The order will be output in sequence until the index limit is exceeded, the process will be automatically aborted, and the index value will be reset to 0. Random will choose a random index output, and infinite will loop output.
+6. Added Gemini API loader node, now compatible with Gemini official API!Since Gemini generates an error with a return code of 500 if the returned parameter contains Chinese characters during the tool call, some tool nodes are unavailable.example workflow:[start_with_gemini](workflow/start_with_gemini.json)
+7. Added lore book node, you can insert your background settings when talking to LLM, example workflow: [lorebook](workflow/lorebook.json)
+8. Added FLUX prompt word generator mask node, which can generate Hearthstone cards, Game King cards, posters, comics and other styles of prompt words, which can make the FLUX model straight out. Reference workflow: [FLUX prompt word](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
 
 ## User Guide
 1. For the instructions for using the node, please refer to: [how to use nodes](how_to_use_nodes.md)
