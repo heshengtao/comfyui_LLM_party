@@ -529,14 +529,19 @@ class Chat:
                         },
                     ]
                     user_prompt = img_json
+            if "o1" in self.model_name:
+                # 将history中的系统提示词部分的角色换成user
+                for i in range(len(history)):
+                    if history[i]["role"] == "system":
+                        history[i]["role"] = "user"
+                        history.append({"role": "assistant", "content": "好的，我会按照你的指示来操作"})
+                        break
             openai.api_key = self.apikey
             openai.base_url = self.baseurl
             new_message = {"role": "user", "content": user_prompt}
             history.append(new_message)
             print(history)
             if "o1" in self.model_name:
-                # 移除history中的系统提示词部分
-                history = [msg for msg in history if msg["role"] != "system"]
                 if tools is not None:
                     response = openai.chat.completions.create(
                         model=self.model_name,

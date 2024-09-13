@@ -1,0 +1,385 @@
+{
+  "last_node_id": 27,
+  "last_link_id": 40,
+  "nodes": [
+    {
+      "id": 23,
+      "type": "LLM_api_loader",
+      "pos": [
+        540,
+        264
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            36
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "o1-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 25,
+      "type": "load_persona",
+      "pos": [
+        530,
+        490
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            38
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "HTML2IMG",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 24,
+      "type": "LLM",
+      "pos": [
+        896,
+        276
+      ],
+      "size": {
+        "0": 444.24951171875,
+        "1": 548.9947509765625
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 36,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 38,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "帮我写一个主题为comfyui llm party的网页",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ]
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1385,
+        280
+      ],
+      "size": {
+        "0": 450,
+        "1": 290
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            39
+          ],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>ComfyUI LLM Party</title>\n    <style>\n        body {\n            margin: 0;\n            padding: 0;\n            font-family: 'Arial', sans-serif;\n            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);\n            color: #333;\n        }\n        header {\n            background-color: #6c63ff;\n            color: white;\n            padding: 30px 20px;\n            text-align: center;\n            box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n        }\n        .container {\n            padding: 50px 20px;\n            max-width: 1200px;\n            margin: 0 auto;\n        }\n        h1 {\n            font-size: 2.5em;\n            margin-bottom: 10px;\n        }\n        h2 {\n            color: #6c63ff;\n            margin-top: 40px;\n            margin-bottom: 20px;\n            font-size: 1.8em;\n            border-bottom: 2px solid #6c63ff;\n            display: inline-block;\n            padding-bottom: 5px;\n        }\n        p {\n            font-size: 1.1em;\n            line-height: 1.8;\n            margin-bottom: 20px;\n        }\n        .party-image {\n            width: 100%;\n            max-width: 800px;\n            display: block;\n            margin: 30px auto;\n            border-radius: 10px;\n            box-shadow: 0 6px 12px rgba(0,0,0,0.1);\n        }\n        .details, .rsvp {\n            background-color: #ffffff;\n            padding: 30px;\n            border-radius: 10px;\n            box-shadow: 0 4px 8px rgba(0,0,0,0.05);\n            margin-bottom: 30px;\n        }\n        .details ul {\n            list-style: none;\n            padding: 0;\n        }\n        .details li {\n            margin: 10px 0;\n            font-size: 1.1em;\n        }\n        .rsvp form {\n            display: flex;\n            flex-direction: column;\n        }\n        .rsvp input, .rsvp button {\n            padding: 10px;\n            margin-bottom: 15px;\n            font-size: 1em;\n            border: 1px solid #ccc;\n            border-radius: 5px;\n        }\n        .rsvp button {\n            background-color: #6c63ff;\n            color: white;\n            border: none;\n            cursor: pointer;\n            transition: background-color 0.3s;\n        }\n        .rsvp button:hover {\n            background-color: #5a54d1;\n        }\n        .footer {\n            background-color: #6c63ff;\n            color: white;\n            padding: 20px;\n            text-align: center;\n        }\n        @media (max-width: 768px) {\n            h1 {\n                font-size: 2em;\n            }\n            h2 {\n                font-size: 1.5em;\n            }\n            .details, .rsvp {\n                padding: 20px;\n            }\n        }\n    </style>\n</head>\n<body>\n    <header>\n        <h1>欢迎参加 ComfyUI LLM Party!</h1>\n    </header>\n    <div class=\"container\">\n        <img src=\"https://via.placeholder.com/800x400\" alt=\"Party Image\" class=\"party-image\">\n        <section class=\"details\">\n            <h2>活动详情</h2>\n            <ul>\n                <li><strong>日期：</strong>2024年5月20日</li>\n                <li><strong>时间：</strong>下午5:00 至 晚上10:00</li>\n                <li><strong>地点：</strong>上海市静安区某某大厦</li>\n                <li><strong>活动内容：</strong>体验最新的ComfyUI功能，与LLM专家互动，参与有趣的工作坊和讨论。</li>\n            </ul>\n        </section>\n        <section class=\"rsvp\">\n            <h2>确认出席</h2>\n            <form action=\"#\" method=\"post\">\n                <input type=\"text\" name=\"name\" placeholder=\"您的姓名\" required>\n                <input type=\"email\" name=\"email\" placeholder=\"您的邮箱\" required>\n                <button type=\"submit\">提交</button>\n            </form>\n        </section>\n        <section class=\"about\">\n            <h2>关于ComfyUI LLM Party</h2>\n            <p>\n                ComfyUI LLM Party旨在为开发者、设计师和AI爱好者提供一个交流和学习的平台。在这里，您可以了解ComfyUI的最新进展，与业内专家交流心得，共同探讨LLM技术的未来发展。\n            </p>\n        </section>\n    </div>\n    <div class=\"footer\">\n        &copy; 2024 ComfyUI LLM Party 版权所有 | 联系我们: contact@comfyui.com\n    </div>\n</body>\n</html>"
+      ]
+    },
+    {
+      "id": 26,
+      "type": "html2img_function",
+      "pos": [
+        1930,
+        310
+      ],
+      "size": [
+        320,
+        130
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "html_str",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "html_str"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "img",
+          "type": "IMAGE",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "label": "img",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "html2img_function"
+      },
+      "widgets_values": [
+        "HTML code string",
+        1920,
+        1080,
+        true
+      ]
+    },
+    {
+      "id": 27,
+      "type": "PreviewImage",
+      "pos": [
+        1390,
+        630
+      ],
+      "size": [
+        430,
+        340
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 40,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    }
+  ],
+  "links": [
+    [
+      36,
+      23,
+      0,
+      24,
+      0,
+      "CUSTOM"
+    ],
+    [
+      37,
+      24,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      38,
+      25,
+      0,
+      24,
+      4,
+      "STRING"
+    ],
+    [
+      39,
+      11,
+      0,
+      26,
+      0,
+      "STRING"
+    ],
+    [
+      40,
+      26,
+      0,
+      27,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.724729500000014,
+      "offset": [
+        -425.55008598740835,
+        24.038406981721764
+      ]
+    }
+  },
+  "version": 0.4
+}
