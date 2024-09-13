@@ -1,6 +1,6 @@
 {
-  "last_node_id": 78,
-  "last_link_id": 102,
+  "last_node_id": 79,
+  "last_link_id": 104,
   "nodes": [
     {
       "id": 72,
@@ -10,8 +10,8 @@
         343
       ],
       "size": {
-        "0": 315,
-        "1": 58
+        "0": 320,
+        "1": 60
       },
       "flags": {},
       "order": 4,
@@ -54,7 +54,7 @@
       ],
       "size": {
         "0": 315,
-        "1": 106
+        "1": 130
       },
       "flags": {},
       "order": 0,
@@ -66,9 +66,9 @@
           "links": [
             98
           ],
+          "slot_index": 0,
           "shape": 3,
-          "label": "model",
-          "slot_index": 0
+          "label": "model"
         }
       ],
       "properties": {
@@ -77,47 +77,11 @@
       "widgets_values": [
         "gpt-3.5-turbo-1106",
         "https://api.openai.com/v1",
-        "sk-XXXXX"
+        "sk-XXXXX",
+        false
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
-    },
-    {
-      "id": 76,
-      "type": "load_file",
-      "pos": [
-        42,
-        343
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "links": [
-            101
-          ],
-          "shape": 3,
-          "label": "file_content",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "load_file"
-      },
-      "widgets_values": [
-        "",
-        "test.txt",
-        true
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
     },
     {
       "id": 77,
@@ -152,7 +116,8 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
-          }
+          },
+          "label": "system_prompt_input"
         },
         {
           "name": "user_prompt_input",
@@ -160,15 +125,17 @@
           "link": null,
           "widget": {
             "name": "user_prompt_input"
-          }
+          },
+          "label": "user_prompt_input"
         },
         {
           "name": "tools",
           "type": "STRING",
-          "link": 102,
+          "link": 104,
           "widget": {
             "name": "tools"
-          }
+          },
+          "label": "tools"
         },
         {
           "name": "file_content",
@@ -176,7 +143,8 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
@@ -186,9 +154,9 @@
           "links": [
             100
           ],
+          "slot_index": 0,
           "shape": 3,
-          "label": "assistant_response",
-          "slot_index": 0
+          "label": "assistant_response"
         },
         {
           "name": "history",
@@ -235,11 +203,48 @@
       ]
     },
     {
-      "id": 78,
+      "id": 76,
+      "type": "load_file",
+      "pos": [
+        30,
+        370
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "links": [
+            103
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "file_content"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_file"
+      },
+      "widgets_values": [
+        "",
+        "test.txt",
+        true
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 79,
       "type": "ebd_tool",
       "pos": [
-        387,
-        339
+        390,
+        390
       ],
       "size": [
         315,
@@ -250,9 +255,15 @@
       "mode": 0,
       "inputs": [
         {
+          "name": "ebd_model",
+          "type": "EBD_MODEL",
+          "link": null,
+          "label": "ebd_model"
+        },
+        {
           "name": "file_content",
           "type": "STRING",
-          "link": 101,
+          "link": 103,
           "widget": {
             "name": "file_content"
           }
@@ -263,9 +274,10 @@
           "name": "tool",
           "type": "STRING",
           "links": [
-            102
+            104
           ],
           "shape": 3,
+          "label": "tool",
           "slot_index": 0
         }
       ],
@@ -302,16 +314,16 @@
       "STRING"
     ],
     [
-      101,
+      103,
       76,
       0,
-      78,
-      0,
+      79,
+      1,
       "STRING"
     ],
     [
-      102,
-      78,
+      104,
+      79,
       0,
       77,
       4,
@@ -323,10 +335,10 @@
   "extra": {
     "ds": {
       "scale": 0.8264462809917354,
-      "offset": {
-        "0": 26.162674638991078,
-        "1": 6.341303652705278
-      }
+      "offset": [
+        -172.77484216981674,
+        106.24984110491718
+      ]
     }
   },
   "version": 0.4
