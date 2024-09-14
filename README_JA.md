@@ -30,7 +30,8 @@
 Comfyui_llm_partyは、[comfyui](https://github.com/comfyanonymous/ComfyUI)という非常にシンプルなUIインターフェースを基に、LLMワークフロー構築のための完全なノードライブラリを開発することを目指しています。これにより、ユーザーは自身のLLMワークフローをより便利かつ迅速に構築でき、自身の画像ワークフローに接続することも容易になります。
 
 ## 効果の展示
-https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
+https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
+
 ## プロジェクト概要
 ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャラクター設定によって、専属のAIアシスタントを迅速に構築することから、業界に適用可能な単語ベクトルRAG、GraphRAGを用いた知識ベースのローカル管理までを行います。単一のエージェントパイプラインから、複雑なエージェント間の放射状および環状の相互作用モードの構築まで、個人ユーザーのためのSNSアプリ（QQ、Feishu、Discord）への接続から、ストリーミングメディアの作業者が必要とするワンストップLLM+TTS+ComfyUIワークフローまで、普通の学生が必要とする最初のLLMアプリケーションの簡単な導入から、研究者が一般的に使用するさまざまなパラメータ調整インターフェースやモデル適応に至るまで、これらすべての答えはComfyUI LLM Partyの中にあります。
 
