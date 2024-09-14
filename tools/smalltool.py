@@ -164,5 +164,5 @@ class any2str:
 
     CATEGORY = "大模型会议（llm_meeting）/函数（function）"
 
-    def tts(self, number):
-        return (str(number),)
+    def tts(self,any):
+        return (str(any),)
