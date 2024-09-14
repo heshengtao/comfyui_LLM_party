@@ -30,7 +30,8 @@
 Comfyui_llm_party tiene la intención de desarrollar una biblioteca completa de nodos para la construcción de flujos de trabajo de LLM, basada en la interfaz de usuario extremadamente simple de [comfyui](https://github.com/comfyanonymous/ComfyUI) como frontend. Esto permitirá a los usuarios construir sus flujos de trabajo de LLM de manera más rápida y conveniente, además de facilitar la integración de sus flujos de trabajo de imágenes.
 
 ## Demostración de resultados
-https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
+https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
+
 ## Resumen del Proyecto
 ComfyUI LLM Party permite desde la llamada a múltiples herramientas LLM desde la base, la rápida configuración de un asistente AI personalizado, hasta la implementación de vectores de palabras RAG y GraphRAG para la gestión local de bases de datos de conocimiento en la industria; desde una simple línea de agentes inteligentes hasta la construcción de complejos modos de interacción radial entre agentes inteligentes y modos de interacción en círculo; desde la integración de aplicaciones sociales (QQ, Feishu, Discord) para usuarios individuales, hasta un flujo de trabajo integral de LLM+TTS+ComfyUI para trabajadores de streaming; desde el inicio sencillo que necesita un estudiante común con su primera aplicación LLM, hasta las diversas interfaces de ajuste de parámetros frecuentemente utilizadas por investigadores. Todo esto lo puedes encontrar en ComfyUI LLM Party.
 

@@ -23,7 +23,7 @@ from PIL import Image, ImageOps, ImageSequence
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import get_lexer_by_name
 
-current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from ..config import current_dir_path
 
 client_id = str(uuid.uuid4())
 
@@ -47,13 +47,11 @@ def get_history(prompt_id,server_address):
         return json.loads(response.read())
 
 
-def get_all(prompt,server_address):
+def get_all(ws, prompt,server_address):
     prompt_id = queue_prompt(prompt,server_address)["prompt_id"]
     output_images = {}
     output_text = ""
-    
     while True:
-        """
         out = ws.recv()
         if isinstance(out, str):
             message = json.loads(out)
@@ -63,13 +61,8 @@ def get_all(prompt,server_address):
                     break  # Execution is done
         else:
             continue  # previews are binary data
-            """
-        history_all=get_history(prompt_id,server_address)
-        # 如果history中有outputs，则跳出循环
-        if prompt_id in history_all:
-            break
-        time.sleep(0.1)
-    history=get_history(prompt_id,server_address)[prompt_id]
+
+    history = get_history(prompt_id,server_address)[prompt_id]
     for o in history["outputs"]:
         for node_id in history["outputs"]:
             node_output = history["outputs"][node_id]
@@ -120,7 +113,9 @@ def api(
             prompt[p]["inputs"]["negative_prompt"] = negative_prompt
             prompt[p]["inputs"]["model_name"] = model_name
 
-    images, res = get_all(prompt,server_address)
+    ws = websocket.WebSocket()
+    ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
+    images, res = get_all(ws, prompt,server_address)
     return images, res
 
 
@@ -281,6 +276,3 @@ class workflow_transfer_v2:
         hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
         return hash_value
 
-if __name__ == "__main__":
-    images, res=api(user_prompt="你好",workflow_path="fastapi.json")
-    print(res)
