@@ -1,12 +1,14 @@
 import json
 import locale
 
-
+amap_api_key = ""
 import requests
-def get_amap_regeo(location, api_key, extensions="all", radius=1000):
+def get_amap_regeo(location, extensions="all", radius=1000):
+    global amap_api_key
+
     url = "https://restapi.amap.com/v3/geocode/regeo"
     params = {
-        'key': api_key,
+        'key': amap_api_key,
         'location': location,
         'extensions': extensions,
         'radius': str(radius)
@@ -40,6 +42,8 @@ class AmapRegeoTool:
     def amap_regeo(self, location, api_key, extensions="all", radius=1000, is_enable=True):
         if not is_enable:
             return (None,)
+        global amap_api_key
+        amap_api_key = api_key
         regeo_info = get_amap_regeo(location, api_key, extensions, radius)
         if regeo_info:
             output = [
@@ -56,11 +60,6 @@ class AmapRegeoTool:
                                     "description": "需要查询的经纬度坐标，例如：116.310003,39.991957",
                                     "default": str(location),
                                 },
-                                "api_key": {
-                                    "type": "string",
-                                    "description": "高德API密钥",
-                                    "default": str(api_key),
-                                },
                                 "extensions": {
                                     "type": "string",
                                     "description": "返回结果控制",
@@ -72,7 +71,7 @@ class AmapRegeoTool:
                                     "default": radius,
                                 }
                             },
-                            "required": ["location", "api_key"],
+                            "required": ["location"],
                         },
                     },
                 }

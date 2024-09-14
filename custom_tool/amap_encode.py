@@ -2,10 +2,11 @@ import json
 import locale
 import requests
 
-
-def geocode(address, api_key):
+amap_api_key = ""
+def geocode(address):
+    global amap_api_key
     # 调用地理编码API
-    url = f"https://restapi.amap.com/v3/geocode/geo?address={address}&key={api_key}"
+    url = f"https://restapi.amap.com/v3/geocode/geo?address={address}&key={amap_api_key}"
     response = requests.get(url)
     data = response.json()
     if data['status'] == '1' and data['geocodes']:
@@ -36,6 +37,8 @@ class GeocodeTool:
     def geocode(self, address, api_key, is_enable=True):
         if not is_enable:
             return (None,)
+        global amap_api_key
+        amap_api_key = api_key
         output = [
             {
                 "type": "function",
@@ -49,14 +52,9 @@ class GeocodeTool:
                                 "type": "string",
                                 "description": "需要查询的地址，例如：北京市朝阳区",
                                 "default": str(address),
-                            },
-                            "api_key": {
-                                "type": "string",
-                                "description": "高德地图API密钥",
-                                "default": str(api_key),
                             }
                         },
-                        "required": ["address", "api_key"],
+                        "required": ["address"],
                     },
                 },
             }

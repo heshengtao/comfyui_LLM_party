@@ -2,10 +2,12 @@ import json
 import locale
 import requests
 
-def get_amap_weather(city_code, api_key):
+amap_api_key = ""
+def get_amap_weather(city_code):
+    global amap_api_key
     url = "https://restapi.amap.com/v3/weather/weatherInfo"
     params = {
-        'key': api_key,
+        'key': amap_api_key,
         'city': city_code,
         'extensions': 'all'  # 'base' for current weather, 'all' for forecast
     }
@@ -36,6 +38,8 @@ class AmapWeatherTool:
     def amap_weather(self, city_code, api_key, is_enable=True):
         if not is_enable:
             return (None,)
+        global amap_api_key
+        amap_api_key = api_key
         weather_info = get_amap_weather(city_code, api_key)
         if weather_info:
             output = [
@@ -51,14 +55,9 @@ class AmapWeatherTool:
                                     "type": "string",
                                     "description": "需要查询的城市编码，例如：110000（北京）",
                                     "default": str(city_code),
-                                },
-                                "api_key": {
-                                    "type": "string",
-                                    "description": "高德API密钥",
-                                    "default": str(api_key),
                                 }
                             },
-                            "required": ["city_code", "api_key"],
+                            "required": ["city_code"],
                         },
                     },
                 }
