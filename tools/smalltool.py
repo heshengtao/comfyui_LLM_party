@@ -115,3 +115,54 @@ class str2float:
 
     def tts(self, text):
         return (float(text),)
+    
+class str2int:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "text": ("STRING", {}),
+            },
+        }
+
+    RETURN_TYPES = ("INT",)
+    RETURN_NAMES = ("int",)
+
+    FUNCTION = "tts"
+
+    OUTPUT_NODE = True
+
+    CATEGORY = "大模型会议（llm_meeting）/函数（function）"
+
+    def tts(self, text):
+        return (int(text),)
+    
+class AnyType(str):
+    """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
+
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+
+any_type = AnyType("*")
+
+class any2str:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "any": (any_type, {}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("text",)
+
+    FUNCTION = "tts"
+
+    OUTPUT_NODE = True
+
+    CATEGORY = "大模型会议（llm_meeting）/函数（function）"
+
+    def tts(self, number):
+        return (str(number),)

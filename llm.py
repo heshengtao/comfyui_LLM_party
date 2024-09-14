@@ -128,7 +128,7 @@ from .tools.search_web import (
     search_duckduckgo,
 )
 from .tools.show_text import About_us, show_text_party
-from .tools.smalltool import bool_logic, load_int, none2false,str2float
+from .tools.smalltool import bool_logic, load_int, none2false,str2float,str2int,any2str
 from .tools.story import read_story_json, story_json_tool
 from .tools.text_iterator import text_iterator,text_writing
 from .tools.tool_combine import tool_combine, tool_combine_plus
@@ -2092,6 +2092,8 @@ NODE_CLASS_MAPPINGS = {
     "json_iterator":json_iterator,
     "Lorebook":Lorebook,
     "text_writing":text_writing,
+    "str2int":str2int,
+    "any2str":any2str,
 }
 
 
@@ -2200,6 +2202,8 @@ if lang == "zh_CN":
         "json_iterator":"JSON迭代器",
         "Lorebook":"Lorebook传说书",
         "text_writing":"文本写入",
+        "str2int":"字符串转整数",
+        "any2str":"任意类型转字符串",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2302,6 +2306,8 @@ else:
         "json_iterator": "JSON Iterator",
         "Lorebook":"Lore book",
         "text_writing":"Text write",
+        "str2int": "String to Integer",
+        "any2str": "Any to String",
     }
 
 
