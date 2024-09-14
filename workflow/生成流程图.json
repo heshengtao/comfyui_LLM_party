@@ -1,0 +1,433 @@
+{
+  "last_node_id": 30,
+  "last_link_id": 44,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1385,
+        "1": 280,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 450,
+        "1": 290
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            42
+          ],
+          "slot_index": 0,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "graph TD;\n    A[数据收集] --> B[数据清洗];\n    B --> C[数据增强];\n    C --> D[模型选择];\n    D --> E[训练数据准备];\n    E --> F[模型训练];\n    F --> G[模型评估];\n    G --> H[超参数优化];\n    H --> I[模型测试];\n    I --> J[模型部署];\n    J --> K[监控与反馈];"
+      ]
+    },
+    {
+      "id": 28,
+      "type": "LLM_api_loader",
+      "pos": {
+        "0": 539,
+        "1": 288,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            41
+          ],
+          "shape": 3,
+          "label": "model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 24,
+      "type": "LLM",
+      "pos": {
+        "0": 896,
+        "1": 276,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        460.82156570608095,
+        805.7548302234854
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 41,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你需要按照我的提示生成Mermaid图表定义，例如：\n\ngraph TD;\n    A[这是一个节点] --> B[这是另一个节点];\n    A --> C[第三个节点];\n    B --> D[第四个节点];\n    C --> D;\n\n请不要输出除了Mermaid图表定义之外的其他字符，也不要前后的``` ```\n\n现在，开始！",
+        "帮我写一个LLM训练的流程图",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ]
+    },
+    {
+      "id": 30,
+      "type": "html2img_function",
+      "pos": {
+        "0": 1436,
+        "1": 855,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "html_str",
+          "type": "STRING",
+          "link": 43,
+          "widget": {
+            "name": "html_str"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "img",
+          "type": "IMAGE",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "label": "img",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "html2img_function"
+      },
+      "widgets_values": [
+        "HTML code string",
+        800,
+        1600,
+        true
+      ]
+    },
+    {
+      "id": 27,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 605,
+        "1": 473,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        248.06938051936572,
+        531.7873325270853
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 44,
+          "label": "images"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 29,
+      "type": "graph_md_to_html",
+      "pos": {
+        "0": 1436,
+        "1": 680,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "graph_definition",
+          "type": "STRING",
+          "link": 42,
+          "widget": {
+            "name": "graph_definition"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "HTML",
+          "type": "STRING",
+          "links": [
+            43
+          ],
+          "shape": 3,
+          "label": "HTML"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "graph_md_to_html"
+      },
+      "widgets_values": [
+        "graph md code string",
+        "dtransparent",
+        true
+      ]
+    }
+  ],
+  "links": [
+    [
+      37,
+      24,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      41,
+      28,
+      0,
+      24,
+      0,
+      "CUSTOM"
+    ],
+    [
+      42,
+      11,
+      0,
+      29,
+      0,
+      "STRING"
+    ],
+    [
+      43,
+      29,
+      0,
+      30,
+      0,
+      "STRING"
+    ],
+    [
+      44,
+      30,
+      0,
+      27,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6830134553650705,
+      "offset": [
+        -436.89091488344326,
+        -195.49845834428487
+      ]
+    }
+  },
+  "version": 0.4
+}
