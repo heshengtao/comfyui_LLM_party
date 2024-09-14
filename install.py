@@ -78,6 +78,8 @@ def install_llama(system_info):
             
             if system_info.get("gpu", False):
                 cuda_version = system_info["cuda_version"]
+                if cuda_version =="cu124":
+                    cuda_version = "cu122"
                 custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
                 print("cuda " + custom_command)
             elif system_info.get("metal", False):
