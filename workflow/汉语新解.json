@@ -1,0 +1,436 @@
+{
+  "last_node_id": 31,
+  "last_link_id": 44,
+  "nodes": [
+    {
+      "id": 23,
+      "type": "LLM_api_loader",
+      "pos": {
+        "0": 464,
+        "1": 65,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            36
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1362,
+        "1": -68,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 450,
+        "1": 290
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            41
+          ],
+          "slot_index": 0,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "<svg width=\"400\" height=\"600\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: #FAFAD2; font-family: '毛笔楷体';\">\n  <text x=\"200\" y=\"40\" font-size=\"24\" text-anchor=\"middle\" fill=\"#333\">汉语新解</text>\n  <line x1=\"20\" y1=\"60\" x2=\"380\" y2=\"60\" stroke=\"#333\" stroke-width=\"2\"/>\n  <text x=\"20\" y=\"100\" font-size=\"16\" fill=\"#333\">调休 (Adjusting Days Off)</text>\n  <text x=\"20\" y=\"130\" font-size=\"16\" fill=\"#333\">休暇を調整する (Kyuuka wo chousei suru)</text>\n  <text x=\"20\" y=\"160\" font-size=\"16\" fill=\"#333\">在忙碌的生活中寻求短暂的喘息，</text>\n  <text x=\"20\" y=\"180\" font-size=\"16\" fill=\"#333\">就像在沙漠中找到一片绿洲，</text>\n  <text x=\"20\" y=\"200\" font-size=\"16\" fill=\"#333\">却不知那绿洲是否也是镜花水月。</text>\n  <line x1=\"20\" y1=\"220\" x2=\"380\" y2=\"220\" stroke=\"#333\" stroke-width=\"2\"/>\n  <text x=\"20\" y=\"240\" font-size=\"16\" fill=\"#333\">极简总结：</text>\n  <text x=\"20\" y=\"260\" font-size=\"16\" fill=\"#333\">调休，是放松的假象。</text>\n  <line x1=\"20\" y1=\"280\" x2=\"380\" y2=\"280\" stroke=\"#333\" stroke-width=\"2\"/>\n</svg>"
+      ]
+    },
+    {
+      "id": 29,
+      "type": "svg2img_function",
+      "pos": {
+        "0": 1892,
+        "1": -38,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "svg_str",
+          "type": "STRING",
+          "link": 41,
+          "widget": {
+            "name": "svg_str"
+          },
+          "label": "svg_str"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "img",
+          "type": "IMAGE",
+          "links": [
+            42
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "img"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "svg2img_function"
+      },
+      "widgets_values": [
+        "svg code string",
+        400,
+        600,
+        true
+      ]
+    },
+    {
+      "id": 24,
+      "type": "LLM",
+      "pos": {
+        "0": 896,
+        "1": 276,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        448.12126949419394,
+        545.1334930527294
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 36,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 44,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "调休",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true
+      ]
+    },
+    {
+      "id": 31,
+      "type": "load_persona",
+      "pos": {
+        "0": 485,
+        "1": 380,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "汉语新解",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 27,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 1364,
+        "1": 280,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        438.4516767720256,
+        630.862180281123
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 42,
+          "label": "images"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    }
+  ],
+  "links": [
+    [
+      36,
+      23,
+      0,
+      24,
+      0,
+      "CUSTOM"
+    ],
+    [
+      37,
+      24,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      41,
+      11,
+      0,
+      29,
+      0,
+      "STRING"
+    ],
+    [
+      42,
+      29,
+      0,
+      27,
+      0,
+      "IMAGE"
+    ],
+    [
+      44,
+      31,
+      0,
+      24,
+      3,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909092,
+      "offset": [
+        -569.7214765767139,
+        -226.1821492676343
+      ]
+    }
+  },
+  "version": 0.4
+}
