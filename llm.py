@@ -52,7 +52,7 @@ from .tools.classify_persona import classify_persona, classify_persona_plus
 from .tools.clear_file import clear_file
 from .tools.clear_model import clear_model
 from .tools.custom_persona import custom_persona
-from .tools.dialog import end_dialog, start_dialog
+from .tools.dialog import end_dialog, start_dialog,start_anything,end_anything
 from .tools.dingding import Dingding, Dingding_tool, send_dingding
 from .tools.end_work import end_workflow, img2path
 from .tools.excel import image_iterator, load_excel,json_iterator
@@ -2094,6 +2094,8 @@ NODE_CLASS_MAPPINGS = {
     "text_writing":text_writing,
     "str2int":str2int,
     "any2str":any2str,
+    "start_anything":start_anything,
+    "end_anything":end_anything,
 }
 
 
@@ -2204,6 +2206,8 @@ if lang == "zh_CN":
         "text_writing":"文本写入",
         "str2int":"字符串转整数",
         "any2str":"任意类型转字符串",
+        "start_anything":"开始任意",
+        "end_anything": "结束任意",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2308,6 +2312,8 @@ else:
         "text_writing":"Text write",
         "str2int": "String to Integer",
         "any2str": "Any to String",
+        "start_anything": "Start Anything",
+        "end_anything": "End Anything",
     }
 
 
