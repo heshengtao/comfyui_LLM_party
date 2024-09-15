@@ -105,25 +105,15 @@ class AnyType(str):
 
 any_type = AnyType("*")
 
+anything={}
+
 class start_anything:
     def __init__(self):
         self.start = True
-        self.start_dialog=""
-        current_time = datetime.datetime.now()
-        # 生成一个hash值作为id
-        self.id = current_time.strftime("%Y_%m_%d_%H_%M_%S") + str(hash(random.randint(0, 1000000)))
-        # temp文件夹不存在就创建
-        if not os.path.exists(os.path.join(current_dir_path, "temp")):
-            os.makedirs(os.path.join(current_dir_path, "temp"))
-        # 构建prompt.txt的绝对路径
-        self.prompt_path = os.path.join(current_dir_path, "temp", self.id + ".json")
-        # 如果文件不存在，创建prompt.txt文件，存在就覆盖文件
-        if not os.path.exists(self.prompt_path):
-            with open(self.prompt_path, "w", encoding="utf-8") as f:
-                f.write("")
 
     @classmethod
     def INPUT_TYPES(s):
+        global anything
         return {"required": 
                 {"start_any": (any_type, {}),
                  "key": ("STRING", {"default":""}),
@@ -137,7 +127,6 @@ class start_anything:
     )
     RETURN_NAMES = (
         "any",
-        "dialog_id",
     )
 
     FUNCTION = "dialog"
@@ -150,17 +139,19 @@ class start_anything:
         if is_reload:
             self.start = True
         if self.start == False:
-            # 读取prompt.json中key的值
-            with open(self.prompt_path, "r", encoding="utf-8") as f:
-                prompt = json.load(f)
-                prompt = prompt.get(key,"")
+            global anything
+            try:
+                prompt= anything[key]
+            except:
+                prompt = start_any
+                anything[key] = start_any
+                self.start = False
         else:
             prompt = start_any
+            anything[key] = start_any
             self.start = False
-        dialog_id = self.id
         return (
             prompt,
-            dialog_id,
         )
     @classmethod
     def IS_CHANGED(s):
@@ -173,7 +164,6 @@ class end_anything:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "dialog_id": ("STRING", {"forceInput": True}),
                 "key": ("STRING", {"default":""}),
                 "any": (any_type, {"forceInput": True}),
             }
@@ -188,18 +178,7 @@ class end_anything:
 
     CATEGORY = "大模型派对（llm_party）/工作流（workflow）"
 
-    def dialog(self, dialog_id, any,key):
-        # 构建prompt.txt的绝对路径
-        self.prompt_path = os.path.join(current_dir_path, "temp", dialog_id + ".json")
-        print(self.prompt_path)
-        # 如果文件不存在，创建prompt.json文件，存在就把any写入key的值
-        if not os.path.exists(self.prompt_path):
-            with open(self.prompt_path, "w", encoding="utf-8") as f:
-                json.dump({key: any}, f, ensure_ascii=False, indent=4)
-        else:
-            with open(self.prompt_path, "r", encoding="utf-8") as f:
-                prompt = json.load(f)
-                prompt[key] = any
-            with open(self.prompt_path, "w", encoding="utf-8") as f:
-                json.dump(prompt, f, ensure_ascii=False, indent=4)
+    def dialog(self, any,key):
+        global anything
+        anything[key] = any
         return ()
