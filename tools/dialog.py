@@ -27,7 +27,7 @@ class start_dialog:
     @classmethod
     def INPUT_TYPES(s):
         return {"required": 
-                {"start_dialog": ("STRING", {}),
+                {"init_dialog": ("STRING", {}),
                  "is_reload": ("BOOLEAN", {"default": False})
                  }
                 }
@@ -115,7 +115,7 @@ class start_anything:
     def INPUT_TYPES(s):
         global anything
         return {"required": 
-                {"start_any": (any_type, {}),
+                {"init_any": (any_type, {}),
                  "key": ("STRING", {"default":""}),
                  "is_reload": ("BOOLEAN", {"default": False})
                  }
