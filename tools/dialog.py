@@ -123,7 +123,6 @@ class start_anything:
 
     RETURN_TYPES = (
         any_type,
-        "STRING",
     )
     RETURN_NAMES = (
         "any",
