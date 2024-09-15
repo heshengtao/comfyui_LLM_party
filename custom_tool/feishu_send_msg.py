@@ -38,7 +38,7 @@ class FeishuSendMsg:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "msg_type": (["text", "image", "audio"], {"default": "text"}),
+                "msg_type": (["text","markdown", "image", "audio"], {"default": "text"}),
                 "text": ("STRING", {"default": "Hello. I am an AI from LLM_Party."}),
                 "app_id": ("STRING", {}),
                 "app_secret": ("STRING", {}),
@@ -152,6 +152,35 @@ class FeishuSendMsg:
         response = requests.post(self.url_msg, params=params, data=json.dumps(post_data), headers=headers)
         return response
 
+    def send_markdown(self, markdown_text):
+        params = {"receive_id_type": self.receive_id_type}
+
+        headers = {
+            "Content-Type": "application/json; charset=utf-8",
+            "Authorization": f"Bearer {self.tenant_access_token}",
+        }
+
+        msg_content = {
+            "zh_cn": {
+                "title": "markdown",
+                "content": [
+                    [
+                        {
+                        "tag": "md",
+                        "text": str(markdown_text)
+                        }
+                    ]
+                ]
+            }
+        }
+        post_data = {
+            "receive_id": self.receive_id,
+            "msg_type": "post",  # 消息类型，这里以富文本消息为例
+            "content": json.dumps(msg_content),  # 消息内容
+        }
+        response = requests.post(self.url_msg, params=params, data=json.dumps(post_data), headers=headers)
+        return response
+
     def send_msg(
         self,
         msg_type=None,
@@ -200,6 +229,13 @@ class FeishuSendMsg:
 
         if msg_type == "text":
             response = self.send_text(text)
+            return (
+                None,
+                response.json().get("data").get("message_id"),
+                show_help,
+            )
+        elif msg_type == "markdown":
+            response = self.send_markdown(text)
             return (
                 None,
                 response.json().get("data").get("message_id"),
