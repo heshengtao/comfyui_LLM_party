@@ -35,10 +35,10 @@ class FeishuDownloadAudio:
         }
 
     RETURN_TYPES = (
-        "AUDIO",
+        "STRING",
         "STRING",
     )
-    RETURN_NAMES = ("audio", "show_help")
+    RETURN_NAMES = ("audio_path", "show_help")
 
     FUNCTION = "download_audio"
     CATEGORY = "大模型派对（llm_party）/函数（function）"
@@ -70,11 +70,11 @@ class FeishuDownloadAudio:
             audio = AudioSegment.from_file(file_path)
             audio.export(wav_file_path, format="wav")
 
-            return (wav_file_path, show_help)
+            return (wav_file_path, show_help,)
         else:
             print("获取文件资源信息失败。")
             print("错误信息:", response.text)
-            return (None, show_help)
+            return (None, show_help,)
 
 
 NODE_CLASS_MAPPINGS = {
