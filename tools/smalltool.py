@@ -132,7 +132,7 @@ class str2int:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型会议（llm_meeting）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/函数（function）"
 
     def tts(self, text):
         return (int(text),)
@@ -162,7 +162,7 @@ class any2str:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型会议（llm_meeting）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/函数（function）"
 
     def tts(self,any):
         return (str(any),)
