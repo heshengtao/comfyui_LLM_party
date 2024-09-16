@@ -82,6 +82,9 @@ class gpt_sovits:
             set_gpt_weights(GPT_weights_path)
         if Sovits_weights_path != "":
             set_sovits_weights(Sovits_weights_path)
+        # 将text中的"替换为空
+        text = text.replace("\"", "")
+        prompt_text = prompt_text.replace("\"", "")
         data = {
     "text": text,
     "text_lang": text_lang,
