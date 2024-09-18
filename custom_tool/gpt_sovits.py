@@ -97,6 +97,9 @@ class gpt_sovits:
     "streaming_mode": False,
 }
         audio_stream = post_tts(data)
+        # 如果audio_stream是一个字典
+        if isinstance(audio_stream, dict):
+            print("audio_stream is a dict:", audio_stream)
         # 判断当前目录是否存在audio文件夹，如果不存在则创建
         if not os.path.exists(os.path.join(current_dir_path, "audio")):
             os.makedirs(os.path.join(current_dir_path, "audio"))
