@@ -1,4 +1,5 @@
 import locale
+import re
 import time
 import requests
 import os
@@ -82,9 +83,9 @@ class gpt_sovits:
             set_gpt_weights(GPT_weights_path)
         if Sovits_weights_path != "":
             set_sovits_weights(Sovits_weights_path)
-        # 将text中的"替换为空
-        text = text.replace("\"", "")
-        prompt_text = prompt_text.replace("\"", "")
+        # 如果text_lang=zh,删除text中所有的非中文字符（包含英文标点，不包含中文标点）
+        if text_lang == "zh":
+            text = re.sub(r'[^\u4e00-\u9fa5，。！？；：、（）《》“”‘’]', '', text)
         data = {
     "text": text,
     "text_lang": text_lang,
