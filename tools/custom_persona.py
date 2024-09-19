@@ -11,7 +11,7 @@ class custom_persona:
                     "STRING",
                     {
                         "multiline": True,
-                        "default": "根据背景知识，请帮我写一篇关于/{主题/}的文章。",
+                        "default": "根据背景知识，请帮我写一篇关于{主题}的文章。",
                     },
                 ),
                 "prompt_template": (
@@ -41,7 +41,7 @@ class custom_persona:
             return (None,)
         text = ""
         if file_content is not None:
-            text = "##背景知识：\n" + file_content + "\n\n"
+            text = "## 背景知识：\n" + file_content + "\n\n"
         sys_prompt = (
             text
             + f"""
