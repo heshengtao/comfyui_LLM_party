@@ -43,3 +43,6 @@ llama_index
 html2image
 markdown
 selenium
+ffmpeg-python
+librosa
+moviepy
