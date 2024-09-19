@@ -44,3 +44,4 @@ html2image
 markdown
 selenium
 librosa
+ffmpeg-python
