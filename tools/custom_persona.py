@@ -39,18 +39,20 @@ class custom_persona:
     def custom(self, prompt, prompt_template, is_enable=True, file_content=None):
         if is_enable == False:
             return (None,)
+        # 去除prompt_template中的转义符
+        prompt_template = prompt_template.replace("\\", "")
+        prompt_template=json.loads(prompt_template)
+        prompt = prompt.format(**prompt_template)
         text = ""
         if file_content is not None:
             text = "## 背景知识：\n" + file_content + "\n\n"
         sys_prompt = (
             text
-            + f"""
-            请依次执行以下步骤：
-            1. 请根据{prompt_template}中的规则，替换{prompt}中的变量，生成一段符合规则的文本。
-            2. 请将第一步生成的文本中的{{text}}变量替换为用户输入的文本，如果没有则不用替换，跳过这一步。
-            3. 回复第二步生成的文本,回复时不用告诉用户你的思考过程，直接对第二步生成的文本进行回复即可。
-            下面为用户输入的文本：
-        """
+            +
+            "## 要求：\n" 
+            +
+            prompt
         )
         sys_prompt = sys_prompt.strip()
         return (sys_prompt,)
+
