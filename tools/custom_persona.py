@@ -28,7 +28,7 @@ class custom_persona:
         }
 
     RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("system_prompt",)
+    RETURN_NAMES = ("system_or_user_prompt",)
 
     FUNCTION = "custom"
 
@@ -39,8 +39,6 @@ class custom_persona:
     def custom(self, prompt, prompt_template, is_enable=True, file_content=None):
         if is_enable == False:
             return (None,)
-        # 去除prompt_template中的转义符
-        prompt_template = prompt_template.replace("\\", "")
         prompt_template=json.loads(prompt_template)
         prompt = prompt.format(**prompt_template)
         text = ""
