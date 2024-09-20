@@ -45,3 +45,4 @@ markdown
 selenium
 librosa
 ffmpeg-python
+moviepy
