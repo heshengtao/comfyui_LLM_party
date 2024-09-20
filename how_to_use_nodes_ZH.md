@@ -102,7 +102,7 @@
 3. 可以和分类器函数进行配合，将不同类别的文字输出到不同的工作流中
 
 ### 自定义面具
-1. prompt是将要输入到LLM节点中的system_prompt_input，可以包含一些变量，例如：“你是一个关于{app}的智能客服，你需要生成{text}相关的内容”，其中{text}会自动填充为LLM接收的user_prompt。
+1. prompt是将要输入到LLM节点中的system_prompt_input，可以包含一些变量，例如：“你是一个关于{app}的智能客服”。
 2. prompt_template包含了prompt中变量的对应规则，一般为json格式，可以以如下格式填入：{"app":"chatgpt"}，此时，prompt中{app}将会被自动替换为chatgpt。
 
 ### 加载人格面具

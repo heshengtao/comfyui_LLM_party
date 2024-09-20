@@ -101,7 +101,7 @@
 3. Can be used in conjunction with classifier functions to output different categories of text to different workflows.
 
 ### Custom persona
-1. prompt is the system_prompt_input that will be input into the LLM node, which can contain some variables, such as: "You are an intelligent customer service about {app}, you need to generate content related to {text}", where {text} will automatically be filled with the user_prompt received by LLM.
+1. prompt is the system_prompt_input that will be input into the LLM node, which can contain some variables, such as: "You are an intelligent customer service about {app}"
 2. prompt_template contains the corresponding rules for the variables in the prompt, generally in json format, which can be filled in as follows: {"app":"chatgpt"}, at this time, {app} in the prompt will be automatically replaced with chatgpt.
 
 ### Load_Persona Node
