@@ -9,6 +9,8 @@ def md2excel(markdown_data, output_file):
     # 将Markdown转换为HTML
     html_data = markdown.markdown(markdown_data, extensions=['tables'])
 
+    print(html_data)
+
     # 使用StringIO包装HTML字符串
     html_io = StringIO(html_data)
 
