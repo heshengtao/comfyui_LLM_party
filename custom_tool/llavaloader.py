@@ -66,6 +66,6 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"LLavaLoader": "LLava加载器"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"LLavaLoader": "LLava加载器(已弃用)"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"LLavaLoader": "LLava Loader"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"LLavaLoader": "LLava Loader(deprecated)"}

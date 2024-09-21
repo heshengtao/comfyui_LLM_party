@@ -85,8 +85,8 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(推奨！豊富なプロンプトモデル)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
-* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
-* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b)（GLM4が新しい呼び出し形式に変更されたため、開発者はすべてのローカル大モデルの呼び出しを維持することが困難です。そのため、ollamaを使用したローカル呼び出しを推奨します！）
+* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)（開発者はすべてのgguf形式の大規模モデルの呼び出しを維持できないため、llama.cpp方式を使用してgguf形式のローカルモデルを呼び出すことをお勧めします！）
+* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b)（GLM4の新しい呼び出し形式のため、開発者はすべてのローカル大規模モデルの呼び出しを維持できないため、ollama方式を使用してローカル呼び出しを行うことをお勧めします！）
 
 4. モデルのダウンロード：
 * [百度云アドレス](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)、抽出コード：qyhu

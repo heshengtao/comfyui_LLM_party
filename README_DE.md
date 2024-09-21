@@ -85,8 +85,8 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (empfohlen! Reichhaltiges Prompt-Modell)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
-* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
-* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (da GLM4 ein neues Aufrufformat verwendet, sind die Entwickler nicht in der Lage, alle lokalen großen Modelle aufrechtzuerhalten, da empfohlen wird, die lokale Aufrufmethode von ollama zu verwenden!)
+* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf) (Entwickler können die Aufrufe für alle großen Modelle im gguf-Format nicht aufrechterhalten, daher wird empfohlen, die llama.cpp-Methode zu verwenden, um lokale Modelle im gguf-Format aufzurufen!)
+* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (Aufgrund des neuen Aufrufformats von GLM4 können Entwickler die Aufrufe für alle lokalen großen Modelle nicht aufrechterhalten, daher wird empfohlen, die ollama-Methode für lokale Aufrufe zu verwenden!)
 
 4. Modells download:
 * [Baidu Cloud Adresse](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), Entnahmecode: qyhu

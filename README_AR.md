@@ -85,8 +85,8 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (موصى به! نموذج غني بالكلمات الرئيسية)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
-* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
-* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (نظرًا لأن GLM4 قد غيرت تنسيق الاستدعاء الجديد، فإن المطورين غير قادرين على الحفاظ على استدعاء جميع النماذج الكبيرة المحلية، لذلك يُوصى للجميع باستخدام طريقة ollama للاستدعاء المحلي!)
+* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf) (لا يستطيع المطورون الحفاظ على المكالمات لجميع النماذج الكبيرة بتنسيق gguf، لذلك يوصى باستخدام طريقة llama.cpp لاستدعاء النماذج المحلية بتنسيق gguf!)
+* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (نظرًا لتنسيق الاتصال الجديد لـ GLM4، لا يستطيع المطورون الحفاظ على المكالمات لجميع النماذج الكبيرة المحلية، لذلك يوصى باستخدام طريقة ollama للمكالمات المحلية!)
 
 4. تحميل النموذج:
 * [رابط بايدو السحابي](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)، رمز الاستخراج: qyhu

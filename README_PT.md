@@ -85,8 +85,8 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (recomendado! modelo de sugestões ricas)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
-* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
-* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (devido à nova formatação de chamada do GLM4, os desenvolvedores não conseguem manter todas as chamadas de grandes modelos locais, portanto, recomenda-se que todos utilizem o método ollama para chamadas locais!)
+* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf) (Os desenvolvedores não conseguem manter chamadas para todos os grandes modelos no formato gguf, por isso é recomendável usar o método llama.cpp para chamar os modelos locais no formato gguf!)
+* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (Devido ao novo formato de chamada do GLM4, os desenvolvedores não conseguem manter chamadas para todos os grandes modelos locais, por isso é recomendável usar o método ollama para chamadas locais!)
 
 4. Download do modelo:
 * [Link do Baidu Cloud](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), código de extração: qyhu

@@ -89,8 +89,8 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(推荐！丰富提示词模型)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
-* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
-* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b)（由于GLM4换了新的调用格式，开发者无力维持所有本地大模型的调用，因为推荐大家使用ollama的方式本地调用！）
+* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)（开发者无力维持所有gguf格式大模型的调用，因此推荐大家使用llama.cpp的方式调用gguf格式的本地模型！）
+* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b)（由于GLM4换了新的调用格式，开发者无力维持所有本地大模型的调用，因此推荐大家使用ollama的方式本地调用！）
 
 4. 模型下载：
 * [百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu

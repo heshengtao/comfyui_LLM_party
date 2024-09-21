@@ -85,8 +85,8 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (recommandé ! Modèle avec des invites riches)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
-* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
-* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (en raison du nouveau format d'appel du GLM4, les développeurs ne peuvent pas maintenir tous les modèles locaux, il est donc recommandé d'utiliser la méthode ollama pour les appels locaux !)
+* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf) (Les développeurs ne peuvent pas maintenir les appels pour tous les grands modèles au format gguf, il est donc recommandé d'utiliser la méthode llama.cpp pour appeler les modèles locaux au format gguf!)
+* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (En raison du nouveau format d'appel de GLM4, les développeurs ne peuvent pas maintenir les appels pour tous les grands modèles locaux, il est donc recommandé d'utiliser la méthode ollama pour les appels locaux!)
 
 4. Téléchargement des modèles :
 * [Adresse Baidu Cloud](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), code d'extraction : qyhu

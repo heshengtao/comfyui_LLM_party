@@ -85,8 +85,8 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (추천! 풍부한 프롬프트 모델)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
-* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
-* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (GLM4가 새로운 호출 형식으로 변경됨에 따라, 개발자는 모든 로컬 대규모 모델의 호출을 유지할 수 없으니, ollama 방식을 사용하여 로컬 호출하는 것을 추천드립니다!)
+* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf) (개발자는 모든 gguf 형식의 대형 모델 호출을 유지할 수 없으므로 gguf 형식의 로컬 모델을 호출하기 위해 llama.cpp 방법을 사용하는 것이 좋습니다!)
+* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (GLM4의 새로운 호출 형식으로 인해 개발자는 모든 로컬 대형 모델 호출을 유지할 수 없으므로 로컬 호출을 위해 ollama 방법을 사용하는 것이 좋습니다!)
 
 4. 모델 다운로드:
 * [百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu
