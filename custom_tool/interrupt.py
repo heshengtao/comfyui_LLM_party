@@ -28,7 +28,7 @@ class interrupt_loop:
 
     FUNCTION = "time"
 
-    # OUTPUT_NODE = False
+    OUTPUT_NODE = True
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
