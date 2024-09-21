@@ -47,7 +47,7 @@ class send_to_wechat_official:
                 "secret": ("STRING", {"default": "secret"}),
                 "title": ("STRING", {"default": "title"}),
                 "author": ("STRING", {"default": "author"}),
-                "content": ("STRING", {"default": "content"}),
+                "content": ("STRING", {"default": "HTML content"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             }
         }
