@@ -69,7 +69,9 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 5. [Namorada de IA, e na sua forma | Implementação de graphRAG no comfyui, interagindo com neoa4j | Integração do fluxo de trabalho comfyui com o front-end streamlit](https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 ## Suporte ao Modelo
 1. Suporte a todas as chamadas de API no formato openai (combinado com [oneapi](https://github.com/songquanpeng/one-api), é possível chamar quase todas as APIs LLM, além de suportar todas as APIs de encaminhamento), a escolha do base_url deve seguir o exemplo em [config.ini.example](config.ini.example), atualmente testados incluem:
-* [ollama](https://github.com/ollama/ollama) (recomendado! Se você está chamando localmente, é altamente aconselhável usar o método ollama para hospedar seu modelo local!)
+* [openai](https://platform.openai.com/docs/api-reference/chat/create) (Perfeitamente compatível com todos os modelos OpenAI, incluindo as séries 4o e o1!)
+* [ollama](https://github.com/ollama/ollama) (Recomendado! Se você estiver chamando localmente, é altamente recomendável usar o método ollama para hospedar seu modelo local!)
+* [llama.cpp](https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#web-server) (Recomendado! Se você quiser usar o modelo no formato gguf local, pode usar a API do projeto llama.cpp para acessar este projeto!)
 * [通义千问/qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [智谱清言/glm](https://open.bigmodel.cn/dev/api#http_auth)
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)

@@ -69,7 +69,9 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 5. [AI彼女、そしてあなたの形 | comfyui上でgraphRAGを実現し、neoa4jと連携 | comfyuiワークフローをstreamlitフロントエンドに接続する](https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 ## モデルサポート
 1. すべてのOpenAI形式のAPI呼び出しをサポートしています（[oneapi](https://github.com/songquanpeng/one-api)を組み合わせることで、ほぼすべてのLLM APIを呼び出すことができ、中継APIもサポートしています）。base_urlの選択は[config.ini.example](config.ini.example)を参考にしてください。現在、テスト済みのものは以下の通りです：
-* [ollama](https://github.com/ollama/ollama)（推奨！ローカル呼び出しを行う場合は、非常におすすめの方法であるollamaを使用してローカルモデルをホストしてください！）
+* [openai](https://platform.openai.com/docs/api-reference/chat/create)（すべてのOpenAIモデルに完全に対応しており、4oおよびo1シリーズを含みます！）
+* [ollama](https://github.com/ollama/ollama)（おすすめ！ローカルで呼び出す場合は、ollama方式を使用してローカルモデルをホストすることを強くお勧めします！）
+* [llama.cpp](https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#web-server)（おすすめ！ローカルgguf形式のモデルを使用したい場合は、llama.cppプロジェクトのAPIを使用してこのプロジェクトにアクセスできます！）
 * [通義千问/qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [智谱清言/glm](https://open.bigmodel.cn/dev/api#http_auth)
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)
