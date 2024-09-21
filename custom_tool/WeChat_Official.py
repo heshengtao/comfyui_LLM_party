@@ -1,3 +1,4 @@
+import locale
 import requests
 import json
 
@@ -74,7 +75,7 @@ class send_to_wechat_official:
 
 NODE_CLASS_MAPPINGS = {"send_to_wechat_official": send_to_wechat_official}
 # 获取系统语言
-lang = locals.getdefaultlocale()[0]
+lang = locale.getdefaultlocale()[0]
 import os
 import sys
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
