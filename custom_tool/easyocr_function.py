@@ -40,8 +40,8 @@ class EasyOCR_advance:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
     FUNCTION = "OCR"
-    RETURN_TYPES = ("IMAGE", "MASK", "STRING",)
-    RETURN_NAMES = ("images", "masks", "json_str",)
+    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "STRING",)
+    RETURN_NAMES = ("images", "masks", "json_str","text",)
 
     def OCR(self, image, gpu, language_name, decoder="greedy", beamWidth=5, batch_size=1, workers=0, allowlist="", blocklist="", paragraph=False, min_size=20, contrast_ths=0.1, adjust_contrast=0.5, text_threshold=0.7, low_text=0.4, link_threshold=0.4, canvas_size=2560, mag_ratio=1.0, slope_ths=0.1, ycenter_ths=0.5, height_ths=0.5, width_ths=0.5, add_margin=0,is_enable=True):
         if not is_enable:
@@ -49,7 +49,7 @@ class EasyOCR_advance:
         out_images = []
         out_masks = []
         out_json = []
-
+        out_text= []
         for item in image:
             image_pil = Image.fromarray(np.clip(255.0 * item.cpu().numpy(), 0, 255).astype(np.uint8)).convert("RGB")
 
@@ -80,7 +80,30 @@ class EasyOCR_advance:
                 width_ths=width_ths, 
                 add_margin=add_margin
             )
-
+            result_text = reader.readtext(
+                np.array(image_pil), 
+                detail=0, 
+                decoder=decoder, 
+                beamWidth=beamWidth, 
+                batch_size=batch_size, 
+                workers=workers, 
+                allowlist=allowlist, 
+                blocklist=blocklist, 
+                paragraph=paragraph, 
+                min_size=min_size, 
+                contrast_ths=contrast_ths, 
+                adjust_contrast=adjust_contrast, 
+                text_threshold=text_threshold, 
+                low_text=low_text, 
+                link_threshold=link_threshold, 
+                canvas_size=canvas_size, 
+                mag_ratio=mag_ratio, 
+                slope_ths=slope_ths, 
+                ycenter_ths=ycenter_ths, 
+                height_ths=height_ths, 
+                width_ths=width_ths, 
+                add_margin=add_margin
+            )
             W, H = image_pil.size
             mask = np.zeros((H, W, 1), dtype=np.uint8)
             image_with_boxes = np.array(image_pil)
@@ -108,9 +131,11 @@ class EasyOCR_advance:
             out_images.append(torch.from_numpy(image_with_boxes.astype(np.float32) / 255.0).unsqueeze(0))
             out_masks.append(torch.from_numpy(mask.astype(np.float32) / 255.0).permute(2, 0, 1).unsqueeze(0))
             out_json.append(parsed_result)
+            out_text.append(result_text)
 
         json_result = json.dumps(out_json, ensure_ascii=False, indent=4)
-        return (torch.cat(out_images, dim=0), torch.cat(out_masks, dim=0), json_result,)
+        out_text= json.dumps(out_text, ensure_ascii=False, indent=4)
+        return (torch.cat(out_images, dim=0), torch.cat(out_masks, dim=0), json_result,out_text,)
 
 
 lang_list = {
@@ -181,8 +206,8 @@ class EasyOCR_choose:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
     FUNCTION = "OCR"
-    RETURN_TYPES = ("IMAGE", "MASK", "STRING",)
-    RETURN_NAMES = ("images", "masks", "json_str",)
+    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "STRING",)
+    RETURN_NAMES = ("images", "masks", "json_str","text",)
 
     def OCR(self, image, gpu, language_list, is_enable=True):
         if not is_enable:
@@ -190,6 +215,8 @@ class EasyOCR_choose:
         out_images = []
         out_masks = []
         out_json = []
+        out_text = []
+
 
         for item in image:
             image_pil = Image.fromarray(np.clip(255.0 * item.cpu().numpy(), 0, 255).astype(np.uint8)).convert("RGB")
@@ -198,7 +225,8 @@ class EasyOCR_choose:
 
             reader = easyocr.Reader(languages, gpu=gpu)
             result = reader.readtext(np.array(image_pil), detail=1)
-
+            result_text = reader.readtext(np.array(image_pil), detail=0)
+            
             W, H = image_pil.size
             mask = np.zeros((H, W, 1), dtype=np.uint8)
             image_with_boxes = np.array(image_pil)
@@ -226,9 +254,11 @@ class EasyOCR_choose:
             out_images.append(torch.from_numpy(image_with_boxes.astype(np.float32) / 255.0).unsqueeze(0))
             out_masks.append(torch.from_numpy(mask.astype(np.float32) / 255.0).permute(2, 0, 1).unsqueeze(0))
             out_json.append(parsed_result)
+            out_text.append(result_text)
 
         json_result = json.dumps(out_json, ensure_ascii=False, indent=4)
-        return (torch.cat(out_images, dim=0), torch.cat(out_masks, dim=0), json_result,)
+        out_text= json.dumps(out_text, ensure_ascii=False, indent=4)
+        return (torch.cat(out_images, dim=0), torch.cat(out_masks, dim=0), json_result,out_text,)
 
 
 NODE_CLASS_MAPPINGS = {
