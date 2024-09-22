@@ -8,6 +8,19 @@ import locale
 import re
 
 
+def detect_language(text):
+    has_chinese = False
+    has_english = False
+    
+    for char in text:
+        if '\u4e00' <= char <= '\u9fa5':
+            has_chinese = True
+        elif ('\u0041' <= char <= '\u005A') or ('\u0061' <= char <= '\u007A'):
+            has_english = True
+
+    return (has_chinese, has_english)
+    
+
 def sort_videos_by_timestamp(file_names):
     # 使用正则表达式提取文件名中的时间戳
     def extract_timestamp(filename):
@@ -58,13 +71,21 @@ class Image2Video:
         max_width = img.width
         max_height = img.height
 
-        words = subtitle.split()
+        has_cn, _ = detect_language(subtitle)
+        if not has_cn:
+            words = subtitle.split()
+        else:
+            words = [subtitle[i:i+2] for i in range(0, len(subtitle), 2)]
+        
         lines = []
         current_line = words[0]
 
         for word in words[1:]:
             if draw.textbbox((0, 0), current_line + ' ' + word, font=font)[2] < max_width:
-                current_line += ' ' + word
+                if has_cn:
+                    current_line += word
+                else:
+                    current_line += ' ' + word
             else:
                 lines.append(current_line)
                 current_line = word
@@ -123,6 +144,9 @@ class CombineVideos:
         if not is_enable:
             return (None,)
         
+        if os.path.isfile(input_folder):
+            input_folder = os.path.dirname(input_folder)
+
         video_files = [os.path.join(input_folder, f) for f in os.listdir(input_folder) if f.endswith(('.mp4', '.avi', '.mov'))]
         
         sorted_video_files = sort_videos_by_timestamp(video_files)

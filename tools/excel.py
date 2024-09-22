@@ -41,13 +41,13 @@ class load_excel:
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "is_reload": ("BOOLEAN", {"default": False}),
                 "load_all": ("BOOLEAN", {"default": False}),
-                "iterator_mode": (["sequential","random","Infinite"], {"default": "sequential"}),
+                "iterator_mode": (["sequential","random","Infinite", "sequential_flagout"], {"default": "sequential"}),
             },
             "optional": {},
         }
 
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("file_content",)
+    RETURN_TYPES = ("STRING", "BOOLEAN")
+    RETURN_NAMES = ("file_content", "is_end")
 
     FUNCTION = "file"
 
@@ -56,14 +56,15 @@ class load_excel:
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
     def file(self, path,iterator_mode, is_enable=True, is_reload=False,load_all=False):
+        flag_is_end = False
         if not is_enable:
-            return (None,)
+            return (None, flag_is_end,)   
         if load_all:
             # 返回这个表格，以json字符串格式返回
             df = pd.read_excel(path, header=0)
             data_list = df.to_dict(orient='records')
             data = json.dumps(data_list, ensure_ascii=False, indent=4)
-            return (data,)
+            return (data, flag_is_end,)
         if self.path != path or is_reload == True:
             self.index = 0  # 重置索引为0，因为我们要从第二行开始读取数据
             self.path = path
@@ -75,17 +76,19 @@ class load_excel:
             if iterator_mode == "sequential":
                 signal.signal(signal.SIGINT, interrupt_handler)
                 signal.raise_signal(signal.SIGINT)  # 直接中断进程
+        if self.index == len(self.data) - 1 and iterator_mode == "sequential_flagout":
+            flag_is_end = True
         # 读取第self.index行的数据
         data_row = df.iloc[self.index]
         # 将Series对象转换为字典
         data_dict = data_row.to_dict()
         # 返回JSON格式的数据
         data = json.dumps(data_dict, ensure_ascii=False,indent=4)
-        if iterator_mode == "sequential" or iterator_mode =="Infinite":
+        if iterator_mode == "sequential" or iterator_mode =="Infinite" or iterator_mode == "sequential_flagout":
             self.index += 1
         elif iterator_mode == "random":
             self.index = random.randint(0, len(df) - 1)
-        return (data,)
+        return (data, flag_is_end,)
 
     @classmethod
     def IS_CHANGED(self, s):
@@ -106,13 +109,13 @@ class image_iterator:
                 "folder_path": ("STRING", {"default": ""}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "is_reload": ("BOOLEAN", {"default": False}),
-                "iterator_mode": (["sequential","random","Infinite"], {"default": "sequential"}),
+                "iterator_mode": (["sequential","random","Infinite", "sequential_flagout"], {"default": "sequential"}),
             },
             "optional": {},
         }
 
-    RETURN_TYPES = ("IMAGE",)
-    RETURN_NAMES = ("image",)
+    RETURN_TYPES = ("IMAGE", "BOOLEAN")
+    RETURN_NAMES = ("image", "is_end")
 
     FUNCTION = "file"
 
@@ -121,8 +124,9 @@ class image_iterator:
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
     def file(self, folder_path,iterator_mode, is_enable=True, is_reload=False):
+        flag_is_end = False
         if not is_enable:
-            return (None,)
+            return (None, flag_is_end,)
         if self.path != folder_path or is_reload == True:
             self.index = 0  # 重置索引为0，因为我们要从第二行开始读取数据
             self.path = folder_path
@@ -138,7 +142,8 @@ class image_iterator:
             if iterator_mode == "sequential":
                 signal.signal(signal.SIGINT, interrupt_handler)
                 signal.raise_signal(signal.SIGINT)  # 直接中断进程
-
+        if self.index == len(self.data) - 1 and iterator_mode == "sequential_flagout":
+            flag_is_end = True
         image_path = os.path.join(folder_path, image_files[self.index])
         img = pillow(Image.open, image_path)
 
@@ -174,11 +179,11 @@ class image_iterator:
             output_image = torch.cat(output_images, dim=0)
         else:
             output_image = output_images[0]
-        if iterator_mode == "sequential" or iterator_mode =="Infinite":
+        if iterator_mode == "sequential" or iterator_mode =="Infinite" or iterator_mode == "sequential_flagout":
             self.index += 1
         elif iterator_mode == "random":
             self.index = random.randint(0, len(image_files) - 1)
-        return (output_image,)
+        return (output_image, flag_is_end,)
     @classmethod
     def IS_CHANGED(self, s):
         self.record = self.index
@@ -200,21 +205,22 @@ class json_iterator:
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "is_reload": ("BOOLEAN", {"default": False}),
                 "load_all": ("BOOLEAN", {"default": False}),
-                "iterator_mode": (["sequential","random","Infinite"], {"default": "sequential"}),
+                "iterator_mode": (["sequential","random","Infinite", "sequential_flagout"], {"default": "sequential"}),
             },
             "optional": {},
         }
 
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("file_content",)
+    RETURN_TYPES = ("STRING", "BOOLEAN")
+    RETURN_NAMES = ("file_content", "is_end")
 
     FUNCTION = "file"
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
     def file(self, json_str,iterator_mode, is_enable=True, is_reload=False, load_all=False):
+        flag_is_end = False
         if not is_enable:
-            return (None,)
+            return (None, flag_is_end)
         if self.json_str != json_str or is_reload:
             self.index = 0  # 重置索引为0
             self.json_str = json_str
@@ -222,7 +228,7 @@ class json_iterator:
         
         if load_all:
             # 返回整个JSON数据作为字符串
-            return (json.dumps(self.data, ensure_ascii=False, indent=4),)
+            return (json.dumps(self.data, ensure_ascii=False, indent=4), flag_is_end)
         
         if isinstance(self.data, list):
             if self.index >= len(self.data):
@@ -230,12 +236,14 @@ class json_iterator:
                 if iterator_mode == "sequential":
                     signal.signal(signal.SIGINT, interrupt_handler)
                     signal.raise_signal(signal.SIGINT)  # 直接中断进程
+            if self.index == len(self.data) - 1 and iterator_mode == "sequential_flagout":
+                flag_is_end = True
             data_item = self.data[self.index]
-            if iterator_mode == "sequential" or iterator_mode =="Infinite":
+            if iterator_mode == "sequential" or iterator_mode =="Infinite" or iterator_mode =="sequential_flagout":
                 self.index += 1
             elif iterator_mode == "random":
                 self.index = random.randint(0, len(self.data) - 1)
-            return (json.dumps(data_item, ensure_ascii=False, indent=4),)
+            return (json.dumps(data_item, ensure_ascii=False, indent=4), flag_is_end)
 
         
         elif isinstance(self.data, dict):
@@ -245,15 +253,17 @@ class json_iterator:
                 if iterator_mode == "sequential":
                     signal.signal(signal.SIGINT, interrupt_handler)
                     signal.raise_signal(signal.SIGINT)  # 直接中断进程
+            if self.index == len(self.data) - 1 and iterator_mode == "sequential_flagout":
+                flag_is_end = True
             key = keys[self.index]
             data_item = self.data[key]
-            if iterator_mode == "sequential" or iterator_mode =="Infinite":
+            if iterator_mode == "sequential" or iterator_mode =="Infinite"  or iterator_mode =="sequential_flagout":
                 self.index += 1
             elif iterator_mode == "random":
                 self.index = random.randint(0, len(self.data) - 1)
-            return (json.dumps(data_item, ensure_ascii=False, indent=4),)
+            return (json.dumps(data_item, ensure_ascii=False, indent=4), flag_is_end)
         
-        return (None,)
+        return (None, flag_is_end)
 
     @classmethod
     def IS_CHANGED(self, s):
