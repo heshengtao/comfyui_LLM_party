@@ -22,8 +22,11 @@ from PIL import Image
 from transformers import (
     AutoModel,
     AutoModelForCausalLM,
+    AutoModelForSeq2SeqLM, 
+    AutoModelForSequenceClassification,
     AutoTokenizer,
     GenerationConfig,
+    AutoConfig,
 )
 import PIL.Image
 if torch.cuda.is_available():
@@ -895,8 +898,6 @@ class genai_api_loader:
         return (chat,)
 
 class LLM:
-    original_IS_CHANGED = None
-
     def __init__(self):
         current_time = datetime.datetime.now()
         # 以时间戳作为ID，字符串格式 XX年XX月XX日XX时XX分XX秒并加上一个哈希值防止重复
@@ -1048,9 +1049,6 @@ class LLM:
                 llm_tools_list.append(self.tool_data)
                 self.added_to_list = True
         self.is_locked = is_locked
-        if LLM.original_IS_CHANGED is None:
-            # 保存原始的IS_CHANGED方法的引用
-            LLM.original_IS_CHANGED = LLM.IS_CHANGED
         if self.is_locked == "disable":
             setattr(LLM, "IS_CHANGED", LLM.original_IS_CHANGED)
         else:
@@ -1220,7 +1218,7 @@ class LLM:
                 )
 
     @classmethod
-    def IS_CHANGED(s):
+    def original_IS_CHANGED(s):
         # 生成当前时间的哈希值
         hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
         return hash_value
@@ -1249,15 +1247,11 @@ def llm_chat(
 
 
 class LLM_local_loader:
-    original_IS_CHANGED = None
-
     def __init__(self):
         self.id = hash(str(self))
         self.device = ""
         self.dtype = ""
-        self.model_type = ""
-        self.model_path = ""
-        self.tokenizer_path = ""
+        self.model_name_or_path = ""
         self.model = ""
         self.tokenizer = ""
         self.is_locked = False
@@ -1266,25 +1260,7 @@ class LLM_local_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name": ("STRING", {"default": ""}),
-                "model_type": (
-                    ["llama","GLM3",  "Qwen"],
-                    {
-                        "default": "llama",
-                    },
-                ),
-                "model_path": (
-                    "STRING",
-                    {
-                        "default": "",
-                    },
-                ),
-                "tokenizer_path": (
-                    "STRING",
-                    {
-                        "default": "",
-                    },
-                ),
+                "model_name_or_path": ("STRING", {"default": ""}),
                 "device": (
                     ["auto", "cuda", "cpu", "mps"],
                     {
@@ -1316,34 +1292,21 @@ class LLM_local_loader:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def chatbot(self, model_name, model_type, model_path, tokenizer_path, device, dtype, is_locked=False):
+    def chatbot(self, model_name_or_path, device, dtype, is_locked=True):
         self.is_locked = is_locked
-        if LLM_local_loader.original_IS_CHANGED is None:
-            # 保存原始的IS_CHANGED方法的引用
-            LLM_local_loader.original_IS_CHANGED = LLM_local_loader.IS_CHANGED
         if self.is_locked == False:
             setattr(LLM_local_loader, "IS_CHANGED", LLM_local_loader.original_IS_CHANGED)
         else:
             # 如果方法存在，则删除
             if hasattr(LLM_local_loader, "IS_CHANGED"):
                 delattr(LLM_local_loader, "IS_CHANGED")
-        if model_path != "" and tokenizer_path != "":
-            model_name = ""
-        if model_name in config_key:
-            model_path = config_key[model_name].get("model_path")
-            tokenizer_path = config_key[model_name].get("tokenizer_path")
-        elif model_name != "":
-            model_path = model_name
-            tokenizer_path = model_name
         if device == "auto":
             device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
 
         if (
-            self.model_type != model_type
-            or self.device != device
+            self.device != device
             or self.dtype != dtype
-            or self.model_path != model_path
-            or self.tokenizer_path != tokenizer_path
+            or self.model_name_or_path != model_name_or_path
             or is_locked == False
         ):
             del self.model
@@ -1356,119 +1319,43 @@ class LLM_local_loader:
                 gc.collect()
             self.model = ""
             self.tokenizer = ""
-            self.model_type = model_type
-            self.model_path = model_path
-            self.tokenizer_path = tokenizer_path
+            self.model_name_or_path = model_name_or_path
             self.device = device
             self.dtype = dtype
-        if model_type == "GLM3":
-            if not self.tokenizer:
-                self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
-            if not self.model:
-                if device == "cuda":
-                    if dtype == "float32":
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).cuda()
-                    elif dtype == "float16":
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().cuda()
-                    elif dtype == "bfloat16":
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16).cuda()
-                    elif dtype in ["int8", "int4"]:
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(int(dtype[-1])).half().cuda()
-                elif device == "cpu":
-                    if dtype == "float32":
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).float()
-                    elif dtype == "float16":
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().float()
-                    elif dtype == "bfloat16":
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16).half().float()
-                    elif dtype in ["int8", "int4"]:
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(int(dtype[-1])).half().float()
-                elif device == "mps":
-                    if dtype == "float32":
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).to("mps")
-                    elif dtype == "float16":
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).half().to("mps")
-                    elif dtype == "bfloat16":
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16).half().to("mps")
-                    elif dtype in ["int8", "int4"]:
-                        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).quantize(int(dtype[-1])).half().to("mps")
-                self.model = self.model.eval()
+            model_kwargs = {
+                'device_map': device,
+            }
 
-        elif model_type in ["llama", "Qwen"]:
-            if self.tokenizer == "":
-                self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
-            if self.model == "":
-                if device == "cuda":
-                    if dtype == "float32":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cuda"
-                        )
-                    elif dtype == "float16":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cuda"
-                        ).half()
-                    elif dtype == "bfloat16":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cuda",torch_dtype=torch.bfloat16
-                        )
-                    elif dtype == "int8":
-                        quantization_config = BitsAndBytesConfig(
-                            load_in_8bit=True,
-                        )
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path,
-                            trust_remote_code=True,
-                            device_map="cuda",
-                            quantization_config=quantization_config,
-                        )
-                    elif dtype == "int4":
-                        quantization_config = BitsAndBytesConfig(load_in_4bit=True)
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path,
-                            trust_remote_code=True,
-                            device_map="cuda",
-                            quantization_config=quantization_config,
-                        )
-                elif device == "cpu":
-                    if dtype == "float32":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cpu"
-                        )
-                    elif dtype in ["float16", "bfloat16", "int8", "int4"]:
-                        print(f"{dtype} is not supported on CPU. Using float32 instead.")
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="cpu"
-                        )
-                elif device == "mps":
-                    if dtype == "float32":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="mps"
-                        )
-                    elif dtype == "float16":
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="mps"
-                        ).half()
-                    elif dtype in ["bfloat16", "int8", "int4"]:
-                        print(f"{dtype} is not supported on MPS. Using float32 instead.")
-                        self.model = AutoModelForCausalLM.from_pretrained(
-                            model_path, trust_remote_code=True, device_map="mps"
-                        ).half()
-                self.model = self.model.eval()
+            if dtype == "float16":
+                model_kwargs['torch_dtype'] = torch.float16
+            elif dtype == "bfloat16":
+                model_kwargs['torch_dtype'] = torch.bfloat16
+            elif dtype in ["int8", "int4"]:
+                model_kwargs['quantization_config'] = BitsAndBytesConfig(load_in_8bit=(dtype == "int8"), load_in_4bit=(dtype == "int4"))
+
+            config = AutoConfig.from_pretrained(model_name_or_path, **model_kwargs)
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, trust_remote_code=True)
+
+            if config.model_type == "t5":
+                self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, **model_kwargs)
+            elif config.model_type in ["gpt2", "gpt_refact", "gemma", "llama", "mistral", "qwen2", "chatglm"]:
+                self.model = AutoModelForCausalLM.from_pretrained(model_name_or_path, **model_kwargs)
+            else:
+                raise ValueError(f"Unsupported model type: {config.model_type}")
+            self.model = self.model.eval()
         return (
             self.model,
             self.tokenizer,
         )
 
     @classmethod
-    def IS_CHANGED(s):
+    def original_IS_CHANGED(s):
         # 生成当前时间的哈希值
         hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
         return hash_value
 
 
 class LLM_local:
-    original_IS_CHANGED = None
-
     def __init__(self):
         # 生成一个hash值作为id
         current_time = datetime.datetime.now()
@@ -1509,9 +1396,9 @@ class LLM_local:
                     },
                 ),
                 "model_type": (
-                    ["llama", "GLM3", "Qwen", "llaVa"],
+                    ["LLM", "VLM","GGUF"],
                     {
-                        "default": "llama",
+                        "default": "LLM",
                     },
                 ),
                 "temperature": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0, "step": 0.1}),
@@ -1620,9 +1507,6 @@ class LLM_local:
                 llm_tools_list.append(self.tool_data)
                 self.added_to_list = True
         self.is_locked = is_locked
-        if LLM_local.original_IS_CHANGED is None:
-            # 保存原始的IS_CHANGED方法的引用
-            LLM_local.original_IS_CHANGED = LLM_local.IS_CHANGED
         if self.is_locked == "disable":
             setattr(LLM_local, "IS_CHANGED", LLM_local.original_IS_CHANGED)
         else:
@@ -1763,68 +1647,9 @@ class LLM_local:
                     )
 
                 # 获得model存放的设备
-                if model_type not in ["llaVa", "llama-guff"]:
+                if model_type not in ["VLM", "GGUF"]:
                     device = next(model.parameters()).device
-                if model_type == "GLM3":
-                    if extra_parameters is not None and extra_parameters != {}:
-                        response, history = model.chat(
-                            tokenizer,
-                            user_prompt,
-                            history,
-                            temperature=temperature,
-                            max_length=max_length,
-                            role="user",
-                            **extra_parameters,
-                        )
-                    else:
-                        response, history = model.chat(
-                            tokenizer, user_prompt, history, temperature=temperature, max_length=max_length, role="user"
-                        )
-                    while type(response) == dict:
-                        if response["name"] == "interpreter":
-                            result = interpreter(str(response["content"]))
-                            if extra_parameters is not None and extra_parameters != {}:
-                                response, history = model.chat(
-                                    tokenizer,
-                                    result,
-                                    history=history,
-                                    temperature=temperature,
-                                    max_length=max_length,
-                                    role="observation",
-                                    **extra_parameters,
-                                )
-                            else:
-                                response, history = model.chat(
-                                    tokenizer,
-                                    result,
-                                    history=history,
-                                    temperature=temperature,
-                                    max_length=max_length,
-                                    role="observation",
-                                )
-                        else:
-                            result = dispatch_tool(response["name"], response["parameters"])
-                            print(result)
-                            if extra_parameters is not None and extra_parameters != {}:
-                                response, history = model.chat(
-                                    tokenizer,
-                                    result,
-                                    history=history,
-                                    temperature=temperature,
-                                    max_length=max_length,
-                                    role="observation",
-                                    **extra_parameters,
-                                )
-                            else:
-                                response, history = model.chat(
-                                    tokenizer,
-                                    result,
-                                    history=history,
-                                    temperature=temperature,
-                                    max_length=max_length,
-                                    role="observation",
-                                )
-                elif model_type in ["llama", "Qwen"]:
+                if model_type in ["LLM"]:
                     if extra_parameters is not None and extra_parameters != {}:
                         response, history = llm_chat(
                             model,
@@ -1874,7 +1699,7 @@ class LLM_local:
                                 role="observation",
                                 temperature=temperature,
                             )
-                elif model_type == "llaVa":
+                elif model_type == "VLM":
                     if image is not None:
                         pil_image = ToPILImage()(image[0].permute(2, 0, 1))
                         # Convert the PIL image to a bytes buffer
@@ -1897,7 +1722,6 @@ class LLM_local:
                                 messages=history,
                                 temperature=temperature,
                                 max_tokens=max_length,
-                                stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
                                 **extra_parameters,
                             )
                         else:
@@ -1905,7 +1729,6 @@ class LLM_local:
                                 messages=history,
                                 temperature=temperature,
                                 max_tokens=max_length,
-                                stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
                             )
                         response = f"{response['choices'][0]['message']['content']}"
                         print(response)
@@ -1919,18 +1742,36 @@ class LLM_local:
                                 messages=history,
                                 temperature=temperature,
                                 max_tokens=max_length,
-                                stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
+                                **extra_parameters,
                             )
                         else:
                             response = model.create_chat_completion(
                                 messages=history,
                                 temperature=temperature,
                                 max_tokens=max_length,
-                                stop=["<|eot_id|>", "[/INST]", "</s>", "[End Conversation]"],
                             )
                         response = f"{response['choices'][0]['message']['content']}"
                         assistant_content = {"role": "assistant", "content": response}
                         history.append(assistant_content)
+                elif model_type == "GGUF":
+                        user_content = {"role": "user", "content": user_prompt}
+                        history.append(user_content)
+                        if extra_parameters is not None and extra_parameters != {}:
+                            response = model.create_chat_completion(
+                                messages=history,
+                                temperature=temperature,
+                                max_tokens=max_length,
+                                **extra_parameters,
+                            )
+                        else:
+                            response = model.create_chat_completion(
+                                messages=history,
+                                temperature=temperature,
+                                max_tokens=max_length,
+                            )
+                        response = f"{response['choices'][0]['message']['content']}"
+                        assistant_content = {"role": "assistant", "content": response}
+                        history.append(assistant_content)                  
                 print(response)
                 # 修改prompt.json文件
                 history_get = [history[0]]
@@ -1985,7 +1826,7 @@ class LLM_local:
                 )
 
     @classmethod
-    def IS_CHANGED(s):
+    def original_IS_CHANGED(s):
         # 生成当前时间的哈希值
         hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
         return hash_value
@@ -2179,7 +2020,7 @@ if lang == "zh_CN":
         "bing_loader": "Bing搜索加载器",
         "api_function": "API函数",
         "parameter_function": "参数字典函数",
-        "get_string": "获取字符串",
+        "get_string": "输入字符串",
         "parameter_combine": "参数字典组合",
         "parameter_combine_plus": "超大参数字典组合",
         "list_append": "列表追加",
@@ -2285,7 +2126,7 @@ else:
         "bing_loader": "Bing Image Loader",
         "api_function": "API Function",
         "parameter_function": "Parameter Dictionary Function",
-        "get_string": "Get String",
+        "get_string": "Input String",
         "parameter_combine": "Parameter Dictionary Combine",
         "parameter_combine_plus": "Large Parameter Dictionary Combine",
         "list_append": "List Append",

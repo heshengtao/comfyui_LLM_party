@@ -1,6 +1,6 @@
 {
-  "last_node_id": 24,
-  "last_link_id": 39,
+  "last_node_id": 30,
+  "last_link_id": 45,
   "nodes": [
     {
       "id": 23,
@@ -20,13 +20,13 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 38,
+          "link": 45,
           "label": "model"
         },
         {
           "name": "tokenizer",
           "type": "CUSTOM",
-          "link": 39,
+          "link": null,
           "label": "tokenizer"
         },
         {
@@ -109,12 +109,12 @@
         "Node name for S&R": "LLM_local"
       },
       "widgets_values": [
-        "你是一个可爱的小兔娘",
-        "你好，你是谁哇",
-        "LLM",
+        "",
+        "你好，你是什么模型",
+        "GGUF",
         0.7,
         512,
-        "enable",
+        "disable",
         "disable",
         "enable",
         "",
@@ -127,52 +127,6 @@
       ]
     },
     {
-      "id": 24,
-      "type": "LLM_local_loader",
-      "pos": [
-        540,
-        250
-      ],
-      "size": {
-        "0": 315,
-        "1": 150
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            38
-          ],
-          "slot_index": 0,
-          "shape": 3,
-          "label": "model"
-        },
-        {
-          "name": "tokenizer",
-          "type": "CUSTOM",
-          "links": [
-            39
-          ],
-          "slot_index": 1,
-          "shape": 3,
-          "label": "tokenizer"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_local_loader"
-      },
-      "widgets_values": [
-        "D:\\AI\\mychat\\model\\Qwen2-1.5B",
-        "auto",
-        "float32",
-        true
-      ]
-    },
-    {
       "id": 11,
       "type": "show_text_party",
       "pos": [
@@ -180,8 +134,8 @@
         240
       ],
       "size": {
-        "0": 450,
-        "1": 290
+        "0": 470,
+        "1": 350
       },
       "flags": {},
       "order": 2,
@@ -211,10 +165,46 @@
       },
       "widgets_values": [
         "",
-        "*blushes slightly* My name is Alice, and I'm a fairy. I'm a very powerful fairy, but I'm also very mischievous. I love to play pranks on others, and I have a very mischievous sense of humor. I'm also very good at reading minds, and I can use my magic to make people feel good or bad."
+        "你好！我是一个基于 transformer 的语言模型，主要用于回答问题、生成文本、进行对话等任务。"
       ],
       "color": "#233",
       "bgcolor": "#355"
+    },
+    {
+      "id": 30,
+      "type": "GGUFLoader",
+      "pos": [
+        540,
+        230
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GGUFLoader"
+      },
+      "widgets_values": [
+        "D:\\AI\\mychat\\model\\llama-gguf\\Meta-Llama-3.1-8B-Instruct-IQ4_XS.gguf",
+        512,
+        31,
+        8
+      ]
     }
   ],
   "links": [
@@ -227,19 +217,11 @@
       "STRING"
     ],
     [
-      38,
-      24,
+      45,
+      30,
       0,
       23,
       0,
-      "CUSTOM"
-    ],
-    [
-      39,
-      24,
-      1,
-      23,
-      1,
       "CUSTOM"
     ]
   ],
@@ -249,8 +231,8 @@
     "ds": {
       "scale": 1,
       "offset": [
-        -455.5588030162946,
-        47.36551725746442
+        -444.3690732851434,
+        22.418166419407072
       ]
     }
   },

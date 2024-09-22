@@ -1,7 +1,92 @@
 {
-  "last_node_id": 24,
-  "last_link_id": 39,
+  "last_node_id": 27,
+  "last_link_id": 42,
   "nodes": [
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1420,
+        240
+      ],
+      "size": {
+        "0": 450,
+        "1": 290
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "antennas, arms, and legs for an alien-like creature with blue eyes and a pink dress."
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 27,
+      "type": "LoadImage",
+      "pos": [
+        520,
+        360
+      ],
+      "size": [
+        320,
+        310
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            42
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
+      ]
+    },
     {
       "id": 23,
       "type": "LLM_local",
@@ -14,25 +99,25 @@
         "1": 462
       },
       "flags": {},
-      "order": 1,
+      "order": 2,
       "mode": 0,
       "inputs": [
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 38,
+          "link": 40,
           "label": "model"
         },
         {
           "name": "tokenizer",
           "type": "CUSTOM",
-          "link": 39,
+          "link": null,
           "label": "tokenizer"
         },
         {
           "name": "image",
           "type": "IMAGE",
-          "link": null,
+          "link": 42,
           "label": "image"
         },
         {
@@ -109,11 +194,11 @@
         "Node name for S&R": "LLM_local"
       },
       "widgets_values": [
-        "你是一个可爱的小兔娘",
-        "你好，你是谁哇",
-        "LLM",
+        "",
+        "图中画了什么哇",
+        "VLM",
         0.7,
-        512,
+        1920,
         "enable",
         "disable",
         "enable",
@@ -127,94 +212,41 @@
       ]
     },
     {
-      "id": 24,
-      "type": "LLM_local_loader",
+      "id": 25,
+      "type": "LLavaLoader",
       "pos": [
-        540,
-        250
+        520,
+        140
       ],
       "size": {
         "0": 315,
-        "1": 150
+        "1": 154
       },
       "flags": {},
-      "order": 0,
+      "order": 1,
       "mode": 0,
       "outputs": [
         {
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            38
+            40
           ],
           "slot_index": 0,
           "shape": 3,
           "label": "model"
-        },
-        {
-          "name": "tokenizer",
-          "type": "CUSTOM",
-          "links": [
-            39
-          ],
-          "slot_index": 1,
-          "shape": 3,
-          "label": "tokenizer"
         }
       ],
       "properties": {
-        "Node name for S&R": "LLM_local_loader"
+        "Node name for S&R": "LLavaLoader"
       },
       "widgets_values": [
-        "D:\\AI\\mychat\\model\\Qwen2-1.5B",
-        "auto",
-        "float32",
-        true
+        "D:\\AI\\mychat\\model\\llaVa\\llava-llama-3-8b-v1_1-int4.gguf",
+        "D:\\AI\\mychat\\model\\llaVa\\llava-llama-3-8b-v1_1-mmproj-f16.gguf",
+        1836,
+        31,
+        8
       ]
-    },
-    {
-      "id": 11,
-      "type": "show_text_party",
-      "pos": [
-        1420,
-        240
-      ],
-      "size": {
-        "0": 450,
-        "1": 290
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 37,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        "",
-        "*blushes slightly* My name is Alice, and I'm a fairy. I'm a very powerful fairy, but I'm also very mischievous. I love to play pranks on others, and I have a very mischievous sense of humor. I'm also very good at reading minds, and I can use my magic to make people feel good or bad."
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
     }
   ],
   "links": [
@@ -227,20 +259,20 @@
       "STRING"
     ],
     [
-      38,
-      24,
+      40,
+      25,
       0,
       23,
       0,
       "CUSTOM"
     ],
     [
-      39,
-      24,
-      1,
+      42,
+      27,
+      0,
       23,
-      1,
-      "CUSTOM"
+      2,
+      "IMAGE"
     ]
   ],
   "groups": [],
@@ -249,8 +281,8 @@
     "ds": {
       "scale": 1,
       "offset": [
-        -455.5588030162946,
-        47.36551725746442
+        -434.76058875643173,
+        32.016170835766246
       ]
     }
   },
