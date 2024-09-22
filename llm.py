@@ -895,8 +895,6 @@ class genai_api_loader:
         return (chat,)
 
 class LLM:
-    original_IS_CHANGED = None
-
     def __init__(self):
         current_time = datetime.datetime.now()
         # 以时间戳作为ID，字符串格式 XX年XX月XX日XX时XX分XX秒并加上一个哈希值防止重复
@@ -1048,9 +1046,6 @@ class LLM:
                 llm_tools_list.append(self.tool_data)
                 self.added_to_list = True
         self.is_locked = is_locked
-        if LLM.original_IS_CHANGED is None:
-            # 保存原始的IS_CHANGED方法的引用
-            LLM.original_IS_CHANGED = LLM.IS_CHANGED
         if self.is_locked == "disable":
             setattr(LLM, "IS_CHANGED", LLM.original_IS_CHANGED)
         else:
@@ -1220,7 +1215,7 @@ class LLM:
                 )
 
     @classmethod
-    def IS_CHANGED(s):
+    def original_IS_CHANGED(s):
         # 生成当前时间的哈希值
         hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
         return hash_value
@@ -1467,8 +1462,6 @@ class LLM_local_loader:
 
 
 class LLM_local:
-    original_IS_CHANGED = None
-
     def __init__(self):
         # 生成一个hash值作为id
         current_time = datetime.datetime.now()
@@ -1620,9 +1613,6 @@ class LLM_local:
                 llm_tools_list.append(self.tool_data)
                 self.added_to_list = True
         self.is_locked = is_locked
-        if LLM_local.original_IS_CHANGED is None:
-            # 保存原始的IS_CHANGED方法的引用
-            LLM_local.original_IS_CHANGED = LLM_local.IS_CHANGED
         if self.is_locked == "disable":
             setattr(LLM_local, "IS_CHANGED", LLM_local.original_IS_CHANGED)
         else:
@@ -1985,7 +1975,7 @@ class LLM_local:
                 )
 
     @classmethod
-    def IS_CHANGED(s):
+    def original_IS_CHANGED(s):
         # 生成当前时间的哈希值
         hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
         return hash_value
