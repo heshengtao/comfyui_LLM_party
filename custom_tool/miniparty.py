@@ -1,10 +1,13 @@
 import configparser
+import io
 import json
 import locale
 import os
-
+import requests
+from PIL import Image
+import numpy as np
 import openai
-
+import base64
 # 当前脚本目录的上级目录
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
@@ -440,11 +443,330 @@ FLUX是一款利用深度学习的文生图模型，支持通过使用 自然语
         flux_prompt = response.choices[0].message.content
         return (flux_prompt,)
 
+class mini_sd_tag:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "image": ("IMAGE", {}),
+                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+            },
+            "optional": {
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": "https://api.openai.com/v1/",
+                    },
+                ),
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": "sk-XXXXX",
+                    },
+                ),
+                "imgbb_api_key":(
+                    "STRING",
+                    {
+                        "default": "",
+                    }
+                ),
+                "is_enable": ("BOOLEAN", {"default": True,}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("tags",)
+
+    FUNCTION = "file"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/迷你派对（mini-party）"
+
+    def file(
+        self,
+        image,
+        model_name="gpt-4o-mini",
+        base_url=None,
+        api_key=None,
+        is_enable=True,
+        imgbb_api_key=None,
+    ):
+        if not is_enable:
+            return (None,)
+        api_keys = load_api_keys(config_path)
+        if api_key:
+            openai.api_key = api_key
+        elif api_keys.get("openai_api_key"):
+            openai.api_key = api_keys.get("openai_api_key")
+        else:
+            openai.api_key = os.environ.get("OPENAI_API_KEY")
+
+        if base_url:
+            openai.base_url = base_url.rstrip("/") + "/"
+        elif api_keys.get("base_url"):
+            openai.base_url = api_keys.get("base_url")
+        else:
+            openai.base_url = os.environ.get("OPENAI_API_BASE")
+
+        if not openai.api_key:
+            return ("请输入API_KEY",)
+        sys_prompt = f'''# Stable Diffusion prompt 助理
+
+你来充当一位图片反推prompt助理。
+
+## 任务
+
+我会发给你一张图片，你要根据这张图片生成的prompt，你的任务是根据这张图片反推成一份详细的、高质量的prompt，可以让Stable Diffusion重现这张图片。
+
+## 背景介绍
+
+Stable Diffusion是一款利用深度学习的文生图模型，支持通过使用 prompt 来产生新的图像，描述要包含或省略的元素。
+
+## prompt 概念
+
+- 以","分隔的每个单词或词组称为 tag。所以prompt是由系列由","分隔的tag组成的。
+
+## Prompt 格式要求
+
+你必须尽可能的和我会发给你的图片保持一致。不多不少的描述完整张图片的所有tag。
+
+### 示例：
+a girl, beautiful detailed eyes, stars in the eyes, messy floating hair, colored inner hair, Starry sky adorns hair, depth of field
+
+
+### 3. 限制：
+- tag 内容用英语单词或短语来描述，并不局限于我给你的单词。注意只能包含关键词或词组。
+- 注意不要输出句子，不要有任何解释。
+- tag数量限制40个以内，单词数量限制在60个以内。
+- tag不要带引号("")。
+- 使用英文半角","做分隔符。
+- tag 按重要性从高到低的顺序排列。
+- 我给你的主题可能是用中文描述，你给出的prompt只用英文。
+'''
+        if imgbb_api_key == "" or imgbb_api_key is None:
+            imgbb_api_key = api_keys.get("imgbb_api")
+        if imgbb_api_key == "" or imgbb_api_key is None:
+            i = 255.0 * image[0].cpu().numpy()
+            img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+            # 将图片保存到缓冲区
+            buffered = io.BytesIO()
+            img.save(buffered, format="PNG")
+            # 将图片编码为base64
+            img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+            img_json = [
+                {"type": "text", "text": "请生成这张图片的prompt"},
+                {
+                    "type": "image_url",
+                    "image_url": {"url": f"data:image/jpeg;base64,{img_str}"},
+                },
+            ]
+        else:
+            i = 255.0 * image[0].cpu().numpy()
+            img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+            # 将图片保存到缓冲区
+            buffered = io.BytesIO()
+            img.save(buffered, format="PNG")
+            # 将图片编码为base64
+            img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+            url = "https://api.imgbb.com/1/upload"
+            payload = {"key": imgbb_api_key, "image": img_str}
+            # 向API发送POST请求
+            response = requests.post(url, data=payload)
+            # 检查请求是否成功
+            if response.status_code == 200:
+                # 解析响应以获取图片URL
+                result = response.json()
+                img_url = result["data"]["url"]
+                print(img_url)
+            else:
+                return "Error: " + response.text
+            img_json = [
+                {"type": "text", "text": "请生成这张图片的prompt"},
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": img_url,
+                    },
+                },
+            ]
+        history= [
+            {"role": "system", "content": sys_prompt},
+            {"role": "user", "content": img_json}
+        ]
+        response = openai.chat.completions.create(
+                            model=model_name,
+                            messages=history,
+                        )
+        tags = response.choices[0].message.content
+        return (tags,)
+
+class mini_flux_tag:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "image": ("IMAGE", {}),
+                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+            },
+            "optional": {
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": "https://api.openai.com/v1/",
+                    },
+                ),
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": "sk-XXXXX",
+                    },
+                ),
+                "imgbb_api_key":(
+                    "STRING",
+                    {
+                        "default": "",
+                    }
+                ),
+                "is_enable": ("BOOLEAN", {"default": True,}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("tags",)
+
+    FUNCTION = "file"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/迷你派对（mini-party）"
+
+    def file(
+        self,
+        image,
+        model_name="gpt-4o-mini",
+        base_url=None,
+        api_key=None,
+        is_enable=True,
+        imgbb_api_key=None,
+    ):
+        if not is_enable:
+            return (None,)
+        api_keys = load_api_keys(config_path)
+        if api_key:
+            openai.api_key = api_key
+        elif api_keys.get("openai_api_key"):
+            openai.api_key = api_keys.get("openai_api_key")
+        else:
+            openai.api_key = os.environ.get("OPENAI_API_KEY")
+
+        if base_url:
+            openai.base_url = base_url.rstrip("/") + "/"
+        elif api_keys.get("base_url"):
+            openai.base_url = api_keys.get("base_url")
+        else:
+            openai.base_url = os.environ.get("OPENAI_API_BASE")
+
+        if not openai.api_key:
+            return ("请输入API_KEY",)
+        sys_prompt = f'''# FLUX prompt 助理
+
+你来充当一位图片反推prompt助理。
+
+## 任务
+
+我会发给你一张图片，你要根据这张图片生成的prompt，你的任务是根据这张图片反推成一份详细的、高质量的prompt，可以让FLUX重现这张图片。
+
+## 背景介绍
+
+FLUX是一款利用深度学习的文生图模型，支持通过使用 自然语言 prompt 来产生新的图像，描述要包含或省略的元素。
+
+## Prompt 格式要求
+
+你必须尽可能的和我会发给你的图片保持一致。不多不少的描述完整张图片的所有细节。
+
+**示例：**
+
+A majestic, emerald-scaled dragon with glowing amber eyes, wings outstretched, soars through a breathtaking vista of snow-capped mountains. The dragon's powerful form dominates the scene, casting a long shadow over the imposing peaks. Below, a cascading waterfall plunges into a deep valley, its spray catching the sunlight in a dazzling array of colors. The dragon's scales shimmer with iridescent hues, reflecting the surrounding natural beauty. The sky is a vibrant blue, dotted with fluffy white clouds, creating a sense of awe and wonder. This dynamic and visually stunning depiction captures the majesty of both the dragon and the mountainous landscape.
+
+**指导**：
+
+1. **描述细节**：尽量提供具体的细节，如颜色、形状、位置等。
+2. **情感和氛围**：描述场景的情感和氛围，如温暖、神秘、宁静等。
+3. **风格和背景**：说明场景的风格和背景，如卡通风格、未来主义、复古等。
+
+### 3. 限制：
+- 你给出的prompt只用英文。
+- 不要解释你的prompt，直接输出prompt。
+- 不要输出其他任何非prompt字符，只输出prompt，也不要包含 **生成提示词**： 等类似的字符。
+'''
+        if imgbb_api_key == "" or imgbb_api_key is None:
+            imgbb_api_key = api_keys.get("imgbb_api")
+        if imgbb_api_key == "" or imgbb_api_key is None:
+            i = 255.0 * image[0].cpu().numpy()
+            img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+            # 将图片保存到缓冲区
+            buffered = io.BytesIO()
+            img.save(buffered, format="PNG")
+            # 将图片编码为base64
+            img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+            img_json = [
+                {"type": "text", "text": "请生成这张图片的prompt"},
+                {
+                    "type": "image_url",
+                    "image_url": {"url": f"data:image/jpeg;base64,{img_str}"},
+                },
+            ]
+        else:
+            i = 255.0 * image[0].cpu().numpy()
+            img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+            # 将图片保存到缓冲区
+            buffered = io.BytesIO()
+            img.save(buffered, format="PNG")
+            # 将图片编码为base64
+            img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+            url = "https://api.imgbb.com/1/upload"
+            payload = {"key": imgbb_api_key, "image": img_str}
+            # 向API发送POST请求
+            response = requests.post(url, data=payload)
+            # 检查请求是否成功
+            if response.status_code == 200:
+                # 解析响应以获取图片URL
+                result = response.json()
+                img_url = result["data"]["url"]
+                print(img_url)
+            else:
+                return "Error: " + response.text
+            img_json = [
+                {"type": "text", "text": "请生成这张图片的prompt"},
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": img_url,
+                    },
+                },
+            ]
+        history= [
+            {"role": "system", "content": sys_prompt},
+            {"role": "user", "content": img_json}
+        ]
+        response = openai.chat.completions.create(
+                            model=model_name,
+                            messages=history,
+                        )
+        tags = response.choices[0].message.content
+        return (tags,)
+
+
 NODE_CLASS_MAPPINGS = {
     "mini_party": mini_party,
     "mini_translate": mini_translate,
     "mini_sd_prompt": mini_sd_prompt,
     "mini_flux_prompt":mini_flux_prompt,
+    "mini_sd_tag":mini_sd_tag,
+    "mini_flux_tag":mini_flux_tag,
     }
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
@@ -467,6 +789,8 @@ if lang == "zh_CN":
         "mini_translate": "迷你翻译机",
         "mini_sd_prompt": "迷你SD提示词生成器",
         "mini_flux_prompt": "迷你FLUX提示词生成器",
+        "mini_sd_tag": "迷你SD标签生成器",
+        "mini_flux_tag": "迷你FLUX标签生成器",
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -474,4 +798,6 @@ else:
         "mini_translate": "Mini Translator",
         "mini_sd_prompt": "Mini SD Prompt Generator",
         "mini_flux_prompt": "Mini FLUX Prompt Generator",
+        "mini_sd_tag": "Mini SD Tag Generator",
+        "mini_flux_tag": "Mini FLUX Tag Generator",
         }
