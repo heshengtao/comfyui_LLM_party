@@ -36,7 +36,8 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعددة، وإعداد الشخصيات لبناء مساعد AI الخاص بك بسرعة، إلى RAG وGraphRAG القابلة للتطبيق في الصناعة لإدارة قواعد المعرفة المحلية؛ من خط أنابيب وكيل واحد إلى بناء أنماط تفاعل معقدة بين الوكلاء وأنماط تفاعل دائرية؛ من الحاجة الفردية للمستخدمين للوصول إلى تطبيقات التواصل الاجتماعي الخاصة بهم (QQ، Feishu، Discord)، إلى تدفقات العمل الشاملة التي يحتاجها العاملون في وسائل الإعلام LLM+TTS+ComfyUI؛ من بدء استخدام تطبيق LLM الأول للطلاب العاديين، إلى واجهات ضبط المعلمات التي يستخدمها الباحثون. كل هذا يمكنك العثور على إجابات له في ComfyUI LLM Party.
 
 ## التحديثات الأخيرة
-1. تمت إضافة عقدة EasyOCR للتعرف على النصوص والمواقع في الصور. يمكنه إنشاء الأقنعة المقابلة وإرجاع سلسلة JSON لعرضها بواسطة LLM. تتوفر إصدارات عادية ومميزة للاختيار من بينها!
+1. تم تعديل عقد تحميل LLM المحلية بشكل كبير، لذلك لم تعد بحاجة إلى اختيار نوع النموذج بنفسك. تم إعادة إضافة عقدة تحميل llava وعقدة تحميل GGUF. تم تغيير نوع النموذج على عقدة سلسلة نماذج LLM المحلية إلى LLM وVLM وGGUF، مما يتوافق مع تحميل نماذج LLM مباشرة، وتحميل نماذج VLM، وتحميل نماذج LLM بتنسيق GGUF. الآن يتم دعم نماذج VLM ونماذج LLM بتنسيق GGUF مرة أخرى. يمكن الآن أن تكون المكالمات المحلية متوافقة مع المزيد من النماذج! أمثلة على سير العمل: [LLM_local](workflow\start_with_LLM_local.json), [llava](workflow\start_with_llava.json), [GGUF](workflow\start_with_GGUF.json)
+2. تمت إضافة عقدة EasyOCR للتعرف على النصوص والمواقع في الصور. يمكنه إنشاء الأقنعة المقابلة وإرجاع سلسلة JSON لعرضها بواسطة LLM. تتوفر إصدارات عادية ومميزة للاختيار من بينها!
 2. في حفلة comfyui LLM، تم إعادة إنتاج نظام الفراولة لنموذج سلسلة chatgpt-o1، بالإشارة إلى مطالبات [Llamaberry](https://huggingface.co/spaces/martinbowling/Llamaberry/blob/main/app.py). مثال على سير العمل: [نظام الفراولة مقارنة بـ o1](workflow\草莓系统与o1对比.json).
 2. تمت إضافة عقدة GPT-sovits جديدة، مما يتيح لك استدعاء نموذج GPT-sovits لتحويل النص إلى كلام بناءً على الصوت المرجعي الخاص بك. يمكنك أيضًا ملء مسار النموذج المحسن الخاص بك (إذا لم يتم ملؤه، سيتم استخدام النموذج الأساسي للاستدلال) للحصول على أي صوت تريده. لاستخدامه، تحتاج إلى تنزيل مشروع [GPT-sovits](https://github.com/RVC-Boss/GPT-SoVITS) والنموذج الأساسي المقابل محليًا، ثم بدء خدمة API باستخدام `runtime\python.exe api_v2.py` في مجلد مشروع GPT-sovits. بالإضافة إلى ذلك، تم نقل عقدة chatTTS إلى [comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia). السبب هو أن chatTTS يحتوي على العديد من التبعيات، ورخصته على PyPi هي CC BY-NC 4.0، وهي رخصة غير تجارية. على الرغم من أن مشروع chatTTS على GitHub تحت رخصة AGPL، فقد نقلنا عقدة chatTTS إلى comfyui LLM mafia لتجنب المشاكل غير الضرورية. نأمل أن يفهم الجميع!
 3. يدعم الآن أحدث نموذج من OpenAI، سلسلة o1!
@@ -86,8 +87,8 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (موصى به! نموذج غني بالكلمات الرئيسية)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
-* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf) (لا يستطيع المطورون الحفاظ على المكالمات لجميع النماذج الكبيرة بتنسيق gguf، لذلك يوصى باستخدام طريقة llama.cpp لاستدعاء النماذج المحلية بتنسيق gguf!)
-* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (نظرًا لتنسيق الاتصال الجديد لـ GLM4، لا يستطيع المطورون الحفاظ على المكالمات لجميع النماذج الكبيرة المحلية، لذلك يوصى باستخدام طريقة ollama للمكالمات المحلية!)
+* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
+* [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
 
 4. تحميل النموذج:
 * [رابط بايدو السحابي](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)، رمز الاستخراج: qyhu

@@ -38,7 +38,8 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 
 
 ## Latest update
-1. Added EasyOCR node for recognizing text and positions in images. It can generate corresponding masks and return a JSON string for LLM to view. There are standard and premium versions available for everyone to choose from!
+1. The local LLM loader nodes have been significantly adjusted, so you no longer need to choose the model type yourself. The llava loader node and GGUF loader node have been re-added. The model type on the local LLM model chain node has been changed to LLM, VLM, and GGUF, corresponding to directly loading LLM models, loading VLM models, and loading GGUF format LLM models. VLM models and GGUF format LLM models are now supported again. Local calls can now be compatible with more models! Example workflows: [LLM_local](workflow\start_with_LLM_local.json), [llava](workflow\start_with_llava.json), [GGUF](workflow\start_with_GGUF.json)
+2. Added EasyOCR node for recognizing text and positions in images. It can generate corresponding masks and return a JSON string for LLM to view. There are standard and premium versions available for everyone to choose from!
 2. In the comfyui LLM party, the strawberry system of the chatgpt-o1 series model was reproduced, referring to the prompts of [Llamaberry](https://huggingface.co/spaces/martinbowling/Llamaberry/blob/main/app.py). Example workflow: [Strawberry system compared to o1](workflow\草莓系统与o1对比.json).
 2. A new GPT-sovits node has been added, allowing you to call the GPT-sovits model to convert text into speech based on your reference audio. You can also fill in the path of your fine-tuned model (if not filled, the base model will be used for inference) to get any desired voice. To use it, you need to download the [GPT-sovits](https://github.com/RVC-Boss/GPT-SoVITS) project and the corresponding base model locally, then start the API service with `runtime\python.exe api_v2.py` in the GPT-sovits project folder. Additionally, the chatTTS node has been moved to [comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia). The reason is that chatTTS has many dependencies, and its license on PyPi is CC BY-NC 4.0, which is a non-commercial license. Even though the chatTTS GitHub project is under the AGPL license, we moved the chatTTS node to comfyui LLM mafia to avoid unnecessary trouble. We hope everyone understands!
 3. Now supports OpenAI’s latest model, the o1 series!
@@ -91,8 +92,8 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(Recommended! Rich prompt model)
 * [meta-llama/llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
-* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf) (Developers are unable to maintain calls for all large models in gguf format, so it is recommended to use the llama.cpp method to call local models in gguf format!)
-* [THUDM/chatglm3-6b](https://huggingface.co/THUDM/chatglm3-6b) (Due to the new calling format of GLM4, developers are unable to maintain calls for all local large models, so it is recommended to use the ollama method for local calls!)
+* [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
+* [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
 
 4. Model download
 * [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu
