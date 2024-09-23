@@ -34,7 +34,7 @@ class mini_party:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "any": (any_type, {}),
+                "input_str": ("STRING", {"forceInput": True}),
                 "prompt": ("STRING", {"default": "input function here","multiline": True}),
                 "is_enable": ("BOOLEAN", {"default": True,}),
                 "model_name": ("STRING", {"default": "gpt-4o-mini",}),
@@ -55,8 +55,8 @@ class mini_party:
             },
         }
 
-    RETURN_TYPES = (any_type,)
-    RETURN_NAMES = ("any",)
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("output_str",)
 
     FUNCTION = "file"
 
@@ -66,7 +66,7 @@ class mini_party:
 
     def file(
         self,
-        any,
+        input_str,
         prompt,
         model_name,
         base_url=None,
@@ -94,7 +94,7 @@ class mini_party:
             return ("请输入API_KEY",)
         history= [
             {"role": "system", "content": prompt},
-            {"role": "user", "content": any}
+            {"role": "user", "content": input_str}
         ]
         response = openai.chat.completions.create(
                             model=model_name,
