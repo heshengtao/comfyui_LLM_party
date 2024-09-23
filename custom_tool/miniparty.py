@@ -789,8 +789,8 @@ if lang == "zh_CN":
         "mini_translate": "迷你翻译机",
         "mini_sd_prompt": "迷你SD提示词生成器",
         "mini_flux_prompt": "迷你FLUX提示词生成器",
-        "mini_sd_tag": "迷你SD标签生成器",
-        "mini_flux_tag": "迷你FLUX标签生成器",
+        "mini_sd_tag": "迷你SD图片提示词反推器",
+        "mini_flux_tag": "迷你FLUX图片提示词反推器",
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -798,6 +798,6 @@ else:
         "mini_translate": "Mini Translator",
         "mini_sd_prompt": "Mini SD Prompt Generator",
         "mini_flux_prompt": "Mini FLUX Prompt Generator",
-        "mini_sd_tag": "Mini SD Tag Generator",
-        "mini_flux_tag": "Mini FLUX Tag Generator",
+        "mini_sd_tag": "Mini SD image prompt retractor",
+        "mini_flux_tag": "Mini FLUX image prompt retractor",
         }
