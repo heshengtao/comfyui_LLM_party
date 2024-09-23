@@ -34,7 +34,7 @@ class mini_party:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "input": ("STRING", {}),
+                "input": ("STRING", {"forceInput": True}),
                 "prompt": ("STRING", {"default": "input function here","multiline": True}),
                 "is_enable": ("BOOLEAN", {"default": True,}),
                 "model_name": ("STRING", {"default": "gpt-4o-mini",}),
