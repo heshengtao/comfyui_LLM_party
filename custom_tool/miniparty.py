@@ -8,6 +8,7 @@ from PIL import Image
 import numpy as np
 import openai
 import base64
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 # 当前脚本目录的上级目录
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
@@ -187,16 +188,128 @@ class mini_translate:
 
 从现在开始，请将以下内容翻译成{target_language}。
         """
-        history= [
-            {"role": "system", "content": sys_prompt},
-            {"role": "user", "content": input_str}
-        ]
-        response = openai.chat.completions.create(
-                            model=model_name,
-                            messages=history,
-                        )
-        output = response.choices[0].message.content
+
+        # 将file_content用RecursiveCharacterTextSplitter分割
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=2000, chunk_overlap=0
+        )
+        output=""
+        for chunk in text_splitter.split_text(input_str):   
+            history= [
+                {"role": "system", "content": sys_prompt},
+                {"role": "user", "content": chunk}
+            ]
+            response = openai.chat.completions.create(
+                                model=model_name,
+                                messages=history,
+                            )
+            output += response.choices[0].message.content
         return (output,)
+
+class mini_error_correction:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "input_str": ("STRING", {"forceInput": True}),
+                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+            },
+            "optional": {
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": "https://api.openai.com/v1/",
+                    },
+                ),
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": "sk-XXXXX",
+                    },
+                ),
+                "is_enable": ("BOOLEAN", {"default": True,}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING","STRING","STRING",)
+    RETURN_NAMES = ("input_text","output_text","error",)
+
+    FUNCTION = "file"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/迷你派对（mini-party）"
+
+    def file(
+        self,
+        input_str,
+        model_name="gpt-4o-mini",
+        base_url=None,
+        api_key=None,
+        is_enable=True,
+    ):
+        if not is_enable:
+            return (None,)
+        api_keys = load_api_keys(config_path)
+        if api_key:
+            openai.api_key = api_key
+        elif api_keys.get("openai_api_key"):
+            openai.api_key = api_keys.get("openai_api_key")
+        else:
+            openai.api_key = os.environ.get("OPENAI_API_KEY")
+
+        if base_url:
+            openai.base_url = base_url.rstrip("/") + "/"
+        elif api_keys.get("base_url"):
+            openai.base_url = api_keys.get("base_url")
+        else:
+            openai.base_url = os.environ.get("OPENAI_API_BASE")
+
+        if not openai.api_key:
+            return ("请输入API_KEY",)
+        sys_prompt = f"""你是一个文档纠错大师，你会纠正我输入的文字中的包括但不限于错别字、语法错误、病句、拼写错误等一系列文档错误，并给出修改后的内容以及错误的位置。
+输出格式为json，格式如下：
+{{
+    "input_str": "输入的文字，用** **将错误的地方括起来",
+    "output_str": "修改后的文字，保留原格式",
+    "error":"你修改的部分，如果没有错误则为空字符串。如果有错误，则用无序列表的形式列出错误",
+}}
+
+示例：
+{{
+    "input_str": "三年中，这个县的粮食产量以平均每年递增20%的速度大踏步地**向前发展**。他主动为这个系工程力学专业的两届船舶结构力学学习班**挑起**了薄壳力学、船舶结构力学等课程的主讲任务。",
+    "output_str": "三年中，这个县的粮食产量以平均每年递增20%的速度大踏步地提高。他主动为这个系工程力学专业的两届船舶结构力学学习班承担了薄壳力学、船舶结构力学等课程的主讲任务。",
+    "error":"- 向前发展 -> 提高\n- 挑起 -> 承担\n",
+}}
+
+从现在开始，请对我的输入进行纠错。
+        """
+
+        # 将file_content用RecursiveCharacterTextSplitter分割
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=2000, chunk_overlap=0
+        )
+        input_text=""
+        output_text=""
+        error=""
+        for chunk in text_splitter.split_text(input_str):   
+            history= [
+                {"role": "system", "content": sys_prompt},
+                {"role": "user", "content": chunk}
+            ]
+            response = openai.chat.completions.create(
+                                model=model_name,
+                                messages=history,
+                                response_format={"type": "json_object"},
+                            )
+            output = response.choices[0].message.content
+            output = json.loads(output)
+            input_text += output["input_str"]
+            output_text += output["output_str"]
+            error += output["error"]
+        return (input_text,output_text,error,)
+
 
 class mini_sd_prompt:
 
@@ -767,6 +880,7 @@ NODE_CLASS_MAPPINGS = {
     "mini_flux_prompt":mini_flux_prompt,
     "mini_sd_tag":mini_sd_tag,
     "mini_flux_tag":mini_flux_tag,
+    "mini_error_correction":mini_error_correction,
     }
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
@@ -791,6 +905,7 @@ if lang == "zh_CN":
         "mini_flux_prompt": "迷你FLUX提示词生成器",
         "mini_sd_tag": "迷你SD图片提示词反推器",
         "mini_flux_tag": "迷你FLUX图片提示词反推器",
+        "mini_error_correction": "迷你文档纠错器",
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -800,4 +915,5 @@ else:
         "mini_flux_prompt": "Mini FLUX Prompt Generator",
         "mini_sd_tag": "Mini SD image prompt retractor",
         "mini_flux_tag": "Mini FLUX image prompt retractor",
+        "mini_error_correction": "Mini file Error Corrector",
         }
