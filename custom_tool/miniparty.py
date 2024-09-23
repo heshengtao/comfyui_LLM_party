@@ -62,7 +62,7 @@ class mini_party:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/迷你派对（mini-party）"
 
     def file(
         self,
