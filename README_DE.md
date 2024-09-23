@@ -82,7 +82,8 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 
 2. Unterstützung von API-Aufrufen im Gemini-Format:
 * [Gemini](https://aistudio.google.com/app/prompts/new_chat)
-3. Kompatibel mit den meisten lokalen Modellen, die von der Klasse AutoModelForCausalLM der Transformer-Bibliothek unterstützt werden (wenn Sie unsicher sind, welchen Modelltyp Sie für lokale Modelle auswählen sollen, wählen Sie einfach llama, es sollte in den meisten Fällen kompatibel sein). Bisher getestete Modelle sind:
+
+3. Kompatibel mit den meisten lokalen Modellen in der Transformer-Bibliothek (der Modelltyp auf dem lokalen LLM-Modellkettenknoten wurde in LLM, VLM und GGUF geändert, was dem direkten Laden von LLM-Modellen, dem Laden von VLM-Modellen und dem Laden von LLM-Modellen im GGUF-Format entspricht). Wenn Ihr VLM- oder GGUF-Format-LLM-Modell einen Fehler meldet, laden Sie bitte die neueste Version von llama-cpp-python von [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases) herunter. Derzeit getestete Modelle umfassen:
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay) (empfohlen! Rollenspiel-Modell)
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (empfohlen! Reichhaltiges Prompt-Modell)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)

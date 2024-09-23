@@ -87,7 +87,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 2. API calls that support Gemini format:
 * [Gemini](https://aistudio.google.com/app/prompts/new_chat)
 
-3. Most of the local models supported by the transformer library AutoModelForCausalLM class have been tested so far(If the model type on the local model node does not know what to choose, choose llama, which can be adapted with high probability):
+3. Compatible with most local models in the transformer library (the model type on the local LLM model chain node has been changed to LLM, VLM, and GGUF, corresponding to directly loading LLM models, loading VLM models, and loading GGUF format LLM models). If your VLM or GGUF format LLM model reports an error, please download the latest version of llama-cpp-python from [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases). Currently tested models include:
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay)(Recommended! Role-playing model)
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(Recommended! Rich prompt model)
 * [meta-llama/llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
