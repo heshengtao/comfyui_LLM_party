@@ -34,7 +34,7 @@ class mini_party:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "input": ("STRING", {"forceInput": True}),
+                "any": (any_type, {}),
                 "prompt": ("STRING", {"default": "input function here","multiline": True}),
                 "is_enable": ("BOOLEAN", {"default": True,}),
                 "model_name": ("STRING", {"default": "gpt-4o-mini",}),
@@ -55,8 +55,8 @@ class mini_party:
             },
         }
 
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("output",)
+    RETURN_TYPES = (any_type,)
+    RETURN_NAMES = ("any",)
 
     FUNCTION = "file"
 
