@@ -1203,24 +1203,24 @@ if language == "zh_CN" or language=="en_US":
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "mini_party": "迷你派对",
-        "mini_translate": "迷你翻译机",
+        "mini_translate": "迷你长文翻译机",
         "mini_sd_prompt": "迷你SD提示词生成器",
         "mini_flux_prompt": "迷你FLUX提示词生成器",
         "mini_sd_tag": "迷你SD图片提示词反推器",
         "mini_flux_tag": "迷你FLUX图片提示词反推器",
-        "mini_error_correction": "迷你文档纠错器",
+        "mini_error_correction": "迷你长文纠错器",
         "mini_story": "迷你故事生成器",
         "mini_ocr": "迷你高级OCR",
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
         "mini_party": "Mini Party",
-        "mini_translate": "Mini Translator",
+        "mini_translate": "Mini Long Text Translator",
         "mini_sd_prompt": "Mini SD Prompt Generator",
         "mini_flux_prompt": "Mini FLUX Prompt Generator",
         "mini_sd_tag": "Mini SD image prompt retractor",
         "mini_flux_tag": "Mini FLUX image prompt retractor",
-        "mini_error_correction": "Mini file Error Corrector",
+        "mini_error_correction": "Mini Long Text Error Corrector",
         "mini_story": "Mini Story Generator",
         "mini_ocr": "Mini Advanced OCR",
         }
