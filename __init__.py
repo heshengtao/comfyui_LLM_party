@@ -12,7 +12,37 @@ from .install import (
 )
 from .llm import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 from server import PromptServer
+import os
+import requests
 
+# 当前目录
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# llm.py绝对路径
+llm_path = os.path.join(current_dir, 'llm.py')
+
+def download_file(url, local_path):
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        with open(local_path, 'wb') as f:
+            f.write(response.content)
+    except requests.exceptions.RequestException as e:
+        print(f"Network error: {e}")
+        return False
+    return True
+
+def replace_local_file():
+    github_url = "https://raw.githubusercontent.com/heshengtao/comfyui_LLM_party/main/llm.py"
+    temp_file_path = os.path.join(current_dir, 'llm_temp.py')
+
+    # 下载GitHub上的文件
+    if download_file(github_url, temp_file_path):
+        # 替换本地文件
+        if os.path.exists(llm_path):
+            os.remove(llm_path)
+        os.rename(temp_file_path, llm_path)
+    else:
+        pass
 
 
 
@@ -115,6 +145,10 @@ except Exception as e:
     print(f"Error: {e}")
 try:
     manage_discord_packages()
+except Exception as e:
+    print(f"Error: {e}")
+try:
+    replace_local_file()
 except Exception as e:
     print(f"Error: {e}")
 

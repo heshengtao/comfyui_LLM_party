@@ -1087,9 +1087,18 @@ class LLM:
             )
         else:
             try:
-                if is_memory == "disable":
+                if is_memory == "disable" or "clear party memory" in user_prompt:
                     with open(self.prompt_path, "w", encoding="utf-8") as f:
                         json.dump([{"role": "system", "content": system_prompt}], f, indent=4, ensure_ascii=False)
+                    if "clear party memory" in user_prompt:
+                        with open(self.prompt_path, "r", encoding="utf-8") as f:
+                            history = json.load(f)
+                        return (
+                            "party memory has been cleared, please ask me again, powered by LLM party!",
+                            str(history),
+                            llm_tools_json,
+                            None,
+                        )
                 api_keys = load_api_keys(config_path)
 
                 with open(self.prompt_path, "r", encoding="utf-8") as f:
@@ -1543,9 +1552,18 @@ class LLM_local:
             )
         else:
             try:
-                if is_memory == "disable":
+                if is_memory == "disable" or "clear party memory" in user_prompt:
                     with open(self.prompt_path, "w", encoding="utf-8") as f:
                         json.dump([{"role": "system", "content": system_prompt}], f, indent=4, ensure_ascii=False)
+                    if "clear party memory" in user_prompt:
+                        with open(self.prompt_path, "r", encoding="utf-8") as f:
+                            history = json.load(f)
+                        return (
+                            "party memory has been cleared, please ask me again, powered by LLM party!",
+                            str(history),
+                            llm_tools_json,
+                            None,
+                        )
                 with open(self.prompt_path, "r", encoding="utf-8") as f:
                     history = json.load(f)
                 history_temp = [history[0]]
