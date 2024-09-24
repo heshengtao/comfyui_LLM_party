@@ -313,6 +313,109 @@ class mini_error_correction:
             error += output["error"]
         return (input_text,output_text,error,)
 
+
+class mini_summary:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "input_str": ("STRING", {"forceInput": True}),
+                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+            },
+            "optional": {
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": "https://api.openai.com/v1/",
+                    },
+                ),
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": "sk-XXXXX",
+                    },
+                ),
+                "is_enable": ("BOOLEAN", {"default": True,}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("output_text",)
+
+    FUNCTION = "file"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/迷你派对（mini-party）"
+
+    def file(
+        self,
+        input_str,
+        model_name="gpt-4o-mini",
+        base_url=None,
+        api_key=None,
+        is_enable=True,
+    ):
+        if not is_enable:
+            return (None,)
+        api_keys = load_api_keys(config_path)
+        if api_key:
+            openai.api_key = api_key
+        elif api_keys.get("openai_api_key"):
+            openai.api_key = api_keys.get("openai_api_key")
+        else:
+            openai.api_key = os.environ.get("OPENAI_API_KEY")
+
+        if base_url:
+            openai.base_url = base_url.rstrip("/") + "/"
+        elif api_keys.get("base_url"):
+            openai.base_url = api_keys.get("base_url")
+        else:
+            openai.base_url = os.environ.get("OPENAI_API_BASE")
+
+        if not openai.api_key:
+            return ("请输入API_KEY",)
+        sys_prompt = f"""你是一个文档总结助手，请根据我给出的文字，进行总结。
+总结时，你需要抓住文中的要点，不要重复也不要遗漏，尽可能的把文中重要的、有价值的、新颖的、有趣的地方体现在总结中，并按照以下格式输出：
+
+- 要点：xxxx
+- 要点：xxxx
+- 要点：xxxx
+
+请严格按照以上格式输出，不要输出其他内容。
+        """
+
+        # 将file_content用RecursiveCharacterTextSplitter分割
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=2000, chunk_overlap=400
+        )
+        output_text=""
+        for chunk in text_splitter.split_text(input_str):   
+            history= [
+                {"role": "system", "content": sys_prompt},
+                {"role": "user", "content": chunk}
+            ]
+            response = openai.chat.completions.create(
+                                model=model_name,
+                                messages=history,
+                            )
+            output = response.choices[0].message.content
+            output_text += output+"\n"
+        sys_prompt2 = f"""你是一个文档总结助手，我将给你一个已经总结过的要点报告，请根据我给出的要点报告，进行总结。
+总结时，先阐述全文的主题，再阐述各部分的主旨，最后再对结论进行总结。采用总分总的形式进行总结。
+"""
+        history= [
+            {"role": "system", "content": sys_prompt2},
+            {"role": "user", "content": output_text}
+        ]
+        response = openai.chat.completions.create(
+                            model=model_name,
+                            messages=history,
+                        )      
+        output2 = response.choices[0].message.content
+        return (output2,)
+
 class mini_story:
 
     @classmethod
@@ -1184,6 +1287,7 @@ NODE_CLASS_MAPPINGS = {
     "mini_error_correction":mini_error_correction,
     "mini_story":mini_story,
     "mini_ocr": mini_ocr,
+    "mini_summary":mini_summary,
     }
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
@@ -1211,6 +1315,7 @@ if lang == "zh_CN":
         "mini_error_correction": "迷你长文纠错器",
         "mini_story": "迷你故事生成器",
         "mini_ocr": "迷你高级OCR",
+        "mini_summary": "迷你摘要生成器",
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -1223,4 +1328,5 @@ else:
         "mini_error_correction": "Mini Long Text Error Corrector",
         "mini_story": "Mini Story Generator",
         "mini_ocr": "Mini Advanced OCR",
+        "mini_summary": "Mini Summary Generator",
         }
