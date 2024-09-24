@@ -1203,7 +1203,7 @@ if language == "zh_CN" or language=="en_US":
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "mini_party": "迷你派对",
-        "mini_translate": "迷你长文翻译机",
+        "mini_translate": "迷你长文翻译器",
         "mini_sd_prompt": "迷你SD提示词生成器",
         "mini_flux_prompt": "迷你FLUX提示词生成器",
         "mini_sd_tag": "迷你SD图片提示词反推器",
