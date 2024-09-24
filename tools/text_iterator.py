@@ -87,8 +87,8 @@ class text_writing:
             },
         }
 
-    RETURN_TYPES = ()
-    RETURN_NAMES = ()
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("file_path",)
 
     FUNCTION = "file"
 
@@ -104,4 +104,4 @@ class text_writing:
         except Exception as e:
             # 捕获并处理异常
             raise ValueError(f"写入文件失败: {e}")
-        return ()
+        return (file_path,)

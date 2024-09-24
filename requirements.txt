@@ -49,3 +49,4 @@ moviepy
 html5lib
 easyocr
 feedparser
+psutil

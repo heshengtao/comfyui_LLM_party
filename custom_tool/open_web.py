@@ -1,6 +1,34 @@
 import webbrowser
 import json
 import locale
+
+class open_url_function:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "path_or_url": ("STRING", {"default": "https://github.com/heshengtao/comfyui_LLM_party"}),
+                "is_enable": ("BOOLEAN", {"default": True}),
+                }
+            }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("log",)
+    OUTPUT_NODE = True
+    FUNCTION = "convert_txt2json"
+
+    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+
+    def convert_txt2json(self,path_or_url, is_enable=True):
+        if is_enable == False:
+            return (None,)
+        try:
+            webbrowser.open(path_or_url)
+        except Exception as e:
+            return (f"打开网页时出错: {str(e)}",)
+        return ("成功打开网页",)
+
+
 def open_url(url):
     # 用默认浏览器打开URL
     try:
@@ -50,6 +78,7 @@ class open_url_tool:
 _TOOL_HOOKS = ["open_url"]
 NODE_CLASS_MAPPINGS = {
     "open_url_tool": open_url_tool,
+    "open_url_function": open_url_function,
     }
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
@@ -69,8 +98,10 @@ if language == "zh_CN" or language=="en_US":
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "open_url_tool": "打开网页工具",
+        "open_url_function": "打开网页",
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
         "open_url_tool": "Open Web tool",
+        "open_url_function": "Open Web",
         }
