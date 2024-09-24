@@ -3,12 +3,15 @@ import io
 import json
 import locale
 import os
+import cv2
 import requests
 from PIL import Image
 import numpy as np
 import openai
 import base64
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+import torch
+import easyocr
 # 当前脚本目录的上级目录
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
@@ -411,6 +414,203 @@ class mini_story:
         character= json.dumps(character, ensure_ascii=False, indent=4)
         return (story,character,)
 
+class mini_ocr:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "image": ("IMAGE", {}),
+                "gpu": ("BOOLEAN", {"default": True,}),
+                "language_name": ("STRING", {"default": "ch_sim,en"}),
+                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+            },
+            "optional": {
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": "https://api.openai.com/v1/",
+                    },
+                ),
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": "sk-XXXXX",
+                    },
+                ),
+                "imgbb_api_key":(
+                    "STRING",
+                    {
+                        "default": "",
+                    },
+                ),
+                "is_enable": ("BOOLEAN", {"default": True,}),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "STRING",)
+    RETURN_NAMES = ("images", "masks", "json_str","text",)
+
+    FUNCTION = "file"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/迷你派对（mini-party）"
+
+    def OCR(self, 
+            image, 
+            gpu, 
+            language_name, 
+            ):
+        out_images = []
+        out_masks = []
+        out_json = []
+        out_text = []
+
+
+        for item in image:
+            image_pil = Image.fromarray(np.clip(255.0 * item.cpu().numpy(), 0, 255).astype(np.uint8)).convert("RGB")
+
+            languages = language_name.split(",")
+            reader = easyocr.Reader(languages, gpu=gpu)
+            result = reader.readtext(np.array(image_pil), detail=1)
+            result_text = reader.readtext(np.array(image_pil), detail=0)
+            
+            W, H = image_pil.size
+            mask = np.zeros((H, W, 1), dtype=np.uint8)
+            image_with_boxes = np.array(image_pil)
+
+            parsed_result = []
+            for (bbox, text, prob) in result:
+                top_left = tuple(map(int, bbox[0]))
+                bottom_right = tuple(map(int, bbox[2]))
+
+                cv2.rectangle(image_with_boxes, top_left, bottom_right, (0, 0, 255), 2)
+                cv2.putText(image_with_boxes, text, top_left, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2, cv2.LINE_AA)
+                cv2.rectangle(mask, top_left, bottom_right, (255, 255, 255), -1)
+
+                parsed_result.append({
+                    "bounding_box": {
+                        "top_left": [int(coord) for coord in bbox[0]],
+                        "top_right": [int(coord) for coord in bbox[1]],
+                        "bottom_right": [int(coord) for coord in bbox[2]],
+                        "bottom_left": [int(coord) for coord in bbox[3]]
+                    },
+                    "text": text,
+                    "confidence": float(prob)
+                })
+
+            out_images.append(torch.from_numpy(image_with_boxes.astype(np.float32) / 255.0).unsqueeze(0))
+            out_masks.append(torch.from_numpy(mask.astype(np.float32) / 255.0).permute(2, 0, 1).unsqueeze(0))
+            out_json.append(parsed_result)
+            out_text.append(result_text)
+
+        json_result = json.dumps(out_json, ensure_ascii=False, indent=4)
+        return torch.cat(out_images, dim=0), torch.cat(out_masks, dim=0), json_result
+
+    def file(
+        self,
+        image, 
+        gpu, 
+        language_name, 
+        model_name="gpt-4o-mini",
+        base_url=None,
+        api_key=None,
+        imgbb_api_key=None,
+        is_enable=True,
+    ):
+        if not is_enable:
+            return (None,)
+        api_keys = load_api_keys(config_path)
+        if api_key:
+            openai.api_key = api_key
+        elif api_keys.get("openai_api_key"):
+            openai.api_key = api_keys.get("openai_api_key")
+        else:
+            openai.api_key = os.environ.get("OPENAI_API_KEY")
+
+        if base_url:
+            openai.base_url = base_url.rstrip("/") + "/"
+        elif api_keys.get("base_url"):
+            openai.base_url = api_keys.get("base_url")
+        else:
+            openai.base_url = os.environ.get("OPENAI_API_BASE")
+
+        if not openai.api_key:
+            return ("请输入API_KEY",)
+        sys_prompt = f"""你是一个图片文字识别工具。请根据输入的图片以及我用OCR工具扫描后的json结果，综合识别出图片中的文字，并输出文字的坐标和内容。
+输出时，请使用和我输入的json格式保持一致。注意，我给出的是OCR扫描的结果，并不准确，你需要根据图片内容进行判断和修正文字部分，坐标部分无需修改。
+        
+从现在开始，请对我的输入的图片进行提取文字。
+        """
+
+        out_images, out_masks, out_json = self.OCR(image, gpu, language_name)
+        if imgbb_api_key == "" or imgbb_api_key is None:
+            imgbb_api_key = api_keys.get("imgbb_api")
+        if imgbb_api_key == "" or imgbb_api_key is None:
+            i = 255.0 * image[0].cpu().numpy()
+            img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+            # 将图片保存到缓冲区
+            buffered = io.BytesIO()
+            img.save(buffered, format="PNG")
+            # 将图片编码为base64
+            img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+            img_json = [
+                {"type": "text", "text": out_json},
+                {
+                    "type": "image_url",
+                    "image_url": {"url": f"data:image/jpeg;base64,{img_str}"},
+                },
+            ]
+        else:
+            i = 255.0 * image[0].cpu().numpy()
+            img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+            # 将图片保存到缓冲区
+            buffered = io.BytesIO()
+            img.save(buffered, format="PNG")
+            # 将图片编码为base64
+            img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+            url = "https://api.imgbb.com/1/upload"
+            payload = {"key": imgbb_api_key, "image": img_str}
+            # 向API发送POST请求
+            response = requests.post(url, data=payload)
+            # 检查请求是否成功
+            if response.status_code == 200:
+                # 解析响应以获取图片URL
+                result = response.json()
+                img_url = result["data"]["url"]
+                print(img_url)
+            else:
+                return "Error: " + response.text
+            img_json = [
+                {"type": "text", "text": out_json},
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": img_url,
+                    },
+                },
+            ]
+        history= [
+            {"role": "system", "content": sys_prompt},
+            {"role": "user", "content": img_json}
+        ]
+        response = openai.chat.completions.create(
+                            model=model_name,
+                            messages=history,
+                            response_format={"type": "json_object"},
+                        )
+        output = response.choices[0].message.content
+        history= [
+            {"role": "system", "content": "将这个包含文字坐标信息的json转化成markdown格式，请参照json中的文字位置坐标，安排好markdown中的文字位置，并输出markdown格式的文本。"},
+            {"role": "user", "content": output}
+        ]
+        response2 = openai.chat.completions.create(
+                            model=model_name,
+                            messages=history,
+                        )
+        output_text = response2.choices[0].message.content
+        return (out_images, out_masks,output,output_text,)
 
 class mini_sd_prompt:
 
@@ -983,6 +1183,7 @@ NODE_CLASS_MAPPINGS = {
     "mini_flux_tag":mini_flux_tag,
     "mini_error_correction":mini_error_correction,
     "mini_story":mini_story,
+    "mini_ocr": mini_ocr,
     }
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
@@ -1009,6 +1210,7 @@ if lang == "zh_CN":
         "mini_flux_tag": "迷你FLUX图片提示词反推器",
         "mini_error_correction": "迷你文档纠错器",
         "mini_story": "迷你故事生成器",
+        "mini_ocr": "迷你高级OCR",
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -1020,4 +1222,5 @@ else:
         "mini_flux_tag": "Mini FLUX image prompt retractor",
         "mini_error_correction": "Mini file Error Corrector",
         "mini_story": "Mini Story Generator",
+        "mini_ocr": "Mini Advanced OCR",
         }
