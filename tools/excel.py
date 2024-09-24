@@ -142,7 +142,7 @@ class image_iterator:
             if iterator_mode == "sequential":
                 signal.signal(signal.SIGINT, interrupt_handler)
                 signal.raise_signal(signal.SIGINT)  # 直接中断进程
-        if self.index == len(self.data) - 1 and iterator_mode == "sequential_flagout":
+        if self.index == len(image_files) - 1 and iterator_mode == "sequential_flagout":
             flag_is_end = True
         image_path = os.path.join(folder_path, image_files[self.index])
         img = pillow(Image.open, image_path)
