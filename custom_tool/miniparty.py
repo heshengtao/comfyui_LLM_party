@@ -273,14 +273,14 @@ class mini_error_correction:
 {{
     "input_str": "输入的文字，用** **将错误的地方括起来",
     "output_str": "修改后的文字，保留原格式",
-    "error":"你修改的部分，如果没有错误则为空字符串。如果有错误，则用无序列表的形式列出错误",
+    "error":"你修改的部分，如果没有错误则为空字符串。如果有错误，则用无序列表的形式列出错误"
 }}
 
 示例：
 {{
     "input_str": "三年中，这个县的粮食产量以平均每年递增20%的速度大踏步地**向前发展**。他主动为这个系工程力学专业的两届船舶结构力学学习班**挑起**了薄壳力学、船舶结构力学等课程的主讲任务。",
     "output_str": "三年中，这个县的粮食产量以平均每年递增20%的速度大踏步地提高。他主动为这个系工程力学专业的两届船舶结构力学学习班承担了薄壳力学、船舶结构力学等课程的主讲任务。",
-    "error":"- 向前发展 -> 提高\n- 挑起 -> 承担\n",
+    "error":"- 向前发展 -> 提高\n- 挑起 -> 承担\n"
 }}
 
 从现在开始，请对我的输入进行纠错。
@@ -309,6 +309,107 @@ class mini_error_correction:
             output_text += output["output_str"]
             error += output["error"]
         return (input_text,output_text,error,)
+
+class mini_story:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "theme": ("STRING", {"default": "龟兔赛跑的故事","multiline": True}),
+                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+            },
+            "optional": {
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": "https://api.openai.com/v1/",
+                    },
+                ),
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": "sk-XXXXX",
+                    },
+                ),
+                "is_enable": ("BOOLEAN", {"default": True,}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING","STRING",)
+    RETURN_NAMES = ("story","character",)
+
+    FUNCTION = "file"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/迷你派对（mini-party）"
+
+    def file(
+        self,
+        theme,
+        model_name="gpt-4o-mini",
+        base_url=None,
+        api_key=None,
+        is_enable=True,
+    ):
+        if not is_enable:
+            return (None,)
+        api_keys = load_api_keys(config_path)
+        if api_key:
+            openai.api_key = api_key
+        elif api_keys.get("openai_api_key"):
+            openai.api_key = api_keys.get("openai_api_key")
+        else:
+            openai.api_key = os.environ.get("OPENAI_API_KEY")
+
+        if base_url:
+            openai.base_url = base_url.rstrip("/") + "/"
+        elif api_keys.get("base_url"):
+            openai.base_url = api_keys.get("base_url")
+        else:
+            openai.base_url = os.environ.get("OPENAI_API_BASE")
+
+        if not openai.api_key:
+            return ("请输入API_KEY",)
+        sys_prompt = f"""你是一个故事设计大师，根据我接下来给出的主题，生成一个剧情完整的故事，并且给出故事中每一个角色的外观描述词。
+输出格式为json，格式如下：
+
+{{
+    "story": "根据我接下来给出的主题，生成的一个剧情完整故事，和我输入的主题相关，且和我输入主题使用的语言一致。",
+    "character": {{
+        "角色1": "角色1的外观描述词，必须用英文描述",
+        "角色2": "角色2的外观描述词，必须用英文描述"
+    }},
+}}
+
+示例（例如我给出的主题是龟兔赛跑的故事）：
+
+{{
+    "story": "从前，在一个美丽的森林里，住着许多可爱的动物。其中有一只骄傲的兔子和一只勤奋的乌龟。兔子有一身雪白的毛发，长长的耳朵总是竖得高高的，眼睛像两颗红宝石，闪闪发光。它跑得非常快，总是喜欢在森林里炫耀自己的速度。乌龟则有着坚硬的绿色壳子，壳上布满了深浅不一的纹路。它的四肢短而有力，虽然行动缓慢，但每一步都走得很稳重。乌龟的眼睛小而明亮，透露出一股坚定的神情。一天，兔子在森林里遇到了乌龟，嘲笑它走得太慢。兔子说：“乌龟，你走得这么慢，连比赛都不敢参加吧？”乌龟不甘示弱，回答道：“兔子，我们来比赛跑步吧，我相信我能赢你。”兔子听了哈哈大笑，觉得这简直是天大的笑话，但它还是答应了比赛。比赛的消息很快传遍了整个森林，所有的动物都来围观。比赛开始了，兔子像箭一样冲了出去，很快就把乌龟远远地甩在了后面。跑了一段路后，兔子回头一看，发现乌龟还在远处慢慢地爬着。兔子心想：“乌龟这么慢，我还是先休息一下吧。”于是，它在路边找了个阴凉的地方，躺下睡着了。乌龟一步一步地向前爬着，虽然很慢，但它从未停下。它心里想着：“只要我不停下来，总会到达终点的。”就这样，乌龟坚持不懈地向前爬，终于超过了还在睡觉的兔子。当兔子醒来时，发现乌龟已经快到终点了。兔子急忙起身，拼命地向终点跑去，但已经太晚了。乌龟稳稳地爬过了终点线，赢得了比赛。森林里的动物们都为乌龟欢呼，兔子则羞愧地低下了头。乌龟对兔子说：“兔子，骄傲自满是不会带来胜利的，只有坚持不懈，才能取得成功。”从那以后，兔子不再骄傲自满，乌龟也继续保持着它的勤奋和坚持。森林里的动物们都从这场比赛中学到了宝贵的教训，大家和睦相处，过着幸福的生活。",
+    "character": {{
+        "兔子": "A rabbit with snow-white hair, long ears, and ruby eyes.",
+        "乌龟": "A turtle with a hard green shell, shades of stripes, short, powerful limbs, and small, bright eyes"
+    }}
+}}
+
+从现在开始，请对我的输入的主题开始撰写故事和人物外观描述。
+        """
+        history= [
+            {"role": "system", "content": sys_prompt},
+            {"role": "user", "content": theme}
+        ]
+        response = openai.chat.completions.create(
+                            model=model_name,
+                            messages=history,
+                            response_format={"type": "json_object"},
+                        )
+        output = response.choices[0].message.content
+        output= json.loads(output)
+        story = output["story"]
+        character = output["character"]
+        character= json.dumps(character, ensure_ascii=False, indent=4)
+        return (story,character,)
 
 
 class mini_sd_prompt:
@@ -881,6 +982,7 @@ NODE_CLASS_MAPPINGS = {
     "mini_sd_tag":mini_sd_tag,
     "mini_flux_tag":mini_flux_tag,
     "mini_error_correction":mini_error_correction,
+    "mini_story":mini_story,
     }
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
@@ -906,6 +1008,7 @@ if lang == "zh_CN":
         "mini_sd_tag": "迷你SD图片提示词反推器",
         "mini_flux_tag": "迷你FLUX图片提示词反推器",
         "mini_error_correction": "迷你文档纠错器",
+        "mini_story": "迷你故事生成器",
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -916,4 +1019,5 @@ else:
         "mini_sd_tag": "Mini SD image prompt retractor",
         "mini_flux_tag": "Mini FLUX image prompt retractor",
         "mini_error_correction": "Mini file Error Corrector",
+        "mini_story": "Mini Story Generator",
         }
