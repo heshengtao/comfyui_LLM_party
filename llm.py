@@ -1237,6 +1237,25 @@ def llm_chat(
     model, tokenizer, user_prompt, history, device, max_length, role="user", temperature=0.7, **extra_parameters
 ):
     history.append({"role": role, "content": user_prompt.strip()})
+    # 检查是否已经设置了 chat_template
+    if not hasattr(tokenizer, 'chat_template') or tokenizer.chat_template is None:
+        # 如果没有设置 chat_template，尝试使用 default_chat_template
+        if hasattr(tokenizer, 'default_chat_template') and tokenizer.default_chat_template is not None:
+            tokenizer.chat_template = tokenizer.default_chat_template
+        else:
+            print("chat_template is not set")
+            model_inputs = tokenizer([user_prompt.strip()], return_tensors="pt").to(device)
+            generated_ids = model.generate(
+                model_inputs.input_ids,
+                max_new_tokens=max_length,
+                do_sample=True,
+                temperature=temperature,
+                eos_token_id=tokenizer.eos_token_id,
+                **extra_parameters,  # Add the eos_token_id parameter
+            )
+            response = tokenizer.decode(generated_ids[0], skip_special_tokens=True)
+            history.append({"role": "assistant", "content": response})
+            return response, history
     text = tokenizer.apply_chat_template(history, tokenize=False, add_generation_prompt=True)
     model_inputs = tokenizer([text], return_tensors="pt").to(device)
     generated_ids = model.generate(
