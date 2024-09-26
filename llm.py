@@ -1424,7 +1424,7 @@ class LLM_local:
                     },
                 ),
                 "model_type": (
-                    ["LLM", "VLM","GGUF"],
+                    ["LLM","LLM-GGUF", "VLM-GGUF", "VLM(testing)"],
                     {
                         "default": "LLM",
                     },
@@ -1684,7 +1684,7 @@ class LLM_local:
                     )
 
                 # 获得model存放的设备
-                if model_type not in ["VLM", "GGUF"]:
+                if model_type not in ["VLM-GGUF", "LLM-GGUF"]:
                     device = next(model.parameters()).device
                 if model_type in ["LLM"]:
                     if extra_parameters is not None and extra_parameters != {}:
@@ -1736,7 +1736,7 @@ class LLM_local:
                                 role="observation",
                                 temperature=temperature,
                             )
-                elif model_type == "VLM":
+                elif model_type == "VLM-GGUF":
                     if image is not None:
                         pil_image = ToPILImage()(image[0].permute(2, 0, 1))
                         # Convert the PIL image to a bytes buffer
@@ -1790,7 +1790,7 @@ class LLM_local:
                         response = f"{response['choices'][0]['message']['content']}"
                         assistant_content = {"role": "assistant", "content": response}
                         history.append(assistant_content)
-                elif model_type == "GGUF":
+                elif model_type == "LLM-GGUF":
                         user_content = {"role": "user", "content": user_prompt}
                         history.append(user_content)
                         if extra_parameters is not None and extra_parameters != {}:

@@ -3,12 +3,93 @@
   "last_link_id": 45,
   "nodes": [
     {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1420,
+        "1": 240
+      },
+      "size": {
+        "0": 470,
+        "1": 350
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "你好！我是一个基于 transformer 的语言模型，主要用于回答问题、生成文本、进行对话等任务。"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 30,
+      "type": "GGUFLoader",
+      "pos": {
+        "0": 540,
+        "1": 230
+      },
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            45
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GGUFLoader"
+      },
+      "widgets_values": [
+        "D:\\AI\\mychat\\model\\llama-gguf\\Meta-Llama-3.1-8B-Instruct-IQ4_XS.gguf",
+        512,
+        31,
+        8
+      ]
+    },
+    {
       "id": 23,
       "type": "LLM_local",
-      "pos": [
-        939,
-        242
-      ],
+      "pos": {
+        "0": 939,
+        "1": 242
+      },
       "size": {
         "0": 396.04949951171875,
         "1": 462
@@ -111,7 +192,7 @@
       "widgets_values": [
         "",
         "你好，你是什么模型",
-        "GGUF",
+        "LLM-GGUF",
         0.7,
         512,
         "disable",
@@ -124,86 +205,6 @@
         100,
         "",
         true
-      ]
-    },
-    {
-      "id": 11,
-      "type": "show_text_party",
-      "pos": [
-        1420,
-        240
-      ],
-      "size": {
-        "0": 470,
-        "1": 350
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 37,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        "",
-        "你好！我是一个基于 transformer 的语言模型，主要用于回答问题、生成文本、进行对话等任务。"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 30,
-      "type": "GGUFLoader",
-      "pos": [
-        540,
-        230
-      ],
-      "size": {
-        "0": 315,
-        "1": 130
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            45
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "GGUFLoader"
-      },
-      "widgets_values": [
-        "D:\\AI\\mychat\\model\\llama-gguf\\Meta-Llama-3.1-8B-Instruct-IQ4_XS.gguf",
-        512,
-        31,
-        8
       ]
     }
   ],
@@ -229,10 +230,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1,
+      "scale": 0.8140274938684305,
       "offset": [
-        -444.3690732851434,
-        22.418166419407072
+        -397.2556050341024,
+        -44.24046684936329
       ]
     }
   },
