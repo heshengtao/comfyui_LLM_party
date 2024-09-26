@@ -1292,7 +1292,9 @@ def vlm_chat(
                 {"type": "text", "text": user_prompt},
             ],
         }
-        inputs = processor(image, input_text, return_tensors="pt").to(device)
+        history.append(user_content)
+        input_text = processor.apply_chat_template(history, add_generation_prompt=True)
+        inputs = processor(base64_string, input_text, return_tensors="pt").to(device)
     else:
         user_content = {
             "role": role,
@@ -1300,10 +1302,10 @@ def vlm_chat(
                 {"type": "text", "text": user_prompt},
             ],
         }
+        history.append(user_content)
+        input_text = processor.apply_chat_template(history, add_generation_prompt=True)
         inputs = processor(text=input_text, return_tensors="pt").to(device)
     
-    history.append(user_content)
-    input_text = processor.apply_chat_template(history, add_generation_prompt=True)
 
     output = model.generate(**inputs, max_new_tokens=max_length, temperature=temperature, **extra_parameters)
     response = processor.decode(output[0])
