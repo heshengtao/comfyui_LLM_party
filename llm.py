@@ -1302,8 +1302,9 @@ def vlm_chat(
 
     output = model.generate(**inputs, max_new_tokens=max_length, temperature=temperature, **extra_parameters)
     response = processor.decode(output[0], skip_special_tokens=True)
+    print(response)
     # 使用正则表达式提取最后一个助手的回答
-    matches = re.findall(r'assistant\s*(.*?)(?=\s*(?:system|user|$))', response, re.DOTALL)
+    matches = re.findall(r'assistant\s*(.*?)(?=\s*(?:system|user|$))', response.strip(), re.DOTALL)
     if matches:
         assistant_output = matches[-1].strip()
     else:
