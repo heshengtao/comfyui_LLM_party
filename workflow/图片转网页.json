@@ -1,0 +1,272 @@
+{
+  "last_node_id": 30,
+  "last_link_id": 44,
+  "nodes": [
+    {
+      "id": 28,
+      "type": "LoadImage",
+      "pos": {
+        "0": 434,
+        "1": 482
+      },
+      "size": [
+        554.9673349158593,
+        386.22504437601117
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            42
+          ],
+          "shape": 3,
+          "label": "IMAGE"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "MASK"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1727365635168.png",
+        "image"
+      ]
+    },
+    {
+      "id": 27,
+      "type": "got_ocr",
+      "pos": {
+        "0": 1079,
+        "1": 537
+      },
+      "size": {
+        "0": 315,
+        "1": 202
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 42,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            41
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "text"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "got_ocr"
+      },
+      "widgets_values": [
+        "E:\\GitHub\\model\\GOT-OCR2_0",
+        "auto",
+        "format",
+        true,
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1488,
+        "1": 501
+      },
+      "size": [
+        546.4870911600487,
+        411.0308803440438
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 41,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            43
+          ],
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "Preview\nCode\n238 lines (194 loc) - 24.4 KB\nCode 55\\% faster with GitHub Copilot\n\\title{\n项目综述\n}\nComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭建自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建从个人用户需要的接入自己的社交 APP(QQ、飞书、Discord)，到流媒体工作者需要的一站式LIM+TTS+ComfyUI工作流；从普通学生所需要的第一个LMI应用的简单上手起步，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在ComfyUI LLM Party中找到答案。\n\\section*{最新更新}\n1. 大幅调整了本地LLM加载器节点，不用自己选择model type了。重新添加了lava加载器节点和GGUF加载器节点。本地LLM模型键节点上的 model type 已改成LLM、VLM-GGUF、LLM-GGUF三个选项，对应了直接加载LLM模型、加载VLM模型和加载GGUF格式的LLM模型。重新支持了VLM模型和GGUF格式的LLM模型。现在本地调用可以兼容更多的模型了! 示例工.作流: LLM local, IJava, GGU\n2. 已加入easyOCR节点，用于识别图中文字和位置，可以生成对应的mask，可以返回一个json字符串供LLM查看，有普通版本和高级版本供大家选择!\n3. 在comfyui LLM party中复现了chatgpt-o1系列模型的草莓系统，参考了Llamaber \\(\\mathrm{m}\\) 的提示词，示例工作流：Strawberry system compared to\n4. 新增了GPT-sovits节点，可以调用GPT-sovits模型，将文字根据你的参考音频转换为语音，也可以将你微调后的模型路径填入 (如果不填充基其虚拟模型进行推理 )，获得你想要的任务意色。使用时，需要下载GPT-sovits项目和对应的基底模型到本地，然后在GPT-sovits项目文件夹下用 runtime|python.exe api_v2.py 启动API服务。此外，chatTTS节点被移动到了comfyui LLM mafia中。原因是chatTTS的依赖库较多，且在 \\(y p\\) 中的许可且CC BY-NC 4.0，这是一个非商用许可证。即使chatTTS的github项目是AGPL协议的，我们还是为了避免不必要的麻烦，将chatTTS节点移到了comfyui LLM mafia中。希望大家能够理解！"
+      ]
+    },
+    {
+      "id": 29,
+      "type": "mini_party",
+      "pos": {
+        "0": 2110,
+        "1": 519
+      },
+      "size": [
+        419.20636526656426,
+        291.5276276801434
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_str",
+          "type": "STRING",
+          "link": 43,
+          "widget": {
+            "name": "input_str"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output_str",
+          "type": "STRING",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "label": "output_str"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_party"
+      },
+      "widgets_values": [
+        "",
+        "把我的输入转成markdown格式",
+        "gpt-4o-mini",
+        "",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 30,
+      "type": "Browser_display",
+      "pos": {
+        "0": 2643,
+        "1": 537
+      },
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "md_string",
+          "type": "STRING",
+          "link": 44,
+          "widget": {
+            "name": "md_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "log",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "log"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Browser_display"
+      },
+      "widgets_values": [
+        "md code string",
+        true
+      ]
+    }
+  ],
+  "links": [
+    [
+      41,
+      27,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      42,
+      28,
+      0,
+      27,
+      0,
+      "IMAGE"
+    ],
+    [
+      43,
+      11,
+      0,
+      29,
+      0,
+      "STRING"
+    ],
+    [
+      44,
+      29,
+      0,
+      30,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5054470284993141,
+      "offset": [
+        -523.1610693515428,
+        -78.12756532614941
+      ]
+    }
+  },
+  "version": 0.4
+}
