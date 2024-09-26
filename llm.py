@@ -1278,13 +1278,6 @@ def vlm_chat(
 ):
     if image is not None:
         pil_image = ToPILImage()(image[0].permute(2, 0, 1))
-        # Convert the PIL image to a bytes buffer
-        buffer = io.BytesIO()
-        pil_image.save(buffer, format="PNG")  # You can change the format if needed
-        # Get the bytes from the buffer
-        image_bytes = buffer.getvalue()
-        # Encode the bytes to base64
-        base64_string = f"data:image/jpeg;base64,{base64.b64encode(image_bytes).decode('utf-8')}"
         user_content = {
             "role": role,
             "content": [
@@ -1294,7 +1287,7 @@ def vlm_chat(
         }
         history.append(user_content)
         input_text = processor.apply_chat_template(history, add_generation_prompt=True)
-        inputs = processor(base64_string, input_text, return_tensors="pt").to(device)
+        inputs = processor(pil_image, input_text, return_tensors="pt").to(device)
     else:
         user_content = {
             "role": role,
