@@ -1,0 +1,487 @@
+{
+  "last_node_id": 32,
+  "last_link_id": 45,
+  "nodes": [
+    {
+      "id": 28,
+      "type": "vlmLoader",
+      "pos": {
+        "0": 520,
+        "1": 170
+      },
+      "size": {
+        "0": 320,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            43
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "model"
+        },
+        {
+          "name": "processor",
+          "type": "CUSTOM",
+          "links": [
+            44
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "processor"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "vlmLoader"
+      },
+      "widgets_values": [
+        "/hy-tmp/llama3.2",
+        "auto",
+        "bfloat16"
+      ]
+    },
+    {
+      "id": 23,
+      "type": "LLM_local",
+      "pos": {
+        "0": 870,
+        "1": 170
+      },
+      "size": {
+        "0": 400,
+        "1": 510
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 43,
+          "label": "model"
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "link": 44,
+          "label": "tokenizer"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 42,
+          "label": "image"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local"
+      },
+      "widgets_values": [
+        "",
+        "那这张图中画了什么哇",
+        "VLM(testing)",
+        0.7,
+        1920,
+        "enable",
+        "disable",
+        "enable",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": 27,
+      "type": "LoadImage",
+      "pos": {
+        "0": 520,
+        "1": 390
+      },
+      "size": [
+        320,
+        310
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            42
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "f5644f22b055fd93bba297c0af8a8bf2 (1).jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 29,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1660,
+        "1": 170
+      },
+      "size": [
+        330,
+        530
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 45,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "**System:** \n\n**User:** 图中画了什么哇\n\n**Assistant:** 这个图画的是一个女孩，女孩的头上是黄色的头发，女孩的头发上面有两个小白云，女孩的眼睛是蓝色的，女孩的衣服是粉色的，女孩的衣服是短裙，女孩的双臂是向前伸出的。背景是蓝色的天空和绿色的草地。\n\n**User:** 那这张图中画了什么哇\n\n**Assistant:** 这个图画的是一个树木，树木的树干是棕色的，树木的树枝和树叶是绿色的，树木的树枝上有一个小鸟的巢，树木的树枝上有一个小鸟，树木的树干上有一个嘴巴，树木的树干上有两个眼睛。背景是蓝色的天空和绿色的草地。\n\n"
+      ]
+    },
+    {
+      "id": 32,
+      "type": "Note",
+      "pos": {
+        "0": 2020,
+        "1": 470
+      },
+      "size": [
+        390,
+        230
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "#关于我们：\n- LLM_Party正在用心经营一片AI时代的后花园，我们希望能够在AI时代下成为众多参与者的一员，我们从开源社区中走来，也希望回到社区中去。\n- 欢迎大家来到我们用心经营的后花园。如果我们的项目能够帮助到大家，麻烦大家在Github上帮我点一下Star：\n- github项目地址：https://github.com/heshengtao/comfyui_LLM_party\n- openart：https://openart.ai/workflows/profile/comfyui_llm_party?tab=workflows&sort=latest\n- LibLib：https://www.liblib.art/userpage/4378612c5b3341c79c0deab3101aeabb/publish/workflow\n- 哔哩哔哩：https://space.bilibili.com/26978344?spm_id_from=333.337.0.0\n- YouTube：https://www.youtube.com/@comfyui-LLM-party\n- discord：https://discord.com/invite/gxrQAYy6\n- QQ交流群：931057213\n- 微信交流群：Choo-Yong（添加小助理微信，统一通过后会添加至交流群）\n商务合作请联系email：hst97@qq.com"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1300,
+        "1": 190
+      },
+      "size": [
+        330,
+        510
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "这个图画的是一个树木，树木的树干是棕色的，树木的树枝和树叶是绿色的，树木的树枝上有一个小鸟的巢，树木的树枝上有一个小鸟，树木的树干上有一个嘴巴，树木的树干上有两个眼睛。背景是蓝色的天空和绿色的草地。"
+      ]
+    },
+    {
+      "id": 31,
+      "type": "Note",
+      "pos": {
+        "0": 2020,
+        "1": 180
+      },
+      "size": [
+        400,
+        250
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "#工作流介绍：\n- llm party 目前兼容最新的llama3.2 vision\n- 该版本的llama3.2节点支持记忆，视觉功能\n- 可以连续传入多张图片，进行图片比较、生成的提示词由多图融合\n- 暂不支持工具调用。\n\n-----------------------------------------\n模型下载地址：-\n- https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct\n- https://modelscope.cn/models/LLM-Research/Llama-3.2-11B-Vision-Instruct（魔塔社区下载链接）\n\n如果报错的话，需要更新transformer。因为Llama3.2比较新，老版本的transformer没有这个模型。\n\n#Warning：\ntransformer更新之后，会有个加速依赖没跟上版本。\n"
+      ]
+    }
+  ],
+  "links": [
+    [
+      37,
+      23,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      42,
+      27,
+      0,
+      23,
+      2,
+      "IMAGE"
+    ],
+    [
+      43,
+      28,
+      0,
+      23,
+      0,
+      "CUSTOM"
+    ],
+    [
+      44,
+      28,
+      1,
+      23,
+      1,
+      "CUSTOM"
+    ],
+    [
+      45,
+      23,
+      1,
+      29,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "LLM_Party for Llama3.2 -Vision（带记忆）",
+      "bounding": [
+        510,
+        -50,
+        1920,
+        140
+      ],
+      "color": "#3f789e",
+      "font_size": 100,
+      "flags": {}
+    },
+    {
+      "title": "视觉模型加载",
+      "bounding": [
+        510,
+        96,
+        340,
+        214
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "LLM Apply",
+      "bounding": [
+        860,
+        100,
+        420,
+        610
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "图片加载",
+      "bounding": [
+        510,
+        320,
+        340,
+        394
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Output",
+      "bounding": [
+        1290,
+        100,
+        350,
+        610
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "记忆",
+      "bounding": [
+        1650,
+        100,
+        350,
+        610
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "note",
+      "bounding": [
+        2010,
+        100,
+        420,
+        610
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6588450000000093,
+      "offset": [
+        27.626089759571794,
+        310.7846343896794
+      ]
+    }
+  },
+  "version": 0.4
+}
