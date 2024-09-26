@@ -28,7 +28,7 @@ class FileOnlineStorage_gitee:
     RETURN_NAMES = ("download_url", "branch_name", "file_name", "show_help")
 
     FUNCTION = "upload_file"
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
     def check_repo_initialized(self):
         url = f"{self.url_prefix}{self.repo_owner}/{self.repo_name}/branches"

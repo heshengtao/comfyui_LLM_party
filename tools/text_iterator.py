@@ -33,7 +33,7 @@ class text_iterator:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/迭代器（iterator）"
 
     def file(self, file_content,iterator_mode, chunk_size=1024, chunk_overlap=0, is_enable=True, is_reload=False):
         flag_is_end = False
@@ -94,7 +94,7 @@ class text_writing:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/迭代器（iterator）"
 
     def file(self, text, file_path, mode="w"):
         try:

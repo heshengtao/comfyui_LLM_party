@@ -70,7 +70,7 @@ class CLIPTextEncode_party:
     RETURN_TYPES = ("CONDITIONING",)
     FUNCTION = "encode"
 
-    CATEGORY = "大模型派对（llm_party）/绘图（image）"
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
 
     def encode(self, clip, text=None):
         if text is None or text == "":
@@ -102,7 +102,7 @@ class KSampler_party:
     RETURN_TYPES = ("LATENT",)
     FUNCTION = "sample"
 
-    CATEGORY = "大模型派对（llm_party）/绘图（image）"
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
 
     def sample(self, model, seed, steps, cfg, sampler_name, scheduler, positive, negative, latent_image, denoise=1.0):
         if positive == [[], {}] and negative == [[], {}]:
@@ -121,7 +121,7 @@ class VAEDecode_party:
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "decode"
 
-    CATEGORY = "大模型派对（llm_party）/绘图（image）"
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
 
     def decode(self, vae, samples=None):
         if samples is None:

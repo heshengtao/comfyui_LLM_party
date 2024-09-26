@@ -68,7 +68,7 @@ class listen_audio:
 
     # OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/音频（audio）"
 
     def listen(self, press_key="shift"):
         print(f"请按下{press_key}键开始录音，松开后录音结束。")
@@ -131,7 +131,7 @@ class openai_whisper:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/音频（audio）"
 
     def whisper(self, is_enable=True, audio_path="", base_url=None, api_key=None):
         if is_enable == False:

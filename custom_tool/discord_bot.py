@@ -32,7 +32,7 @@ class discord_bot:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
     def bot(self, token, function_name='["ping", "add"]', is_enable=True):
         if not is_enable:
@@ -244,7 +244,7 @@ class discord_send:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
     def bot(self, text, img_path, audio_path, is_enable=True):
         if not is_enable:

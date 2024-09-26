@@ -27,7 +27,7 @@ class FileOnlineDelete_gitee:
     RETURN_NAMES = ("show_help",)
 
     FUNCTION = "delete_file_from_branch"
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
     def delete_file_from_branch(
         self, repo_owner, repo_name, file_path, branch, access_token, commit_message="[comfyui_LLM_party] file deleted"

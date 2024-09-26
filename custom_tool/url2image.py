@@ -27,7 +27,7 @@ class URL2IMG:
     RETURN_NAMES = ("file_path","img", "log",)
 
     FUNCTION = "url_to_img"
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
     def url_to_img(self, url, file_name=None, is_enable=True):
         if not is_enable:

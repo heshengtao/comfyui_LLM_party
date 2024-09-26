@@ -60,7 +60,7 @@ class send_to_wechat_official:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
     def time(self, appid, secret, title, author, content, is_enable=True):
         if is_enable == False:

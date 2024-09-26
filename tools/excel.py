@@ -53,7 +53,7 @@ class load_excel:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/迭代器（iterator）"
 
     def file(self, path,iterator_mode, is_enable=True, is_reload=False,load_all=False):
         flag_is_end = False
@@ -121,7 +121,7 @@ class image_iterator:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/迭代器（iterator）"
 
     def file(self, folder_path,iterator_mode, is_enable=True, is_reload=False):
         flag_is_end = False
@@ -215,7 +215,7 @@ class json_iterator:
 
     FUNCTION = "file"
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/迭代器（iterator）"
 
     def file(self, json_str,iterator_mode, is_enable=True, is_reload=False, load_all=False):
         flag_is_end = False

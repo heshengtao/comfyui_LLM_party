@@ -58,7 +58,7 @@ class FeishuSendMsg:
     OUTPUT_NODE = True
     FUNCTION = "send_msg"
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
     def upload_image(self, image_path):
         form = {"image_type": "message", "image": (open(image_path, "rb"))}

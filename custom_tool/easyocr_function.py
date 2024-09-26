@@ -38,7 +38,7 @@ class EasyOCR_advance:
             },
         }
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
     FUNCTION = "OCR"
     RETURN_TYPES = ("IMAGE", "MASK", "STRING", "STRING",)
     RETURN_NAMES = ("images", "masks", "json_str","text",)
@@ -204,7 +204,7 @@ class EasyOCR_choose:
             },
         }
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
     FUNCTION = "OCR"
     RETURN_TYPES = ("IMAGE", "MASK", "STRING", "STRING",)
     RETURN_NAMES = ("images", "masks", "json_str","text",)

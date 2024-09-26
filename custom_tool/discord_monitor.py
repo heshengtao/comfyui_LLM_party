@@ -32,7 +32,7 @@ class discord_file_monitor:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
     def monitor(self, interval=0.1, is_success=True):
         show_help = "placeholder for help text"

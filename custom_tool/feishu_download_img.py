@@ -56,7 +56,7 @@ class FeishuDownloadImage:
     RETURN_NAMES = ("image_path", "show_help")
 
     FUNCTION = "download_image"
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
     def download_image(self, app_id, app_secret, message_id, file_key, is_enable):
         show_help = "This function retrieves a file resource from a Feishu message."

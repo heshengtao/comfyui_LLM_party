@@ -101,7 +101,7 @@ class work_wechat:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
     def web(self, is_enable=True, url=None, content="hello world", msgtype="markdown"):
         if is_enable == False:

@@ -516,7 +516,7 @@ class json2text:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
     def parameter(self, JSON=""):
         # 把 json 转换成 text

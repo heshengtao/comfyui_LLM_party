@@ -45,7 +45,7 @@ class string_logic:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/文本（text）"
 
     def str_logic(self, option, stringA="", stringB=""):
         if stringA is None or stringA == "":
@@ -124,7 +124,7 @@ class substring:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/文本（text）"
 
     def substr(self, input_string, start_string="", end_string=""):
         if input_string == "" or input_string is None:
@@ -169,7 +169,7 @@ class get_string:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/文本（text）"
 
     def substr(self, input_string):
         out = input_string
@@ -194,7 +194,7 @@ class replace_string:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/文本（text）"
 
     def substr(self, old_string, new_string, input_string=""):
         out = input_string.replace(old_string, new_string)

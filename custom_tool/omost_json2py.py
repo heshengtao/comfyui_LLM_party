@@ -63,7 +63,7 @@ class omost_json2py:
 
     FUNCTION = "convert_txt2json"
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
     def convert_txt2json(self, omost_json):
         omost_py=json_to_py(omost_json)

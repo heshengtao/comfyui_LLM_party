@@ -55,7 +55,7 @@ class Image2Video:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/视频（video）"
 
     def image_to_video(self, audio_path, image_path, subtitle, subtitle_size, font_path, r, g, b, output_path, is_enable):
         if not is_enable:
@@ -138,7 +138,7 @@ class CombineVideos:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/视频（video）"
 
     def concatenate_videos(self, input_folder, output_folder, is_enable):
         if not is_enable:

@@ -12,7 +12,7 @@ class Images2Image:
     RETURN_TYPES = ("IMAGE", "IMAGE", "IMAGE", "IMAGE", "IMAGE")
     RETURN_NAMES = ("image1", "image2", "image3", "image4", "image5")
     FUNCTION = "split"
-    CATEGORY = "大模型派对（llm_party）/绘图（image）"
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
 
     def split(self, images,):
       if images is None:

@@ -48,7 +48,7 @@ class omost_decode:
     FUNCTION = "notify"
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
 
     def notify(self, text, clip, mode="greedy", strength=1.0):
         self.text_encoder = clip[0].encode_from_tokens
@@ -438,7 +438,7 @@ class omost_setting:
 
     # OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
 
     def substr(self, color, locations, offsets, areas):
         out = f"""location='{locations}',

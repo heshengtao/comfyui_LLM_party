@@ -50,7 +50,7 @@ class openai_tts:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/音频（audio）"
 
     def tts(self, is_enable=True, input_string="", base_url=None, api_key=None, model_name="tts-1", voice="alloy"):
         if is_enable == False:

@@ -97,7 +97,7 @@ class img2path:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/绘图（image）"
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
 
     def save_all(self, images=None, filename_prefix="ComfyUI", prompt=None, extra_pnginfo=None):
         if images is None or len(images) == 0:

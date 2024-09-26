@@ -34,7 +34,7 @@ class html2img_function:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
     def time(self, html_str, width, height, is_enable=True):
         if is_enable == False:

@@ -74,7 +74,7 @@ class gpt_sovits:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/音频（audio）"
 
     def time(self, text,text_lang, ref_audio_path, prompt_text, prompt_lang, text_split_method, batch_size, media_type,GPT_weights_path="", Sovits_weights_path="", is_enable=True):
         if is_enable == False:

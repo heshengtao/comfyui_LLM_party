@@ -56,7 +56,7 @@ class json_parser:
     OUTPUT_NODE = True
     FUNCTION = "json_parser_tool"
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
     def json_parser_tool(self, file_path: str, key=None, is_enable=True):
         if is_enable == False:
@@ -102,7 +102,7 @@ class json_get_value:
     RETURN_TYPES = (any_type,)
     RETURN_NAMES = ("any",)
     FUNCTION = "get_value"
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
     def get_value(self, text, key=None, is_enable=True):
         if is_enable == False:

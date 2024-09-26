@@ -46,7 +46,7 @@ class SpeedChange:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/音频（audio）"
 
 
     def audio_process(self, input_audio_path, output_folder_path, speed_factor, is_enable):
