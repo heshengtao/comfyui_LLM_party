@@ -36,7 +36,7 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャラクター設定によって、専属のAIアシスタントを迅速に構築することから、業界に適用可能な単語ベクトルRAG、GraphRAGを用いた知識ベースのローカル管理までを行います。単一のエージェントパイプラインから、複雑なエージェント間の放射状および環状の相互作用モードの構築まで、個人ユーザーのためのSNSアプリ（QQ、Feishu、Discord）への接続から、ストリーミングメディアの作業者が必要とするワンストップLLM+TTS+ComfyUIワークフローまで、普通の学生が必要とする最初のLLMアプリケーションの簡単な導入から、研究者が一般的に使用するさまざまなパラメータ調整インターフェースやモデル適応に至るまで、これらすべての答えはComfyUI LLM Partyの中にあります。
 
 ## 最新の更新
-1. ローカルLLMローダーノードが大幅に調整され、モデルタイプを自分で選択する必要がなくなりました。llavaローダーノードとGGUFローダーノードが再追加されました。ローカルLLMモデルチェーンノードのモデルタイプは、LLM、VLM、およびGGUFに変更され、LLMモデルの直接ロード、VLMモデルのロード、およびGGUF形式のLLMモデルのロードに対応します。VLMモデルとGGUF形式のLLMモデルが再びサポートされるようになりました。ローカルコールは、より多くのモデルと互換性を持つようになりました！例のワークフロー：[LLM_local](workflow/start_with_LLM_local.json), [llava](workflow/start_with_llava.json), [GGUF](workflow/start_with_GGUF.json)
+1. ローカルLLMローダーノードが大幅に調整され、モデルタイプを自分で選択する必要がなくなりました。llavaローダーノードとGGUFローダーノードが再追加されました。ローカルLLMモデルチェーンノードのモデルタイプは、LLM、VLM-GGUF、およびLLM-GGUFに変更され、LLMモデルの直接ロード、VLMモデルのロード、およびGGUF形式のLLMモデルのロードに対応します。VLMモデルとGGUF形式のLLMモデルが再びサポートされるようになりました。ローカルコールは、より多くのモデルと互換性を持つようになりました！例のワークフロー：[LLM_local](workflow/start_with_LLM_local.json), [llava](workflow/start_with_llava.json), [GGUF](workflow/start_with_GGUF.json)
 2. comfyui LLMパーティーで、chatgpt-o1シリーズモデルのストロベリーシステムが再現され、[Llamaberry](https://huggingface.co/spaces/martinbowling/Llamaberry/blob/main/app.py)のプロンプトを参照しました。例のワークフロー：[ストロベリーシステムとo1の比較](workflow/草莓系统与o1对比.json)。
 2. 新しいGPT-sovitsノードが追加され、GPT-sovitsモデルを呼び出して、参照オーディオに基づいてテキストを音声に変換できるようになりました。また、微調整されたモデルのパスを入力することもできます（入力しない場合はベースモデルが推論に使用されます）任意の音声を取得できます。使用するには、[GPT-sovits](https://github.com/RVC-Boss/GPT-SoVITS)プロジェクトと対応するベースモデルをローカルにダウンロードし、GPT-sovitsプロジェクトフォルダーで`runtime\python.exe api_v2.py`を使用してAPIサービスを開始する必要があります。さらに、chatTTSノードは[comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)に移動されました。理由は、chatTTSには多くの依存関係があり、PyPiのライセンスはCC BY-NC 4.0であり、これは非商用ライセンスです。chatTTSのGitHubプロジェクトがAGPLライセンスの下にあるにもかかわらず、不要なトラブルを避けるためにchatTTSノードをcomfyui LLM mafiaに移動しました。皆さんの理解をお願いします！
 3. 最新のOpenAIモデル、o1シリーズをサポートしました！
@@ -83,7 +83,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 2. Gemini形式のAPI呼び出しをサポートしています：
 * [Gemini](https://aistudio.google.com/app/prompts/new_chat)
 
-3. トランスフォーマーライブラリのほとんどのローカルモデルと互換性があります（ローカルLLMモデルチェーンノードのモデルタイプは、LLM、VLM、およびGGUFに変更され、LLMモデルの直接ロード、VLMモデルのロード、およびGGUF形式のLLMモデルのロードに対応します）。VLMまたはGGUF形式のLLMモデルでエラーが発生した場合は、[llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases)から最新バージョンのllama-cpp-pythonをダウンロードしてください。現在テストされているモデルには次のものが含まれます：
+3. トランスフォーマーライブラリのほとんどのローカルモデルと互換性があります（ローカルLLMモデルチェーンノードのモデルタイプは、LLM、VLM-GGUF、およびLLM-GGUFに変更され、LLMモデルの直接ロード、VLMモデルのロード、およびGGUF形式のLLMモデルのロードに対応します）。VLMまたはGGUF形式のLLMモデルでエラーが発生した場合は、[llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases)から最新バージョンのllama-cpp-pythonをダウンロードしてください。現在テストされているモデルには次のものが含まれます：
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay)(推奨！ロールプレイモデル)
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(推奨！豊富なプロンプトモデル)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)

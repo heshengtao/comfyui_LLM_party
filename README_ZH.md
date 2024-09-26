@@ -37,7 +37,7 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭建自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建;从个人用户需要的接入自己的社交APP(QQ、飞书、Discord)，到流媒体工作者需要的一站式LLM+TTS+ComfyUI工作流；从普通学生所需要的第一个LLM应用的简单上手起步，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在ComfyUI LLM Party中找到答案。
 
 ## 最新更新
-1. 大幅调整了本地LLM加载器节点，不用自己选择model type了。重新添加了llava加载器节点和GGUF加载器节点。本地LLM模型链节点上的model type已改成LLM、VLM、GGUF三个选项，对应了直接加载LLM模型、加载VLM模型和加载GGUF格式的LLM模型。重新支持了VLM模型和GGUF格式的LLM模型。现在本地调用可以兼容更多的模型了！示例工作流：[LLM_local](workflow/start_with_LLM_local.json)，[llava](workflow/start_with_llava.json)，[GGUF](workflow/start_with_GGUF.json)
+1. 大幅调整了本地LLM加载器节点，不用自己选择model type了。重新添加了llava加载器节点和GGUF加载器节点。本地LLM模型链节点上的model type已改成LLM、VLM-GGUF、LLM-GGUF三个选项，对应了直接加载LLM模型、加载VLM模型和加载GGUF格式的LLM模型。重新支持了VLM模型和GGUF格式的LLM模型。现在本地调用可以兼容更多的模型了！示例工作流：[LLM_local](workflow/start_with_LLM_local.json)，[llava](workflow/start_with_llava.json)，[GGUF](workflow/start_with_GGUF.json)
 2. 已加入easyOCR节点，用于识别图中文字和位置，可以生成对应的mask，可以返回一个json字符串供LLM查看，有普通版本和高级版本供大家选择！
 2. 在comfyui LLM party中复现了chatgpt-o1系列模型的草莓系统，参考了[Llamaberry](https://huggingface.co/spaces/martinbowling/Llamaberry/blob/main/app.py)的提示词，示例工作流：[Strawberry system compared to o1](workflow/草莓系统与o1对比.json)。
 2. 新增了GPT-sovits节点，可以调用GPT-sovits模型，将文字根据你的参考音频转换为语音，也可以将你微调后的模型路径填入（如果不填就是基底模型进行推理），获得你想要的任意音色。使用时，需要下载[GPT-sovits](https://github.com/RVC-Boss/GPT-SoVITS)项目和对应的基底模型到本地，然后在GPT-sovits项目文件夹下用`runtime\python.exe api_v2.py`启动API服务。此外，chatTTS节点被移动到了[comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)中。原因是chatTTS的依赖库较多，且在PyPi中的许可证为CC BY-NC 4.0，这是一个非商用许可证。即使chatTTS的github项目是AGPL协议的，我们还是为了避免不必要的麻烦，将chatTTS节点移到了comfyui LLM mafia中。希望大家能够理解！
@@ -86,7 +86,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 2. 支持Gemini格式的API调用：
 * [Gemini](https://aistudio.google.com/app/prompts/new_chat)
 
-3. 兼容transformer库的大部分本地模型（本地LLM模型链节点上的model type已改成LLM、VLM、GGUF三个选项，对应了直接加载LLM模型、加载VLM模型和加载GGUF格式的LLM模型），如果你的VLM或GGUF格式的LLM模型报错了，请在[llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases)下载最新版本的llama-cpp-python，目前已测试的有：
+3. 兼容transformer库的大部分本地模型（本地LLM模型链节点上的model type已改成LLM、VLM-GGUF、LLM-GGUF三个选项，对应了直接加载LLM模型、加载VLM模型和加载GGUF格式的LLM模型），如果你的VLM或GGUF格式的LLM模型报错了，请在[llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases)下载最新版本的llama-cpp-python，目前已测试的有：
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay)(推荐！角色扮演模型)
 * [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(推荐！丰富提示词模型)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
