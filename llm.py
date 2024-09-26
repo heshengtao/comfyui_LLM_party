@@ -1301,7 +1301,7 @@ def vlm_chat(
     
 
     output = model.generate(**inputs, max_new_tokens=max_length, temperature=temperature, **extra_parameters)
-    response = processor.decode(output[0])
+    response = processor.decode(output[0], skip_special_tokens=True)
     history.append({"role": "assistant", "content": response})
     
     return response, history
