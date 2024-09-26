@@ -1276,8 +1276,7 @@ def llm_chat(
 def vlm_chat(
     model, processor, image, user_prompt, history, device, max_length, role="user", temperature=0.7, **extra_parameters
 ):
-    if image is not None:
-        pil_image = ToPILImage()(image[0].permute(2, 0, 1))
+    if image !=[]:
         user_content = {
             "role": role,
             "content": [
@@ -1287,7 +1286,7 @@ def vlm_chat(
         }
         history.append(user_content)
         input_text = processor.apply_chat_template(history, add_generation_prompt=True)
-        inputs = processor(pil_image, input_text, return_tensors="pt").to(device)
+        inputs = processor(image, input_text, return_tensors="pt").to(device)
     else:
         user_content = {
             "role": role,
@@ -1444,6 +1443,7 @@ class LLM_local:
         self.list = []
         self.added_to_list = False
         self.is_locked = "disable"
+        self.images = []
 
     @classmethod
     def INPUT_TYPES(s):
@@ -1612,6 +1612,7 @@ class LLM_local:
         else:
             try:
                 if is_memory == "disable" or "clear party memory" in user_prompt:
+                    self.images= []
                     with open(self.prompt_path, "w", encoding="utf-8") as f:
                         json.dump([{"role": "system", "content": system_prompt}], f, indent=4, ensure_ascii=False)
                     if "clear party memory" in user_prompt:
@@ -1850,11 +1851,14 @@ class LLM_local:
                         assistant_content = {"role": "assistant", "content": response}
                         history.append(assistant_content)         
                 elif model_type in ["VLM(testing)"]:
+                    if image is not None:
+                        pil_image = ToPILImage()(image[0].permute(2, 0, 1))
+                        self.images.append(pil_image)
                     if extra_parameters is not None and extra_parameters != {}:
                         response, history = vlm_chat(
                             model,
                             tokenizer,
-                            image,
+                            self.images,
                             user_prompt,
                             history,
                             device,
@@ -1864,7 +1868,7 @@ class LLM_local:
                         )
                     else:
                         response, history = vlm_chat(
-                            model, tokenizer, image, user_prompt, history, device, max_length, temperature=temperature
+                            model, tokenizer, self.images, user_prompt, history, device, max_length, temperature=temperature
                         )
                     # 正则表达式匹配
                     pattern = r'\{\s*"tool":\s*"(.*?)",\s*"parameters":\s*\{(.*?)\}\s*\}'
@@ -1882,7 +1886,7 @@ class LLM_local:
                             response, history = vlm_chat(
                                 model,
                                 tokenizer,
-                                None, # image,
+                                self.images, # image,
                                 results,
                                 history,
                                 device,
@@ -1894,7 +1898,7 @@ class LLM_local:
                             response, history = vlm_chat(
                                 model,
                                 tokenizer,
-                                None, # image,
+                                self.images, # image,
                                 results,
                                 history,
                                 device,
