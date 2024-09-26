@@ -44,14 +44,3 @@ api_key=
 [your_ollama_model_name]
 base_url=http://127.0.0.1:11434/v1/
 api_key=ollama
-
-[your_local_model_name]
-model_path=/path/to/your/model
-tokenizer_path=/path/to/your/tokenizer
-
-[your_local_guff_model_name]
-model_path=/path/to/your/model
-
-[your_local_llaVa_model_name]
-ckpt_path= /path/to/your/model
-clip_path= /path/to/your/clip

@@ -15,7 +15,8 @@ import easyocr
 # 当前脚本目录的上级目录
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
-
+config_key = configparser.ConfigParser()
+config_key.read(config_path, encoding="utf-8")
 class AnyType(str):
     """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
 
@@ -83,22 +84,25 @@ class mini_party:
         if not is_enable:
             return (None,)
         api_keys = load_api_keys(config_path)
-        if api_key:
+        if api_key != "":
             openai.api_key = api_key
-        elif api_keys.get("openai_api_key"):
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.api_key = api_keys.get("api_key")
+        elif api_keys.get("openai_api_key") != "":
             openai.api_key = api_keys.get("openai_api_key")
-        else:
-            openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-        if base_url:
-            openai.base_url = base_url.rstrip("/") + "/"
-        elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
-        else:
-            openai.base_url = os.environ.get("OPENAI_API_BASE")
-
-        if not openai.api_key:
+        if base_url != "":
+            openai.base_url = base_url
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.base_url = api_keys.get("base_url")
+        elif api_keys.get("base_url") != "":
+            openai.base_url = api_keys.get("base_url")
+        if openai.api_key == "":
             return ("请输入API_KEY",)
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
         history= [
             {"role": "system", "content": prompt},
             {"role": "user", "content": input_str}
@@ -163,22 +167,25 @@ class mini_translate:
         if not is_enable:
             return (None,)
         api_keys = load_api_keys(config_path)
-        if api_key:
+        if api_key != "":
             openai.api_key = api_key
-        elif api_keys.get("openai_api_key"):
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.api_key = api_keys.get("api_key")
+        elif api_keys.get("openai_api_key") != "":
             openai.api_key = api_keys.get("openai_api_key")
-        else:
-            openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-        if base_url:
-            openai.base_url = base_url.rstrip("/") + "/"
-        elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
-        else:
-            openai.base_url = os.environ.get("OPENAI_API_BASE")
-
-        if not openai.api_key:
+        if base_url != "":
+            openai.base_url = base_url
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.base_url = api_keys.get("base_url")
+        elif api_keys.get("base_url") != "":
+            openai.base_url = api_keys.get("base_url")
+        if openai.api_key == "":
             return ("请输入API_KEY",)
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
         sys_prompt = f"""你是一个翻译专家，请将我的输入翻译成{target_language}，语气为{tone}，语气程度为{str(degree)}。
 语气程度最大为10，最小为0，数字越大语气越{tone}。当语气程度为0时，几乎不改变原文的语气，当语气程度为10时，语气会非常{tone}。
 即使我的输入的语言和{target_language}相同，也请注意语气的调整，而不是返回原内容。
@@ -255,22 +262,25 @@ class mini_error_correction:
         if not is_enable:
             return (None,)
         api_keys = load_api_keys(config_path)
-        if api_key:
+        if api_key != "":
             openai.api_key = api_key
-        elif api_keys.get("openai_api_key"):
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.api_key = api_keys.get("api_key")
+        elif api_keys.get("openai_api_key") != "":
             openai.api_key = api_keys.get("openai_api_key")
-        else:
-            openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-        if base_url:
-            openai.base_url = base_url.rstrip("/") + "/"
-        elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
-        else:
-            openai.base_url = os.environ.get("OPENAI_API_BASE")
-
-        if not openai.api_key:
+        if base_url != "":
+            openai.base_url = base_url
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.base_url = api_keys.get("base_url")
+        elif api_keys.get("base_url") != "":
+            openai.base_url = api_keys.get("base_url")
+        if openai.api_key == "":
             return ("请输入API_KEY",)
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
         sys_prompt = f"""你是一个文档纠错大师，你会纠正我输入的文字中的包括但不限于错别字、语法错误、病句、拼写错误等一系列文档错误，并给出修改后的内容以及错误的位置。
 输出格式为json，格式如下：
 {{
@@ -360,22 +370,25 @@ class mini_summary:
         if not is_enable:
             return (None,)
         api_keys = load_api_keys(config_path)
-        if api_key:
+        if api_key != "":
             openai.api_key = api_key
-        elif api_keys.get("openai_api_key"):
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.api_key = api_keys.get("api_key")
+        elif api_keys.get("openai_api_key") != "":
             openai.api_key = api_keys.get("openai_api_key")
-        else:
-            openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-        if base_url:
-            openai.base_url = base_url.rstrip("/") + "/"
-        elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
-        else:
-            openai.base_url = os.environ.get("OPENAI_API_BASE")
-
-        if not openai.api_key:
+        if base_url != "":
+            openai.base_url = base_url
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.base_url = api_keys.get("base_url")
+        elif api_keys.get("base_url") != "":
+            openai.base_url = api_keys.get("base_url")
+        if openai.api_key == "":
             return ("请输入API_KEY",)
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
         sys_prompt = f"""你是一个文档总结助手，请根据我给出的文字，进行总结。
 总结时，你需要抓住文中的要点，不要重复也不要遗漏，尽可能的把文中重要的、有价值的、新颖的、有趣的地方体现在总结中，并按照以下格式输出：
 
@@ -462,22 +475,25 @@ class mini_story:
         if not is_enable:
             return (None,)
         api_keys = load_api_keys(config_path)
-        if api_key:
+        if api_key != "":
             openai.api_key = api_key
-        elif api_keys.get("openai_api_key"):
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.api_key = api_keys.get("api_key")
+        elif api_keys.get("openai_api_key") != "":
             openai.api_key = api_keys.get("openai_api_key")
-        else:
-            openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-        if base_url:
-            openai.base_url = base_url.rstrip("/") + "/"
-        elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
-        else:
-            openai.base_url = os.environ.get("OPENAI_API_BASE")
-
-        if not openai.api_key:
+        if base_url != "":
+            openai.base_url = base_url
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.base_url = api_keys.get("base_url")
+        elif api_keys.get("base_url") != "":
+            openai.base_url = api_keys.get("base_url")
+        if openai.api_key == "":
             return ("请输入API_KEY",)
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
         sys_prompt = f"""你是一个故事设计大师，根据我接下来给出的主题，生成一个剧情完整的故事，并且给出故事中每一个角色的外观描述词。
 输出格式为json，格式如下：
 
@@ -625,22 +641,25 @@ class mini_ocr:
         if not is_enable:
             return (None,)
         api_keys = load_api_keys(config_path)
-        if api_key:
+        if api_key != "":
             openai.api_key = api_key
-        elif api_keys.get("openai_api_key"):
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.api_key = api_keys.get("api_key")
+        elif api_keys.get("openai_api_key") != "":
             openai.api_key = api_keys.get("openai_api_key")
-        else:
-            openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-        if base_url:
-            openai.base_url = base_url.rstrip("/") + "/"
-        elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
-        else:
-            openai.base_url = os.environ.get("OPENAI_API_BASE")
-
-        if not openai.api_key:
+        if base_url != "":
+            openai.base_url = base_url
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.base_url = api_keys.get("base_url")
+        elif api_keys.get("base_url") != "":
+            openai.base_url = api_keys.get("base_url")
+        if openai.api_key == "":
             return ("请输入API_KEY",)
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
         sys_prompt = f"""你是一个图片文字识别工具。请根据输入的图片以及我用OCR工具扫描后的json结果，综合识别出图片中的文字，并输出文字的坐标和内容。
 输出时，请使用和我输入的json格式保持一致。注意，我给出的是OCR扫描的结果，并不准确，你需要根据图片内容进行判断和修正文字部分，坐标部分无需修改。
         
@@ -761,22 +780,25 @@ class mini_sd_prompt:
         if not is_enable:
             return (None,)
         api_keys = load_api_keys(config_path)
-        if api_key:
+        if api_key != "":
             openai.api_key = api_key
-        elif api_keys.get("openai_api_key"):
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.api_key = api_keys.get("api_key")
+        elif api_keys.get("openai_api_key") != "":
             openai.api_key = api_keys.get("openai_api_key")
-        else:
-            openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-        if base_url:
-            openai.base_url = base_url.rstrip("/") + "/"
-        elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
-        else:
-            openai.base_url = os.environ.get("OPENAI_API_BASE")
-
-        if not openai.api_key:
+        if base_url != "":
+            openai.base_url = base_url
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.base_url = api_keys.get("base_url")
+        elif api_keys.get("base_url") != "":
+            openai.base_url = api_keys.get("base_url")
+        if openai.api_key == "":
             return ("请输入API_KEY",)
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
         sys_prompt = f'''# Stable Diffusion prompt 助理
 
 你来充当一位有艺术气息的Stable Diffusion prompt 助理。
@@ -898,22 +920,25 @@ class mini_flux_prompt:
         if not is_enable:
             return (None,)
         api_keys = load_api_keys(config_path)
-        if api_key:
+        if api_key != "":
             openai.api_key = api_key
-        elif api_keys.get("openai_api_key"):
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.api_key = api_keys.get("api_key")
+        elif api_keys.get("openai_api_key") != "":
             openai.api_key = api_keys.get("openai_api_key")
-        else:
-            openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-        if base_url:
-            openai.base_url = base_url.rstrip("/") + "/"
-        elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
-        else:
-            openai.base_url = os.environ.get("OPENAI_API_BASE")
-
-        if not openai.api_key:
+        if base_url != "":
+            openai.base_url = base_url
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.base_url = api_keys.get("base_url")
+        elif api_keys.get("base_url") != "":
+            openai.base_url = api_keys.get("base_url")
+        if openai.api_key == "":
             return ("请输入API_KEY",)
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
         sys_prompt = f'''# FLUX prompt 助理
 
 你来充当一位有艺术气息的FLUX prompt 助理。
@@ -1013,22 +1038,25 @@ class mini_sd_tag:
         if not is_enable:
             return (None,)
         api_keys = load_api_keys(config_path)
-        if api_key:
+        if api_key != "":
             openai.api_key = api_key
-        elif api_keys.get("openai_api_key"):
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.api_key = api_keys.get("api_key")
+        elif api_keys.get("openai_api_key") != "":
             openai.api_key = api_keys.get("openai_api_key")
-        else:
-            openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-        if base_url:
-            openai.base_url = base_url.rstrip("/") + "/"
-        elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
-        else:
-            openai.base_url = os.environ.get("OPENAI_API_BASE")
-
-        if not openai.api_key:
+        if base_url != "":
+            openai.base_url = base_url
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.base_url = api_keys.get("base_url")
+        elif api_keys.get("base_url") != "":
+            openai.base_url = api_keys.get("base_url")
+        if openai.api_key == "":
             return ("请输入API_KEY",)
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
         sys_prompt = f'''# Stable Diffusion prompt 助理
 
 你来充当一位图片反推prompt助理。
@@ -1172,19 +1200,25 @@ class mini_flux_tag:
         if not is_enable:
             return (None,)
         api_keys = load_api_keys(config_path)
-        if api_key:
+        if api_key != "":
             openai.api_key = api_key
-        elif api_keys.get("openai_api_key"):
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.api_key = api_keys.get("api_key")
+        elif api_keys.get("openai_api_key") != "":
             openai.api_key = api_keys.get("openai_api_key")
-        else:
-            openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-        if base_url:
-            openai.base_url = base_url.rstrip("/") + "/"
-        elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
-        else:
-            openai.base_url = os.environ.get("OPENAI_API_BASE")
+        if base_url != "":
+            openai.base_url = base_url
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.base_url = api_keys.get("base_url")
+        elif api_keys.get("base_url") != "":
+            openai.base_url = api_keys.get("base_url")
+        if openai.api_key == "":
+            return ("请输入API_KEY",)
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
 
         if not openai.api_key:
             return ("请输入API_KEY",)
