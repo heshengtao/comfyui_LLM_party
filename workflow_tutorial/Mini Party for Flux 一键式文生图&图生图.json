@@ -1,0 +1,1064 @@
+{
+  "last_node_id": 21,
+  "last_link_id": 19,
+  "nodes": [
+    {
+      "id": 5,
+      "type": "UnetLoaderGGUF",
+      "pos": {
+        "0": 450,
+        "1": 40,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        320,
+        60
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "label": "MODEL",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UnetLoaderGGUF"
+      },
+      "widgets_values": [
+        "FLUX_GGUF/flux1-dev-Q8_0.gguf"
+      ]
+    },
+    {
+      "id": 13,
+      "type": "RandomNoise",
+      "pos": {
+        "0": 810,
+        "1": 200,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        608915290176147,
+        "randomize"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "CLIPTextEncode_party",
+      "pos": {
+        "0": 450,
+        "1": 460,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        330,
+        60
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 6,
+          "label": "clip"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 5,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode_party"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 7,
+      "type": "BasicGuider",
+      "pos": {
+        "0": 810,
+        "1": 490,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        320,
+        70
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 4,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 7,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "label": "引导",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      }
+    },
+    {
+      "id": 11,
+      "type": "KSamplerSelect",
+      "pos": {
+        "0": 450,
+        "1": 570,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 320,
+        "1": 60
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "BasicScheduler",
+      "pos": {
+        "0": 810,
+        "1": 40,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 320,
+        "1": 110
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 11,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "normal",
+        20,
+        1
+      ]
+    },
+    {
+      "id": 15,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 450,
+        "1": 680,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 320,
+        "1": 110
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            14
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 17,
+      "type": "VAELoader",
+      "pos": {
+        "0": 810,
+        "1": 720,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        320,
+        60
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            16
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.safetensors"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 810,
+        "1": 610,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        320,
+        50
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 15,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 16,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            17
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 8,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": 450,
+        "1": 290,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 320,
+        "1": 110
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "FLUX_clip_models/t5xxl_fp16.safetensors",
+        "FLUX_clip_models/clip_l.safetensors",
+        "flux"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "LoraLoaderModelOnly",
+      "pos": {
+        "0": 450,
+        "1": 160,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        330,
+        80
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            4,
+            11
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "7-FLUX模型/EuropeanGameScene_v1_000001750.safetensors",
+        1.5
+      ]
+    },
+    {
+      "id": 10,
+      "type": "SamplerCustomAdvanced",
+      "pos": {
+        "0": 810,
+        "1": 330,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        320,
+        110
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 12,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 8,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 9,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 10,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 14,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            15
+          ],
+          "shape": 3,
+          "label": "输出",
+          "slot_index": 0
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      }
+    },
+    {
+      "id": 3,
+      "type": "mini_flux_prompt",
+      "pos": {
+        "0": -750,
+        "1": 50,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        390,
+        180
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "flux_prompt",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "label": "flux_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_flux_prompt"
+      },
+      "widgets_values": [
+        "欧洲古寺庙，游戏场景",
+        "gpt-4o-mini",
+        "",
+        "",
+        true,
+        true
+      ]
+    },
+    {
+      "id": 19,
+      "type": "mini_flux_tag",
+      "pos": {
+        "0": -740,
+        "1": 280,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        380,
+        150
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 19,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tags",
+          "type": "STRING",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "label": "tags",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_flux_tag"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 4,
+      "type": "show_text_party",
+      "pos": {
+        "0": -750,
+        "1": 480,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        380,
+        300
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 18,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            5
+          ],
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "A vibrant and colorful depiction of an ancient stone temple, surrounded by lush greenery and a serene body of water in the foreground. The temple features a broad set of stairs leading up to an arched entrance, framed by ornate stone pillars. The structure is made of dark, weathered stones, showcasing a blend of strong architectural elements with a touch of nature. Green palm leaves and other tropical plants surround the base of the temple and the water, adding an exotic atmosphere. In the background, distant rocky mountains catch the warm glow of a sunset, creating a tranquil and mystical ambiance. The water is a clear, bright turquoise, gently reflecting the colors of the sky and surroundings, enhancing the peaceful setting. The scene evokes a sense of adventure and exploration, reminiscent of ancient civilizations."
+      ]
+    },
+    {
+      "id": 18,
+      "type": "PreviewImage",
+      "pos": {
+        "0": -330,
+        "1": 40,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        750,
+        740
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 17,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 20,
+      "type": "LoadImage",
+      "pos": {
+        "0": -1140,
+        "1": 40,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        360,
+        730
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "pasted/image (131).png",
+        "image"
+      ]
+    },
+    {
+      "id": 21,
+      "type": "Note",
+      "pos": {
+        "0": 1150,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        420,
+        800
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Note",
+      "properties": {},
+      "widgets_values": [
+        "#官方文档：\n\nhttps://dcnsxxvm4zeq.feishu.cn/wiki/XOnXwC2btiw8YDkyFQsctFAEnHf\n\n（官方文档中有详细的工作流参数介绍）\n\n---------------------------------------------------------------------\n\n#关于我们：\n\n- LLM_Party正在用心经营一片AI时代的后花园，我们希望能够在AI时代下成为众多参与者的一员，我们从开源社区中走来，也希望回到社区中去。\n\n\n\n- 欢迎大家来到我们用心经营的后花园。如果我们的项目能够帮助到大家，麻烦大家在Github上帮我点一下Star：\n\n\n\n- github项目地址：https://github.com/heshengtao/comfyui_LLM_party\n\n\n\n- openart：https://openart.ai/workflows/profile/comfyui_llm_party?tab=workflows&sort=latest\n\n\n\n- LibLib：https://www.liblib.art/userpage/4378612c5b3341c79c0deab3101aeabb/publish/workflow\n\n\n\n- 哔哩哔哩：https://space.bilibili.com/26978344?spm_id_from=333.337.0.0\n\n\n\n- YouTube：https://www.youtube.com/@comfyui-LLM-party\n\n\n\n- discord：https://discord.com/invite/gxrQAYy6\n\n\n\n- QQ交流群：931057213\n\n\n\n- 微信交流群：Choo-Yong（添加小助理微信，统一通过后会添加至交流群）\n\n\n\n商务合作请联系email：hst97@qq.com"
+      ],
+      "color": "#c09430"
+    }
+  ],
+  "links": [
+    [
+      3,
+      5,
+      0,
+      6,
+      0,
+      "MODEL"
+    ],
+    [
+      4,
+      6,
+      0,
+      7,
+      0,
+      "MODEL"
+    ],
+    [
+      5,
+      4,
+      0,
+      9,
+      1,
+      "STRING"
+    ],
+    [
+      6,
+      8,
+      0,
+      9,
+      0,
+      "CLIP"
+    ],
+    [
+      7,
+      9,
+      0,
+      7,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      8,
+      7,
+      0,
+      10,
+      1,
+      "GUIDER"
+    ],
+    [
+      9,
+      11,
+      0,
+      10,
+      2,
+      "SAMPLER"
+    ],
+    [
+      10,
+      12,
+      0,
+      10,
+      3,
+      "SIGMAS"
+    ],
+    [
+      11,
+      6,
+      0,
+      12,
+      0,
+      "MODEL"
+    ],
+    [
+      12,
+      13,
+      0,
+      10,
+      0,
+      "NOISE"
+    ],
+    [
+      14,
+      15,
+      0,
+      10,
+      4,
+      "LATENT"
+    ],
+    [
+      15,
+      10,
+      0,
+      16,
+      0,
+      "LATENT"
+    ],
+    [
+      16,
+      17,
+      0,
+      16,
+      1,
+      "VAE"
+    ],
+    [
+      17,
+      16,
+      0,
+      18,
+      0,
+      "IMAGE"
+    ],
+    [
+      18,
+      19,
+      0,
+      4,
+      0,
+      "STRING"
+    ],
+    [
+      19,
+      20,
+      0,
+      19,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "FLUX生成",
+      "bounding": [
+        440,
+        -30,
+        700,
+        834
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "FLUX提示词生成",
+      "bounding": [
+        -760,
+        -30,
+        410,
+        830
+      ],
+      "color": "#A88",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Output",
+      "bounding": [
+        -340,
+        -30,
+        770,
+        830
+      ],
+      "color": "#b58b2a",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "加载图像",
+      "bounding": [
+        -1150,
+        -30,
+        380,
+        830
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "LLM Party for Flux 一键式文生图&图生图",
+      "bounding": [
+        -1150,
+        -260,
+        2720,
+        210
+      ],
+      "color": "#3f789e",
+      "font_size": 150,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5445000000000009,
+      "offset": [
+        1500.0368758244147,
+        443.8911284757349
+      ]
+    }
+  },
+  "version": 0.4
+}
