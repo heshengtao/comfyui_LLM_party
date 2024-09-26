@@ -50,3 +50,4 @@ html5lib
 easyocr
 feedparser
 psutil
+verovio
