@@ -1301,8 +1301,14 @@ def vlm_chat(
     
 
     output = model.generate(**inputs, max_new_tokens=max_length, temperature=temperature, **extra_parameters)
-    response = processor.decode(output[0], skip_special_tokens=True)
-    history.append({"role": "assistant", "content": response})
+    response = processor.decode(output[0])
+    # 使用正则表达式匹配最后一个 <|end_header_id|> 和 <|eot_id|> 之间的内容
+    matches = re.findall(r'<\|end_header_id\|>(.*?)<\|eot_id\|>', response, re.DOTALL)
+    if matches:
+        last_content = matches[-1].strip()
+    else:
+        last_content = response.strip()
+    history.append({"role": "assistant", "content":last_content})
     
     return response, history
 
