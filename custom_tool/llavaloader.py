@@ -4,6 +4,10 @@ import sys
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+from transformers import AutoProcessor, AutoModelForPreTraining,AutoConfig
+import torch
+if torch.cuda.is_available():
+    from transformers import BitsAndBytesConfig
 config = configparser.ConfigParser()
 config.read(config_path)
 
@@ -69,9 +73,64 @@ class GGUFLoader:
         )
         return (llm,)
 
+class vlmLoader:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "model_name_or_path": ("STRING", {"default": ""}),
+                "device": (
+                    ["auto", "cuda", "cpu", "mps"],
+                    {
+                        "default": "auto",
+                    },
+                ),
+                "dtype": (
+                    ["float32", "float16","bfloat16", "int8", "int4"],
+                    {
+                        "default": "float32",
+                    },
+                ),
+            }
+        }
+
+    RETURN_TYPES = (
+        "CUSTOM",
+        "CUSTOM",
+    )
+    RETURN_NAMES = (
+        "model",
+        "processor",
+    )
+    FUNCTION = "load_VLM"
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+    def load_VLM(self, model_name_or_path, device, dtype):
+        model_kwargs = {
+            'device_map': device,
+        }
+
+        if dtype == "float16":
+            model_kwargs['torch_dtype'] = torch.float16
+        elif dtype == "bfloat16":
+            model_kwargs['torch_dtype'] = torch.bfloat16
+        elif dtype in ["int8", "int4"]:
+            model_kwargs['quantization_config'] = BitsAndBytesConfig(load_in_8bit=(dtype == "int8"), load_in_4bit=(dtype == "int4"))
+
+        config = AutoConfig.from_pretrained(model_name_or_path, **model_kwargs)
+        processor = AutoProcessor.from_pretrained(model_name_or_path)
+        model = AutoModelForPreTraining.from_pretrained(model_name_or_path, **model_kwargs)
+        model = model.eval()
+        return (
+            model,
+            processor,
+        )
+
 NODE_CLASS_MAPPINGS = {
     "LLavaLoader":LLavaLoader,
-    "GGUFLoader":GGUFLoader
+    "GGUFLoader":GGUFLoader,
+    "vlmLoader":vlmLoader,
     }
 lang = locale.getdefaultlocale()[0]
 
@@ -83,11 +142,13 @@ if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "LLavaLoader": "LLava加载器",
-        "GGUFLoader": "GGUF加载器",
+        "LLavaLoader": "VLM-GGUF加载器",
+        "GGUFLoader": "LLM-GGUF加载器",
+        "vlmLoader": "VLM本地加载器",
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "LLavaLoader": "LLava Loader",
-        "GGUFLoader": "GGUF Loader",
+        "LLavaLoader": "VLM-GGUF Loader",
+        "GGUFLoader": "LLM-GGUF Loader",
+        "vlmLoader": "VLM local Loader",
         }

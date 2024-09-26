@@ -1273,6 +1273,45 @@ def llm_chat(
     history.append({"role": "assistant", "content": response})
     return response, history
 
+def vlm_chat(
+    model, processor, image, user_prompt, history, device, max_length, role="user", temperature=0.7, **extra_parameters
+):
+    if image is not None:
+        pil_image = ToPILImage()(image[0].permute(2, 0, 1))
+        # Convert the PIL image to a bytes buffer
+        buffer = io.BytesIO()
+        pil_image.save(buffer, format="PNG")  # You can change the format if needed
+        # Get the bytes from the buffer
+        image_bytes = buffer.getvalue()
+        # Encode the bytes to base64
+        base64_string = f"data:image/jpeg;base64,{base64.b64encode(image_bytes).decode('utf-8')}"
+        user_content = {
+            "role": role,
+            "content": [
+                {"type": "image"},
+                {"type": "text", "text": user_prompt},
+            ],
+        }
+        inputs = processor(image, input_text, return_tensors="pt").to(device)
+    else:
+        user_content = {
+            "role": role,
+            "content": [
+                {"type": "text", "text": user_prompt},
+            ],
+        }
+        inputs = processor(text=input_text, return_tensors="pt").to(device)
+    
+    history.append(user_content)
+    input_text = processor.apply_chat_template(history, add_generation_prompt=True)
+
+    output = model.generate(**inputs, max_new_tokens=max_length, temperature=temperature, **extra_parameters)
+    response = processor.decode(output[0])
+    history.append({"role": "assistant", "content": response})
+    
+    return response, history
+
+
 
 class LLM_local_loader:
     def __init__(self):
@@ -1808,7 +1847,60 @@ class LLM_local:
                             )
                         response = f"{response['choices'][0]['message']['content']}"
                         assistant_content = {"role": "assistant", "content": response}
-                        history.append(assistant_content)                  
+                        history.append(assistant_content)         
+                elif model_type in ["VLM(testing)"]:
+                    if extra_parameters is not None and extra_parameters != {}:
+                        response, history = vlm_chat(
+                            model,
+                            tokenizer,
+                            image,
+                            user_prompt,
+                            history,
+                            device,
+                            max_length,
+                            temperature=temperature,
+                            **extra_parameters,
+                        )
+                    else:
+                        response, history = vlm_chat(
+                            model, tokenizer, image, user_prompt, history, device, max_length, temperature=temperature
+                        )
+                    # 正则表达式匹配
+                    pattern = r'\{\s*"tool":\s*"(.*?)",\s*"parameters":\s*\{(.*?)\}\s*\}'
+                    while re.search(pattern, response, re.DOTALL) != None:
+                        match = re.search(pattern, response, re.DOTALL)
+                        tool = match.group(1)
+                        parameters = match.group(2)
+                        json_str = '{"tool": "' + tool + '", "parameters": {' + parameters + "}}"
+                        history.append({"role": "assistant", "content": json_str})
+                        print("正在调用" + tool + "工具")
+                        parameters = json.loads("{" + parameters + "}")
+                        results = dispatch_tool(tool, parameters)
+                        print(results)
+                        if extra_parameters is not None and extra_parameters != {}:
+                            response, history = vlm_chat(
+                                model,
+                                tokenizer,
+                                None, # image,
+                                results,
+                                history,
+                                device,
+                                max_length,
+                                temperature=temperature,
+                                **extra_parameters,
+                            )
+                        else:
+                            response, history = vlm_chat(
+                                model,
+                                tokenizer,
+                                None, # image,
+                                results,
+                                history,
+                                device,
+                                max_length,
+                                role="observation",
+                                temperature=temperature,
+                            )         
                 print(response)
                 # 修改prompt.json文件
                 history_get = [history[0]]
