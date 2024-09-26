@@ -36,6 +36,7 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정을 통해 나만의 AI 도우미를 신속하게 구축하고, 산업에 적용 가능한 단어 벡터 RAG, GraphRAG를 통해 산업 내 지식 관리 시스템을 로컬화합니다. 단일 지능체 파이프라인에서 복잡한 지능체 간의 방사형 상호작용 모드, 순환 상호작용 모드를 구성하는 것까지; 개인 사용자가 자신의 사회적 APP(QQ, Feishu, Discord)에 접속할 필요가 있는 것부터, 스트리밍 작업자가 필요로 하는 원스톱 LLM+TTS+ComfyUI 워크플로우까지; 일반 학생들이 필요로 하는 첫 번째 LLM 응용 프로그램의 간단한 시작부터, 연구자들이 자주 사용하는 다양한 파라미터 조정 인터페이스, 모델 적응까지. 이 모든 것을 ComfyUI LLM Party에서 확인할 수 있습니다.
 
 ## 최신 업데이트
+1. llama3.2 vision 모델과 호환되며, 다중 회차 대화 및 시각 기능을 지원합니다. 모델 주소: [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct). 예제 워크플로우: [llama3.2_vision](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json).
 1. GOT-OCR2를 적용하여 형식화된 출력 결과를 지원하고 위치 상자와 색상을 사용하여 텍스트를 정밀하게 인식합니다. 모델 주소: [GOT-OCR2](https://huggingface.co/stepfun-ai/GOT-OCR2_0). 예제 워크플로우는 웹페이지의 스크린샷을 HTML 코드로 변환한 다음 브라우저를 열어 이 웹페이지를 표시합니다: [img2web](workflow/图片转网页.json).
 2. 로컬 LLM 로더 노드가 크게 조정되어 모델 유형을 직접 선택할 필요가 없습니다. llava 로더 노드와 GGUF 로더 노드가 다시 추가되었습니다. 로컬 LLM 모델 체인 노드의 모델 유형이 LLM, VLM-GGUF 및 LLM-GGUF로 변경되어 LLM 모델을 직접 로드하고, VLM 모델을 로드하고, GGUF 형식의 LLM 모델을 로드할 수 있습니다. 이제 VLM 모델과 GGUF 형식의 LLM 모델이 다시 지원됩니다. 로컬 호출은 이제 더 많은 모델과 호환될 수 있습니다! 예제 워크플로우: [LLM_local](workflow/start_with_LLM_local.json), [llava](workflow/start_with_llava.json), [GGUF](workflow/start_with_GGUF.json)
 2. easyOCR 노드가 추가되어 이미지 내 텍스트와 위치를 인식할 수 있습니다. 해당 마스크를 생성할 수 있으며, LLM이 볼 수 있는 JSON 문자열을 반환할 수 있습니다. 일반 버전과 고급 버전이 제공됩니다!
@@ -92,6 +93,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
+* [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
 4. 모델 다운로드:
 * [百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu

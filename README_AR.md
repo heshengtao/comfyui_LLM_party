@@ -36,6 +36,7 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعددة، وإعداد الشخصيات لبناء مساعد AI الخاص بك بسرعة، إلى RAG وGraphRAG القابلة للتطبيق في الصناعة لإدارة قواعد المعرفة المحلية؛ من خط أنابيب وكيل واحد إلى بناء أنماط تفاعل معقدة بين الوكلاء وأنماط تفاعل دائرية؛ من الحاجة الفردية للمستخدمين للوصول إلى تطبيقات التواصل الاجتماعي الخاصة بهم (QQ، Feishu، Discord)، إلى تدفقات العمل الشاملة التي يحتاجها العاملون في وسائل الإعلام LLM+TTS+ComfyUI؛ من بدء استخدام تطبيق LLM الأول للطلاب العاديين، إلى واجهات ضبط المعلمات التي يستخدمها الباحثون. كل هذا يمكنك العثور على إجابات له في ComfyUI LLM Party.
 
 ## التحديثات الأخيرة
+1. متوافق مع نموذج llama3.2 vision، يدعم الحوار متعدد الأدوار، والوظائف البصرية. عنوان النموذج: [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct). مثال على سير العمل: [llama3.2_vision](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json).
 1. تم تكييف GOT-OCR2، يدعم نتائج الإخراج المنسقة، يدعم التعرف الدقيق على النصوص باستخدام مربعات الموضع والألوان. عنوان النموذج: [GOT-OCR2](https://huggingface.co/stepfun-ai/GOT-OCR2_0). مثال على سير العمل يحول لقطة شاشة لصفحة ويب إلى كود HTML ثم يفتح المتصفح لعرض هذه الصفحة: [img2web](workflow/图片转网页.json).
 2. تم تعديل عقد تحميل LLM المحلية بشكل كبير، لذلك لم تعد بحاجة إلى اختيار نوع النموذج بنفسك. تم إعادة إضافة عقدة تحميل llava وعقدة تحميل GGUF. تم تغيير نوع النموذج على عقدة سلسلة نماذج LLM المحلية إلى LLM وVLM-GGUF وLLM-GGUF، مما يتوافق مع تحميل نماذج LLM مباشرة، وتحميل نماذج VLM، وتحميل نماذج LLM بتنسيق GGUF. الآن يتم دعم نماذج VLM ونماذج LLM بتنسيق GGUF مرة أخرى. يمكن الآن أن تكون المكالمات المحلية متوافقة مع المزيد من النماذج! أمثلة على سير العمل: [LLM_local](workflow/start_with_LLM_local.json), [llava](workflow/start_with_llava.json), [GGUF](workflow/start_with_GGUF.json)
 2. تمت إضافة عقدة EasyOCR للتعرف على النصوص والمواقع في الصور. يمكنه إنشاء الأقنعة المقابلة وإرجاع سلسلة JSON لعرضها بواسطة LLM. تتوفر إصدارات عادية ومميزة للاختيار من بينها!
@@ -91,6 +92,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
+* [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
 4. تحميل النموذج:
 * [رابط بايدو السحابي](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)، رمز الاستخراج: qyhu

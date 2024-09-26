@@ -38,6 +38,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 
 
 ## Latest update
+1. Compatible with the llama3.2 vision model, supports multi-turn dialogue, visual functions. Model address: [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct). Example workflow: [llama3.2_vision](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json).
 1. Adapted GOT-OCR2, supports formatted output results, supports fine text recognition using position boxes and colors. Model address: [GOT-OCR2](https://huggingface.co/stepfun-ai/GOT-OCR2_0). Example workflow converts a screenshot of a webpage into HTML code and then opens the browser to display this webpage: [img2web](workflow/图片转网页.json).
 2. The local LLM loader nodes have been significantly adjusted, so you no longer need to choose the model type yourself. The llava loader node and GGUF loader node have been re-added. The model type on the local LLM model chain node has been changed to LLM, VLM-GGUF, and LLM-GGUF, corresponding to directly loading LLM models, loading VLM models, and loading GGUF format LLM models. VLM models and GGUF format LLM models are now supported again. Local calls can now be compatible with more models! Example workflows: [LLM_local](workflow/start_with_LLM_local.json), [llava](workflow/start_with_llava.json), [GGUF](workflow/start_with_GGUF.json)
 2. Added EasyOCR node for recognizing text and positions in images. It can generate corresponding masks and return a JSON string for LLM to view. There are standard and premium versions available for everyone to choose from!
@@ -95,6 +96,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
+* [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
 4. Model download
 * [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu
