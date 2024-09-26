@@ -1,0 +1,852 @@
+{
+  "last_node_id": 49,
+  "last_link_id": 56,
+  "nodes": [
+    {
+      "id": 25,
+      "type": "ListCounter //Inspire",
+      "pos": {
+        "0": 1340,
+        "1": 10
+      },
+      "size": {
+        "0": 320,
+        "1": 60
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "signal",
+          "type": "*",
+          "link": 13,
+          "label": "值"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            14
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "整数"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ListCounter //Inspire"
+      },
+      "widgets_values": [
+        0
+      ],
+      "shape": 1
+    },
+    {
+      "id": 47,
+      "type": "mini_flux_tag",
+      "pos": {
+        "0": 940,
+        "1": 20
+      },
+      "size": [
+        370,
+        150
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 55,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tags",
+          "type": "STRING",
+          "links": [
+            56
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "tags"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_flux_tag"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 36,
+      "type": "> Scale Image to Side",
+      "pos": {
+        "0": 590,
+        "1": 250
+      },
+      "size": {
+        "0": 350,
+        "1": 210
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 29,
+          "label": "image"
+        },
+        {
+          "name": "mask_opt",
+          "type": "MASK",
+          "link": null,
+          "label": "mask_opt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            28,
+            55
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "image"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "mask"
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "width"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "height"
+        },
+        {
+          "name": "scale_ratio",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3,
+          "label": "scale_ratio"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "> Scale Image to Side"
+      },
+      "widgets_values": [
+        1024,
+        "shortest",
+        "lanczos",
+        0
+      ],
+      "shape": 1
+    },
+    {
+      "id": 35,
+      "type": "ImageCrop+",
+      "pos": {
+        "0": 950,
+        "1": 260
+      },
+      "size": [
+        370,
+        200
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 28,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            41
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "x",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "X"
+        },
+        {
+          "name": "y",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "Y"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageCrop+"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "center",
+        0,
+        0
+      ],
+      "shape": 1
+    },
+    {
+      "id": 24,
+      "type": "CR Integer To String",
+      "pos": {
+        "0": 1340,
+        "1": 120
+      },
+      "size": {
+        "0": 320,
+        "1": 70
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "int_",
+          "type": "INT",
+          "link": 14,
+          "widget": {
+            "name": "int_"
+          },
+          "label": "整数"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            52,
+            54
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "字符串"
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 1,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Integer To String"
+      },
+      "widgets_values": [
+        0
+      ],
+      "shape": 1
+    },
+    {
+      "id": 12,
+      "type": "show_text_party",
+      "pos": {
+        "0": 590,
+        "1": 550
+      },
+      "size": [
+        440,
+        240
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 56,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            43
+          ],
+          "slot_index": 0,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "A stack of three plush pillows designed to resemble crispy fried chicken pieces. Each pillow is crafted with a textured, fluffy fabric in a vibrant orange hue, mimicking the appearance of crunchy breading. The pillows are of a flattened oval shape, stacked neatly on top of each other, with the top pillow slightly tilted to one side. The background is pure white, emphasizing the bright color and unique design of the pillows, creating a fun and whimsical atmosphere. This playful and decorative arrangement invites a sense of humor and creativity."
+      ],
+      "shape": 1
+    },
+    {
+      "id": 42,
+      "type": "file_combine",
+      "pos": {
+        "0": 1060,
+        "1": 550
+      },
+      "size": [
+        240,
+        100
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file1",
+          "type": "STRING",
+          "link": 43,
+          "widget": {
+            "name": "file1"
+          },
+          "label": "file1"
+        },
+        {
+          "name": "file2",
+          "type": "STRING",
+          "link": 44,
+          "widget": {
+            "name": "file2"
+          },
+          "label": "file2"
+        },
+        {
+          "name": "file3",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file3"
+          },
+          "label": "file3"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "files",
+          "type": "STRING",
+          "links": [
+            53
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "files"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "file_combine"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "",
+        ""
+      ],
+      "shape": 1
+    },
+    {
+      "id": 38,
+      "type": "get_string",
+      "pos": {
+        "0": 1050,
+        "1": 700
+      },
+      "size": [
+        250,
+        81
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            44
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "string"
+        }
+      ],
+      "title": "添加触发词",
+      "properties": {
+        "Node name for S&R": "get_string"
+      },
+      "widgets_values": [
+        "TBW,creative",
+        true
+      ],
+      "shape": 1
+    },
+    {
+      "id": 40,
+      "type": "LayerUtility: SaveImagePlus",
+      "pos": {
+        "0": 1340,
+        "1": 290
+      },
+      "size": [
+        320,
+        250
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 41,
+          "label": "images"
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "link": 52,
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "label": "filename_prefix"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "LayerUtility: SaveImagePlus"
+      },
+      "widgets_values": [
+        "/hy-tmp/FLUX_Train/TBW",
+        "comfyui",
+        "None",
+        "png",
+        100,
+        false,
+        "",
+        false,
+        false
+      ],
+      "color": "rgba(38, 73, 116, 0.7)",
+      "shape": 1
+    },
+    {
+      "id": 46,
+      "type": "Save Text File",
+      "pos": {
+        "0": 1340,
+        "1": 630
+      },
+      "size": [
+        320,
+        180
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 53,
+          "widget": {
+            "name": "text"
+          },
+          "label": "字符串"
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "link": 54,
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "label": "文件名前缀"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "Save Text File"
+      },
+      "widgets_values": [
+        "",
+        "/hy-tmp/FLUX_Train/TBW",
+        "ComfyUI",
+        "_",
+        5,
+        ".txt",
+        "utf-8"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 17,
+      "type": "image_iterator",
+      "pos": {
+        "0": 590,
+        "1": 10
+      },
+      "size": {
+        "0": 320,
+        "1": 150
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            13,
+            29
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "image"
+        },
+        {
+          "name": "is_end",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3,
+          "label": "is_end"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "image_iterator"
+      },
+      "widgets_values": [
+        "/hy-tmp/FLUX_Train/tmp_images/TBW",
+        true,
+        false,
+        "sequential"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 48,
+      "type": "Note",
+      "pos": {
+        "0": 1690,
+        "1": 20
+      },
+      "size": [
+        430,
+        460
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "【图片迭代器】\n- floder_path：填写需要训练图片数据集的目标文件夹\n- is_enable：是否开启该节点\n- is_reload：开启后将索引重置为开始，可以简单理解为重新从第一张图片开始加载。\n- iterator_mode(迭代方式)：有四种不同的迭代方式，一般来说，自动打标选择[sequential]即可。\n  · 顺序：会按顺序依次输出，直到超出索引上限自动中止进程，并将索引值重置为0；\n  · 随机：会选择一个随机索引输出；\n  · 无限：会无限循环输出。\n\n【列表计数】\n- 基值：默认选择0即可，也就是第一个文件命名的名称基点，依次顺延；\n\n【LayerUtility: SaveImage Plus】\n- custom_path：选择目标存储打标后的图片的目标文件夹；\n- 其他参数可以保持默认，不要调整。\n\n【保存文本】\n- 路径：选择目标存储打标后的文本的目标文件夹；\n- 其他参数可以保持默认，不要调整。\n\n【添加触发词】\n- 添加模型需要触发的关键词\n"
+      ]
+    },
+    {
+      "id": 49,
+      "type": "Note",
+      "pos": {
+        "0": 1690,
+        "1": 590
+      },
+      "size": [
+        430,
+        210
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "#关于我们：\n- LLM_Party正在用心经营一片AI时代的后花园，我们希望能够在AI时代下成为众多参与者的一员，我们从开源社区中走来，也希望回到社区中去。\n- 欢迎大家来到我们用心经营的后花园。如果我们的项目能够帮助到大家，麻烦大家在Github上帮我点一下Star：\n- github项目地址：https://github.com/heshengtao/comfyui_LLM_party\n- openart：https://openart.ai/workflows/profile/comfyui_llm_party?tab=workflows&sort=latest\n- LibLib：https://www.liblib.art/userpage/4378612c5b3341c79c0deab3101aeabb/publish/workflow\n- 哔哩哔哩：https://space.bilibili.com/26978344?spm_id_from=333.337.0.0\n- YouTube：https://www.youtube.com/@comfyui-LLM-party\n- discord：https://discord.com/invite/gxrQAYy6\n- QQ交流群：931057213\n- 微信交流群：Choo-Yong（添加小助理微信，统一通过后会添加至交流群）\n商务合作请联系email：hst97@qq.com"
+      ]
+    }
+  ],
+  "links": [
+    [
+      13,
+      17,
+      0,
+      25,
+      0,
+      "*"
+    ],
+    [
+      14,
+      25,
+      0,
+      24,
+      0,
+      "INT"
+    ],
+    [
+      28,
+      36,
+      0,
+      35,
+      0,
+      "IMAGE"
+    ],
+    [
+      29,
+      17,
+      0,
+      36,
+      0,
+      "IMAGE"
+    ],
+    [
+      41,
+      35,
+      0,
+      40,
+      0,
+      "IMAGE"
+    ],
+    [
+      43,
+      12,
+      0,
+      42,
+      0,
+      "STRING"
+    ],
+    [
+      44,
+      38,
+      0,
+      42,
+      1,
+      "STRING"
+    ],
+    [
+      52,
+      24,
+      0,
+      40,
+      1,
+      "STRING"
+    ],
+    [
+      53,
+      42,
+      0,
+      46,
+      0,
+      "STRING"
+    ],
+    [
+      54,
+      24,
+      0,
+      46,
+      1,
+      "STRING"
+    ],
+    [
+      55,
+      36,
+      0,
+      47,
+      0,
+      "IMAGE"
+    ],
+    [
+      56,
+      47,
+      0,
+      12,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "About Us",
+      "bounding": [
+        1680,
+        510,
+        450,
+        300
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Save Image",
+      "bounding": [
+        1330,
+        210,
+        340,
+        334
+      ],
+      "color": "#b58b2a",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Save Text ",
+      "bounding": [
+        1330,
+        550,
+        340,
+        264
+      ],
+      "color": "#A88",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "提示词反推结果",
+      "bounding": [
+        580,
+        480,
+        740,
+        330
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "图片处理",
+      "bounding": [
+        580,
+        180,
+        740,
+        290
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Image Caption",
+      "bounding": [
+        930,
+        -60,
+        390,
+        234
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "文件重命名",
+      "bounding": [
+        1330,
+        -60,
+        340,
+        260
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Images Load",
+      "bounding": [
+        580,
+        -60,
+        340,
+        230
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Mini Party for Flux自动打标",
+      "bounding": [
+        580,
+        -240,
+        1548,
+        169
+      ],
+      "color": "#3f789e",
+      "font_size": 120,
+      "flags": {}
+    },
+    {
+      "title": "Note",
+      "bounding": [
+        1680,
+        -60,
+        450,
+        560
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6588450000000086,
+      "offset": [
+        164.06552800174998,
+        355.88038325669254
+      ]
+    }
+  },
+  "version": 0.4
+}

@@ -100,7 +100,7 @@ class vlmLoader:
     )
     RETURN_NAMES = (
         "model",
-        "processor",
+        "tokenizer(processor)",
     )
     FUNCTION = "load_VLM"
 

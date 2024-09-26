@@ -93,7 +93,7 @@ class mini_party:
         if base_url:
             openai.base_url = base_url.rstrip("/") + "/"
         elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url")
+            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
 
@@ -173,7 +173,7 @@ class mini_translate:
         if base_url:
             openai.base_url = base_url.rstrip("/") + "/"
         elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url")
+            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
 
@@ -265,7 +265,7 @@ class mini_error_correction:
         if base_url:
             openai.base_url = base_url.rstrip("/") + "/"
         elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url")
+            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
 
@@ -370,7 +370,7 @@ class mini_summary:
         if base_url:
             openai.base_url = base_url.rstrip("/") + "/"
         elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url")
+            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
 
@@ -472,7 +472,7 @@ class mini_story:
         if base_url:
             openai.base_url = base_url.rstrip("/") + "/"
         elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url")
+            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
 
@@ -635,7 +635,7 @@ class mini_ocr:
         if base_url:
             openai.base_url = base_url.rstrip("/") + "/"
         elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url")
+            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
 
@@ -771,7 +771,7 @@ class mini_sd_prompt:
         if base_url:
             openai.base_url = base_url.rstrip("/") + "/"
         elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url")
+            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
 
@@ -908,7 +908,7 @@ class mini_flux_prompt:
         if base_url:
             openai.base_url = base_url.rstrip("/") + "/"
         elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url")
+            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
 
@@ -1023,7 +1023,7 @@ class mini_sd_tag:
         if base_url:
             openai.base_url = base_url.rstrip("/") + "/"
         elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url")
+            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
 
@@ -1182,7 +1182,7 @@ class mini_flux_tag:
         if base_url:
             openai.base_url = base_url.rstrip("/") + "/"
         elif api_keys.get("base_url"):
-            openai.base_url = api_keys.get("base_url")
+            openai.base_url = api_keys.get("base_url").rstrip("/") + "/"
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
 
