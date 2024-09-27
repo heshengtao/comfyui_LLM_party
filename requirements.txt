@@ -51,3 +51,4 @@ easyocr
 feedparser
 psutil
 verovio
+mdtex2html

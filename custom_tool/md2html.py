@@ -12,43 +12,118 @@ out_path = os.path.join(current_dir,"output")
 if not os.path.exists(out_path):
     os.makedirs(out_path)
 
+import mdtex2html
+
 def markdown_to_html(md_text):
-    # Convert Markdown to HTML
-    html = markdown.markdown(md_text, extensions=['fenced_code', 'codehilite'])
-    # 把HTML插入到HTML模板中
+    # Convert Markdown to HTML with math support
+    html = mdtex2html.convert(md_text, extensions=['extra'])
+    
+    # Insert the HTML into the HTML template
     html_template = """
 <html>
 <head>
     <style>
         body {{
-            font-family: Arial, sans-serif;
+            font-family: "Source Sans Pro", sans-serif;
             font-size: 16px;
             line-height: 1.5;
             margin: 20px;
-            background-color: white; /* 设置背景颜色 */
-            color: black; /* 设置字体颜色 */
+            background-color: #FFFFFF;
+            color: #262730;
         }}
         h1, h2, h3, h4, h5, h6 {{
+            color: #262730; /* 纯黑色 */
             font-weight: bold;
         }}
         ul, ol {{
             padding-left: 20px;
         }}
         pre {{
-            background-color: #f5f5f5;
+            background-color: #F0F2F6;
             padding: 10px;
             border-radius: 5px;
             overflow: auto;
+            position: relative;
         }}
         code {{
-            background-color: #f5f5f5;
+            background-color: #F0F2F6;
             padding: 2px 4px;
             border-radius: 3px;
+        }}
+        .blockformula {{
+            text-align: center;
+            margin: 1em 0;
+        }}
+        table {{
+            width: 80%;
+            margin: 20px auto; /* 居中表格 */
+            border-collapse: collapse;
+        }}
+        th, td {{
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }}
+        th {{
+            background-color: #F2F2F2;
+        }}
+        tr:nth-child(even) {{
+            background-color: #F9F9F9;
+        }}
+        tr:hover {{
+            background-color: #F1F1F1;
+        }}
+        .button, .label {{
+            position: absolute;
+            top: 5px;
+            background-color: #E0E0E0;
+            color: black;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 12px;
+        }}
+        .button:hover, .label:hover {{
+            background-color: #D0D0D0;
+        }}
+        .button {{
+            right: 5px;
+        }}
+        .label {{
+            left: 5px;
+            padding: 2px 5px;
         }}
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
+    <script>
+        hljs.highlightAll();
+        document.addEventListener('DOMContentLoaded', (event) => {{
+            document.querySelectorAll('pre code').forEach((block) => {{
+                const button = document.createElement('button');
+                button.innerText = 'Copy';
+                button.className = 'button';
+                button.addEventListener('click', () => {{
+                    navigator.clipboard.writeText(block.innerText).then(() => {{
+                        button.innerText = 'Copied!';
+                        setTimeout(() => {{
+                            button.innerText = 'Copy';
+                        }}, 2000);
+                    }});
+                }});
+                block.parentNode.appendChild(button);
+
+                const language = block.className.split('-')[1];
+                if (language) {{
+                    const label = document.createElement('span');
+                    label.innerText = language.toUpperCase();
+                    label.className = 'label';
+                    block.parentNode.appendChild(label);
+                }}
+            }});
+        }});
+    </script>
 </head>
 <body>
     {html_content}
