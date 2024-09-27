@@ -22,12 +22,15 @@ class open_url_function:
     def convert_txt2json(self,path_or_url, is_enable=True):
         if is_enable == False:
             return (None,)
+        print(os.environ.get('BROWSER'))
         try:
-            webbrowser.open(path_or_url)
+            success = webbrowser.open(path_or_url)
+            if success:
+                return "成功打开网页"
+            else:
+                return "无法打开网页"
         except Exception as e:
-            return (f"打开网页时出错: {str(e)}",)
-        return ("成功打开网页",)
-
+            return f"打开网页时出错: {str(e)}"
 
 def open_url(url):
     # 用默认浏览器打开URL
