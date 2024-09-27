@@ -20,7 +20,7 @@ class html2img_function:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "html_str": ("STRING", {"default": "HTML code string"}),
+                "html_str": ("STRING", {"forceInput": True}),
                 "width": ("INT", {"default": 800}),
                 "height": ("INT", {"default": 600}),
                 "is_enable": ("BOOLEAN", {"default": True}),

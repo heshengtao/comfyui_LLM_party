@@ -228,7 +228,7 @@ class graph_md_to_html:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "graph_definition": ("STRING", {"default": "graph md code string"}),
+                "graph_definition": ("STRING", {"forceInput": True}),
                 "mode": (["dark","light","dtransparent"], {"default": "dark"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             }

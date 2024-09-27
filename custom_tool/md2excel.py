@@ -25,7 +25,7 @@ class md_to_excel:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "md_str": ("STRING", {"default": "md code string"}),
+                "md_str": ("STRING", {"forceInput": True}),
                 "output_file": ("STRING", {"default": "output.xlsx"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             }

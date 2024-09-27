@@ -37,6 +37,7 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭建自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建;从个人用户需要的接入自己的社交APP(QQ、飞书、Discord)，到流媒体工作者需要的一站式LLM+TTS+ComfyUI工作流；从普通学生所需要的第一个LLM应用的简单上手起步，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在ComfyUI LLM Party中找到答案。
 
 ## 最新更新
+1. 更新了一系列转换节点，markdown转HTML，svg转图片，HTML转图片，mermaid转图片，markdown转Excel。
 1. 兼容了llama3.2 vision模型，支持多轮对话，视觉功能,模型地址：[meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)，示例工作流：[llama3.2_vision](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json)
 2. 适配了GOT-OCR2，支持格式化输出结果，支持使用位置box和颜色来精细识别文字，模型地址：[GOT-OCR2](https://huggingface.co/stepfun-ai/GOT-OCR2_0),示例工作流将一张网页的截图转换成了HTML代码再打开浏览器显示这个网页：[img2web](workflow/图片转网页.json)
 2. 大幅调整了本地LLM加载器节点，不用自己选择model type了。重新添加了llava加载器节点和GGUF加载器节点。本地LLM模型链节点上的model type已改成LLM、VLM-GGUF、LLM-GGUF三个选项，对应了直接加载LLM模型、加载VLM模型和加载GGUF格式的LLM模型。重新支持了VLM模型和GGUF格式的LLM模型。现在本地调用可以兼容更多的模型了！示例工作流：[LLM_local](workflow/start_with_LLM_local.json)，[llava](workflow/start_with_llava.json)，[GGUF](workflow/start_with_GGUF.json)

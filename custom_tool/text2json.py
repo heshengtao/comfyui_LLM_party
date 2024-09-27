@@ -16,7 +16,7 @@ import json
 class text2json:
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"text": ("STRING", {}), "sep": ("STRING", {"default": "\n"})}}
+        return {"required": {"text": ("STRING", {"multiline": True}), "sep": ("STRING", {"default": "\n"})}}
 
     RETURN_TYPES = ("DICT",)
     RETURN_NAMES = ("json_data",)

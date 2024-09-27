@@ -138,7 +138,7 @@ class Browser_display:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "md_string": ("STRING", {"default": "md code string"}),
+                "md_string": ("STRING", {"forceInput": True}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 }
             }
@@ -172,7 +172,7 @@ class md_to_html:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "md_str": ("STRING", {"default": "md code string"}),
+                "md_str": ("STRING", {"forceInput": True}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             }
         }

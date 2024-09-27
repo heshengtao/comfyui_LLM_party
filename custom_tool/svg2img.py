@@ -56,7 +56,7 @@ class svg2img_function:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "svg_str": ("STRING", {"default": "svg code string"}),
+                "svg_str": ("STRING", {"forceInput": True}),
                 "width": ("INT", {"default": 800}),
                 "height": ("INT", {"default": 600}),
                 "is_enable": ("BOOLEAN", {"default": True}),
