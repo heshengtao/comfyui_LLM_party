@@ -3,33 +3,44 @@
 ## 模型加载器以及模型链
 
 ### API LLM节点及其加载节点
-1. 大模型节点可以自定义模型名称、温度、API_KEY、base_url，目前暂时只支持openai类型的API接口调用。
-2. 可以直接在节点上输入系统提示词、用户提示词，也可以右键将这两个小组件转化成节点的输入，接受字符串类型的输入。
-3. 大模型节点还可以从tools接口接受工具节点的输出，可以从file_content接口接受字符串形式的输入，这些输入会被当作模型的知识库，以词向量相似度来搜索相关的内容输入到模型中。
-4. 大模型节点的is_memory可以决定大模型是否拥有记忆，可以将is_memory改为disable，再运行，这时模型会清楚之前的对话记录，再切换回enable，之后的运行中模型就会保留与你的对话记录。
-5. 可以通过assistant_response来查看本轮对话中模型的回复，也可以通过history来查看多轮对话的历史记录。
-6. 即使外部参数不变，大模型节点总是会运行，因为大模型对同一个问题也总是有着不同的回答。
-7. is_tools_in_sys_prompt决定了tools的信息是否会输入到系统提示词中。
-8. is_locked可以锁住上轮对话的结果，让大模型直接返回上轮对话中的回答。
-9. main_brain决定了大模型是不是与用户对接的模型，禁用后，LLM节点可以作为另一个LLM节点的一个工具。
-10. LLM适配GPT4的视觉功能，imgbb_api_key可以输入imgbb的api_key，填入之后你的图片会以url格式传入GPT，如果不填，就是以图片编码的形式传入。
-11. conversation_rounds决定了LLM的对话轮次，当超出对话轮次后，会只读取最近的对话轮次。
-12. historical_record可以将之前的对话记录加载到LLM中，继续上次的聊天。
-13. assistant_response为LLM的文字输出
-14. history为LLM的对话记录
-15. tools输入为LLM的工具调用接口，tool输出则是将该LLM节点当做工具使用的接口，一般不使用。
+1. 可以直接在节点上输入系统提示词、用户提示词，也可以使用system prompt input和user prompt input来输入，可接受字符串类型的输入。system input一般用来挂载面具节点。本质上和输入框没有区别
+2. 大模型节点还可以从tools接口接受工具节点的输出，可以从file_content接口接受字符串形式的输入，这些输入会被当作模型的知识库，以词向量相似度来搜索相关的内容输入到模型中。
+3. 大模型节点的is_memory可以决定大模型是否拥有记忆，可以将is_memory改为disable，再运行，这时模型会清楚之前的对话记录，再切换回enable，之后的运行中模型就会保留与你的对话记录。
+4. 可以通过assistant_response来查看本轮对话中模型的回复，也可以通过history来查看多轮对话的历史记录。
+5. 即使外部参数不变，大模型节点总是会运行，因为大模型对同一个问题也总是有着不同的回答。
+6. Input：
+  - is_tools_in_sys_prompt：决定了tools的信息是否会输入到系统提示词中。如果输入到系统提示词中，可以让部分没有工具能力的模型解锁工具能力。
+  - Is_memory :开启后，LLM获得记忆，如果不开启，就每次都会清除记忆，重新开始。 
+  - is_locked：当你没有更改任何参数时，直接返回上轮对话的结果，节省算力，稳定LLM的输出结果。
+  - main_brain：决定了大模型是不是与用户对接的模型，禁用后，LLM节点可以作为另一个LLM节点的一个工具。
+  - conversation_rounds：决定了LLM的对话轮次，当超出对话轮次后，会只读取最近的对话轮次。
+  - historical_record：可以将之前的对话记录加载到LLM中，继续上次的聊天。
+  - tools：输入为LLM的工具调用接口，tool输出则是将该LLM节点当做工具使用的接口，一般不使用。
+  1. Imgbb api key 是可选的，如果你使用视觉功能时，不填这个key，就是base64编码传输到openai，如果加了一个key，就是图床生成URL后，将URL传入openai，不填也不影响使用，只是会影响对话记录的可读性。
+7. Output：
+  - assistant_response：为LLM的文字输出
+  - history：为LLM的对话记录
+  - Tool :当LLM作为另一个LLM的工具时，启用这个输出。大部分情况下可以无视。
+  - Image: 在施工中，未来有用。
+8. LLM适配GPT4的视觉功能，imgbb_api_key可以输入imgbb的api_key，填入之后你的图片会以url格式传入GPT，如果不填，就是以图片编码的形式传入。
+9. 大模型节点可以自定义模型名称、API_KEY、base_url，目前暂时只支持openai类型的API接口调用。可以结合one api 转接任意大模型API
 
 ### 本地LLM节点及其加载节点
-1. model_path和tokenizer_path如果填写了，就由本地路径加载，否则根据model_name从config.ini上加载，如果config.ini也没有配置，则从HF上直接加载。
-2. 目前支持GLM/Llama/Qwen，不过只有GLM的工具调用是完美适配的，其他两个需要大参数版本才能正常工具调用
-3. model_path和tokenizer_path填入模型的项目文件夹即可，适配所有可以被transformer兼容的型号。
-4. 其余参数与APILLM节点一致
+1. 大幅调整了本地LLM加载器节点，不用自己选择model type了。重新添加了llava加载器节点和GGUF加载器节点。本地LLM模型链节点上的model type已改成LLM、VLM-GGUF、LLM-GGUF三个选项，对应了直接加载LLM模型、加载VLM模型和加载GGUF格式的LLM模型。重新支持了VLM模型和GGUF格式的LLM模型。现在本地调用可以兼容更多的模型了！示例工作流：LLM_local，llava，GGUF
+2. model_name_or_path填入模型的项目文件夹即可，适配所有可以被transformer兼容的型号。也可以填写hugging face上的repo id，直接拉取模型。
+3. 其余参数与API LLM节点一致。
 
-### LVM模型加载器
-1. ckpt_path和clip_path如果填写了，就由本地路径加载，否则根据model_name从config.ini上加载，如果config.ini也没有配置，则从HF上直接加载。
+### VLM-GGUF模型加载器
+1. ckpt_path和clip_path分别填入LLM的GGUF文件绝对路径和CLIP的GGUF文件绝对路径。
 2. max_ctx是LVM模型的最大上下文长度，如果超过这个长度，模型会自动截断。
 3. gpu_layers是LVM模型在GPU上的层数。
 4. n_threads是LVM模型在CPU上的线程数。
+
+### LLM-GGUF模型加载器
+1. 同上，但只用填入LLM的GGUF文件绝对路径
+
+### VLM本地加载器
+1. 和LLM本地加载器一样，但是只支持类似于llama3.2-vision的模型，用该节点加载时，需要将模型链上的model type 设置为LVM（testing），这个加载器还在测试中，不能适配很多模型。
 
 ### 词嵌入模型加载器
 1. file_content节点可以输入一个字符串，该字符串会被作为词嵌入模型的输入，模型会在这个字符串上进行搜索，根据question来返回最相关的文本内容。

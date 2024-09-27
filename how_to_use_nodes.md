@@ -2,36 +2,47 @@
 
 ## Models
 
-### Model Loaders and Model Chains
-1. Large model nodes can customize `model name`, `temperature`, `API_KEY`, `base_url`, currently only supports openai type API interface calls.
-2. You can directly input system prompts and user prompts on the node, or right-click to convert these two widgets into node inputs, accepting string type inputs.
-3. Large model nodes can also accept outputs from tool nodes through the tools interface and accept string inputs from the file_content interface, which will be used as the model's knowledge base, searching for related content to input into the model based on word vector similarity.
-4. The is_memory of the large model node can determine whether the large model has memory. You can change is_memory to disable, then run, at which time the model will clear the previous conversation records, then switch back to enable, and the model will retain your conversation records in subsequent runs.
-5. You can view the model's reply in this round of conversation through assistant_response, or view the history of multiple rounds of conversation through history.
-6. Even if the external parameters do not change, the large model node will always run, because the large model always has different answers to the same question.
-7. is_tools_in_sys_prompt determines whether the information of tools will be input into the system prompts.
-8. is_locked can lock the results of the previous round of conversation, allowing the large model to directly return the answer from the previous round of conversation.
-9. main_brain determines whether the large model is the model that interfaces with the user. If disabled, the LLM node can serve as a tool for another LLM node.
-10. LLM is compatible with GPT-4’s visual features. The imgbb_api_key can be entered with imgbb’s API key. After filling it in, your image will be input into GPT in URL format. If not filled, it will be input in the form of image encoding.
-11. `conversation_rounds` determines the number of conversation rounds for the LLM. When the number of rounds is exceeded, only the most recent rounds will be read.
-12. `historical_record` can load previous conversation records into the LLM to continue the last chat.
-13. `assistant_response` is the text output of the LLM.
-14. `history` is the conversation record of the LLM.
-15. `tools` input is the interface for the LLM to call tools, while `tool` output is the interface to use this LLM node as a tool, which is generally not used.
+### API LLM Nodes and Their Loading Nodes
+1. You can directly input system prompts and user prompts on the node, or use `system prompt input` and `user prompt input` to input, accepting string type inputs. `system input` is generally used to mount mask nodes. Essentially, it is no different from an input box.
+2. The large model node can also accept the output of tool nodes from the `tools` interface and accept string inputs from the `file_content` interface. These inputs will be used as the model's knowledge base, and relevant content will be searched and input into the model based on word vector similarity.
+3. The `is_memory` of the large model node can determine whether the large model has memory. You can change `is_memory` to `disable`, then run it, and the model will clear the previous conversation records. Switch back to `enable`, and the model will retain your conversation records in subsequent runs.
+4. You can view the model's response in the current round of conversation through `assistant_response`, and you can also view the history of multiple rounds of conversation through `history`.
+5. Even if external parameters remain unchanged, the large model node will always run because the large model always has different answers to the same question.
+6. Input:
+   - `is_tools_in_sys_prompt`: Determines whether the information of tools will be input into the system prompt. If input into the system prompt, it can unlock tool capabilities for some models without tool capabilities.
+   - `is_memory`: When enabled, the LLM gains memory. If not enabled, it will clear memory each time and start over.
+   - `is_locked`: When you do not change any parameters, it directly returns the result of the last conversation, saving computing power and stabilizing the output results of the LLM.
+   - `main_brain`: Determines whether the large model is the model interfacing with the user. When disabled, the LLM node can be used as a tool for another LLM node.
+   - `conversation_rounds`: Determines the number of conversation rounds for the LLM. When the number of rounds is exceeded, only the most recent conversation rounds will be read.
+   - `historical_record`: Can load previous conversation records into the LLM to continue the last chat.
+   - `tools`: Input is the tool call interface of the LLM, and tool output is the interface for using this LLM node as a tool, generally not used.
+   - `Imgbb api key` is optional. If you use visual functions and do not fill in this key, it will be transmitted to OpenAI in base64 encoding. If you add a key, it will generate a URL after uploading to the image bed and pass the URL to OpenAI. Not filling it will not affect usage, but it will affect the readability of the conversation record.
+7. Output:
+   - `assistant_response`: Text output of the LLM
+   - `history`: Conversation records of the LLM
+   - `Tool`: Enabled when the LLM is used as a tool for another LLM. In most cases, it can be ignored.
+   - `Image`: Under construction, useful in the future.
+8. The LLM adapts to GPT-4's visual functions. You can input the `imgbb_api_key` into the imgbb API key. After filling it in, your image will be passed to GPT in URL format. If not filled, it will be passed in image encoding format.
+9. The large model node can customize the model name, API_KEY, and base_url. Currently, only OpenAI type API interface calls are supported. It can be combined with One API to connect to any large model API.
 
-### Local LLM Node and Its Loading Node
-1. If `model_path` and `tokenizer_path` are filled in, they will be loaded from the local path. Otherwise, they will be loaded from `model_name` in `config.ini`. If `config.ini` is not configured, they will be loaded directly from HF.
-2. Currently supports GLM/Llama/Qwen, but only GLM's tool calls are perfectly adapted. The other two require large parameter versions to call tools normally.
-3. `model_path` and `tokenizer_path` can be filled in the project folder of the model, and all models that can be compatible with the transformer can be adapted.
-4. Other parameters are consistent with the APILLM node.
+### Local LLM Nodes and Their Loading Nodes
+1. The local LLM loader node has been greatly adjusted, and you no longer need to choose the model type yourself. The `llava` loader node and `GGUF` loader node have been re-added. The model type on the local LLM model chain node has been changed to three options: `LLM`, `VLM-GGUF`, and `LLM-GGUF`, corresponding to directly loading LLM models, loading VLM models, and loading GGUF format LLM models. Support for VLM models and GGUF format LLM models has been restored. Now local calls can be compatible with more models! Example workflows: `LLM_local`, `llava`, `GGUF`.
+2. Fill in the model's project folder in `model_name_or_path`, compatible with all models that can be compatible with transformers. You can also fill in the repo ID on Hugging Face to directly pull the model.
+3. The remaining parameters are consistent with the API LLM nodes.
 
-### LVM Model Loader
-1. If `ckpt_path` and `clip_path` are filled in, they will be loaded from the local path. Otherwise, they will be loaded from `model_name` in `config.ini`. If `config.ini` is not configured, they will be loaded directly from HF.
+### VLM-GGUF Model Loader
+1. ckpt_path and clip_path should be filled with the absolute paths of the LLM’s GGUF file and the CLIP’s GGUF file, respectively.
 2. `max_ctx` is the maximum context length of the LVM model. If this length is exceeded, the model will automatically truncate.
 3. `gpu_layers` is the number of layers of the LVM model on the GPU.
 4. `n_threads` is the number of threads of the LVM model on the CPU.
 
-### Word Embedding Model Loader
+### LLM-GGUF Model Loader
+1. Same as above, but only the absolute path of the LLM’s GGUF file needs to be filled in.
+
+### VLM Local Loader
+1. Similar to the LLM local loader, but it only supports models like llama3.2-vision. When using this node to load, you need to set the model type on the model chain to LVM (testing). This loader is still in testing and cannot adapt to many models.
+
+### Embedding Model Loader
 1. The `file_content` node can input a string, which will be used as the input of the word embedding model. The model will search this string and return the most relevant text content based on the question.
 2. `k` is the number of paragraphs returned. `chuck_size` is the size of each text block when splitting the text, with a default of 200. `chuck_overlap` is the overlap size between each text block when splitting the text, with a default of 50.
 3. Input `embedding_path` to call the word embedding model in this folder.
