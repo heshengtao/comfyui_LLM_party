@@ -329,7 +329,7 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
     tool_call = globals().get(tool_name)
     try:
         ret_out = tool_call(**tool_params)
-        if tool_name == "work_flow" or tool_name == "dall_e":
+        if isinstance(ret_out, tuple):
             ret = ret_out[0]
             global image_buffer
             image_buffer = ret_out[1]
