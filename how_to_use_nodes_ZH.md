@@ -16,7 +16,7 @@
   - conversation_rounds：决定了LLM的对话轮次，当超出对话轮次后，会只读取最近的对话轮次。
   - historical_record：可以将之前的对话记录加载到LLM中，继续上次的聊天。
   - tools：输入为LLM的工具调用接口，tool输出则是将该LLM节点当做工具使用的接口，一般不使用。
-  1. Imgbb api key 是可选的，如果你使用视觉功能时，不填这个key，就是base64编码传输到openai，如果加了一个key，就是图床生成URL后，将URL传入openai，不填也不影响使用，只是会影响对话记录的可读性。
+  - Imgbb api key 是可选的，如果你使用视觉功能时，不填这个key，就是base64编码传输到openai，如果加了一个key，就是图床生成URL后，将URL传入openai，不填也不影响使用，只是会影响对话记录的可读性。
 7. Output：
   - assistant_response：为LLM的文字输出
   - history：为LLM的对话记录
