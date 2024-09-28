@@ -278,7 +278,8 @@ class workflow_tool:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "workflow_name": ("STRING", {"multiline": True, "default": "测试画画app.json,绘图app.json"}),
+                "workflow_name": ("STRING", {"multiline": True, "default": "写诗.json,画画.json"}),
+                "workflow_description": ("STRING", {"multiline": True, "default": "写诗.json是一个根据用户输入的信息生成诗歌的工具，画画.json是一个根据用户输入的信息生成图片的工具"}),
             },
         }
 
@@ -291,7 +292,7 @@ class workflow_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def workflow(self, workflow_name, is_enable="enable"):
+    def workflow(self, workflow_name,workflow_description, is_enable="enable"):
         if is_enable == "disable":
             return (None,)
         output = [
@@ -305,7 +306,7 @@ class workflow_tool:
                         "properties": {
                             "workflow_name": {
                                 "type": "string",
-                                "description": f"请从[{str(workflow_name)}]中选择json文件名作为要调用的workflow_name",
+                                "description": f"请从[{str(workflow_name)}]中选择json文件名作为要调用的workflow_name。这些工作流分别的使用说明为：{workflow_description}。该参数用于指定要调用的workflow文件名，是一个带.json后缀名的文件名。",
                             },
                             "user_prompt": {
                                 "type": "string",
