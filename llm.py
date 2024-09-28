@@ -329,8 +329,9 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
     tool_call = globals().get(tool_name)
     try:
         ret_out = tool_call(**tool_params)
-        if tool_name == "work_flow":
+        if tool_name == "work_flow" or tool_name == "dall_e":
             ret = ret_out[0]
+            global image_buffer
             image_buffer = ret_out[1]
             if ret == "" or ret is None:
                 ret = "图片已生成。"
@@ -1207,10 +1208,7 @@ class LLM:
                     json.dump(history, f, indent=4, ensure_ascii=False)
                 history = json.dumps(history, ensure_ascii=False,indent=4)
                 global image_buffer
-                image_out = image_buffer.copy()
-                image_buffer = []
-                if image_out == []:
-                    image_out = None
+                image_out = image_buffer
                 return (
                     response,
                     history,
@@ -1940,10 +1938,7 @@ class LLM_local:
 
                 history = str(historys)
                 global image_buffer
-                image_out = image_buffer.copy()
-                image_buffer = []
-                if image_out == []:
-                    image_out = None
+                image_out = image_buffer
                 return (
                     response,
                     history,

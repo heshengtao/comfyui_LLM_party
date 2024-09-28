@@ -99,7 +99,7 @@ class openai_dall_e:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/音频（audio）"
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
 
 
 
@@ -140,8 +140,114 @@ class openai_dall_e:
         img_out=process_images(image_url)
         return (img_out,image_url, )
 
+global_image_size="1024x1024"
+global_image_quality="hd"
+global_style="natural"
+global_dall_e=""
+def dall_e(prompt):
+    
+    global global_image_size, global_image_quality,global_style,global_dall_e
+    response = global_dall_e.images.generate(
+        prompt=prompt,
+        model="dall-e-3",
+        size=global_image_size,
+        quality=global_image_quality,
+        style=global_style,
+        response_format="url",
+        n=1,
+    )
+    # 获取所有生成图像的URL
+    image_url = response.data[0].url
+    img_out=process_images(image_url)
+    return f"图片已生成：[img]({image_url})",img_out
+
+class dall_e_tool:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "image_size": (["1024x1024", "1792x1024", "1024x1792"], {"default": "1024x1024"} ),              
+                "image_quality": (["standard", "hd"], {"default": "hd"} ),
+                "style": (["vivid", "natural"], {"default": "natural"} ),
+            },
+            "optional": {
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": "https://api.openai.com/v1/",
+                    },
+                ),
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": "sk-XXXXX",
+                    },
+                ),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("tool",)
+
+    FUNCTION = "get_dall_e"
+
+    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+
+
+
+    def get_dall_e(self,image_size,image_quality,style,is_enable=True, base_url=None, api_key=None):
+        global global_image_size, global_image_quality,global_style,global_dall_e
+        global_image_size=image_size
+        global_image_quality=image_quality
+        global_style=style
+        if is_enable == False:
+            return (None,)
+        if api_key != "":
+            openai.api_key = api_key
+        elif config.get("API_KEYS", "openai_api_key") != "":
+            openai.api_key = config.get("API_KEYS", "openai_api_key")
+        else:
+            openai.api_key = os.environ.get("OPENAI_API_KEY")
+        if base_url != "":
+            # 如果以/结尾
+            if base_url[-1] == "/":
+                openai.base_url = base_url
+            else:
+                openai.base_url = base_url + "/"
+        elif config.get("API_KEYS", "base_url") != "":
+            openai.base_url = config.get("API_KEYS", "base_url")
+        else:
+            openai.base_url = os.environ.get("OPENAI_API_BASE")
+        if openai.api_key == "":
+            return ("请输入API_KEY",)
+        global_dall_e = OpenAI(api_key=openai.api_key, base_url=openai.base_url)
+        output = [
+            {
+                "type": "function",
+                "function": {
+                    "name": "dall_e",
+                    "description": "输入自然语言，生成图片",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "prompt": {
+                                "type": "string",
+                                "description": "输入用于生成图片的自然语言",
+                            }
+                        },
+                        "required": ["prompt"],
+                    },
+                },
+            }
+        ]
+        out = json.dumps(output, ensure_ascii=False)
+        return (out,)
+
+_TOOL_HOOKS = ["dall_e"]
 NODE_CLASS_MAPPINGS = {
     "openai_dall_e": openai_dall_e,
+    "dall_e_tool":dall_e_tool,
 }
 lang = locale.getdefaultlocale()[0]
 
@@ -154,8 +260,10 @@ if language == "zh_CN" or language=="en_US":
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "openai_dall_e": "dall_e文生图",
+        "dall_e_tool": "dall_e文生图工具",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
         "openai_dall_e": "Dall_e text2Image",
+        "dall_e_tool": "Dall_e text2Image tool",
     }
