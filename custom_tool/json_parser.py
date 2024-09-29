@@ -32,7 +32,14 @@ def json_loader(file_path: str, is_enable=True) -> str:
     output = load_json_file(file_path)
     output = json.dumps(output, ensure_ascii=False)
     return output
+class AnyType(str):
+    """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
 
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+
+any_type = AnyType("*")
 
 class json_parser:
     @classmethod
@@ -47,7 +54,7 @@ class json_parser:
 
     RETURN_TYPES = (
         "STRING",
-        "STRING",
+        any_type,
     )
     RETURN_NAMES = (
         "show_json_file",
@@ -73,20 +80,12 @@ class json_parser:
         except KeyError:
             print(f"Key '{key}' not found in JSON data.")
             value = None
-        out = json.dumps(value, ensure_ascii=False)
         return (
             data_json,
-            out,
+            value,
         )
 
-class AnyType(str):
-    """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
 
-    def __ne__(self, __value: object) -> bool:
-        return False
-
-
-any_type = AnyType("*")
 
 class json_get_value:
     @classmethod
