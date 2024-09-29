@@ -62,8 +62,107 @@ def process_images(url):
         image = torch.from_numpy(image).unsqueeze(0)
         img_out.append(image)
     img_out = img_out[0]
-    return img_out
+    return "已经将图片在前端展示",img_out
 
+class url2img_tool:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "is_enable": ("BOOLEAN", {"default": True}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("tool",)
+
+    FUNCTION = "dall_e"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
+
+    def dall_e(self,is_enable=True):
+        if is_enable == False:
+            return (None,)
+        output = [
+            {
+                "type": "function",
+                "function": {
+                    "name": "process_images",
+                    "description": "用于将URL转换为图片，显示到前端展示给用户看。",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string",
+                                "description": "你想要展示的图片的URL地址",
+                            }
+                        },
+                        "required": ["url"],
+                    },
+                },
+            }
+        ]
+        out = json.dumps(output, ensure_ascii=False)
+        return (out,)
+
+def path2img(path):
+    img = Image.open(path)
+    img_out = []
+    for frame in ImageSequence.Iterator(img):
+        frame = ImageOps.exif_transpose(frame)
+        if frame.mode == "I":
+            frame = frame.point(lambda i: i * (1 / 256)).convert("L")
+        image = frame.convert("RGB")
+        image = np.array(image).astype(np.float32) / 255.0
+        image = torch.from_numpy(image).unsqueeze(0)
+        img_out.append(image)
+    img_out = img_out[0]
+    return "已经将图片在前端展示",img_out
+
+class path2img_tool:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "is_enable": ("BOOLEAN", {"default": True}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("tool",)
+
+    FUNCTION = "dall_e"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
+
+    def dall_e(self,is_enable=True):
+        if is_enable == False:
+            return (None,)
+        output = [
+            {
+                "type": "function",
+                "function": {
+                    "name": "path2img",
+                    "description": "用于将本地path转换为图片，显示到前端展示给用户看。",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "path": {
+                                "type": "string",
+                                "description": "你想要展示的图片的URL地址",
+                            }
+                        },
+                        "required": ["path"],
+                    },
+                },
+            }
+        ]
+        out = json.dumps(output, ensure_ascii=False)
+        return (out,)
 
 class openai_dall_e:
     @classmethod
@@ -95,16 +194,13 @@ class openai_dall_e:
     RETURN_TYPES = ("IMAGE","STRING",)
     RETURN_NAMES = ("img","img_url",)
 
-    FUNCTION = "dall_e"
+    FUNCTION = "get_dall_e"
 
     # OUTPUT_NODE = False
 
     CATEGORY = "大模型派对（llm_party）/图片（image）"
 
-
-
-
-    def dall_e(self,image_size,image_quality,style,is_enable=True, prompt="", base_url=None, api_key=None):
+    def get_dall_e(self,image_size,image_quality,style,is_enable=True, prompt="", base_url=None, api_key=None):
         if is_enable == False:
             return (None,)
         if api_key != "":
@@ -137,7 +233,7 @@ class openai_dall_e:
         )
         # 获取所有生成图像的URL
         image_url = response.data[0].url
-        img_out=process_images(image_url)
+        _,img_out=process_images(image_url)
         return (img_out,image_url, )
 
 global_image_size="1024x1024"
@@ -158,7 +254,7 @@ def dall_e(prompt):
     )
     # 获取所有生成图像的URL
     image_url = response.data[0].url
-    img_out=process_images(image_url)
+    _,img_out=process_images(image_url)
     return f"图片已生成：[img]({image_url})",img_out
 
 class dall_e_tool:
@@ -244,10 +340,12 @@ class dall_e_tool:
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
 
-_TOOL_HOOKS = ["dall_e"]
+_TOOL_HOOKS = ["dall_e","process_images","path2img"]
 NODE_CLASS_MAPPINGS = {
     "openai_dall_e": openai_dall_e,
     "dall_e_tool":dall_e_tool,
+    "url2img_tool":url2img_tool,
+    "path2img_tool":path2img_tool,
 }
 lang = locale.getdefaultlocale()[0]
 
@@ -261,9 +359,13 @@ if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "openai_dall_e": "dall_e文生图",
         "dall_e_tool": "dall_e文生图工具",
+        "url2img_tool": "url转图片工具",
+        "path2img_tool": "路径转图片工具",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
         "openai_dall_e": "Dall_e text2Image",
         "dall_e_tool": "Dall_e text2Image tool",
+        "url2img_tool": "url2img tool",
+        "path2img_tool": "path2img tool",
     }
