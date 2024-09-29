@@ -278,8 +278,8 @@ class workflow_tool:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "workflow_name": ("STRING", {"multiline": True, "default": "写诗.json,画画.json"}),
-                "workflow_description": ("STRING", {"multiline": True, "default": "写诗.json是一个根据用户输入的信息生成诗歌的工具，画画.json是一个根据用户输入的信息生成图片的工具"}),
+                "workflow_name": ("STRING", {"multiline": True, "default": "写诗.json,draw.json"}),
+                "workflow_description": ("STRING", {"multiline": True, "default": "写诗.json是一个根据用户输入的信息生成诗歌的工具，draw.json is a tool that generates images based on user prompt."}),
             },
         }
 
@@ -312,16 +312,8 @@ class workflow_tool:
                                 "type": "string",
                                 "description": "用户输入的信息",
                             },
-                            "positive_prompt": {
-                                "type": "string",
-                                "description": "正面提示",
-                            },
-                            "negative_prompt": {
-                                "type": "string",
-                                "description": "负面提示",
-                            },
                         },
-                        "required": ["workflow_name"],
+                        "required": ["workflow_name","user_prompt"]
                     },
                 },
             }
@@ -332,8 +324,6 @@ class workflow_tool:
 
 def work_flow(
     user_prompt="",
-    positive_prompt="",
-    negative_prompt="",
     workflow_name="测试画画app.json",
 ):
     # 用re去掉workflow_name字符串中的'['、']'字符
@@ -360,10 +350,26 @@ def work_flow(
         # 如果p的class_type是start_workflow
         if prompt[p]["class_type"] == "start_workflow":
             prompt[p]["inputs"]["user_prompt"] = user_prompt
-            prompt[p]["inputs"]["positive_prompt"] = positive_prompt
-            prompt[p]["inputs"]["negative_prompt"] = negative_prompt
 
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
     images, res = get_all(ws, prompt)
-    return res, images
+    img_out = []
+    if images == {}:
+        images = None
+    elif images is not None:
+        for node_id in images:
+            for image_data in images[node_id]:
+                img = Image.open(io.BytesIO(image_data))
+                img = ImageOps.exif_transpose(img)
+                if img.mode == "I":
+                    img = img.point(lambda i: i * (1 / 256)).convert("L")
+                image = img.convert("RGB")
+                image = np.array(image).astype(np.float32) / 255.0
+                image = torch.from_numpy(image).unsqueeze(0)
+                img_out.append(image)
+    if len(img_out) > 1:
+        img_out = torch.cat(img_out, dim=0)
+    elif img_out:
+        img_out = img_out[0]
+    return res, img_out

@@ -1,0 +1,48 @@
+{
+  "11": {
+    "inputs": {
+      "file_path": "",
+      "img_path1": "",
+      "img_path2": "",
+      "system_prompt": "你是一个强大的智能助手",
+      "user_prompt": "中秋节",
+      "positive_prompt": "",
+      "negative_prompt": "",
+      "model_name": ""
+    },
+    "class_type": "start_workflow",
+    "_meta": {
+      "title": "开始工作流"
+    }
+  },
+  "12": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "text": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "end_workflow",
+    "_meta": {
+      "title": "结束工作流"
+    }
+  },
+  "13": {
+    "inputs": {
+      "input_str": [
+        "11",
+        4
+      ],
+      "prompt": "根据我输入的主题写一首诗",
+      "model_name": "gpt-4o-mini",
+      "base_url": "",
+      "api_key": "",
+      "is_enable": true
+    },
+    "class_type": "mini_party",
+    "_meta": {
+      "title": "迷你派对"
+    }
+  }
+}

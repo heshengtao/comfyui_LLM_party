@@ -334,7 +334,7 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
             global image_buffer
             image_buffer = ret_out[1]
             if ret == "" or ret is None:
-                ret = "图片已生成。"
+                ret = "图片已生成。并以展示在本节点的image输出中。可以使用preview_image节点查看图片。"
         else:
             ret = ret_out
     except:

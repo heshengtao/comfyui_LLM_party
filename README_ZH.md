@@ -37,21 +37,15 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭建自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建;从个人用户需要的接入自己的社交APP(QQ、飞书、Discord)，到流媒体工作者需要的一站式LLM+TTS+ComfyUI工作流；从普通学生所需要的第一个LLM应用的简单上手起步，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在ComfyUI LLM Party中找到答案。
 
 ## 最新更新
-1. 更新了一系列转换节点，markdown转HTML，svg转图片，HTML转图片，mermaid转图片，markdown转Excel。
-1. 兼容了llama3.2 vision模型，支持多轮对话，视觉功能,模型地址：[meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)，示例工作流：[llama3.2_vision](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json)
-2. 适配了GOT-OCR2，支持格式化输出结果，支持使用位置box和颜色来精细识别文字，模型地址：[GOT-OCR2](https://huggingface.co/stepfun-ai/GOT-OCR2_0),示例工作流将一张网页的截图转换成了HTML代码再打开浏览器显示这个网页：[img2web](workflow/图片转网页.json)
-2. 大幅调整了本地LLM加载器节点，不用自己选择model type了。重新添加了llava加载器节点和GGUF加载器节点。本地LLM模型链节点上的model type已改成LLM、VLM-GGUF、LLM-GGUF三个选项，对应了直接加载LLM模型、加载VLM模型和加载GGUF格式的LLM模型。重新支持了VLM模型和GGUF格式的LLM模型。现在本地调用可以兼容更多的模型了！示例工作流：[LLM_local](workflow/start_with_LLM_local.json)，[llava](workflow/start_with_llava.json)，[GGUF](workflow/start_with_GGUF.json)
-2. 已加入easyOCR节点，用于识别图中文字和位置，可以生成对应的mask，可以返回一个json字符串供LLM查看，有普通版本和高级版本供大家选择！
-2. 在comfyui LLM party中复现了chatgpt-o1系列模型的草莓系统，参考了[Llamaberry](https://huggingface.co/spaces/martinbowling/Llamaberry/blob/main/app.py)的提示词，示例工作流：[Strawberry system compared to o1](workflow/草莓系统与o1对比.json)。
-2. 新增了GPT-sovits节点，可以调用GPT-sovits模型，将文字根据你的参考音频转换为语音，也可以将你微调后的模型路径填入（如果不填就是基底模型进行推理），获得你想要的任意音色。使用时，需要下载[GPT-sovits](https://github.com/RVC-Boss/GPT-SoVITS)项目和对应的基底模型到本地，然后在GPT-sovits项目文件夹下用`runtime\python.exe api_v2.py`启动API服务。此外，chatTTS节点被移动到了[comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)中。原因是chatTTS的依赖库较多，且在PyPi中的许可证为CC BY-NC 4.0，这是一个非商用许可证。即使chatTTS的github项目是AGPL协议的，我们还是为了避免不必要的麻烦，将chatTTS节点移到了comfyui LLM mafia中。希望大家能够理解！
-3. 现已支持openai最新模型o1系列模型!!!!
-4. 新增了本地文件控制工具，让LLM可以控制你指定的文件夹的文件，例如：读取、写入、追加、删除、重命名、移动、复制文件等。由于该节点比较危险，收录在[comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)中。
-5. 新增SQL工具，可以让LLM查询SQL数据库。
-6. 更新了readme的多语言版本，翻译readme文档的工作流：[translate_readme](workflow/文档自动翻译机.json)
-7. 更新了4个迭代器节点（文字迭代器、图片迭代器、表格迭代器、json迭代器），迭代器模式有：顺序、随机和无限三种模式。顺序会按顺序依次输出，直到超出索引上限自动中止进程，并将索引值重置为0，随机会选择一个随机索引输出，无限会无限循环输出。
-8. 新增了Gemini API加载器节点，现在兼容Gemini官方的API啦！如果你是国内网络环境，如果出现API地区受限制的问题，请将节点切换到美国，并使用TUN模式。由于Gemini在工具调用时，如果返回的参数中包含中文字符会出现返回码为500的报错，因此部分工具节点不可用。示例工作流：[start_with_gemini](workflow/start_with_gemini.json)
-9. 新增lore book节点，可以在与LLM对话时插入你的背景设定，示例工作流：[lorebook](workflow/lorebook.json)
-10. 新增了FLUX提示词生成器面具节点，可以生成炉石卡牌、游戏王卡牌、海报、漫画等多种风格的提示词，可以让FLUX模型直出。参考工作流：[FLUX提示词](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
+1. **超级重大更新！！！** 现在你可以将任意的comfyui工作流封装成一个LLM工具节点。你可以让你的LLM同时控制多个comfyui工作流，当你想要他完成一些任务时，他可以根据你的提示，选择合适的comfyui工作流，完成你的任务，并且将结果返回给你。示例工作流：[comfyui_workflows_tool](workflow/把任意workflow当作LLM_tool.json)。具体步骤如下：
+  - 首先，将你待会需要被封装成工具的工作流的需要输入文字的接口连上“开始工作流”节点的“user_prompt”输出，这个位置是LLM调用工具时，传入的prompt。在你要输出文字和图片的位置连上“结束工作流”节点的对应输入位置。
+  - 将这个工作流以API形式保存（需要再设置中开启开发者模式才能看到这个按钮）。
+  - 将这个工作流保存到本项目的workflow_api文件夹中。
+  - 重启comfyui，建立一个简单的LLM工作流，例如：[start_with_LLM_api](workflow/start_with_LLM_api.json)。
+  - 给这个LLM节点添加一个“工作流工具”节点，连在LLM节点的tool输入上。
+  - 在“工作流工具”节点上，在第一个输入框中写入想要调用的工作流文件名，例如：draw.json，可以写入多个工作流文件名。在第二个输入框中写入每个工作流的作用，这样可以让LLM明白这些工作流怎么用。
+  - 运行即可看到这个LLM调用你封装好的工作流，并且将结果返回给你。如果返回的是图片，请在LLM节点的image输出上连上“预览图片”节点，查看生成的图片。注意！该方法是在你的8190端口调用了一个新的comfyui，请不要占用这个端口。window和mac系统会有一个新的终端被打开，请不要关闭。Linux系统使用的是screen进程实现的，当你不需要用时，关闭这个screen进程，否则会一直占用你的端口。
+![workflow_tool](img/workflow_tool.png)
 
 ## 使用说明
 1. 节点的使用说明请参考：[怎么使用节点](how_to_use_nodes_ZH.md)
@@ -184,6 +178,21 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 38. 新增了万能API调用节点以及大量的辅助节点，用于构造请求体和抓取响应中的信息。
 39. 新增了清空模型节点，可以在任意位置将LLM从显存中卸载！
 40. 已添加了[chatTTS](https://github.com/2noise/ChatTTS)节点，超级感谢[guobalove](https://github.com/guobalove)的贡献！`model_path`参数可以为空！推荐使用HF模式加载模型，模型会自动从hugging face上下载，无需手动下载；如果使用local加载，请将模型的`asset`和`config`文件夹放到根目录下。[百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu；如果使用`custom`模式加载，请将模型的`asset`和`config`文件夹放到`model_path`下。
+2. 更新了一系列转换节点，markdown转HTML，svg转图片，HTML转图片，mermaid转图片，markdown转Excel。
+1. 兼容了llama3.2 vision模型，支持多轮对话，视觉功能,模型地址：[meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)，示例工作流：[llama3.2_vision](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json)
+2. 适配了GOT-OCR2，支持格式化输出结果，支持使用位置box和颜色来精细识别文字，模型地址：[GOT-OCR2](https://huggingface.co/stepfun-ai/GOT-OCR2_0),示例工作流将一张网页的截图转换成了HTML代码再打开浏览器显示这个网页：[img2web](workflow/图片转网页.json)
+2. 大幅调整了本地LLM加载器节点，不用自己选择model type了。重新添加了llava加载器节点和GGUF加载器节点。本地LLM模型链节点上的model type已改成LLM、VLM-GGUF、LLM-GGUF三个选项，对应了直接加载LLM模型、加载VLM模型和加载GGUF格式的LLM模型。重新支持了VLM模型和GGUF格式的LLM模型。现在本地调用可以兼容更多的模型了！示例工作流：[LLM_local](workflow/start_with_LLM_local.json)，[llava](workflow/start_with_llava.json)，[GGUF](workflow/start_with_GGUF.json)
+2. 已加入easyOCR节点，用于识别图中文字和位置，可以生成对应的mask，可以返回一个json字符串供LLM查看，有普通版本和高级版本供大家选择！
+2. 在comfyui LLM party中复现了chatgpt-o1系列模型的草莓系统，参考了[Llamaberry](https://huggingface.co/spaces/martinbowling/Llamaberry/blob/main/app.py)的提示词，示例工作流：[Strawberry system compared to o1](workflow/草莓系统与o1对比.json)。
+2. 新增了GPT-sovits节点，可以调用GPT-sovits模型，将文字根据你的参考音频转换为语音，也可以将你微调后的模型路径填入（如果不填就是基底模型进行推理），获得你想要的任意音色。使用时，需要下载[GPT-sovits](https://github.com/RVC-Boss/GPT-SoVITS)项目和对应的基底模型到本地，然后在GPT-sovits项目文件夹下用`runtime\python.exe api_v2.py`启动API服务。此外，chatTTS节点被移动到了[comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)中。原因是chatTTS的依赖库较多，且在PyPi中的许可证为CC BY-NC 4.0，这是一个非商用许可证。即使chatTTS的github项目是AGPL协议的，我们还是为了避免不必要的麻烦，将chatTTS节点移到了comfyui LLM mafia中。希望大家能够理解！
+3. 现已支持openai最新模型o1系列模型!!!!
+4. 新增了本地文件控制工具，让LLM可以控制你指定的文件夹的文件，例如：读取、写入、追加、删除、重命名、移动、复制文件等。由于该节点比较危险，收录在[comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)中。
+5. 新增SQL工具，可以让LLM查询SQL数据库。
+6. 更新了readme的多语言版本，翻译readme文档的工作流：[translate_readme](workflow/文档自动翻译机.json)
+7. 更新了4个迭代器节点（文字迭代器、图片迭代器、表格迭代器、json迭代器），迭代器模式有：顺序、随机和无限三种模式。顺序会按顺序依次输出，直到超出索引上限自动中止进程，并将索引值重置为0，随机会选择一个随机索引输出，无限会无限循环输出。
+8. 新增了Gemini API加载器节点，现在兼容Gemini官方的API啦！如果你是国内网络环境，如果出现API地区受限制的问题，请将节点切换到美国，并使用TUN模式。由于Gemini在工具调用时，如果返回的参数中包含中文字符会出现返回码为500的报错，因此部分工具节点不可用。示例工作流：[start_with_gemini](workflow/start_with_gemini.json)
+9. 新增lore book节点，可以在与LLM对话时插入你的背景设定，示例工作流：[lorebook](workflow/lorebook.json)
+10. 新增了FLUX提示词生成器面具节点，可以生成炉石卡牌、游戏王卡牌、海报、漫画等多种风格的提示词，可以让FLUX模型直出。参考工作流：[FLUX提示词](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
 
 ## 下一步计划：
 1. 更多的模型适配，至少可以覆盖主流的大模型API接口和主流的开源模型的本地调用，以及更多的LVM模型的适配，目前我还只适配了GPT4的视觉功能的调用；

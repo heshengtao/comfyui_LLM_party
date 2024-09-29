@@ -36,21 +36,16 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정을 통해 나만의 AI 도우미를 신속하게 구축하고, 산업에 적용 가능한 단어 벡터 RAG, GraphRAG를 통해 산업 내 지식 관리 시스템을 로컬화합니다. 단일 지능체 파이프라인에서 복잡한 지능체 간의 방사형 상호작용 모드, 순환 상호작용 모드를 구성하는 것까지; 개인 사용자가 자신의 사회적 APP(QQ, Feishu, Discord)에 접속할 필요가 있는 것부터, 스트리밍 작업자가 필요로 하는 원스톱 LLM+TTS+ComfyUI 워크플로우까지; 일반 학생들이 필요로 하는 첫 번째 LLM 응용 프로그램의 간단한 시작부터, 연구자들이 자주 사용하는 다양한 파라미터 조정 인터페이스, 모델 적응까지. 이 모든 것을 ComfyUI LLM Party에서 확인할 수 있습니다.
 
 ## 최신 업데이트
-1. 변환 노드 시리즈 업데이트: markdown에서 HTML로, svg에서 이미지로, HTML에서 이미지로, mermaid에서 이미지로, markdown에서 Excel로.
-1. llama3.2 vision 모델과 호환되며, 다중 회차 대화 및 시각 기능을 지원합니다. 모델 주소: [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct). 예제 워크플로우: [llama3.2_vision](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json).
-1. GOT-OCR2를 적용하여 형식화된 출력 결과를 지원하고 위치 상자와 색상을 사용하여 텍스트를 정밀하게 인식합니다. 모델 주소: [GOT-OCR2](https://huggingface.co/stepfun-ai/GOT-OCR2_0). 예제 워크플로우는 웹페이지의 스크린샷을 HTML 코드로 변환한 다음 브라우저를 열어 이 웹페이지를 표시합니다: [img2web](workflow/图片转网页.json).
-2. 로컬 LLM 로더 노드가 크게 조정되어 모델 유형을 직접 선택할 필요가 없습니다. llava 로더 노드와 GGUF 로더 노드가 다시 추가되었습니다. 로컬 LLM 모델 체인 노드의 모델 유형이 LLM, VLM-GGUF 및 LLM-GGUF로 변경되어 LLM 모델을 직접 로드하고, VLM 모델을 로드하고, GGUF 형식의 LLM 모델을 로드할 수 있습니다. 이제 VLM 모델과 GGUF 형식의 LLM 모델이 다시 지원됩니다. 로컬 호출은 이제 더 많은 모델과 호환될 수 있습니다! 예제 워크플로우: [LLM_local](workflow/start_with_LLM_local.json), [llava](workflow/start_with_llava.json), [GGUF](workflow/start_with_GGUF.json)
-2. easyOCR 노드가 추가되어 이미지 내 텍스트와 위치를 인식할 수 있습니다. 해당 마스크를 생성할 수 있으며, LLM이 볼 수 있는 JSON 문자열을 반환할 수 있습니다. 일반 버전과 고급 버전이 제공됩니다!
-2. comfyui LLM 파티에서 chatgpt-o1 시리즈 모델의 딸기 시스템을 재현했습니다. [Llamaberry](https://huggingface.co/spaces/martinbowling/Llamaberry/blob/main/app.py)의 프롬프트를 참고했습니다. 예제 워크플로우: [Strawberry system compared to o1](workflow/草莓系统与o1对比.json).
-2. 새로운 GPT-sovits 노드가 추가되어 GPT-sovits 모델을 호출하여 참조 오디오를 기반으로 텍스트를 음성으로 변환할 수 있습니다. 또한 미세 조정된 모델 경로를 입력할 수도 있습니다(입력하지 않으면 기본 모델이 추론에 사용됨) 원하는 음성을 얻을 수 있습니다. 사용하려면 [GPT-sovits](https://github.com/RVC-Boss/GPT-SoVITS) 프로젝트와 해당 기본 모델을 로컬에 다운로드한 다음 GPT-sovits 프로젝트 폴더에서 `runtime\python.exe api_v2.py`를 사용하여 API 서비스를 시작해야 합니다. 또한 chatTTS 노드는 [comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)로 이동되었습니다. 이유는 chatTTS에 많은 종속성이 있으며 PyPi의 라이선스가 CC BY-NC 4.0으로 비상업적 라이선스이기 때문입니다. chatTTS의 GitHub 프로젝트가 AGPL 라이선스 하에 있음에도 불구하고 불필요한 문제를 피하기 위해 chatTTS 노드를 comfyui LLM mafia로 이동했습니다. 모두의 이해를 바랍니다!
-3. 이제 OpenAI의 최신 모델인 o1 시리즈를 지원합니다!
-4. 지정한 폴더의 파일을 제어할 수 있는 로컬 파일 제어 도구가 추가되었습니다. 읽기, 쓰기, 추가, 삭제, 이름 변경, 이동, 복사 등이 가능합니다.이 노드의 잠재적인 위험성 때문에 [comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)에 포함되어 있습니다.
-5. 새로운 SQL 도구로 LLM이 SQL 데이터베이스를 쿼리할 수 있습니다.
-6. README의 다국어 버전을 업데이트했습니다. README 문서를 번역하는 워크플로우: [translate_readme](workflow/文档自动翻译机.json)
-7. 4개의 반복기 노드(텍스트 반복기, 이미지 반복기, 표 반복기, json 반복기)가 업데이트되었습니다. 반복기 모드는 순차, 무작위 및 무한의 세 가지 모드가 있습니다. 순차 모드는 순서대로 출력을 하며, 인덱스 한계를 초과하면 자동으로 프로세스가 중단되고 인덱스 값이 0으로 재설정됩니다. 무작위 모드는 무작위 인덱스를 선택하여 출력을 하며, 무한 모드는 무한 반복 출력을 진행합니다.
-8. Gemini API 로더 노드가 추가되어 이제 Gemini 공식 API와 호환됩니다! 국내 네트워크 환경에서 API 지역 제한 문제가 발생하면 노드를 미국으로 전환하고 TUN 모드를 사용해 주십시오. Gemini에서 도구 호출 시 반환된 파라미터에 중국어 문자가 포함되면 반환 코드 500 오류가 발생할 수 있어 일부 도구 노드가 사용 불가능합니다. 예시 워크플로우: [start_with_gemini](workflow/start_with_gemini.json)
-9. LLM과 대화할 때 배경 설정을 삽입할 수 있는 lore book 노드가 추가되었습니다. 예시 워크플로우: [lorebook](workflow/lorebook.json)
-10. FLUX 프롬프트 생성기 마스크 노드가 추가되어 하스스톤 카드, 유희왕 카드, 포스터, 만화 등 다양한 스타일의 프롬프트를 생성할 수 있으며, FLUX 모델이 직접 출력할 수 있게 해줍니다. 참고 워크플로우: [FLUX 프롬프트](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
+1. **중대한 업데이트!!!** 이제 모든 ComfyUI 워크플로를 LLM 도구 노드로 캡슐화할 수 있습니다. LLM이 여러 ComfyUI 워크플로를 동시에 제어할 수 있습니다. 작업을 완료하고 싶을 때, 프롬프트에 따라 적절한 ComfyUI 워크플로를 선택하여 작업을 완료하고 결과를 반환할 수 있습니다. 예제 워크플로: [comfyui_workflows_tool](workflow/把任意workflow当作LLM_tool.json). 구체적인 단계는 다음과 같습니다:
+   - 먼저, 도구로 캡슐화할 워크플로의 텍스트 입력 인터페이스를 "워크플로 시작" 노드의 "user_prompt" 출력에 연결합니다. 이는 LLM이 도구를 호출할 때 프롬프트가 전달되는 위치입니다.
+   - 텍스트와 이미지를 출력하려는 위치를 "워크플로 종료" 노드의 해당 입력 위치에 연결합니다.
+   - 이 워크플로를 API로 저장합니다(설정에서 개발자 모드를 활성화해야 이 버튼을 볼 수 있습니다).
+   - 이 워크플로를 프로젝트의 workflow_api 폴더에 저장합니다.
+   - ComfyUI를 다시 시작하고 간단한 LLM 워크플로를 만듭니다. 예: [start_with_LLM_api](workflow/start_with_LLM_api.json).
+   - 이 LLM 노드에 "워크플로 도구" 노드를 추가하고 LLM 노드의 도구 입력에 연결합니다.
+   - "워크플로 도구" 노드에서 호출하려는 워크플로 파일 이름을 첫 번째 입력 상자에 작성합니다. 예: draw.json. 여러 워크플로 파일 이름을 작성할 수 있습니다. 두 번째 입력 상자에 각 워크플로의 기능을 작성합니다. 이를 통해 LLM이 이러한 워크플로를 사용하는 방법을 이해할 수 있습니다.
+   - 실행하여 LLM이 캡슐화된 워크플로를 호출하고 결과를 반환하는 것을 확인합니다. 결과가 이미지인 경우, LLM 노드의 이미지 출력에 "이미지 미리보기" 노드를 연결하여 생성된 이미지를 확인합니다. 주의! 이 방법은 8190 포트에서 새로운 ComfyUI를 호출합니다. 이 포트를 점유하지 마십시오. Windows 및 Mac 시스템에서는 새로운 터미널이 열립니다. 닫지 마십시오. Linux 시스템에서는 screen 프로세스를 사용하여 이를 구현합니다. 사용하지 않을 경우 이 screen 프로세스를 닫으십시오. 그렇지 않으면 포트가 항상 점유됩니다.
+![workflow_tool](img/workflow_tool.png)
 
 ## 사용 설명
 1. 노드 사용 설명서는 다음을 참고하십시오: [노드 사용 방법](how_to_use_nodes.md)
@@ -178,6 +173,22 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 38. 요청 본체를 구성하고 응답에서 정보를 가져오기 위한 만능 API 호출 노드 및 다수의 보조 노드가 추가되었습니다.
 39. 모델을 비워주는 노드가 추가되어, 원하는 위치에서 LLM을 메모리에서 언로드할 수 있습니다!
 40. [chatTTS](https://github.com/2noise/ChatTTS) 노드가 추가되었습니다. [guobalove](https://github.com/guobalove)의 기여에 진심으로 감사드립니다! `model_path` 매개변수는 비워둘 수 있습니다! HF 모드로 모델을 로드하는 것을 추천하며, 모델은 자동으로 hugging face에서 다운로드되므로 수동 다운로드가 필요하지 않습니다; 로컬 로드를 사용할 경우, 모델의 `asset` 및 `config` 폴더를 루트 디렉토리에 놓아야 합니다. [百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), 추출 코드: qyhu; `custom` 모드로 로드를 사용할 경우, 모델의 `asset` 및 `config` 폴더를 `model_path` 아래에 놓아야 합니다.
+2. 일련의 변환 노드를 업데이트했습니다: markdown에서 HTML, svg에서 이미지, HTML에서 이미지, mermaid에서 이미지, markdown에서 Excel.
+1. llama3.2 vision 모델과 호환되며, 다중 회차 대화 및 시각 기능을 지원합니다. 모델 주소: [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct). 예제 워크플로우: [llama3.2_vision](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json).
+1. GOT-OCR2를 적용하여 형식화된 출력 결과를 지원하고 위치 상자와 색상을 사용하여 텍스트를 정밀하게 인식합니다. 모델 주소: [GOT-OCR2](https://huggingface.co/stepfun-ai/GOT-OCR2_0). 예제 워크플로우는 웹페이지의 스크린샷을 HTML 코드로 변환한 다음 브라우저를 열어 이 웹페이지를 표시합니다: [img2web](workflow/图片转网页.json).
+2. 로컬 LLM 로더 노드가 크게 조정되어 모델 유형을 직접 선택할 필요가 없습니다. llava 로더 노드와 GGUF 로더 노드가 다시 추가되었습니다. 로컬 LLM 모델 체인 노드의 모델 유형이 LLM, VLM-GGUF 및 LLM-GGUF로 변경되어 LLM 모델을 직접 로드하고, VLM 모델을 로드하고, GGUF 형식의 LLM 모델을 로드할 수 있습니다. 이제 VLM 모델과 GGUF 형식의 LLM 모델이 다시 지원됩니다. 로컬 호출은 이제 더 많은 모델과 호환될 수 있습니다! 예제 워크플로우: [LLM_local](workflow/start_with_LLM_local.json), [llava](workflow/start_with_llava.json), [GGUF](workflow/start_with_GGUF.json)
+2. easyOCR 노드가 추가되어 이미지 내 텍스트와 위치를 인식할 수 있습니다. 해당 마스크를 생성할 수 있으며, LLM이 볼 수 있는 JSON 문자열을 반환할 수 있습니다. 일반 버전과 고급 버전이 제공됩니다!
+2. comfyui LLM 파티에서 chatgpt-o1 시리즈 모델의 딸기 시스템을 재현했습니다. [Llamaberry](https://huggingface.co/spaces/martinbowling/Llamaberry/blob/main/app.py)의 프롬프트를 참고했습니다. 예제 워크플로우: [Strawberry system compared to o1](workflow/草莓系统与o1对比.json).
+2. 새로운 GPT-sovits 노드가 추가되어 GPT-sovits 모델을 호출하여 참조 오디오를 기반으로 텍스트를 음성으로 변환할 수 있습니다. 또한 미세 조정된 모델 경로를 입력할 수도 있습니다(입력하지 않으면 기본 모델이 추론에 사용됨) 원하는 음성을 얻을 수 있습니다. 사용하려면 [GPT-sovits](https://github.com/RVC-Boss/GPT-SoVITS) 프로젝트와 해당 기본 모델을 로컬에 다운로드한 다음 GPT-sovits 프로젝트 폴더에서 `runtime\python.exe api_v2.py`를 사용하여 API 서비스를 시작해야 합니다. 또한 chatTTS 노드는 [comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)로 이동되었습니다. 이유는 chatTTS에 많은 종속성이 있으며 PyPi의 라이선스가 CC BY-NC 4.0으로 비상업적 라이선스이기 때문입니다. chatTTS의 GitHub 프로젝트가 AGPL 라이선스 하에 있음에도 불구하고 불필요한 문제를 피하기 위해 chatTTS 노드를 comfyui LLM mafia로 이동했습니다. 모두의 이해를 바랍니다!
+3. 이제 OpenAI의 최신 모델인 o1 시리즈를 지원합니다!
+4. 지정한 폴더의 파일을 제어할 수 있는 로컬 파일 제어 도구가 추가되었습니다. 읽기, 쓰기, 추가, 삭제, 이름 변경, 이동, 복사 등이 가능합니다.이 노드의 잠재적인 위험성 때문에 [comfyui LLM mafia](https://github.com/heshengtao/comfyui_LLM_mafia)에 포함되어 있습니다.
+5. 새로운 SQL 도구로 LLM이 SQL 데이터베이스를 쿼리할 수 있습니다.
+6. README의 다국어 버전을 업데이트했습니다. README 문서를 번역하는 워크플로우: [translate_readme](workflow/文档自动翻译机.json)
+7. 4개의 반복기 노드(텍스트 반복기, 이미지 반복기, 표 반복기, json 반복기)가 업데이트되었습니다. 반복기 모드는 순차, 무작위 및 무한의 세 가지 모드가 있습니다. 순차 모드는 순서대로 출력을 하며, 인덱스 한계를 초과하면 자동으로 프로세스가 중단되고 인덱스 값이 0으로 재설정됩니다. 무작위 모드는 무작위 인덱스를 선택하여 출력을 하며, 무한 모드는 무한 반복 출력을 진행합니다.
+8. Gemini API 로더 노드가 추가되어 이제 Gemini 공식 API와 호환됩니다! 국내 네트워크 환경에서 API 지역 제한 문제가 발생하면 노드를 미국으로 전환하고 TUN 모드를 사용해 주십시오. Gemini에서 도구 호출 시 반환된 파라미터에 중국어 문자가 포함되면 반환 코드 500 오류가 발생할 수 있어 일부 도구 노드가 사용 불가능합니다. 예시 워크플로우: [start_with_gemini](workflow/start_with_gemini.json)
+9. LLM과 대화할 때 배경 설정을 삽입할 수 있는 lore book 노드가 추가되었습니다. 예시 워크플로우: [lorebook](workflow/lorebook.json)
+10. FLUX 프롬프트 생성기 마스크 노드가 추가되어 하스스톤 카드, 유희왕 카드, 포스터, 만화 등 다양한 스타일의 프롬프트를 생성할 수 있으며, FLUX 모델이 직접 출력할 수 있게 해줍니다. 참고 워크플로우: [FLUX 프롬프트](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
+
 ## 다음 단계 계획:
 1. 더 많은 모델 적응, 최소한 주류 대형 모델 API 인터페이스와 주류 오픈 소스 모델의 로컬 호출을 포함하며, 더 많은 LVM 모델의 적응도 진행할 예정입니다. 현재 저는 GPT-4의 시각 기능 호출만 적응한 상태입니다;
 2. 더 많은 지능체 구축 방식, 현재 이 분야에서 제가 완료한 작업은 LLM을 도구로 사용하여 다른 LLM에 도입하고, 방사형으로 LLM 워크플로우를 구축하며, 하나의 워크플로우를 노드로 하여 다른 워크플로우에 도입하는 것입니다. 향후 이 부분에서 좀 더 멋진 기능을 개발할 계획입니다;
