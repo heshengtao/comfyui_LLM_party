@@ -335,10 +335,7 @@ def work_flow(
     # 获取main.py的绝对路径
     root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "main.py"))
 
-    # 构建在新控制台窗口中执行main.py的命令
-    # 使用'cmd /c'在新窗口中执行命令，并且'cmd /k'保持窗口打开
-    command = f'cmd /c start cmd /k "{interpreter} {root_path} --port 8190"'
-    check_port_and_execute_bat(8190, command)
+    execute_command_in_new_window(interpreter, root_path, 8190)
     global current_dir_path
     WF_path = os.path.join(current_dir_path, "workflow_api", workflow_name)
     with open(WF_path, "r", encoding="utf-8") as f:
