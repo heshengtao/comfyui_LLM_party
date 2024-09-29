@@ -45,7 +45,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
    - Fügen Sie diesem LLM-Knoten einen "Workflow-Tool"-Knoten hinzu und verbinden Sie ihn mit dem Tool-Eingang des LLM-Knotens.
    - Schreiben Sie im "Workflow-Tool"-Knoten den Namen der Workflow-Datei, die Sie aufrufen möchten, in das erste Eingabefeld, z.B.: draw.json. Sie können mehrere Workflow-Dateinamen schreiben. Schreiben Sie im zweiten Eingabefeld die Funktion jedes Workflows, damit das LLM versteht, wie diese Workflows verwendet werden.
    - Führen Sie es aus, um zu sehen, wie das LLM Ihren gekapselten Workflow aufruft und Ihnen das Ergebnis zurückgibt. Wenn das Ergebnis ein Bild ist, verbinden Sie den "Bildvorschau"-Knoten mit dem Bildausgang des LLM-Knotens, um das generierte Bild anzuzeigen. Achtung! Diese Methode ruft ein neues ComfyUI auf Ihrem Port 8190 auf, bitte belegen Sie diesen Port nicht. Auf Windows- und Mac-Systemen wird ein neues Terminal geöffnet, bitte schließen Sie es nicht. Das Linux-System verwendet den screen-Prozess, um dies zu erreichen. Wenn Sie es nicht benötigen, schließen Sie diesen screen-Prozess, andernfalls wird Ihr Port immer belegt.
-![workflow_tool](img/workflow_tool.png)
+![workflow_tool](img/workflowtool.png)
 
 ## Gebrauchsanweisung
 1. Bitte beziehen Sie sich auf die Anweisungen zur Verwendung der Knoten: [怎么使用节点](how_to_use_nodes.md)

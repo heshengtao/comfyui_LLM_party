@@ -47,7 +47,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
    - Add a "Workflow Tool" node to this LLM node and connect it to the tool input of the LLM node.
    - In the "Workflow Tool" node, write the name of the workflow file you want to call in the first input box, for example: draw.json. You can write multiple workflow file names. In the second input box, write the function of each workflow so that the LLM understands how to use these workflows.
    - Run it to see the LLM call your encapsulated workflow and return the result to you. If the return is an image, connect the "Preview Image" node to the image output of the LLM node to view the generated image. Note! This method calls a new ComfyUI on your 8190 port, please do not occupy this port. A new terminal will be opened on Windows and Mac systems, please do not close it. The Linux system uses the screen process to achieve this, when you do not need to use it, close this screen process, otherwise, it will always occupy your port.
-![workflow_tool](img/workflow_tool.png)
+![workflow_tool](img/workflowtool.png)
 
 ## User Guide
 1. For the instructions for using the node, please refer to: [how to use nodes](how_to_use_nodes.md)

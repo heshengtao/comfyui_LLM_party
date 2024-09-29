@@ -45,7 +45,7 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
    - Adicione um nó "Ferramenta de fluxo de trabalho" a este nó LLM e conecte-o à entrada de ferramenta do nó LLM.
    - No nó "Ferramenta de fluxo de trabalho", escreva o nome do arquivo de fluxo de trabalho que você deseja chamar na primeira caixa de entrada, por exemplo: draw.json. Você pode escrever vários nomes de arquivos de fluxo de trabalho. Na segunda caixa de entrada, escreva a função de cada fluxo de trabalho para que o LLM entenda como usar esses fluxos de trabalho.
    - Execute-o para ver o LLM chamar seu fluxo de trabalho encapsulado e retornar o resultado para você. Se o resultado for uma imagem, conecte o nó "Visualizar imagem" à saída de imagem do nó LLM para visualizar a imagem gerada. Atenção! Este método chama um novo ComfyUI na sua porta 8190, por favor, não ocupe esta porta. Um novo terminal será aberto nos sistemas Windows e Mac, por favor, não o feche. O sistema Linux usa o processo screen para conseguir isso, quando você não precisar usá-lo, feche este processo screen, caso contrário, ele sempre ocupará sua porta.
-![workflow_tool](img/workflow_tool.png)
+![workflow_tool](img/workflowtool.png)
 
 ## Instruções de Uso
 1. Para instruções sobre o uso dos nós, consulte: [怎么使用节点](how_to_use_nodes.md)
