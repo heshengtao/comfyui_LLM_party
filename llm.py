@@ -862,7 +862,7 @@ class genai_api_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name": (["gemini-1.0-pro","gemini-1.0-pro-001","gemini-1.5-flash-latest","gemini-1.5-pro-latest"], {"default": "gemini-1.5-flash-latest"}),
+                "model_name": ("STRING", {"default": "gemini-1.5-flash-latest"}),
             },
             "optional": {
                 "api_key": (
