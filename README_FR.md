@@ -45,6 +45,7 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
    - Ajoutez un nœud "Outil de flux de travail" à ce nœud LLM et connectez-le à l'entrée de l'outil du nœud LLM.
    - Dans le nœud "Outil de flux de travail", écrivez le nom du fichier de flux de travail que vous souhaitez appeler dans la première case de saisie, par exemple : draw.json. Vous pouvez écrire plusieurs noms de fichiers de flux de travail. Dans la deuxième case de saisie, écrivez la fonction de chaque flux de travail afin que le LLM comprenne comment utiliser ces flux de travail.
    - Exécutez-le pour voir le LLM appeler votre flux de travail encapsulé et vous renvoyer le résultat. Si le résultat est une image, connectez le nœud "Aperçu de l'image" à la sortie d'image du nœud LLM pour voir l'image générée. Attention ! Cette méthode appelle un nouveau ComfyUI sur votre port 8190, veuillez ne pas occuper ce port. Un nouveau terminal sera ouvert sur les systèmes Windows et Mac, veuillez ne pas le fermer. Le système Linux utilise le processus screen pour réaliser cela, lorsque vous n'avez pas besoin de l'utiliser, fermez ce processus screen, sinon il occupera toujours votre port.
+
 ![workflow_tool](img/workflowtool.png)
 
 ## Instructions d'utilisation
