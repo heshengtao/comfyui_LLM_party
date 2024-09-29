@@ -115,7 +115,7 @@ from .tools.load_file import (
     load_url,
     start_workflow,
 )
-from .tools.load_model_name import load_name
+from .tools.load_model_name import load_name,load_name_v2
 from .tools.load_persona import load_persona
 from .tools.logic import get_string, replace_string, string_logic, substring
 from .tools.omost import omost_decode, omost_setting
@@ -2017,6 +2017,7 @@ NODE_CLASS_MAPPINGS = {
     "substring": substring,
     "openai_tts": openai_tts,
     "load_name": load_name,
+    "load_name_v2":load_name_v2,
     "omost_decode": omost_decode,
     "omost_setting": omost_setting,
     "keyword_tool": keyword_tool,
@@ -2129,6 +2130,7 @@ if lang == "zh_CN":
         "substring": "提取字符串",
         "openai_tts": "OpenAI语音合成",
         "load_name": "加载config.ini中的模型名称",
+        "load_name_v2":"自动获取模型列表",
         "omost_decode": "omost解码器",
         "omost_setting": "omost设置",
         "keyword_tool": "搜索关键词工具",
@@ -2235,6 +2237,7 @@ else:
         "substring": "Extract Substring",
         "openai_tts": "OpenAI TTS",
         "load_name": "Load Model Name in config.ini",
+        "load_name_v2": "Auto get model list",
         "omost_decode": "omost Decoder",
         "omost_setting": "omost Setting",
         "keyword_tool": "Search Keyword Tool",
