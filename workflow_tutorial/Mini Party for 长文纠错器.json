@@ -1,0 +1,425 @@
+{
+  "last_node_id": 9,
+  "last_link_id": 4,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "mini_error_correction",
+      "pos": {
+        "0": 1210,
+        "1": 1220
+      },
+      "size": {
+        "0": 390,
+        "1": 180
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_str",
+          "type": "STRING",
+          "link": 1,
+          "widget": {
+            "name": "input_str"
+          },
+          "label": "input_str"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "input_text",
+          "type": "STRING",
+          "links": [
+            2
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "input_text"
+        },
+        {
+          "name": "output_text",
+          "type": "STRING",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "label": "output_text"
+        },
+        {
+          "name": "error",
+          "type": "STRING",
+          "links": [
+            3
+          ],
+          "slot_index": 2,
+          "shape": 3,
+          "label": "error"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_error_correction"
+      },
+      "widgets_values": [
+        "",
+        "gpt-4o-mini",
+        "",
+        "",
+        true
+      ],
+      "shape": 1
+    },
+    {
+      "id": 3,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1640,
+        "1": 930
+      },
+      "size": {
+        "0": 420,
+        "1": 470
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 2,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "comfyui LLM party, 从最基础的 LLM 多工具调用、persona人格设定**快速搭建**自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建；从个人用户需要的接入自己的社交应用，到流媒体工作者需要的一站式LLM+TTS+SD工作流；从普通学生所需要的第一个LLM应用的简单上手**起步**，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在comfyui LLM party中找到答案。"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 2,
+      "type": "get_string",
+      "pos": {
+        "0": 1210,
+        "1": 930
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            1
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "string"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "get_string"
+      },
+      "widgets_values": [
+        "comfyui LLM party, 从最基础的 LLM 多工具调用、persona人格设定快速搭建自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建；从个人用户需要的接入自己的社交应用，到流媒体工作者需要的一站式LLM+TTS+SD工作流；从普通学生所需要的第一个LLM应用的简单上手起步，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在comfyui LLM party中找到答案。"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 4,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1210,
+        "1": 1490
+      },
+      "size": {
+        "0": 400,
+        "1": 470
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 3,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "- 快速搭建 -> 快速构建\n- 起步 -> 入门"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 5,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1650,
+        "1": 1500
+      },
+      "size": {
+        "0": 410,
+        "1": 460
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 4,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "comfyui LLM party, 从最基础的 LLM 多工具调用、persona人格设定**快速构建**自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建；从个人用户需要的接入自己的社交应用，到流媒体工作者需要的一站式LLM+TTS+SD工作流；从普通学生所需要的第一个LLM应用的简单上手**入门**，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在comfyui LLM party中找到答案。"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 7,
+      "type": "Note",
+      "pos": {
+        "0": 2090,
+        "1": 1500
+      },
+      "size": {
+        "0": 330,
+        "1": 460
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "#关于我们：\n- LLM_Party正在用心经营一片AI时代的后花园，我们希望能够在AI时代下成为众多参与者的一员，我们从开源社区中走来，也希望回到社区中去。\n- 欢迎大家来到我们用心经营的后花园。如果我们的项目能够帮助到大家，麻烦大家在Github上帮我点一下Star：\n- github项目地址：https://github.com/heshengtao/comfyui_LLM_party\n- openart：https://openart.ai/workflows/profile/comfyui_llm_party?tab=workflows&sort=latest\n- LibLib：https://www.liblib.art/userpage/4378612c5b3341c79c0deab3101aeabb/publish/workflow\n- 哔哩哔哩：https://space.bilibili.com/26978344?spm_id_from=333.337.0.0\n- YouTube：https://www.youtube.com/@comfyui-LLM-party\n- discord：https://discord.com/invite/gxrQAYy6\n- QQ交流群：931057213\n- 微信交流群：Choo-Yong（添加小助理微信，统一通过后会添加至交流群）\n商务合作请联系email：hst97@qq.com"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 6,
+      "type": "Note",
+      "pos": {
+        "0": 2090,
+        "1": 940
+      },
+      "size": {
+        "0": 330,
+        "1": 460
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "【输入字符串】\n- 输入需要纠错的文本，如果是文件需要纠错，可以选在【加载文件】节点，填入绝对路径。\n- 绝对路径填写示例：C:\\Users\\YourUsername\\Documents\\example.txt\n\n【迷你长文纠错器】\n- [model_name]：参考API model配置方法。（mini系列节点目前只支持api调用LLM）\n- [input_text]：输出原文内容\n- [output_text]：输出纠错后的内容\n- [error]：输出纠错的部分"
+      ],
+      "shape": 1
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      1,
+      0,
+      3,
+      0,
+      "STRING"
+    ],
+    [
+      3,
+      1,
+      2,
+      4,
+      0,
+      "STRING"
+    ],
+    [
+      4,
+      1,
+      1,
+      5,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "About Us",
+      "bounding": [
+        2080,
+        1420,
+        350,
+        550
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Mini Party for 长文纠错器",
+      "bounding": [
+        1200,
+        700,
+        1230,
+        150
+      ],
+      "color": "#3f789e",
+      "font_size": 110,
+      "flags": {}
+    },
+    {
+      "title": "纠错器",
+      "bounding": [
+        1200,
+        1150,
+        420,
+        260
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Text Input",
+      "bounding": [
+        1200,
+        856,
+        420,
+        284
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Input Text",
+      "bounding": [
+        1630,
+        860,
+        440,
+        550
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "纠错后Text",
+      "bounding": [
+        1630,
+        1420,
+        440,
+        550
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Text Error",
+      "bounding": [
+        1200,
+        1420,
+        420,
+        550
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Note",
+      "bounding": [
+        2080,
+        860,
+        350,
+        550
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6115909044841502,
+      "offset": [
+        -436.6693340257762,
+        -596.9995135187099
+      ]
+    }
+  },
+  "version": 0.4
+}
