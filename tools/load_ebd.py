@@ -25,7 +25,7 @@ class ebd_tool:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "path": ("STRING", {"default":""}),
+                "model_path": ("STRING", {"default":""}),
                 "is_enable": (["enable", "disable"], {"default": "enable"}),
                 "k": ("INT", {"default": 5}),
                 "device": (
@@ -51,7 +51,7 @@ class ebd_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def file(self, path, k, chunk_size, chunk_overlap, device, file_content="", is_enable="enable", base_path="",ebd_model=None):
+    def file(self, model_path, k, chunk_size, chunk_overlap, device, file_content="", is_enable="enable", base_path="",ebd_model=None):
         if is_enable == "disable":
             return (None,)
         global files_load, bge_embeddings, c_size, c_overlap, knowledge_base, k_setting
@@ -66,7 +66,7 @@ class ebd_tool:
                 model_kwargs = {"device": device}
                 encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度
                 bge_embeddings = HuggingFaceBgeEmbeddings(
-                    model_name=path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
+                    model_name=model_path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
                 )
             else:
                 bge_embeddings = ebd_model
@@ -102,7 +102,7 @@ class load_ebd:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "path": ("STRING", {"default": ""}),
+                "model_path": ("STRING", {"default": ""}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "device": (
                     ["auto", "cuda", "mps", "cpu"],
@@ -120,7 +120,7 @@ class load_ebd:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def file(self, path, device, is_enable=True):
+    def file(self, model_path, device, is_enable=True):
         if is_enable == False:
             return (None,)
         if device == "auto":
@@ -129,7 +129,7 @@ class load_ebd:
         model_kwargs = {"device": device}
         encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度
         bge_embeddings = HuggingFaceBgeEmbeddings(
-            model_name=path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
+            model_name=model_path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
         )
         return (bge_embeddings,)
 
@@ -142,7 +142,7 @@ class embeddings_function:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "path": ("STRING", {"default": None}),
+                "model_path": ("STRING", {"default": None}),
                 "question": ("STRING", {"default": "question"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "device": (
@@ -169,20 +169,20 @@ class embeddings_function:
 
     CATEGORY = "大模型派对（llm_party）/函数（function）"
 
-    def file(self, path, question, k, chunk_size, chunk_overlap, device, file_content="", is_enable=True, base_path="",ebd_model=None):
+    def file(self, model_path, question, k, chunk_size, chunk_overlap, device, file_content="", is_enable=True, base_path="",ebd_model=None):
         if is_enable == False:
             return (None,)
         if ebd_model is None:
             if device == "auto":
                 device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
 
-            if self.embeddings_path != path:
+            if self.embeddings_path != model_path:
                 model_kwargs = {"device": device}
                 encode_kwargs = {"normalize_embeddings": True}  # 设置为 True 以计算余弦相似度
                 self.bge_embeddings = HuggingFaceBgeEmbeddings(
-                    model_name=path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
+                    model_name=model_path, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
                 )
-                self.embeddings_path = path
+                self.embeddings_path = model_path
         else:
             self.bge_embeddings = ebd_model
         if base_path != "":
