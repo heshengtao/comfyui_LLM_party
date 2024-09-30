@@ -1,0 +1,476 @@
+{
+  "last_node_id": 8,
+  "last_link_id": 5,
+  "nodes": [
+    {
+      "id": 6,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1950,
+        "1": 1030
+      },
+      "size": [
+        500,
+        640
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 3,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "```markdown\n# Project Overview\n\n## ComfyUI LLM Party\n\nfrom the most basic LLM multi-tool call, role setting to quickly build your own exclusive AI assistant, to the industry-specific word vector RAG and GraphRAG to localize the management of the industry knowledge base;\n\nfrom a single agent pipeline, to the construction of complex agent-agent radial interaction mode;\n\nfrom the access to their own social APP (QQ, Feishu, Discord) required by individual users, to the one-stop LLM + TTS + ComfyUI workflow required by streaming media workers;\n\nfrom the simple start of the first LLM application required by ordinary students; to the various parameter debugging interfaces commonly used by scientific researchers, model adaptation.\n\nAll of this, you can find the answer in ComfyUI LLM Party.\n```"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 4,
+      "type": "LayerMask: MaskPreview",
+      "pos": {
+        "0": 1560,
+        "1": 1440
+      },
+      "size": [
+        360,
+        230
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 5,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "LayerMask: MaskPreview"
+      },
+      "color": "rgba(27, 80, 119, 0.7)",
+      "shape": 1
+    },
+    {
+      "id": 3,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 1560,
+        "1": 1050
+      },
+      "size": [
+        360,
+        290
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 2,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "shape": 1
+    },
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "pos": {
+        "0": 1210,
+        "1": 1020
+      },
+      "size": [
+        320,
+        300
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "pasted/image (163).png",
+        "image"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 8,
+      "type": "Note",
+      "pos": {
+        "0": 1900,
+        "1": 2150
+      },
+      "size": [
+        550,
+        250
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "#关于我们：\n- LLM_Party正在用心经营一片AI时代的后花园，我们希望能够在AI时代下成为众多参与者的一员，我们从开源社区中走来，也希望回到社区中去。\n- 欢迎大家来到我们用心经营的后花园。如果我们的项目能够帮助到大家，麻烦大家在Github上帮我点一下Star：\n- github项目地址：https://github.com/heshengtao/comfyui_LLM_party\n- openart：https://openart.ai/workflows/profile/comfyui_llm_party?tab=workflows&sort=latest\n- LibLib：https://www.liblib.art/userpage/4378612c5b3341c79c0deab3101aeabb/publish/workflow\n- 哔哩哔哩：https://space.bilibili.com/26978344?spm_id_from=333.337.0.0\n- YouTube：https://www.youtube.com/@comfyui-LLM-party\n- discord：https://discord.com/invite/gxrQAYy6\n- QQ交流群：931057213\n- 微信交流群：Choo-Yong（添加小助理微信，统一通过后会添加至交流群）\n商务合作请联系email：hst97@qq.com"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 1,
+      "type": "mini_ocr",
+      "pos": {
+        "0": 1210,
+        "1": 1420
+      },
+      "size": [
+        320,
+        260
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "label": "images",
+          "slot_index": 0
+        },
+        {
+          "name": "masks",
+          "type": "MASK",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "label": "masks",
+          "slot_index": 1
+        },
+        {
+          "name": "json_str",
+          "type": "STRING",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "label": "json_str",
+          "slot_index": 2
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "label": "text",
+          "slot_index": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_ocr"
+      },
+      "widgets_values": [
+        true,
+        "ch_sim,en",
+        "gpt-4o-mini",
+        "",
+        "",
+        "",
+        true
+      ],
+      "shape": 1
+    },
+    {
+      "id": 5,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1210,
+        "1": 1760
+      },
+      "size": [
+        660,
+        650
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 4,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "{\n    \"data\": [\n        {\n            \"bounding_box\": {\n                \"top_left\": [12, 10],\n                \"top_right\": [200, 10],\n                \"bottom_right\": [200, 42],\n                \"bottom_left\": [12, 42]\n            },\n            \"text\": \"Project Overview\",\n            \"confidence\": 0.6886788774514725\n        },\n        {\n            \"bounding_box\": {\n                \"top_left\": [10, 62],\n                \"top_right\": [110, 62],\n                \"bottom_right\": [110, 86],\n                \"bottom_left\": [10, 86]\n            },\n            \"text\": \"ComfyUI LLM Party\",\n            \"confidence\": 0.5126277131052115\n        },\n        {\n            \"bounding_box\": {\n                \"top_left\": [152, 60],\n                \"top_right\": [792, 60],\n                \"bottom_right\": [792, 86],\n                \"bottom_left\": [152, 86]\n            },\n            \"text\": \"from the most basic LLM multi-tool call, role setting to quickly build your\",\n            \"confidence\": 0.39175829259042455\n        },\n        {\n            \"bounding_box\": {\n                \"top_left\": [12, 84],\n                \"top_right\": [788, 84],\n                \"bottom_right\": [788, 111],\n                \"bottom_left\": [12, 111]\n            },\n            \"text\": \"own exclusive AI assistant, to the industry-specific word vector RAG and GraphRAG to localize the management of the industry knowledge base;\",\n            \"confidence\": 0.42053909152755503\n        },\n        {\n            \"bounding_box\": {\n                \"top_left\": [13, 113],\n                \"top_right\": [171, 113],\n                \"bottom_right\": [171, 133],\n                \"bottom_left\": [13, 133]\n            },\n            \"text\": \"from a single agent pipeline,\",\n            \"confidence\": 0.5802180167822132\n        },\n        {\n            \"bounding_box\": {\n                \"top_left\": [182, 110],\n                \"top_right\": [822, 110],\n                \"bottom_right\": [822, 134],\n                \"bottom_left\": [182, 134]\n            },\n            \"text\": \"to the construction of complex agent-agent radial interaction mode;\",\n            \"confidence\": 0.5352650043794726\n        },\n        {\n            \"bounding_box\": {\n                \"top_left\": [13, 139],\n                \"top_right\": [41, 139],\n                \"bottom_right\": [41, 155],\n                \"bottom_left\": [13, 155]\n            },\n            \"text\": \"from the access to their own social APP (QQ, Feishu, Discord)\",\n            \"confidence\": 0.13917100429534912\n        },\n        {\n            \"bounding_box\": {\n                \"top_left\": [75, 137],\n                \"top_right\": [199, 137],\n                \"bottom_right\": [199, 155],\n                \"bottom_left\": [75, 155]\n            },\n            \"text\": \"required by individual users,\",\n            \"confidence\": 0.8032971236332138\n        },\n        {\n            \"bounding_box\": {\n                \"top_left\": [205, 135],\n                \"top_right\": [447, 135],\n                \"bottom_right\": [447, 155],\n                \"bottom_left\": [205, 155]\n            },\n            \"text\": \"to the one-stop LLM + TTS + ComfyUI workflow required by streaming media workers;\",\n            \"confidence\": 0.21756475218132076\n        },\n        {\n            \"bounding_box\": {\n                \"top_left\": [10, 180],\n                \"top_right\": [824, 180],\n                \"bottom_right\": [824, 208],\n                \"bottom_left\": [10, 208]\n            },\n            \"text\": \"from the simple start of the first LLM application required by ordinary students;\",\n            \"confidence\": 0.5762921182942531\n        },\n        {\n            \"bounding_box\": {\n                \"top_left\": [10, 204],\n                \"top_right\": [684, 204],\n                \"bottom_right\": [684, 231],\n                \"bottom_left\": [10, 231]\n            },\n            \"text\": \"to the various parameter debugging interfaces commonly used by scientific researchers, model adaptation.\",\n            \"confidence\": 0.3299957537745147\n        },\n        {\n            \"bounding_box\": {\n                \"top_left\": [11, 161],\n                \"top_right\": [159, 161],\n                \"bottom_right\": [159, 181],\n                \"bottom_left\": [11, 181]\n            },\n            \"text\": \"All of this, you can find the answer in ComfyUI LLM Party.\",\n            \"confidence\": 0.4129876508250355\n        }\n    ]\n}"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 7,
+      "type": "Note",
+      "pos": {
+        "0": 1900,
+        "1": 1760
+      },
+      "size": [
+        550,
+        300
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "【迷你高级OCR】\n- [language_name]：“ch_sim,en” 是一种用于指定语言的格式，通常在图像文字识别（OCR）工具中使用。它表示该工具将识别简体中文（ch_sim）和英文（en）两种语言的文本。\n  - ch_sim: 代表简体中文（Simplified Chinese）。\n  - en: 代表英文（English）。\n    \"English\": \"en\",\n- [model_name]：参考API model配置方法。（mini系列节点目前只支持api调用LLM）\n- [imgbb_api_key]：图床，可以不填。\n- [mask]：输出遮罩box位置信息\n- [json_str]：json格式的文本\n- [text]：文字识别的内容"
+      ],
+      "shape": 1
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      1,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ],
+    [
+      3,
+      1,
+      3,
+      6,
+      0,
+      "STRING"
+    ],
+    [
+      4,
+      1,
+      2,
+      5,
+      0,
+      "STRING"
+    ],
+    [
+      5,
+      1,
+      1,
+      4,
+      0,
+      "MASK"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "About Us",
+      "bounding": [
+        1890,
+        2080,
+        570,
+        340
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Note",
+      "bounding": [
+        1890,
+        1690,
+        570,
+        380
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Mini OCR（Advanced）",
+      "bounding": [
+        1200,
+        1340,
+        340,
+        344
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Load Image",
+      "bounding": [
+        1200,
+        950,
+        340,
+        380
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Mask",
+      "bounding": [
+        1550,
+        1360,
+        380,
+        320
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Json Text",
+      "bounding": [
+        1200,
+        1690,
+        680,
+        734
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Text Output",
+      "bounding": [
+        1940,
+        950,
+        520,
+        730
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Image",
+      "bounding": [
+        1550,
+        950,
+        380,
+        404
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Mini Party for 高级OCR",
+      "bounding": [
+        1200,
+        770,
+        1260,
+        170
+      ],
+      "color": "#3f789e",
+      "font_size": 120,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5054470284992983,
+      "offset": [
+        186.60799197546393,
+        -580.7251335874892
+      ]
+    }
+  },
+  "version": 0.4
+}
