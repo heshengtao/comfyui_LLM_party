@@ -1,0 +1,287 @@
+{
+  "last_node_id": 9,
+  "last_link_id": 6,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "mini_story",
+      "pos": {
+        "0": 1420,
+        "1": 1110
+      },
+      "size": [
+        420,
+        240
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "story",
+          "type": "STRING",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "story",
+          "slot_index": 0
+        },
+        {
+          "name": "character",
+          "type": "STRING",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "label": "character",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_story"
+      },
+      "widgets_values": [
+        "龟兔赛跑的故事",
+        "gpt-4o-mini",
+        "",
+        "",
+        true
+      ],
+      "shape": 1
+    },
+    {
+      "id": 3,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1420,
+        "1": 1440
+      },
+      "size": [
+        420,
+        280
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 2,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "{\n    \"兔子\": \"A rabbit with snow-white fur, long soft ears, and sparkling ruby eyes.\",\n    \"乌龟\": \"A turtle with a deep green shell that shows signs of age, short sturdy legs, and small, wise eyes\"\n}"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 2,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1870,
+        "1": 1110
+      },
+      "size": [
+        390,
+        610
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 1,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "从前，在一片广袤的森林里，生活着不少可爱的小动物。这当中，有一只自负的兔子和一只勤奋的乌龟。兔子的毛色如雪般洁白，耳朵长而柔软，竖得高高的，眼睛则像两颗闪亮的红宝石，显得调皮而灵动。日复一日，兔子总是在森林中飞奔，从不把其他动物放在眼里，尤其是那只走得缓慢的乌龟。乌龟的壳是深绿色的，表面布满了岁月的痕迹，显示出它的智慧和坚韧。四肢短而粗壮，每一步都显得踏实而稳重。它的小眼睛虽然不大，却流露出坚定和从容之气。  \n\n一天，兔子和乌龟在森林里相遇。兔子看到了乌龟缓慢的步伐，忍不住嘲讽说：“乌龟，真希望你能和我比赛，看看谁跑得快！”乌龟不甘示弱，坚定地回答：“兔子，我们来比赛吧，我相信我能赢你。”兔子听了哈哈大笑，但还是同意了。新闻很快就传遍了整个森林，所有动物都兴奋不已，纷纷前来观看这场别开生面的比赛。  \n\n比赛开始了，兔子立刻像箭一样冲了出去，速度快得让人目不暇接，很快把乌龟远远甩在了后面。跑了一小段后，兔子回头一看，发现乌龟仍在远处慢腾腾地前进，兔子心中暗喜，想着：“反正我速度快，先休息一下没问题。”于是它找了个阴凉的地方躺了下来，舒舒服服地睡了一觉。  \n\n而乌龟并没有停下，尽管它的动作缓慢，但每一步都踏实稳重，心中默念着：“只要我不停下，终会到达终点。”经过一段时间，乌龟在安静的夜色中坚持向前，终于在兔子沉沉的睡梦中，超过了它。  \n\n当兔子醒来，发现乌龟已经快到终点时，惊慌失措地跃起，拼尽全力向终点跑去，但已经为时已晚。乌龟稳稳地爬过了终点线，赢得了比赛。森林里的动物们都为乌龟欢呼，兔子则深感羞愧，低下了头。乌龟慢慢地对兔子说道：“骄傲自满得不到胜利，只有坚持不懈才会成功。”从此，兔子再也不敢轻视别人，乌龟继续保持着自己的勤奋与坚持，森林里的一切都变得更加和谐美好。"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 8,
+      "type": "Note",
+      "pos": {
+        "0": 2290,
+        "1": 1110
+      },
+      "size": [
+        250,
+        170
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "【迷你故事生成器】\n- [文本框]：输入需要生成的故事主题；\n- [model_name]：参考API model配置方法。（mini系列节点目前只支持api调用LLM）\n- [story]：生成的故事内容文本\n- [character]：故事的人物设定"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 9,
+      "type": "Note",
+      "pos": {
+        "0": 2290,
+        "1": 1370
+      },
+      "size": [
+        250,
+        350
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "#关于我们：\n- LLM_Party正在用心经营一片AI时代的后花园，我们希望能够在AI时代下成为众多参与者的一员，我们从开源社区中走来，也希望回到社区中去。\n- 欢迎大家来到我们用心经营的后花园。如果我们的项目能够帮助到大家，麻烦大家在Github上帮我点一下Star：\n- github项目地址：https://github.com/heshengtao/comfyui_LLM_party\n- openart：https://openart.ai/workflows/profile/comfyui_llm_party?tab=workflows&sort=latest\n- LibLib：https://www.liblib.art/userpage/4378612c5b3341c79c0deab3101aeabb/publish/workflow\n- 哔哩哔哩：https://space.bilibili.com/26978344?spm_id_from=333.337.0.0\n- YouTube：https://www.youtube.com/@comfyui-LLM-party\n- discord：https://discord.com/invite/gxrQAYy6\n- QQ交流群：931057213\n- 微信交流群：Choo-Yong（添加小助理微信，统一通过后会添加至交流群）\n商务合作请联系email：hst97@qq.com"
+      ],
+      "shape": 1
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      1,
+      1,
+      3,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Note",
+      "bounding": [
+        2280,
+        1040,
+        270,
+        254
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "About Us",
+      "bounding": [
+        2280,
+        1300,
+        270,
+        430
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Group",
+      "bounding": [
+        1860,
+        1040,
+        410,
+        690
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Group",
+      "bounding": [
+        1410,
+        1040,
+        440,
+        324
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Group",
+      "bounding": [
+        1410,
+        1370,
+        440,
+        360
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Mini Party for 故事生成器",
+      "bounding": [
+        1410,
+        890,
+        1140,
+        140
+      ],
+      "color": "#3f789e",
+      "font_size": 100,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.984973267580769,
+      "offset": [
+        -1218.3711074725663,
+        -844.518505263075
+      ]
+    }
+  },
+  "version": 0.4
+}
