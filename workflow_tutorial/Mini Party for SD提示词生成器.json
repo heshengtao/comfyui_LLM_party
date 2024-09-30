@@ -1,0 +1,665 @@
+{
+  "last_node_id": 9,
+  "last_link_id": 6,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "mini_sd_prompt",
+      "pos": {
+        "0": 2020,
+        "1": 970
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "positive_prompt",
+          "type": "STRING",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "positive_prompt",
+          "slot_index": 0
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "label": "negative_prompt",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_sd_prompt"
+      },
+      "widgets_values": [
+        "一只可爱的派对小猫",
+        "gpt-4o-mini",
+        "",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 4,
+      "type": "easy fullLoader",
+      "pos": {
+        "0": 2450,
+        "1": 970
+      },
+      "size": [
+        430,
+        480
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_override",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "clip_override",
+          "type": "CLIP",
+          "link": null,
+          "label": "CLIP（可选）"
+        },
+        {
+          "name": "vae_override",
+          "type": "VAE",
+          "link": null,
+          "label": "VAE（可选）"
+        },
+        {
+          "name": "optional_lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "Lora堆（可选）"
+        },
+        {
+          "name": "optional_controlnet_stack",
+          "type": "CONTROL_NET_STACK",
+          "link": null
+        },
+        {
+          "name": "positive",
+          "type": "STRING",
+          "link": 4,
+          "widget": {
+            "name": "positive"
+          },
+          "label": "正面提示词"
+        },
+        {
+          "name": "negative",
+          "type": "STRING",
+          "link": 3,
+          "widget": {
+            "name": "negative"
+          },
+          "label": "负面提示词"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "label": "节点束",
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullLoader"
+      },
+      "widgets_values": [
+        "1-SDXL模型/wuhaXL_realisticMix_4.0.safetensors",
+        "Default",
+        "Baked VAE",
+        -1,
+        "None",
+        1,
+        1,
+        "1024 x 1024",
+        512,
+        512,
+        "",
+        "none",
+        "A1111",
+        "",
+        "none",
+        "A1111",
+        4,
+        false
+      ]
+    },
+    {
+      "id": 3,
+      "type": "easy fullkSampler",
+      "pos": {
+        "0": 2910,
+        "1": 990
+      },
+      "size": [
+        320,
+        450
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "link": 5,
+          "label": "节点束"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": null,
+          "label": "正面条件（可选）"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": null,
+          "label": "负面条件（可选）"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": null,
+          "label": "Latent（可选）"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "xyPlot",
+          "type": "XYPLOT",
+          "link": null
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": null,
+          "shape": 3,
+          "label": "节点束"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 1
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "随机种"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullkSampler"
+      },
+      "widgets_values": [
+        20,
+        4,
+        "euler",
+        "normal",
+        1,
+        "Hide",
+        0,
+        "ComfyUI",
+        107350167882270,
+        "randomize"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 3260,
+        "1": 970
+      },
+      "size": [
+        440,
+        470
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 6,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 5,
+      "type": "show_text_party",
+      "pos": {
+        "0": 2020,
+        "1": 1260
+      },
+      "size": [
+        400,
+        190
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 1,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            4
+          ],
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "best quality,4k,8k,highres,masterpiece:1.2,ultra-detailed,photorealistic,cute party kitten,fluffy fur,bright blue eyes,playful expression,adorable tiny paws,colorful party hat,surrounded by balloons and confetti,soft warm lighting,vibrant colors,festive atmosphere,highly detailed fur texture,cheerful pose"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "show_text_party",
+      "pos": {
+        "0": 2020,
+        "1": 1540
+      },
+      "size": [
+        400,
+        220
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 2,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            3
+          ],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "nsfw,(low quality,normal quality,worst quality,jpeg artifacts),cropped,monochrome,lowres,low saturation,((watermark)),(white letters),skin spots,acnes,skin blemishes,age spot,mutated hands,mutated fingers,deformed,bad anatomy,disfigured,poorly drawn face,extra limb,ugly,poorly drawn hands,missing limb,floating limbs,disconnected limbs,out of focus,long neck,long body,extra fingers,fewer fingers,(multi nipples),bad hands,signature,username,bad feet,blurry,bad body"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "Note",
+      "pos": {
+        "0": 2910,
+        "1": 1540
+      },
+      "size": [
+        780,
+        220
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "#关于我们：\n- LLM_Party正在用心经营一片AI时代的后花园，我们希望能够在AI时代下成为众多参与者的一员，我们从开源社区中走来，也希望回到社区中去。\n- 欢迎大家来到我们用心经营的后花园。如果我们的项目能够帮助到大家，麻烦大家在Github上帮我点一下Star：\n- github项目地址：https://github.com/heshengtao/comfyui_LLM_party\n- openart：https://openart.ai/workflows/profile/comfyui_llm_party?tab=workflows&sort=latest\n- LibLib：https://www.liblib.art/userpage/4378612c5b3341c79c0deab3101aeabb/publish/workflow\n- 哔哩哔哩：https://space.bilibili.com/26978344?spm_id_from=333.337.0.0\n- YouTube：https://www.youtube.com/@comfyui-LLM-party\n- discord：https://discord.com/invite/gxrQAYy6\n- QQ交流群：931057213\n- 微信交流群：Choo-Yong（添加小助理微信，统一通过后会添加至交流群）\n商务合作请联系email：hst97@qq.com"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "Note",
+      "pos": {
+        "0": 2450,
+        "1": 1540
+      },
+      "size": [
+        430,
+        220
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "【SD提示词生成器】\n- [文本框]：输入你想要生成的主题；\n- [model_name]：参考API model配置方法。（mini系列节点目前只支持api调用LLM）"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      5,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      2,
+      1,
+      6,
+      0,
+      "STRING"
+    ],
+    [
+      3,
+      6,
+      0,
+      4,
+      6,
+      "STRING"
+    ],
+    [
+      4,
+      5,
+      0,
+      4,
+      5,
+      "STRING"
+    ],
+    [
+      5,
+      4,
+      0,
+      3,
+      0,
+      "PIPE_LINE"
+    ],
+    [
+      6,
+      3,
+      1,
+      7,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Note",
+      "bounding": [
+        2440,
+        1470,
+        450,
+        300
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Mini Party for SD提示词生成器",
+      "bounding": [
+        2010,
+        720,
+        1700,
+        170
+      ],
+      "color": "#3f789e",
+      "font_size": 120,
+      "flags": {}
+    },
+    {
+      "title": "Sampling",
+      "bounding": [
+        2900,
+        900,
+        340,
+        560
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "负面提示词",
+      "bounding": [
+        2010,
+        1470,
+        420,
+        300
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "正面提示词",
+      "bounding": [
+        2010,
+        1190,
+        420,
+        270
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Loader",
+      "bounding": [
+        2440,
+        900,
+        450,
+        560
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Output",
+      "bounding": [
+        3250,
+        900,
+        460,
+        560
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "提示生成",
+      "bounding": [
+        2010,
+        900,
+        420,
+        284
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "About Us",
+      "bounding": [
+        2900,
+        1470,
+        810,
+        300
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6727499949325704,
+      "offset": [
+        -1587.230692464627,
+        -580.429946535608
+      ]
+    }
+  },
+  "version": 0.4
+}
