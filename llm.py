@@ -1781,14 +1781,12 @@ class LLM_local:
                         # Convert the PIL image to a bytes buffer
                         buffer = io.BytesIO()
                         pil_image.save(buffer, format="PNG")  # You can change the format if needed
-                        # Get the bytes from the buffer
-                        image_bytes = buffer.getvalue()
                         # Encode the bytes to base64
-                        base64_string = f"data:image/jpeg;base64,{base64.b64encode(image_bytes).decode('utf-8')}"
+                        base64_string = base64.b64encode(buffer.getvalue()).decode("utf-8")
                         user_content = {
                             "role": "user",
                             "content": [
-                                {"type": "image_url", "image_url": {"url": base64_string}},
+                                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{base64_string}"}},
                                 {"type": "text", "text": user_prompt},
                             ],
                         }
