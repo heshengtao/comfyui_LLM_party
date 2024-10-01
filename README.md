@@ -38,12 +38,12 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 
 ## Quick Start
 1. Drag the following workflows into your comfyui, then use [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager) to install the missing nodes.
-- Use API to call LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
-- Manage local LLM with ollama: [start_with_Ollama](workflow/ollama.json)
-- Use local LLM in distributed format: [start_with_LLM_local](workflow/start_with_LLM_local.json)
-- Use local LLM in GGUF format: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-- Use local VLM in distributed format: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (testing, currently only supports [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
-- Use local VLM in GGUF format: [start_with_VLM_GGUF](workflow/start_with_llava.json)
+  - Use API to call LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
+  - Manage local LLM with ollama: [start_with_Ollama](workflow/ollama.json)
+  - Use local LLM in distributed format: [start_with_LLM_local](workflow/start_with_LLM_local.json)
+  - Use local LLM in GGUF format: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
+  - Use local VLM in distributed format: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (testing, currently only supports [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
+  - Use local VLM in GGUF format: [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. If you are using API, fill in your `base_url` (it can be a relay API, make sure it ends with `/v1/`), for example: `https://api.openai.com/v1/` and `api_key` in the API LLM loader node.
 3. If you are using ollama, turn on the `is_ollama` option in the API LLM loader node, no need to fill in `base_url` and `api_key`.
 4. If you are using a local model, fill in your model path in the local model loader node, for example: `E:\model\Llama-3.2-1B-Instruct`. You can also fill in the Huggingface model repo id in the local model loader node, for example: `lllyasviel/omost-llama-3-8b-4bits`.

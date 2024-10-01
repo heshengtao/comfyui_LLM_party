@@ -37,12 +37,12 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 
 ## Démarrage rapide
 1. Faites glisser les workflows suivants dans votre comfyui, puis utilisez [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager) pour installer les nœuds manquants.
-- Utilisez l'API pour appeler LLM : [start_with_LLM_api](workflow/start_with_LLM_api.json)
-- Gérez les LLM locaux avec ollama : [start_with_Ollama](workflow/ollama.json)
-- Utilisez des LLM locaux au format distribué : [start_with_LLM_local](workflow/start_with_LLM_local.json)
-- Utilisez des LLM locaux au format GGUF : [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-- Utilisez des VLM locaux au format distribué : [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (en test, actuellement uniquement [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct) pris en charge)
-- Utilisez des VLM locaux au format GGUF : [start_with_VLM_GGUF](workflow/start_with_llava.json)
+  - Utilisez l'API pour appeler LLM : [start_with_LLM_api](workflow/start_with_LLM_api.json)
+  - Gérez les LLM locaux avec ollama : [start_with_Ollama](workflow/ollama.json)
+  - Utilisez des LLM locaux au format distribué : [start_with_LLM_local](workflow/start_with_LLM_local.json)
+  - Utilisez des LLM locaux au format GGUF : [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
+  - Utilisez des VLM locaux au format distribué : [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (en test, actuellement uniquement [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct) pris en charge)
+  - Utilisez des VLM locaux au format GGUF : [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. Si vous utilisez l'API, remplissez votre `base_url` (cela peut être une API relais, assurez-vous qu'elle se termine par `/v1/`) et `api_key` dans le nœud de chargement de l'API LLM. Exemple : `https://api.openai.com/v1/`
 3. Si vous utilisez ollama, activez l'option `is_ollama` dans le nœud de chargement de l'API LLM, sans remplir `base_url` et `api_key`.
 4. Si vous utilisez un modèle local, remplissez le chemin de votre modèle dans le nœud de chargement du modèle local, par exemple : `E:\model\Llama-3.2-1B-Instruct`. Vous pouvez également remplir l'ID du dépôt du modèle Huggingface dans le nœud de chargement du modèle local, par exemple : `lllyasviel/omost-llama-3-8b-4bits`.

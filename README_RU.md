@@ -37,12 +37,12 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 
 ## Быстрый старт
 1. Перетащите следующие рабочие процессы в ваш comfyui, затем используйте [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager) для установки недостающих узлов.
-- Используйте API для вызова LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
-- Управляйте локальным LLM с помощью ollama: [start_with_Ollama](workflow/ollama.json)
-- Используйте локальный LLM в распределенном формате: [start_with_LLM_local](workflow/start_with_LLM_local.json)
-- Используйте локальный LLM в формате GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-- Используйте локальный VLM в распределенном формате: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (тестирование, в настоящее время поддерживает только [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
-- Используйте локальный VLM в формате GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
+  - Используйте API для вызова LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
+  - Управляйте локальным LLM с помощью ollama: [start_with_Ollama](workflow/ollama.json)
+  - Используйте локальный LLM в распределенном формате: [start_with_LLM_local](workflow/start_with_LLM_local.json)
+  - Используйте локальный LLM в формате GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
+  - Используйте локальный VLM в распределенном формате: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (тестирование, в настоящее время поддерживает только [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
+  - Используйте локальный VLM в формате GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. Если вы используете API, заполните `base_url` (это может быть промежуточный API, убедитесь, что он заканчивается на `/v1/`), например: `https://api.openai.com/v1/` и `api_key` в узле загрузчика API LLM.
 3. Если вы используете ollama, включите опцию `is_ollama` в узле загрузчика API LLM, не нужно заполнять `base_url` и `api_key`.
 4. Если вы используете локальную модель, заполните путь к вашей модели в узле загрузчика локальной модели, например: `E:\model\Llama-3.2-1B-Instruct`. Вы также можете заполнить идентификатор репозитория модели Huggingface в узле загрузчика локальной модели, например: `lllyasviel/omost-llama-3-8b-4bits`.

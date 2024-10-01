@@ -37,12 +37,12 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 
 ## Início Rápido
 1. Arraste os seguintes fluxos de trabalho para o seu comfyui e use [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager) para instalar os nós ausentes.
-- Use a API para chamar LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
-- Gerencie LLM local com ollama: [start_with_Ollama](workflow/ollama.json)
-- Use LLM local em formato distribuído: [start_with_LLM_local](workflow/start_with_LLM_local.json)
-- Use LLM local em formato GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-- Use VLM local em formato distribuído: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (em teste, atualmente suporta apenas [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
-- Use VLM local em formato GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
+  - Use a API para chamar LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
+  - Gerencie LLM local com ollama: [start_with_Ollama](workflow/ollama.json)
+  - Use LLM local em formato distribuído: [start_with_LLM_local](workflow/start_with_LLM_local.json)
+  - Use LLM local em formato GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
+  - Use VLM local em formato distribuído: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (em teste, atualmente suporta apenas [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
+  - Use VLM local em formato GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. Se você estiver usando a API, preencha seu `base_url` (pode ser uma API de retransmissão, certifique-se de que termine com `/v1/`) e `api_key` no nó de carregamento da API LLM. Exemplo: `https://api.openai.com/v1/`
 3. Se você estiver usando ollama, ative a opção `is_ollama` no nó de carregamento da API LLM, não é necessário preencher `base_url` e `api_key`.
 4. Se você estiver usando um modelo local, preencha o caminho do seu modelo no nó de carregamento do modelo local, por exemplo: `E:\model\Llama-3.2-1B-Instruct`. Você também pode preencher o ID do repositório do modelo no Huggingface no nó de carregamento do modelo local, por exemplo: `lllyasviel/omost-llama-3-8b-4bits`.

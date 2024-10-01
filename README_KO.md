@@ -37,12 +37,12 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 
 ## 빠른 시작
 1. 다음 워크플로를 comfyui에 드래그한 다음 [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)를 사용하여 누락된 노드를 설치합니다.
-- API를 사용하여 LLM 호출: [start_with_LLM_api](workflow/start_with_LLM_api.json)
-- ollama를 사용하여 로컬 LLM 관리: [start_with_Ollama](workflow/ollama.json)
-- 분산 형식의 로컬 LLM 사용: [start_with_LLM_local](workflow/start_with_LLM_local.json)
-- GGUF 형식의 로컬 LLM 사용: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-- 분산 형식의 로컬 VLM 사용: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (테스트 중, 현재는 [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)만 지원)
-- GGUF 형식의 로컬 VLM 사용: [start_with_VLM_GGUF](workflow/start_with_llava.json)
+  - API를 사용하여 LLM 호출: [start_with_LLM_api](workflow/start_with_LLM_api.json)
+  - ollama를 사용하여 로컬 LLM 관리: [start_with_Ollama](workflow/ollama.json)
+  - 분산 형식의 로컬 LLM 사용: [start_with_LLM_local](workflow/start_with_LLM_local.json)
+  - GGUF 형식의 로컬 LLM 사용: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
+  - 분산 형식의 로컬 VLM 사용: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (테스트 중, 현재는 [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)만 지원)
+  - GGUF 형식의 로컬 VLM 사용: [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. API를 사용하는 경우, API LLM 로더 노드에 `base_url`(릴레이 API일 수 있으며, 끝이 `/v1/`로 끝나는지 확인)과 `api_key`를 입력합니다. 예: `https://api.openai.com/v1/`
 3. ollama를 사용하는 경우, API LLM 로더 노드에서 `is_ollama` 옵션을 켜고 `base_url` 및 `api_key`를 입력할 필요가 없습니다.
 4. 로컬 모델을 사용하는 경우, 로컬 모델 로더 노드에 모델 경로를 입력합니다. 예: `E:\model\Llama-3.2-1B-Instruct`. 또한 로컬 모델 로더 노드에 Huggingface 모델 repo id를 입력할 수도 있습니다. 예: `lllyasviel/omost-llama-3-8b-4bits`

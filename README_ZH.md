@@ -38,12 +38,12 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 ## 快速开始
 1. 直接将以下工作流拖入你的comfyui，然后用[comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)安装缺失节点。
-- 使用API调用LLM：[start_with_LLM_api](workflow/start_with_LLM_api.json)
-- 使用ollama管理本地LLM：[start_with_Ollama](workflow/ollama.json)
-- 使用分散格式的本地LLM：[start_with_LLM_local](workflow/start_with_LLM_local.json)
-- 使用GGUF格式的本地LLM：[start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-- 使用分散格式的本地VLM：[start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json)（测试中，目前只支持[Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)）
-- 使用GGUF格式的本地VLM：[start_with_VLM_GGUF](workflow/start_with_llava.json)
+  - 使用API调用LLM：[start_with_LLM_api](workflow/start_with_LLM_api.json)
+  - 使用ollama管理本地LLM：[start_with_Ollama](workflow/ollama.json)
+  - 使用分散格式的本地LLM：[start_with_LLM_local](workflow/start_with_LLM_local.json)
+  - 使用GGUF格式的本地LLM：[start_with_LLM_GGUF](workflow/start_with_GGUF.json)
+  - 使用分散格式的本地VLM：[start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json)（测试中，目前只支持[Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)）
+  - 使用GGUF格式的本地VLM：[start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. 如果你是使用API，在API LLM加载器节点上填入你的`base_url`（可以是中转API，注意结尾要用`/v1/`），例如：`https://api.openai.com/v1/` 以及`api_key`。
 3. 如果你是使用ollama，在API LLM加载器节点上打开`is_ollama`选项，无需填写`base_url`和`api_key`。
 4. 如果你是使用本地模型，在本地模型加载器节点上填入你的模型路径，例如：`E:\model\Llama-3.2-1B-Instruct`。也可以在本地模型加载器节点上填入hunggingface的模型repo id，例如：`lllyasviel/omost-llama-3-8b-4bits`。
