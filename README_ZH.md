@@ -36,6 +36,19 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 
 ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭建自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建;从个人用户需要的接入自己的社交APP(QQ、飞书、Discord)，到流媒体工作者需要的一站式LLM+TTS+ComfyUI工作流；从普通学生所需要的第一个LLM应用的简单上手起步，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在ComfyUI LLM Party中找到答案。
 
+## 快速开始
+1. 直接将以下工作流拖入你的comfyui，然后用[comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)安装缺失节点。
+- 使用API调用LLM：[start_with_LLM_api](workflow/start_with_LLM_api.json)
+- 使用ollama管理本地LLM：[start_with_Ollama](workflow/ollama.json)
+- 使用分散格式的本地LLM：[start_with_LLM_local](workflow/start_with_LLM_local.json)
+- 使用GGUF格式的本地LLM：[start_with_LLM_GGUF](workflow/start_with_GGUF.json)
+- 使用分散格式的本地VLM：[start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json)（测试中，目前只支持[Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)）
+- 使用GGUF格式的本地VLM：[start_with_VLM_GGUF](workflow/start_with_llava.json)
+2. 如果你是使用API，在API LLM加载器节点上填入你的`base_url`（可以是中转API，注意结尾要用`/v1/`），例如：`https://api.openai.com/v1/` 以及`api_key`。
+3. 如果你是使用ollama，在API LLM加载器节点上打开`is_ollama`选项，无需填写`base_url`和`api_key`。
+4. 如果你是使用本地模型，在本地模型加载器节点上填入你的模型路径，例如：`E:\model\Llama-3.2-1B-Instruct`。也可以在本地模型加载器节点上填入hunggingface的模型repo id，例如：`lllyasviel/omost-llama-3-8b-4bits`。
+5. 由于本项目有较高的使用门槛，所以即使你选择了快速开始，我也希望你能耐心阅读完本项目主页。
+
 ## 最新更新
 1. **超级重大更新！！！** 现在你可以将任意的comfyui工作流封装成一个LLM工具节点。你可以让你的LLM同时控制多个comfyui工作流，当你想要他完成一些任务时，他可以根据你的提示，选择合适的comfyui工作流，完成你的任务，并且将结果返回给你。示例工作流：[comfyui_workflows_tool](workflow/把任意workflow当作LLM_tool.json)。具体步骤如下：
   - 首先，将你待会需要被封装成工具的工作流的需要输入文字的接口连上“开始工作流”节点的“user_prompt”输出，这个位置是LLM调用工具时，传入的prompt。在你要输出文字和图片的位置连上“结束工作流”节点的对应输入位置。
@@ -86,7 +99,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 3. 兼容transformer库的大部分本地模型（本地LLM模型链节点上的model type已改成LLM、VLM-GGUF、LLM-GGUF三个选项，对应了直接加载LLM模型、加载VLM模型和加载GGUF格式的LLM模型），如果你的VLM或GGUF格式的LLM模型报错了，请在[llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases)下载最新版本的llama-cpp-python，目前已测试的有：
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay)(推荐！角色扮演模型)
-* [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(推荐！丰富提示词模型)
+* [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(推荐！丰富提示词模型)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)

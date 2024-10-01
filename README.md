@@ -36,6 +36,18 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 
 ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quickly build your own exclusive AI assistant, to the industry-specific word vector RAG and GraphRAG to localize the management of the industry knowledge base; from a single agent pipeline, to the construction of complex agent-agent radial interaction mode and ring interaction mode; from the access to their own social APP (QQ, Feishu, Discord) required by individual users, to the one-stop LLM + TTS + ComfyUI workflow required by streaming media workers; from the simple start of the first LLM application required by ordinary students, to the various parameter debugging interfaces commonly used by scientific researchers, model adaptation. All of this, you can find the answer in ComfyUI LLM Party.
 
+## Quick Start
+1. Drag the following workflows into your comfyui, then use [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager) to install the missing nodes.
+- Use API to call LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
+- Manage local LLM with ollama: [start_with_Ollama](workflow/ollama.json)
+- Use local LLM in distributed format: [start_with_LLM_local](workflow/start_with_LLM_local.json)
+- Use local LLM in GGUF format: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
+- Use local VLM in distributed format: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (testing, currently only supports [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
+- Use local VLM in GGUF format: [start_with_VLM_GGUF](workflow/start_with_llava.json)
+2. If you are using API, fill in your `base_url` (it can be a relay API, make sure it ends with `/v1/`), for example: `https://api.openai.com/v1/` and `api_key` in the API LLM loader node.
+3. If you are using ollama, turn on the `is_ollama` option in the API LLM loader node, no need to fill in `base_url` and `api_key`.
+4. If you are using a local model, fill in your model path in the local model loader node, for example: `E:\model\Llama-3.2-1B-Instruct`. You can also fill in the Huggingface model repo id in the local model loader node, for example: `lllyasviel/omost-llama-3-8b-4bits`.
+5. Due to the high usage threshold of this project, even if you choose the quick start, I hope you can patiently read through the project homepage.
 
 ## Latest update
 1. **Major Update!!!** Now you can encapsulate any ComfyUI workflow into an LLM tool node. You can have your LLM control multiple ComfyUI workflows simultaneously. When you want it to complete some tasks, it can choose the appropriate ComfyUI workflow based on your prompt, complete your task, and return the result to you. Example workflow: [comfyui_workflows_tool](workflow/把任意workflow当作LLM_tool.json). The specific steps are as follows:
@@ -88,7 +100,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 
 3. Compatible with most local models in the transformer library (the model type on the local LLM model chain node has been changed to LLM, VLM-GGUF, and LLM-GGUF, corresponding to directly loading LLM models, loading VLM models, and loading GGUF format LLM models). If your VLM or GGUF format LLM model reports an error, please download the latest version of llama-cpp-python from [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases). Currently tested models include:
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay)(Recommended! Role-playing model)
-* [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(Recommended! Rich prompt model)
+* [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(Recommended! Rich prompt model)
 * [meta-llama/llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)

@@ -35,6 +35,19 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ## نظرة عامة على المشروع
 ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعددة، وإعداد الشخصيات لبناء مساعد AI الخاص بك بسرعة، إلى RAG وGraphRAG القابلة للتطبيق في الصناعة لإدارة قواعد المعرفة المحلية؛ من خط أنابيب وكيل واحد إلى بناء أنماط تفاعل معقدة بين الوكلاء وأنماط تفاعل دائرية؛ من الحاجة الفردية للمستخدمين للوصول إلى تطبيقات التواصل الاجتماعي الخاصة بهم (QQ، Feishu، Discord)، إلى تدفقات العمل الشاملة التي يحتاجها العاملون في وسائل الإعلام LLM+TTS+ComfyUI؛ من بدء استخدام تطبيق LLM الأول للطلاب العاديين، إلى واجهات ضبط المعلمات التي يستخدمها الباحثون. كل هذا يمكنك العثور على إجابات له في ComfyUI LLM Party.
 
+## بدء سريع
+1. اسحب سير العمل التالي إلى comfyui الخاص بك، ثم استخدم [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager) لتثبيت العقد المفقودة.
+- استخدم API لاستدعاء LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
+- إدارة LLM المحلي باستخدام ollama: [start_with_Ollama](workflow/ollama.json)
+- استخدم LLM المحلي بتنسيق موزع: [start_with_LLM_local](workflow/start_with_LLM_local.json)
+- استخدم LLM المحلي بتنسيق GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
+- استخدم VLM المحلي بتنسيق موزع: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (تحت الاختبار، يدعم حاليًا فقط [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
+- استخدم VLM المحلي بتنسيق GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
+2. إذا كنت تستخدم API، فاملأ `base_url` (يمكن أن يكون API وسيط، تأكد من أنه ينتهي بـ `/v1/`) و`api_key` في عقدة تحميل API LLM. مثال: `https://api.openai.com/v1/`
+3. إذا كنت تستخدم ollama، فقم بتشغيل خيار `is_ollama` في عقدة تحميل API LLM، ولا حاجة لملء `base_url` و`api_key`.
+4. إذا كنت تستخدم نموذجًا محليًا، فاملأ مسار النموذج الخاص بك في عقدة تحميل النموذج المحلي، على سبيل المثال: `E:\model\Llama-3.2-1B-Instruct`. يمكنك أيضًا ملء معرف مستودع النموذج في Huggingface في عقدة تحميل النموذج المحلي، على سبيل المثال: `lllyasviel/omost-llama-3-8b-4bits`.
+5. نظرًا للعتبة العالية لاستخدام هذا المشروع، حتى إذا اخترت البدء السريع، آمل أن تتمكن من قراءة الصفحة الرئيسية للمشروع بصبر.
+
 ## التحديثات الأخيرة
 1. **تحديث ضخم!!!** الآن يمكنك تغليف أي سير عمل ComfyUI في عقدة أداة LLM. يمكنك جعل LLM الخاص بك يتحكم في سير عمل ComfyUI متعدد في نفس الوقت. عندما تريد إكمال بعض المهام، يمكنه اختيار سير العمل المناسب لـ ComfyUI بناءً على طلبك، وإكمال مهمتك، وإرجاع النتيجة لك. مثال على سير العمل: [comfyui_workflows_tool](workflow/把任意workflow当作LLM_tool.json). الخطوات المحددة هي كما يلي:
    - أولاً، قم بتوصيل واجهة إدخال النص لسير العمل الذي تريد تغليفه كأداة بمخرج "user_prompt" لعقدة "بدء سير العمل". هذا هو المكان الذي يتم فيه تمرير الطلب عند استدعاء الأداة بواسطة LLM.
@@ -84,7 +97,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 
 3. متوافق مع معظم النماذج المحلية في مكتبة transformer (تم تغيير نوع النموذج على عقدة سلسلة نماذج LLM المحلية إلى LLM وVLM-GGUF وLLM-GGUF، مما يتوافق مع تحميل نماذج LLM مباشرة، وتحميل نماذج VLM، وتحميل نماذج LLM بتنسيق GGUF). إذا أبلغ نموذج LLM بتنسيق VLM أو GGUF عن خطأ، فيرجى تنزيل أحدث إصدار من llama-cpp-python من [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases). النماذج التي تم اختبارها حاليًا تشمل:
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay) (موصى به! نموذج لعب الأدوار)
-* [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (موصى به! نموذج غني بالكلمات الرئيسية)
+* [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (موصى به! نموذج غني بالكلمات الرئيسية)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)

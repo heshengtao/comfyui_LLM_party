@@ -35,6 +35,19 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ## 프로젝트 개요
 ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정을 통해 나만의 AI 도우미를 신속하게 구축하고, 산업에 적용 가능한 단어 벡터 RAG, GraphRAG를 통해 산업 내 지식 관리 시스템을 로컬화합니다. 단일 지능체 파이프라인에서 복잡한 지능체 간의 방사형 상호작용 모드, 순환 상호작용 모드를 구성하는 것까지; 개인 사용자가 자신의 사회적 APP(QQ, Feishu, Discord)에 접속할 필요가 있는 것부터, 스트리밍 작업자가 필요로 하는 원스톱 LLM+TTS+ComfyUI 워크플로우까지; 일반 학생들이 필요로 하는 첫 번째 LLM 응용 프로그램의 간단한 시작부터, 연구자들이 자주 사용하는 다양한 파라미터 조정 인터페이스, 모델 적응까지. 이 모든 것을 ComfyUI LLM Party에서 확인할 수 있습니다.
 
+## 빠른 시작
+1. 다음 워크플로를 comfyui에 드래그한 다음 [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)를 사용하여 누락된 노드를 설치합니다.
+- API를 사용하여 LLM 호출: [start_with_LLM_api](workflow/start_with_LLM_api.json)
+- ollama를 사용하여 로컬 LLM 관리: [start_with_Ollama](workflow/ollama.json)
+- 분산 형식의 로컬 LLM 사용: [start_with_LLM_local](workflow/start_with_LLM_local.json)
+- GGUF 형식의 로컬 LLM 사용: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
+- 분산 형식의 로컬 VLM 사용: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (테스트 중, 현재는 [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)만 지원)
+- GGUF 형식의 로컬 VLM 사용: [start_with_VLM_GGUF](workflow/start_with_llava.json)
+2. API를 사용하는 경우, API LLM 로더 노드에 `base_url`(릴레이 API일 수 있으며, 끝이 `/v1/`로 끝나는지 확인)과 `api_key`를 입력합니다. 예: `https://api.openai.com/v1/`
+3. ollama를 사용하는 경우, API LLM 로더 노드에서 `is_ollama` 옵션을 켜고 `base_url` 및 `api_key`를 입력할 필요가 없습니다.
+4. 로컬 모델을 사용하는 경우, 로컬 모델 로더 노드에 모델 경로를 입력합니다. 예: `E:\model\Llama-3.2-1B-Instruct`. 또한 로컬 모델 로더 노드에 Huggingface 모델 repo id를 입력할 수도 있습니다. 예: `lllyasviel/omost-llama-3-8b-4bits`
+5. 이 프로젝트는 사용 임계값이 높기 때문에 빠른 시작을 선택하더라도 프로젝트 홈페이지를 꼼꼼히 읽어주시기 바랍니다.
+
 ## 최신 업데이트
 1. **중대한 업데이트!!!** 이제 모든 ComfyUI 워크플로를 LLM 도구 노드로 캡슐화할 수 있습니다. LLM이 여러 ComfyUI 워크플로를 동시에 제어할 수 있습니다. 작업을 완료하고 싶을 때, 프롬프트에 따라 적절한 ComfyUI 워크플로를 선택하여 작업을 완료하고 결과를 반환할 수 있습니다. 예제 워크플로: [comfyui_workflows_tool](workflow/把任意workflow当作LLM_tool.json). 구체적인 단계는 다음과 같습니다:
    - 먼저, 도구로 캡슐화할 워크플로의 텍스트 입력 인터페이스를 "워크플로 시작" 노드의 "user_prompt" 출력에 연결합니다. 이는 LLM이 도구를 호출할 때 프롬프트가 전달되는 위치입니다.
@@ -85,7 +98,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 
 3. transformer 라이브러리의 대부분의 로컬 모델과 호환됩니다 (로컬 LLM 모델 체인 노드의 모델 유형이 LLM, VLM-GGUF 및 LLM-GGUF로 변경되어 LLM 모델을 직접 로드하고, VLM 모델을 로드하고, GGUF 형식의 LLM 모델을 로드할 수 있습니다). VLM 또는 GGUF 형식의 LLM 모델에서 오류가 발생하면 [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases)에서 최신 버전의 llama-cpp-python을 다운로드하십시오. 현재 테스트된 모델에는 다음이 포함됩니다:
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay) (추천! 역할극 모델)
-* [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (추천! 풍부한 프롬프트 모델)
+* [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (추천! 풍부한 프롬프트 모델)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)

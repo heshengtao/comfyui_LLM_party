@@ -35,6 +35,19 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ## プロジェクト概要
 ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャラクター設定によって、専属のAIアシスタントを迅速に構築することから、業界に適用可能な単語ベクトルRAG、GraphRAGを用いた知識ベースのローカル管理までを行います。単一のエージェントパイプラインから、複雑なエージェント間の放射状および環状の相互作用モードの構築まで、個人ユーザーのためのSNSアプリ（QQ、Feishu、Discord）への接続から、ストリーミングメディアの作業者が必要とするワンストップLLM+TTS+ComfyUIワークフローまで、普通の学生が必要とする最初のLLMアプリケーションの簡単な導入から、研究者が一般的に使用するさまざまなパラメータ調整インターフェースやモデル適応に至るまで、これらすべての答えはComfyUI LLM Partyの中にあります。
 
+## クイックスタート
+1. 以下のワークフローをcomfyuiにドラッグし、[comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)を使用して不足しているノードをインストールします。
+- APIを使用してLLMを呼び出す：[start_with_LLM_api](workflow/start_with_LLM_api.json)
+- ollamaを使用してローカルLLMを管理する：[start_with_Ollama](workflow/ollama.json)
+- 分散形式のローカルLLMを使用する：[start_with_LLM_local](workflow/start_with_LLM_local.json)
+- GGUF形式のローカルLLMを使用する：[start_with_LLM_GGUF](workflow/start_with_GGUF.json)
+- 分散形式のローカルVLMを使用する：[start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json)（テスト中、現在は[Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)のみサポート）
+- GGUF形式のローカルVLMを使用する：[start_with_VLM_GGUF](workflow/start_with_llava.json)
+2. APIを使用する場合、API LLMローダーノードに`base_url`（リレーAPIでも可、末尾は`/v1/`であることを確認）と`api_key`を入力します。例：`https://api.openai.com/v1/`
+3. ollamaを使用する場合、API LLMローダーノードで`is_ollama`オプションをオンにし、`base_url`と`api_key`を入力する必要はありません。
+4. ローカルモデルを使用する場合、ローカルモデルローダーノードにモデルパスを入力します。例：`E:\model\Llama-3.2-1B-Instruct`。また、ローカルモデルローダーノードにHuggingfaceのモデルrepo idを入力することもできます。例：`lllyasviel/omost-llama-3-8b-4bits`
+5. このプロジェクトは使用の敷居が高いため、クイックスタートを選択した場合でも、プロジェクトのホームページをじっくり読んでいただけると幸いです。
+
 ## 最新の更新
 1. **重大アップデート！！！** これで、任意のComfyUIワークフローをLLMツールノードとしてカプセル化できます。LLMが複数のComfyUIワークフローを同時に制御できるようになります。タスクを完了させたいときに、プロンプトに基づいて適切なComfyUIワークフローを選択し、タスクを完了し、結果を返すことができます。例のワークフロー：[comfyui_workflows_tool](workflow/把任意workflow当作LLM_tool.json)。具体的な手順は以下の通りです：
    - まず、ツールとしてカプセル化するワークフローのテキスト入力インターフェースを「ワークフロー開始」ノードの「user_prompt」出力に接続します。これは、LLMがツールを呼び出すときにプロンプトが渡される場所です。
@@ -85,7 +98,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 
 3. トランスフォーマーライブラリのほとんどのローカルモデルと互換性があります（ローカルLLMモデルチェーンノードのモデルタイプは、LLM、VLM-GGUF、およびLLM-GGUFに変更され、LLMモデルの直接ロード、VLMモデルのロード、およびGGUF形式のLLMモデルのロードに対応します）。VLMまたはGGUF形式のLLMモデルでエラーが発生した場合は、[llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases)から最新バージョンのllama-cpp-pythonをダウンロードしてください。現在テストされているモデルには次のものが含まれます：
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay)(推奨！ロールプレイモデル)
-* [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(推奨！豊富なプロンプトモデル)
+* [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(推奨！豊富なプロンプトモデル)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)

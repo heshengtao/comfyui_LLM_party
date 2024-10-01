@@ -35,6 +35,19 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ## Visão Geral do Projeto
 ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configuração rápida de personagens para construir seu assistente de IA personalizado, até a aplicação de Word Vector RAG e GraphRAG para gerenciamento local de bancos de dados de conhecimento da indústria; desde um pipeline de agentes inteligentes simples, até a construção de modos de interação complexos entre agentes inteligentes em padrão radial e circular; desde a necessidade de usuários individuais de integrar seus aplicativos sociais (QQ, Feishu, Discord), até o fluxo de trabalho tudo-em-um LLM+TTS+ComfyUI que os trabalhadores de streaming precisam; desde o primeiro aplicativo LLM que alunos comuns precisam para um fácil início, até as diversas interfaces de ajuste de parâmetros frequentemente utilizadas por pesquisadores e a adaptação de modelos. Tudo isso, você pode encontrar respostas no ComfyUI LLM Party.
 
+## Início Rápido
+1. Arraste os seguintes fluxos de trabalho para o seu comfyui e use [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager) para instalar os nós ausentes.
+- Use a API para chamar LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
+- Gerencie LLM local com ollama: [start_with_Ollama](workflow/ollama.json)
+- Use LLM local em formato distribuído: [start_with_LLM_local](workflow/start_with_LLM_local.json)
+- Use LLM local em formato GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
+- Use VLM local em formato distribuído: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (em teste, atualmente suporta apenas [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
+- Use VLM local em formato GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
+2. Se você estiver usando a API, preencha seu `base_url` (pode ser uma API de retransmissão, certifique-se de que termine com `/v1/`) e `api_key` no nó de carregamento da API LLM. Exemplo: `https://api.openai.com/v1/`
+3. Se você estiver usando ollama, ative a opção `is_ollama` no nó de carregamento da API LLM, não é necessário preencher `base_url` e `api_key`.
+4. Se você estiver usando um modelo local, preencha o caminho do seu modelo no nó de carregamento do modelo local, por exemplo: `E:\model\Llama-3.2-1B-Instruct`. Você também pode preencher o ID do repositório do modelo no Huggingface no nó de carregamento do modelo local, por exemplo: `lllyasviel/omost-llama-3-8b-4bits`.
+5. Devido ao alto limiar de uso deste projeto, mesmo que você escolha o início rápido, espero que possa ler pacientemente a página inicial do projeto.
+
 ## Atualizações Recentes
 1. **Atualização importante!!!** Agora você pode encapsular qualquer fluxo de trabalho do ComfyUI em um nó de ferramenta LLM. Você pode fazer com que seu LLM controle vários fluxos de trabalho do ComfyUI simultaneamente. Quando você quiser que ele complete algumas tarefas, ele pode escolher o fluxo de trabalho do ComfyUI apropriado com base no seu prompt, completar sua tarefa e retornar o resultado para você. Exemplo de fluxo de trabalho: [comfyui_workflows_tool](workflow/把任意workflow当作LLM_tool.json). Os passos específicos são os seguintes:
    - Primeiro, conecte a interface de entrada de texto do fluxo de trabalho que você deseja encapsular como ferramenta à saída "user_prompt" do nó "Iniciar fluxo de trabalho". Este é o lugar onde o prompt é passado quando o LLM chama a ferramenta.
@@ -84,7 +97,7 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 
 3. Compatível com a maioria dos modelos locais na biblioteca transformer (o tipo de modelo no nó da cadeia de modelos LLM local foi alterado para LLM, VLM-GGUF e LLM-GGUF, correspondendo ao carregamento direto de modelos LLM, carregamento de modelos VLM e carregamento de modelos LLM no formato GGUF). Se o seu modelo LLM no formato VLM ou GGUF relatar um erro, faça o download da versão mais recente do llama-cpp-python em [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases). Os modelos atualmente testados incluem:
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay) (recomendado! modelo de interpretação de papéis)
-* [omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (recomendado! modelo de sugestões ricas)
+* [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (recomendado! modelo de sugestões ricas)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
 * [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)
 * [xtuner/llava-llama-3-8b-v1_1-gguf](https://huggingface.co/xtuner/llava-llama-3-8b-v1_1-gguf)
