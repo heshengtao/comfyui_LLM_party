@@ -1,0 +1,71 @@
+{
+  "24": {
+    "inputs": {
+      "file_path": "",
+      "img_path1": "",
+      "img_path2": "",
+      "system_prompt": "",
+      "user_prompt": "你好",
+      "positive_prompt": "",
+      "negative_prompt": "",
+      "model_name": ""
+    },
+    "class_type": "start_workflow",
+    "_meta": {
+      "title": "开始工作流(start_workflow)"
+    }
+  },
+  "25": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "text": [
+        "26",
+        0
+      ]
+    },
+    "class_type": "end_workflow",
+    "_meta": {
+      "title": "结束工作流(end_workflow)"
+    }
+  },
+  "26": {
+    "inputs": {
+      "system_prompt": "如果我的输入不是中文（例如：英文），你会将我的输入翻译成中文；如果我的输入是中文，你会将输入翻译成推特风格的英文发言。",
+      "user_prompt": "",
+      "temperature": 0.7000000000000001,
+      "is_memory": "enable",
+      "is_tools_in_sys_prompt": "disable",
+      "is_locked": "disable",
+      "main_brain": "enable",
+      "max_length": 1920,
+      "user_prompt_input": [
+        "24",
+        4
+      ],
+      "imgbb_api_key": "",
+      "conversation_rounds": 100,
+      "historical_record": "",
+      "is_enable": true,
+      "model": [
+        "27",
+        0
+      ]
+    },
+    "class_type": "LLM",
+    "_meta": {
+      "title": "API大语言模型"
+    }
+  },
+  "27": {
+    "inputs": {
+      "model_name": "gpt-4o-mini",
+      "base_url": "",
+      "api_key": "",
+      "is_ollama": false
+    },
+    "class_type": "LLM_api_loader",
+    "_meta": {
+      "title": "API大语言模型加载器"
+    }
+  }
+}
