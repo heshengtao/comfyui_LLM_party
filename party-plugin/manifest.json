@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Party Plugin",
+  "version": "1.0",
+  "description": "A simple plugin to send selected text to GPT and display the response in Markdown.",
+  "permissions": ["contextMenus", "activeTab", "scripting", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
+

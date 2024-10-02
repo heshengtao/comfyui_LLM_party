@@ -123,7 +123,20 @@ def api(
     return images, res
 
 
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+# 允许所有来源的跨域请求
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 允许所有来源
+    allow_credentials=True,
+    allow_methods=["*"],  # 允许所有方法
+    allow_headers=["*"],  # 允许所有请求头
+)
+
 
 
 # 定义请求中的消息
