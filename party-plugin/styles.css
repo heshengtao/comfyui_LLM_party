@@ -1,0 +1,81 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  width: 400px; /* 固定面板宽度 */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.btn.custom-btn {
+  padding: 10px 20px;
+  border: 2px solid #000; /* 黑色边框 */
+  border-radius: 5px; /* 圆角 */
+  background-color: #fff; /* 白色背景 */
+  color: #000; /* 黑色字体 */
+  font-weight: bold; /* 粗体 */
+  cursor: pointer;
+  flex: 1; /* 使按钮长度一致 */
+  margin: 5px; /* 增加按钮之间的间距 */
+  text-align: center;
+  white-space: nowrap; /* 确保文字单行显示 */
+}
+
+.btn.custom-btn:hover {
+  background-color: #e0e0e0; /* 悬停时变灰 */
+}
+
+#response-container {
+  white-space: pre-wrap;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  position: relative;
+}
+
+#copy-response {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
