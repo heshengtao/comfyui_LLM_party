@@ -210,11 +210,11 @@ Verwenden Sie eine der folgenden Methoden zur Installation
 10. Ein neuer FLUX-Prompt-Generator-Maskenknoten wurde hinzugefügt, der Prompts in verschiedenen Stilen wie Hearthstone-Karten, Yu-Gi-Oh-Karten, Plakate und Comics generieren kann, um das FLUX-Modell direkt zu nutzen. Referenz-Workflow: [FLUX提示词](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
 
 ## Nächste Schritte:
-1. Weitere Modellanpassungen, die mindestens die gängigen großen Modell-API-Schnittstellen und die lokale Nutzung gängiger Open-Source-Modelle abdecken sollten, sowie mehr Anpassungen für LVM-Modelle. Derzeit habe ich nur die visuellen Funktionen von GPT-4 angepasst.
-2. Weitere Möglichkeiten zum Aufbau intelligenter Agenten. In dieser Hinsicht habe ich bereits einen Teil der Arbeit abgeschlossen, indem ich LLM als Werkzeug in ein anderes LLM importiert habe, um eine strahlenförmige LLM-Workflow-Struktur zu schaffen. Ein Workflow wird als Knoten in einen anderen Workflow integriert. In Zukunft könnte ich in diesem Bereich einige spannendere Funktionen entwickeln.
-3. Weitere Automatisierungsfunktionen. In Zukunft werde ich mehr Knoten einführen, die Bilder, Texte, Videos und Audios automatisch an andere Anwendungen weiterleiten, sowie Überwachungs-Knoten, die automatisch auf gängige soziale Netzwerke und Foren reagieren.
-4. Weitere Funktionen zur Verwaltung von Wissensdatenbanken. Das aktuelle Projekt unterstützt bereits die lokale Dateisuche und die Internetsuche. In Zukunft werde ich die Wissensgraph-Suche und die Langzeitgedächtnis-Suche einführen, damit intelligente Agenten logisch über Fachwissen nachdenken und beim Dialog mit Benutzern bestimmte Schlüsselinformationen dauerhaft speichern können.
-5. Weitere Werkzeuge und mehr Persönlichkeitsmasken. Dieser Bereich ist am einfachsten zu gestalten, erfordert jedoch auch das größte Maß an Ansammlung. Ich hoffe, dass ich in Zukunft dieses Projekt ähnlich wie comfyui mit zahlreichen benutzerdefinierten Knoten ausstatten kann, um viele Werkzeuge und Persönlichkeitsmasken anzubieten.
+1. Mehr Modellanpassungen;
+2. Mehr Möglichkeiten zum Aufbau von Agenten;
+3. Mehr Automatisierungsfunktionen;
+4. Mehr Funktionen zur Verwaltung von Wissensdatenbanken;
+5. Mehr Werkzeuge, mehr Personas.
 
 ## Haftungsausschluss:
 Dieses Open-Source-Projekt und seine Inhalte (im Folgenden „Projekt“) dienen nur zu Informationszwecken und bedeuten keine ausdrückliche oder stillschweigende Garantie. Die Projektbeitragsleistenden übernehmen keine Verantwortung für die Vollständigkeit, Genauigkeit, Zuverlässigkeit oder Anwendbarkeit des Projekts. Jegliche Handlungen, die auf den Inhalten des Projekts basieren, erfolgen auf eigenes Risiko. Unter keinen Umständen haften die Projektbeitragsleistenden für indirekte, spezielle oder zufällige Verluste oder Schäden, die aus der Nutzung der Inhalte des Projekts resultieren.

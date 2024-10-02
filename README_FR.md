@@ -210,11 +210,11 @@ Installez en utilisant l'une des méthodes suivantes
 10. Un nœud de générateur de mots-clés FLUX a été ajouté, capable de générer des mots-clés dans divers styles, tels que des cartes Hearthstone, des cartes Yu-Gi-Oh, des affiches, des bandes dessinées, etc., facilitant la sortie directe du modèle FLUX. Flux de travail de référence : [FLUX提示词](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
 
 ## Prochaines étapes :
-1. Adaptation de modèles supplémentaires, afin de couvrir au moins les principales API de grands modèles et les appels locaux des modèles open source, ainsi que d'autres adaptations de modèles LVM. À l'heure actuelle, je n'ai encore adapté que l'appel des fonctionnalités visuelles de GPT-4 ;
-2. Développement de davantage de modes de construction d'agents intelligents. À ce jour, j'ai déjà complété le travail consistant à intégrer un LLM en tant qu'outil pour un autre LLM, réalisant ainsi une construction de flux de travail LLM en rayonnant, où un flux de travail est importé en tant que nœud dans un autre flux de travail. À l'avenir, je pourrais développer des fonctionnalités encore plus intéressantes dans ce domaine ;
-3. Mise en place de fonctionnalités d'automatisation supplémentaires. Je prévois de lancer davantage de nœuds permettant de pousser automatiquement des images, des textes, des vidéos et des audios vers d'autres applications, ainsi que des nœuds d'écoute pour permettre des réponses automatiques sur les principaux réseaux sociaux et forums ;
-4. Amélioration des fonctionnalités de gestion de la base de connaissances. Actuellement, ce projet prend déjà en charge la recherche de fichiers locaux et la recherche sur le web. Dans le futur, je compte introduire des recherches dans des graphes de connaissances et des recherches de mémoire à long terme, permettant aux agents d'avoir une réflexion logique sur des connaissances spécialisées et de se souvenir indéfiniment de certaines informations clés lors de leurs interactions avec les utilisateurs ;
-5. Développement de davantage d'outils et de masques de personnalité. Cet aspect est le plus facile à réaliser mais nécessite également le plus d'accumulation. J'espère qu'à l'avenir, ce projet pourra disposer, tout comme ComfyUI, d'un grand nombre de nœuds personnalisés, ainsi que de nombreux outils et masques de personnalité.
+1. Plus d'adaptations de modèles;
+2. Plus de façons de construire des agents;
+3. Plus de fonctionnalités d'automatisation;
+4. Plus de fonctionnalités de gestion de la base de connaissances;
+5. Plus d'outils, plus de personas.
 
 ## Avertissement :
 Ce projet open source et son contenu (ci-après dénommé "projet") sont fournis uniquement à titre de référence et ne constituent en aucun cas une garantie expresse ou implicite. Les contributeurs du projet ne sauraient être tenus responsables de l'intégrité, de l'exactitude, de la fiabilité ou de l'applicabilité du projet. Toute action reposant sur le contenu du projet se fait à vos propres risques. En aucun cas, les contributeurs du projet ne sauraient être tenus responsables des pertes ou dommages indirects, spéciaux ou consécutifs résultant de l'utilisation du contenu du projet.

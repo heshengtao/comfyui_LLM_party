@@ -203,11 +203,11 @@ Utilize um dos métodos abaixo para instalar
 10. Adicionado o nó gerador de prompts FLUX, que pode gerar prompts em diversos estilos, como cartas de Hearthstone, cartas de Yu-Gi-Oh, pôsteres, quadrinhos, etc., permitindo que o modelo FLUX gere diretamente. Fluxo de trabalho de referência: [FLUX提示词](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
 
 ## Próximos passos:
-1. Maior adaptação de modelos, cobrindo pelo menos as principais interfaces de API de grandes modelos e chamadas locais de modelos de código aberto populares, além de mais adaptações de modelos LVM. Atualmente, só adaptei a funcionalidade visual do GPT-4.
-2. Mais maneiras de construir agentes inteligentes. Até agora, completei o trabalho de importar um LLM como uma ferramenta para outro LLM, permitindo a construção radial de fluxos de trabalho LLM, onde um fluxo de trabalho é importado como um nó para outro fluxo de trabalho. No futuro, posso desenvolver funcionalidades ainda mais interessantes nessa área.
-3. Mais funcionalidades de automação. No futuro, lançarei mais nós que automaticamente enviam imagens, texto, vídeo e áudio para outros aplicativos, além de implementar nós de escuta para permitir respostas automáticas em redes sociais e fóruns populares.
-4. Mais funcionalidades de gerenciamento de banco de dados de conhecimento. Atualmente, este projeto já suporta busca em arquivos locais e busca na web. No futuro, lançarei busca em gráficos de conhecimento e busca em memória de longo prazo, permitindo que os agentes realizem um raciocínio lógico sobre conhecimentos especializados e retenham informações-chave em conversas com os usuários.
-5. Mais ferramentas e mais personas. Esta área é a mais fácil de desenvolver, mas também a que mais precisa de acumulação. Espero que, no futuro, este projeto possa ter, assim como o comfyui, uma variedade de nós personalizáveis, oferecendo numerosas ferramentas e personas.
+1. Mais adaptações de modelos;
+2. Mais formas de construir agentes;
+3. Mais recursos de automação;
+4. Mais recursos de gestão de base de conhecimento;
+5. Mais ferramentas, mais personas.
 
 ## Isenção de responsabilidade:
 Este projeto de código aberto e seu conteúdo (doravante denominado "projeto") são fornecidos apenas para fins de referência e não implicam em qualquer garantia expressa ou implícita. Os contribuintes do projeto não assumem qualquer responsabilidade pela integridade, precisão, confiabilidade ou adequação do projeto. Qualquer ação que dependa do conteúdo do projeto deve ser realizada por sua própria conta e risco. Em nenhuma circunstância os contribuintes do projeto serão responsáveis por quaisquer perdas ou danos indiretos, especiais ou consequenciais decorrentes do uso do conteúdo do projeto.

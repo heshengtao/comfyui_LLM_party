@@ -210,11 +210,11 @@ Instale utilizando uno de los siguientes métodos:
 10. Se ha añadido el nodo generador de palabras clave FLUX, que puede generar palabras clave en varios estilos como cartas de Hearthstone, cartas de Yu-Gi-Oh, carteles, cómics, entre otros, permitiendo que el modelo FLUX genere directamente. Flujo de trabajo de referencia: [FLUX提示词](https://openart.ai/workflows/comfyui_llm_party/flux-by-llm-party/sjME541i68Kfw6Ib0EAD)
 
 ## Plan de acción siguiente:
-1. Adaptación de más modelos, cubriendo al menos las interfaces API de los grandes modelos más utilizados y las llamadas locales a los modelos de código abierto más relevantes, así como más adaptaciones de modelos LVM. Hasta ahora, solo he adaptado la funcionalidad visual de GPT-4.
-2. Más formas de construir agentes inteligentes. En este ámbito, he completado el trabajo de importar un LLM como herramienta a otro LLM, creando flujos de trabajo LLM radiales y permitiendo que un flujo de trabajo actúe como nodo dentro de otro flujo de trabajo. En el futuro, espero desarrollar funciones aún más innovadoras en este aspecto.
-3. Más funciones de automatización. En el futuro, lanzar más nodos que permitan la transmisión automática de imágenes, texto, video y audio a otras aplicaciones, así como introducir nodos de escucha para lograr respuestas automáticas en las principales redes sociales y foros.
-4. Más funciones de gestión de bases de conocimiento. Actualmente, este proyecto ya soporta búsquedas en archivos locales y en internet. En el futuro, lanzar búsquedas en gráficos de conocimiento y búsquedas de memoria a largo plazo, permitiendo que los agentes realicen un razonamiento lógico sobre conocimientos especializados y mantengan en la memoria información clave durante las conversaciones con los usuarios.
-5. Más herramientas y más máscaras de personalidad. Esta área es fácil de desarrollar, pero requiere acumulación. Espero que en el futuro este proyecto pueda ofrecer, al igual que comfyui, una amplia variedad de nodos personalizados, herramientas y máscaras de personalidad.
+1. Más adaptaciones de modelos;
+2. Más formas de construir agentes;
+3. Más funciones de automatización;
+4. Más funciones de gestión de bases de conocimiento;
+5. Más herramientas, más personajes.
 
 ## Aviso legal:
 Este proyecto de código abierto y su contenido (en adelante, "el proyecto") son solo para fines de referencia y no implican ninguna garantía expresa o implícita. Los contribuyentes del proyecto no asumen ninguna responsabilidad por la integridad, precisión, fiabilidad o aplicabilidad del proyecto. Cualquier acción que dependa del contenido del proyecto debe asumir el riesgo por su cuenta. En ningún caso, los contribuyentes del proyecto serán responsables de cualquier pérdida o daño indirecto, especial o incidental que surja del uso del contenido del proyecto.
