@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "GPT Browser Plugin",
+  "name": "Party Plugin",
   "version": "1.0",
   "description": "A simple plugin to send selected text to GPT and display the response in Markdown.",
   "permissions": ["contextMenus", "activeTab", "scripting", "storage"],

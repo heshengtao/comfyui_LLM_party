@@ -7,13 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const sendInputButton = document.getElementById('send-input');
   const saveSettingsButton = document.getElementById('save-settings');
   const responseContainer = document.getElementById('response-container');
-  const copyResponseButton = document.getElementById('copy-response');
+  const copyResponseButton = document.getElementById('copy-response'); // 新的复制按钮
+  const clearResponseButton = document.getElementById('clear-response'); // 新的清除按钮
 
   // Load saved settings
   chrome.storage.local.get(['baseUrl', 'apiKey', 'modelName', 'systemPrompt', 'markdownResponse', 'isThinking'], (data) => {
     baseUrlInput.value = data.baseUrl || 'http://127.0.0.1:8187/v1';
     apiKeyInput.value = data.apiKey || 'party';
-    modelNameInput.value = data.modelName || 'fastapi';
+    modelNameInput.value = data.modelName || 'X';
     systemPromptInput.value = data.systemPrompt || '';
     responseContainer.innerHTML = marked.parse(data.markdownResponse || 'No response yet.');
     sendInputButton.disabled = data.isThinking || false;
@@ -72,10 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Copy response to clipboard
   copyResponseButton.addEventListener('click', () => {
-    const textToCopy = responseContainer.innerText;
+    const textToCopy = responseContainer.innerText.trim(); // 使用 trim() 去除前后多余的空格
     navigator.clipboard.writeText(textToCopy).then(() => {
       alert('Response copied to clipboard!');
     });
+  });
+
+  // Clear response
+  clearResponseButton.addEventListener('click', () => {
+    responseContainer.innerHTML = '';
+    chrome.storage.local.set({ markdownResponse: 'No response yet.' });
   });
 
   // 监听 storage 变化，刷新输出框内容
@@ -100,5 +107,3 @@ document.addEventListener('DOMContentLoaded', () => {
     sendInputButton.disabled = false;
   }
 });
-
-

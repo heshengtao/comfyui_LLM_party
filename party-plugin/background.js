@@ -22,7 +22,7 @@ function sendToGPT(selectedText) {
   chrome.storage.local.get(['baseUrl', 'apiKey', 'modelName', 'systemPrompt'], (data) => {
     const baseUrl = data.baseUrl || 'http://127.0.0.1:8187/v1';
     const apiKey = data.apiKey || 'party';
-    const modelName = data.modelName || 'fastapi';
+    const modelName = data.modelName || 'X';
     const systemPrompt = data.systemPrompt || '';
 
     // 禁用按钮并显示 "Thinking..."

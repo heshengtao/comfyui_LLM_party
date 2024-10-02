@@ -74,15 +74,3 @@ textarea {
   position: relative;
   overflow: auto; /* 添加滚动条 */
 }
-
-#response-container img {
-  max-width: 100%; /* 限制图片最大宽度 */
-  height: auto; /* 保持图片比例 */
-  display: block; /* 确保图片独占一行 */
-}
-
-#copy-response {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
