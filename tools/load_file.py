@@ -21,16 +21,16 @@ programming_languages_extensions = [".py", ".js", ".java", ".c", ".cpp", ".html"
 
 def read_one(path):
     text = ""
-    if path.endswith(".docx"):
+    if path.endswith(".docx") or path.endswith(".DOCX"):
         text += docx2txt.process(path)
-    elif path.endswith(".md"):
+    elif path.endswith(".md") or path.endswith(".MD"):
         with open(path, "r", encoding="utf-8") as f:
             text += f.read()
-    elif path.endswith(".pdf"):
+    elif path.endswith(".pdf") or path.endswith(".PDF"):
         with pdfplumber.open(path) as pdf:
             for page in pdf.pages:
                 text += page.extract_text()
-    elif path.endswith(".xlsx"):
+    elif path.endswith(".xlsx") or path.endswith(".XLSX"):
         workbook = openpyxl.load_workbook(path)
         for sheet in workbook.worksheets:
             # 检查工作表是否至少有一行数据
@@ -54,7 +54,7 @@ def read_one(path):
                     else:
                         # 如果整行都是空的，则停止读取当前工作表
                         break
-    elif path.endswith(".xls"):
+    elif path.endswith(".xls") or path.endswith(".XLS"):
         workbook = xlrd.open_workbook(path)
         for sheet_index in range(workbook.nsheets):
             sheet = workbook.sheet_by_index(sheet_index)
@@ -65,7 +65,7 @@ def read_one(path):
                 text += "| " + " | ".join(["---"] * sheet.ncols) + " |\n"  # 添加分隔符
                 for row_num in range(1, sheet.nrows):
                     text += "| " + " | ".join([str(cell) for cell in sheet.row_values(row_num)]) + " |\n"
-    elif path.endswith(".csv"):
+    elif path.endswith(".csv") or path.endswith(".CSV"):
         # 检测文件编码
         with open(path, "rb") as file:
             content = file.read()
@@ -74,10 +74,10 @@ def read_one(path):
         # 读取 CSV 文件
         df = pd.read_csv(path, encoding=encoding)
         text += df.to_markdown(index=True)
-    elif path.endswith(".txt"):
+    elif path.endswith(".txt") or path.endswith(".TXT"):
         with open(path, "r", encoding="utf-8") as f:
             text += f.read()
-    elif path.endswith(".json"):
+    elif path.endswith(".json") or path.endswith(".JSON"):
         with open(path, "r", encoding="utf-8") as f:
             text += json.dumps(json.load(f), ensure_ascii=False, indent=4)
     elif any(path.endswith(extension) for extension in programming_languages_extensions):

@@ -19,7 +19,7 @@ class LLavaLoader:
             "required": {
                 "ckpt_path": ("STRING", {"default": ""}),
                 "clip_path": ("STRING", {"default": ""}),
-                "max_ctx": ("INT", {"default": 512, "min": 300, "max": 100000, "step": 64}),
+                "max_ctx":  ("INT", {"default": 512, "min": 256, "max": 128000, "step": 128}),
                 "gpu_layers": ("INT", {"default": 31, "min": 0, "max": 100, "step": 1}),
                 "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
             }
@@ -51,7 +51,7 @@ class GGUFLoader:
         return {
             "required": {
                 "model_path": ("STRING", {"default": ""}),
-                "max_ctx": ("INT", {"default": 512, "min": 300, "max": 100000, "step": 64}),
+                "max_ctx": ("INT", {"default": 512, "min": 256, "max": 128000, "step": 128}),
                 "gpu_layers": ("INT", {"default": 31, "min": 0, "max": 100, "step": 1}),
                 "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
             }

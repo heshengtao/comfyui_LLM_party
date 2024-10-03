@@ -8,17 +8,16 @@ import os
 current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 在current_dir_path下创建一个名为output的文件夹
 output_dir_path = os.path.join(current_dir_path, 'output')
-def perform_ocr(model_name_or_path, device, ocr_type, image_path,ocr_box, ocr_color, multi_crop,render):
+if not os.path.exists(output_dir_path):
+    os.makedirs(output_dir_path)
+def perform_ocr(model_name_or_path, device, ocr_type, image_path,ocr_box, ocr_color, multi_crop,render,out_dir_path):
     # Load the tokenizer and model
     tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, trust_remote_code=True)
     model = AutoModel.from_pretrained(model_name_or_path, trust_remote_code=True, low_cpu_mem_usage=True, device_map=device, use_safetensors=True, pad_token_id=tokenizer.eos_token_id)
     model = model.eval()
-    if render:
-        output_dir_path = os.path.join(current_dir_path, 'output')
-        if not os.path.exists(output_dir_path):
-            os.makedirs(output_dir_path)        
-        html_path = os.path.join(output_dir_path, 'render.html')
-        res = model.chat_crop(tokenizer, image_path, ocr_type='format',render=True,save_render_file=html_path)
+    if render:    
+        html_path = os.path.join(out_dir_path, 'render.html')
+        res = model.chat(tokenizer, image_path, ocr_type='format', render=True, save_render_file = html_path)
     elif multi_crop:
         res = model.chat_crop(tokenizer, image_path, ocr_type=ocr_type)
     else:
@@ -32,7 +31,7 @@ class got_ocr:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name_or_path": ("STRING", {"default": "ucaslcl/GOT-OCR2_0"}),
+                "model_name_or_path": ("STRING", {"default": "D:\GOT-OCR2_0"}),
                 "device": (["auto","cuda", "cpu", "mps"], {"default": "auto"}),
                 "ocr_type": (["ocr","format"], {"default": "format"}),
                 "image": ("IMAGE", {}),
@@ -43,6 +42,7 @@ class got_ocr:
                 "ocr_color": ("STRING", {"default": ""}),
                 "multi_crop": ("BOOLEAN", {"default": False}),
                 "render": ("BOOLEAN", {"default": False}),
+                "out_dir_path": ("STRING", {"default": output_dir_path}),
             },
         }
 
@@ -55,7 +55,7 @@ class got_ocr:
 
     CATEGORY = "大模型派对（llm_party）/图片（image）"
 
-    def time(self, model_name_or_path, device, ocr_type, image,ocr_box, ocr_color, multi_crop, is_enable=True,render=False):
+    def time(self, model_name_or_path, device, ocr_type, image,ocr_box, ocr_color, multi_crop, is_enable=True,render=False,out_dir_path=output_dir_path):
         if is_enable == False:
             return (None,)
         # 保存image到本地output_dir_path 
@@ -68,7 +68,7 @@ class got_ocr:
             img = img.convert("RGB")
             img.save(os.path.join(output_dir_path, 'temp.png'))
             image_path = os.path.join(output_dir_path, 'temp.png')
-            res=perform_ocr(model_name_or_path, device, ocr_type, image_path,ocr_box, ocr_color, multi_crop,render)
+            res=perform_ocr(model_name_or_path, device, ocr_type, image_path,ocr_box, ocr_color, multi_crop,render,out_dir_path)
             return (res,)
         else:
             return (None,)
