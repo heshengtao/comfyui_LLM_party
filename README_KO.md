@@ -36,6 +36,7 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정을 통해 나만의 AI 도우미를 신속하게 구축하고, 산업에 적용 가능한 단어 벡터 RAG, GraphRAG를 통해 산업 내 지식 관리 시스템을 로컬화합니다. 단일 지능체 파이프라인에서 복잡한 지능체 간의 방사형 상호작용 모드, 순환 상호작용 모드를 구성하는 것까지; 개인 사용자가 자신의 사회적 APP(QQ, Feishu, Discord)에 접속할 필요가 있는 것부터, 스트리밍 작업자가 필요로 하는 원스톱 LLM+TTS+ComfyUI 워크플로우까지; 일반 학생들이 필요로 하는 첫 번째 LLM 응용 프로그램의 간단한 시작부터, 연구자들이 자주 사용하는 다양한 파라미터 조정 인터페이스, 모델 적응까지. 이 모든 것을 ComfyUI LLM Party에서 확인할 수 있습니다.
 
 ## 빠른 시작
+1. [searxng](https://github.com/searxng/searxng) 도구를 추가하여 전체 웹에서 검색을 집계할 수 있습니다. Perplexica도 이 집계 검색 도구에 의존하므로 파티에서 Perplexica를 설정할 수 있습니다. Docker에서 searxng/searxng 공용 이미지를 배포한 다음 `docker run -d -p 8080:8080 searxng/searxng`을 사용하여 시작하고 `http://localhost:8080`을 사용하여 액세스할 수 있습니다. 이 URL `http://localhost:8080`을 파티의 searxng 도구에 입력하면 searxng을 LLM의 도구로 사용할 수 있습니다.
 1. 다음 워크플로를 comfyui에 드래그한 다음 [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)를 사용하여 누락된 노드를 설치합니다.
   - API를 사용하여 LLM 호출: [start_with_LLM_api](workflow/start_with_LLM_api.json)
   - ollama를 사용하여 로컬 LLM 관리: [start_with_Ollama](workflow/ollama.json)

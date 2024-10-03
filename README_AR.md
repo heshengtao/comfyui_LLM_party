@@ -36,6 +36,7 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعددة، وإعداد الشخصيات لبناء مساعد AI الخاص بك بسرعة، إلى RAG وGraphRAG القابلة للتطبيق في الصناعة لإدارة قواعد المعرفة المحلية؛ من خط أنابيب وكيل واحد إلى بناء أنماط تفاعل معقدة بين الوكلاء وأنماط تفاعل دائرية؛ من الحاجة الفردية للمستخدمين للوصول إلى تطبيقات التواصل الاجتماعي الخاصة بهم (QQ، Feishu، Discord)، إلى تدفقات العمل الشاملة التي يحتاجها العاملون في وسائل الإعلام LLM+TTS+ComfyUI؛ من بدء استخدام تطبيق LLM الأول للطلاب العاديين، إلى واجهات ضبط المعلمات التي يستخدمها الباحثون. كل هذا يمكنك العثور على إجابات له في ComfyUI LLM Party.
 
 ## بدء سريع
+1. تمت إضافة أداة [searxng](https://github.com/searxng/searxng)، التي يمكنها تجميع عمليات البحث عبر الويب بالكامل. يعتمد Perplexica أيضًا على أداة البحث المجمعة هذه، بحيث يمكنك إعداد Perplexica في حفلتك. يمكنك نشر الصورة العامة searxng/searxng في Docker، ثم بدء تشغيلها باستخدام `docker run -d -p 8080:8080 searxng/searxng` والوصول إليها باستخدام `http://localhost:8080`. يمكنك ملء هذا الرابط `http://localhost:8080` في أداة searxng الخاصة بالحفلة، ثم يمكنك استخدام searxng كأداة لـ LLM.
 1. اسحب سير العمل التالي إلى comfyui الخاص بك، ثم استخدم [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager) لتثبيت العقد المفقودة.
   - استخدم API لاستدعاء LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
   - إدارة LLM المحلي باستخدام ollama: [start_with_Ollama](workflow/ollama.json)

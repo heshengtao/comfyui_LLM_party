@@ -50,6 +50,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 5. 由于本项目有较高的使用门槛，所以即使你选择了快速开始，我也希望你能耐心阅读完本项目主页。
 
 ## 最新更新
+1. 添加了[searxng](https://github.com/searxng/searxng)工具，可以聚合搜索全网，Perplexica也是依赖于这个聚合搜索工具，相当于你可以在party里搭建一个Perplexica。你可以在docker中部署searxng/searxng公共镜像，然后使用`docker run -d -p 8080:8080 searxng/searxng`来启动它，然后使用`http://localhost:8080`来访问它。你可以将`http://localhost:8080`这个URL填入party的searxng工具，就可以将searxng当作LLM的一个工具使用了。
 1. **超级重大更新！！！** 现在你可以将任意的comfyui工作流封装成一个LLM工具节点。你可以让你的LLM同时控制多个comfyui工作流，当你想要他完成一些任务时，他可以根据你的提示，选择合适的comfyui工作流，完成你的任务，并且将结果返回给你。示例工作流：[comfyui_workflows_tool](workflow/把任意workflow当作LLM_tool.json)。具体步骤如下：
   - 首先，将你待会需要被封装成工具的工作流的需要输入文字的接口连上“开始工作流”节点的“user_prompt”输出，这个位置是LLM调用工具时，传入的prompt。在你要输出文字和图片的位置连上“结束工作流”节点的对应输入位置。
   - 将这个工作流以API形式保存（需要再设置中开启开发者模式才能看到这个按钮）。
