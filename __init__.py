@@ -89,6 +89,7 @@ try:
     install_portaudio()
 except Exception as e:
     print(f"Error: {e}")
+'''
 try:
     dir = get_comfy_dir("web_custom_versions/Comfy-Org_ComfyUI_frontend")
     if os.path.exists(dir):
@@ -98,6 +99,7 @@ try:
     copy_js_files("web/extensions/party")
 except Exception as e:
     print(f"Error: {e}")
+'''
 try:
     system_info = get_system_info()
     install_llama(system_info)
