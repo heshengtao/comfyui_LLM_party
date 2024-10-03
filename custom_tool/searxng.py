@@ -8,14 +8,17 @@ from bs4 import BeautifulSoup
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 api_url=""
+api_categories = "general"
 def search_searxng(query):
-    global api_url
-    if not api_url:
-        api_url = "http://localhost:8080"
     headers = {
         "User-Agent": "Mozilla/5.0"
     }
-    response = requests.get(f"{api_url}/search?q={query}", headers=headers)
+    global api_url, api_categories
+    params = {
+        "q": query,
+        "categories": api_categories
+    }
+    response = requests.get(api_url + "/search", headers=headers, params=params)
     html_content = response.text
 
     # 使用 BeautifulSoup 解析 HTML 内容
@@ -24,26 +27,60 @@ def search_searxng(query):
     # 提取搜索结果
     results = []
     for result in soup.find_all('article', class_='result'):
-        title_tag = result.find('h3')
-        link_tag = result.find('a', class_='url_wrapper')
-        snippet_tag = result.find('p', class_='content')
+        if api_categories == "images":
+            img_tag = result.find('img')
+            link_tag = result.find('a', class_='url_wrapper')
+            snippet_tag = result.find('p', class_='content')
 
-        title = title_tag.get_text() if title_tag else 'No title'
-        link = link_tag['href'] if link_tag else 'No link'
-        snippet = snippet_tag.get_text() if snippet_tag else 'No snippet'
+            img_src = img_tag['src'] if img_tag else 'No image'
+            link = link_tag['href'] if link_tag else 'No link'
+            snippet = snippet_tag.get_text() if snippet_tag else 'No snippet'
 
-        results.append({
-            'title': title,
-            'link': link,
-            'snippet': snippet
-        })
+            results.append({
+                'image': img_src,
+                'link': link,
+                'snippet': snippet
+            })
+        elif api_categories == "videos":
+            title_tag = result.find('h3')
+            link_tag = result.find('a', class_='url_wrapper')
+            snippet_tag = result.find('p', class_='content')
+
+            title = title_tag.get_text() if title_tag else 'No title'
+            link = link_tag['href'] if link_tag else 'No link'
+            snippet = snippet_tag.get_text() if snippet_tag else 'No snippet'
+
+            results.append({
+                'title': title,
+                'link': link,
+                'snippet': snippet
+            })
+        else:
+            title_tag = result.find('h3')
+            link_tag = result.find('a', class_='url_wrapper')
+            snippet_tag = result.find('p', class_='content')
+
+            title = title_tag.get_text() if title_tag else 'No title'
+            link = link_tag['href'] if link_tag else 'No link'
+            snippet = snippet_tag.get_text() if snippet_tag else 'No snippet'
+
+            results.append({
+                'title': title,
+                'link': link,
+                'snippet': snippet
+            })
 
     # 整合信息到一个字符串中
     result_str = ""
     for result in results:
-        result_str += f"Title: {result['title']}\n"
-        result_str += f"Link: {result['link']}\n"
-        result_str += f"Snippet: {result['snippet']}\n"
+        if api_categories == "images":
+            result_str += f"Image: {result['image']}\n"
+            result_str += f"Link: {result['link']}\n"
+            result_str += f"Snippet: {result['snippet']}\n"
+        else:
+            result_str += f"Title: {result['title']}\n"
+            result_str += f"Link: {result['link']}\n"
+            result_str += f"Snippet: {result['snippet']}\n"
         result_str += '-' * 40 + '\n'
 
     return result_str
@@ -55,6 +92,7 @@ class searxng_tool:
         return {
             "required": {
                 "searxng_api_url": ("STRING", {"default": "http://localhost:8080"}),
+                "categories": (["general", "images", "videos", "news", "music", "map","science","files","social_media","it","q&a","shopping"], {"default": "general"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             },
         }
@@ -66,11 +104,12 @@ class searxng_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def query_searxng(self, searxng_api_url, is_enable=True):
+    def query_searxng(self, searxng_api_url,categories, is_enable=True):
 
         if not is_enable:
             return (None,)
-        global api_url
+        global api_url,api_categories
+        api_categories=categories
         api_url = searxng_api_url
         output = [
             {
