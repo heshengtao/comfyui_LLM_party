@@ -51,6 +51,58 @@ def html2img(html_file, output_file, width=800, height=600):
     image_path = os.path.join(hti.output_path, output_file)
     return image_path
 
+class svg2html:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "svg_code": ("STRING", {"forceInput": True}),
+            }
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("html_str",)
+
+    FUNCTION = "time"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/转换器（converter）"
+
+    def time(self, svg_code, is_enable=True):
+        if is_enable == False:
+            return (None,)
+        html_str = f'''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Example</title>
+    <style>
+        body {{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }}
+        svg {{
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+        }}
+    </style>
+</head>
+<body>
+    <?xml version="1.0" encoding="UTF-8"?>
+    {svg_code}
+</body>
+</html>
+'''
+        return (html_str,)
+
 class svg2img_function:
     @classmethod
     def INPUT_TYPES(s):
@@ -103,7 +155,8 @@ class svg2img_function:
         return (img_out,)
 
 
-NODE_CLASS_MAPPINGS = {"svg2img_function": svg2img_function}
+NODE_CLASS_MAPPINGS = {"svg2img_function": svg2img_function,
+                      "svg2html": svg2html}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
 import os
@@ -120,6 +173,8 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"svg2img_function": "SVG转图片"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"svg2img_function": "SVG转图片",
+                                  "svg2html": "SVG转HTML"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"svg2img_function": "SVG to Image"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"svg2img_function": "SVG to Image",
+                                  "svg2html": "SVG to HTML"}

@@ -1,4 +1,5 @@
 import locale
+import re
 import markdown
 import webbrowser
 import os
@@ -11,6 +12,10 @@ out_path = os.path.join(current_dir,"output")
 # 确保输出目录存在
 if not os.path.exists(out_path):
     os.makedirs(out_path)
+
+def is_html_string(s):
+    html_pattern = re.compile(r'<([A-Za-z][A-Za-z0-9]*)\b[^>]*>(.*?)<\/\1>')
+    return bool(html_pattern.search(s))
 
 import mdtex2html
 
@@ -138,7 +143,7 @@ class Browser_display:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "md_string": ("STRING", {"forceInput": True}),
+                "md_or_html": ("STRING", {"forceInput": True}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 }
             }
@@ -151,10 +156,13 @@ class Browser_display:
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
     OUTPUT_NODE = True
 
-    def convert_txt2json(self,md_string, is_enable=True):
+    def convert_txt2json(self,md_or_html, is_enable=True):
         if is_enable == False:
             return (None,)
-        html_content = markdown_to_html(md_string)
+        if is_html_string(md_or_html):
+            html_content = md_or_html
+        else:
+            html_content = markdown_to_html(md_or_html)
         path = os.path.join(out_path, "md_to_html.html")
         with open(path, "w", encoding="utf-8") as f:
             f.write(html_content)
