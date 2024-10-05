@@ -1,5 +1,14 @@
 import json
-
+import re
+def replace_keys_in_string(s, key_values):
+    
+    # 使用正则表达式找到所有的 {key} 模式
+    keys = re.findall(r'\{(.*?)\}', s)
+    # 对找到的每一个键，如果存在于字典中，则替换；否则忽略它
+    for key in keys:
+        if key in key_values:
+            s = s.replace('{' + key + '}', str(key_values[key]))
+    return s
 
 class custom_persona:
     @classmethod
@@ -40,7 +49,7 @@ class custom_persona:
         if is_enable == False:
             return (None,)
         prompt_template=json.loads(prompt_template)
-        prompt = prompt.format(**prompt_template)
+        prompt = replace_keys_in_string(prompt, prompt_template)
         text = ""
         if file_content is not None:
             text = "## 背景知识：\n" + file_content + "\n\n"
