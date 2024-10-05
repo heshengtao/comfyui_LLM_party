@@ -6,6 +6,53 @@ import numpy as np
 import torch
 from PIL import Image
 
+lang_list = {
+    "English": "en",
+    "简体中文": "ch_sim",
+    "繁體中文": "ch_tra",
+    "العربية": "ar",
+    "Azərbaycan": "az",
+    "Euskal": "eu",
+    "Bosanski": "bs",
+    "Български": "bg",
+    "Català": "ca",
+    "Hrvatski": "hr",
+    "Čeština": "cs",
+    "Dansk": "da",
+    "Nederlands": "nl",
+    "Eesti": "et",
+    "Suomi": "fi",
+    "Français": "fr",
+    "Galego": "gl",
+    "Deutsch": "de",
+    "Ελληνικά": "el",
+    "עברית": "he",
+    "हिन्दी": "hi",
+    "Magyar": "hu",
+    "Íslenska": "is",
+    "Indonesia": "id",
+    "Italiano": "it",
+    "日本語": "ja",
+    "한국어": "ko",
+    "Latviešu": "lv",
+    "Lietuvių": "lt",
+    "Македонски": "mk",
+    "Norsk": "no",
+    "Polski": "pl",
+    "Português": "pt",
+    "Română": "ro",
+    "Русский": "ru",
+    "Српски": "sr",
+    "Slovenčina": "sk",
+    "Slovenščina": "sl",
+    "Español": "es",
+    "Svenska": "sv",
+    "ไทย": "th",
+    "Türkçe": "tr",
+    "Українська": "uk",
+    "Tiếng Việt": "vi",
+}
+
 class EasyOCR_advance:
     @classmethod
     def INPUT_TYPES(cls):
@@ -14,7 +61,7 @@ class EasyOCR_advance:
                 "image": ("IMAGE",),
                 "gpu": ("BOOLEAN", {"default": True}),
                 "language_name": ("STRING", {"default": "ch_sim,en"}),
-                "decoder": ("STRING", {"default": "greedy"}),
+                "decoder": (["greedy","beamsearch","wordbeamsearch"], {"default": "greedy"}),
                 "beamWidth": ("INT", {"default": 5}),
                 "batch_size": ("INT", {"default": 1}),
                 "workers": ("INT", {"default": 0}),
@@ -40,8 +87,8 @@ class EasyOCR_advance:
 
     CATEGORY = "大模型派对（llm_party）/图片（image）"
     FUNCTION = "OCR"
-    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "STRING",)
-    RETURN_NAMES = ("images", "masks", "json_str","text",)
+    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "STRING","STRING",)
+    RETURN_NAMES = ("images", "masks", "json_str","text","language_list_help")
 
     def OCR(self, image, gpu, language_name, decoder="greedy", beamWidth=5, batch_size=1, workers=0, allowlist="", blocklist="", paragraph=False, min_size=20, contrast_ths=0.1, adjust_contrast=0.5, text_threshold=0.7, low_text=0.4, link_threshold=0.4, canvas_size=2560, mag_ratio=1.0, slope_ths=0.1, ycenter_ths=0.5, height_ths=0.5, width_ths=0.5, add_margin=0,is_enable=True):
         if not is_enable:
@@ -135,55 +182,12 @@ class EasyOCR_advance:
 
         json_result = json.dumps(out_json, ensure_ascii=False, indent=4)
         out_text= json.dumps(out_text, ensure_ascii=False, indent=4)
-        return (torch.cat(out_images, dim=0), torch.cat(out_masks, dim=0), json_result,out_text,)
+        global lang_list
+        lang_list_help=json.dumps(lang_list, ensure_ascii=False, indent=4)
+        return (torch.cat(out_images, dim=0), torch.cat(out_masks, dim=0), json_result,out_text,lang_list_help,)
 
 
-lang_list = {
-    "English": "en",
-    "简体中文": "ch_sim",
-    "繁體中文": "ch_tra",
-    "العربية": "ar",
-    "Azərbaycan": "az",
-    "Euskal": "eu",
-    "Bosanski": "bs",
-    "Български": "bg",
-    "Català": "ca",
-    "Hrvatski": "hr",
-    "Čeština": "cs",
-    "Dansk": "da",
-    "Nederlands": "nl",
-    "Eesti": "et",
-    "Suomi": "fi",
-    "Français": "fr",
-    "Galego": "gl",
-    "Deutsch": "de",
-    "Ελληνικά": "el",
-    "עברית": "he",
-    "हिन्दी": "hi",
-    "Magyar": "hu",
-    "Íslenska": "is",
-    "Indonesia": "id",
-    "Italiano": "it",
-    "日本語": "ja",
-    "한국어": "ko",
-    "Latviešu": "lv",
-    "Lietuvių": "lt",
-    "Македонски": "mk",
-    "Norsk": "no",
-    "Polski": "pl",
-    "Português": "pt",
-    "Română": "ro",
-    "Русский": "ru",
-    "Српски": "sr",
-    "Slovenčina": "sk",
-    "Slovenščina": "sl",
-    "Español": "es",
-    "Svenska": "sv",
-    "ไทย": "th",
-    "Türkçe": "tr",
-    "Українська": "uk",
-    "Tiếng Việt": "vi",
-}
+
 
 
 def get_lang_list():
