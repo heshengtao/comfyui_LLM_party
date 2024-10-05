@@ -18,7 +18,7 @@ class text2json:
     def INPUT_TYPES(s):
         return {"required": {"text": ("STRING", {"multiline": True}), "sep": ("STRING", {"default": "\n"})}}
 
-    RETURN_TYPES = ("DICT",)
+    RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("json_data",)
 
     FUNCTION = "convert_txt2json"
@@ -36,7 +36,7 @@ class text2json:
             if paragraph != "":
                 dict[idx] = paragraph
                 idx += 1
-        json_data = json.dumps(dict, ensure_ascii=False)
+        json_data = json.dumps(dict, ensure_ascii=False, indent=4)
         return (json_data,)
 
 
