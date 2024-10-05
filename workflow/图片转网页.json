@@ -1,18 +1,18 @@
 {
-  "last_node_id": 30,
-  "last_link_id": 44,
+  "last_node_id": 31,
+  "last_link_id": 45,
   "nodes": [
     {
       "id": 28,
       "type": "LoadImage",
-      "pos": {
-        "0": 434,
-        "1": 482
-      },
-      "size": [
-        554.9673349158593,
-        386.22504437601117
+      "pos": [
+        434,
+        482
       ],
+      "size": {
+        "0": 554.9673461914062,
+        "1": 386.22503662109375
+      },
       "flags": {},
       "order": 0,
       "mode": 0,
@@ -44,63 +44,16 @@
       ]
     },
     {
-      "id": 27,
-      "type": "got_ocr",
-      "pos": {
-        "0": 1079,
-        "1": 537
-      },
-      "size": {
-        "0": 315,
-        "1": 202
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 42,
-          "label": "image"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "links": [
-            41
-          ],
-          "slot_index": 0,
-          "shape": 3,
-          "label": "text"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "got_ocr"
-      },
-      "widgets_values": [
-        "E:\\GitHub\\model\\GOT-OCR2_0",
-        "auto",
-        "format",
-        true,
-        "",
-        "",
-        false
-      ]
-    },
-    {
       "id": 11,
       "type": "show_text_party",
-      "pos": {
-        "0": 1488,
-        "1": 501
-      },
-      "size": [
-        546.4870911600487,
-        411.0308803440438
+      "pos": [
+        1488,
+        501
       ],
+      "size": {
+        "0": 546.4871215820312,
+        "1": 411.0308837890625
+      },
       "flags": {},
       "order": 2,
       "mode": 0,
@@ -137,14 +90,14 @@
     {
       "id": 29,
       "type": "mini_party",
-      "pos": {
-        "0": 2110,
-        "1": 519
-      },
-      "size": [
-        419.20636526656426,
-        291.5276276801434
+      "pos": [
+        2110,
+        519
       ],
+      "size": {
+        "0": 419.20635986328125,
+        "1": 291.5276184082031
+      },
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -155,7 +108,8 @@
           "link": 43,
           "widget": {
             "name": "input_str"
-          }
+          },
+          "label": "input_str"
         }
       ],
       "outputs": [
@@ -163,7 +117,7 @@
           "name": "output_str",
           "type": "STRING",
           "links": [
-            44
+            45
           ],
           "shape": 3,
           "label": "output_str"
@@ -182,27 +136,77 @@
       ]
     },
     {
-      "id": 30,
-      "type": "Browser_display",
-      "pos": {
-        "0": 2643,
-        "1": 537
-      },
-      "size": [
-        315,
-        82
+      "id": 27,
+      "type": "got_ocr",
+      "pos": [
+        1079,
+        537
       ],
+      "size": {
+        "0": 315,
+        "1": 250
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 42,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            41
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "text"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "got_ocr"
+      },
+      "widgets_values": [
+        "E:\\GitHub\\model\\GOT-OCR2_0",
+        "auto",
+        "format",
+        true,
+        "",
+        "",
+        false,
+        false,
+        "E:\\GitHub\\ComfyUI_windows_portable_nvidia\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\comfyui_LLM_party\\output"
+      ]
+    },
+    {
+      "id": 31,
+      "type": "Browser_display",
+      "pos": [
+        2588,
+        537
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
       "flags": {},
       "order": 4,
       "mode": 0,
       "inputs": [
         {
-          "name": "md_string",
+          "name": "md_or_html",
           "type": "STRING",
-          "link": 44,
+          "link": 45,
           "widget": {
-            "name": "md_string"
-          }
+            "name": "md_or_html"
+          },
+          "slot_index": 0
         }
       ],
       "outputs": [
@@ -218,7 +222,7 @@
         "Node name for S&R": "Browser_display"
       },
       "widgets_values": [
-        "md code string",
+        "",
         true
       ]
     }
@@ -249,10 +253,10 @@
       "STRING"
     ],
     [
-      44,
+      45,
       29,
       0,
-      30,
+      31,
       0,
       "STRING"
     ]
@@ -261,10 +265,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.5054470284993141,
+      "scale": 0.5559917313492456,
       "offset": [
-        -523.1610693515428,
-        -78.12756532614941
+        -720.3939780128053,
+        -72.94613307417796
       ]
     }
   },
