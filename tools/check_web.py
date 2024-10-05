@@ -1,5 +1,6 @@
 import json
 import os
+import re
 
 from bs4 import BeautifulSoup
 import openai
@@ -10,7 +11,8 @@ from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from openai import OpenAI
-
+import charset_normalizer
+from markdownify import markdownify as md
 from ..config import config_path, current_dir_path, load_api_keys
 
 bge_embeddings = ""
@@ -34,34 +36,37 @@ def check_web(url, keyword=None):
 
         jina = "https://r.jina.ai/"
         global is_jina
-        if is_jina:
-            url = jina + url
+        try:
+            jina = "https://r.jina.ai/"
+            if is_jina:
+                url = jina + url
 
             response = requests.get(url, timeout=10)
             response.raise_for_status()  # 确保请求成功
 
-            # 设置响应内容的编码，确保文本不会出现编码问题
-            response.encoding = response.apparent_encoding
-            res=response.text
-        else:
-            response = requests.get(url, timeout=10)
-            response.raise_for_status()  # 确保请求成功
-
-            # 设置响应内容的编码，确保文本不会出现编码问题
-            response.encoding = response.apparent_encoding
-            # 假设response.text包含你的HTML内容
-            soup = BeautifulSoup(response.text, 'html.parser')
-
-            # 移除所有script和style元素
-            for script in soup(["script", "style"]):
-                script.extract()
-
-            # 获取纯文本内容
-            res = soup.get_text()
+            # 使用 charset_normalizer 检测编码
+            detected_encoding = charset_normalizer.detect(response.content)['encoding']
+            response.encoding = detected_encoding if detected_encoding else 'utf-8'
+        except requests.exceptions.RequestException as e:
+            print(f"请求发生错误: {e}")
+            return (None,)
+        
+        out = response.text
+        print(out)  # Debugging: Check the HTML content
+        
+        if not is_jina:
+            # 使用 BeautifulSoup 解析 HTML
+            soup = BeautifulSoup(out, 'html.parser')
+            # 提取主要内容
+            main_content = soup.get_text()
+            # 将 HTML 转换为 Markdown
+            out = md(main_content, convert=['p', 'h1', 'h2', 'h3', 'a', 'img'], heading_style="ATX", bullets="*+-", strong_em_symbol="ASTERISK")
+            # 去掉多余的换行符
+            out = re.sub(r'\n+', '\n', out)
 
 
         if keyword == None or keyword == "":
-            combined_content = str(res)
+            combined_content = str(out)
             return "该网页的相关信息为：" + str(combined_content)
         elif bge_embeddings == "":
             embeddings = OpenAIEmbeddings(

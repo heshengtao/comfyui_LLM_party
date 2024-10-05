@@ -1,0 +1,173 @@
+{
+  "last_node_id": 42,
+  "last_link_id": 57,
+  "nodes": [
+    {
+      "id": 41,
+      "type": "txt2srt",
+      "pos": [
+        1092,
+        303
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "timestamps",
+          "type": "TIMESTAMP",
+          "link": 57,
+          "label": "timestamps"
+        },
+        {
+          "name": "translated_texts",
+          "type": "STRING",
+          "link": 55,
+          "widget": {
+            "name": "translated_texts"
+          }
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "txt2srt"
+      },
+      "widgets_values": [
+        "",
+        "E:\\GitHub\\ComfyUI_windows_portable_nvidia\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\comfyui_LLM_party\\output"
+      ]
+    },
+    {
+      "id": 42,
+      "type": "srt2txt",
+      "pos": [
+        157,
+        302
+      ],
+      "size": {
+        "0": 315,
+        "1": 78
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "texts",
+          "type": "STRING",
+          "links": [
+            56
+          ],
+          "shape": 3,
+          "label": "texts"
+        },
+        {
+          "name": "timestamps",
+          "type": "TIMESTAMP",
+          "links": [
+            57
+          ],
+          "shape": 3,
+          "label": "timestamps"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "srt2txt"
+      },
+      "widgets_values": [
+        "E:\\GitHub\\readme\\1.srt"
+      ]
+    },
+    {
+      "id": 37,
+      "type": "mini_party",
+      "pos": [
+        551,
+        299
+      ],
+      "size": {
+        "0": 424.794189453125,
+        "1": 263.2471923828125
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_str",
+          "type": "STRING",
+          "link": 56,
+          "widget": {
+            "name": "input_str"
+          },
+          "label": "input_str",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output_str",
+          "type": "STRING",
+          "links": [
+            55
+          ],
+          "shape": 3,
+          "label": "output_str",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_party"
+      },
+      "widgets_values": [
+        "",
+        "将输入的字幕列表翻译成英文，但是不要改变他的原本格式，输出时，不要出现多余的字符。要能够直接被json.loads解析",
+        "gpt-4o-mini",
+        "",
+        "",
+        true
+      ]
+    }
+  ],
+  "links": [
+    [
+      55,
+      37,
+      0,
+      41,
+      1,
+      "STRING"
+    ],
+    [
+      56,
+      42,
+      0,
+      37,
+      0,
+      "STRING"
+    ],
+    [
+      57,
+      42,
+      1,
+      41,
+      0,
+      "TIMESTAMP"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9849732675808012,
+      "offset": [
+        -125.00533188556112,
+        -98.48005726045486
+      ]
+    }
+  },
+  "version": 0.4
+}

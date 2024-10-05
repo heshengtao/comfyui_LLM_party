@@ -52,3 +52,5 @@ feedparser
 psutil
 verovio
 mdtex2html
+markdownify
+srt

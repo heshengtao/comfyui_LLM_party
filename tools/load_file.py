@@ -1,6 +1,8 @@
 import json
 import os
+import re
 
+from bs4 import BeautifulSoup
 import pandas as pd
 import charset_normalizer
 import docx2txt
@@ -12,7 +14,7 @@ import requests
 import torch
 import xlrd
 from PIL import Image, ImageOps, ImageSequence
-
+from markdownify import markdownify as md
 from ..config import current_dir_path
 
 file_path = os.path.join(current_dir_path, "file")
@@ -182,10 +184,9 @@ class load_url:
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
     def file(self, url, with_jina=True, is_enable=True):
-        if is_enable == False:
+        if not is_enable:
             return (None,)
         try:
-
             jina = "https://r.jina.ai/"
             if with_jina:
                 url = jina + url
@@ -193,12 +194,26 @@ class load_url:
             response = requests.get(url, timeout=10)
             response.raise_for_status()  # 确保请求成功
 
-            # 设置响应内容的编码，确保文本不会出现编码问题
-            response.encoding = response.apparent_encoding
+            # 使用 charset_normalizer 检测编码
+            detected_encoding = charset_normalizer.detect(response.content)['encoding']
+            response.encoding = detected_encoding if detected_encoding else 'utf-8'
         except requests.exceptions.RequestException as e:
             print(f"请求发生错误: {e}")
             return (None,)
+        
         out = response.text
+        print(out)  # Debugging: Check the HTML content
+        
+        if not with_jina:
+            # 使用 BeautifulSoup 解析 HTML
+            soup = BeautifulSoup(out, 'html.parser')
+            # 提取主要内容
+            main_content = soup.get_text()
+            # 将 HTML 转换为 Markdown
+            out = md(main_content, convert=['p', 'h1', 'h2', 'h3', 'a', 'img'], heading_style="ATX", bullets="*+-", strong_em_symbol="ASTERISK")
+            # 去掉多余的换行符
+            out = re.sub(r'\n+', '\n', out)
+        
         return (out,)
 
 
