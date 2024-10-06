@@ -229,6 +229,9 @@ Ce projet open source et son contenu (ci-après dénommé "projet") sont fournis
 <a href="https://github.com/HuangYuChuh">
   <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
+<a href="https://github.com/SpenserCai">
+  <img src="https://avatars.githubusercontent.com/u/25168945?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
+</a>
 
 ## Liste des emprunts
 Certaines des fonctionnalités de ce projet s'inspirent des projets suivants, nous les remercions pour leur contribution à la communauté open source !

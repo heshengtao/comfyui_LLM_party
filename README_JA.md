@@ -229,6 +229,9 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 <a href="https://github.com/HuangYuChuh">
   <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
+<a href="https://github.com/SpenserCai">
+  <img src="https://avatars.githubusercontent.com/u/25168945?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
+</a>
 
 ## 参考文献
 本プロジェクトのいくつかのノードは以下のプロジェクトを参考にしており、オープンソースコミュニティへの貢献に感謝します！

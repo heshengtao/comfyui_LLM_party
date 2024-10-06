@@ -229,6 +229,9 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 <a href="https://github.com/HuangYuChuh">
   <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
+<a href="https://github.com/SpenserCai">
+  <img src="https://avatars.githubusercontent.com/u/25168945?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
+</a>
 
 ## 借物表
 本项目中的一些节点借鉴了以下项目，感谢他们在开源社区中的贡献！

@@ -229,6 +229,9 @@ Este proyecto de código abierto y su contenido (en adelante, "el proyecto") son
 <a href="https://github.com/HuangYuChuh">
   <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
+<a href="https://github.com/SpenserCai">
+  <img src="https://avatars.githubusercontent.com/u/25168945?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
+</a>
 
 ## Lista de proyectos referenciados
 Algunos nodos en este proyecto se han inspirado en los siguientes proyectos. ¡Agradecemos su contribución a la comunidad de código abierto!

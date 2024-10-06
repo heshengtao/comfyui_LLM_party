@@ -223,6 +223,9 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 <a href="https://github.com/HuangYuChuh">
   <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
+<a href="https://github.com/SpenserCai">
+  <img src="https://avatars.githubusercontent.com/u/25168945?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
+</a>
 
 ## 참고 목록
 본 프로젝트의 일부 노드는 아래 프로젝트를 참고하였으며, 오픈소스 커뮤니티에 대한 그들의 기여에 감사드립니다!

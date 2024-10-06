@@ -229,6 +229,9 @@ Dieses Open-Source-Projekt und seine Inhalte (im Folgenden „Projekt“) dienen
 <a href="https://github.com/HuangYuChuh">
   <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
+<a href="https://github.com/SpenserCai">
+  <img src="https://avatars.githubusercontent.com/u/25168945?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
+</a>
 
 ## Entlehnungen
 Einige Knoten in diesem Projekt basieren auf den folgenden Projekten. Wir danken ihnen für ihren Beitrag zur Open-Source-Community!
