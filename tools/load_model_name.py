@@ -1,6 +1,9 @@
-from ..config import config_keys, load_api_keys,config_path
 import openai
+
+from ..config import config_keys, config_path, load_api_keys
+
 api_keys = load_api_keys(config_path)
+
 
 class load_name:
 
@@ -25,11 +28,12 @@ class load_name:
     def file(self, model_name):
         out = model_name
         return (out,)
-    
-api_key=api_keys.get("openai_api_key").strip()
-base_url=api_keys.get("base_url").strip()
-if api_key == "" or api_key =="sk-XXXXX" or base_url == "":
-    models_dict =[]
+
+
+api_key = api_keys.get("openai_api_key").strip()
+base_url = api_keys.get("base_url").strip()
+if api_key == "" or api_key == "sk-XXXXX" or base_url == "":
+    models_dict = []
 else:
     try:
         client = openai.OpenAI(api_key=api_key, base_url=base_url)
@@ -38,6 +42,8 @@ else:
         models_dict = [model.id for model in models_response.data]
     except Exception as e:
         models_dict = []
+
+
 class load_name_v2:
 
     @classmethod

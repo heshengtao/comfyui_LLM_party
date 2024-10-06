@@ -2,6 +2,9 @@ import inspect
 import os
 import re
 import shutil
+
+from server import PromptServer
+
 from .install import (
     check_and_uninstall_websocket,
     get_system_info,
@@ -11,7 +14,6 @@ from .install import (
     manage_discord_packages,
 )
 from .llm import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
-from server import PromptServer
 
 
 def get_comfy_dir(subpath=None, mkdir=False):
@@ -55,11 +57,11 @@ def copy_js_files(ext_path):
             print(f"无法删除文件 {file_path}: {e}")
 
     # 获取当前文件夹中web子文件夹下的所有.js文件
-    js_files = [f for f in os.listdir(os.path.join(current_folder, "web","js")) if f.endswith(".js")]
+    js_files = [f for f in os.listdir(os.path.join(current_folder, "web", "js")) if f.endswith(".js")]
 
     # 复制文件
     for file_name in js_files:
-        source_file = os.path.join(current_folder, "web","js", file_name)
+        source_file = os.path.join(current_folder, "web", "js", file_name)
         target_file = os.path.join(target_folder, file_name)
         try:
             shutil.copy2(source_file, target_file)
@@ -68,7 +70,7 @@ def copy_js_files(ext_path):
 
 
 def get_latest_version_folder(directory):
-    version_pattern = re.compile(r'(\d+\.\d+\.\d+)')
+    version_pattern = re.compile(r"(\d+\.\d+\.\d+)")
     latest_version = None
     latest_folder = None
 
@@ -89,7 +91,7 @@ try:
     install_portaudio()
 except Exception as e:
     print(f"Error: {e}")
-'''
+"""
 try:
     dir = get_comfy_dir("web_custom_versions/Comfy-Org_ComfyUI_frontend")
     if os.path.exists(dir):
@@ -99,7 +101,7 @@ try:
     copy_js_files("web/extensions/party")
 except Exception as e:
     print(f"Error: {e}")
-'''
+"""
 try:
     system_info = get_system_info()
     install_llama(system_info)
@@ -118,5 +120,5 @@ try:
 except Exception as e:
     print(f"Error: {e}")
 
-WEB_DIRECTORY = "./web/js"  
+WEB_DIRECTORY = "./web/js"
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]

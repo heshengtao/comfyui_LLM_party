@@ -2,8 +2,6 @@ import json
 import os
 import re
 
-from bs4 import BeautifulSoup
-import pandas as pd
 import charset_normalizer
 import docx2txt
 import numpy as np
@@ -13,8 +11,10 @@ import pdfplumber
 import requests
 import torch
 import xlrd
-from PIL import Image, ImageOps, ImageSequence
+from bs4 import BeautifulSoup
 from markdownify import markdownify as md
+from PIL import Image, ImageOps, ImageSequence
+
 from ..config import current_dir_path
 
 file_path = os.path.join(current_dir_path, "file")
@@ -72,7 +72,7 @@ def read_one(path):
         with open(path, "rb") as file:
             content = file.read()
         result = charset_normalizer.from_bytes(content)
-        encoding = result.best().encoding if result else 'utf-8'
+        encoding = result.best().encoding if result else "utf-8"
         # 读取 CSV 文件
         df = pd.read_csv(path, encoding=encoding)
         text += df.to_markdown(index=True)
@@ -195,25 +195,31 @@ class load_url:
             response.raise_for_status()  # 确保请求成功
 
             # 使用 charset_normalizer 检测编码
-            detected_encoding = charset_normalizer.detect(response.content)['encoding']
-            response.encoding = detected_encoding if detected_encoding else 'utf-8'
+            detected_encoding = charset_normalizer.detect(response.content)["encoding"]
+            response.encoding = detected_encoding if detected_encoding else "utf-8"
         except requests.exceptions.RequestException as e:
             print(f"请求发生错误: {e}")
             return (None,)
-        
+
         out = response.text
         print(out)  # Debugging: Check the HTML content
-        
+
         if not with_jina:
             # 使用 BeautifulSoup 解析 HTML
-            soup = BeautifulSoup(out, 'html.parser')
+            soup = BeautifulSoup(out, "html.parser")
             # 提取主要内容
             main_content = soup.get_text()
             # 将 HTML 转换为 Markdown
-            out = md(main_content, convert=['p', 'h1', 'h2', 'h3', 'a', 'img'], heading_style="ATX", bullets="*+-", strong_em_symbol="ASTERISK")
+            out = md(
+                main_content,
+                convert=["p", "h1", "h2", "h3", "a", "img"],
+                heading_style="ATX",
+                bullets="*+-",
+                strong_em_symbol="ASTERISK",
+            )
             # 去掉多余的换行符
-            out = re.sub(r'\n+', '\n', out)
-        
+            out = re.sub(r"\n+", "\n", out)
+
         return (out,)
 
 
@@ -306,10 +312,10 @@ class start_workflow:
                 file_out = read_one(path)
         img_out = []
         if image_input1 is not None:
-            img_out=image_input1
+            img_out = image_input1
         img_out2 = []
         if image_input2 is not None:
-            img_out2=image_input2
+            img_out2 = image_input2
         if img_path1 is not None and img_path1 != "":
             img_out = []
             # 检查img_path是否是一个目录

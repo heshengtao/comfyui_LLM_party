@@ -9,15 +9,15 @@ class extra_parameters:
                 "json_out": ("BOOLEAN", {"default": False}),
                 "n": ("INT", {"default": 1}),
                 "stop": ("STRING", {"default": ""}),
-                "presence_penalty": ("FLOAT", {"default": 0.0,"min": 0.0, "max": 1.0,"step": 0.1}),
-                "frequency_penalty": ("FLOAT", {"default": 0.0,"min": 0.0, "max": 1.0,"step": 0.1}),
-                "repetition_penalty": ("FLOAT", {"default": 1.0,"min": 0.0, "max": 1.0,"step": 0.1}),
+                "presence_penalty": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.1}),
+                "frequency_penalty": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.1}),
+                "repetition_penalty": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.1}),
                 "min_length": ("INT", {"default": 0}),
                 "logprobs": ("BOOLEAN", {"default": False}),
                 "echo": ("BOOLEAN", {"default": False}),
                 "best_of": ("INT", {"default": 1}),
                 "user": ("STRING", {"default": ""}),
-                "top_p": ("FLOAT", {"default": 1.0,"min": 0.0, "max": 1.0,"step": 0.1}),
+                "top_p": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.1}),
                 "top_k": ("INT", {"default": 50}),
             }
         }
@@ -80,17 +80,19 @@ NODE_CLASS_MAPPINGS = {"extra_parameters": extra_parameters}
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "额外参数"}
 else:

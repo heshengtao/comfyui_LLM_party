@@ -324,8 +324,8 @@ class bing_loader:
         return (out,)
 
 
-
 ddg_searchType = "web"
+
 
 def search_duckduckgo(keywords, paper_num=1):
     if paper_num == "":
@@ -360,13 +360,17 @@ def search_duckduckgo(keywords, paper_num=1):
                     if "Text" in item and "FirstURL" in item:
                         keyword = item["Text"]
                         url = item["FirstURL"]
-                        all_content += "\n\n" + json.dumps({"snippet": keyword, "link": url}, ensure_ascii=False, indent=4)
+                        all_content += "\n\n" + json.dumps(
+                            {"snippet": keyword, "link": url}, ensure_ascii=False, indent=4
+                        )
             elif "ImageResults" in data:
                 for item in data["ImageResults"]:
                     if "Title" in item and "Image" in item:
                         keyword = item["Title"]
                         url = item["Image"]
-                        all_content += "\n\n" + json.dumps({"snippet": keyword, "link": url}, ensure_ascii=False, indent=4)
+                        all_content += "\n\n" + json.dumps(
+                            {"snippet": keyword, "link": url}, ensure_ascii=False, indent=4
+                        )
             else:
                 print("No relevant data found in the response.")
         else:
@@ -383,6 +387,7 @@ def search_duckduckgo(keywords, paper_num=1):
         + str(all_content)
         + "”。\n如果以上信息中没有相关信息，你可以改变paper_num，查看下一页的信息。"
     )
+
 
 class duckduckgo_tool:
     @classmethod
@@ -419,7 +424,10 @@ class duckduckgo_tool:
                                 "type": "string",
                                 "description": "需要搜索的关键词，可以是多个词语，多个词语之间用空格隔开，但是多个词语只能是一个概念，而不是多个概念，如果有多个概念应拆分开来，多次调用duckduckgo。duckduckgo只支持英文搜索！关键词必须是英文。",
                             },
-                            "paper_num": {"type": "string", "description": "DuckDuckGo搜索的页码，可以改变paper_num用于翻页"},
+                            "paper_num": {
+                                "type": "string",
+                                "description": "DuckDuckGo搜索的页码，可以改变paper_num用于翻页",
+                            },
                         },
                         "required": ["keywords", "paper_num"],
                     },
@@ -429,7 +437,8 @@ class duckduckgo_tool:
 
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
-    
+
+
 class duckduckgo_loader:
     @classmethod
     def INPUT_TYPES(s):

@@ -1,21 +1,25 @@
 import json
 import locale
+
 import requests
 
 amap_api_key = ""
+
+
 def get_amap_weather(city_code):
     global amap_api_key
     url = "https://restapi.amap.com/v3/weather/weatherInfo"
     params = {
-        'key': amap_api_key,
-        'city': city_code,
-        'extensions': 'all'  # 'base' for current weather, 'all' for forecast
+        "key": amap_api_key,
+        "city": city_code,
+        "extensions": "all",  # 'base' for current weather, 'all' for forecast
     }
     response = requests.get(url, params=params)
     if response.status_code == 200:
         return response.json()
     else:
         return None
+
 
 class AmapWeatherTool:
     @classmethod
@@ -67,23 +71,26 @@ class AmapWeatherTool:
         else:
             return (None,)
 
+
 _TOOL_HOOKS = ["get_amap_weather"]
 NODE_CLASS_MAPPINGS = {"AmapWeatherTool": AmapWeatherTool}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"AmapWeatherTool": "高德天气查询工具"}
 else:

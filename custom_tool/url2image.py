@@ -1,12 +1,14 @@
 import locale
 import os
+import ssl
 import time
+
+import numpy as np
 import requests
 import torch
 import urllib3
-import ssl
 from PIL import Image, ImageOps, ImageSequence
-import numpy as np
+
 
 class URL2IMG:
     def __init__(self):
@@ -23,8 +25,16 @@ class URL2IMG:
             }
         }
 
-    RETURN_TYPES = ("STRING","IMAGE", "STRING",)
-    RETURN_NAMES = ("file_path","img", "log",)
+    RETURN_TYPES = (
+        "STRING",
+        "IMAGE",
+        "STRING",
+    )
+    RETURN_NAMES = (
+        "file_path",
+        "img",
+        "log",
+    )
 
     FUNCTION = "url_to_img"
     CATEGORY = "大模型派对（llm_party）/转换器（converter）"
@@ -36,33 +46,33 @@ class URL2IMG:
             return (None, None, "URL is None")
 
         context = ssl.create_default_context()
-        context.set_ciphers('DEFAULT@SECLEVEL=1')
+        context.set_ciphers("DEFAULT@SECLEVEL=1")
         http = urllib3.PoolManager(ssl_context=context)
 
-        response = http.request('GET', url)
+        response = http.request("GET", url)
         if response.status >= 300:
             return (None, None, "Failed to get data from URL")
 
         first_bytes = response.data[:8]
-        if first_bytes.startswith(b'\x89PNG\r\n\x1a\n'):
-            ext = 'PNG'
-        elif first_bytes.startswith(b'\xff\xd8'):
-            ext = 'JPG'
+        if first_bytes.startswith(b"\x89PNG\r\n\x1a\n"):
+            ext = "PNG"
+        elif first_bytes.startswith(b"\xff\xd8"):
+            ext = "JPG"
         else:
             return (None, None, "Unknown image extension based on base64")
         # 当前脚本目录
         current_dir = os.path.dirname(os.path.abspath(__file__))
         # 构建img_temp目录路径
-        img_temp_dir = os.path.join(current_dir, 'img_temp')
+        img_temp_dir = os.path.join(current_dir, "img_temp")
         # 如果img_temp目录不存在，则创建
         os.makedirs(img_temp_dir, exist_ok=True)
         # 时间戳
         timestamp = int(time.time())
         if file_name == None:
-            img_path = os.path.join(img_temp_dir,f'image-{timestamp}.{ext}')
+            img_path = os.path.join(img_temp_dir, f"image-{timestamp}.{ext}")
         else:
-            img_path = os.path.join(img_temp_dir,f'{file_name}-{timestamp}.{ext}')
-        with open(img_path, 'wb') as f:
+            img_path = os.path.join(img_temp_dir, f"{file_name}-{timestamp}.{ext}")
+        with open(img_path, "wb") as f:
             f.write(response.data)
 
         img = Image.open(img_path)
@@ -80,28 +90,27 @@ class URL2IMG:
         self.img_data = img_out
         return (img_path, img_out, f"Image file saved as {img_path}")
 
+
 NODE_CLASS_MAPPINGS = {
     "URL2IMG": URL2IMG,
 }
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "URL2IMG": "下载图片🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"URL2IMG": "下载图片🐶"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "URL2IMG": "URL 2 IMG🐶"
-    }
+    NODE_DISPLAY_NAME_MAPPINGS = {"URL2IMG": "URL 2 IMG🐶"}

@@ -16,7 +16,7 @@
   <a href="./README_ZH.md"><img src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
   <a href="./README.md"><img src="https://img.shields.io/badge/English-d9d9d9"></a>
   <a href="./README_RU.md"><img src="https://img.shields.io/badge/Русский-d9d9d9"></a>
-  <a href="./README_FR.md"><img src="https://img.shields.io/badge/Français-d9d9d9"></a> 
+  <a href="./README_FR.md"><img src="https://img.shields.io/badge/Français-d9d9d9"></a>
   <a href="./README_DE.md"><img src="https://img.shields.io/badge/Deutsch-d9d9d9"></a>
   <a href="./README_JA.md"><img src="https://img.shields.io/badge/日本語-d9d9d9"></a>
   <a href="./README_KO.md"><img src="https://img.shields.io/badge/한국어-d9d9d9"></a>
@@ -59,7 +59,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
   - 给这个LLM节点添加一个“工作流工具”节点，连在LLM节点的tool输入上。
   - 在“工作流工具”节点上，在第一个输入框中写入想要调用的工作流文件名，例如：draw.json，可以写入多个工作流文件名。在第二个输入框中写入每个工作流的作用，这样可以让LLM明白这些工作流怎么用。
   - 运行即可看到这个LLM调用你封装好的工作流，并且将结果返回给你。如果返回的是图片，请在LLM节点的image输出上连上“预览图片”节点，查看生成的图片。注意！该方法是在你的8190端口调用了一个新的comfyui，请不要占用这个端口。window和mac系统会有一个新的终端被打开，请不要关闭。Linux系统使用的是screen进程实现的，当你不需要用时，关闭这个screen进程，否则会一直占用你的端口。
-  
+
 ![workflow_tool](img/workflowtool.png)
 
 ## 使用说明

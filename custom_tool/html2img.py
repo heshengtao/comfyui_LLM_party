@@ -1,19 +1,23 @@
 import locale
 import os
-from html2image import Html2Image
-from PIL import Image, ImageOps, ImageSequence
+
 import numpy as np
 import torch
+from html2image import Html2Image
+from PIL import Image, ImageOps, ImageSequence
+
 current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 在current_dir_path下创建一个名为output的文件夹
-output_dir_path = os.path.join(current_dir_path, 'output')
+output_dir_path = os.path.join(current_dir_path, "output")
+
 
 def html2img(html_str, width=800, height=600):
     hti = Html2Image()
     hti.output_path = output_dir_path
-    hti.screenshot(html_str=html_str, save_as='example.png', size=(width, height))
-    image_path = os.path.join(hti.output_path, 'example.png')
+    hti.screenshot(html_str=html_str, save_as="example.png", size=(width, height))
+    image_path = os.path.join(hti.output_path, "example.png")
     return image_path
+
 
 class html2img_function:
     @classmethod
@@ -65,17 +69,19 @@ NODE_CLASS_MAPPINGS = {"html2img_function": html2img_function}
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"html2img_function": "HTML转图片"}
 else:

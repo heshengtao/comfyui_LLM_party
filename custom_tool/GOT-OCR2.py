@@ -1,23 +1,33 @@
 import json
-import numpy as np
-from transformers import AutoModel, AutoTokenizer
 import locale
+import os
+
 import numpy as np
 from PIL import Image
-import os
+from transformers import AutoModel, AutoTokenizer
+
 current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 在current_dir_path下创建一个名为output的文件夹
-output_dir_path = os.path.join(current_dir_path, 'output')
+output_dir_path = os.path.join(current_dir_path, "output")
 if not os.path.exists(output_dir_path):
     os.makedirs(output_dir_path)
-def perform_ocr(model_name_or_path, device, ocr_type, image_path,ocr_box, ocr_color, multi_crop,render,out_dir_path):
+
+
+def perform_ocr(model_name_or_path, device, ocr_type, image_path, ocr_box, ocr_color, multi_crop, render, out_dir_path):
     # Load the tokenizer and model
     tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, trust_remote_code=True)
-    model = AutoModel.from_pretrained(model_name_or_path, trust_remote_code=True, low_cpu_mem_usage=True, device_map=device, use_safetensors=True, pad_token_id=tokenizer.eos_token_id)
+    model = AutoModel.from_pretrained(
+        model_name_or_path,
+        trust_remote_code=True,
+        low_cpu_mem_usage=True,
+        device_map=device,
+        use_safetensors=True,
+        pad_token_id=tokenizer.eos_token_id,
+    )
     model = model.eval()
-    if render:    
-        html_path = os.path.join(out_dir_path, 'render.html')
-        res = model.chat(tokenizer, image_path, ocr_type='format', render=True, save_render_file = html_path)
+    if render:
+        html_path = os.path.join(out_dir_path, "render.html")
+        res = model.chat(tokenizer, image_path, ocr_type="format", render=True, save_render_file=html_path)
     elif multi_crop:
         res = model.chat_crop(tokenizer, image_path, ocr_type=ocr_type)
     else:
@@ -32,8 +42,8 @@ class got_ocr:
         return {
             "required": {
                 "model_name_or_path": ("STRING", {"default": "D:\GOT-OCR2_0"}),
-                "device": (["auto","cuda", "cpu", "mps"], {"default": "auto"}),
-                "ocr_type": (["ocr","format"], {"default": "format"}),
+                "device": (["auto", "cuda", "cpu", "mps"], {"default": "auto"}),
+                "ocr_type": (["ocr", "format"], {"default": "format"}),
                 "image": ("IMAGE", {}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             },
@@ -55,20 +65,34 @@ class got_ocr:
 
     CATEGORY = "大模型派对（llm_party）/图片（image）"
 
-    def time(self, model_name_or_path, device, ocr_type, image,ocr_box, ocr_color, multi_crop, is_enable=True,render=False,out_dir_path=output_dir_path):
+    def time(
+        self,
+        model_name_or_path,
+        device,
+        ocr_type,
+        image,
+        ocr_box,
+        ocr_color,
+        multi_crop,
+        is_enable=True,
+        render=False,
+        out_dir_path=output_dir_path,
+    ):
         if is_enable == False:
             return (None,)
-        # 保存image到本地output_dir_path 
+        # 保存image到本地output_dir_path
         if image is not None and len(image) > 0:
             image = image[0]
             i = 255.0 * image.cpu().numpy()
             img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
-            
+
             # 将图像转换为 RGB 模式并保存为 JPG 格式
             img = img.convert("RGB")
-            img.save(os.path.join(output_dir_path, 'temp.png'))
-            image_path = os.path.join(output_dir_path, 'temp.png')
-            res=perform_ocr(model_name_or_path, device, ocr_type, image_path,ocr_box, ocr_color, multi_crop,render,out_dir_path)
+            img.save(os.path.join(output_dir_path, "temp.png"))
+            image_path = os.path.join(output_dir_path, "temp.png")
+            res = perform_ocr(
+                model_name_or_path, device, ocr_type, image_path, ocr_box, ocr_color, multi_crop, render, out_dir_path
+            )
             return (res,)
         else:
             return (None,)
@@ -79,17 +103,19 @@ NODE_CLASS_MAPPINGS = {"got_ocr": got_ocr}
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"got_ocr": "GOT-OCR2"}
 else:

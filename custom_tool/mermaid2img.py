@@ -1,11 +1,9 @@
-
-
 import locale
 
 
-def generate_mermaid(graph_definition,mode="dark"):
+def generate_mermaid(graph_definition, mode="dark"):
 
-    if mode=="dark":
+    if mode == "dark":
         mermaid_html = f"""
         <!DOCTYPE html>
         <html>
@@ -77,7 +75,7 @@ def generate_mermaid(graph_definition,mode="dark"):
         </body>
         </html>
         """
-    elif mode=="light":
+    elif mode == "light":
         mermaid_html = f"""
         <!DOCTYPE html>
         <html>
@@ -149,7 +147,7 @@ def generate_mermaid(graph_definition,mode="dark"):
         </body>
         </html>
         """
-    elif mode=="dtransparent":
+    elif mode == "dtransparent":
         mermaid_html = f"""
         <!DOCTYPE html>
         <html>
@@ -223,13 +221,14 @@ def generate_mermaid(graph_definition,mode="dark"):
         """
     return mermaid_html
 
+
 class graph_md_to_html:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "graph_definition": ("STRING", {"forceInput": True}),
-                "mode": (["dark","light","dtransparent"], {"default": "dark"}),
+                "mode": (["dark", "light", "dtransparent"], {"default": "dark"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             }
         }
@@ -243,28 +242,31 @@ class graph_md_to_html:
 
     CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
-    def time(self, graph_definition,mode, is_enable=True):
+    def time(self, graph_definition, mode, is_enable=True):
         if is_enable == False:
             return (None,)
-        html=generate_mermaid(graph_definition,mode)
+        html = generate_mermaid(graph_definition, mode)
         return (html,)
+
 
 NODE_CLASS_MAPPINGS = {"graph_md_to_html": graph_md_to_html}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"graph_md_to_html": "思维导图markdown转HTML"}
 else:

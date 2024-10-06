@@ -13,29 +13,31 @@ import re
 import sys
 import time
 import traceback
+
 import google.generativeai as genai
 import numpy as np
 import openai
+import PIL.Image
 import requests
 import torch
 from PIL import Image
 from transformers import (
+    AutoConfig,
     AutoModel,
     AutoModelForCausalLM,
-    AutoModelForSeq2SeqLM, 
+    AutoModelForSeq2SeqLM,
     AutoModelForSequenceClassification,
     AutoTokenizer,
     GenerationConfig,
-    AutoConfig,
 )
-import PIL.Image
+
 if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
+
 from google.protobuf.struct_pb2 import Struct
 from torchvision.transforms import ToPILImage
 
 from .config import config_key, config_path, current_dir_path, load_api_keys
-from .tools.lorebook import Lorebook
 from .tools.api_tool import (
     api_function,
     api_tool,
@@ -55,12 +57,13 @@ from .tools.classify_persona import classify_persona, classify_persona_plus
 from .tools.clear_file import clear_file
 from .tools.clear_model import clear_model
 from .tools.custom_persona import custom_persona
-from .tools.dialog import end_dialog, start_dialog,start_anything,end_anything
+from .tools.dialog import end_anything, end_dialog, start_anything, start_dialog
 from .tools.dingding import Dingding, Dingding_tool, send_dingding
 from .tools.end_work import end_workflow, img2path
-from .tools.excel import image_iterator, load_excel,json_iterator
+from .tools.excel import image_iterator, json_iterator, load_excel
 from .tools.feishu import feishu, feishu_tool, send_feishu
 from .tools.file_combine import file_combine, file_combine_plus
+from .tools.flux_persona import flux_persona
 from .tools.get_time import get_time, time_tool
 from .tools.get_weather import (
     accuweather_tool,
@@ -107,7 +110,13 @@ from .tools.KG_neo4j import (
     New_entities_neo4j,
     New_relationships_neo4j,
 )
-from .tools.load_ebd import data_base, ebd_tool, embeddings_function, save_ebd_database,load_ebd
+from .tools.load_ebd import (
+    data_base,
+    ebd_tool,
+    embeddings_function,
+    load_ebd,
+    save_ebd_database,
+)
 from .tools.load_file import (
     load_file,
     load_file_folder,
@@ -115,33 +124,41 @@ from .tools.load_file import (
     load_url,
     start_workflow,
 )
-from .tools.load_model_name import load_name,load_name_v2
+from .tools.load_model_name import load_name, load_name_v2
 from .tools.load_persona import load_persona
 from .tools.logic import get_string, replace_string, string_logic, substring
+from .tools.lorebook import Lorebook
 from .tools.omost import omost_decode, omost_setting
 from .tools.search_web import (
     bing_loader,
     bing_tool,
+    duckduckgo_loader,
+    duckduckgo_tool,
     google_loader,
     google_tool,
+    search_duckduckgo,
     search_web,
     search_web_bing,
-    duckduckgo_tool,
-    duckduckgo_loader,
-    search_duckduckgo,
 )
 from .tools.show_text import About_us, show_text_party
-from .tools.smalltool import bool_logic, load_int, none2false,str2float,str2int,any2str
+from .tools.smalltool import (
+    any2str,
+    bool_logic,
+    load_int,
+    none2false,
+    str2float,
+    str2int,
+)
 from .tools.story import read_story_json, story_json_tool
-from .tools.text_iterator import text_iterator,text_writing
+from .tools.text_iterator import text_iterator, text_writing
 from .tools.tool_combine import tool_combine, tool_combine_plus
 from .tools.translate_persona import translate_persona
 from .tools.tts import openai_tts
 from .tools.wechat import send_wechat, work_wechat, work_wechat_tool
 from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import work_flow, workflow_tool, workflow_transfer
-from .tools.flux_persona import flux_persona
 from .tools.workflow_V2 import workflow_transfer_v2
+
 _TOOL_HOOKS = [
     "get_time",
     "get_weather",
@@ -340,6 +357,8 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
     except:
         ret = traceback.format_exc()
     return str(ret)
+
+
 def convert_to_gemini(openai_history):
     for entry in openai_history:
         role = entry["role"]
@@ -348,25 +367,24 @@ def convert_to_gemini(openai_history):
             return content
     return ""
 
+
 def convert_tool_to_gemini(openai_tools):
     gemini_tools = []
     for tool in openai_tools:
         gemini_tool = {
             "name": tool["function"]["name"],
             "description": tool["function"]["description"],
-            "parameters": {
-                "type": "OBJECT",
-                "properties": {}
-            }
+            "parameters": {"type": "OBJECT", "properties": {}},
         }
         for prop_name, prop_details in tool["function"]["parameters"]["properties"].items():
             gemini_tool["parameters"]["properties"][prop_name] = {
                 "type": prop_details["type"].upper(),
-                "description": prop_details["description"]
+                "description": prop_details["description"],
             }
         gemini_tool["parameters"]["required"] = tool["function"]["parameters"]["required"]
         gemini_tools.append(gemini_tool)
     return gemini_tools
+
 
 class genChat:
     def __init__(self, model_name, apikey) -> None:
@@ -389,36 +407,35 @@ class genChat:
             if tools is None:
                 tools = []
             # Function to convert OpenAI history to Gemini history
-            System_prompt= convert_to_gemini(history)
+            System_prompt = convert_to_gemini(history)
             if images is not None:
                 i = 255.0 * images[0].cpu().numpy()
                 img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
-                new_message = {"role": "user", "parts": [{"text": user_prompt},{"inline_data": img}]}
+                new_message = {"role": "user", "parts": [{"text": user_prompt}, {"inline_data": img}]}
             else:
                 new_message = {"role": "user", "parts": [{"text": user_prompt}]}
-            
+
             history.append(new_message)
             tools = convert_tool_to_gemini(tools)
             genai.configure(api_key=self.apikey)
-            tool_list={
-                'function_declarations':  tools
-            }
+            tool_list = {"function_declarations": tools}
             if "n" in extra_parameters:
-                extra_parameters["candidate_count"]= extra_parameters["n"]
+                extra_parameters["candidate_count"] = extra_parameters["n"]
                 del extra_parameters["n"]
             # 如果extra_parameters["response_format"]存在就删除它
             if "response_format" in extra_parameters:
                 del extra_parameters["response_format"]
-                model = genai.GenerativeModel(self.model_name,tools=tool_list,system_instruction=System_prompt,generation_config={"response_mime_type": "application/json"})
+                model = genai.GenerativeModel(
+                    self.model_name,
+                    tools=tool_list,
+                    system_instruction=System_prompt,
+                    generation_config={"response_mime_type": "application/json"},
+                )
             else:
-                model = genai.GenerativeModel(self.model_name,tools=tool_list,system_instruction=System_prompt)
+                model = genai.GenerativeModel(self.model_name, tools=tool_list, system_instruction=System_prompt)
             response = model.generate_content(
-                contents= history[1:],
-                generation_config={
-                    "temperature": temperature,
-                    "max_output_tokens": max_length,
-                    **extra_parameters
-                }
+                contents=history[1:],
+                generation_config={"temperature": temperature, "max_output_tokens": max_length, **extra_parameters},
             )
             if images is not None:
                 # 移除包含 "inline_data" 的部分
@@ -427,39 +444,32 @@ class genChat:
                         message["parts"] = [part for part in message["parts"] if "inline_data" not in part]
 
             while response.candidates[0].content.parts[0].function_call:
-                function_call =response.candidates[0].content.parts[0].function_call
+                function_call = response.candidates[0].content.parts[0].function_call
                 name = function_call.name
-                args = {key:value for key, value in function_call.args.items()}
-                res={"role": "model", "parts": response.candidates[0].content.parts}
+                args = {key: value for key, value in function_call.args.items()}
+                res = {"role": "model", "parts": response.candidates[0].content.parts}
                 history.append(res)
                 print("正在调用" + name + "工具")
                 results = dispatch_tool(name, args)
-                
+
                 s = Struct()
                 s.update({"result": results})
 
                 function_response = genai.protos.Part(
                     function_response=genai.protos.FunctionResponse(name=name, response=s)
                 )
-                res={
-                    "role": "user",
-                    "parts": [function_response]
-                }
+                res = {"role": "user", "parts": [function_response]}
                 print("调用结果：" + str(results))
                 history.append(res)
                 response = model.generate_content(
-                    contents= history[1:],
-                    generation_config={
-                        "temperature": temperature,
-                        "max_output_tokens": max_length,
-                        **extra_parameters
-                    }
+                    contents=history[1:],
+                    generation_config={"temperature": temperature, "max_output_tokens": max_length, **extra_parameters},
                 )
                 # 移除history最后两个元素
                 history.pop()
                 history.pop()
             text = response.candidates[0].content.parts[0].text
-            res={"role": "model", "parts": [{"text": text}]}
+            res = {"role": "model", "parts": [{"text": text}]}
             history.append(res)
         except Exception as e:
             return str(e), history
@@ -898,6 +908,7 @@ class genai_api_loader:
         chat = genChat(model_name, api_key)
         return (chat,)
 
+
 class LLM:
     def __init__(self):
         current_time = datetime.datetime.now()
@@ -1192,11 +1203,26 @@ class LLM:
                     )
                 if extra_parameters is not None and extra_parameters != {}:
                     response, history = model.send(
-                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,images,imgbb_api_key, **extra_parameters
+                        user_prompt,
+                        temperature,
+                        max_length,
+                        history,
+                        tools,
+                        is_tools_in_sys_prompt,
+                        images,
+                        imgbb_api_key,
+                        **extra_parameters,
                     )
                 else:
                     response, history = model.send(
-                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,images,imgbb_api_key
+                        user_prompt,
+                        temperature,
+                        max_length,
+                        history,
+                        tools,
+                        is_tools_in_sys_prompt,
+                        images,
+                        imgbb_api_key,
                     )
                 print(response)
                 # 修改prompt.json文件
@@ -1206,7 +1232,7 @@ class LLM:
                 history = history_get
                 with open(self.prompt_path, "w", encoding="utf-8") as f:
                     json.dump(history, f, indent=4, ensure_ascii=False)
-                history = json.dumps(history, ensure_ascii=False,indent=4)
+                history = json.dumps(history, ensure_ascii=False, indent=4)
                 global image_buffer
                 image_out = image_buffer
                 return (
@@ -1236,9 +1262,9 @@ def llm_chat(
 ):
     history.append({"role": role, "content": user_prompt.strip()})
     # 检查是否已经设置了 chat_template
-    if not hasattr(tokenizer, 'chat_template') or tokenizer.chat_template is None:
+    if not hasattr(tokenizer, "chat_template") or tokenizer.chat_template is None:
         # 如果没有设置 chat_template，尝试使用 default_chat_template
-        if hasattr(tokenizer, 'default_chat_template') and tokenizer.default_chat_template is not None:
+        if hasattr(tokenizer, "default_chat_template") and tokenizer.default_chat_template is not None:
             tokenizer.chat_template = tokenizer.default_chat_template
         else:
             print("chat_template is not set")
@@ -1271,10 +1297,11 @@ def llm_chat(
     history.append({"role": "assistant", "content": response})
     return response, history
 
+
 def vlm_chat(
     model, processor, image, user_prompt, history, device, max_length, role="user", temperature=0.7, **extra_parameters
 ):
-    if image !=[]:
+    if image != []:
         user_content = {
             "role": role,
             "content": [
@@ -1295,20 +1322,18 @@ def vlm_chat(
         history.append(user_content)
         input_text = processor.apply_chat_template(history, add_generation_prompt=True)
         inputs = processor(text=input_text, return_tensors="pt").to(device)
-    
 
     output = model.generate(**inputs, max_new_tokens=max_length, temperature=temperature, **extra_parameters)
     response = processor.decode(output[0], skip_special_tokens=True)
     # 使用正则表达式提取最后一个助手的回答
-    matches = re.findall(r'assistant\s*(.*?)(?=\s*(?:system|user|$))', response, re.DOTALL)
+    matches = re.findall(r"assistant\s*(.*?)(?=\s*(?:system|user|$))", response, re.DOTALL)
     if matches:
         assistant_output = matches[-1].strip()
     else:
         assistant_output = response.strip()
-    history.append({"role": "assistant", "content":assistant_output})
-    
-    return assistant_output, history
+    history.append({"role": "assistant", "content": assistant_output})
 
+    return assistant_output, history
 
 
 class LLM_local_loader:
@@ -1333,7 +1358,7 @@ class LLM_local_loader:
                     },
                 ),
                 "dtype": (
-                    ["float32", "float16","bfloat16", "int8", "int4"],
+                    ["float32", "float16", "bfloat16", "int8", "int4"],
                     {
                         "default": "float32",
                     },
@@ -1388,15 +1413,17 @@ class LLM_local_loader:
             self.device = device
             self.dtype = dtype
             model_kwargs = {
-                'device_map': device,
+                "device_map": device,
             }
 
             if dtype == "float16":
-                model_kwargs['torch_dtype'] = torch.float16
+                model_kwargs["torch_dtype"] = torch.float16
             elif dtype == "bfloat16":
-                model_kwargs['torch_dtype'] = torch.bfloat16
+                model_kwargs["torch_dtype"] = torch.bfloat16
             elif dtype in ["int8", "int4"]:
-                model_kwargs['quantization_config'] = BitsAndBytesConfig(load_in_8bit=(dtype == "int8"), load_in_4bit=(dtype == "int4"))
+                model_kwargs["quantization_config"] = BitsAndBytesConfig(
+                    load_in_8bit=(dtype == "int8"), load_in_4bit=(dtype == "int4")
+                )
 
             config = AutoConfig.from_pretrained(model_name_or_path, **model_kwargs)
             self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, trust_remote_code=True)
@@ -1462,13 +1489,13 @@ class LLM_local:
                     },
                 ),
                 "model_type": (
-                    ["LLM","LLM-GGUF", "VLM-GGUF", "VLM(testing)"],
+                    ["LLM", "LLM-GGUF", "VLM-GGUF", "VLM(testing)"],
                     {
                         "default": "LLM",
                     },
                 ),
                 "temperature": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0, "step": 0.1}),
-                "max_length":("INT", {"default": 512, "min": 256, "max": 128000, "step": 128}),
+                "max_length": ("INT", {"default": 512, "min": 256, "max": 128000, "step": 128}),
                 "is_memory": (["enable", "disable"], {"default": "enable"}),
                 "is_locked": (["enable", "disable"], {"default": "disable"}),
                 "main_brain": (["enable", "disable"], {"default": "enable"}),
@@ -1610,7 +1637,7 @@ class LLM_local:
         else:
             try:
                 if is_memory == "disable" or "clear party memory" in user_prompt:
-                    self.images= []
+                    self.images = []
                     with open(self.prompt_path, "w", encoding="utf-8") as f:
                         json.dump([{"role": "system", "content": system_prompt}], f, indent=4, ensure_ascii=False)
                     if "clear party memory" in user_prompt:
@@ -1828,24 +1855,24 @@ class LLM_local:
                         assistant_content = {"role": "assistant", "content": response}
                         history.append(assistant_content)
                 elif model_type == "LLM-GGUF":
-                        user_content = {"role": "user", "content": user_prompt}
-                        history.append(user_content)
-                        if extra_parameters is not None and extra_parameters != {}:
-                            response = model.create_chat_completion(
-                                messages=history,
-                                temperature=temperature,
-                                max_tokens=max_length,
-                                **extra_parameters,
-                            )
-                        else:
-                            response = model.create_chat_completion(
-                                messages=history,
-                                temperature=temperature,
-                                max_tokens=max_length,
-                            )
-                        response = f"{response['choices'][0]['message']['content']}"
-                        assistant_content = {"role": "assistant", "content": response}
-                        history.append(assistant_content)         
+                    user_content = {"role": "user", "content": user_prompt}
+                    history.append(user_content)
+                    if extra_parameters is not None and extra_parameters != {}:
+                        response = model.create_chat_completion(
+                            messages=history,
+                            temperature=temperature,
+                            max_tokens=max_length,
+                            **extra_parameters,
+                        )
+                    else:
+                        response = model.create_chat_completion(
+                            messages=history,
+                            temperature=temperature,
+                            max_tokens=max_length,
+                        )
+                    response = f"{response['choices'][0]['message']['content']}"
+                    assistant_content = {"role": "assistant", "content": response}
+                    history.append(assistant_content)
                 elif model_type in ["VLM(testing)"]:
                     if image is not None:
                         pil_image = ToPILImage()(image[0].permute(2, 0, 1))
@@ -1864,7 +1891,14 @@ class LLM_local:
                         )
                     else:
                         response, history = vlm_chat(
-                            model, tokenizer, self.images, user_prompt, history, device, max_length, temperature=temperature
+                            model,
+                            tokenizer,
+                            self.images,
+                            user_prompt,
+                            history,
+                            device,
+                            max_length,
+                            temperature=temperature,
                         )
                     # 正则表达式匹配
                     pattern = r'\{\s*"tool":\s*"(.*?)",\s*"parameters":\s*\{(.*?)\}\s*\}'
@@ -1882,7 +1916,7 @@ class LLM_local:
                             response, history = vlm_chat(
                                 model,
                                 tokenizer,
-                                self.images, # image,
+                                self.images,  # image,
                                 results,
                                 history,
                                 device,
@@ -1894,14 +1928,14 @@ class LLM_local:
                             response, history = vlm_chat(
                                 model,
                                 tokenizer,
-                                self.images, # image,
+                                self.images,  # image,
                                 results,
                                 history,
                                 device,
                                 max_length,
                                 role="observation",
                                 temperature=temperature,
-                            )         
+                            )
                 print(response)
                 # 修改prompt.json文件
                 history_get = [history[0]]
@@ -1959,15 +1993,13 @@ class LLM_local:
         return hash_value
 
 
-
-
 NODE_CLASS_MAPPINGS = {
     "LLM": LLM,
     "LLM_local": LLM_local,
     "LLM_api_loader": LLM_api_loader,
-    "genai_api_loader":genai_api_loader,
+    "genai_api_loader": genai_api_loader,
     "LLM_local_loader": LLM_local_loader,
-    "load_ebd":load_ebd,
+    "load_ebd": load_ebd,
     "embeddings_function": embeddings_function,
     "load_file": load_file,
     "load_persona": load_persona,
@@ -2015,7 +2047,7 @@ NODE_CLASS_MAPPINGS = {
     "substring": substring,
     "openai_tts": openai_tts,
     "load_name": load_name,
-    "load_name_v2":load_name_v2,
+    "load_name_v2": load_name_v2,
     "omost_decode": omost_decode,
     "omost_setting": omost_setting,
     "keyword_tool": keyword_tool,
@@ -2052,33 +2084,33 @@ NODE_CLASS_MAPPINGS = {
     "load_int": load_int,
     "none2false": none2false,
     "bool_logic": bool_logic,
-    "duckduckgo_tool":duckduckgo_tool,
-    "duckduckgo_loader":duckduckgo_loader,
-    "flux_persona":flux_persona,
-    "clear_file":clear_file,
-    "workflow_transfer_v2":workflow_transfer_v2,
-    "str2float":str2float,
-    "json_iterator":json_iterator,
-    "Lorebook":Lorebook,
-    "text_writing":text_writing,
-    "str2int":str2int,
-    "any2str":any2str,
-    "start_anything":start_anything,
-    "end_anything":end_anything,
+    "duckduckgo_tool": duckduckgo_tool,
+    "duckduckgo_loader": duckduckgo_loader,
+    "flux_persona": flux_persona,
+    "clear_file": clear_file,
+    "workflow_transfer_v2": workflow_transfer_v2,
+    "str2float": str2float,
+    "json_iterator": json_iterator,
+    "Lorebook": Lorebook,
+    "text_writing": text_writing,
+    "str2int": str2int,
+    "any2str": any2str,
+    "start_anything": start_anything,
+    "end_anything": end_anything,
 }
 
 
 lang = locale.getdefaultlocale()[0]
 api_keys = load_api_keys(config_path)
-lang_config=api_keys.get("language")
-if lang_config=="en_US" or lang_config=="zh_CN":
-    lang=lang_config
+lang_config = api_keys.get("language")
+if lang_config == "en_US" or lang_config == "zh_CN":
+    lang = lang_config
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "LLM": "API大语言模型",
         "LLM_local": "本地大语言模型",
         "LLM_api_loader": "API大语言模型加载器",
-        "genai_api_loader":"Gemini API加载器",
+        "genai_api_loader": "Gemini API加载器",
         "LLM_local_loader": "本地大语言模型加载器",
         "load_ebd": "加载词嵌入",
         "embeddings_function": "词向量检索",
@@ -2128,7 +2160,7 @@ if lang == "zh_CN":
         "substring": "提取字符串",
         "openai_tts": "OpenAI语音合成",
         "load_name": "加载config.ini中的模型名称",
-        "load_name_v2":"自动获取模型列表",
+        "load_name_v2": "自动获取模型列表",
         "omost_decode": "omost解码器",
         "omost_setting": "omost设置",
         "keyword_tool": "搜索关键词工具",
@@ -2167,16 +2199,16 @@ if lang == "zh_CN":
         "bool_logic": "布尔逻辑",
         "duckduckgo_tool": "DuckDuckGo工具",
         "duckduckgo_loader": "DuckDuckGo加载器",
-        "flux_persona":"flux提示词生成器面具",
-        "clear_file":"清理文件",
-        "workflow_transfer_v2":"工作流中转器V2",
-        "str2float":"字符串转浮点数",
-        "json_iterator":"JSON迭代器",
-        "Lorebook":"Lorebook传说书",
-        "text_writing":"文本写入",
-        "str2int":"字符串转整数",
-        "any2str":"任意类型转字符串",
-        "start_anything":"开始任意",
+        "flux_persona": "flux提示词生成器面具",
+        "clear_file": "清理文件",
+        "workflow_transfer_v2": "工作流中转器V2",
+        "str2float": "字符串转浮点数",
+        "json_iterator": "JSON迭代器",
+        "Lorebook": "Lorebook传说书",
+        "text_writing": "文本写入",
+        "str2int": "字符串转整数",
+        "any2str": "任意类型转字符串",
+        "start_anything": "开始任意",
         "end_anything": "结束任意",
     }
 else:
@@ -2184,7 +2216,7 @@ else:
         "LLM": "API Large Language Model",
         "LLM_local": "Local Large Language Model",
         "LLM_api_loader": "API Large Language Model Loader",
-        "genai_api_loader":"Gemini API Loader",
+        "genai_api_loader": "Gemini API Loader",
         "LLM_local_loader": "Local Large Language Model Loader",
         "llama_guff_loader": "llama-guff Loader",
         "load_ebd": "Load Embeddings",
@@ -2273,14 +2305,14 @@ else:
         "none2false": "None to False",
         "bool_logic": "Boolean Logic",
         "duckduckgo_tool": "DuckDuckGo Tool",
-        "duckduckgo_loader":"DuckDuckGo Loader",
-        "flux_persona":"flux prompt word generator",
-        "clear_file":"clear file",
+        "duckduckgo_loader": "DuckDuckGo Loader",
+        "flux_persona": "flux prompt word generator",
+        "clear_file": "clear file",
         "workflow_transfer_v2": "Workflow Transfer V2",
         "str2float": "String to Float",
         "json_iterator": "JSON Iterator",
-        "Lorebook":"Lore book",
-        "text_writing":"Text write",
+        "Lorebook": "Lore book",
+        "text_writing": "Text write",
         "str2int": "String to Integer",
         "any2str": "Any to String",
         "start_anything": "Start Anything",
@@ -2341,4 +2373,3 @@ load_custom_tools()
 
 if __name__ == "__main__":
     print("hello llm party!")
-

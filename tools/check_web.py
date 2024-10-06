@@ -2,17 +2,18 @@ import json
 import os
 import re
 
-from bs4 import BeautifulSoup
+import charset_normalizer
 import openai
 import requests
 import torch
+from bs4 import BeautifulSoup
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from openai import OpenAI
-import charset_normalizer
 from markdownify import markdownify as md
+from openai import OpenAI
+
 from ..config import config_path, current_dir_path, load_api_keys
 
 bge_embeddings = ""
@@ -45,25 +46,30 @@ def check_web(url, keyword=None):
             response.raise_for_status()  # 确保请求成功
 
             # 使用 charset_normalizer 检测编码
-            detected_encoding = charset_normalizer.detect(response.content)['encoding']
-            response.encoding = detected_encoding if detected_encoding else 'utf-8'
+            detected_encoding = charset_normalizer.detect(response.content)["encoding"]
+            response.encoding = detected_encoding if detected_encoding else "utf-8"
         except requests.exceptions.RequestException as e:
             print(f"请求发生错误: {e}")
             return (None,)
-        
+
         out = response.text
         print(out)  # Debugging: Check the HTML content
-        
+
         if not is_jina:
             # 使用 BeautifulSoup 解析 HTML
-            soup = BeautifulSoup(out, 'html.parser')
+            soup = BeautifulSoup(out, "html.parser")
             # 提取主要内容
             main_content = soup.get_text()
             # 将 HTML 转换为 Markdown
-            out = md(main_content, convert=['p', 'h1', 'h2', 'h3', 'a', 'img'], heading_style="ATX", bullets="*+-", strong_em_symbol="ASTERISK")
+            out = md(
+                main_content,
+                convert=["p", "h1", "h2", "h3", "a", "img"],
+                heading_style="ATX",
+                bullets="*+-",
+                strong_em_symbol="ASTERISK",
+            )
             # 去掉多余的换行符
-            out = re.sub(r'\n+', '\n', out)
-
+            out = re.sub(r"\n+", "\n", out)
 
         if keyword == None or keyword == "":
             combined_content = str(out)
@@ -154,7 +160,7 @@ class check_web_tool:
     ):
         if is_enable == False:
             return (None,)
-        global  files_load, bge_embeddings, c_size, c_overlap, knowledge_base, is_jina
+        global files_load, bge_embeddings, c_size, c_overlap, knowledge_base, is_jina
         is_jina = with_jina
         c_size = chunk_size
         c_overlap = chunk_overlap

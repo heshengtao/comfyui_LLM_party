@@ -4,7 +4,10 @@ class flux_persona:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "image_type": (["海报Poster","炉石Hearthstone","游戏王Yu-Gi-Oh","塔罗牌tarot","漫画manga"], {"default": "炉石Hearthstone"}),
+                "image_type": (
+                    ["海报Poster", "炉石Hearthstone", "游戏王Yu-Gi-Oh", "塔罗牌tarot", "漫画manga"],
+                    {"default": "炉石Hearthstone"},
+                ),
                 "theme": ("STRING", {"default": "派对狗狗"}),
                 "style": ("STRING", {"default": "奇幻"}),
             },
@@ -25,8 +28,8 @@ class flux_persona:
     def flux(self, image_type, theme, style, strength=5, is_enable=True):
         if is_enable == False:
             return (None,)
-        if image_type=="海报Poster":
-            sys_prompt=f"""# 海报设计助理
+        if image_type == "海报Poster":
+            sys_prompt = f"""# 海报设计助理
 
 你来充当一位有艺术气息的海报设计助理。
 
@@ -63,8 +66,8 @@ A modern style poster with the theme of "Music Festival". The overall style of t
 
 接下来设计一个主题为{theme}，整体风格为{style}，丰富程度为{strength}的海报，开始生成海报 prompt吧
 """
-        elif image_type=="炉石Hearthstone":
-            sys_prompt=f"""# 《炉石传说》卡牌设计师
+        elif image_type == "炉石Hearthstone":
+            sys_prompt = f"""# 《炉石传说》卡牌设计师
 
 你来充当一位《炉石传说》卡牌设计师。
 
@@ -86,7 +89,7 @@ Card Type: Includes minion, spell, weapon, etc., usually located in the upper mi
 Minion Attributes: Minion cards display attack and health, located at the bottom left and bottom right of the card, respectively.
 Card Effect Description: Located in the middle of the card, detailing the specific effect of the card.
 Card Artwork: Located in the center of the card, showcasing the card’s artistic design.
-race: Located at the bottom of the card, Some cards indicate their race (e.g., Dragon, Mech, Demon, Elemental, Murloc, Pirate, Beast, Totem, Undead, Demon Hunter) 
+race: Located at the bottom of the card, Some cards indicate their race (e.g., Dragon, Mech, Demon, Elemental, Murloc, Pirate, Beast, Totem, Undead, Demon Hunter)
 occupation: (e.g., Mage, Warrior, Priest, Rogue, Shaman, Warlock, Hunter, Paladin, Druid, Demon Hunter).
 Rarity Gem and Corresponding Color: Legendary (orange), Epic (purple), Rare (blue), Common (white).
 Common keywords in card effect descriptions:
@@ -129,8 +132,8 @@ The text on the card, "Blaster Rager," is written in stylized fantasy font, with
 
 开始！
 """
-        elif image_type =="游戏王Yu-Gi-Oh":
-            sys_prompt =f"""# Yu-Gi-Oh! Card Designer
+        elif image_type == "游戏王Yu-Gi-Oh":
+            sys_prompt = f"""# Yu-Gi-Oh! Card Designer
 You will act as a Yu-Gi-Oh! card designer.
 
 ## Task
@@ -171,7 +174,7 @@ You must use English to describe this card.
 
 Next, please design a game king card with a theme of {theme}, an overall style of {style}, and a richness of {strength}!
 """
-        elif image_type =="塔罗牌tarot":
+        elif image_type == "塔罗牌tarot":
             sys_prompt = f"""# 塔罗牌设计师
 
 你来充当一位塔罗牌设计师。
@@ -197,7 +200,7 @@ This picture is a digital illustration of a tarot card. It depicts a figure stan
 
 接下来，请你设计一个主题为{theme}，整体风格为{style}，丰富程度为{strength}的塔罗牌吧！
 """
-        elif image_type =="漫画manga":
+        elif image_type == "漫画manga":
             sys_prompt = f"""# 多格漫画艺术家
 
 你来充当一位有艺术气息的多格漫画艺术家。
@@ -221,7 +224,7 @@ FLUX模型可以接受自然语言prompt。你需要设计很多英文句子来�
 I will tell you the relevant information for generating a multi-panel comic in natural language. Using the information I provide, enrich these details to create a complete multi-panel comic prompt. For the information I haven’t provided, you need to reasonably imagine and complete it. Please output in the following format, with {{}} being the parts you need to fill in with detailed content. Be as detailed as possible:
 
 This is a comic strip with {strength} panels. The manga style is {{manga style}}. The size and shape of the grid are {{uniform or uneven}}. The grid is arranged {{single or double column}}.
-Panel 1: {{panel size}}. In the first panel, the background is {{background of the first panel}}, and {{description of the character’s appearance}} appears. {{Character 1}} says, “{{What Character 1 says}}.” 
+Panel 1: {{panel size}}. In the first panel, the background is {{background of the first panel}}, and {{description of the character’s appearance}} appears. {{Character 1}} says, “{{What Character 1 says}}.”
 Panel N: {{panel size}}. In the Nth panel, the background is {{background of the Nth panel}}, and {{description of the character’s appearance}} appears. {{Character X}} says, “{{What Character X says}}.” Generate a comic script according to this format (do not generate images).
 
 ## 示例
@@ -236,6 +239,6 @@ Panel 4: Medium size. In the fourth panel, the background is still the coffee sh
 
 接下来，请你设计一个主题为{theme}，整体风格为{style}，格数为{strength}的多格漫画prompt吧
 """
-        
+
         sys_prompt = sys_prompt.strip()
         return (sys_prompt,)

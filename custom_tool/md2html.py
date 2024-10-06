@@ -1,28 +1,33 @@
 import locale
-import re
-import markdown
-import webbrowser
 import os
+import re
 import sys
-import psutil
 import time
+import webbrowser
+
+import markdown
+import psutil
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
-out_path = os.path.join(current_dir,"output")
+out_path = os.path.join(current_dir, "output")
 # 确保输出目录存在
 if not os.path.exists(out_path):
     os.makedirs(out_path)
 
+
 def is_html_string(s):
-    html_pattern = re.compile(r'<([A-Za-z][A-Za-z0-9]*)\b[^>]*>(.*?)<\/\1>')
+    html_pattern = re.compile(r"<([A-Za-z][A-Za-z0-9]*)\b[^>]*>(.*?)<\/\1>")
     return bool(html_pattern.search(s))
+
 
 import mdtex2html
 
+
 def markdown_to_html(md_text):
     # Convert Markdown to HTML with math support
-    html = mdtex2html.convert(md_text, extensions=['extra'])
-    
+    html = mdtex2html.convert(md_text, extensions=["extra"])
+
     # Insert the HTML into the HTML template
     html_template = """
 <html>
@@ -138,6 +143,7 @@ def markdown_to_html(md_text):
     html_content = html_template.format(html_content=html)
     return html_content
 
+
 class Browser_display:
     @classmethod
     def INPUT_TYPES(s):
@@ -145,8 +151,8 @@ class Browser_display:
             "required": {
                 "md_or_html": ("STRING", {"forceInput": True}),
                 "is_enable": ("BOOLEAN", {"default": True}),
-                }
             }
+        }
 
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("log",)
@@ -156,7 +162,7 @@ class Browser_display:
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
     OUTPUT_NODE = True
 
-    def convert_txt2json(self,md_or_html, is_enable=True):
+    def convert_txt2json(self, md_or_html, is_enable=True):
         if is_enable == False:
             return (None,)
         if is_html_string(md_or_html):
@@ -172,7 +178,6 @@ class Browser_display:
         except Exception as e:
             return (f"打开网页时出错: {str(e)}",)
         return ("成功打开网页",)
-
 
 
 class md_to_html:
@@ -198,27 +203,26 @@ class md_to_html:
         if is_enable == False:
             return (None,)
         return (markdown_to_html(md_str),)
-        
 
 
-NODE_CLASS_MAPPINGS = {"md_to_html": md_to_html,"Browser_display": Browser_display,}
+NODE_CLASS_MAPPINGS = {
+    "md_to_html": md_to_html,
+    "Browser_display": Browser_display,
+}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
 
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "md_to_html": "Markdown转HTML",
-        "Browser_display": "浏览器显示"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"md_to_html": "Markdown转HTML", "Browser_display": "浏览器显示"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {
-        "md_to_html": "Markdown to HTML",
-        "Browser_display": "Browser display"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"md_to_html": "Markdown to HTML", "Browser_display": "Browser display"}

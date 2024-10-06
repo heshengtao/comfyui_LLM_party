@@ -1,6 +1,8 @@
 # 将 JSON 数据转换为字典
 import json
 import locale
+
+
 def json_to_py(json_data):
     data = json.loads(json_data)
 
@@ -24,7 +26,7 @@ canvas.set_global_description(
         description=global_description["description"],
         detailed_descriptions=global_description["detailed_descriptions"],
         tags=global_description["tags"],
-        HTML_web_color_name=global_description["HTML_web_color_name"]
+        HTML_web_color_name=global_description["HTML_web_color_name"],
     )
 
     # 添加局部描述
@@ -46,12 +48,13 @@ canvas.add_local_description(
 )
     """
         python_code += local_description
-    start="""
+    start = """
 ```python
 
     """
-    end="\n\n```"
-    return start+python_code+end
+    end = "\n\n```"
+    return start + python_code + end
+
 
 class omost_json2py:
     @classmethod
@@ -66,7 +69,7 @@ class omost_json2py:
     CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
     def convert_txt2json(self, omost_json):
-        omost_py=json_to_py(omost_json)
+        omost_py = json_to_py(omost_json)
         return (omost_py,)
 
 
@@ -74,17 +77,19 @@ NODE_CLASS_MAPPINGS = {"omost_json2py": omost_json2py}
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"omost_json2py": "omost JSON转Python"}
 else:

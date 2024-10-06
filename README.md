@@ -7,7 +7,7 @@
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baidu cloud</a> ·
   <a href="img/Q群.jpg">QQ group</a> ·
   <a href="https://discord.gg/gxrQAYy6">discord</a> ·
-  <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">About us</a>  
+  <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">About us</a>
 </div>
 
 ####
@@ -16,7 +16,7 @@
   <a href="./README_ZH.md"><img src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
   <a href="./README.md"><img src="https://img.shields.io/badge/English-d9d9d9"></a>
   <a href="./README_RU.md"><img src="https://img.shields.io/badge/Русский-d9d9d9"></a>
-  <a href="./README_FR.md"><img src="https://img.shields.io/badge/Français-d9d9d9"></a> 
+  <a href="./README_FR.md"><img src="https://img.shields.io/badge/Français-d9d9d9"></a>
   <a href="./README_DE.md"><img src="https://img.shields.io/badge/Deutsch-d9d9d9"></a>
   <a href="./README_JA.md"><img src="https://img.shields.io/badge/日本語-d9d9d9"></a>
   <a href="./README_KO.md"><img src="https://img.shields.io/badge/한국어-d9d9d9"></a>
@@ -60,7 +60,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
    - Add a "Workflow Tool" node to this LLM node and connect it to the tool input of the LLM node.
    - In the "Workflow Tool" node, write the name of the workflow file you want to call in the first input box, for example: draw.json. You can write multiple workflow file names. In the second input box, write the function of each workflow so that the LLM understands how to use these workflows.
    - Run it to see the LLM call your encapsulated workflow and return the result to you. If the return is an image, connect the "Preview Image" node to the image output of the LLM node to view the generated image. Note! This method calls a new ComfyUI on your 8190 port, please do not occupy this port. A new terminal will be opened on Windows and Mac systems, please do not close it. The Linux system uses the screen process to achieve this, when you do not need to use it, close this screen process, otherwise, it will always occupy your port.
-   
+
 ![workflow_tool](img/workflowtool.png)
 
 ## User Guide
@@ -231,7 +231,7 @@ This open-source project and its contents (hereinafter referred to as "Project")
   <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
 
-## loan list 
+## loan list
 Some of the nodes in this project have borrowed from the following projects. Thank you for your contributions to the open-source community!
 1. [pythongosssss/ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
 2. [lllyasviel/Omost](https://github.com/lllyasviel/Omost)

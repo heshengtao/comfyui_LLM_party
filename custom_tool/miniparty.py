@@ -1,22 +1,26 @@
+import base64
 import configparser
 import io
 import json
 import locale
 import os
+
 import cv2
-import requests
-from PIL import Image
+import easyocr
 import numpy as np
 import openai
-import base64
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+import requests
 import torch
-import easyocr
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from PIL import Image
+
 # 当前脚本目录的上级目录
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 config_key = configparser.ConfigParser()
 config_key.read(config_path, encoding="utf-8")
+
+
 class AnyType(str):
     """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
 
@@ -25,6 +29,8 @@ class AnyType(str):
 
 
 any_type = AnyType("*")
+
+
 def load_api_keys(config_file):
     config = configparser.ConfigParser()
     config.read(config_file, encoding="utf-8")
@@ -43,8 +49,13 @@ class mini_party:
         return {
             "required": {
                 "input_str": ("STRING", {"forceInput": True}),
-                "prompt": ("STRING", {"default": "input function here","multiline": True}),
-                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+                "prompt": ("STRING", {"default": "input function here", "multiline": True}),
+                "model_name": (
+                    "STRING",
+                    {
+                        "default": "gpt-4o-mini",
+                    },
+                ),
             },
             "optional": {
                 "base_url": (
@@ -59,7 +70,12 @@ class mini_party:
                         "default": "sk-XXXXX",
                     },
                 ),
-                "is_enable": ("BOOLEAN", {"default": True,}),
+                "is_enable": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                    },
+                ),
             },
         }
 
@@ -103,17 +119,14 @@ class mini_party:
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
-        history= [
-            {"role": "system", "content": prompt},
-            {"role": "user", "content": input_str}
-        ]
+        history = [{"role": "system", "content": prompt}, {"role": "user", "content": input_str}]
         response = openai.chat.completions.create(
-                            model=model_name,
-                            messages=history,
-                        )
+            model=model_name,
+            messages=history,
+        )
         output = response.choices[0].message.content
         return (output,)
-    
+
 
 class mini_translate:
 
@@ -125,7 +138,12 @@ class mini_translate:
                 "target_language": ("STRING", {"default": "English"}),
                 "tone": ("STRING", {"default": "正式"}),
                 "degree": ("INT", {"default": 5, " min": 0, "max": 10}),
-                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+                "model_name": (
+                    "STRING",
+                    {
+                        "default": "gpt-4o-mini",
+                    },
+                ),
             },
             "optional": {
                 "base_url": (
@@ -140,7 +158,12 @@ class mini_translate:
                         "default": "sk-XXXXX",
                     },
                 ),
-                "is_enable": ("BOOLEAN", {"default": True,}),
+                "is_enable": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                    },
+                ),
             },
         }
 
@@ -156,8 +179,8 @@ class mini_translate:
     def file(
         self,
         input_str,
-        target_language, 
-        degree=5, 
+        target_language,
+        degree=5,
         tone="正式",
         model_name="gpt-4o-mini",
         base_url=None,
@@ -200,21 +223,17 @@ class mini_translate:
         """
 
         # 将file_content用RecursiveCharacterTextSplitter分割
-        text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=2000, chunk_overlap=0
-        )
-        output=""
-        for chunk in text_splitter.split_text(input_str):   
-            history= [
-                {"role": "system", "content": sys_prompt},
-                {"role": "user", "content": chunk}
-            ]
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=0)
+        output = ""
+        for chunk in text_splitter.split_text(input_str):
+            history = [{"role": "system", "content": sys_prompt}, {"role": "user", "content": chunk}]
             response = openai.chat.completions.create(
-                                model=model_name,
-                                messages=history,
-                            )
+                model=model_name,
+                messages=history,
+            )
             output += response.choices[0].message.content
         return (output,)
+
 
 class mini_error_correction:
 
@@ -223,7 +242,12 @@ class mini_error_correction:
         return {
             "required": {
                 "input_str": ("STRING", {"forceInput": True}),
-                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+                "model_name": (
+                    "STRING",
+                    {
+                        "default": "gpt-4o-mini",
+                    },
+                ),
             },
             "optional": {
                 "base_url": (
@@ -238,12 +262,25 @@ class mini_error_correction:
                         "default": "sk-XXXXX",
                     },
                 ),
-                "is_enable": ("BOOLEAN", {"default": True,}),
+                "is_enable": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                    },
+                ),
             },
         }
 
-    RETURN_TYPES = ("STRING","STRING","STRING",)
-    RETURN_NAMES = ("input_text","output_text","error",)
+    RETURN_TYPES = (
+        "STRING",
+        "STRING",
+        "STRING",
+    )
+    RETURN_NAMES = (
+        "input_text",
+        "output_text",
+        "error",
+    )
 
     FUNCTION = "file"
 
@@ -300,28 +337,27 @@ class mini_error_correction:
         """
 
         # 将file_content用RecursiveCharacterTextSplitter分割
-        text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=2000, chunk_overlap=0
-        )
-        input_text=""
-        output_text=""
-        error=""
-        for chunk in text_splitter.split_text(input_str):   
-            history= [
-                {"role": "system", "content": sys_prompt},
-                {"role": "user", "content": chunk}
-            ]
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=0)
+        input_text = ""
+        output_text = ""
+        error = ""
+        for chunk in text_splitter.split_text(input_str):
+            history = [{"role": "system", "content": sys_prompt}, {"role": "user", "content": chunk}]
             response = openai.chat.completions.create(
-                                model=model_name,
-                                messages=history,
-                                response_format={"type": "json_object"},
-                            )
+                model=model_name,
+                messages=history,
+                response_format={"type": "json_object"},
+            )
             output = response.choices[0].message.content
             output = json.loads(output)
             input_text += output["input_str"]
             output_text += output["output_str"]
             error += output["error"]
-        return (input_text,output_text,error,)
+        return (
+            input_text,
+            output_text,
+            error,
+        )
 
 
 class mini_summary:
@@ -331,7 +367,12 @@ class mini_summary:
         return {
             "required": {
                 "input_str": ("STRING", {"forceInput": True}),
-                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+                "model_name": (
+                    "STRING",
+                    {
+                        "default": "gpt-4o-mini",
+                    },
+                ),
             },
             "optional": {
                 "base_url": (
@@ -346,7 +387,12 @@ class mini_summary:
                         "default": "sk-XXXXX",
                     },
                 ),
-                "is_enable": ("BOOLEAN", {"default": True,}),
+                "is_enable": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                    },
+                ),
             },
         }
 
@@ -400,34 +446,27 @@ class mini_summary:
         """
 
         # 将file_content用RecursiveCharacterTextSplitter分割
-        text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=2000, chunk_overlap=400
-        )
-        output_text=""
-        for chunk in text_splitter.split_text(input_str):   
-            history= [
-                {"role": "system", "content": sys_prompt},
-                {"role": "user", "content": chunk}
-            ]
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=400)
+        output_text = ""
+        for chunk in text_splitter.split_text(input_str):
+            history = [{"role": "system", "content": sys_prompt}, {"role": "user", "content": chunk}]
             response = openai.chat.completions.create(
-                                model=model_name,
-                                messages=history,
-                            )
+                model=model_name,
+                messages=history,
+            )
             output = response.choices[0].message.content
-            output_text += output+"\n"
+            output_text += output + "\n"
         sys_prompt2 = f"""你是一个文档总结助手，我将给你一个已经总结过的要点报告，请根据我给出的要点报告，进行总结。
 总结时，先阐述全文的主题，再阐述各部分的主旨，最后再对结论进行总结。采用总分总的形式进行总结。
 """
-        history= [
-            {"role": "system", "content": sys_prompt2},
-            {"role": "user", "content": output_text}
-        ]
+        history = [{"role": "system", "content": sys_prompt2}, {"role": "user", "content": output_text}]
         response = openai.chat.completions.create(
-                            model=model_name,
-                            messages=history,
-                        )      
+            model=model_name,
+            messages=history,
+        )
         output2 = response.choices[0].message.content
         return (output2,)
+
 
 class mini_story:
 
@@ -435,8 +474,13 @@ class mini_story:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "theme": ("STRING", {"default": "龟兔赛跑的故事","multiline": True}),
-                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+                "theme": ("STRING", {"default": "龟兔赛跑的故事", "multiline": True}),
+                "model_name": (
+                    "STRING",
+                    {
+                        "default": "gpt-4o-mini",
+                    },
+                ),
             },
             "optional": {
                 "base_url": (
@@ -451,12 +495,23 @@ class mini_story:
                         "default": "sk-XXXXX",
                     },
                 ),
-                "is_enable": ("BOOLEAN", {"default": True,}),
+                "is_enable": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                    },
+                ),
             },
         }
 
-    RETURN_TYPES = ("STRING","STRING",)
-    RETURN_NAMES = ("story","character",)
+    RETURN_TYPES = (
+        "STRING",
+        "STRING",
+    )
+    RETURN_NAMES = (
+        "story",
+        "character",
+    )
 
     FUNCTION = "file"
 
@@ -517,21 +572,22 @@ class mini_story:
 
 从现在开始，请对我的输入的主题开始撰写故事和人物外观描述。
         """
-        history= [
-            {"role": "system", "content": sys_prompt},
-            {"role": "user", "content": theme}
-        ]
+        history = [{"role": "system", "content": sys_prompt}, {"role": "user", "content": theme}]
         response = openai.chat.completions.create(
-                            model=model_name,
-                            messages=history,
-                            response_format={"type": "json_object"},
-                        )
+            model=model_name,
+            messages=history,
+            response_format={"type": "json_object"},
+        )
         output = response.choices[0].message.content
-        output= json.loads(output)
+        output = json.loads(output)
         story = output["story"]
         character = output["character"]
-        character= json.dumps(character, ensure_ascii=False, indent=4)
-        return (story,character,)
+        character = json.dumps(character, ensure_ascii=False, indent=4)
+        return (
+            story,
+            character,
+        )
+
 
 class mini_ocr:
 
@@ -540,9 +596,19 @@ class mini_ocr:
         return {
             "required": {
                 "image": ("IMAGE", {}),
-                "gpu": ("BOOLEAN", {"default": True,}),
+                "gpu": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                    },
+                ),
                 "language_name": ("STRING", {"default": "ch_sim,en"}),
-                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+                "model_name": (
+                    "STRING",
+                    {
+                        "default": "gpt-4o-mini",
+                    },
+                ),
             },
             "optional": {
                 "base_url": (
@@ -557,18 +623,33 @@ class mini_ocr:
                         "default": "sk-XXXXX",
                     },
                 ),
-                "imgbb_api_key":(
+                "imgbb_api_key": (
                     "STRING",
                     {
                         "default": "",
                     },
                 ),
-                "is_enable": ("BOOLEAN", {"default": True,}),
+                "is_enable": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                    },
+                ),
             },
         }
 
-    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "STRING",)
-    RETURN_NAMES = ("images", "masks", "json_str","text",)
+    RETURN_TYPES = (
+        "IMAGE",
+        "MASK",
+        "STRING",
+        "STRING",
+    )
+    RETURN_NAMES = (
+        "images",
+        "masks",
+        "json_str",
+        "text",
+    )
 
     FUNCTION = "file"
 
@@ -576,16 +657,16 @@ class mini_ocr:
 
     CATEGORY = "大模型派对（llm_party）/迷你派对（mini-party）"
 
-    def OCR(self, 
-            image, 
-            gpu, 
-            language_name, 
-            ):
+    def OCR(
+        self,
+        image,
+        gpu,
+        language_name,
+    ):
         out_images = []
         out_masks = []
         out_json = []
         out_text = []
-
 
         for item in image:
             image_pil = Image.fromarray(np.clip(255.0 * item.cpu().numpy(), 0, 255).astype(np.uint8)).convert("RGB")
@@ -594,30 +675,34 @@ class mini_ocr:
             reader = easyocr.Reader(languages, gpu=gpu)
             result = reader.readtext(np.array(image_pil), detail=1)
             result_text = reader.readtext(np.array(image_pil), detail=0)
-            
+
             W, H = image_pil.size
             mask = np.zeros((H, W, 1), dtype=np.uint8)
             image_with_boxes = np.array(image_pil)
 
             parsed_result = []
-            for (bbox, text, prob) in result:
+            for bbox, text, prob in result:
                 top_left = tuple(map(int, bbox[0]))
                 bottom_right = tuple(map(int, bbox[2]))
 
                 cv2.rectangle(image_with_boxes, top_left, bottom_right, (0, 0, 255), 2)
-                cv2.putText(image_with_boxes, text, top_left, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2, cv2.LINE_AA)
+                cv2.putText(
+                    image_with_boxes, text, top_left, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2, cv2.LINE_AA
+                )
                 cv2.rectangle(mask, top_left, bottom_right, (255, 255, 255), -1)
 
-                parsed_result.append({
-                    "bounding_box": {
-                        "top_left": [int(coord) for coord in bbox[0]],
-                        "top_right": [int(coord) for coord in bbox[1]],
-                        "bottom_right": [int(coord) for coord in bbox[2]],
-                        "bottom_left": [int(coord) for coord in bbox[3]]
-                    },
-                    "text": text,
-                    "confidence": float(prob)
-                })
+                parsed_result.append(
+                    {
+                        "bounding_box": {
+                            "top_left": [int(coord) for coord in bbox[0]],
+                            "top_right": [int(coord) for coord in bbox[1]],
+                            "bottom_right": [int(coord) for coord in bbox[2]],
+                            "bottom_left": [int(coord) for coord in bbox[3]],
+                        },
+                        "text": text,
+                        "confidence": float(prob),
+                    }
+                )
 
             out_images.append(torch.from_numpy(image_with_boxes.astype(np.float32) / 255.0).unsqueeze(0))
             out_masks.append(torch.from_numpy(mask.astype(np.float32) / 255.0).permute(2, 0, 1).unsqueeze(0))
@@ -629,9 +714,9 @@ class mini_ocr:
 
     def file(
         self,
-        image, 
-        gpu, 
-        language_name, 
+        image,
+        gpu,
+        language_name,
         model_name="gpt-4o-mini",
         base_url=None,
         api_key=None,
@@ -662,7 +747,7 @@ class mini_ocr:
                 openai.base_url = openai.base_url + "/"
         sys_prompt = f"""你是一个图片文字识别工具。请根据输入的图片以及我用OCR工具扫描后的json结果，综合识别出图片中的文字，并输出文字的坐标和内容。
 输出时，请使用和我输入的json格式保持一致。注意，我给出的是OCR扫描的结果，并不准确，你需要根据图片内容进行判断和修正文字部分，坐标部分无需修改。
-        
+
 从现在开始，请对我的输入的图片进行提取文字。
         """
 
@@ -713,26 +798,32 @@ class mini_ocr:
                     },
                 },
             ]
-        history= [
-            {"role": "system", "content": sys_prompt},
-            {"role": "user", "content": img_json}
-        ]
+        history = [{"role": "system", "content": sys_prompt}, {"role": "user", "content": img_json}]
         response = openai.chat.completions.create(
-                            model=model_name,
-                            messages=history,
-                            response_format={"type": "json_object"},
-                        )
+            model=model_name,
+            messages=history,
+            response_format={"type": "json_object"},
+        )
         output = response.choices[0].message.content
-        history= [
-            {"role": "system", "content": "将这个包含文字坐标信息的json转化成markdown格式，请参照json中的文字位置坐标，安排好markdown中的文字位置，并输出markdown格式的文本。"},
-            {"role": "user", "content": output}
+        history = [
+            {
+                "role": "system",
+                "content": "将这个包含文字坐标信息的json转化成markdown格式，请参照json中的文字位置坐标，安排好markdown中的文字位置，并输出markdown格式的文本。",
+            },
+            {"role": "user", "content": output},
         ]
         response2 = openai.chat.completions.create(
-                            model=model_name,
-                            messages=history,
-                        )
+            model=model_name,
+            messages=history,
+        )
         output_text = response2.choices[0].message.content
-        return (out_images, out_masks,output,output_text,)
+        return (
+            out_images,
+            out_masks,
+            output,
+            output_text,
+        )
+
 
 class mini_sd_prompt:
 
@@ -740,8 +831,13 @@ class mini_sd_prompt:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "prompt": ("STRING", {"default": "a girl","multiline": True}),
-                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+                "prompt": ("STRING", {"default": "a girl", "multiline": True}),
+                "model_name": (
+                    "STRING",
+                    {
+                        "default": "gpt-4o-mini",
+                    },
+                ),
             },
             "optional": {
                 "base_url": (
@@ -756,12 +852,23 @@ class mini_sd_prompt:
                         "default": "sk-XXXXX",
                     },
                 ),
-                "is_enable": ("BOOLEAN", {"default": True,}),
+                "is_enable": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                    },
+                ),
             },
         }
 
-    RETURN_TYPES = ("STRING","STRING",)
-    RETURN_NAMES = ("positive_prompt","negative_prompt",)
+    RETURN_TYPES = (
+        "STRING",
+        "STRING",
+    )
+    RETURN_NAMES = (
+        "positive_prompt",
+        "negative_prompt",
+    )
 
     FUNCTION = "file"
 
@@ -799,7 +906,7 @@ class mini_sd_prompt:
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
-        sys_prompt = f'''# Stable Diffusion prompt 助理
+        sys_prompt = f"""# Stable Diffusion prompt 助理
 
 你来充当一位有艺术气息的Stable Diffusion prompt 助理。
 
@@ -858,21 +965,22 @@ Stable Diffusion是一款利用深度学习的文生图模型，支持通过使�
 - 使用英文半角","做分隔符。
 - tag 按重要性从高到低的顺序排列。
 - 我给你的主题可能是用中文描述，你给出的Positive prompt和negative prompt只用英文。
-'''
-        history= [
-            {"role": "system", "content": sys_prompt},
-            {"role": "user", "content": prompt}
-        ]
+"""
+        history = [{"role": "system", "content": sys_prompt}, {"role": "user", "content": prompt}]
         response = openai.chat.completions.create(
-                            model=model_name,
-                            messages=history,
-                            response_format={"type": "json_object"},
-                        )
+            model=model_name,
+            messages=history,
+            response_format={"type": "json_object"},
+        )
         output = response.choices[0].message.content
         output = json.loads(output)
-        positive_prompt= output["positive"]
-        negative_prompt=output["negative"]
-        return (positive_prompt,negative_prompt,)
+        positive_prompt = output["positive"]
+        negative_prompt = output["negative"]
+        return (
+            positive_prompt,
+            negative_prompt,
+        )
+
 
 class mini_flux_prompt:
 
@@ -880,8 +988,13 @@ class mini_flux_prompt:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "prompt": ("STRING", {"default": "a girl","multiline": True}),
-                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+                "prompt": ("STRING", {"default": "a girl", "multiline": True}),
+                "model_name": (
+                    "STRING",
+                    {
+                        "default": "gpt-4o-mini",
+                    },
+                ),
             },
             "optional": {
                 "base_url": (
@@ -896,7 +1009,12 @@ class mini_flux_prompt:
                         "default": "sk-XXXXX",
                     },
                 ),
-                "is_enable": ("BOOLEAN", {"default": True,}),
+                "is_enable": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                    },
+                ),
             },
         }
 
@@ -939,7 +1057,7 @@ class mini_flux_prompt:
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
-        sys_prompt = f'''# FLUX prompt 助理
+        sys_prompt = f"""# FLUX prompt 助理
 
 你来充当一位有艺术气息的FLUX prompt 助理。
 
@@ -973,17 +1091,15 @@ FLUX是一款利用深度学习的文生图模型，支持通过使用 自然语
 - 我给你的主题可能是用中文描述，你给出的prompt只用英文。
 - 不要解释你的prompt，直接输出prompt。
 - 不要输出其他任何非prompt字符，只输出prompt，也不要包含 **生成提示词**： 等类似的字符。
-'''
-        history= [
-            {"role": "system", "content": sys_prompt},
-            {"role": "user", "content": prompt}
-        ]
+"""
+        history = [{"role": "system", "content": sys_prompt}, {"role": "user", "content": prompt}]
         response = openai.chat.completions.create(
-                            model=model_name,
-                            messages=history,
-                        )
+            model=model_name,
+            messages=history,
+        )
         flux_prompt = response.choices[0].message.content
         return (flux_prompt,)
+
 
 class mini_sd_tag:
 
@@ -992,7 +1108,12 @@ class mini_sd_tag:
         return {
             "required": {
                 "image": ("IMAGE", {}),
-                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+                "model_name": (
+                    "STRING",
+                    {
+                        "default": "gpt-4o-mini",
+                    },
+                ),
             },
             "optional": {
                 "base_url": (
@@ -1007,13 +1128,18 @@ class mini_sd_tag:
                         "default": "sk-XXXXX",
                     },
                 ),
-                "imgbb_api_key":(
+                "imgbb_api_key": (
                     "STRING",
                     {
                         "default": "",
-                    }
+                    },
                 ),
-                "is_enable": ("BOOLEAN", {"default": True,}),
+                "is_enable": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                    },
+                ),
             },
         }
 
@@ -1057,7 +1183,7 @@ class mini_sd_tag:
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
-        sys_prompt = f'''# Stable Diffusion prompt 助理
+        sys_prompt = f"""# Stable Diffusion prompt 助理
 
 你来充当一位图片反推prompt助理。
 
@@ -1089,7 +1215,7 @@ a girl, beautiful detailed eyes, stars in the eyes, messy floating hair, colored
 - 使用英文半角","做分隔符。
 - tag 按重要性从高到低的顺序排列。
 - 我给你的主题可能是用中文描述，你给出的prompt只用英文。
-'''
+"""
         if imgbb_api_key == "" or imgbb_api_key is None:
             imgbb_api_key = api_keys.get("imgbb_api")
         if imgbb_api_key == "" or imgbb_api_key is None:
@@ -1136,16 +1262,14 @@ a girl, beautiful detailed eyes, stars in the eyes, messy floating hair, colored
                     },
                 },
             ]
-        history= [
-            {"role": "system", "content": sys_prompt},
-            {"role": "user", "content": img_json}
-        ]
+        history = [{"role": "system", "content": sys_prompt}, {"role": "user", "content": img_json}]
         response = openai.chat.completions.create(
-                            model=model_name,
-                            messages=history,
-                        )
+            model=model_name,
+            messages=history,
+        )
         tags = response.choices[0].message.content
         return (tags,)
+
 
 class mini_flux_tag:
 
@@ -1154,7 +1278,12 @@ class mini_flux_tag:
         return {
             "required": {
                 "image": ("IMAGE", {}),
-                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+                "model_name": (
+                    "STRING",
+                    {
+                        "default": "gpt-4o-mini",
+                    },
+                ),
             },
             "optional": {
                 "base_url": (
@@ -1169,13 +1298,18 @@ class mini_flux_tag:
                         "default": "sk-XXXXX",
                     },
                 ),
-                "imgbb_api_key":(
+                "imgbb_api_key": (
                     "STRING",
                     {
                         "default": "",
-                    }
+                    },
                 ),
-                "is_enable": ("BOOLEAN", {"default": True,}),
+                "is_enable": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                    },
+                ),
             },
         }
 
@@ -1222,7 +1356,7 @@ class mini_flux_tag:
 
         if not openai.api_key:
             return ("请输入API_KEY",)
-        sys_prompt = f'''# FLUX prompt 助理
+        sys_prompt = f"""# FLUX prompt 助理
 
 你来充当一位图片反推prompt助理。
 
@@ -1252,7 +1386,7 @@ A majestic, emerald-scaled dragon with glowing amber eyes, wings outstretched, s
 - 你给出的prompt只用英文。
 - 不要解释你的prompt，直接输出prompt。
 - 不要输出其他任何非prompt字符，只输出prompt，也不要包含 **生成提示词**： 等类似的字符。
-'''
+"""
         if imgbb_api_key == "" or imgbb_api_key is None:
             imgbb_api_key = api_keys.get("imgbb_api")
         if imgbb_api_key == "" or imgbb_api_key is None:
@@ -1299,14 +1433,11 @@ A majestic, emerald-scaled dragon with glowing amber eyes, wings outstretched, s
                     },
                 },
             ]
-        history= [
-            {"role": "system", "content": sys_prompt},
-            {"role": "user", "content": img_json}
-        ]
+        history = [{"role": "system", "content": sys_prompt}, {"role": "user", "content": img_json}]
         response = openai.chat.completions.create(
-                            model=model_name,
-                            messages=history,
-                        )
+            model=model_name,
+            messages=history,
+        )
         tags = response.choices[0].message.content
         return (tags,)
 
@@ -1315,29 +1446,31 @@ NODE_CLASS_MAPPINGS = {
     "mini_party": mini_party,
     "mini_translate": mini_translate,
     "mini_sd_prompt": mini_sd_prompt,
-    "mini_flux_prompt":mini_flux_prompt,
-    "mini_sd_tag":mini_sd_tag,
-    "mini_flux_tag":mini_flux_tag,
-    "mini_error_correction":mini_error_correction,
-    "mini_story":mini_story,
+    "mini_flux_prompt": mini_flux_prompt,
+    "mini_sd_tag": mini_sd_tag,
+    "mini_flux_tag": mini_flux_tag,
+    "mini_error_correction": mini_error_correction,
+    "mini_story": mini_story,
     "mini_ocr": mini_ocr,
-    "mini_summary":mini_summary,
-    }
+    "mini_summary": mini_summary,
+}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "mini_party": "迷你派对",
@@ -1350,7 +1483,7 @@ if lang == "zh_CN":
         "mini_story": "迷你故事生成器",
         "mini_ocr": "迷你高级OCR",
         "mini_summary": "迷你摘要生成器",
-        }
+    }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
         "mini_party": "Mini Party",
@@ -1363,4 +1496,4 @@ else:
         "mini_story": "Mini Story Generator",
         "mini_ocr": "Mini Advanced OCR",
         "mini_summary": "Mini Summary Generator",
-        }
+    }

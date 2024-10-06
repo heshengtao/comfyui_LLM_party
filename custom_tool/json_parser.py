@@ -32,6 +32,8 @@ def json_loader(file_path: str, is_enable=True) -> str:
     output = load_json_file(file_path)
     output = json.dumps(output, ensure_ascii=False)
     return output
+
+
 class AnyType(str):
     """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
 
@@ -40,6 +42,7 @@ class AnyType(str):
 
 
 any_type = AnyType("*")
+
 
 class json_parser:
     @classmethod
@@ -86,7 +89,6 @@ class json_parser:
         )
 
 
-
 class json_get_value:
     @classmethod
     def INPUT_TYPES(s):
@@ -121,7 +123,7 @@ class json_get_value:
                 return (out.strip(),)
             else:
                 return (out,)
-            
+
         except json.JSONDecodeError:
             print("Invalid JSON format.")
             return (None,)
@@ -135,17 +137,19 @@ NODE_CLASS_MAPPINGS = {
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"json_parser": "JSON文件解析🐶", "json_get_value": "JSON取值🐶"}
 else:

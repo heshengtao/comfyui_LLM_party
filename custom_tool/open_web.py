@@ -1,6 +1,7 @@
-import webbrowser
 import json
 import locale
+import webbrowser
+
 
 class open_url_function:
     @classmethod
@@ -9,8 +10,8 @@ class open_url_function:
             "required": {
                 "path_or_url": ("STRING", {"default": "https://github.com/heshengtao/comfyui_LLM_party"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
-                }
             }
+        }
 
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("log",)
@@ -19,10 +20,10 @@ class open_url_function:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def convert_txt2json(self,path_or_url, is_enable=True):
+    def convert_txt2json(self, path_or_url, is_enable=True):
         if is_enable == False:
             return (None,)
-        print(os.environ.get('BROWSER'))
+        print(os.environ.get("BROWSER"))
         try:
             success = webbrowser.open(path_or_url)
             if success:
@@ -32,6 +33,7 @@ class open_url_function:
         except Exception as e:
             return f"打开网页时出错: {str(e)}"
 
+
 def open_url(url):
     # 用默认浏览器打开URL
     try:
@@ -40,14 +42,15 @@ def open_url(url):
         return f"打开网页时出错: {str(e)}"
     return "成功打开网页"
 
+
 class open_url_tool:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                }
             }
+        }
 
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("tool",)
@@ -77,34 +80,37 @@ class open_url_tool:
         ]
         out = json.dumps(output, ensure_ascii=False)
         return (out,)
-    
+
+
 _TOOL_HOOKS = ["open_url"]
 NODE_CLASS_MAPPINGS = {
     "open_url_tool": open_url_tool,
     "open_url_function": open_url_function,
-    }
+}
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "open_url_tool": "打开网页工具",
         "open_url_function": "打开网页",
-        }
+    }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
         "open_url_tool": "Open Web tool",
         "open_url_function": "Open Web",
-        }
+    }

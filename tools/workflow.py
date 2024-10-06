@@ -266,11 +266,13 @@ class workflow_transfer:
             img_out,
             output_text,
         )
+
     @classmethod
     def IS_CHANGED(s):
         # 生成当前时间的哈希值
         hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
         return hash_value
+
 
 class workflow_tool:
     @classmethod
@@ -279,7 +281,13 @@ class workflow_tool:
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "workflow_name": ("STRING", {"multiline": True, "default": "写诗.json,draw.json"}),
-                "workflow_description": ("STRING", {"multiline": True, "default": "写诗.json是一个根据用户输入的信息生成诗歌的工具，draw.json is a tool that generates images based on user prompt."}),
+                "workflow_description": (
+                    "STRING",
+                    {
+                        "multiline": True,
+                        "default": "写诗.json是一个根据用户输入的信息生成诗歌的工具，draw.json is a tool that generates images based on user prompt.",
+                    },
+                ),
             },
         }
 
@@ -292,7 +300,7 @@ class workflow_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）"
 
-    def workflow(self, workflow_name,workflow_description, is_enable="enable"):
+    def workflow(self, workflow_name, workflow_description, is_enable="enable"):
         if is_enable == "disable":
             return (None,)
         output = [
@@ -313,7 +321,7 @@ class workflow_tool:
                                 "description": "用户输入的信息",
                             },
                         },
-                        "required": ["workflow_name","user_prompt"]
+                        "required": ["workflow_name", "user_prompt"],
                     },
                 },
             }

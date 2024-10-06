@@ -38,7 +38,7 @@ class FeishuSendMsg:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "msg_type": (["text","markdown", "image", "audio"], {"default": "text"}),
+                "msg_type": (["text", "markdown", "image", "audio"], {"default": "text"}),
                 "text": ("STRING", {"default": "Hello. I am an AI from LLM_Party."}),
                 "app_id": ("STRING", {}),
                 "app_secret": ("STRING", {}),
@@ -160,19 +160,7 @@ class FeishuSendMsg:
             "Authorization": f"Bearer {self.tenant_access_token}",
         }
 
-        msg_content = {
-            "zh_cn": {
-                "title": "markdown",
-                "content": [
-                    [
-                        {
-                        "tag": "md",
-                        "text": str(markdown_text)
-                        }
-                    ]
-                ]
-            }
-        }
+        msg_content = {"zh_cn": {"title": "markdown", "content": [[{"tag": "md", "text": str(markdown_text)}]]}}
         post_data = {
             "receive_id": self.receive_id,
             "msg_type": "post",  # 消息类型，这里以富文本消息为例
@@ -265,17 +253,19 @@ NODE_CLASS_MAPPINGS = {
 lang = locale.getdefaultlocale()[0]
 import os
 import sys
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
+
 config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
 except:
     language = ""
-if language == "zh_CN" or language=="en_US":
-    lang=language
+if language == "zh_CN" or language == "en_US":
+    lang = language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"FeishuSendMsg": "飞书机器人发消息🐶"}
 else:

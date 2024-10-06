@@ -66,7 +66,7 @@ class bool_logic:
             },
             "optional": {
                 "B": ("BOOLEAN", {}),
-            }
+            },
         }
 
     RETURN_TYPES = ("BOOLEAN",)
@@ -115,7 +115,8 @@ class str2float:
 
     def tts(self, text):
         return (float(text),)
-    
+
+
 class str2int:
     @classmethod
     def INPUT_TYPES(s):
@@ -136,7 +137,8 @@ class str2int:
 
     def tts(self, text):
         return (int(text),)
-    
+
+
 class AnyType(str):
     """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
 
@@ -145,6 +147,7 @@ class AnyType(str):
 
 
 any_type = AnyType("*")
+
 
 class any2str:
     @classmethod
@@ -164,5 +167,5 @@ class any2str:
 
     CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
-    def tts(self,any):
+    def tts(self, any):
         return (str(any),)
