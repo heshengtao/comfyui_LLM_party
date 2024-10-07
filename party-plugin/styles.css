@@ -9,6 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 600px;
 }
 
 h1 {
@@ -17,7 +18,7 @@ h1 {
 }
 
 .form-group {
-  width: 100%;
+  width: 600px;
   margin-bottom: 15px;
 }
 
@@ -28,7 +29,7 @@ label {
 }
 
 input, textarea {
-  width: 100%;
+  width: 600px;
   padding: 10px;
   box-sizing: border-box;
   border: 1px solid #ccc;
@@ -43,7 +44,7 @@ textarea {
 .d-flex {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 600px;
 }
 
 .btn.custom-btn {
@@ -70,7 +71,13 @@ textarea {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 100%;
+  width:  600px;
   position: relative;
   overflow: auto; /* 添加滚动条 */
+
+  /* 新增部分，控制图像大小 */
+  img {
+    max-width: 100%; /* 图像最大宽度为包含它的元素的宽度 */
+    height: auto; /* 自动调整高度以保持原始宽高比 */
+  }
 }
