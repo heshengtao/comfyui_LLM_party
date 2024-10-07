@@ -12,6 +12,9 @@ class red_book_text_persona:
                 "min_length": ("INT", {"default": 100}),
                 "desc": ("STRING", ),
             },
+            "optional": {
+                "must_include_tag": ("STRING", ),
+            },
         }
     
     RETURN_TYPES = ("STRING","STRING",)
@@ -21,7 +24,7 @@ class red_book_text_persona:
 
     CATEGORY = "大模型派对（llm_party）/面具（persona）"
 
-    def red_book_text(self, main_body, text_type,min_length, desc, is_enable=True):
+    def red_book_text(self, main_body, text_type,min_length, desc,must_include_tag=None, is_enable=True):
         if is_enable == False:
             return (None,)
         if text_type == "产品文案":
@@ -40,6 +43,10 @@ class red_book_text_persona:
 - 文案内容要有创意，吸引用户点击
 - 可以适当的加入emoji、表情等元素
 - 在文章的最后加上符合产品的标签（在小红书中标签的格式为#标签名,标签和标签之间用空格分开），标签应该在5个以上，10个以下
+"""
+            if must_include_tag is not None and must_include_tag != "":
+                system_prompt += f"- 文案最后必须包含标签:{must_include_tag}\n"
+            system_prompt += f"""
 
 ## 限制
 
@@ -63,6 +70,10 @@ class red_book_text_persona:
 - 文案内容要有创意，吸引用户点击
 - 可以适当的加入emoji、表情等元素
 - 在文章的最后加上符合活动的标签（在小红书中标签的格式为#标签名，标签和标签之间用空格分开），标签应该在5个以上，10个以下
+"""
+            if must_include_tag is not None and must_include_tag != "":
+                system_prompt += f"- 文案最后必须包含标签:{must_include_tag}\n"
+            system_prompt += f"""
 
 
 ## 限制
