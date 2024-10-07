@@ -3,6 +3,7 @@ import io
 import json
 import locale
 import os
+import time
 import cv2
 import requests
 from PIL import Image
@@ -214,6 +215,7 @@ class mini_translate:
                                 messages=history,
                             )
             output += response.choices[0].message.content
+            time.sleep(0.5)
         return (output,)
 
 class mini_error_correction:
@@ -321,6 +323,7 @@ class mini_error_correction:
             input_text += output["input_str"]
             output_text += output["output_str"]
             error += output["error"]
+            time.sleep(0.5)
         return (input_text,output_text,error,)
 
 
@@ -415,6 +418,7 @@ class mini_summary:
                             )
             output = response.choices[0].message.content
             output_text += output+"\n"
+            time.sleep(0.5)
         sys_prompt2 = f"""你是一个文档总结助手，我将给你一个已经总结过的要点报告，请根据我给出的要点报告，进行总结。
 总结时，先阐述全文的主题，再阐述各部分的主旨，最后再对结论进行总结。采用总分总的形式进行总结。
 """
