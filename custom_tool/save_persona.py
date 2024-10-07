@@ -19,7 +19,7 @@ class savepersona:
 
     FUNCTION = "save"
     OUTPUT_NODE = True
-    CATEGORY = "大模型派对（llm_party）/转换器（converter）"
+    CATEGORY = "大模型派对（llm_party）/面具（persona）"
 
     def save(self, persona_name,text):
         # 保存为persona_path下的example.txt文件
