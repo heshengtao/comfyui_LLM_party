@@ -54,3 +54,4 @@ verovio
 mdtex2html
 markdownify
 srt
+peft
