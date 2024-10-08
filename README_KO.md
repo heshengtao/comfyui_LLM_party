@@ -50,6 +50,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 5. 이 프로젝트는 사용 임계값이 높기 때문에 빠른 시작을 선택하더라도 프로젝트 홈페이지를 꼼꼼히 읽어주시기 바랍니다.
 
 ## 최신 업데이트
+1. 자동 모델 이름 목록 노드는 제거되었으며 config.ini 파일의 구성에서 모델 이름 목록을 자동으로 가져오는 간단한 API LLM 로더 노드로 대체되었습니다. 모델을 로드하려면 이름을 선택하기만 하면 됩니다. 또한 간단한 LLM 로더, 간단한 LLM-GGUF 로더, 간단한 VLM 로더, 간단한 VLM-GGUF 로더, 간단한 LLM lora 로더 노드가 업데이트되었습니다. 이들은 모두 파티 폴더 내의 모델 폴더에서 모델 경로를 자동으로 읽어 다양한 로컬 모델을 더 쉽게 로드할 수 있습니다.
 1. 이제 LLM은 SD 및 FLUX처럼 동적으로 lora를 로드할 수 있습니다. 동일한 LLM에 더 많은 lora를 로드하기 위해 여러 lora를 연결할 수 있습니다. 예제 워크플로: [start_with_LLM_LORA](workflow/llm_lora.json).
 2. [searxng](https://github.com/searxng/searxng) 도구가 추가되어 전체 웹의 검색을 집계할 수 있습니다. Perplexica도 이 집계된 검색 도구에 의존하므로 파티에서 Perplexica를 설정할 수 있습니다. Docker에서 공개 이미지 searxng/searxng를 배포한 다음 명령 `docker run -d -p 8080:8080 searxng/searxng`을 사용하여 시작한 다음 `http://localhost:8080`을 사용하여 액세스할 수 있습니다. URL `http://localhost:8080`을 party의 searxng 도구에 입력하면 searxng이 LLM의 도구로 사용될 수 있습니다.
 1. **중대한 업데이트!!!** 이제 모든 ComfyUI 워크플로를 LLM 도구 노드로 캡슐화할 수 있습니다. LLM이 여러 ComfyUI 워크플로를 동시에 제어할 수 있습니다. 작업을 완료하고 싶을 때, 프롬프트에 따라 적절한 ComfyUI 워크플로를 선택하여 작업을 완료하고 결과를 반환할 수 있습니다. 예제 워크플로: [comfyui_workflows_tool](workflow/把任意workflow当作LLM_tool.json). 구체적인 단계는 다음과 같습니다:
