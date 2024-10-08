@@ -49,7 +49,8 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 5. このプロジェクトは使用の敷居が高いため、クイックスタートを選択した場合でも、プロジェクトのホームページをじっくり読んでいただけると幸いです。
 
 ## 最新の更新
-1. [searxng](https://github.com/searxng/searxng)ツールを追加しました。これは、ウェブ全体の検索を集約できます。Perplexicaもこの集約検索ツールに依存しているので、パーティーでPerplexicaを設定できます。Dockerでsearxng/searxngのパブリックイメージをデプロイし、`docker run -d -p 8080:8080 searxng/searxng`を使用して起動し、`http://localhost:8080`を使用してアクセスできます。このURL `http://localhost:8080`をパーティーのsearxngツールに入力すると、searxngをLLMのツールとして使用できます。
+1. LLMは、SDやFLUXのように動的にloraをロードできるようになりました。複数のloraを連結して、同じLLMに複数のloraをロードすることができます。サンプルワークフロー：[start_with_LLM_LORA](workflow/llm_lora.json)。
+2. [searxng](https://github.com/searxng/searxng)ツールが追加され、Web全体の検索を集約できます。Perplexicaもこの集約検索ツールに依存しているため、パーティーでPerplexicaをセットアップできます。Dockerにsearxng/searxngのパブリックイメージをデプロイし、その後、コマンド`docker run -d -p 8080:8080 searxng/searxng`を使用して起動し、`http://localhost:8080`を使用してアクセスします。URL `http://localhost:8080`をpartyのsearxngツールに入力することで、searxngをLLMのツールとして使用できます。
 1. **重大アップデート！！！** これで、任意のComfyUIワークフローをLLMツールノードとしてカプセル化できます。LLMが複数のComfyUIワークフローを同時に制御できるようになります。タスクを完了させたいときに、プロンプトに基づいて適切なComfyUIワークフローを選択し、タスクを完了し、結果を返すことができます。例のワークフロー：[comfyui_workflows_tool](workflow/把任意workflow当作LLM_tool.json)。具体的な手順は以下の通りです：
    - まず、ツールとしてカプセル化するワークフローのテキスト入力インターフェースを「ワークフロー開始」ノードの「user_prompt」出力に接続します。これは、LLMがツールを呼び出すときにプロンプトが渡される場所です。
    - テキストと画像を出力したい場所を「ワークフロー終了」ノードの対応する入力位置に接続します。
