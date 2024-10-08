@@ -38,26 +38,3 @@ else:
         models_dict = [model.id for model in models_response.data]
     except Exception as e:
         models_dict = []
-class load_name_v2:
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "model_name": (models_dict, {"default": "gpt-4o-mini"}),
-            },
-            "optional": {},
-        }
-
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("model_name",)
-
-    FUNCTION = "file"
-
-    # OUTPUT_NODE = False
-
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
-
-    def file(self, model_name):
-        out = model_name
-        return (out,)

@@ -115,7 +115,7 @@ from .tools.load_file import (
     load_url,
     start_workflow,
 )
-from .tools.load_model_name import load_name,load_name_v2
+from .tools.load_model_name import load_name
 from .tools.load_persona import load_persona
 from .tools.logic import get_string, replace_string, string_logic, substring
 from .tools.omost import omost_decode, omost_setting
@@ -852,7 +852,45 @@ class LLM_api_loader:
 
         chat = Chat(model_name, openai.api_key, openai.base_url)
         return (chat,)
+llm_api_keys = load_api_keys(config_path)
+llm_api_key=llm_api_keys.get("openai_api_key").strip()
+llm_base_url=llm_api_keys.get("base_url").strip()
+if llm_api_key == "" or llm_api_key =="sk-XXXXX" or llm_base_url == "":
+    models_dict =[]
+else:
+    try:
+        client = openai.OpenAI(api_key=llm_api_key, base_url=llm_base_url)
+        models_response = client.models.list()
+        # 将模型列表转换为字典
+        models_dict = [model.id for model in models_response.data]
+        openai.api_key=llm_api_key
+        openai.base_url=llm_base_url+"/"
+    except Exception as e:
+        models_dict = []
+class easy_LLM_api_loader:
+    def __init__(self):
+        pass
 
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "model_name": (models_dict, {"default": "gpt-4o-mini"}),
+            },
+        }
+
+    RETURN_TYPES = ("CUSTOM",)
+    RETURN_NAMES = ("model",)
+
+    FUNCTION = "chatbot"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+    def chatbot(self, model_name):
+        chat = Chat(model_name, openai.api_key, openai.base_url)
+        return (chat,)
 
 class genai_api_loader:
     def __init__(self):
@@ -1358,6 +1396,118 @@ class LLM_local_loader:
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
     def chatbot(self, model_name_or_path, device, dtype, is_locked=True):
+        self.is_locked = is_locked
+        if self.is_locked == False:
+            setattr(LLM_local_loader, "IS_CHANGED", LLM_local_loader.original_IS_CHANGED)
+        else:
+            # 如果方法存在，则删除
+            if hasattr(LLM_local_loader, "IS_CHANGED"):
+                delattr(LLM_local_loader, "IS_CHANGED")
+        if device == "auto":
+            device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
+
+        if (
+            self.device != device
+            or self.dtype != dtype
+            or self.model_name_or_path != model_name_or_path
+            or is_locked == False
+        ):
+            del self.model
+            del self.tokenizer
+            if self.device == "cuda":
+                torch.cuda.empty_cache()
+                gc.collect()
+            # 对于 CPU 和 MPS 设备，不需要清空 CUDA 缓存
+            elif self.device == "cpu" or self.device == "mps":
+                gc.collect()
+            self.model = ""
+            self.tokenizer = ""
+            self.model_name_or_path = model_name_or_path
+            self.device = device
+            self.dtype = dtype
+            model_kwargs = {
+                'device_map': device,
+            }
+
+            if dtype == "float16":
+                model_kwargs['torch_dtype'] = torch.float16
+            elif dtype == "bfloat16":
+                model_kwargs['torch_dtype'] = torch.bfloat16
+            elif dtype in ["int8", "int4"]:
+                model_kwargs['quantization_config'] = BitsAndBytesConfig(load_in_8bit=(dtype == "int8"), load_in_4bit=(dtype == "int4"))
+
+            config = AutoConfig.from_pretrained(model_name_or_path, **model_kwargs)
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, trust_remote_code=True)
+
+            if config.model_type == "t5":
+                self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, **model_kwargs)
+            elif config.model_type in ["gpt2", "gpt_refact", "gemma", "llama", "mistral", "qwen2", "chatglm"]:
+                self.model = AutoModelForCausalLM.from_pretrained(model_name_or_path, **model_kwargs)
+            else:
+                raise ValueError(f"Unsupported model type: {config.model_type}")
+            self.model = self.model.eval()
+        return (
+            self.model,
+            self.tokenizer,
+        )
+
+    @classmethod
+    def original_IS_CHANGED(s):
+        # 生成当前时间的哈希值
+        hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+        return hash_value
+
+LLM_dir=os.path.join(current_dir_path, "model","LLM")
+# 获取LLM_dir文件夹中的所有文件夹
+LLM_list = [f for f in os.listdir(LLM_dir) if os.path.isdir(os.path.join(LLM_dir, f))]
+class easy_LLM_local_loader:
+    def __init__(self):
+        self.id = hash(str(self))
+        self.device = ""
+        self.dtype = ""
+        self.model_name_or_path = ""
+        self.model = ""
+        self.tokenizer = ""
+        self.is_locked = False
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "model_name_or_path": (LLM_list, {"default": ""}),
+                "device": (
+                    ["auto", "cuda", "cpu", "mps"],
+                    {
+                        "default": "auto",
+                    },
+                ),
+                "dtype": (
+                    ["float32", "float16","bfloat16", "int8", "int4"],
+                    {
+                        "default": "float32",
+                    },
+                ),
+                "is_locked": ("BOOLEAN", {"default": True}),
+            }
+        }
+
+    RETURN_TYPES = (
+        "CUSTOM",
+        "CUSTOM",
+    )
+    RETURN_NAMES = (
+        "model",
+        "tokenizer",
+    )
+
+    FUNCTION = "chatbot"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+
+    def chatbot(self, model_name_or_path, device, dtype, is_locked=True):
+        model_name_or_path=os.path.join(LLM_dir,model_name_or_path)
         self.is_locked = is_locked
         if self.is_locked == False:
             setattr(LLM_local_loader, "IS_CHANGED", LLM_local_loader.original_IS_CHANGED)
@@ -1967,6 +2117,8 @@ NODE_CLASS_MAPPINGS = {
     "LLM_api_loader": LLM_api_loader,
     "genai_api_loader":genai_api_loader,
     "LLM_local_loader": LLM_local_loader,
+    "easy_LLM_local_loader": easy_LLM_local_loader,
+    "easy_LLM_api_loader":easy_LLM_api_loader,
     "load_ebd":load_ebd,
     "embeddings_function": embeddings_function,
     "load_file": load_file,
@@ -2015,7 +2167,6 @@ NODE_CLASS_MAPPINGS = {
     "substring": substring,
     "openai_tts": openai_tts,
     "load_name": load_name,
-    "load_name_v2":load_name_v2,
     "omost_decode": omost_decode,
     "omost_setting": omost_setting,
     "keyword_tool": keyword_tool,
@@ -2075,11 +2226,13 @@ if lang_config=="en_US" or lang_config=="zh_CN":
     lang=lang_config
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "LLM": "API大语言模型",
-        "LLM_local": "本地大语言模型",
-        "LLM_api_loader": "API大语言模型加载器",
-        "genai_api_loader":"Gemini API加载器",
-        "LLM_local_loader": "本地大语言模型加载器",
+        "LLM": "API LLM通用链路",
+        "LLM_local": "本地LLM通用链路",
+        "LLM_api_loader": "API LLM加载器",
+        "easy_LLM_api_loader": "简易API LLM加载器",
+        "genai_api_loader":"Gemini API LLM加载器",
+        "LLM_local_loader": "本地LLM加载器",
+        "easy_LLM_local_loader": "简易本地LLM加载器",
         "load_ebd": "加载词嵌入",
         "embeddings_function": "词向量检索",
         "load_file": "加载文件",
@@ -2128,7 +2281,6 @@ if lang == "zh_CN":
         "substring": "提取字符串",
         "openai_tts": "OpenAI语音合成",
         "load_name": "加载config.ini中的模型名称",
-        "load_name_v2":"自动获取模型列表",
         "omost_decode": "omost解码器",
         "omost_setting": "omost设置",
         "keyword_tool": "搜索关键词工具",
@@ -2181,12 +2333,13 @@ if lang == "zh_CN":
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "LLM": "API Large Language Model",
-        "LLM_local": "Local Large Language Model",
-        "LLM_api_loader": "API Large Language Model Loader",
-        "genai_api_loader":"Gemini API Loader",
-        "LLM_local_loader": "Local Large Language Model Loader",
-        "llama_guff_loader": "llama-guff Loader",
+        "LLM": "API LLM general link",
+        "LLM_local": "Local LLM general link",
+        "LLM_api_loader": "API LLM Loader",
+        "easy_LLM_api_loader": "Easy API LLM Loader",
+        "genai_api_loader":"Gemini API LLM Loader",
+        "LLM_local_loader": "Local LLM Loader",
+        "easy_LLM_local_loader": "Easy Local LLM Loader",
         "load_ebd": "Load Embeddings",
         "embeddings_function": "Word Vector Search",
         "load_file": "Load File",
@@ -2235,7 +2388,6 @@ else:
         "substring": "Extract Substring",
         "openai_tts": "OpenAI TTS",
         "load_name": "Load Model Name in config.ini",
-        "load_name_v2": "Auto get model list",
         "omost_decode": "omost Decoder",
         "omost_setting": "omost Setting",
         "keyword_tool": "Search Keyword Tool",
