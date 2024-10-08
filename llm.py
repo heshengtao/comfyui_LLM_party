@@ -1510,11 +1510,11 @@ class easy_LLM_local_loader:
         model_name_or_path=os.path.join(LLM_dir,model_name_or_path)
         self.is_locked = is_locked
         if self.is_locked == False:
-            setattr(LLM_local_loader, "IS_CHANGED", LLM_local_loader.original_IS_CHANGED)
+            setattr(easy_LLM_local_loader, "IS_CHANGED", easy_LLM_local_loader.original_IS_CHANGED)
         else:
             # 如果方法存在，则删除
-            if hasattr(LLM_local_loader, "IS_CHANGED"):
-                delattr(LLM_local_loader, "IS_CHANGED")
+            if hasattr(easy_LLM_local_loader, "IS_CHANGED"):
+                delattr(easy_LLM_local_loader, "IS_CHANGED")
         if device == "auto":
             device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
 
