@@ -21,7 +21,7 @@ class load_llm_lora:
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "model": ("CUSTOM", {}),
-                "lora_path": ("STRING", {"default": "", "description": "Path to the LoRA folder."}),
+                "lora_path": ("STRING", {"default": ""}),
             }
         }
 
