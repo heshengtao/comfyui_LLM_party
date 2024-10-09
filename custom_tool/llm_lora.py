@@ -1,22 +1,26 @@
 import locale
 import os
 from peft import PeftModel
+import torch
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-lora_dir= os.path.join(current_dir, "model","LORA")
+lora_dir = os.path.join(current_dir, "model", "LORA")
 
-# 获取lora_path中的所有文件夹列表
+# 获取 lora_path 中的所有文件夹列表
 lora_list = [f for f in os.listdir(lora_dir) if os.path.isdir(os.path.join(lora_dir, f))]
 
 def merge_lora_weights(model, lora_path, weight):
     model = PeftModel.from_pretrained(model, lora_path, adapter_name=lora_path, weight=weight)
     return model
 
+
 class load_llm_lora:
+    def __init__(self):
+        self.model=""
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
-                "is_enable": ("BOOLEAN", {"default":True}),
+                "is_enable": ("BOOLEAN", {"default": True}),
                 "model": ("CUSTOM", {}),
                 "lora_path": ("STRING", {"default": ""}),
                 "weight": ("FLOAT", {"default": 1.0})
@@ -32,12 +36,17 @@ class load_llm_lora:
 
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
-    def sleep(self,model,lora_path,weight,is_enable=False):
-        if is_enable == False:
-            return (model,)
-        return (merge_lora_weights(model, lora_path, weight),)
+    def sleep(self, model, lora_path, weight, is_enable=False):
+        self.model=model
+        if is_enable:
+            return (merge_lora_weights(self.model, lora_path, weight),)
+        else:
+            return (self.model,)
+
         
 class easy_load_llm_lora:
+    def __init__(self):
+        self.model=""
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -59,10 +68,12 @@ class easy_load_llm_lora:
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
     def sleep(self,model,lora_path,weight,is_enable=False):
-        if is_enable == False:
-            return (model,)
         lora_path=os.path.join(lora_dir,lora_path)
-        return (merge_lora_weights(model, lora_path, weight),)
+        self.model=model
+        if is_enable:
+            return (merge_lora_weights(model, lora_path, weight),)
+        else:
+            return (self.model,)
 
 NODE_CLASS_MAPPINGS = {"load_llm_lora": load_llm_lora, "easy_load_llm_lora": easy_load_llm_lora}
 # 获取系统语言
