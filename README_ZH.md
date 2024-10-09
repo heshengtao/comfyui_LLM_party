@@ -51,7 +51,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 ## 最新更新
 1. 移除了自动获取模型名称列表节点，取而代之的是简易API LLM加载器节点，自动从你的config.ini文件中的配置中获取你的模型名称列表，你只要选择一个名称就可以加载模型了。此外更新了简易LLM加载器、简易LLM-GGUF加载器、简易VLM加载器、简易VLM-GGUF加载器、简易LLM lora加载器节点。都是自动读取party文件夹的model文件夹内的模型路径，让大家更方便的加载各种本地模型。
-1. 现在LLM可以像SD和FLUX一样动态加载lora了，你可以用多个lora串联，以在同一个LLM上加载多的lora。示例工作流：[start_with_LLM_LORA](workflow/llm_lora.json)。
+1. 现在LLM可以像SD和FLUX一样动态加载lora了，你可以用多个lora串联，以在同一个LLM上加载多的lora。示例工作流：[start_with_LLM_LORA](workflow/LLM_lora.json)。
 1. 添加了[searxng](https://github.com/searxng/searxng)工具，可以聚合搜索全网，Perplexica也是依赖于这个聚合搜索工具，相当于你可以在party里搭建一个Perplexica。你可以在docker中部署searxng/searxng公共镜像，然后使用`docker run -d -p 8080:8080 searxng/searxng`来启动它，然后使用`http://localhost:8080`来访问它。你可以将`http://localhost:8080`这个URL填入party的searxng工具，就可以将searxng当作LLM的一个工具使用了。
 1. **超级重大更新！！！** 现在你可以将任意的comfyui工作流封装成一个LLM工具节点。你可以让你的LLM同时控制多个comfyui工作流，当你想要他完成一些任务时，他可以根据你的提示，选择合适的comfyui工作流，完成你的任务，并且将结果返回给你。示例工作流：[comfyui_workflows_tool](workflow/把任意workflow当作LLM_tool.json)。具体步骤如下：
   - 首先，将你待会需要被封装成工具的工作流的需要输入文字的接口连上“开始工作流”节点的“user_prompt”输出，这个位置是LLM调用工具时，传入的prompt。在你要输出文字和图片的位置连上“结束工作流”节点的对应输入位置。
