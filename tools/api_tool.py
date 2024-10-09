@@ -25,7 +25,7 @@ class api_box:
         else:
             out = "API请求失败"
 
-        return (out,)
+        return out
 
 
 api_boxes = {}
