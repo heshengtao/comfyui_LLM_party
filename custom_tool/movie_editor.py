@@ -120,7 +120,7 @@ class Image2Video:
         return (video_path,)
 
 
-class CombineVideos:
+class Combine_Videos_party:
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -165,7 +165,7 @@ class CombineVideos:
 
 NODE_CLASS_MAPPINGS = {
     "Image2Video": Image2Video,
-    "CombineVideos": CombineVideos
+    "Combine_Videos_party": Combine_Videos_party
     }
 
 lang = locale.getdefaultlocale()[0]
@@ -182,12 +182,12 @@ if language == "zh_CN" or language=="en_US":
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "Image2Video": "静态图片转视频🐶",
-        "CombineVideos": "合并视频🐶"
+        "Combine_Videos_party": "合并视频🐶"
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
         "Image2Video": "Image2Video🐶",
-        "CombineVideos": "CombineVideos🐶"
+        "Combine_Videos_party": "CombineVideos🐶"
         }
 
 
