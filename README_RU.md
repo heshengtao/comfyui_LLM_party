@@ -6,7 +6,7 @@
   <a href="workflow_tutorial/">Инструкции по работе с потоками</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Ссылка на Baidu Pan</a> ·
   <a href="img/Q群.jpg">QQ группа</a> ·
-  <a href="https://discord.gg/gxrQAYy6">Discord</a> ·
+  <a href="https://discord.gg/hbMQDH7J">Discord</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">О нас</a>
 </div>
 
@@ -247,7 +247,7 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 
 2. 微信群：`Choo-Yong`（添加小助手微信后进群）
 
-3. discord:[дискорд-ссылка](https://discord.gg/gxrQAYy6)
+3. discord:[дискорд-ссылка](https://discord.gg/hbMQDH7J)
 
 ### Следите за нами
 1. Если вы хотите оставаться в курсе последних функций этого проекта, пожалуйста, подпишитесь на аккаунт B站: [派对主持BB机](https://space.bilibili.com/26978344)

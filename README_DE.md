@@ -6,7 +6,7 @@
   <a href="workflow_tutorial/">Workflow-Tutorial</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baudisk-Link</a> ·
   <a href="img/Q群.jpg">QQ-Gruppe</a> ·
-  <a href="https://discord.gg/gxrQAYy6">Discord</a> ·
+  <a href="https://discord.gg/hbMQDH7J">Discord</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">Über uns</a>
 </div>
 
@@ -252,7 +252,7 @@ Wenn es Probleme mit dem Plugin gibt oder Sie andere Fragen haben, sind Sie herz
 
 2. WeChat-Gruppe: `Choo-Yong` (Fügen Sie den kleinen Assistenten zu WeChat hinzu, um der Gruppe beizutreten)
 
-3. Discord:[discord链接](https://discord.gg/gxrQAYy6)
+3. Discord:[discord链接](https://discord.gg/hbMQDH7J)
 
 ### Folgen Sie uns
 1. Wenn Sie die neuesten Funktionen dieses Projekts kontinuierlich verfolgen möchten, heißen wir Sie herzlich willkommen, unseren Bilibili-Account zu abonnieren: [派对主持BB机](https://space.bilibili.com/26978344)

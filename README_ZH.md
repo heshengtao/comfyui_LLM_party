@@ -6,7 +6,7 @@
   <a href="workflow_tutorial/">工作流教程</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">度盘链接</a> ·
   <a href="img/Q群.jpg">QQ群</a> ·
-  <a href="https://discord.gg/gxrQAYy6">discord</a> ·
+  <a href="https://discord.gg/hbMQDH7J">discord</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">关于我们</a>
 </div>
 
@@ -253,7 +253,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 2. 微信群：`Choo-Yong`（添加小助手微信后进群）
 
-3. discord:[discord链接](https://discord.gg/gxrQAYy6)
+3. discord:[discord链接](https://discord.gg/hbMQDH7J)
 
 ### 关注我们
 1. 如果想持续关注本项目的最新功能，欢迎关注B站账号：[派对主持BB机](https://space.bilibili.com/26978344)

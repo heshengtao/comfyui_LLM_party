@@ -6,7 +6,7 @@
   <a href="workflow_tutorial/">workflow tutorial</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baidu cloud</a> ·
   <a href="img/Q群.jpg">QQ group</a> ·
-  <a href="https://discord.gg/gxrQAYy6">discord</a> ·
+  <a href="https://discord.gg/hbMQDH7J">discord</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">About us</a>  
 </div>
 
@@ -246,7 +246,7 @@ Some of the nodes in this project have borrowed from the following projects. Tha
 ### Join the community
 If there is a problem with the plugin or you have any other questions, please join our community.
 
-1. discord:[discord link](https://discord.gg/gxrQAYy6)
+1. discord:[discord link](https://discord.gg/hbMQDH7J)
 2. QQ group: `931057213`
 
 <div style="display: flex; justify-content: center;">

@@ -6,7 +6,7 @@
   <a href="workflow_tutorial/">Tutorial de flujo de trabajo</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Enlace de Baidu</a> ·
   <a href="img/Q群.jpg">Grupo QQ</a> ·
-  <a href="https://discord.gg/gxrQAYy6">Discord</a> ·
+  <a href="https://discord.gg/hbMQDH7J">Discord</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">Sobre nosotros</a>
 </div>
 
@@ -253,7 +253,7 @@ Si hay problemas con el complemento o si tiene alguna otra pregunta, le damos la
 
 2. Grupo de WeChat: `Choo-Yong` (una vez que añada a la asistente de WeChat, podrá unirse al grupo)
 
-3. Discord: [enlace de discord](https://discord.gg/gxrQAYy6)
+3. Discord: [enlace de discord](https://discord.gg/hbMQDH7J)
 
 ### Síguenos
 1. Si desea mantenerse informado sobre las últimas funciones de este proyecto, le invitamos a seguir nuestra cuenta de Bilibili: [主持BB机](https://space.bilibili.com/26978344)

@@ -6,7 +6,7 @@
   <a href="workflow_tutorial/">작업 흐름 튜토리얼</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">바이두 링크</a> ·
   <a href="img/Q群.jpg">QQ 그룹</a> ·
-  <a href="https://discord.gg/gxrQAYy6">디스코드</a> ·
+  <a href="https://discord.gg/hbMQDH7J">디스코드</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">우리에 관하여</a>
 </div>
 
@@ -247,7 +247,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 
 2. 웨이신 그룹：`Choo-Yong`（소助手의 웨이신을 추가한 후 그룹에 가입하세요）
 
-3. 디스코드:[discord 링크](https://discord.gg/gxrQAYy6)
+3. 디스코드:[discord 링크](https://discord.gg/hbMQDH7J)
 
 ### 저희를 팔로우하세요
 1. 본 프로젝트의 최신 기능을 지속적으로 관심 가져주시길 원하신다면, B站 계정에 팔로우해 주세요：[파티 호스트 BB기](https://space.bilibili.com/26978344)

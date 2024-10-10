@@ -6,7 +6,7 @@
   <a href="workflow_tutorial/">ワークフローチュートリアル</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">百度リンク</a> ·
   <a href="img/Q群.jpg">QQグループ</a> ·
-  <a href="https://discord.gg/gxrQAYy6">ディスコード</a> ·
+  <a href="https://discord.gg/hbMQDH7J">ディスコード</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">私たちについて</a>
 </div>
 
@@ -252,7 +252,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 
 2. WeChatグループ：`Choo-Yong`（小助手のWeChatを追加した後にグループに参加してください）
 
-3. discord:[discordリンク](https://discord.gg/gxrQAYy6)
+3. discord:[discordリンク](https://discord.gg/hbMQDH7J)
 
 ### 私たちをフォローする
 1. このプロジェクトの最新機能を継続的にフォローしたい方は、Bilibiliアカウントをフォローしてください：[派对主持BB机](https://space.bilibili.com/26978344)
