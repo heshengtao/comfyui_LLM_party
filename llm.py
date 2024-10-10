@@ -864,7 +864,7 @@ else:
         # 将模型列表转换为字典
         models_dict = [model.id for model in models_response.data]
         openai.api_key=llm_api_key
-        openai.base_url=llm_base_url+"/"
+        openai.base_url=llm_base_url
     except Exception as e:
         models_dict = []
 class easy_LLM_api_loader:
@@ -889,6 +889,10 @@ class easy_LLM_api_loader:
     CATEGORY = "大模型派对（llm_party）/加载器（loader）"
 
     def chatbot(self, model_name):
+        # 如果openai.base_url没有/结尾就加一个
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
         chat = Chat(model_name, openai.api_key, openai.base_url)
         return (chat,)
 
