@@ -68,7 +68,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 ## User Guide
 1. For the instructions for using the node, please refer to: [how to use nodes](how_to_use_nodes.md)
 
-2. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg).
+2. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/hbMQDH7J).
 
 3. Please refer to the workflow tutorial: [Workflow Tutorial](workflow_tutorial/), thanks to [HuangYuChuh](https://github.com/HuangYuChuh) for your contribution!
 

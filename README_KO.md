@@ -68,7 +68,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 ## 사용 설명
 1. 노드 사용 설명서는 다음을 참고하십시오: [노드 사용 방법](how_to_use_nodes.md)
 
-2. 플러그인에 문제가 있거나 다른 질문이 있으시면 QQ 그룹에 참여해 주십시오: [931057213](img/Q群.jpg)
+2. 플러그인에 문제가 있거나 다른 질문이 있으시면 QQ 그룹에 참여해 주십시오: [931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/hbMQDH7J).
 3. 워크플로우 튜토리얼은 다음을 참조하시기 바랍니다: [워크플로우 튜토리얼](workflow_tutorial/), [HuangYuChuh](https://github.com/HuangYuChuh)님의 기여에 감사드립니다!
 
 4. 고급 워크플로우 플레이 계정: [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)

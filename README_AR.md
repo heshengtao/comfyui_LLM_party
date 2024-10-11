@@ -68,7 +68,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 ## تعليمات الاستخدام
 1. يرجى الرجوع إلى تعليمات استخدام العقدة: [怎么使用节点](how_to_use_nodes.md)
 
-2. إذا كانت هناك مشاكل في المكون الإضافي أو إذا كان لديك أي استفسارات أخرى، فنحن نرحب بك للانضمام إلى مجموعة QQ: [931057213](img/Q群.jpg)
+2. إذا كانت هناك مشاكل في المكون الإضافي أو إذا كان لديك أي استفسارات أخرى، فنحن نرحب بك للانضمام إلى مجموعة QQ: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/hbMQDH7J).
 3. يُرجى الرجوع إلى [دليل سير العمل](workflow_tutorial/) ، شكرًا لمساهمة [HuangYuChuh](https://github.com/HuangYuChuh)！
 
 4. حساب لعب سير العمل المتقدم: [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)

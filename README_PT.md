@@ -67,7 +67,7 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 ## Instruções de Uso
 1. Para instruções sobre o uso dos nós, consulte: [怎么使用节点](how_to_use_nodes.md)
 
-2. Se houver problemas com o plugin ou se você tiver outras dúvidas, sinta-se à vontade para entrar no grupo QQ: [931057213](img/Q群.jpg)
+2. Se houver problemas com o plugin ou se você tiver outras dúvidas, sinta-se à vontade para entrar no grupo QQ: [931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/hbMQDH7J).
 3. Para o tutorial de fluxo de trabalho, por favor, consulte: [工作流教程](workflow_tutorial/)，agradecemos a contribuição de [HuangYuChuh](https://github.com/HuangYuChuh)!
 
 4. Conta para o uso avançado do fluxo de trabalho: [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)

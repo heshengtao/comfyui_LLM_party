@@ -67,7 +67,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 ## Gebrauchsanweisung
 1. Bitte beziehen Sie sich auf die Anweisungen zur Verwendung der Knoten: [怎么使用节点](how_to_use_nodes.md)
 
-2. Bei Problemen mit dem Plugin oder anderen Fragen freuen wir uns über Ihren Beitritt zur QQ-Gruppe: [931057213](img/Q群.jpg)
+2. Bei Problemen mit dem Plugin oder anderen Fragen freuen wir uns über Ihren Beitritt zur QQ-Gruppe: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/hbMQDH7J).
 3. Für das Workflow-Tutorial siehe bitte: [Workflow-Tutorial](workflow_tutorial/). Vielen Dank an [HuangYuChuh](https://github.com/HuangYuChuh) für seinen Beitrag!
 
 4. Konto für fortgeschrittene Workflow-Anwendungen: [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)

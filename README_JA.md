@@ -67,7 +67,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 ## 使用説明
 1. ノードの使用説明については、以下を参照してください：[ノードの使用方法](how_to_use_nodes.md)
 
-2. プラグインに問題がある場合や他に疑問がある場合は、ぜひQQ群にご参加ください：[931057213](img/Q群.jpg)
+2. プラグインに問題がある場合や他に疑問がある場合は、ぜひQQ群にご参加ください：[931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/hbMQDH7J).
 3. ワークフローのチュートリアルについては、[ワークフローのチュートリアル](workflow_tutorial/)をご参照ください。貢献してくださった[HuangYuChuh](https://github.com/HuangYuChuh)に感謝いたします。
 
 4. 高度なワークフローのアカウント：[openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
