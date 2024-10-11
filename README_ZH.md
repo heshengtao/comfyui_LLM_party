@@ -77,7 +77,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 ## 视频教程
 <a href="https://space.bilibili.com/26978344">
-  <img src="img/B站.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+  <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
 <a href="https://www.youtube.com/@comfyui-LLM-party">
   <img src="img/YouTube.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
