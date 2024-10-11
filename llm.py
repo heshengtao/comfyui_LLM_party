@@ -1879,7 +1879,7 @@ class LLM_local:
                 # 获得model存放的设备
                 if model_type not in ["VLM-GGUF", "LLM-GGUF"]:
                     device = next(model.parameters()).device
-                if model_type in ["LLM"]:
+                if model_type == "LLM":
                     if extra_parameters is not None and extra_parameters != {}:
                         response, history = llm_chat(
                             model,
@@ -2003,7 +2003,7 @@ class LLM_local:
                         response = f"{response['choices'][0]['message']['content']}"
                         assistant_content = {"role": "assistant", "content": response}
                         history.append(assistant_content)         
-                elif model_type in ["VLM(testing)"]:
+                elif model_type =="VLM(testing)":
                     if image is not None:
                         pil_image = ToPILImage()(image[0].permute(2, 0, 1))
                         self.images.append(pil_image)
