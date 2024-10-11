@@ -1915,6 +1915,7 @@ class LLM_local:
                                 history,
                                 device,
                                 max_length,
+                                role="tool",
                                 temperature=temperature,
                                 **extra_parameters,
                             )
@@ -1926,7 +1927,7 @@ class LLM_local:
                                 history,
                                 device,
                                 max_length,
-                                role="observation",
+                                role="tool",
                                 temperature=temperature,
                             )
                 elif model_type == "VLM-GGUF":
@@ -1989,6 +1990,7 @@ class LLM_local:
                                 messages=history,
                                 temperature=temperature,
                                 max_tokens=max_length,
+                                tools=tools,
                                 **extra_parameters,
                             )
                         else:
@@ -1996,6 +1998,7 @@ class LLM_local:
                                 messages=history,
                                 temperature=temperature,
                                 max_tokens=max_length,
+                                tools=tools,
                             )
                         response = f"{response['choices'][0]['message']['content']}"
                         assistant_content = {"role": "assistant", "content": response}
@@ -2041,6 +2044,7 @@ class LLM_local:
                                 history,
                                 device,
                                 max_length,
+                                role="tool",
                                 temperature=temperature,
                                 **extra_parameters,
                             )
@@ -2053,7 +2057,7 @@ class LLM_local:
                                 history,
                                 device,
                                 max_length,
-                                role="observation",
+                                role="tool",
                                 temperature=temperature,
                             )         
                 print(response)
