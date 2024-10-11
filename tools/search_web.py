@@ -153,7 +153,7 @@ class google_loader:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/资料加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/知识库加载器（knowbase loader）"
 
     def web(self, keywords, paper_num=1, searchType="web", google_api_key=None, google_CSE_ID=None, is_enable=True):
         if is_enable == False:
@@ -308,7 +308,7 @@ class bing_loader:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/资料加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/知识库加载器（knowbase loader）"
 
     def web(self, keywords, paper_num=1, searchType="web", bing_api_key=None, is_enable=True):
         if is_enable == False:
@@ -447,7 +447,7 @@ class duckduckgo_loader:
 
     FUNCTION = "web"
 
-    CATEGORY = "大模型派对（llm_party）/资料加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/知识库加载器（knowbase loader）"
 
     def web(self, keywords, paper_num=1, searchType="web", is_enable=True):
         if is_enable == False:

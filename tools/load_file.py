@@ -116,7 +116,7 @@ class load_file:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/资料加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/知识库加载器（knowbase loader）"
 
     def file(self, relative_path, absolute_path="", is_enable=True):
         if is_enable == False:
@@ -147,7 +147,7 @@ class load_file_folder:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/资料加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/知识库加载器（knowbase loader）"
 
     def file(self, folder_path, is_enable=True):
         if is_enable == False:
@@ -181,7 +181,7 @@ class load_url:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/资料加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/知识库加载器（knowbase loader）"
 
     def file(self, url, with_jina=True, is_enable=True):
         if not is_enable:
@@ -409,7 +409,7 @@ class load_img_path:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/资料加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/图片（image）"
 
     def load_all(self, img_path):
         img_out = []

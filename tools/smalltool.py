@@ -14,7 +14,7 @@ class load_int:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/资料加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/文本（text）"
 
     def tts(self, text):
         text = int(text)

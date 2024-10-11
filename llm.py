@@ -822,7 +822,7 @@ class LLM_api_loader:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def chatbot(self, model_name, base_url=None, api_key=None, is_ollama=False):
         if is_ollama:
@@ -886,7 +886,7 @@ class easy_LLM_api_loader:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def chatbot(self, model_name):
         # 如果openai.base_url没有/结尾就加一个
@@ -923,7 +923,7 @@ class genai_api_loader:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def chatbot(self, model_name, api_key=None):
         api_keys = load_api_keys(config_path)
@@ -1397,7 +1397,7 @@ class LLM_local_loader:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def chatbot(self, model_name_or_path, device, dtype, is_locked=True):
         self.is_locked = is_locked
@@ -1508,7 +1508,7 @@ class easy_LLM_local_loader:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def chatbot(self, model_name_or_path, device, dtype, is_locked=True):
         model_name_or_path=os.path.join(LLM_dir,model_name_or_path)
