@@ -133,7 +133,7 @@ class load_wikipedia:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/资料加载器（loader）"
 
     def wikipedia(self, query, is_enable=True):
         if is_enable == False:

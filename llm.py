@@ -822,7 +822,7 @@ class LLM_api_loader:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
 
     def chatbot(self, model_name, base_url=None, api_key=None, is_ollama=False):
         if is_ollama:
@@ -886,7 +886,7 @@ class easy_LLM_api_loader:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
 
     def chatbot(self, model_name):
         # 如果openai.base_url没有/结尾就加一个
@@ -923,7 +923,7 @@ class genai_api_loader:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
 
     def chatbot(self, model_name, api_key=None):
         api_keys = load_api_keys(config_path)
@@ -1397,7 +1397,7 @@ class LLM_local_loader:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
 
     def chatbot(self, model_name_or_path, device, dtype, is_locked=True):
         self.is_locked = is_locked
@@ -1508,7 +1508,7 @@ class easy_LLM_local_loader:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
 
     def chatbot(self, model_name_or_path, device, dtype, is_locked=True):
         model_name_or_path=os.path.join(LLM_dir,model_name_or_path)
@@ -2128,9 +2128,9 @@ NODE_CLASS_MAPPINGS = {
     "easy_LLM_local_loader": easy_LLM_local_loader,
     "easy_LLM_api_loader":easy_LLM_api_loader,
     "load_ebd":load_ebd,
-    "embeddings_function": embeddings_function,
     "load_file": load_file,
     "load_persona": load_persona,
+    "embeddings_function": embeddings_function,
     "classify_persona": classify_persona,
     "classify_function": classify_function,
     "classify_persona_plus": classify_persona_plus,
@@ -2236,11 +2236,11 @@ if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
         "LLM": "API LLM通用链路",
         "LLM_local": "本地LLM通用链路",
-        "LLM_api_loader": "API LLM加载器",
-        "easy_LLM_api_loader": "简易API LLM加载器",
-        "genai_api_loader":"Gemini API LLM加载器",
-        "LLM_local_loader": "本地LLM加载器",
-        "easy_LLM_local_loader": "简易本地LLM加载器",
+        "LLM_api_loader": "API 模型加载器",
+        "easy_LLM_api_loader": "简易API 模型加载器",
+        "genai_api_loader":"Gemini API 模型加载器",
+        "LLM_local_loader": "本地模型加载器",
+        "easy_LLM_local_loader": "简易本地模型加载器",
         "load_ebd": "加载词嵌入",
         "embeddings_function": "词向量检索",
         "load_file": "加载文件",

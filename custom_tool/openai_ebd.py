@@ -79,7 +79,7 @@ class load_openai_ebd:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
 
     def file(
         self,

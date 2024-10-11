@@ -20,7 +20,7 @@ class load_name:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/资料加载器（loader）"
 
     def file(self, model_name):
         out = model_name
