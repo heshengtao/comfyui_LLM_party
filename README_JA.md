@@ -1,7 +1,8 @@
 ![画像](img/封面.png)
 
 <div align="center">
-  <a href="https://space.bilibili.com/26978344">ビデオチュートリアル</a> ·
+  <a href="https://space.bilibili.com/26978344">bilibili</a> ·
+  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="how_to_use_nodes_ZH.md">テキストチュートリアル</a> ·
   <a href="workflow_tutorial/">ワークフローチュートリアル</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">百度リンク</a> ·
@@ -75,15 +76,13 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 4. さらに多くのワークフローは[workflow](workflow)フォルダーをご覧ください。
 
 ## 動画チュートリアル
-1. [手取り足取り、ブロック型エージェントの構築方法を教えます（超簡単！）](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
+<a href="https://space.bilibili.com/26978344">
+  <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+</a>
+<a href="https://www.youtube.com/@comfyui-LLM-party">
+  <img src="img/YT.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+</a>
 
-2. [GPT-4oをcomfyuiに接続する方法 | ワークフローが別のワークフローを呼び出す | LLMをツールにする](https://www.bilibili.com/video/BV1JJ4m1A789/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
-
-3. [あなたのワークフローをGPTに偽装し、WeChatに接続 | Omost互換！自分のdalle3を柔軟に創造する](https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0)
-
-4. [comfyuiでインタラクティブノベルゲームを楽しむ方法](https://www.bilibili.com/video/BV15y411q78L/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
-
-5. [AI彼女、そしてあなたの形 | comfyui上でgraphRAGを実現し、neoa4jと連携 | comfyuiワークフローをstreamlitフロントエンドに接続する](https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 ## モデルサポート
 1. 画像内のテキストと位置を認識するためのEasyOCRノードを追加しました。対応するマスクを生成し、LLMが表示するためのJSON文字列を返すことができます。標準版とプレミアム版が選択可能です！
 2. すべてのOpenAI形式のAPI呼び出しをサポートしています（[oneapi](https://github.com/songquanpeng/one-api)を組み合わせることで、ほぼすべてのLLM APIを呼び出すことができ、中継APIもサポートしています）。base_urlの選択は[config.ini.example](config.ini.example)を参考にしてください。現在、テスト済みのものは以下の通りです：

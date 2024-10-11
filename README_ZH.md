@@ -1,7 +1,8 @@
 ![图片](img/封面.png)
 
 <div align="center">
-  <a href="https://space.bilibili.com/26978344">视频教程</a> ·
+  <a href="https://space.bilibili.com/26978344">B站</a> ·
+  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="how_to_use_nodes_ZH.md">文字教程</a> ·
   <a href="workflow_tutorial/">工作流教程</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">度盘链接</a> ·

@@ -1,7 +1,8 @@
 ![이미지](img/封面.png)
 
 <div align="center">
-  <a href="https://space.bilibili.com/26978344">비디오 튜토리얼</a> ·
+  <a href="https://space.bilibili.com/26978344">bilibili</a> ·
+  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="how_to_use_nodes_ZH.md">텍스트 튜토리얼</a> ·
   <a href="workflow_tutorial/">작업 흐름 튜토리얼</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">바이두 링크</a> ·
@@ -76,15 +77,13 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 4. 더 많은 워크플로우는 [workflow](workflow) 폴더를 참조하시기 바랍니다.
 
 ## 비디오 튜토리얼
-1. [손쉽게 블록형 지능형 에이전트를 구축하는 방법](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
+<a href="https://space.bilibili.com/26978344">
+  <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+</a>
+<a href="https://www.youtube.com/@comfyui-LLM-party">
+  <img src="img/YT.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+</a>
 
-2. [GPT-4o를 comfyui에 연결하는 방법 | 워크플로우가 다른 워크플로우를 호출하게 하기 | LLM을 하나의 도구로 만드는 방법](https://www.bilibili.com/video/BV1JJ4m1A789/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
-
-3. [당신의 워크플로우를 GPT로 위장하여 WeChat에 접속하는 방법 | Omost 호환! 자신만의 dalle3을 유연하게 창조하기](https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0)
-
-4. [comfyui에서 인터랙티브 소설 게임을 즐기는 방법](https://www.bilibili.com/video/BV15y411q78L/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
-
-5. [AI 여자친구, 그리고 당신의 형태 | comfyui에서 graphRAG 구현, neoa4j 연동 | comfyui 워크플로우를 streamlit 프론트엔드에 접속하기](https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 ## 모델 지원
 1. 이미지에서 텍스트와 위치를 인식하기 위한 EasyOCR 노드를 추가했습니다. 해당 마스크를 생성하고 LLM이 볼 수 있도록 JSON 문자열을 반환할 수 있습니다. 표준 버전과 프리미엄 버전이 모두 제공됩니다!
 2. 모든 OpenAI 형식의 API 호출을 지원합니다( [oneapi](https://github.com/songquanpeng/one-api)와 결합하면 거의 모든 LLM API를 호출할 수 있으며, 모든 중계 API도 지원합니다). base_url 선택은 [config.ini.example](config.ini.example)을 참조하시기 바랍니다. 현재 테스트된 항목은 다음과 같습니다:

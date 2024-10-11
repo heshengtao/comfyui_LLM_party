@@ -1,7 +1,8 @@
 ![صورة](img/封面.png)
 
 <div align="center">
-  <a href="https://space.bilibili.com/26978344">دليل الفيديو</a> ·
+  <a href="https://space.bilibili.com/26978344">bilibili</a> ·
+  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="how_to_use_nodes_ZH.md">دليل النص</a> ·
   <a href="workflow_tutorial/">دليل سير العمل</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">رابط دودة</a> ·
@@ -76,15 +77,13 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 4. يمكن الاطلاع على المزيد من سير العمل في مجلد [workflow](workflow)
 
 ## دروس الفيديو
-1. [دليل خطوة بخطوة لبناء وكيل ذكي بطريقة الكتل (سهل جدًا！)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
+<a href="https://space.bilibili.com/26978344">
+  <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+</a>
+<a href="https://www.youtube.com/@comfyui-LLM-party">
+  <img src="img/YT.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+</a>
 
-2. [كيفية توصيل GPT-4o بـ comfyui | جعل سير العمل يستدعي سير عمل آخر | تحويل LLM إلى أداة](https://www.bilibili.com/video/BV1JJ4m1A789/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
-
-3. [تخفي سير عملك كـ GPT لتوصيله بـ WeChat | متوافق مع Omost！ أنشئ Dalle3 الخاص بك بمرونة](https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0)
-
-4. [كيفية اللعب بألعاب الروايات التفاعلية في comfyui](https://www.bilibili.com/video/BV15y411q78L/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
-
-5. [صديقة AI ، وهي على شكل شخصيتك | تنفيذ graphRAG على comfyui ، والتفاعل مع neoa4j | توصيل سير عمل comfyui بـ streamlit](https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 ## دعم النموذج
 1. يدعم جميع استدعاءات واجهة برمجة التطبيقات بتنسيق openai (بالاشتراك مع [oneapi](https://github.com/songquanpeng/one-api) يمكن استدعاء تقريبًا جميع واجهات برمجة التطبيقات LLM، كما يدعم جميع واجهات البرمجة الوسيطة)، يرجى الرجوع إلى اختيار base_url في [config.ini.example](config.ini.example)، وقد تم اختبار ما يلي حتى الآن:
 * [openai](https://platform.openai.com/docs/api-reference/chat/create) (متوافق تمامًا مع جميع نماذج OpenAI، بما في ذلك السلسلتين 4o و o1!)

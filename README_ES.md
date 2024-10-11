@@ -1,7 +1,8 @@
 ![Imagen](img/封面.png)
 
 <div align="center">
-  <a href="https://space.bilibili.com/26978344">Tutorial en video</a> ·
+  <a href="https://space.bilibili.com/26978344">bilibili</a> ·
+  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="how_to_use_nodes_ZH.md">Tutorial escrito</a> ·
   <a href="workflow_tutorial/">Tutorial de flujo de trabajo</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Enlace de Baidu</a> ·
@@ -76,15 +77,13 @@ ComfyUI LLM Party permite desde la llamada a múltiples herramientas LLM desde l
 4. Para más flujos de trabajo, puede consultar la carpeta [workflow](workflow).
 
 ## Tutoriales en video
-1. [Manos a la obra: cómo construir agentes modulares (¡muy sencillo!)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
+<a href="https://space.bilibili.com/26978344">
+  <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+</a>
+<a href="https://www.youtube.com/@comfyui-LLM-party">
+  <img src="img/YT.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+</a>
 
-2. [Integrando GPT-4o con comfyui | Permitiendo que un flujo de trabajo llame a otro flujo de trabajo | Transformando LLM en una herramienta](https://www.bilibili.com/video/BV1JJ4m1A789/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
-
-3. [Disfrazando tu flujo de trabajo como GPT para integrarlo en WeChat | ¡Compatible con Omost! Crea tu propio dalle3 de manera flexible](https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0)
-
-4. [Cómo jugar a juegos de novela interactiva en comfyui](https://www.bilibili.com/video/BV15y411q78L/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
-
-5. [Novia AI, y además en tu forma | Implementando graphRAG en comfyui, conectando con neoa4j | Integración de flujos de trabajo de comfyui con el frontend de streamlit](https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 ## Soporte de Modelos
 1. Se admiten todas las llamadas a la API en formato OpenAI (en combinación con [oneapi](https://github.com/songquanpeng/one-api) se pueden realizar llamadas a casi todas las API de LLM, también se admiten todas las API de retransmisión), para la elección de base_url, consulte [config.ini.example](config.ini.example). Actualmente se han probado las siguientes:
 * [openai](https://platform.openai.com/docs/api-reference/chat/create) (¡Perfectamente compatible con todos los modelos de OpenAI, incluidas las series 4o y o1!)

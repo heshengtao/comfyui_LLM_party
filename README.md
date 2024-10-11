@@ -1,7 +1,8 @@
 ![图片](img/封面.png)
 
 <div align="center">
-  <a href="https://space.bilibili.com/26978344">video tutorial</a> ·
+  <a href="https://space.bilibili.com/26978344">bilibili</a> ·
+  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="how_to_use_nodes.md">text tutorial</a> ·
   <a href="workflow_tutorial/">workflow tutorial</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baidu cloud</a> ·
@@ -77,15 +78,12 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 5. More workflows please refer to the [workflow](workflow) folder.
 
 ## Vedio tutorial
-1. [Building a Modular AI with ComfyUI×LLM: A Step-by-Step Tutorial (Super Easy!)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
-
-2. [Teach you GPT-4o access to comfyui | Make workflow call another workflow | Make LLM a tool](https://www.bilibili.com/video/BV1JJ4m1A789/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
-
-3. [Disguise your workflow as GPT to access WeChat | Omost compatible! Flexibly create your own dalle3](https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0)
-
-4. [How to play interactive fiction games in comfyui](https://www.bilibili.com/video/BV15y411q78L/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
-
-5. [AI girlfriend, and is your shape | comfyui on the implementation of graphRAG, linkage neoa4j | comfyui workflow access streamlit front-end](https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
+<a href="https://space.bilibili.com/26978344">
+  <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+</a>
+<a href="https://www.youtube.com/@comfyui-LLM-party">
+  <img src="img/YT.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+</a>
 
 ## Model support
 1. Support all API calls in openai format(Combined with [oneapi](https://github.com/songquanpeng/one-api) can call almost all LLM APIs, also supports all transit APIs), base_url selection reference [config.ini.example](config.ini.example), which has been tested so far:

@@ -1,7 +1,8 @@
 ![图片](img/封面.png)
 
 <div align="center">
-  <a href="https://space.bilibili.com/26978344">Видеоуроки</a> ·
+  <a href="https://space.bilibili.com/26978344">bilibili</a> ·
+  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="how_to_use_nodes_ZH.md">Текстовые инструкции</a> ·
   <a href="workflow_tutorial/">Инструкции по работе с потоками</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Ссылка на Baidu Pan</a> ·
@@ -76,15 +77,13 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 4. Дополнительные рабочие процессы можно найти в папке [workflow](workflow).
 
 ## Видеоуроки
-1. [Пошаговое руководство по созданию модульного интеллекта (очень просто!)](https://www.bilibili.com/video/BV1JZ421v7Tw/?vd_source=f229e378448918b84afab7c430c6a75b)
+<a href="https://space.bilibili.com/26978344">
+  <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+</a>
+<a href="https://www.youtube.com/@comfyui-LLM-party">
+  <img src="img/YT.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
+</a>
 
-2. [Как подключить GPT-4o к comfyui | Позвольте рабочему процессу вызывать другой рабочий процесс | Превратите LLM в инструмент](https://www.bilibili.com/video/BV1JJ4m1A789/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
-
-3. [Как замаскировать ваш рабочий процесс под GPT и подключить к WeChat | Совместимость с Omost! Гибко создавайте свой dalle3](https://www.bilibili.com/video/BV1DT421a7KY/?spm_id_from=333.999.0.0)
-
-4. [Как играть в интерактивные новеллы в comfyui](https://www.bilibili.com/video/BV15y411q78L/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
-
-5. [AI подруга, и она в твоем облике | Реализация graphRAG на comfyui, взаимодействие с neo4j | Подключение рабочего процесса comfyui к фронтенду streamlit](https://www.bilibili.com/video/BV1dS421R7Au/?spm_id_from=333.999.0.0&vd_source=f229e378448918b84afab7c430c6a75b)
 ## Поддержка моделей
 1. Поддержка всех API-вызовов формата OpenAI (в сочетании с [oneapi](https://github.com/songquanpeng/one-api) можно вызывать практически все API LLM, также поддерживаются все промежуточные API). Выбор base_url можно найти в [config.ini.example](config.ini.example), на данный момент протестированы следующие:
 * [openai](https://platform.openai.com/docs/api-reference/chat/create) (Идеально совместим со всеми моделями OpenAI, включая серии 4o и o1!)
