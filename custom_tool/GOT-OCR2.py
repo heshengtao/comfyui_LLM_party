@@ -31,7 +31,7 @@ class got_ocr:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name_or_path": ("STRING", {"default": "D:\GOT-OCR2_0"}),
+                "model_name_or_path": ("STRING", {"default": ""}),
                 "device": (["auto","cuda", "cpu", "mps"], {"default": "auto"}),
                 "ocr_type": (["ocr","format"], {"default": "format"}),
                 "image": ("IMAGE", {}),

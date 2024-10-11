@@ -93,11 +93,3 @@ if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"FolderCleaner": "清空文件夹🐶"}
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {"FolderCleaner": "FolderCleaner🐶"}
-
-
-
-if __name__ == '__main__':
-    obj = FolderCleaner()
-    obj.delete_files('E:\ComfyUI\custom_nodes\comfyui_LLM_party\custom_tool\imgs', 
-                     file_type='all',
-                     is_enable=True)
