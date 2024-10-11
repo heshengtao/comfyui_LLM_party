@@ -118,7 +118,7 @@ class load_ebd:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def file(self, model_path, device, is_enable=True):
         if is_enable == False:

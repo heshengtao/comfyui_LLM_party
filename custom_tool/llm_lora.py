@@ -32,7 +32,7 @@ class load_llm_lora:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def apply_lora(self, model, lora_path, is_enable=True):
         # 合并 LoRA 权重
@@ -64,7 +64,7 @@ class easy_load_llm_lora:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def sleep(self,model,lora_path,is_enable=True):
         lora_path=os.path.join(lora_dir,lora_path)
