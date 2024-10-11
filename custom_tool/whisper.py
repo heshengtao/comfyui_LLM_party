@@ -112,13 +112,13 @@ class openai_whisper:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
             },

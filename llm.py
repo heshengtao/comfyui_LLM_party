@@ -802,13 +802,13 @@ class LLM_api_loader:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
                 "is_ollama": ("BOOLEAN", {"default": False}),
@@ -910,7 +910,7 @@ class genai_api_loader:
                 "api_key": (
                     "STRING",
                     {
-                        "default": "AI-XXXXX",
+                        "default": "",
                     },
                 ),
             },

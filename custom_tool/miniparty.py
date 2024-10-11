@@ -51,13 +51,13 @@ class mini_party:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
                 "is_enable": ("BOOLEAN", {"default": True,}),
@@ -132,13 +132,13 @@ class mini_translate:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
                 "is_enable": ("BOOLEAN", {"default": True,}),
@@ -231,13 +231,13 @@ class mini_error_correction:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
                 "is_enable": ("BOOLEAN", {"default": True,}),
@@ -340,13 +340,13 @@ class mini_summary:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
                 "is_enable": ("BOOLEAN", {"default": True,}),
@@ -446,13 +446,13 @@ class mini_story:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
                 "is_enable": ("BOOLEAN", {"default": True,}),
@@ -552,13 +552,13 @@ class mini_ocr:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
                 "imgbb_api_key":(
@@ -751,13 +751,13 @@ class mini_sd_prompt:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
                 "is_enable": ("BOOLEAN", {"default": True,}),
@@ -891,13 +891,13 @@ class mini_flux_prompt:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
                 "is_enable": ("BOOLEAN", {"default": True,}),
@@ -1002,13 +1002,13 @@ class mini_sd_tag:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
                 "imgbb_api_key":(
@@ -1164,13 +1164,13 @@ class mini_flux_tag:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
                 "imgbb_api_key":(

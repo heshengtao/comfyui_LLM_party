@@ -60,13 +60,13 @@ class load_openai_ebd:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
             },
@@ -157,13 +157,13 @@ class openai_ebd_tool:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
             },
@@ -272,13 +272,13 @@ class save_openai_ebd:
                 "base_url": (
                     "STRING",
                     {
-                        "default": "https://api.openai.com/v1/",
+                        "default": "",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
-                        "default": "sk-XXXXX",
+                        "default": "",
                     },
                 ),
             },
