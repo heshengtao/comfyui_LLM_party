@@ -1983,8 +1983,37 @@ class LLM_local:
                         assistant_content = {"role": "assistant", "content": response}
                         history.append(assistant_content)
                 elif model_type == "LLM-GGUF":
-                        user_content = {"role": "user", "content": user_prompt}
-                        history.append(user_content)
+                    user_content = {"role": "user", "content": user_prompt}
+                    history.append(user_content)
+                    if extra_parameters is not None and extra_parameters != {}:
+                        response = model.create_chat_completion(
+                            messages=history,
+                            temperature=temperature,
+                            max_tokens=max_length,
+                            tools=tools,
+                            **extra_parameters,
+                        )
+                    else:
+                        response = model.create_chat_completion(
+                            messages=history,
+                            temperature=temperature,
+                            max_tokens=max_length,
+                            tools=tools,
+                        )
+                    assistant_message = f"{response['choices'][0]['message']['content']}"
+                    while assistant_message.startswith('{"name":'):
+                        response_content = json.loads(assistant_message)
+                        print("正在调用" + response_content['name'] + "工具")
+                        results = dispatch_tool(response_content['name'], response_content['parameters'])
+                        print(results)
+                        assistant_content = {"role": "assistant", "content": assistant_message}
+                        history.append(assistant_content)    
+                        history.append(
+                            {
+                                "role": "function_call",
+                                "content": results,
+                            }
+                        )
                         if extra_parameters is not None and extra_parameters != {}:
                             response = model.create_chat_completion(
                                 messages=history,
@@ -2000,9 +2029,11 @@ class LLM_local:
                                 max_tokens=max_length,
                                 tools=tools,
                             )
-                        response = f"{response['choices'][0]['message']['content']}"
-                        assistant_content = {"role": "assistant", "content": response}
-                        history.append(assistant_content)         
+                        print(response)   
+                        assistant_message = f"{response['choices'][0]['message']['content']}"
+                    assistant_content = {"role": "assistant", "content": assistant_message}
+                    response= assistant_message
+                    history.append(assistant_content)    
                 elif model_type =="VLM(testing)":
                     if image is not None:
                         pil_image = ToPILImage()(image[0].permute(2, 0, 1))

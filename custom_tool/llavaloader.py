@@ -44,7 +44,7 @@ class LLavaLoader:
     RETURN_NAMES = ("model",)
     FUNCTION = "load_llava_checkpoint"
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def load_llava_checkpoint(self, ckpt_path, clip_path, max_ctx, gpu_layers, n_threads):
         from llama_cpp import Llama
@@ -76,7 +76,7 @@ class easy_LLavaLoader:
     RETURN_NAMES = ("model",)
     FUNCTION = "load_llava_checkpoint"
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def load_llava_checkpoint(self, ckpt_path, clip_path, max_ctx, gpu_layers, n_threads):
         from llama_cpp import Llama
@@ -109,7 +109,7 @@ class GGUFLoader:
     RETURN_NAMES = ("model",)
     FUNCTION = "load_GGUF_checkpoint"
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def load_GGUF_checkpoint(self, model_path, max_ctx, gpu_layers, n_threads):
         from llama_cpp import Llama
@@ -137,7 +137,7 @@ class easy_GGUFLoader:
     RETURN_NAMES = ("model",)
     FUNCTION = "load_GGUF_checkpoint"
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def load_GGUF_checkpoint(self, model_path, max_ctx, gpu_layers, n_threads):
         from llama_cpp import Llama
@@ -181,7 +181,7 @@ class vlmLoader:
     )
     FUNCTION = "load_VLM"
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def load_VLM(self, model_name_or_path, device, dtype):
         model_kwargs = {
@@ -235,7 +235,7 @@ class easy_vlmLoader:
     )
     FUNCTION = "load_VLM"
 
-    CATEGORY = "大模型派对（llm_party）/模型加载器（loader）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def load_VLM(self, model_name_or_path, device, dtype):
         model_name_or_path=os.path.join(VLM_dir, model_name_or_path)
