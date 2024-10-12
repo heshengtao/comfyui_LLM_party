@@ -37,7 +37,7 @@ class AmapRegeoTool:
 
     FUNCTION = "amap_regeo"
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/联网（Networking）"
 
     def amap_regeo(self, location, api_key, extensions="all", radius=1000, is_enable=True):
         if not is_enable:

@@ -102,7 +102,7 @@ class searxng_tool:
 
     FUNCTION = "query_searxng"
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/联网（Networking）"
 
     def query_searxng(self, searxng_api_url,categories, is_enable=True):
 

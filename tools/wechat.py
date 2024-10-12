@@ -40,7 +40,7 @@ class work_wechat_tool:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/自动化（Automation）"
 
     def web(self, is_enable=True, url=None, msgtype="markdown"):
         if is_enable == False:

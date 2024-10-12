@@ -30,7 +30,7 @@ class KG_json_toolkit_developer:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/知识库（Knowbase）"
 
     def file(self, relative_path, absolute_path="", is_enable=True):
         if is_enable == False:
@@ -276,7 +276,7 @@ class KG_json_toolkit_user:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/知识库（Knowbase）"
 
     def file(self, relative_path, absolute_path="", is_enable=True):
         if is_enable == False:

@@ -79,7 +79,7 @@ class RSS_tool:
 
     FUNCTION = "convert_txt2json"
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/联网（Networking）"
 
     def convert_txt2json(self, is_enable=True):
         if is_enable == False:

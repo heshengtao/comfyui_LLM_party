@@ -49,7 +49,7 @@ class ebd_tool:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/知识库（Knowbase）"
 
     def file(self, model_path, k, chunk_size, chunk_overlap, device, file_content="", is_enable="enable", base_path="",ebd_model=None):
         if is_enable == "disable":

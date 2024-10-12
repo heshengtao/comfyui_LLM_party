@@ -256,7 +256,7 @@ class selenium_tool:
 
     FUNCTION = "selenium_driver"
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/自动化（Automation）"
 
     def selenium_driver(self,driver_path,imgbb_api_key, is_enable=True):
 

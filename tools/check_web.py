@@ -137,7 +137,7 @@ class check_web_tool:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/联网（Networking）"
 
     def read_web(
         self,

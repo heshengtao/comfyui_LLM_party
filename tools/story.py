@@ -28,7 +28,7 @@ class story_json_tool:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/知识库（Knowbase）"
 
     def file(self, path, is_enable=True):
         if is_enable == False:

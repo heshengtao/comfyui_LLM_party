@@ -75,7 +75,7 @@ class sql_tool:
 
     FUNCTION = "query_db"
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/知识库（Knowbase）"
 
     def query_db(self, api_key,base_url,model_name, db_connection_string, query_str, is_enable=True):
 

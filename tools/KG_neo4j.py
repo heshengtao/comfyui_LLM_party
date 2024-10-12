@@ -27,7 +27,7 @@ class KG_neo_toolkit_developer:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/知识库（Knowbase）"
 
     def file(self, database_url, database_name, password, is_enable=True):
         if is_enable == False:
@@ -270,7 +270,7 @@ class KG_neo_toolkit_user:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/知识库（Knowbase）"
 
     def file(self, database_name, password, is_enable=True):
         if is_enable == False:

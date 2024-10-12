@@ -33,7 +33,7 @@ class AmapWeatherTool:
 
     FUNCTION = "amap_weather"
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/联网（Networking）"
 
     def amap_weather(self, city_code, api_key, is_enable=True):
         if not is_enable:

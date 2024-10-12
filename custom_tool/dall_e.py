@@ -288,7 +288,7 @@ class dall_e_tool:
 
     FUNCTION = "get_dall_e"
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/实用（Utility）"
 
 
 

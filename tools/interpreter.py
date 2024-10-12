@@ -54,7 +54,7 @@ class interpreter_tool:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/实用（Utility）"
 
     def code(self, is_enable=True):
         if is_enable == False:

@@ -75,7 +75,7 @@ class api_tool:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/自动化（Automation）"
 
     def read_web(self, url, description, parameters, api_key="", is_enable=True):
         if is_enable == False:

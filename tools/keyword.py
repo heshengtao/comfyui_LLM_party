@@ -46,7 +46,7 @@ class keyword_tool:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/知识库（Knowbase）"
 
     def file(self, file_content, k, chunk_size, chunk_overlap, is_enable="enable"):
         if is_enable == "disable":

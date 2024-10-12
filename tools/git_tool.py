@@ -76,7 +76,7 @@ class github_tool:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/联网（Networking）"
 
     def web(self, git_api_key=None, is_enable=True):
         if is_enable == False:

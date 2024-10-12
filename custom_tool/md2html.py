@@ -153,7 +153,7 @@ class Browser_display:
 
     FUNCTION = "convert_txt2json"
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/自动化（Automation）"
     OUTPUT_NODE = True
 
     def convert_txt2json(self,md_or_html, is_enable=True):

@@ -90,7 +90,7 @@ class google_tool:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/联网（Networking）"
 
     def web(self, searchType="web", google_api_key=None, google_CSE_ID=None, is_enable=True):
         if is_enable == False:
@@ -250,7 +250,7 @@ class bing_tool:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/联网（Networking）"
 
     def web(self, searchType="web", bing_api_key=None, is_enable=True):
         if is_enable == False:
@@ -399,7 +399,7 @@ class duckduckgo_tool:
 
     FUNCTION = "web"
 
-    CATEGORY = "大模型派对（llm_party）/工具（tools）"
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/联网（Networking）"
 
     def web(self, searchType="web", is_enable=True):
         if is_enable == False:
