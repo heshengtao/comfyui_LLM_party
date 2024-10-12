@@ -2006,11 +2006,11 @@ class LLM_local:
                         print("正在调用" + response_content['name'] + "工具")
                         results = dispatch_tool(response_content['name'], response_content['parameters'])
                         print(results)
-                        assistant_content = {"role": "assistant", "content": assistant_message}
+                        assistant_content = {"role": "function_call", "content": assistant_message}
                         history.append(assistant_content)    
                         history.append(
                             {
-                                "role": "function_call",
+                                "role": "observation",
                                 "content": results,
                             }
                         )
