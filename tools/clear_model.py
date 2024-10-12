@@ -42,7 +42,7 @@ class clear_model:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def clear(self, any, model,is_enable, tokenizer=None,is_ollama=False):
         if not is_enable:

@@ -32,7 +32,7 @@ class FolderCleaner:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/工作流（workflow）"
     
     def delete_files(self, any, folder_path, file_type='all', is_enable=True):
         if not is_enable:

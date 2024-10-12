@@ -24,7 +24,7 @@ class Lorebook:
 
     FUNCTION = "book"
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/知识库（knowbase）"
 
     def _generate_book_dict(self):
         lines = self._book_txt.strip().split('\n')

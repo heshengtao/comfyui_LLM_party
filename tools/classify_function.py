@@ -28,7 +28,7 @@ class classify_function:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/文本（text）"
 
     def condition(self, text, is_enable=True):
         if is_enable == False:
@@ -85,7 +85,7 @@ class classify_function_plus:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/文本（text）"
 
     def condition(self, text, is_enable=True):
         if is_enable == False:

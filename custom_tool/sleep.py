@@ -31,7 +31,7 @@ class time_sleep:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/工作流（workflow）"
 
     def sleep(self,sleep_time,any,is_enable=False):
         if is_enable == False:

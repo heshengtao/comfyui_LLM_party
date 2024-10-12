@@ -105,7 +105,7 @@ class load_keyword:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/知识库加载器（knowbase loader）"
+    CATEGORY = "大模型派对（llm_party）/知识库（knowbase）"
 
     def file(self, question, file_content, k, chunk_size, chunk_overlap, is_enable=True):
         if is_enable == False:

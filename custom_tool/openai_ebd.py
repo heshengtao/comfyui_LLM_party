@@ -291,7 +291,7 @@ class save_openai_ebd:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/知识库（knowbase）"
 
     def file(
         self,

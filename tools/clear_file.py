@@ -34,7 +34,7 @@ class clear_file:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/工作流（workflow）"
 
     def clear(self, any, path,is_enable):
         if not is_enable:

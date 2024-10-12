@@ -95,7 +95,7 @@ class interpreter_function:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
     def code(self, is_enable=True, code_str="print('Hello, party!')", include_text=False):
         if is_enable == False:

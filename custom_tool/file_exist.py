@@ -17,7 +17,7 @@ class FilePathExists:
     RETURN_NAMES = ("file_exists",)
 
     FUNCTION = "file_exists"
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
     def file_exists(self, file_path="", is_enable=True):
         if is_enable:
@@ -51,9 +51,9 @@ if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "FilePathExists": "路径已存在🐶"
+        "FilePathExists": "文件是否存在转布尔值🐶"
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "FilePathExists": "FilePathExists🐶"
+        "FilePathExists": "FilePathExists To Bool🐶"
     }

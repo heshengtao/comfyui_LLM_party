@@ -27,7 +27,7 @@ class extra_parameters:
 
     FUNCTION = "extra"
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def extra(
         self,
@@ -92,6 +92,6 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "额外参数"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "额外模型参数"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "Extra Parameters"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"extra_parameters": "Extra Model Parameters"}

@@ -133,7 +133,7 @@ class api_function:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
     def api(self, url, parameters, api_key="", request_type="get", timeout=60):
         headers = {"Authorization": f"Bearer {api_key}"} if api_key else {}
@@ -182,7 +182,7 @@ class parameter_function:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
     def parameter(self, key="", value=""):
         out = {key: value}

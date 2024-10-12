@@ -167,7 +167,7 @@ class embeddings_function:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/知识库（knowbase）"
 
     def file(self, model_path, question, k, chunk_size, chunk_overlap, device, file_content="", is_enable=True, base_path="",ebd_model=None):
         if is_enable == False:
@@ -230,7 +230,7 @@ class save_ebd_database:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/知识库（knowbase）"
 
     def file(self, model_path, save_path, file_content, chunk_size, chunk_overlap, device, is_enable=True):
         if is_enable == False:

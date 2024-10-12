@@ -17,7 +17,7 @@ class RSS_loader:
 
     FUNCTION = "convert_txt2json"
 
-    CATEGORY = "大模型派对（llm_party）/知识库加载器（knowbase loader）"
+    CATEGORY = "大模型派对（llm_party）/知识库（knowbase）"
 
     def convert_txt2json(self, rss_url, is_enable=True):
         if is_enable == False:
