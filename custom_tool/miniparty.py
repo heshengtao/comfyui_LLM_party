@@ -298,7 +298,7 @@ class mini_error_correction:
     "error":"- 向前发展 -> 提高\n- 挑起 -> 承担\n"
 }}
 
-从现在开始，请对我的输入进行纠错。注意！input_str里要用** **将错误的地方括起来，output_str里要保留原格式，不用加** **括起来。如果有错误，则用无序列表的形式列出错误。
+从现在开始，请对我的输入进行纠错。注意！input_str里要用** **将错误的地方括起来；output_str里要保留原格式，不用加** **括起来；如果有错误，则用无序列表的形式列出错误。
         """
 
         # 将file_content用RecursiveCharacterTextSplitter分割
