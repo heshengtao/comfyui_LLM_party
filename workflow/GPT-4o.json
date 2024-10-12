@@ -41,7 +41,7 @@
       },
       "widgets_values": [
         "",
-        "The image depicts an anime-style illustration featuring a young girl with white hair and blue eyes. She is dressed in a gold and white outfit and surrounded by various floating mechanical or robotic devices. The overall style and elements suggest it could be related to a fantasy or science fiction theme commonly found in anime, manga, or video games."
+        "图中展示的是一段关于“ComfyUI LLM Party”的文档内容，主要包括项目的概述和最新更新信息。内容涉及LLM（大语言模型）的功能、模块的整合和技术细节，如支持不同模型类型、OCR功能的实现，以及与其他系统的集成。文档旨在为用户提供该项目的使用指南和最新动态。"
       ],
       "color": "#233",
       "bgcolor": "#355"
@@ -50,8 +50,8 @@
       "id": 18,
       "type": "LoadImage",
       "pos": [
-        475,
-        278
+        478,
+        323
       ],
       "size": {
         "0": 315,
@@ -68,21 +68,21 @@
             33
           ],
           "shape": 3,
-          "label": "图像"
+          "label": "IMAGE"
         },
         {
           "name": "MASK",
           "type": "MASK",
           "links": null,
           "shape": 3,
-          "label": "遮罩"
+          "label": "MASK"
         }
       ],
       "properties": {
         "Node name for S&R": "LoadImage"
       },
       "widgets_values": [
-        "a4053c5b9b6c7a4383fbad42c94d411.jpg",
+        "1727365635168.png",
         "image"
       ],
       "color": "#232",
@@ -97,7 +97,7 @@
       ],
       "size": {
         "0": 315,
-        "1": 106
+        "1": 130
       },
       "flags": {},
       "order": 1,
@@ -118,9 +118,10 @@
         "Node name for S&R": "LLM_api_loader"
       },
       "widgets_values": [
-        "gpt-4o",
-        "https://api.openai.com/v1",
-        "sk-XXXXX"
+        "gpt-4o-mini",
+        "",
+        "",
+        false
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
@@ -129,13 +130,13 @@
       "id": 21,
       "type": "LLM",
       "pos": [
-        940,
-        260
+        936,
+        223
       ],
-      "size": [
-        392.7198045330424,
-        454.34486658153423
-      ],
+      "size": {
+        "0": 392.7198181152344,
+        "1": 466
+      },
       "flags": {},
       "order": 2,
       "mode": 0,
@@ -158,7 +159,8 @@
           "link": null,
           "widget": {
             "name": "system_prompt_input"
-          }
+          },
+          "label": "system_prompt_input"
         },
         {
           "name": "user_prompt_input",
@@ -166,7 +168,8 @@
           "link": null,
           "widget": {
             "name": "user_prompt_input"
-          }
+          },
+          "label": "user_prompt_input"
         },
         {
           "name": "tools",
@@ -174,7 +177,8 @@
           "link": null,
           "widget": {
             "name": "tools"
-          }
+          },
+          "label": "tools"
         },
         {
           "name": "file_content",
@@ -182,7 +186,8 @@
           "link": null,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "label": "file_content"
         }
       ],
       "outputs": [
@@ -236,7 +241,8 @@
         "",
         "",
         100,
-        ""
+        "",
+        true
       ]
     }
   ],
@@ -272,8 +278,8 @@
     "ds": {
       "scale": 0.8264462809917354,
       "offset": {
-        "0": -290.9097306805033,
-        "1": 149.59513341846588
+        "0": -345.49879137719205,
+        "1": -13.243990640344528
       }
     }
   },
