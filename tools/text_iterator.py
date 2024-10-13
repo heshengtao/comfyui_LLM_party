@@ -1,7 +1,9 @@
+import os
 import random
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import signal
 import sys
+import json
 def interrupt_handler(signum, frame):
     print("Process interrupted")
     sys.exit(0)
@@ -18,7 +20,7 @@ class text_iterator:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "file_content": ("STRING", {"default": ""}),
+                "file_content": ("STRING", {"forceInput": True}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "is_reload": ("BOOLEAN", {"default": False}),
                 "iterator_mode": (["sequential","random","Infinite", "sequential_flagout"], {"default": "sequential"}),
@@ -81,7 +83,7 @@ class text_writing:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "text": ("STRING", {"default": ""}),
+                "text": ("STRING", {"forceInput": True}),
                 "file_path": ("STRING", {"default": ""}),
                 "mode": (["a","w"], {"default": "a"}),
             },
@@ -104,4 +106,48 @@ class text_writing:
         except Exception as e:
             # 捕获并处理异常
             raise ValueError(f"写入文件失败: {e}")
+        return (file_path,)
+    
+class json_writing:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "text": ("STRING", {"forceInput": True}),
+                "file_path": ("STRING", {"default": ""}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("file_path",)
+
+    FUNCTION = "file"
+
+    OUTPUT_NODE = True
+
+    CATEGORY = "大模型派对（llm_party）/迭代器（iterator）"
+
+    def file(self, text, file_path):
+        try:
+            # 确保file_path指向一个json文件
+            if not file_path.endswith(".json"):
+                raise ValueError("写入的文件必须是一个json文件")
+            # 如果文件不存在，就创建一个空列表
+            if not os.path.exists(file_path):
+                with open(file_path, "w", encoding="utf-8") as f:
+                    json.dump([], f, ensure_ascii=False, indent=4)
+            # 将json文件读取出来
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            #如果为空，就创建一个空列表
+            if not data:
+                data = []
+            # 将新的数据添加到列表中
+            data.extend(json.loads(text))
+            # 将更新后的数据写回文件
+            with open(file_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=4)
+        except Exception as e:
+            # 捕获并处理异常
+            raise ValueError(f"写入的文件必须是一个json文件，写入文件失败: {e}")
         return (file_path,)

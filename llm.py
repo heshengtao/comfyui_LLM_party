@@ -133,7 +133,7 @@ from .tools.search_web import (
 from .tools.show_text import About_us, show_text_party
 from .tools.smalltool import bool_logic, load_int, none2false,str2float,str2int,any2str
 from .tools.story import read_story_json, story_json_tool
-from .tools.text_iterator import text_iterator,text_writing
+from .tools.text_iterator import text_iterator,text_writing,json_writing
 from .tools.tool_combine import tool_combine, tool_combine_plus
 from .tools.translate_persona import translate_persona
 from .tools.tts import openai_tts
@@ -2246,6 +2246,7 @@ NODE_CLASS_MAPPINGS = {
     "any2str":any2str,
     "start_anything":start_anything,
     "end_anything":end_anything,
+    "json_writing":json_writing,
 }
 
 
@@ -2360,6 +2361,7 @@ if lang == "zh_CN":
         "any2str":"任意类型转字符串",
         "start_anything":"开始任意",
         "end_anything": "结束任意",
+        "json_writing": "JSON写入",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2467,6 +2469,7 @@ else:
         "any2str": "Any to String",
         "start_anything": "Start Anything",
         "end_anything": "End Anything",
+        "json_writing": "JSON Writing",
     }
 
 
