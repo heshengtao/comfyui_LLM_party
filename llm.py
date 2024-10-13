@@ -1893,7 +1893,7 @@ class LLM_local:
                         tool = match.group(1)
                         parameters = match.group(2)
                         json_str = '{"tool": "' + tool + '", "parameters": {' + parameters + "}}"
-                        history.append({"role": "assistant", "content": json_str})
+                        history.append({"role": "function_call", "content": json_str})
                         print("正在调用" + tool + "工具")
                         parameters = json.loads("{" + parameters + "}")
                         results = dispatch_tool(tool, parameters)
@@ -1906,7 +1906,7 @@ class LLM_local:
                                 history,
                                 device,
                                 max_length,
-                                role="tool",
+                                role="observation",
                                 temperature=temperature,
                                 **extra_parameters,
                             )
@@ -1918,7 +1918,7 @@ class LLM_local:
                                 history,
                                 device,
                                 max_length,
-                                role="tool",
+                                role="observation",
                                 temperature=temperature,
                             )
                 elif model_type == "VLM-GGUF":
@@ -2052,7 +2052,7 @@ class LLM_local:
                         tool = match.group(1)
                         parameters = match.group(2)
                         json_str = '{"tool": "' + tool + '", "parameters": {' + parameters + "}}"
-                        history.append({"role": "assistant", "content": json_str})
+                        history.append({"role": "function_call", "content": json_str})
                         print("正在调用" + tool + "工具")
                         parameters = json.loads("{" + parameters + "}")
                         results = dispatch_tool(tool, parameters)
@@ -2066,7 +2066,7 @@ class LLM_local:
                                 history,
                                 device,
                                 max_length,
-                                role="tool",
+                                role="observation",
                                 temperature=temperature,
                                 **extra_parameters,
                             )
@@ -2079,7 +2079,7 @@ class LLM_local:
                                 history,
                                 device,
                                 max_length,
-                                role="tool",
+                                role="observation",
                                 temperature=temperature,
                             )         
                 print(response)
