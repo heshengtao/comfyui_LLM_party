@@ -115,6 +115,7 @@ class json_writing:
             "required": {
                 "text": ("STRING", {"forceInput": True}),
                 "file_path": ("STRING", {"default": ""}),
+                "mode": (["extend","append"], {"default": "extend"}),
             },
         }
 
@@ -127,7 +128,7 @@ class json_writing:
 
     CATEGORY = "大模型派对（llm_party）/迭代器（iterator）"
 
-    def file(self, text, file_path):
+    def file(self, text, file_path,mode):
         try:
             # 确保file_path指向一个json文件
             if not file_path.endswith(".json"):
@@ -142,8 +143,12 @@ class json_writing:
             #如果为空，就创建一个空列表
             if not data:
                 data = []
-            # 将新的数据添加到列表中
-            data.extend(json.loads(text))
+            # 如果是extend模式，就将新的数据添加到列表中
+            if mode == "extend":
+                data.extend(json.loads(text))
+            # 如果是append模式，就将新的数据添加到列表的末尾
+            elif mode == "append":
+                data.append(json.loads(text))
             # 将更新后的数据写回文件
             with open(file_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, ensure_ascii=False, indent=4)
