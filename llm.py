@@ -1840,18 +1840,9 @@ class LLM_local:
                     if message["role"] == "system":
                         message["content"] = system_prompt
                         if tools_list != []:
-                            if model_type == "GLM3":
-                                message["content"] += "\n" + "你可以使用以下工具："
-                                message["tools"] = tools_list
-                            elif model_type in ["llama", "Qwen", "llaVa", "llama-guff"]:
+                            if model_type in ["LLM", "VLM(testing)"]:
                                 message["content"] += "\n" + TOOL_EAXMPLE + "\n" + GPT_INSTRUCTION + "\n"
-                                if "tools" in message:
-                                    # 如果存在，移除 'tools' 键值对
-                                    message.pop("tools")
-                        else:
-                            if "tools" in message:
-                                # 如果存在，移除 'tools' 键值对
-                                message.pop("tools")
+                                
                 if tools is not None:
                     print(tools)
                     tools = json.loads(tools)
