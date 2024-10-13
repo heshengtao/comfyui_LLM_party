@@ -280,13 +280,3 @@ if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"FeishuSendMsg": "飞书机器人发消息🐶"}
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {"FeishuSendMsg": "Feishu Bot Send Message🐶"}
-
-
-if __name__ == "__main__":
-    feishu = FeishuSendMsg()
-    feishu.send_msg(msg_type="text", text="Hello. I am an AI from LLM Party.")
-    feishu.send_msg(
-        msg_type="image",
-        file_path="D:\\aaaCode\\feishu\output\9c809373e1f617e1e2e3a5dc39adc0ed_8399068463954610687.jpg",
-    )
-    feishu.send_msg(msg_type="audio", file_path="D:\\aaaCode\\feishu\output\\audio.wav")
