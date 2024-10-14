@@ -533,6 +533,11 @@ class Chat:
                         },
                     ]
                     user_prompt = img_json
+            # 将history中的系统提示词部分如果为空，就剔除
+            for i in range(len(history)):
+                if history[i]["role"] == "system" and history[i]["content"] == "":
+                    history.pop(i)
+                    break
             if "o1" in self.model_name:
                 # 将history中的系统提示词部分的角色换成user
                 for i in range(len(history)):
