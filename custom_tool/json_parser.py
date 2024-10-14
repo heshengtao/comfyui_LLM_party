@@ -92,7 +92,7 @@ class json_get_value:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "text": ("STRING", {"default": ""}),
+                "text": ("STRING", {"forceInput": True}),
                 "key": ("STRING", {}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             }

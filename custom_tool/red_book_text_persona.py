@@ -18,7 +18,7 @@ class red_book_text_persona:
         }
     
     RETURN_TYPES = ("STRING","STRING",)
-    RETURN_NAMES = ("system_prompt","user_prompt",)
+    RETURN_NAMES = ("system_prompt_input","user_prompt_input",)
 
     FUNCTION = "red_book_text"
 

@@ -20,7 +20,7 @@ class load_persona:
         }
 
     RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("system_prompt",)
+    RETURN_NAMES = ("system_prompt_input",)
 
     FUNCTION = "persona"
 

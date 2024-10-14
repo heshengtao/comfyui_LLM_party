@@ -14,7 +14,7 @@ class classify_persona:
         }
 
     RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("system_prompt",)
+    RETURN_NAMES = ("system_prompt_input",)
 
     FUNCTION = "condition"
 
@@ -80,7 +80,7 @@ class classify_persona_plus:
         }
 
     RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("system_prompt",)
+    RETURN_NAMES = ("system_prompt_input",)
 
     FUNCTION = "condition"
 
