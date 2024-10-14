@@ -880,7 +880,7 @@ class easy_LLM_api_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name": (models_dict, {"default": "gpt-4o-mini"}),
+                "model_name": (models_dict, {"default": models_dict[0]}),
             },
         }
 
