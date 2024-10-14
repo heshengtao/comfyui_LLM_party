@@ -68,13 +68,13 @@ def install_llama(system_info):
             
             if system_info.get("gpu", False):
                 cuda_version = system_info["cuda_version"]
-                custom_command = f"--extra-index-url https://abetlen.github.io/llama-cpp-python/whl/{cuda_version}"
+                custom_command = f"--index-url  https://abetlen.github.io/llama-cpp-python/whl/{cuda_version}/"
                 print(f"{cuda_version}:" + custom_command+"\n如果下载速度太慢，请直接到这个链接里下载轮子，然后手动安装。\nIf the download speed is too slow, please go directly to this link to download the wheel and install it manually.")
             elif system_info.get("metal", False):
-                custom_command = f"--extra-index-url https://abetlen.github.io/llama-cpp-python/whl/metal"
+                custom_command = f"--index-url  https://abetlen.github.io/llama-cpp-python/whl/metal/"
                 print("mps:" + custom_command+"\n如果下载速度太慢，请直接到这个链接里下载轮子，然后手动安装。\nIf the download speed is too slow, please go directly to this link to download the wheel and install it manually.")
             else:
-                custom_command = f"--extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu"
+                custom_command = f"--index-url  https://abetlen.github.io/llama-cpp-python/whl/cpu/"
                 print("cpu:" + custom_command+"\n如果下载速度太慢，请直接到这个链接里下载轮子，然后手动安装。\nIf the download speed is too slow, please go directly to this link to download the wheel and install it manually.")
             
             install_llama_package("llama-cpp-python", custom_command=custom_command)
