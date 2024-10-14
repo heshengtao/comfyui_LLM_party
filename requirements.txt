@@ -38,7 +38,7 @@ soundfile
 langchain_openai
 sentence_transformers
 uvicorn
-google.generativeai
+google-generativeai
 llama_index
 html2image
 markdown
