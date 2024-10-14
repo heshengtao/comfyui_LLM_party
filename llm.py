@@ -33,7 +33,7 @@ if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
 from google.protobuf.struct_pb2 import Struct
 from torchvision.transforms import ToPILImage
-
+from .config_update import models_dict
 from .config import config_key, config_path, current_dir_path, load_api_keys
 from .tools.lorebook import Lorebook
 from .tools.api_tool import (
@@ -857,21 +857,6 @@ class LLM_api_loader:
 
         chat = Chat(model_name, openai.api_key, openai.base_url)
         return (chat,)
-llm_api_keys = load_api_keys(config_path)
-llm_api_key=llm_api_keys.get("openai_api_key").strip()
-llm_base_url=llm_api_keys.get("base_url").strip()
-if llm_api_key == "" or llm_api_key =="sk-XXXXX" or llm_base_url == "":
-    models_dict =[]
-else:
-    try:
-        client = openai.OpenAI(api_key=llm_api_key, base_url=llm_base_url)
-        models_response = client.models.list()
-        # 将模型列表转换为字典
-        models_dict = [model.id for model in models_response.data]
-        openai.api_key=llm_api_key
-        openai.base_url=llm_base_url
-    except Exception as e:
-        models_dict = []
 class easy_LLM_api_loader:
     def __init__(self):
         pass

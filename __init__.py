@@ -10,6 +10,7 @@ from .install import (
     install_portaudio,
     manage_discord_packages,
 )
+from .config_update import update_config
 from .llm import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 from server import PromptServer
 
