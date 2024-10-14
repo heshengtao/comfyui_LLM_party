@@ -58,15 +58,6 @@ def package_is_installed(package_name):
         return True
     except importlib.metadata.PackageNotFoundError:
         return False
-    
-def extract_version(tag_name):
-    pattern = r'(\d+\.\d+\.\d+)-'
-    match = re.search(pattern, tag_name)
-    if match:
-        return match.group(1)
-    else:
-        print(f"No match found for: {tag_name}")
-    return None
 
 def install_llama(system_info):
     try:
@@ -74,20 +65,17 @@ def install_llama(system_info):
         if imported:
             print("llama-cpp installed")
         else:
-            avx = "AVX2" if system_info["avx2"] else "AVX"
             
             if system_info.get("gpu", False):
                 cuda_version = system_info["cuda_version"]
-                if cuda_version =="cu124":
-                    cuda_version = "cu122"
-                custom_command = f"--force-reinstall --no-deps --index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/{cuda_version}"
-                print("cuda " + custom_command)
+                custom_command = f"--extra-index-url https://abetlen.github.io/llama-cpp-python/whl/{cuda_version}"
+                print(f"{cuda_version}:" + custom_command+"\n如果下载速度太慢，请直接到这个链接里下载轮子，然后手动安装。\nIf the download speed is too slow, please go directly to this link to download the wheel and install it manually.")
             elif system_info.get("metal", False):
-                custom_command = f"--prefer-binary --extra-index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/basic/cpu"
-                print("mps " + custom_command)
+                custom_command = f"--extra-index-url https://abetlen.github.io/llama-cpp-python/whl/metal"
+                print("mps:" + custom_command+"\n如果下载速度太慢，请直接到这个链接里下载轮子，然后手动安装。\nIf the download speed is too slow, please go directly to this link to download the wheel and install it manually.")
             else:
-                custom_command = f"--prefer-binary --extra-index-url=https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/{avx}/cpu"
-                print("cpu " + custom_command)
+                custom_command = f"--extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu"
+                print("cpu:" + custom_command+"\n如果下载速度太慢，请直接到这个链接里下载轮子，然后手动安装。\nIf the download speed is too slow, please go directly to this link to download the wheel and install it manually.")
             
             install_llama_package("llama-cpp-python", custom_command=custom_command)
     except Exception as e:
@@ -140,10 +128,6 @@ def get_system_info():
     # 确定平台标签
     if importlib.util.find_spec("packaging.tags"):
         system_info["platform_tag"] = next(packaging.tags.sys_tags()).platform
-    if "macosx" in system_info['platform_tag'] and system_info["metal"] == True:
-        system_info["platform_tag"] = "macosx_11_0_arm64"
-    elif "macosx" in system_info['platform_tag'] and system_info["metal"] == False:
-        system_info["platform_tag"] = "macosx_10_9_x86_64"
 
     return system_info
 
