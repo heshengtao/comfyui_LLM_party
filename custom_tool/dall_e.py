@@ -16,7 +16,7 @@ import numpy as np
 current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir_path, "config.ini")
 import configparser
-from openai import OpenAI
+from openai import OpenAI,AzureOpenAI
 config = configparser.ConfigParser()
 config.read(config_path)
 
@@ -222,6 +222,16 @@ class openai_dall_e:
         if openai.api_key == "":
             return ("请输入API_KEY",)
         openai_dall_e = OpenAI(api_key=openai.api_key, base_url=openai.base_url)
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            openai_dall_e = AzureOpenAI(
+                api_key= openai.api_key,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
         response = openai_dall_e.images.generate(
             prompt=prompt,
             model="dall-e-3",
@@ -318,6 +328,16 @@ class dall_e_tool:
         if openai.api_key == "":
             return ("请输入API_KEY",)
         global_dall_e = OpenAI(api_key=openai.api_key, base_url=openai.base_url)
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            global_dall_e = AzureOpenAI(
+                api_key= openai.api_key,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
         output = [
             {
                 "type": "function",
