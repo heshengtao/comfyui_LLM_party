@@ -221,6 +221,7 @@ def another_llm(id, type, question):
             historical_record,
             is_enable,
             extra_parameters,
+            user_history,
         ) = llm.list
         res, _, _, _ = llm.chatbot(
             question,
@@ -242,6 +243,7 @@ def another_llm(id, type, question):
             historical_record,
             is_enable,
             extra_parameters,
+            user_history,
         )
     elif type == "local":
         try:
@@ -271,6 +273,7 @@ def another_llm(id, type, question):
             historical_record,
             is_enable,
             extra_parameters,
+            user_history,
         ) = llm.list
         res, _, _, _ = llm.chatbot(
             question,
@@ -292,6 +295,7 @@ def another_llm(id, type, question):
             historical_record,
             is_enable,
             extra_parameters,
+            user_history,
         )
     else:
         return "type参数错误，请使用api或local"
@@ -993,6 +997,7 @@ class LLM:
                 "historical_record": (paths, {"default": ""}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "extra_parameters": ("DICT", {"forceInput": True}),
+                "user_history": ("STRING", {"forceInput": True}),
             },
         }
 
@@ -1036,6 +1041,7 @@ class LLM:
         historical_record="",
         is_enable=True,
         extra_parameters=None,
+        user_history=None,
     ):
         if not is_enable:
             return (
@@ -1063,6 +1069,7 @@ class LLM:
             historical_record,
             is_enable,
             extra_parameters,
+            user_history,
         ]
         if user_prompt is None:
             user_prompt = user_prompt_input
@@ -1136,6 +1143,8 @@ class LLM:
 
                 with open(self.prompt_path, "r", encoding="utf-8") as f:
                     history = json.load(f)
+                if user_history != "" and user_history is not None:
+                    history=json.loads(user_history)
                 history_temp = [history[0]]
                 elements_to_keep = 2 * conversation_rounds
                 if elements_to_keep < len(history) - 1:
@@ -1628,6 +1637,7 @@ class LLM_local:
                 "historical_record": (paths, {"default": ""}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 "extra_parameters": ("DICT", {"forceInput": True}),
+                "user_history": ("STRING", {"forceInput": True}),
             },
         }
 
@@ -1671,6 +1681,7 @@ class LLM_local:
         historical_record=None,
         is_enable=True,
         extra_parameters=None,
+        user_history=None,
     ):
         if not is_enable:
             return (
@@ -1698,6 +1709,7 @@ class LLM_local:
             historical_record,
             is_enable,
             extra_parameters,
+            user_history,
         ]
         if user_prompt is None:
             user_prompt = user_prompt_input
@@ -1768,6 +1780,8 @@ class LLM_local:
                         )
                 with open(self.prompt_path, "r", encoding="utf-8") as f:
                     history = json.load(f)
+                if user_history != "" and user_history is not None:
+                    history=json.loads(user_history)
                 history_temp = [history[0]]
                 elements_to_keep = 2 * conversation_rounds
                 if elements_to_keep < len(history) - 1:
