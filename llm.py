@@ -29,6 +29,7 @@ from transformers import (
     AutoConfig,
 )
 import PIL.Image
+from openai import AzureOpenAI
 if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
 from google.protobuf.struct_pb2 import Struct
@@ -489,6 +490,7 @@ class Chat:
         **extra_parameters,
     ):
         try:
+            is_azure=False
             if images is not None:
                 if imgbb_api_key == "" or imgbb_api_key is None:
                     imgbb_api_key = api_keys.get("imgbb_api")
@@ -551,12 +553,24 @@ class Chat:
                         break
             openai.api_key = self.apikey
             openai.base_url = self.baseurl
+            openai_client = openai
+            if "openai.azure.com" in self.baseurl:
+                # 获取API版本
+                api_version = self.baseurl.split("=")[-1].split("/")[0]
+                # 获取azure_endpoint
+                azure_endpoint = "https://"+self.baseurl.split("//")[1].split("/")[0]
+                azure = AzureOpenAI(
+                    api_key= self.apikey,
+                    api_version=api_version,
+                    azure_endpoint=azure_endpoint,
+                )
+                openai_client = azure
             new_message = {"role": "user", "content": user_prompt}
             history.append(new_message)
             print(history)
             if "o1" in self.model_name:
                 if tools is not None:
-                    response = openai.chat.completions.create(
+                    response = openai_client.chat.completions.create(
                         model=self.model_name,
                         messages=history,
                         tools=tools,
@@ -593,7 +607,7 @@ class Chat:
                                 "content": results,
                             }
                         )
-                        response = openai.chat.completions.create(
+                        response = openai_client.chat.completions.create(
                             model=self.model_name,
                             messages=history,
                             tools=tools,
@@ -601,7 +615,7 @@ class Chat:
                         )
                         print(response)
                 elif is_tools_in_sys_prompt == "enable":
-                    response = openai.chat.completions.create(
+                    response = openai_client.chat.completions.create(
                         model=self.model_name,
                         messages=history,
                         **extra_parameters,
@@ -629,21 +643,21 @@ class Chat:
                                 + "。请根据工具返回的结果继续回答我之前提出的问题。",
                             }
                         )
-                        response = openai.chat.completions.create(
+                        response = openai_client.chat.completions.create(
                             model=self.model_name,
                             messages=history,
                             **extra_parameters,
                         )
                         response_content = response.choices[0].message.content
                 else:
-                    response = openai.chat.completions.create(
+                    response = openai_client.chat.completions.create(
                         model=self.model_name,
                         messages=history,
                         **extra_parameters,
                     )
                     print(response)
             elif tools is not None:
-                response = openai.chat.completions.create(
+                response = openai_client.chat.completions.create(
                     model=self.model_name,
                     messages=history,
                     temperature=temperature,
@@ -683,7 +697,7 @@ class Chat:
                         }
                     )
                     try:
-                        response = openai.chat.completions.create(
+                        response = openai_client.chat.completions.create(
                             model=self.model_name,
                             messages=history,
                             tools=tools,
@@ -708,7 +722,7 @@ class Chat:
                             }
                         )
                         history.append({"role": "function", "name": response_content.name, "content": results})
-                        response = openai.chat.completions.create(
+                        response = openai_client.chat.completions.create(
                             model=self.model_name,
                             messages=history,
                             tools=tools,
@@ -733,7 +747,7 @@ class Chat:
                         }
                     )
                     history.append({"role": "function", "name": function_name, "content": results})
-                    response = openai.chat.completions.create(
+                    response = openai_client.chat.completions.create(
                         model=self.model_name,
                         messages=history,
                         tools=tools,
@@ -744,7 +758,7 @@ class Chat:
                 response_content = response.choices[0].message.content
                 print(response)
             elif is_tools_in_sys_prompt == "enable":
-                response = openai.chat.completions.create(
+                response = openai_client.chat.completions.create(
                     model=self.model_name,
                     messages=history,
                     temperature=temperature,
@@ -774,7 +788,7 @@ class Chat:
                             + "。请根据工具返回的结果继续回答我之前提出的问题。",
                         }
                     )
-                    response = openai.chat.completions.create(
+                    response = openai_client.chat.completions.create(
                         model=self.model_name,
                         messages=history,
                         temperature=temperature,
@@ -783,7 +797,7 @@ class Chat:
                     )
                     response_content = response.choices[0].message.content
             else:
-                response = openai.chat.completions.create(
+                response = openai_client.chat.completions.create(
                     model=self.model_name,
                     messages=history,
                     temperature=temperature,
