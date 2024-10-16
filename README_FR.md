@@ -88,6 +88,7 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 1. Prise en charge de tous les appels API au format OpenAI (en combinaison avec [oneapi](https://github.com/songquanpeng/one-api), il est possible d'appeler presque toutes les API LLM, ainsi que toutes les API de transit). Pour le choix de base_url, veuillez vous référer à [config.ini.example](config.ini.example). Actuellement, les API testées incluent :
 * [openai](https://platform.openai.com/docs/api-reference/chat/create) (Parfaitement compatible avec tous les modèles OpenAI, y compris les séries 4o et o1!)
 * [ollama](https://github.com/ollama/ollama) (Recommandé! Si vous appelez localement, il est fortement recommandé d'utiliser la méthode ollama pour héberger votre modèle local!)
+* [Azure OpenAI](https://azure.microsoft.com/zh-cn/products/ai-services/openai-service/)
 * [llama.cpp](https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#web-server) (Recommandé! Si vous souhaitez utiliser le modèle au format gguf local, vous pouvez utiliser l'API du projet llama.cpp pour accéder à ce projet!)
 * [通义千问/qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [智谱清言/glm](https://open.bigmodel.cn/dev/api#http_auth)

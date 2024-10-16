@@ -89,6 +89,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 1. Support all API calls in openai format(Combined with [oneapi](https://github.com/songquanpeng/one-api) can call almost all LLM APIs, also supports all transit APIs), base_url selection reference [config.ini.example](config.ini.example), which has been tested so far:
 * [openai](https://platform.openai.com/docs/api-reference/chat/create) (Perfectly compatible with all OpenAI models, including the 4o and o1 series!)
 * [ollama](https://github.com/ollama/ollama) (Recommended! If you are calling locally, it is highly recommended to use the ollama method to host your local model!)
+* [Azure OpenAI](https://azure.microsoft.com/zh-cn/products/ai-services/openai-service/)
 * [llama.cpp](https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#web-server) (Recommended! If you want to use the local gguf format model, you can use the llama.cpp project's API to access this project!)
 * [Tongyi Qianwen /qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [zhipu qingyan/glm](https://open.bigmodel.cn/dev/api#http_auth)

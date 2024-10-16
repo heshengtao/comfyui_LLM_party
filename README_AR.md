@@ -88,6 +88,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 1. يدعم جميع استدعاءات واجهة برمجة التطبيقات بتنسيق openai (بالاشتراك مع [oneapi](https://github.com/songquanpeng/one-api) يمكن استدعاء تقريبًا جميع واجهات برمجة التطبيقات LLM، كما يدعم جميع واجهات البرمجة الوسيطة)، يرجى الرجوع إلى اختيار base_url في [config.ini.example](config.ini.example)، وقد تم اختبار ما يلي حتى الآن:
 * [openai](https://platform.openai.com/docs/api-reference/chat/create) (متوافق تمامًا مع جميع نماذج OpenAI، بما في ذلك السلسلتين 4o و o1!)
 * [ollama](https://github.com/ollama/ollama) (موصى به! إذا كنت تتصل محليًا، فمن المستحسن بشدة استخدام طريقة ollama لاستضافة النموذج المحلي الخاص بك!)
+* [Azure OpenAI](https://azure.microsoft.com/zh-cn/products/ai-services/openai-service/)
 * [llama.cpp](https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#web-server) (موصى به! إذا كنت ترغب في استخدام نموذج تنسيق gguf المحلي، يمكنك استخدام واجهة برمجة تطبيقات مشروع llama.cpp للوصول إلى هذا المشروع!)
 * [通义千问/qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [智谱清言/glm](https://open.bigmodel.cn/dev/api#http_auth)

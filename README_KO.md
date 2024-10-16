@@ -89,6 +89,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 2. 모든 OpenAI 형식의 API 호출을 지원합니다( [oneapi](https://github.com/songquanpeng/one-api)와 결합하면 거의 모든 LLM API를 호출할 수 있으며, 모든 중계 API도 지원합니다). base_url 선택은 [config.ini.example](config.ini.example)을 참조하시기 바랍니다. 현재 테스트된 항목은 다음과 같습니다:
 * [openai](https://platform.openai.com/docs/api-reference/chat/create) (모든 OpenAI 모델과 완벽하게 호환되며, 4o 및 o1 시리즈를 포함합니다!)
 * [ollama](https://github.com/ollama/ollama) (추천! 로컬에서 호출하는 경우, 로컬 모델을 호스팅하기 위해 ollama 방법을 사용하는 것이 강력히 권장됩니다!)
+* [Azure OpenAI](https://azure.microsoft.com/zh-cn/products/ai-services/openai-service/)
 * [llama.cpp](https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#web-server) (추천! 로컬 gguf 형식 모델을 사용하려면 llama.cpp 프로젝트의 API를 사용하여 이 프로젝트에 액세스할 수 있습니다!)
 * [통의천문/qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [지푸청언/glm](https://open.bigmodel.cn/dev/api#http_auth)

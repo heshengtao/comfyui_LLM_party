@@ -87,6 +87,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 1. Unterstützung aller API-Aufrufe im OpenAI-Format (in Kombination mit [oneapi](https://github.com/songquanpeng/one-api) können nahezu alle LLM-APIs aufgerufen werden, ebenso alle Transfer-APIs). Die Auswahl der base_url erfolgt nach [config.ini.example](config.ini.example). Bisher getestete Modelle sind:
 * [openai](https://platform.openai.com/docs/api-reference/chat/create) (Perfekt kompatibel mit allen OpenAI-Modellen, einschließlich der 4o- und o1-Serien!)
 * [ollama](https://github.com/ollama/ollama) (Empfohlen! Wenn Sie lokal aufrufen, wird dringend empfohlen, die ollama-Methode zu verwenden, um Ihr lokales Modell zu hosten!)
+* [Azure OpenAI](https://azure.microsoft.com/zh-cn/products/ai-services/openai-service/)
 * [llama.cpp](https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#web-server) (Empfohlen! Wenn Sie das lokale gguf-Formatmodell verwenden möchten, können Sie die API des llama.cpp-Projekts verwenden, um auf dieses Projekt zuzugreifen!)
 * [Tongyi Qianwen/qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [Zhipu Qinyan/glm](https://open.bigmodel.cn/dev/api#http_auth)
