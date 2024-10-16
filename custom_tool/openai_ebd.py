@@ -9,7 +9,7 @@ import requests
 import torch
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain_openai import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings,AzureOpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from openai import OpenAI
 
@@ -117,7 +117,17 @@ class load_openai_ebd:
             return ("请输入API_KEY",)
 
         embeddings = OpenAIEmbeddings(model=model_name, api_key=openai.api_key, base_url=openai.base_url)
-
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            embeddings = AzureOpenAIEmbeddings(
+                model=model_name,
+                api_key=openai.api_key,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
         if not base_path:
             # 将文件内容按段落分割
             paragraphs = file_content.split("\n")
@@ -213,7 +223,17 @@ class openai_ebd_tool:
             return ("请输入API_KEY",)
 
         embeddings = OpenAIEmbeddings(model=model_name, api_key=openai.api_key, base_url=openai.base_url)
-
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            embeddings = AzureOpenAIEmbeddings(
+                model=model_name,
+                api_key=openai.api_key,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
         if not base_path:
             # 将文件内容按段落分割
             paragraphs = file_content.split("\n")
@@ -327,6 +347,17 @@ class save_openai_ebd:
             return ("请输入API_KEY",)
 
         embeddings = OpenAIEmbeddings(model=model_name, api_key=openai.api_key, base_url=openai.base_url)
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            embeddings = AzureOpenAIEmbeddings(
+                model=model_name,
+                api_key=openai.api_key,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
 
         # 将文件内容按段落分割
         paragraphs = file_content.split("\n")

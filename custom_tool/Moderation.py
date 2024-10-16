@@ -1,6 +1,7 @@
 import locale
 import os
 import openai
+from openai import OpenAI,AzureOpenAI
 current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir_path, "config.ini")
 import configparser
@@ -8,8 +9,21 @@ config = configparser.ConfigParser()
 config.read(config_path)
 def check_text_legality(text):
     try:
+        client = OpenAI(api_key=openai.api_key, base_url=openai.base_url)
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            client = AzureOpenAI(
+                api_key= openai.api_key,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
         # 调用审查模型
-        response = openai.moderations.create(input=text)
+        response = client.moderations.create(
+            input=text,
+        )
 
         # 获取审查结果
         result = response.results[0]

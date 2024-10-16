@@ -12,7 +12,7 @@ import openai
 import requests
 import sounddevice as sd
 import torchaudio
-from openai import OpenAI
+from openai import OpenAI,AzureOpenAI
 import soundfile as sf
 
 current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -157,6 +157,16 @@ class openai_whisper:
 
         if audio_path != "":
             client = OpenAI(api_key=openai.api_key, base_url=openai.base_url)
+            if "openai.azure.com" in openai.base_url:
+                # 获取API版本
+                api_version = openai.base_url.split("=")[-1].split("/")[0]
+                # 获取azure_endpoint
+                azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+                client = AzureOpenAI(
+                    api_key= openai.api_key,
+                    api_version=api_version,
+                    azure_endpoint=azure_endpoint,
+                )
             audio_file = open(audio_path, "rb")
             transcription = client.audio.transcriptions.create(model="whisper-1", file=audio_file)
             out = transcription.text
