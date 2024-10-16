@@ -44,3 +44,7 @@ api_key=
 [your_ollama_model_name]
 base_url=http://127.0.0.1:11434/v1/
 api_key=ollama
+
+[your_azure_openai_model_name]
+base_url=https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/chat/completions?api-version=2024-06-01
+api_key=
