@@ -21,7 +21,6 @@ class LLMPartyExtension {
             position: fixed;
             top: 60px;
             left: 20px;
-            width: 180px;
             height: 30px;
             background-color: #1e1e1e;
             border: 1px solid #444;
@@ -29,41 +28,69 @@ class LLMPartyExtension {
             display: flex;
             align-items: center;
             z-index: 1000;
+        `;
+
+        const dragHandle = document.createElement('div');
+        dragHandle.style.cssText = `
+            width: 20px;
+            height: 100%;
+            background-color: #2c2c2c;
             cursor: move;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        `;
+        dragHandle.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="12" cy="5" r="1" />
+                <circle cx="12" cy="19" r="1" />
+            </svg>
         `;
 
         const buttonWrapper = document.createElement('div');
         buttonWrapper.style.cssText = `
             display: flex;
-            width: 100%;
             height: 100%;
         `;
 
         this.apiButton = document.createElement('button');
-        this.apiButton.textContent = 'API Key';
+        this.apiButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
+            </svg>
+        `;
         this.apiButton.style.cssText = `
-            flex: 1;
+            width: 30px;
             height: 100%;
             background-color: #2c2c2c;
             color: white;
             border: none;
             border-right: 1px solid #444;
             padding: 0;
-            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
         `;
         this.apiButton.onclick = () => this.showAPIModal();
 
         this.aboutButton = document.createElement('button');
-        this.aboutButton.textContent = 'About Us';
+        this.aboutButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+        `;
         this.aboutButton.style.cssText = `
-            flex: 1;
+            width: 30px;
             height: 100%;
             background-color: #2c2c2c;
             color: white;
             border: none;
             padding: 0;
-            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
         `;
         this.aboutButton.onclick = () => this.showAboutModal();
@@ -71,6 +98,7 @@ class LLMPartyExtension {
         buttonWrapper.appendChild(this.apiButton);
         buttonWrapper.appendChild(this.aboutButton);
 
+        this.container.appendChild(dragHandle);
         this.container.appendChild(buttonWrapper);
         document.body.appendChild(this.container);
     }
@@ -285,7 +313,8 @@ class LLMPartyExtension {
 
     makeDraggable(element) {
         let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        element.onmousedown = dragMouseDown;
+        const dragHandle = element.querySelector('div');
+        dragHandle.onmousedown = dragMouseDown;
 
         function dragMouseDown(e) {
             e = e || window.event;
