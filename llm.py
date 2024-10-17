@@ -66,8 +66,6 @@ from .tools.get_time import get_time, time_tool
 from .tools.get_weather import (
     accuweather_tool,
     get_accuweather,
-    get_weather,
-    weather_tool,
 )
 from .tools.git_tool import github_tool, search_github_repositories
 from .tools.image import CLIPTextEncode_party, KSampler_party, VAEDecode_party
@@ -145,7 +143,6 @@ from .tools.flux_persona import flux_persona
 from .tools.workflow_V2 import workflow_transfer_v2
 _TOOL_HOOKS = [
     "get_time",
-    "get_weather",
     "search_web",
     "search_web_bing",
     "check_web",
@@ -2178,7 +2175,6 @@ NODE_CLASS_MAPPINGS = {
     "tool_combine": tool_combine,
     "tool_combine_plus": tool_combine_plus,
     "time_tool": time_tool,
-    "weather_tool": weather_tool,
     "accuweather_tool": accuweather_tool,
     "google_tool": google_tool,
     "bing_tool": bing_tool,
@@ -2293,7 +2289,6 @@ if lang == "zh_CN":
         "tool_combine": "工具组合",
         "tool_combine_plus": "超大工具组合",
         "time_tool": "时间工具",
-        "weather_tool": "天气工具",
         "accuweather_tool": "accuweather工具",
         "google_tool": "谷歌搜索工具",
         "bing_tool": "必应搜索工具",
@@ -2401,7 +2396,6 @@ else:
         "tool_combine": "Tool Combine",
         "tool_combine_plus": "Large Tool Combine",
         "time_tool": "Time Tool",
-        "weather_tool": "Weather Tool",
         "accuweather_tool": "accuweather Tool",
         "google_tool": "Google Search Tool",
         "bing_tool": "Bing Search Tool",
