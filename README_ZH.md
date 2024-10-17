@@ -95,6 +95,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [豆包](https://www.volcengine.com/docs/82379/1263482)
+* [讯飞星火/spark](https://xinghuo.xfyun.cn/sparkapi?scr=price)
 
 2. 支持Gemini格式的API调用：
 * [Gemini](https://aistudio.google.com/app/prompts/new_chat)

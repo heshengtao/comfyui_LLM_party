@@ -96,6 +96,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [doubao](https://www.volcengine.com/docs/82379/1263482)
+* [spark](https://xinghuo.xfyun.cn/sparkapi?scr=price)
 
 2. API calls that support Gemini format:
 * [Gemini](https://aistudio.google.com/app/prompts/new_chat)

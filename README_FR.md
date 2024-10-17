@@ -94,7 +94,8 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 * [智谱清言/glm](https://open.bigmodel.cn/dev/api#http_auth)
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
-* [豆包](https://www.volcengine.com/docs/82379/1263482)
+* [doubao](https://www.volcengine.com/docs/82379/1263482)
+* [讯飞星火/spark](https://xinghuo.xfyun.cn/sparkapi?scr=price)
 
 2. Prise en charge des appels API au format Gemini :
 * [Gemini](https://aistudio.google.com/app/prompts/new_chat)
