@@ -7,7 +7,7 @@
   <a href="workflow_tutorial/">工作流教程</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">度盘链接</a> ·
   <a href="img/Q群.jpg">QQ群</a> ·
-  <a href="https://discord.gg/hbMQDH7J">discord</a> ·
+  <a href="https://discord.gg/bsnMfMAv">discord</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">关于我们</a>
 </div>
 
@@ -68,7 +68,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 ## 使用说明
 1. 节点的使用说明请参考：[怎么使用节点](how_to_use_nodes_ZH.md)
 
-2. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：[931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/hbMQDH7J)
+2. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：[931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/bsnMfMAv)
 
 3. 工作流教程请参考：[工作流教程](workflow_tutorial/)，感谢[HuangYuChuh](https://github.com/HuangYuChuh)的贡献！
 
@@ -253,7 +253,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 2. 微信群：`Choo-Yong`（添加小助手微信后进群）
 
-3. discord:[discord链接](https://discord.gg/hbMQDH7J)
+3. discord:[discord链接](https://discord.gg/bsnMfMAv)
 
 ### 关注我们
 1. 如果想持续关注本项目的最新功能，欢迎关注B站账号：[派对主持BB机](https://space.bilibili.com/26978344)

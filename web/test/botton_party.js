@@ -248,10 +248,12 @@ class LLMPartyExtension {
 
         const content = document.createElement('div');
         content.innerHTML = `
-            <p>项目发起人：heshengtao</p>
-            <p>项目地址: <a href="https://github.com/heshengtao/comfyui_LLM_party" target="_blank" style="color: #4CAF50;">https://github.com/heshengtao/comfyui_LLM_party</a></p>
-            <p>项目频道: <a href="https://space.bilibili.com/26978344?spm_id_from=333.1007.0.0" target="_blank" style="color: #4CAF50;">https://space.bilibili.com/26978344</a></p>
-            <p>ComfyUI LLM Party是一个致力于在ComfyUI的开源生态中打造一个功能强大的LLM Agent生态，将LLM与图像生成领域之间的gap打通，同时将ComfyUI做成一个可万物互联的移动接口，零代码实现个人AI Agent的创造，门槛低，自由度强。</p>
+            <p>project sponsor: heshengtao</p>
+            <p>github: <a href="https://github.com/heshengtao/comfyui_LLM_party" target="_blank" style="color: #4CAF50;">https://github.com/heshengtao/comfyui_LLM_party</a></p>
+            <p>bilibili: <a href="https://space.bilibili.com/26978344?spm_id_from=333.1007.0.0" target="_blank" style="color: #4CAF50;">https://space.bilibili.com/26978344</a></p>
+            <p>youtube: <a href="https://www.youtube.com/@comfyui-LLM-party" target="_blank" style="color: #4CAF50;">https://www.youtube.com/@comfyui-LLM-party</a></p>
+            <p>QQ: <a href="https://discord.com/invite/hbMQDH7J" target="_blank" style="color: #4CAF50;">https://discord.com/invite/hbMQDH7J</a></p>
+
         `;
 
         modalContent.appendChild(closeBtn);
