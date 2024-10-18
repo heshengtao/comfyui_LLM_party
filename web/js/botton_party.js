@@ -23,8 +23,8 @@ class LLMPartyExtension {
         this.container = document.createElement('div');
         this.container.style.cssText = `
             position: fixed;
-            top: 60px;
-            left: 20px;
+            top: 40px;
+            left: 40px;
             height: 30px;
             background-color: #1e1e1e;
             border: 1px solid #444;
