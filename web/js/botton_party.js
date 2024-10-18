@@ -95,7 +95,7 @@ class LLMPartyExtension {
             </svg>
         `, () => this.showAboutModal());
 
-        this.toggleButton = this.createButton('收起', `
+        this.toggleButton = this.createButton('Close', `
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
@@ -145,7 +145,7 @@ class LLMPartyExtension {
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
             `;
-            this.toggleButton.title = '收起';
+            this.toggleButton.title = 'Close';
         } else {
             buttonWrapper.style.width = '0px';
             this.toggleButton.innerHTML = `
@@ -153,7 +153,7 @@ class LLMPartyExtension {
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             `;
-            this.toggleButton.title = '展开';
+            this.toggleButton.title = 'Expand';
         }
 
         // 如果在右边界，保持吸附
@@ -464,7 +464,7 @@ class LLMPartyExtension {
             if (newTop < 5) newTop = 0;
             if (newTop > windowHeight - elementHeight - 5) newTop = windowHeight - elementHeight;
 
-            // 左边界吸附并触发收起
+            // 左边界吸附并触发Close
             if (newLeft < 5) {
                 newLeft = 0;
                 if (this.isExpanded) {
@@ -472,7 +472,7 @@ class LLMPartyExtension {
                 }
             }
 
-            // 右边界吸附并触发收起
+            // 右边界吸附并触发Close
             if (newLeft > windowWidth - elementWidth - 5) {
                 if (this.isExpanded) {
                     this.toggleExpansion();
@@ -501,7 +501,7 @@ class LLMPartyExtension {
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
             `;
-            this.toggleButton.title = '收起';
+            this.toggleButton.title = 'Close';
         } else {
             buttonWrapper.style.width = '0px';
             this.toggleButton.innerHTML = `
@@ -509,7 +509,7 @@ class LLMPartyExtension {
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             `;
-            this.toggleButton.title = '展开';
+            this.toggleButton.title = 'Expand';
         }
 
         // 如果在右边界，保持吸附
