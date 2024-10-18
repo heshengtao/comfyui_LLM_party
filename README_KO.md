@@ -42,7 +42,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
   - FastAPI를 시작하여 ComfyUI 워크플로를 호출할 수 있습니다. 이를 직접 실행하면 `http://127.0.0.1:8817/v1/`에 있는 OpenAI 인터페이스를 얻게 됩니다. 워크플로의 시작과 끝을 워크플로 시작과 종료에 연결하고, API 형식으로 `workflow_api` 폴더에 저장합니다. 그런 다음 OpenAI 인터페이스를 호출할 수 있는 다른 프론트엔드에서 `model name=<워크플로 이름 (.json 확장자 없음)>`, `Base URL=http://127.0.0.1:8817/v1/`을 입력하고, API 키는 아무 값이나 채울 수 있습니다.
   - Streamlit 애플리케이션을 시작합니다. 워크플로 저장 프로세스는 위와 같습니다. Streamlit 애플리케이션의 '설정'에서 저장한 워크플로를 선택하고, '대화'에서 워크플로 에이전트와 대화할 수 있습니다.
   - '우리에 대해', 이 프로젝트를 소개합니다.
-1. [searxng](https://github.com/searxng/searxng) 도구를 추가하여 전체 웹에서 검색을 집계할 수 있습니다. Perplexica도 이 집계 검색 도구에 의존하므로 파티에서 Perplexica를 설정할 수 있습니다. Docker에서 searxng/searxng 공용 이미지를 배포한 다음 `docker run -d -p 8080:8080 searxng/searxng`을 사용하여 시작하고 `http://localhost:8080`을 사용하여 액세스할 수 있습니다. 이 URL `http://localhost:8080`을 파티의 searxng 도구에 입력하면 searxng을 LLM의 도구로 사용할 수 있습니다.
+2. [searxng](https://github.com/searxng/searxng) 도구를 추가하여 전체 웹에서 검색을 집계할 수 있습니다. Perplexica도 이 집계 검색 도구에 의존하므로 파티에서 Perplexica를 설정할 수 있습니다. Docker에서 searxng/searxng 공용 이미지를 배포한 다음 `docker run -d -p 8080:8080 searxng/searxng`을 사용하여 시작하고 `http://localhost:8080`을 사용하여 액세스할 수 있습니다. 이 URL `http://localhost:8080`을 파티의 searxng 도구에 입력하면 searxng을 LLM의 도구로 사용할 수 있습니다.
 1. 다음 워크플로를 comfyui에 드래그한 다음 [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)를 사용하여 누락된 노드를 설치합니다.
   - API를 사용하여 LLM 호출: [start_with_LLM_api](workflow/start_with_LLM_api.json)
   - ollama를 사용하여 로컬 LLM 관리: [start_with_Ollama](workflow/ollama.json)
