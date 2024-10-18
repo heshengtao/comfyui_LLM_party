@@ -1,4 +1,5 @@
 import configparser
+import logging
 import os
 import openai
 import server
@@ -27,8 +28,9 @@ else:
         models_dict = []
         print(e)
 
-# 全局变量来跟踪FastAPI服务器的状态
+# 全局变量来跟踪FastAPI和Streamlit服务器的状态
 fastapi_process = None
+streamlit_process = None
 
 @server.PromptServer.instance.routes.post('/party/update_config')
 async def update_config(request):
@@ -65,23 +67,30 @@ async def update_config(request):
     except Exception as e:
         return web.json_response({"status": "error", "message": str(e)}, status=500)
 
-def start_fastapi_server(fast_api_path):
-    cmd = f"{sys.executable} {fast_api_path} --host 127.0.0.1 --port 8187"
+def start_server(script_path, port, server_type):
+    if server_type == "streamlit":
+        cmd = f"{sys.executable} -m streamlit run {script_path} --server.port {port}"
+    else:
+        cmd = f"{sys.executable} {script_path} --host 127.0.0.1 --port {port}"
+    
+    logging.info(f"Starting {server_type} server with command: {cmd}")
+    
+    env = os.environ.copy()
+    env["PYTHONUNBUFFERED"] = "1"  # 确保Python输出不被缓冲
+    
     if sys.platform == 'win32':
-        return subprocess.Popen(cmd, creationflags=subprocess.CREATE_NEW_CONSOLE)
+        return subprocess.Popen(cmd, creationflags=subprocess.CREATE_NEW_CONSOLE, env=env)
     elif sys.platform == 'darwin':  # macOS
-        return subprocess.Popen(['osascript', '-e', f'tell app "Terminal" to do script "{cmd}"'])
+        return subprocess.Popen(['osascript', '-e', f'tell app "Terminal" to do script "{cmd}"'], env=env)
     else:  # Linux
         try:
-            # 检查 screen 是否可用
             subprocess.run(['which', 'screen'], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            # 使用 screen 启动 FastAPI 服务器
-            screen_name = "fastapi_server"
+            screen_name = f"{server_type}_server"
             full_cmd = f"screen -dmS {screen_name} bash -c '{cmd}'"
-            subprocess.run(full_cmd, shell=True, check=True)
-            return subprocess.Popen(['echo', 'FastAPI server started in screen session'])
+            subprocess.run(full_cmd, shell=True, check=True, env=env)
+            return subprocess.Popen(['echo', f'{server_type.capitalize()} server started in screen session'])
         except subprocess.CalledProcessError:
-            print("Error: 'screen' command not found. Please install screen or use an alternative method.")
+            logging.error("Error: 'screen' command not found. Please install screen or use an alternative method.")
             return None
 
 @server.PromptServer.instance.routes.post('/party/fastapi')
@@ -89,26 +98,19 @@ async def start_fast_api(request):
     global fastapi_process
     try:
         if fastapi_process is not None and fastapi_process.poll() is None:
-            # FastAPI 服务器已经在运行
             return web.json_response({"status": "success", "message": "FastAPI服务已经在运行"})
 
-        # 获取当前文件的目录
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        
-        # 构建fast_api.py的完整路径
         fast_api_path = os.path.join(current_dir, 'fast_api.py')
         
-        # 启动FastAPI服务器
-        fastapi_process = start_fastapi_server(fast_api_path)
+        fastapi_process = start_server(fast_api_path, 8187, "fastapi")
         
         if fastapi_process is None:
             return web.json_response({"status": "error", "message": "无法启动FastAPI服务器"}, status=500)
         
-        # 等待一段时间，确保服务器有时间启动
         await asyncio.sleep(5)
         
         if sys.platform != 'win32' and sys.platform != 'darwin':
-            # 对于Linux，我们假设服务器已经在screen会话中启动
             return web.json_response({"status": "success", "message": "FastAPI服务已在screen会话中启动"})
         elif fastapi_process.poll() is None:
             return web.json_response({"status": "success", "message": "FastAPI服务已启动"})
@@ -118,3 +120,41 @@ async def start_fast_api(request):
     
     except Exception as e:
         return web.json_response({"status": "error", "message": str(e)}, status=500)
+
+@server.PromptServer.instance.routes.post('/party/streamlit')
+async def start_streamlit(request):
+    global streamlit_process
+    try:
+        if streamlit_process is not None and streamlit_process.poll() is None:
+            return web.json_response({"status": "success", "message": "Streamlit应用已经在运行"})
+
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        streamlit_path = os.path.join(current_dir, 'api.py')
+        
+        # 尝试多个端口
+        for port in range(8501, 8510):
+            streamlit_process = start_server(streamlit_path, port, "streamlit")
+            if streamlit_process is not None:
+                break
+        
+        if streamlit_process is None:
+            logging.error("无法启动Streamlit应用")
+            return web.json_response({"status": "error", "message": "无法启动Streamlit应用"}, status=500)
+        
+        await asyncio.sleep(10)  # 给Streamlit更多时间启动
+        
+        if sys.platform != 'win32' and sys.platform != 'darwin':
+            logging.info("Streamlit应用已在screen会话中启动")
+            return web.json_response({"status": "success", "message": "Streamlit应用已在screen会话中启动"})
+        elif streamlit_process.poll() is None:
+            logging.info("Streamlit应用已启动")
+            return web.json_response({"status": "success", "message": "Streamlit应用已启动"})
+        else:
+            error_message = "Streamlit应用启动失败"
+            logging.error(error_message)
+            return web.json_response({"status": "error", "message": error_message}, status=500)
+    
+    except Exception as e:
+        logging.exception("启动Streamlit时发生异常")
+        return web.json_response({"status": "error", "message": str(e)}, status=500)
+

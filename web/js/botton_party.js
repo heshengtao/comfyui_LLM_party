@@ -6,6 +6,7 @@ class LLMPartyExtension {
         this.apiButton = null;
         this.aboutButton = null;
         this.fastApiButton = null;
+        this.streamlitButton = null;
         this.apiModal = null;
         this.aboutModal = null;
 
@@ -68,6 +69,14 @@ class LLMPartyExtension {
             </svg>
         `, () => this.sendFastApiRequest());
 
+        this.streamlitButton = this.createButton('Streamlit', `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+        `, () => this.sendStreamlitRequest());
+
         this.aboutButton = this.createButton('About', `
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
@@ -76,6 +85,7 @@ class LLMPartyExtension {
 
         buttonWrapper.appendChild(this.apiButton);
         buttonWrapper.appendChild(this.fastApiButton);
+        buttonWrapper.appendChild(this.streamlitButton);
         buttonWrapper.appendChild(this.aboutButton);
 
         this.container.appendChild(dragHandle);
@@ -336,6 +346,32 @@ class LLMPartyExtension {
             }
         } catch (error) {
             console.error('FastAPI请求错误:', error);
+            alert(`发生错误: ${error.message}`);
+        }
+    }
+
+    async sendStreamlitRequest() {
+        const endpoint = '/party/streamlit';
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Streamlit请求成功:', result);
+                alert('Streamlit应用已启动！请在新窗口中查看。');
+            } else {
+                const errorMessage = await response.text();
+                console.error('Streamlit请求失败:', response.status, errorMessage);
+                alert(`Streamlit请求失败: ${errorMessage}`);
+            }
+        } catch (error) {
+            console.error('Streamlit请求错误:', error);
             alert(`发生错误: ${error.message}`);
         }
     }
