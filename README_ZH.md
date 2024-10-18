@@ -51,6 +51,11 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 5. 由于本项目有较高的使用门槛，所以即使你选择了快速开始，我也希望你能耐心阅读完本项目主页。
 
 ## 最新更新
+1. 添加了一个前端组件，从左到右的功能分别为：
+  - 将你的API key和Base URL保存到config.ini文件，当你对API LLM加载器节点使用fix node后，他会自动读取config.ini文件中你修改后的API key和Base URL。
+  - 启动一个fastapi，可以用来调用你的comfyui工作流，如果你直接运行它，你就获得了一个`http://127.0.0.1:8817/v1/`上的openai接口。你需要将你的工作流的开始和结尾连上开始工作流和结束工作流，然后以API格式保存到workflow_api文件夹，然后在其他可以调用openai接口的前端输入model name=<你的工作流名不包含.json后缀名>，Base URL=`http://127.0.0.1:8817/v1/`，API key随便填。
+  - 启动一个streamlit应用，工作流保存流程如上，你可以在streamlit应用中的`设置`中选中你保存的工作流，并且在`聊天`中与你的工作流智能体聊天。
+  - 关于我们，介绍本项目。
 1. 移除了自动获取模型名称列表节点，取而代之的是简易API LLM加载器节点，自动从你的config.ini文件中的配置中获取你的模型名称列表，你只要选择一个名称就可以加载模型了。此外更新了简易LLM加载器、简易LLM-GGUF加载器、简易VLM加载器、简易VLM-GGUF加载器、简易LLM lora加载器节点。都是自动读取party文件夹的model文件夹内的模型路径，让大家更方便的加载各种本地模型。
 1. 现在LLM可以像SD和FLUX一样动态加载lora了，你可以用多个lora串联，以在同一个LLM上加载多的lora。示例工作流：[start_with_LLM_LORA](workflow/LLM_lora.json)。
 1. 添加了[searxng](https://github.com/searxng/searxng)工具，可以聚合搜索全网，Perplexica也是依赖于这个聚合搜索工具，相当于你可以在party里搭建一个Perplexica。你可以在docker中部署searxng/searxng公共镜像，然后使用`docker run -d -p 8080:8080 searxng/searxng`来启动它，然后使用`http://localhost:8080`来访问它。你可以将`http://localhost:8080`这个URL填入party的searxng工具，就可以将searxng当作LLM的一个工具使用了。
