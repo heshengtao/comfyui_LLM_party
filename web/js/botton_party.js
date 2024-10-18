@@ -21,10 +21,17 @@ class LLMPartyExtension {
 
     createContainer() {
         this.container = document.createElement('div');
+        
+        // 计算初始位置
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const initialLeft = (windowWidth / 2) - 60; // 假设容器宽度为 120px
+        const initialTop = windowHeight - 40; // 距离底部 40px
+
         this.container.style.cssText = `
             position: fixed;
-            top: 40px;
-            left: 40px;
+            top: ${initialTop}px;
+            left: ${initialLeft}px;
             height: 30px;
             background-color: #1e1e1e;
             border: 1px solid #444;
@@ -159,7 +166,7 @@ class LLMPartyExtension {
     }
 
 
-        // ... 其余方法保持不变 ...
+    // ... 其余方法保持不变 ...
 
         createAPIModal() {
             this.apiModal = document.createElement('div');
