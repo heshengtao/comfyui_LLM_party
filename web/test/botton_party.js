@@ -5,6 +5,7 @@ class LLMPartyExtension {
         this.container = null;
         this.apiButton = null;
         this.aboutButton = null;
+        this.fastApiButton = null;
         this.apiModal = null;
         this.aboutModal = null;
 
@@ -54,13 +55,39 @@ class LLMPartyExtension {
             height: 100%;
         `;
 
-        this.apiButton = document.createElement('button');
-        this.apiButton.innerHTML = `
+        this.apiButton = this.createButton('API', `
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
             </svg>
-        `;
-        this.apiButton.style.cssText = `
+        `, () => this.showAPIModal());
+
+        this.fastApiButton = this.createButton('FastAPI', `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+        `, () => this.sendFastApiRequest());
+
+        this.aboutButton = this.createButton('About', `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+        `, () => this.showAboutModal());
+
+        buttonWrapper.appendChild(this.apiButton);
+        buttonWrapper.appendChild(this.fastApiButton);
+        buttonWrapper.appendChild(this.aboutButton);
+
+        this.container.appendChild(dragHandle);
+        this.container.appendChild(buttonWrapper);
+        document.body.appendChild(this.container);
+    }
+
+    createButton(title, svgContent, onClick) {
+        const button = document.createElement('button');
+        button.innerHTML = svgContent;
+        button.title = title;
+        button.style.cssText = `
             width: 30px;
             height: 100%;
             background-color: #2c2c2c;
@@ -73,34 +100,8 @@ class LLMPartyExtension {
             justify-content: center;
             cursor: pointer;
         `;
-        this.apiButton.onclick = () => this.showAPIModal();
-
-        this.aboutButton = document.createElement('button');
-        this.aboutButton.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-            </svg>
-        `;
-        this.aboutButton.style.cssText = `
-            width: 30px;
-            height: 100%;
-            background-color: #2c2c2c;
-            color: white;
-            border: none;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        `;
-        this.aboutButton.onclick = () => this.showAboutModal();
-
-        buttonWrapper.appendChild(this.apiButton);
-        buttonWrapper.appendChild(this.aboutButton);
-
-        this.container.appendChild(dragHandle);
-        this.container.appendChild(buttonWrapper);
-        document.body.appendChild(this.container);
+        button.onclick = onClick;
+        return button;
     }
 
     createAPIModal() {
@@ -248,12 +249,12 @@ class LLMPartyExtension {
 
         const content = document.createElement('div');
         content.innerHTML = `
-            <p>project sponsor: heshengtao</p>
-            <p>github: <a href="https://github.com/heshengtao/comfyui_LLM_party" target="_blank" style="color: #4CAF50;">https://github.com/heshengtao/comfyui_LLM_party</a></p>
-            <p>bilibili: <a href="https://space.bilibili.com/26978344?spm_id_from=333.1007.0.0" target="_blank" style="color: #4CAF50;">https://space.bilibili.com/26978344</a></p>
-            <p>youtube: <a href="https://www.youtube.com/@comfyui-LLM-party" target="_blank" style="color: #4CAF50;">https://www.youtube.com/@comfyui-LLM-party</a></p>
-            <p>QQ: <a href="https://discord.com/invite/hbMQDH7J" target="_blank" style="color: #4CAF50;">https://discord.com/invite/hbMQDH7J</a></p>
-
+            <p>github: <a href="https://github.com/heshengtao/comfyui_LLM_party" target="_blank" style="color: #4CAF50;">heshengtao/comfyui_LLM_party</a></p>
+            <p>bilibili: <a href="https://space.bilibili.com/26978344?spm_id_from=333.1007.0.0" target="_blank" style="color: #4CAF50;">@party host BB machine</a></p>
+            <p>youtube: <a href="https://www.youtube.com/@comfyui-LLM-party" target="_blank" style="color: #4CAF50;">@comfyui-LLM-party</a></p>
+            <p>QQ: <a href="https://github.com/heshengtao/comfyui_LLM_party/blob/main/img/Q%E7%BE%A4.jpg" target="_blank" style="color: #4CAF50;">931057213</a></p>
+            <p>openart: <a href="https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation" target="_blank" style="color: #4CAF50;">@comfyui-LLM-party</a></p>
+            <p>feishu: <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf?fromScene=spaceOverview" target="_blank" style="color: #4CAF50;">@comfyui-LLM-party</a></p>
         `;
 
         modalContent.appendChild(closeBtn);
@@ -313,11 +314,37 @@ class LLMPartyExtension {
         }
     }
 
+    async sendFastApiRequest() {
+        const endpoint = '/party/fastapi';
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('FastAPI请求成功:', result);
+                alert('FastAPI请求已发送并成功处理！');
+            } else {
+                const errorMessage = await response.text();
+                console.error('FastAPI请求失败:', response.status, errorMessage);
+                alert(`FastAPI请求失败: ${errorMessage}`);
+            }
+        } catch (error) {
+            console.error('FastAPI请求错误:', error);
+            alert(`发生错误: ${error.message}`);
+        }
+    }
+
     makeDraggable(element) {
         let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         const dragHandle = element.querySelector('div');
         dragHandle.onmousedown = dragMouseDown;
-
+    
         function dragMouseDown(e) {
             e = e || window.event;
             e.preventDefault();
@@ -326,7 +353,7 @@ class LLMPartyExtension {
             document.onmouseup = closeDragElement;
             document.onmousemove = elementDrag;
         }
-
+    
         function elementDrag(e) {
             e = e || window.event;
             e.preventDefault();
@@ -337,7 +364,7 @@ class LLMPartyExtension {
             element.style.top = (element.offsetTop - pos2) + "px";
             element.style.left = (element.offsetLeft - pos1) + "px";
         }
-
+    
         function closeDragElement() {
             document.onmouseup = null;
             document.onmousemove = null;
