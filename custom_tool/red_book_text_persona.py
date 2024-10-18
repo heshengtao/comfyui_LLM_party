@@ -1,6 +1,6 @@
 import locale
 
-class red_book_text_persona:
+class red_book:
     @classmethod
     def INPUT_TYPES(s):
         text_type_list = ["产品文案", "活动文案"]
@@ -85,7 +85,7 @@ class red_book_text_persona:
         return (system_prompt,main_body,)
 
 NODE_CLASS_MAPPINGS = {
-    "red_book_text_persona": red_book_text_persona,
+    "red_book": red_book,
 }
 lang = locale.getdefaultlocale()[0]
 import os
@@ -102,6 +102,6 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"red_book_text_persona": "小红书文案面具📕"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"red_book": "小红书文案面具📕"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"red_book_text_persona": "REDnote copywriting Persona📕"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"red_book": "REDnote copywriting Persona📕"}
