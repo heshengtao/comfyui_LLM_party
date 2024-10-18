@@ -428,15 +428,45 @@ class LLMPartyExtension {
             document.onmousemove = elementDrag;
         }
     
-        function elementDrag(e) {
+        const elementDrag = (e) => {
             e = e || window.event;
             e.preventDefault();
             pos1 = pos3 - e.clientX;
             pos2 = pos4 - e.clientY;
             pos3 = e.clientX;
             pos4 = e.clientY;
-            element.style.top = (element.offsetTop - pos2) + "px";
-            element.style.left = (element.offsetLeft - pos1) + "px";
+
+            let newTop = element.offsetTop - pos2;
+            let newLeft = element.offsetLeft - pos1;
+
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            const elementWidth = element.offsetWidth;
+            const elementHeight = element.offsetHeight;
+
+            // 上下边界吸附
+            if (newTop < 5) newTop = 0;
+            if (newTop > windowHeight - elementHeight - 5) newTop = windowHeight - elementHeight;
+
+            // 左边界吸附并触发收起
+            if (newLeft < 5) {
+                newLeft = 0;
+                if (this.isExpanded) {
+                    this.toggleExpansion();
+                }
+            }
+
+            // 右边界吸附并触发收起
+            if (newLeft > windowWidth - elementWidth - 5) {
+                if (this.isExpanded) {
+                    this.toggleExpansion();
+                }
+                newLeft = windowWidth - this.container.querySelector('div:first-child').offsetWidth - this.toggleButton.offsetWidth;
+            }
+
+            // 更新位置
+            element.style.top = newTop + "px";
+            element.style.left = newLeft + "px";
         }
     
         function closeDragElement() {
@@ -444,9 +474,41 @@ class LLMPartyExtension {
             document.onmousemove = null;
         }
     }
+
+    toggleExpansion() {
+        this.isExpanded = !this.isExpanded;
+        const buttonWrapper = this.container.querySelector('div:nth-child(2)');
+        if (this.isExpanded) {
+            buttonWrapper.style.width = '120px';
+            this.toggleButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            `;
+            this.toggleButton.title = '收起';
+        } else {
+            buttonWrapper.style.width = '0px';
+            this.toggleButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            `;
+            this.toggleButton.title = '展开';
+        }
+
+        // 如果在右边界，保持吸附
+        const windowWidth = window.innerWidth;
+        const elementWidth = this.container.offsetWidth;
+        const currentLeft = parseInt(this.container.style.left);
+        if (currentLeft + elementWidth > windowWidth - 5) {
+            this.container.style.left = (windowWidth - this.container.querySelector('div:first-child').offsetWidth - this.toggleButton.offsetWidth) + "px";
+        }
+    }
+
+    // ... 其他方法保持不变 ...
 }
 
-// Register the extension
+// 注册扩展
 app.registerExtension({
     name: "comfy.LLMPartyExtension",
     setup() {
