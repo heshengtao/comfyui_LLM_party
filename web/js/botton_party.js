@@ -7,8 +7,10 @@ class LLMPartyExtension {
         this.aboutButton = null;
         this.fastApiButton = null;
         this.streamlitButton = null;
+        this.toggleButton = null;
         this.apiModal = null;
         this.aboutModal = null;
+        this.isExpanded = true;
 
         this.createContainer();
         this.createAPIModal();
@@ -30,6 +32,7 @@ class LLMPartyExtension {
             display: flex;
             align-items: center;
             z-index: 1000;
+            transition: width 0.3s ease-in-out;
         `;
 
         const dragHandle = document.createElement('div');
@@ -54,6 +57,8 @@ class LLMPartyExtension {
         buttonWrapper.style.cssText = `
             display: flex;
             height: 100%;
+            overflow: hidden;
+            transition: width 0.3s ease-in-out;
         `;
 
         this.apiButton = this.createButton('API', `
@@ -83,6 +88,14 @@ class LLMPartyExtension {
             </svg>
         `, () => this.showAboutModal());
 
+        this.toggleButton = this.createButton('收起', `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        `, () => this.toggleExpansion());
+        this.toggleButton.style.width = '20px';
+        this.toggleButton.style.borderRight = 'none';
+
         buttonWrapper.appendChild(this.apiButton);
         buttonWrapper.appendChild(this.fastApiButton);
         buttonWrapper.appendChild(this.streamlitButton);
@@ -90,6 +103,7 @@ class LLMPartyExtension {
 
         this.container.appendChild(dragHandle);
         this.container.appendChild(buttonWrapper);
+        this.container.appendChild(this.toggleButton);
         document.body.appendChild(this.container);
     }
 
@@ -113,6 +127,30 @@ class LLMPartyExtension {
         button.onclick = onClick;
         return button;
     }
+
+    toggleExpansion() {
+        this.isExpanded = !this.isExpanded;
+        const buttonWrapper = this.container.querySelector('div:nth-child(2)');
+        if (this.isExpanded) {
+            buttonWrapper.style.width = '120px';
+            this.toggleButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            `;
+            this.toggleButton.title = '收起';
+        } else {
+            buttonWrapper.style.width = '0px';
+            this.toggleButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            `;
+            this.toggleButton.title = '展开';
+        }
+    }
+
+    // ... 其余方法保持不变 ...
 
     createAPIModal() {
         this.apiModal = document.createElement('div');
