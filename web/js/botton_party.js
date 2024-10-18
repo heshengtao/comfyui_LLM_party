@@ -264,7 +264,7 @@ class LLMPartyExtension {
             <p>youtube: <a href="https://www.youtube.com/@comfyui-LLM-party" target="_blank" style="color: #4CAF50;">@comfyui-LLM-party</a></p>
             <p>QQ: <a href="https://github.com/heshengtao/comfyui_LLM_party/blob/main/img/Q%E7%BE%A4.jpg" target="_blank" style="color: #4CAF50;">931057213</a></p>
             <p>openart: <a href="https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation" target="_blank" style="color: #4CAF50;">@comfyui-LLM-party</a></p>
-            <p>feishu: <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf?fromScene=spaceOverview" target="_blank" style="color: #4CAF50;">@comfyui-LLM-party</a></p>
+            <p>feishu: <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf?fromScene=spaceOverview" target="_blank" style="color: #4CAF50;">use document</a></p>
         `;
 
         modalContent.appendChild(closeBtn);
