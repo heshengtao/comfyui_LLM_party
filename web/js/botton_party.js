@@ -25,12 +25,12 @@ class LLMPartyExtension {
         // 计算初始位置
         const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
-        const initialLeft = (windowWidth / 2) - 60; // 假设容器宽度为 120px
+        const initialLeft = (windowWidth / 2) - 100; // 假设容器宽度为 120px
         const initialTop = windowHeight - 30; // 距离底部 0px
 
         this.container.style.cssText = `
             position: fixed;
-            top: ${initialTop}px;
+            top: 0px;
             left: ${initialLeft}px;
             height: 30px;
             background-color: #1e1e1e;
