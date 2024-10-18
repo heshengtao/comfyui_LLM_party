@@ -26,7 +26,7 @@ class LLMPartyExtension {
         const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
         const initialLeft = (windowWidth / 2) - 60; // 假设容器宽度为 120px
-        const initialTop = windowHeight - 40; // 距离底部 40px
+        const initialTop = windowHeight - 30; // 距离底部 0px
 
         this.container.style.cssText = `
             position: fixed;
