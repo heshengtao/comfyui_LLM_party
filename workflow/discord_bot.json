@@ -1,0 +1,2684 @@
+{
+  "last_node_id": 109,
+  "last_link_id": 171,
+  "nodes": [
+    {
+      "id": 46,
+      "type": "KSampler_party",
+      "pos": [
+        4036,
+        488
+      ],
+      "size": {
+        "0": 315,
+        "1": 262
+      },
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 52,
+          "label": "model"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 50,
+          "label": "positive"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 51,
+          "label": "negative"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 53,
+          "label": "latent_image",
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            54
+          ],
+          "shape": 3,
+          "label": "LATENT",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler_party"
+      },
+      "widgets_values": [
+        982198420501685,
+        "randomize",
+        20,
+        8,
+        "euler",
+        "normal",
+        1
+      ]
+    },
+    {
+      "id": 48,
+      "type": "VAEDecode_party",
+      "pos": [
+        4480,
+        529
+      ],
+      "size": {
+        "0": 243.60000610351562,
+        "1": 46
+      },
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 54,
+          "label": "samples"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 55,
+          "label": "vae"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            56
+          ],
+          "shape": 3,
+          "label": "IMAGE",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode_party"
+      }
+    },
+    {
+      "id": 35,
+      "type": "json_get_value",
+      "pos": [
+        1209,
+        661
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 130,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "links": [
+            38
+          ],
+          "shape": 3,
+          "label": "content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "draw",
+        true
+      ]
+    },
+    {
+      "id": 57,
+      "type": "load_persona",
+      "pos": [
+        1601,
+        1253
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            66
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "麦洛薇稳定版",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 45,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        2213,
+        312
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            52
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            48,
+            49
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            55
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "chilloutmix_NiPrunedFp32Fix.safetensors"
+      ]
+    },
+    {
+      "id": 53,
+      "type": "json_get_value",
+      "pos": [
+        1200,
+        1136
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 131,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "links": [
+            61
+          ],
+          "shape": 3,
+          "label": "content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "text",
+        true
+      ]
+    },
+    {
+      "id": 79,
+      "type": "json_get_value",
+      "pos": [
+        159,
+        1660
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 158,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0,
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "links": [
+            103,
+            106
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "content"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "2",
+        true
+      ]
+    },
+    {
+      "id": 81,
+      "type": "json_get_value",
+      "pos": [
+        621,
+        1543
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 103,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "links": [
+            109
+          ],
+          "shape": 3,
+          "label": "content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "text",
+        true
+      ]
+    },
+    {
+      "id": 50,
+      "type": "img2path",
+      "pos": [
+        4780,
+        534
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 56,
+          "label": "images"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "path",
+          "type": "STRING",
+          "links": [
+            164
+          ],
+          "shape": 3,
+          "label": "path",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "img2path"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 84,
+      "type": "json_get_value",
+      "pos": [
+        621,
+        1714
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 106,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "links": [
+            108
+          ],
+          "shape": 3,
+          "label": "content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "speak",
+        true
+      ]
+    },
+    {
+      "id": 85,
+      "type": "file_combine",
+      "pos": [
+        620,
+        1896
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file1",
+          "type": "STRING",
+          "link": 109,
+          "widget": {
+            "name": "file1"
+          },
+          "label": "file1"
+        },
+        {
+          "name": "file2",
+          "type": "STRING",
+          "link": 108,
+          "widget": {
+            "name": "file2"
+          },
+          "label": "file2"
+        },
+        {
+          "name": "file3",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file3"
+          },
+          "label": "file3"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "files",
+          "type": "STRING",
+          "links": [
+            146,
+            148,
+            150
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "files"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "file_combine"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 100,
+      "type": "none2false",
+      "pos": [
+        915,
+        2120
+      ],
+      "size": {
+        "0": 223.0547637939453,
+        "1": 26
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "any",
+          "type": "*",
+          "link": 148,
+          "label": "any",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "is_not_none",
+          "type": "BOOLEAN",
+          "links": [
+            149
+          ],
+          "shape": 3,
+          "label": "is_not_none",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "none2false"
+      }
+    },
+    {
+      "id": 101,
+      "type": "show_text_party",
+      "pos": [
+        586,
+        2159
+      ],
+      "size": {
+        "0": 315,
+        "1": 76
+      },
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 150,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "\n"
+      ]
+    },
+    {
+      "id": 55,
+      "type": "LLM",
+      "pos": [
+        2130,
+        1286
+      ],
+      "size": {
+        "0": 469.0147705078125,
+        "1": 539.8937377929688
+      },
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 62,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 147,
+          "label": "images",
+          "slot_index": 1
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 66,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 154,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 67,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "is_enable",
+          "type": "BOOLEAN",
+          "link": 93,
+          "widget": {
+            "name": "is_enable"
+          },
+          "slot_index": 7,
+          "label": "is_enable"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            69
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 99,
+      "type": "URL2IMG",
+      "pos": [
+        1194,
+        2096
+      ],
+      "size": {
+        "0": 315,
+        "1": 146
+      },
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "url",
+          "type": "STRING",
+          "link": 146,
+          "widget": {
+            "name": "url"
+          },
+          "slot_index": 0,
+          "label": "url"
+        },
+        {
+          "name": "is_enable",
+          "type": "BOOLEAN",
+          "link": 149,
+          "widget": {
+            "name": "is_enable"
+          },
+          "label": "is_enable"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "file_path",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "file_path"
+        },
+        {
+          "name": "img",
+          "type": "IMAGE",
+          "links": [
+            147
+          ],
+          "shape": 3,
+          "label": "img"
+        },
+        {
+          "name": "log",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "log"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "URL2IMG"
+      },
+      "widgets_values": [
+        "",
+        "图1",
+        true
+      ]
+    },
+    {
+      "id": 64,
+      "type": "show_text_party",
+      "pos": [
+        1188,
+        1856
+      ],
+      "size": {
+        "0": 315,
+        "1": 76.00003051757812
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 74,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            76,
+            152
+          ],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "你在哪里读书呀"
+      ]
+    },
+    {
+      "id": 54,
+      "type": "show_text_party",
+      "pos": [
+        1212,
+        1361
+      ],
+      "size": {
+        "0": 315,
+        "1": 76.00003051757812
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 61,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            64,
+            153
+          ],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 58,
+      "type": "KG_json_toolkit_developer",
+      "pos": [
+        1763,
+        1634
+      ],
+      "size": {
+        "0": 352.79998779296875,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            67
+          ],
+          "shape": 3,
+          "label": "tools",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KG_json_toolkit_developer"
+      },
+      "widgets_values": [
+        "",
+        "麦洛薇.json",
+        true
+      ]
+    },
+    {
+      "id": 102,
+      "type": "file_combine",
+      "pos": [
+        1550,
+        1531
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file1",
+          "type": "STRING",
+          "link": 153,
+          "widget": {
+            "name": "file1"
+          },
+          "label": "file1"
+        },
+        {
+          "name": "file2",
+          "type": "STRING",
+          "link": 152,
+          "widget": {
+            "name": "file2"
+          },
+          "label": "file2"
+        },
+        {
+          "name": "file3",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file3"
+          },
+          "label": "file3"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "files",
+          "type": "STRING",
+          "links": [
+            154
+          ],
+          "shape": 3,
+          "label": "files",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "file_combine"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 38,
+      "type": "LLM_api_loader",
+      "pos": [
+        1580,
+        1068
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            40,
+            62
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 60,
+      "type": "show_text_party",
+      "pos": [
+        2865,
+        1322
+      ],
+      "size": {
+        "0": 362.14404296875,
+        "1": 101.70391845703125
+      },
+      "flags": {},
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 69,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            75,
+            161
+          ],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "我在华中科技大学读书，专业是计算机科学与技术。你呢？你在哪里读书或者工作呢？😊"
+      ]
+    },
+    {
+      "id": 95,
+      "type": "json_get_value",
+      "pos": [
+        299,
+        865
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 156,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0,
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "links": [
+            130,
+            131,
+            132,
+            151
+          ],
+          "shape": 3,
+          "label": "content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "0",
+        true
+      ]
+    },
+    {
+      "id": 75,
+      "type": "show_text_party",
+      "pos": [
+        569,
+        1371
+      ],
+      "size": {
+        "0": 315,
+        "1": 76
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 151,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0,
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "{\n    \"speak\": \"你在哪里读书呀\"\n}"
+      ]
+    },
+    {
+      "id": 74,
+      "type": "show_text_party",
+      "pos": [
+        179,
+        1338
+      ],
+      "size": {
+        "0": 309.74237060546875,
+        "1": 237.22564697265625
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 157,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "[\n    {\n        \"speak\": \"你在哪里读书呀\"\n    },\n    {\n        \"speak\": \"\"\n    },\n    {\n        \"speak\": \"\"\n    },\n    {\n        \"speak\": \"\"\n    }\n]"
+      ]
+    },
+    {
+      "id": 104,
+      "type": "discord_file_monitor",
+      "pos": [
+        -279,
+        1119
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "is_success",
+          "type": "BOOLEAN",
+          "link": 155,
+          "widget": {
+            "name": "is_success"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "msg_content",
+          "type": "STRING",
+          "links": [
+            156,
+            157,
+            158
+          ],
+          "shape": 3,
+          "label": "msg_content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "discord_file_monitor"
+      },
+      "widgets_values": [
+        0.1,
+        true
+      ]
+    },
+    {
+      "id": 65,
+      "type": "openai_tts",
+      "pos": [
+        2823,
+        1860
+      ],
+      "size": {
+        "0": 315,
+        "1": 178
+      },
+      "flags": {},
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "is_enable",
+          "type": "BOOLEAN",
+          "link": 81,
+          "widget": {
+            "name": "is_enable"
+          },
+          "label": "is_enable"
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 75,
+          "widget": {
+            "name": "input_string"
+          },
+          "slot_index": 1,
+          "label": "input_string"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "STRING",
+          "links": [
+            159
+          ],
+          "shape": 3,
+          "label": "audio",
+          "slot_index": 0
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": null,
+          "shape": 3,
+          "label": "audio"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "openai_tts"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "tts-1",
+        "alloy",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 105,
+      "type": "discord_send",
+      "pos": [
+        3360,
+        1875
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio_path",
+          "type": "STRING",
+          "link": 159,
+          "widget": {
+            "name": "audio_path"
+          }
+        },
+        {
+          "name": "is_enable",
+          "type": "BOOLEAN",
+          "link": 162,
+          "widget": {
+            "name": "is_enable"
+          },
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "discord_send"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 106,
+      "type": "discord_send",
+      "pos": [
+        3352,
+        1331
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "is_enable",
+          "type": "BOOLEAN",
+          "link": 163,
+          "widget": {
+            "name": "is_enable"
+          },
+          "slot_index": 1
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 161,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "discord_send"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 68,
+      "type": "bool_logic",
+      "pos": [
+        1860,
+        1838
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "A",
+          "type": "BOOLEAN",
+          "link": 91,
+          "widget": {
+            "name": "A"
+          },
+          "label": "A"
+        },
+        {
+          "name": "B",
+          "type": "BOOLEAN",
+          "link": 92,
+          "widget": {
+            "name": "B"
+          },
+          "slot_index": 1,
+          "label": "B"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "bool",
+          "type": "BOOLEAN",
+          "links": [
+            80,
+            93
+          ],
+          "shape": 3,
+          "label": "bool",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "bool_logic"
+      },
+      "widgets_values": [
+        false,
+        "or",
+        "or"
+      ]
+    },
+    {
+      "id": 66,
+      "type": "none2false",
+      "pos": [
+        1602,
+        1972
+      ],
+      "size": {
+        "0": 223.0547637939453,
+        "1": 26
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "any",
+          "type": "*",
+          "link": 76,
+          "label": "any",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "is_not_none",
+          "type": "BOOLEAN",
+          "links": [
+            81,
+            92,
+            162
+          ],
+          "shape": 3,
+          "label": "is_not_none",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "none2false"
+      }
+    },
+    {
+      "id": 56,
+      "type": "none2false",
+      "pos": [
+        1656,
+        1396
+      ],
+      "size": {
+        "0": 223.0547637939453,
+        "1": 26
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "any",
+          "type": "*",
+          "link": 64,
+          "label": "any",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "is_not_none",
+          "type": "BOOLEAN",
+          "links": [
+            91,
+            163
+          ],
+          "shape": 3,
+          "label": "is_not_none",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "none2false"
+      }
+    },
+    {
+      "id": 52,
+      "type": "none2false",
+      "pos": [
+        1623,
+        921
+      ],
+      "size": {
+        "0": 210,
+        "1": 26
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "any",
+          "type": "*",
+          "link": 58,
+          "label": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "is_not_none",
+          "type": "BOOLEAN",
+          "links": [
+            59,
+            94,
+            165
+          ],
+          "shape": 3,
+          "label": "is_not_none",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "none2false"
+      }
+    },
+    {
+      "id": 107,
+      "type": "discord_send",
+      "pos": [
+        5200,
+        515
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "is_enable",
+          "type": "BOOLEAN",
+          "link": 165,
+          "widget": {
+            "name": "is_enable"
+          }
+        },
+        {
+          "name": "img_path",
+          "type": "STRING",
+          "link": 164,
+          "widget": {
+            "name": "img_path"
+          },
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "discord_send"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 40,
+      "type": "CLIPTextEncode_party",
+      "pos": [
+        3459,
+        434
+      ],
+      "size": [
+        252.10921027596578,
+        82.37495254464795
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 48,
+          "label": "clip"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 169,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 1,
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            50
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode_party"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 44,
+      "type": "CLIPTextEncode_party",
+      "pos": [
+        3469,
+        770
+      ],
+      "size": [
+        249.85320289071205,
+        98.7269414667661
+      ],
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 49,
+          "label": "clip"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 171,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 1,
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            51
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode_party"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 39,
+      "type": "load_persona",
+      "pos": [
+        1611,
+        588
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            41
+          ],
+          "shape": 3,
+          "label": "system_prompt",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "图片提示词生成器jsonout版",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 108,
+      "type": "json_get_value",
+      "pos": [
+        2815,
+        489
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 168,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "any",
+          "type": "*",
+          "links": [
+            169
+          ],
+          "shape": 3,
+          "label": "any",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "positive",
+        true
+      ]
+    },
+    {
+      "id": 37,
+      "type": "LLM",
+      "pos": [
+        2083,
+        585
+      ],
+      "size": {
+        "0": 462.1759033203125,
+        "1": 523.0535888671875
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 40,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 41,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 42,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "is_enable",
+          "type": "BOOLEAN",
+          "link": 94,
+          "widget": {
+            "name": "is_enable"
+          },
+          "label": "is_enable"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            168,
+            170
+          ],
+          "shape": 3,
+          "label": "assistant_response",
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 109,
+      "type": "json_get_value",
+      "pos": [
+        2820,
+        704
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 170,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "any",
+          "type": "*",
+          "links": [
+            171
+          ],
+          "shape": 3,
+          "label": "any",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "negative",
+        true
+      ]
+    },
+    {
+      "id": 47,
+      "type": "EmptyLatentImage",
+      "pos": [
+        3452,
+        593
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            53
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 36,
+      "type": "show_text_party",
+      "pos": [
+        1225,
+        860
+      ],
+      "size": {
+        "0": 315,
+        "1": 76
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 38,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            42,
+            58
+          ],
+          "shape": 6,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 63,
+      "type": "json_get_value",
+      "pos": [
+        1191,
+        1671
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 132,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "content",
+          "type": "STRING",
+          "links": [
+            74
+          ],
+          "shape": 3,
+          "label": "content",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "speak",
+        true
+      ]
+    },
+    {
+      "id": 103,
+      "type": "discord_bot",
+      "pos": [
+        -647,
+        1111
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "is_success",
+          "type": "BOOLEAN",
+          "links": [
+            155
+          ],
+          "shape": 3,
+          "label": "is_success"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "discord_bot"
+      },
+      "widgets_values": [
+        "",
+        true,
+        "[\"draw\", \"text\",\"speak\"]"
+      ]
+    }
+  ],
+  "links": [
+    [
+      38,
+      35,
+      0,
+      36,
+      0,
+      "STRING"
+    ],
+    [
+      40,
+      38,
+      0,
+      37,
+      0,
+      "CUSTOM"
+    ],
+    [
+      41,
+      39,
+      0,
+      37,
+      3,
+      "STRING"
+    ],
+    [
+      42,
+      36,
+      0,
+      37,
+      4,
+      "STRING"
+    ],
+    [
+      48,
+      45,
+      1,
+      40,
+      0,
+      "CLIP"
+    ],
+    [
+      49,
+      45,
+      1,
+      44,
+      0,
+      "CLIP"
+    ],
+    [
+      50,
+      40,
+      0,
+      46,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      51,
+      44,
+      0,
+      46,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      52,
+      45,
+      0,
+      46,
+      0,
+      "MODEL"
+    ],
+    [
+      53,
+      47,
+      0,
+      46,
+      3,
+      "LATENT"
+    ],
+    [
+      54,
+      46,
+      0,
+      48,
+      0,
+      "LATENT"
+    ],
+    [
+      55,
+      45,
+      2,
+      48,
+      1,
+      "VAE"
+    ],
+    [
+      56,
+      48,
+      0,
+      50,
+      0,
+      "IMAGE"
+    ],
+    [
+      58,
+      36,
+      0,
+      52,
+      0,
+      "*"
+    ],
+    [
+      61,
+      53,
+      0,
+      54,
+      0,
+      "STRING"
+    ],
+    [
+      62,
+      38,
+      0,
+      55,
+      0,
+      "CUSTOM"
+    ],
+    [
+      64,
+      54,
+      0,
+      56,
+      0,
+      "*"
+    ],
+    [
+      66,
+      57,
+      0,
+      55,
+      3,
+      "STRING"
+    ],
+    [
+      67,
+      58,
+      0,
+      55,
+      5,
+      "STRING"
+    ],
+    [
+      69,
+      55,
+      0,
+      60,
+      0,
+      "STRING"
+    ],
+    [
+      74,
+      63,
+      0,
+      64,
+      0,
+      "STRING"
+    ],
+    [
+      75,
+      60,
+      0,
+      65,
+      1,
+      "STRING"
+    ],
+    [
+      76,
+      64,
+      0,
+      66,
+      0,
+      "*"
+    ],
+    [
+      81,
+      66,
+      0,
+      65,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      91,
+      56,
+      0,
+      68,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      92,
+      66,
+      0,
+      68,
+      1,
+      "BOOLEAN"
+    ],
+    [
+      93,
+      68,
+      0,
+      55,
+      7,
+      "BOOLEAN"
+    ],
+    [
+      94,
+      52,
+      0,
+      37,
+      7,
+      "BOOLEAN"
+    ],
+    [
+      103,
+      79,
+      0,
+      81,
+      0,
+      "STRING"
+    ],
+    [
+      106,
+      79,
+      0,
+      84,
+      0,
+      "STRING"
+    ],
+    [
+      108,
+      84,
+      0,
+      85,
+      1,
+      "STRING"
+    ],
+    [
+      109,
+      81,
+      0,
+      85,
+      0,
+      "STRING"
+    ],
+    [
+      130,
+      95,
+      0,
+      35,
+      0,
+      "STRING"
+    ],
+    [
+      131,
+      95,
+      0,
+      53,
+      0,
+      "STRING"
+    ],
+    [
+      132,
+      95,
+      0,
+      63,
+      0,
+      "STRING"
+    ],
+    [
+      146,
+      85,
+      0,
+      99,
+      0,
+      "STRING"
+    ],
+    [
+      147,
+      99,
+      1,
+      55,
+      1,
+      "IMAGE"
+    ],
+    [
+      148,
+      85,
+      0,
+      100,
+      0,
+      "*"
+    ],
+    [
+      149,
+      100,
+      0,
+      99,
+      1,
+      "BOOLEAN"
+    ],
+    [
+      150,
+      85,
+      0,
+      101,
+      0,
+      "STRING"
+    ],
+    [
+      151,
+      95,
+      0,
+      75,
+      0,
+      "STRING"
+    ],
+    [
+      152,
+      64,
+      0,
+      102,
+      1,
+      "STRING"
+    ],
+    [
+      153,
+      54,
+      0,
+      102,
+      0,
+      "STRING"
+    ],
+    [
+      154,
+      102,
+      0,
+      55,
+      4,
+      "STRING"
+    ],
+    [
+      155,
+      103,
+      0,
+      104,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      156,
+      104,
+      0,
+      95,
+      0,
+      "STRING"
+    ],
+    [
+      157,
+      104,
+      0,
+      74,
+      0,
+      "STRING"
+    ],
+    [
+      158,
+      104,
+      0,
+      79,
+      0,
+      "STRING"
+    ],
+    [
+      159,
+      65,
+      0,
+      105,
+      0,
+      "STRING"
+    ],
+    [
+      161,
+      60,
+      0,
+      106,
+      1,
+      "STRING"
+    ],
+    [
+      162,
+      66,
+      0,
+      105,
+      1,
+      "BOOLEAN"
+    ],
+    [
+      163,
+      56,
+      0,
+      106,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      164,
+      50,
+      0,
+      107,
+      1,
+      "STRING"
+    ],
+    [
+      165,
+      52,
+      0,
+      107,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      168,
+      37,
+      0,
+      108,
+      0,
+      "STRING"
+    ],
+    [
+      169,
+      108,
+      0,
+      40,
+      1,
+      "STRING"
+    ],
+    [
+      170,
+      37,
+      0,
+      109,
+      0,
+      "STRING"
+    ],
+    [
+      171,
+      109,
+      0,
+      44,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909097,
+      "offset": {
+        "0": 936.3433459279963,
+        "1": -911.3755438445859
+      }
+    }
+  },
+  "version": 0.4
+}
