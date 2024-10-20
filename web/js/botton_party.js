@@ -78,7 +78,7 @@ class LLMPartyExtension {
             transition: width 0.3s ease-in-out;
         `;
 
-        this.apiButton = this.createButton('API', `
+        this.apiButton = this.createButton('API-key', `
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
             </svg>
@@ -113,7 +113,7 @@ class LLMPartyExtension {
         this.toggleButton.style.width = '20px';
         this.toggleButton.style.borderRight = 'none';
 
-        this.workflowButton = this.createButton('工作流', `
+        this.workflowButton = this.createButton('Workflow', `
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 3v18h18"/>
                 <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
@@ -409,15 +409,15 @@ class LLMPartyExtension {
             if (response.ok) {
                 const result = await response.json();
                 console.log('FastAPI请求成功:', result);
-                alert('FastAPI请求已发送并成功处理！');
+                alert('The FastAPI request was sent and successfully processed!');
             } else {
                 const errorMessage = await response.text();
-                console.error('FastAPI请求失败:', response.status, errorMessage);
-                alert(`FastAPI请求失败: ${errorMessage}`);
+                console.error('FastAPI request failed:', response.status, errorMessage);
+                alert(`FastAPI request failed: ${errorMessage}`);
             }
         } catch (error) {
-            console.error('FastAPI请求错误:', error);
-            alert(`发生错误: ${error.message}`);
+            console.error('FastAPI request failed:', error);
+            alert(`Error occurred: ${error.message}`);
         }
     }
 
@@ -435,15 +435,15 @@ class LLMPartyExtension {
             if (response.ok) {
                 const result = await response.json();
                 console.log('Streamlit请求成功:', result);
-                alert('Streamlit应用已启动！请在新窗口中查看。');
+                alert('The Streamlit app is launched! Please check it in a new window.');
             } else {
                 const errorMessage = await response.text();
-                console.error('Streamlit请求失败:', response.status, errorMessage);
-                alert(`Streamlit请求失败: ${errorMessage}`);
+                console.error('Streamlit request failed:', response.status, errorMessage);
+                alert(`Streamlit request failed: ${errorMessage}`);
             }
         } catch (error) {
-            console.error('Streamlit请求错误:', error);
-            alert(`发生错误: ${error.message}`);
+            console.error('Streamlit request failed:', error);
+            alert(`Error occurred: ${error.message}`);
         }
     }
 
@@ -548,7 +548,7 @@ makeDraggable(element) {
         closeBtn.onclick = () => this.hideWorkflowModal();
 
         const title = document.createElement('h2');
-        title.textContent = '选择工作流';
+        title.textContent = 'Select Workflow';
         title.style.color = 'white';
 
         const select = document.createElement('select');
@@ -564,7 +564,7 @@ makeDraggable(element) {
         `;
 
         const loadButton = document.createElement('button');
-        loadButton.textContent = '加载工作流';
+        loadButton.textContent = 'load workflow';
         loadButton.style.cssText = `
             background-color: #4CAF50;
             color: white;
@@ -634,13 +634,13 @@ makeDraggable(element) {
                     const workflow = await response.json();
                     app.loadGraphData(workflow);
                     this.hideWorkflowModal();
-                    alert('工作流已加载成功！');
+                    alert('Workflow loaded successfully!');
                 } else {
-                    alert('加载工作流失败');
+                    alert('Failed to load workflow');
                 }
             } catch (error) {
                 console.error('Error loading workflow:', error);
-                alert('加载工作流时发生错误');
+                alert('An error occurred while loading the workflow');
             }
         }
     }
