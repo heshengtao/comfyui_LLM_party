@@ -1127,7 +1127,7 @@ class LLM:
         ]
 
         llm_tools_json = json.dumps(llm_tools, ensure_ascii=False, indent=4)
-        if (user_prompt is None or user_prompt.strip() == "") and (images is None or images == []):
+        if (user_prompt is None or user_prompt.strip() == "") and (images is None or images == []) and (user_history is None):
             with open(self.prompt_path, "r", encoding="utf-8") as f:
                 history = json.load(f)
             return (
@@ -1766,7 +1766,7 @@ class LLM_local:
             }
         ]
         llm_tools_json = json.dumps(llm_tools, ensure_ascii=False, indent=4)
-        if (user_prompt is None or user_prompt.strip() == "") and (image is None or image == []):
+        if (user_prompt is None or user_prompt.strip() == "") and (image is None or image == []) and (user_history is None):
             with open(self.prompt_path, "r", encoding="utf-8") as f:
                 history = json.load(f)
             return (
