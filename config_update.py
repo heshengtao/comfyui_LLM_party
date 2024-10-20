@@ -171,7 +171,6 @@ def get_workflow_list():
             workflows.extend([f for f in os.listdir(workflow_dir) if f.endswith('.json')])
         else:
             logging.warning(f"工作流目录不存在: {workflow_dir}")
-    logging.info(f"找到的工作流: {workflows}")
     return workflows
 
 # 修改加载工作流的函数
@@ -203,7 +202,6 @@ def load_workflow(workflow_name):
 async def get_workflows(request):
     try:
         workflows = get_workflow_list()
-        logging.info(f"返回工作流列表: {workflows}")
         return web.json_response(workflows)
     except Exception as e:
         logging.error(f"获取工作流列表时发生错误: {str(e)}")
