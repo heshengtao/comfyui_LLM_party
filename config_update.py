@@ -1,6 +1,7 @@
 import configparser
 import logging
 import os
+import traceback
 import openai
 import server
 from aiohttp import web
@@ -9,8 +10,8 @@ import subprocess
 import sys
 import asyncio
 import shlex
+import json
 
-# Assuming this file is in the same directory as your custom nodes
 config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
 llm_api_keys = load_api_keys(config_path)
 llm_api_key=llm_api_keys.get("openai_api_key").strip()
@@ -158,3 +159,67 @@ async def start_streamlit(request):
         logging.exception("启动Streamlit时发生异常")
         return web.json_response({"status": "error", "message": str(e)}, status=500)
 
+
+
+# 添加新的函数来获取工作流列表
+def get_workflow_list():
+    workflow_dir = os.path.join(os.path.dirname(__file__), 'workflow_tutorial')
+    if not os.path.exists(workflow_dir):
+        logging.error(f"工作流目录不存在: {workflow_dir}")
+        return []
+    workflows = [f for f in os.listdir(workflow_dir) if f.endswith('.json')]
+    logging.info(f"找到的工作流: {workflows}")
+    return workflows
+
+# 修改加载工作流的函数
+def load_workflow(workflow_name):
+    workflow_path = os.path.join(os.path.dirname(__file__), 'workflow_tutorial', workflow_name)
+    logging.info(f"尝试加载工作流: {workflow_path}")
+    if not os.path.exists(workflow_path):
+        logging.error(f"工作流文件不存在: {workflow_path}")
+        raise FileNotFoundError(f"工作流文件不存在: {workflow_path}")
+    try:
+        with open(workflow_path, 'r', encoding='utf-8') as f:
+            workflow_data = json.load(f)
+        logging.info(f"成功加载工作流: {workflow_name}")
+        return workflow_data
+    except json.JSONDecodeError as e:
+        logging.error(f"JSON解析错误: {str(e)}")
+        raise
+    except Exception as e:
+        logging.error(f"加载工作流时发生错误: {str(e)}")
+        raise
+
+# 修改获取工作流列表的路由
+@server.PromptServer.instance.routes.get('/party/workflow_list')
+async def get_workflows(request):
+    try:
+        workflows = get_workflow_list()
+        logging.info(f"返回工作流列表: {workflows}")
+        return web.json_response(workflows)
+    except Exception as e:
+        logging.error(f"获取工作流列表时发生错误: {str(e)}")
+        return web.json_response({"status": "error", "message": str(e)}, status=500)
+
+# 修改加载选定工作流的路由
+@server.PromptServer.instance.routes.post('/party/load_workflow')
+async def load_selected_workflow(request):
+    try:
+        data = await request.json()
+        workflow_name = data['workflow']
+        logging.info(f"尝试加载工作流: {workflow_name}")
+        workflow_data = load_workflow(workflow_name)
+        logging.info(f"成功加载工作流数据")
+        return web.json_response(workflow_data)
+    except FileNotFoundError as e:
+        logging.error(f"文件未找到: {str(e)}")
+        return web.json_response({"status": "error", "message": str(e)}, status=404)
+    except json.JSONDecodeError as e:
+        logging.error(f"JSON解析错误: {str(e)}")
+        return web.json_response({"status": "error", "message": f"无效的JSON文件: {str(e)}"}, status=400)
+    except Exception as e:
+        logging.error(f"加载工作流时发生错误: {str(e)}")
+        logging.error(traceback.format_exc())
+        return web.json_response({"status": "error", "message": str(e)}, status=500)
+
+# ... (保持其他路由和函数不变)
