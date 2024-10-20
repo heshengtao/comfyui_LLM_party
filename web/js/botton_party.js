@@ -7,12 +7,13 @@ class LLMPartyExtension {
         this.aboutButton = null;
         this.fastApiButton = null;
         this.streamlitButton = null;
-        this.workflowButton = null; // 新增：工作流按钮
+        this.workflowButton = null;
         this.toggleButton = null;
         this.apiModal = null;
         this.aboutModal = null;
-        this.workflowModal = null; // 新增：工作流选择面板
+        this.workflowModal = null;
         this.isExpanded = true;
+        this.EXPANDED_WIDTH = '150px'; // 新增：定义展开时的宽度
 
         // 从 localStorage 加载保存的位置
         const savedPosition = JSON.parse(localStorage.getItem('LLMPartyPosition')) || {};
@@ -21,7 +22,7 @@ class LLMPartyExtension {
         this.createContainer(savedPosition);
         this.createAPIModal();
         this.createAboutModal();
-        this.createWorkflowModal(); // 新增：创建工作流选择面板
+        this.createWorkflowModal();
 
         this.makeDraggable(this.container);
 
@@ -76,6 +77,7 @@ class LLMPartyExtension {
             height: 100%;
             overflow: hidden;
             transition: width 0.3s ease-in-out;
+            width: ${this.EXPANDED_WIDTH}; // 使用常量设置初始宽度
         `;
 
         this.apiButton = this.createButton('API-key', `
@@ -123,7 +125,7 @@ class LLMPartyExtension {
         buttonWrapper.appendChild(this.apiButton);
         buttonWrapper.appendChild(this.fastApiButton);
         buttonWrapper.appendChild(this.streamlitButton);
-        buttonWrapper.appendChild(this.workflowButton); // 新增：添加工作流按钮
+        buttonWrapper.appendChild(this.workflowButton);
         buttonWrapper.appendChild(this.aboutButton);
 
         this.container.appendChild(dragHandle);
@@ -157,7 +159,7 @@ class LLMPartyExtension {
         this.isExpanded = !this.isExpanded;
         const buttonWrapper = this.container.querySelector('div:nth-child(2)');
         if (this.isExpanded) {
-            buttonWrapper.style.width = '120px';
+            buttonWrapper.style.width = this.EXPANDED_WIDTH; // 使用常量设置展开宽度
             this.toggleButton.innerHTML = `
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="15 18 9 12 15 6"></polyline>
@@ -656,7 +658,7 @@ makeDraggable(element) {
         this.isExpanded = !this.isExpanded;
         const buttonWrapper = this.container.querySelector('div:nth-child(2)');
         if (this.isExpanded) {
-            buttonWrapper.style.width = '120px';
+            buttonWrapper.style.width = this.EXPANDED_WIDTH;
             this.toggleButton.innerHTML = `
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="15 18 9 12 15 6"></polyline>
