@@ -654,35 +654,6 @@ makeDraggable(element) {
             console.log('Applied saved position:', savedPosition);
         }
     }
-    toggleExpansion() {
-        this.isExpanded = !this.isExpanded;
-        const buttonWrapper = this.container.querySelector('div:nth-child(2)');
-        if (this.isExpanded) {
-            buttonWrapper.style.width = this.EXPANDED_WIDTH;
-            this.toggleButton.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-            `;
-            this.toggleButton.title = 'Close';
-        } else {
-            buttonWrapper.style.width = '0px';
-            this.toggleButton.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-            `;
-            this.toggleButton.title = 'Expand';
-        }
-
-        // 如果在右边界，保持吸附
-        const windowWidth = window.innerWidth;
-        const elementWidth = this.container.offsetWidth;
-        const currentLeft = parseInt(this.container.style.left);
-        if (currentLeft + elementWidth > windowWidth - 5) {
-            this.container.style.left = (windowWidth - this.container.querySelector('div:first-child').offsetWidth - this.toggleButton.offsetWidth) + "px";
-        }
-    }
 }
 
 // 注册扩展
