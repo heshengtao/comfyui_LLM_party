@@ -12,25 +12,32 @@ class LLMPartyExtension {
         this.aboutModal = null;
         this.isExpanded = true;
 
-        this.createContainer();
+        // 从 localStorage 加载保存的位置
+        const savedPosition = JSON.parse(localStorage.getItem('LLMPartyPosition')) || {};
+        console.log('Loaded saved position:', savedPosition);
+
+        this.createContainer(savedPosition);
         this.createAPIModal();
         this.createAboutModal();
 
         this.makeDraggable(this.container);
+
+        // 在页面加载完成后应用保存的位置
+        window.addEventListener('load', () => this.applyPosition(savedPosition));
     }
 
-    createContainer() {
+    createContainer(savedPosition) {
         this.container = document.createElement('div');
         
-        // 计算初始位置
+        // 计算初始位置，优先使用保存的位置
         const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
-        const initialLeft = (windowWidth / 2) - 100; // 假设容器宽度为 120px
-        const initialTop = windowHeight - 30; // 距离底部 0px
+        const initialLeft = savedPosition.left !== undefined ? savedPosition.left : (windowWidth / 2) - 100;
+        const initialTop = savedPosition.top !== undefined ? savedPosition.top : windowHeight - 30;
 
         this.container.style.cssText = `
             position: fixed;
-            top: 0px;
+            top: ${initialTop}px;
             left: ${initialLeft}px;
             height: 30px;
             background-color: #1e1e1e;
@@ -429,7 +436,7 @@ class LLMPartyExtension {
                 alert(`发生错误: ${error.message}`);
             }
         }
-    
+
     makeDraggable(element) {
         let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         const dragHandle = element.querySelector('div');
@@ -483,6 +490,10 @@ class LLMPartyExtension {
             // 更新位置
             element.style.top = newTop + "px";
             element.style.left = newLeft + "px";
+
+            // 保存位置到 localStorage
+            localStorage.setItem('LLMPartyPosition', JSON.stringify({ top: newTop, left: newLeft }));
+            console.log('Position saved:', { top: newTop, left: newLeft });
         }
     
         function closeDragElement() {
@@ -491,6 +502,13 @@ class LLMPartyExtension {
         }
     }
 
+    applyPosition(savedPosition) {
+        if (savedPosition.top !== undefined && savedPosition.left !== undefined) {
+            this.container.style.top = `${savedPosition.top}px`;
+            this.container.style.left = `${savedPosition.left}px`;
+            console.log('Applied saved position:', savedPosition);
+        }
+    }
     toggleExpansion() {
         this.isExpanded = !this.isExpanded;
         const buttonWrapper = this.container.querySelector('div:nth-child(2)');
