@@ -1,42 +1,7 @@
 {
-  "last_node_id": 24,
-  "last_link_id": 37,
+  "last_node_id": 25,
+  "last_link_id": 40,
   "nodes": [
-    {
-      "id": 23,
-      "type": "LLM_api_loader",
-      "pos": [
-        540,
-        264
-      ],
-      "size": {
-        "0": 315,
-        "1": 130
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            36
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "gpt-4o-mini",
-        "",
-        "",
-        false
-      ]
-    },
     {
       "id": 11,
       "type": "show_text_party",
@@ -55,7 +20,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 37,
+          "link": 39,
           "widget": {
             "name": "text"
           },
@@ -76,21 +41,57 @@
       },
       "widgets_values": [
         "",
-        "你好！很高兴和你聊天。有什么想聊的或者需要帮助的地方吗？"
+        "你好！有什么我可以帮助你的吗？"
       ],
       "color": "#233",
       "bgcolor": "#355"
     },
     {
-      "id": 24,
+      "id": 23,
+      "type": "LLM_api_loader",
+      "pos": [
+        513,
+        287
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 25,
       "type": "LLM",
       "pos": [
-        896,
-        276
+        887,
+        278
       ],
       "size": [
-        444.24951998714414,
-        548.9947566205965
+        454.48238870052296,
+        557.4664752332676
       ],
       "flags": {},
       "order": 1,
@@ -99,17 +100,20 @@
         {
           "name": "model",
           "type": "CUSTOM",
-          "link": 36
+          "link": 40,
+          "label": "model"
         },
         {
           "name": "images",
           "type": "IMAGE",
-          "link": null
+          "link": null,
+          "label": "images"
         },
         {
           "name": "extra_parameters",
           "type": "DICT",
-          "link": null
+          "link": null,
+          "label": "extra_parameters"
         },
         {
           "name": "system_prompt_input",
@@ -142,6 +146,14 @@
           "widget": {
             "name": "file_content"
           }
+        },
+        {
+          "name": "user_history",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_history"
+          }
         }
       ],
       "outputs": [
@@ -149,38 +161,41 @@
           "name": "assistant_response",
           "type": "STRING",
           "links": [
-            37
+            39
           ],
           "shape": 3,
-          "slot_index": 0
+          "label": "assistant_response"
         },
         {
           "name": "history",
           "type": "STRING",
           "links": null,
-          "shape": 3
+          "shape": 3,
+          "label": "history"
         },
         {
           "name": "tool",
           "type": "STRING",
           "links": null,
-          "shape": 3
+          "shape": 3,
+          "label": "tool"
         },
         {
           "name": "image",
           "type": "IMAGE",
           "links": null,
-          "shape": 3
+          "shape": 3,
+          "label": "image"
         }
       ],
       "properties": {
         "Node name for S&R": "LLM"
       },
       "widgets_values": [
-        "你一个强大的人工智能助手。",
+        "",
         "你好",
         0.7,
-        "enable",
+        "disable",
         "disable",
         "disable",
         "enable",
@@ -192,36 +207,37 @@
         "",
         100,
         "",
-        true
+        true,
+        ""
       ]
     }
   ],
   "links": [
     [
-      36,
-      23,
-      0,
-      24,
-      0,
-      "CUSTOM"
-    ],
-    [
-      37,
-      24,
+      39,
+      25,
       0,
       11,
       0,
       "STRING"
+    ],
+    [
+      40,
+      23,
+      0,
+      25,
+      0,
+      "CUSTOM"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1,
+      "scale": 0.9090909090909091,
       "offset": {
-        "0": -486.44947115901914,
-        "1": -201.39471999950277
+        "0": -431.88230172542524,
+        "1": -191.0664206830967
       }
     }
   },

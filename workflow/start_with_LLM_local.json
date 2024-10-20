@@ -1,131 +1,7 @@
 {
-  "last_node_id": 24,
-  "last_link_id": 39,
+  "last_node_id": 25,
+  "last_link_id": 42,
   "nodes": [
-    {
-      "id": 23,
-      "type": "LLM_local",
-      "pos": [
-        939,
-        242
-      ],
-      "size": {
-        "0": 396.04949951171875,
-        "1": 462
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "link": 38,
-          "label": "model"
-        },
-        {
-          "name": "tokenizer",
-          "type": "CUSTOM",
-          "link": 39,
-          "label": "tokenizer"
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": null,
-          "label": "image"
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "system_prompt_input"
-          },
-          "label": "system_prompt_input"
-        },
-        {
-          "name": "user_prompt_input",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "user_prompt_input"
-          },
-          "label": "user_prompt_input"
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "tools"
-          },
-          "label": "tools"
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "file_content"
-          },
-          "label": "file_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "type": "STRING",
-          "links": [
-            37
-          ],
-          "slot_index": 0,
-          "shape": 3,
-          "label": "assistant_response"
-        },
-        {
-          "name": "history",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "history"
-        },
-        {
-          "name": "tool",
-          "type": "STRING",
-          "links": null,
-          "shape": 3,
-          "label": "tool"
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": null,
-          "shape": 3,
-          "label": "image"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_local"
-      },
-      "widgets_values": [
-        "你是一个可爱的小兔娘",
-        "你好，你是谁哇",
-        "LLM",
-        0.7,
-        512,
-        "enable",
-        "disable",
-        "enable",
-        "",
-        "",
-        "",
-        "",
-        100,
-        "",
-        true
-      ]
-    },
     {
       "id": 24,
       "type": "LLM_local_loader",
@@ -145,7 +21,7 @@
           "name": "model",
           "type": "CUSTOM",
           "links": [
-            38
+            40
           ],
           "slot_index": 0,
           "shape": 3,
@@ -155,7 +31,7 @@
           "name": "tokenizer",
           "type": "CUSTOM",
           "links": [
-            39
+            41
           ],
           "slot_index": 1,
           "shape": 3,
@@ -190,7 +66,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 37,
+          "link": 42,
           "widget": {
             "name": "text"
           },
@@ -215,42 +91,176 @@
       ],
       "color": "#233",
       "bgcolor": "#355"
+    },
+    {
+      "id": 25,
+      "type": "LLM_local",
+      "pos": [
+        939,
+        242
+      ],
+      "size": [
+        433.7651023754256,
+        532.8992326540344
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 40,
+          "label": "model"
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "link": 41,
+          "label": "tokenizer"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null,
+          "label": "image"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        },
+        {
+          "name": "user_history",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_history"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            42
+          ],
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "你好",
+        "LLM",
+        0.7,
+        512,
+        "enable",
+        "disable",
+        "enable",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true,
+        ""
+      ]
     }
   ],
   "links": [
     [
-      37,
-      23,
+      40,
+      24,
+      0,
+      25,
+      0,
+      "CUSTOM"
+    ],
+    [
+      41,
+      24,
+      1,
+      25,
+      1,
+      "CUSTOM"
+    ],
+    [
+      42,
+      25,
       0,
       11,
       0,
       "STRING"
-    ],
-    [
-      38,
-      24,
-      0,
-      23,
-      0,
-      "CUSTOM"
-    ],
-    [
-      39,
-      24,
-      1,
-      23,
-      1,
-      "CUSTOM"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1,
+      "scale": 0.8264462809917354,
       "offset": [
-        -455.5588030162946,
-        47.36551725746442
+        -379.8250016674177,
+        -95.47548860496212
       ]
     }
   },

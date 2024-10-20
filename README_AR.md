@@ -3,7 +3,7 @@
 <div align="center">
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
-  <a href="how_to_use_nodes_ZH.md">دليل النص</a> ·
+  <a href="https://github.com/heshengtao/Let-LLM-party">دليل النص</a> ·
   <a href="workflow_tutorial/">دليل سير العمل</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">رابط دودة</a> ·
   <a href="img/Q群.jpg">مجموعة QQ</a> ·
@@ -72,7 +72,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 ![workflow_tool](img/workflowtool.png)
 
 ## تعليمات الاستخدام
-1. يرجى الرجوع إلى تعليمات استخدام العقدة: [怎么使用节点](how_to_use_nodes.md)
+1. يرجى الرجوع إلى تعليمات استخدام العقدة: [怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 
 2. إذا كانت هناك مشاكل في المكون الإضافي أو إذا كان لديك أي استفسارات أخرى، فنحن نرحب بك للانضمام إلى مجموعة QQ: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/bsnMfMAv).
 3. يُرجى الرجوع إلى [دليل سير العمل](workflow_tutorial/) ، شكرًا لمساهمة [HuangYuChuh](https://github.com/HuangYuChuh)！
@@ -153,7 +153,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 3. إذا كنت تستخدم نموذج ollama، يرجى استخدام عقدة LLM_api، أدخل في `base_url` `http://127.0.0.1:11434/v1/`، وفي `api_key` أدخل `ollama`، وفي `model_name` أدخل اسم نموذجك، مثل: llama3.
 4. إذا كنت ترغب في استخدام إدخال الصور في LLM، يُوصى باستخدام خدمة imgBB، أدخل `imgbb_api_key` الخاص بك في العقدة.
 ## سجل التحديثات
-1. يمكنك النقر بزر الماوس الأيمن في واجهة **comfyui** واختيار `llm` من قائمة السياق، للعثور على عقدة هذا المشروع. [كيفية استخدام العقد](how_to_use_nodes_ZH.md)
+1. يمكنك النقر بزر الماوس الأيمن في واجهة **comfyui** واختيار `llm` من قائمة السياق، للعثور على عقدة هذا المشروع. [كيفية استخدام العقد](https://github.com/heshengtao/Let-LLM-party)
 2. يدعم الاتصال عبر API أو الاتصال بالنموذج الكبير المحلي. تم تنفيذ وظيفة استدعاء الأدوات بشكل وحدوي. عند إدخال **base_url**، يرجى إدخال عنوان URL الذي ينتهي بـ `/v1/`. يمكنك استخدام [ollama](https://github.com/ollama/ollama) لإدارة نماذجك، ثم أدخل `http://127.0.0.1:11434/v1/` في **base_url**، وأدخل **ollama** في **api_key**، وأدخل اسم نموذجك في **model_name**، على سبيل المثال: **llama3**.
 - مثال على سير العمل مع API: [start_with_LLM_api](workflow/start_with_LLM_api.json)
 - مثال على سير العمل مع النموذج المحلي: [start_with_LLM_local](workflow/start_with_LLM_local.json)

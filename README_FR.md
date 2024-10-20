@@ -3,7 +3,7 @@
 <div align="center">
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
-  <a href="how_to_use_nodes_ZH.md">Tutoriel écrit</a> ·
+  <a href="https://github.com/heshengtao/Let-LLM-party">Tutoriel écrit</a> ·
   <a href="workflow_tutorial/">Tutoriel de workflow</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Lien Baidu</a> ·
   <a href="img/Q群.jpg">Groupe QQ</a> ·
@@ -72,7 +72,7 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 ![workflow_tool](img/workflowtool.png)
 
 ## Instructions d'utilisation
-1. Pour les instructions d'utilisation des nœuds, veuillez consulter : [怎么使用节点](how_to_use_nodes.md)
+1. Pour les instructions d'utilisation des nœuds, veuillez consulter : [怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 
 2. Si vous rencontrez des problèmes avec le plugin ou si vous avez d'autres questions, n'hésitez pas à rejoindre le groupe QQ : [931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/bsnMfMAv).
 3. Pour le tutoriel sur les flux de travail, veuillez consulter : [Tutoriel sur les flux de travail](workflow_tutorial/), merci pour la contribution de [HuangYuChuh](https://github.com/HuangYuChuh) !
@@ -153,7 +153,7 @@ Installez en utilisant l'une des méthodes suivantes
 3. Si vous utilisez le modèle ollama, veuillez utiliser le nœud LLM_api, entrer `http://127.0.0.1:11434/v1/` dans `base_url`, `ollama` dans `api_key`, et le nom de votre modèle dans `model_name`, par exemple : llama3.
 4. Si vous souhaitez utiliser des entrées d'images pour LLM, il est recommandé d'utiliser le service d'hébergement d'images imgbb et d'indiquer votre `imgbb_api_key` dans le nœud.
 ## Journal des mises à jour
-1. Vous pouvez cliquer avec le bouton droit dans l'interface comfyui, sélectionner `llm` dans le menu contextuel, et trouver le nœud de ce projet. [Comment utiliser les nœuds](how_to_use_nodes_ZH.md)
+1. Vous pouvez cliquer avec le bouton droit dans l'interface comfyui, sélectionner `llm` dans le menu contextuel, et trouver le nœud de ce projet. [Comment utiliser les nœuds](https://github.com/heshengtao/Let-LLM-party)
 2. Prise en charge de l'intégration API ou de l'intégration de grands modèles locaux. Mise en œuvre modulaire de la fonctionnalité d'appel d'outils. Lors de la saisie de base_url, veuillez entrer une URL se terminant par `/v1/`. Vous pouvez utiliser [ollama](https://github.com/ollama/ollama) pour gérer vos modèles, puis entrer `http://127.0.0.1:11434/v1/` dans base_url, ollama dans api_key, et le nom de votre modèle, par exemple : llama3.
    - Exemple de flux de travail d'intégration API : [start_with_LLM_api](workflow/start_with_LLM_api.json)
    - Exemple de flux de travail d'intégration de modèle local : [start_with_LLM_local](workflow/start_with_LLM_local.json)

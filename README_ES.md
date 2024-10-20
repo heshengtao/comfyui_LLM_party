@@ -3,7 +3,7 @@
 <div align="center">
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
-  <a href="how_to_use_nodes_ZH.md">Tutorial escrito</a> ·
+  <a href="https://github.com/heshengtao/Let-LLM-party">Tutorial escrito</a> ·
   <a href="workflow_tutorial/">Tutorial de flujo de trabajo</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Enlace de Baidu</a> ·
   <a href="img/Q群.jpg">Grupo QQ</a> ·
@@ -72,7 +72,7 @@ ComfyUI LLM Party permite desde la llamada a múltiples herramientas LLM desde l
 ![workflow_tool](img/workflowtool.png)
 
 ## Instrucciones de Uso
-1. Para las instrucciones de uso de los nodos, consulta: [怎么使用节点](how_to_use_nodes.md)
+1. Para las instrucciones de uso de los nodos, consulta: [怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 
 2. Si hay problemas con el plugin o tienes otras dudas, no dudes en unirte a nuestro grupo de QQ: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/bsnMfMAv).
 3. Para el tutorial de flujos de trabajo, consulte: [工作流教程](workflow_tutorial/)，agradecemos la contribución de [HuangYuChuh](https://github.com/HuangYuChuh).
@@ -153,7 +153,7 @@ Instale utilizando uno de los siguientes métodos:
 3. Si utiliza el modelo ollama, utilice el nodo LLM_api, ingresando `http://127.0.0.1:11434/v1/` en `base_url`, `ollama` en `api_key`, y el nombre de su modelo en `model_name`, por ejemplo: llama3.
 4. Si desea utilizar entrada de imágenes para LLM, se recomienda usar el servicio de alojamiento de imágenes imgbb, ingresando su `imgbb_api_key` en el nodo.
 ## Registro de Actualizaciones
-1. Puede hacer clic derecho en la interfaz de comfyui, seleccionar `llm` en el menú contextual y así encontrará el nodo de este proyecto. [Cómo usar nodos](how_to_use_nodes_ZH.md)
+1. Puede hacer clic derecho en la interfaz de comfyui, seleccionar `llm` en el menú contextual y así encontrará el nodo de este proyecto. [Cómo usar nodos](https://github.com/heshengtao/Let-LLM-party)
 2. Se admite la integración de API o la conexión de modelos grandes locales. Se ha implementado de manera modular la funcionalidad de llamada de herramientas. Al ingresar el base_url, debe ser una URL que termine en `/v1/`. Puede utilizar [ollama](https://github.com/ollama/ollama) para gestionar sus modelos; en base_url ingrese `http://127.0.0.1:11434/v1/`, en api_key ingrese ollama, y en model_name ingrese el nombre de su modelo, por ejemplo: llama3.
    - Ejemplo de flujo de trabajo de integración de API: [start_with_LLM_api](workflow/start_with_LLM_api.json)
    - Ejemplo de flujo de trabajo de integración de modelo local: [start_with_LLM_local](workflow/start_with_LLM_local.json)

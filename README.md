@@ -3,7 +3,7 @@
 <div align="center">
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
-  <a href="how_to_use_nodes.md">text tutorial</a> ·
+  <a href="https://github.com/heshengtao/Let-LLM-party">text tutorial</a> ·
   <a href="workflow_tutorial/">workflow tutorial</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baidu cloud</a> ·
   <a href="img/Q群.jpg">QQ group</a> ·
@@ -72,7 +72,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 ![workflow_tool](img/workflowtool.png)
 
 ## User Guide
-1. For the instructions for using the node, please refer to: [how to use nodes](how_to_use_nodes.md)
+1. For the instructions for using the node, please refer to: [how to use nodes](https://github.com/heshengtao/Let-LLM-party)
 
 2. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/bsnMfMAv).
 
@@ -158,7 +158,7 @@ APIKEY can be configured using one of the following methods
 4. If you want to use image input LLM, it is recommended to use graph bed imgbb and enter your `imgbb_api_key` on the node.
 
 ## Changelog
-1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](how_to_use_nodes.md)
+1. You can right-click in the comfyui interface, select `llm` from the context menu, and you will find the nodes for this project. [how to use nodes](https://github.com/heshengtao/Let-LLM-party)
 2. Supports API integration or local large model integration. Modular implementation for tool invocation.When entering the base_url, please use a URL that ends with `/v1/`.You can use [ollama](https://github.com/ollama/ollama) to manage your model. Then, enter `http://127.0.0.1:11434/v1/` for the base_url, `ollama` for the api_key, and your model name for the model_name, such as: llama3.
 - API access sample workflow: [start_with_LLM_api](workflow/start_with_LLM_api)
 - Local model access sample workflow: [start_with_LLM_local](workflow/start_with_LLM_local)

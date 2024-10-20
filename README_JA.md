@@ -3,7 +3,7 @@
 <div align="center">
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
-  <a href="how_to_use_nodes_ZH.md">テキストチュートリアル</a> ·
+  <a href="https://github.com/heshengtao/Let-LLM-party">テキストチュートリアル</a> ·
   <a href="workflow_tutorial/">ワークフローチュートリアル</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">百度リンク</a> ·
   <a href="img/Q群.jpg">QQグループ</a> ·
@@ -71,7 +71,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 ![workflow_tool](img/workflowtool.png)
 
 ## 使用説明
-1. ノードの使用説明については、以下を参照してください：[ノードの使用方法](how_to_use_nodes.md)
+1. ノードの使用説明については、以下を参照してください：[ノードの使用方法](https://github.com/heshengtao/Let-LLM-party)
 
 2. プラグインに問題がある場合や他に疑問がある場合は、ぜひQQ群にご参加ください：[931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/bsnMfMAv).
 3. ワークフローのチュートリアルについては、[ワークフローのチュートリアル](workflow_tutorial/)をご参照ください。貢献してくださった[HuangYuChuh](https://github.com/HuangYuChuh)に感謝いたします。
@@ -153,7 +153,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 3. ollamaモデルを使用する場合は、LLM_apiノードを使用し、ノードの`base_url`に`http://127.0.0.1:11434/v1/`を入力し、`api_key`に`ollama`を、`model_name`にはあなたのモデル名（例：llama3）を入力します。
 4. 画像入力LLMを使用する場合は、画像ホスティングサービスのimgbbを推奨し、ノードにあなたの`imgbb_api_key`を入力します。
 ## 更新ログ
-1. comfyuiのインターフェースで右クリックし、右クリックメニューの`llm`を選択すると、本プロジェクトのノードを見つけることができます。[ノードの使い方](how_to_use_nodes_ZH.md)
+1. comfyuiのインターフェースで右クリックし、右クリックメニューの`llm`を選択すると、本プロジェクトのノードを見つけることができます。[ノードの使い方](https://github.com/heshengtao/Let-LLM-party)
 2. API接続またはローカル大モデル接続をサポートします。モジュール化されたツール呼び出し機能を実現しています。base_urlを入力する際は、`/v1/`で終わるURLを入力してください。[ollama](https://github.com/ollama/ollama)を使用してモデルを管理し、base_urlに`http://127.0.0.1:11434/v1/`を入力し、api_keyにollamaを、model_nameにモデル名を入力してください。例: llama3。
 - API接続のワークフロー例：[start_with_LLM_api](workflow/start_with_LLM_api.json)
 - ローカルモデル接続のワークフロー例：[start_with_LLM_local](workflow/start_with_LLM_local.json)

@@ -3,7 +3,7 @@
 <div align="center">
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
-  <a href="how_to_use_nodes_ZH.md">Texttutorial</a> ·
+  <a href="https://github.com/heshengtao/Let-LLM-party">Texttutorial</a> ·
   <a href="workflow_tutorial/">Workflow-Tutorial</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baudisk-Link</a> ·
   <a href="img/Q群.jpg">QQ-Gruppe</a> ·
@@ -71,7 +71,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 ![workflow_tool](img/workflowtool.png)
 
 ## Gebrauchsanweisung
-1. Bitte beziehen Sie sich auf die Anweisungen zur Verwendung der Knoten: [怎么使用节点](how_to_use_nodes.md)
+1. Bitte beziehen Sie sich auf die Anweisungen zur Verwendung der Knoten: [怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 
 2. Bei Problemen mit dem Plugin oder anderen Fragen freuen wir uns über Ihren Beitritt zur QQ-Gruppe: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/bsnMfMAv).
 3. Für das Workflow-Tutorial siehe bitte: [Workflow-Tutorial](workflow_tutorial/). Vielen Dank an [HuangYuChuh](https://github.com/HuangYuChuh) für seinen Beitrag!
@@ -152,7 +152,7 @@ Verwenden Sie eine der folgenden Methoden zur Installation
 3. Wenn du das Ollama-Modell verwendest, benutze den LLM_api-Knoten, trage in `base_url` `http://127.0.0.1:11434/v1/` ein, in `api_key` schreibe `ollama` und in `model_name` gib deinen Modellnamen ein, z. B.: llama3.
 4. Wenn du Bildeingaben für LLM verwenden möchtest, wird empfohlen, den Bilddienst imgBB zu nutzen. Gib in dem Knoten deinen `imgbb_api_key` ein.
 ## Änderungsprotokoll
-1. Sie können im ComfyUI-Interface mit der rechten Maustaste klicken und im Kontextmenü `llm` auswählen, um den Knoten dieses Projekts zu finden. [Wie man Knoten verwendet](how_to_use_nodes_ZH.md)
+1. Sie können im ComfyUI-Interface mit der rechten Maustaste klicken und im Kontextmenü `llm` auswählen, um den Knoten dieses Projekts zu finden. [Wie man Knoten verwendet](https://github.com/heshengtao/Let-LLM-party)
 2. Unterstützung für API-Integration oder lokale große Modelle. Modularer Ansatz zur Implementierung der Funktion zur Werkzeuganwendung. Bitte geben Sie beim Ausfüllen von base_url eine URL ein, die mit `/v1/` endet. Sie können [ollama](https://github.com/ollama/ollama) verwenden, um Ihre Modelle zu verwalten, und dann in base_url `http://127.0.0.1:11434/v1/` eingeben, in api_key geben Sie ollama ein und in model_name den Namen Ihres Modells, z. B.: llama3.
    - API-Integrationsbeispiel-Workflow: [start_with_LLM_api](workflow/start_with_LLM_api.json)
    - Lokales Modellintegrationsbeispiel-Workflow: [start_with_LLM_local](workflow/start_with_LLM_local.json)

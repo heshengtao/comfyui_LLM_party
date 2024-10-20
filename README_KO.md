@@ -3,7 +3,7 @@
 <div align="center">
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
-  <a href="how_to_use_nodes_ZH.md">텍스트 튜토리얼</a> ·
+  <a href="https://github.com/heshengtao/Let-LLM-party">텍스트 튜토리얼</a> ·
   <a href="workflow_tutorial/">작업 흐름 튜토리얼</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">바이두 링크</a> ·
   <a href="img/Q群.jpg">QQ 그룹</a> ·
@@ -72,7 +72,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 ![workflow_tool](img/workflowtool.png)
 
 ## 사용 설명
-1. 노드 사용 설명서는 다음을 참고하십시오: [노드 사용 방법](how_to_use_nodes.md)
+1. 노드 사용 설명서는 다음을 참고하십시오: [노드 사용 방법](https://github.com/heshengtao/Let-LLM-party)
 
 2. 플러그인에 문제가 있거나 다른 질문이 있으시면 QQ 그룹에 참여해 주십시오: [931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/bsnMfMAv).
 3. 워크플로우 튜토리얼은 다음을 참조하시기 바랍니다: [워크플로우 튜토리얼](workflow_tutorial/), [HuangYuChuh](https://github.com/HuangYuChuh)님의 기여에 감사드립니다!
@@ -154,7 +154,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 3. ollama 모델을 사용하는 경우, LLM_api 노드를 사용하고, 노드의 `base_url`에 `http://127.0.0.1:11434/v1/`를 입력하며, `api_key`에 `ollama`를 입력하고, `model_name`에 모델 이름(예: llama3)을 입력합니다.
 4. 이미지 입력 LLM을 사용하려면, 이미지 호스팅 서비스인 imgbb를 추천하며, 노드에 `imgbb_api_key`를 입력합니다.
 ## 업데이트 로그
-1. comfyui 인터페이스에서 마우스 오른쪽 버튼을 클릭한 후, 오른쪽 클릭 메뉴의 `llm`을 선택하면 본 프로젝트의 노드를 찾을 수 있습니다. [노드 사용 방법](how_to_use_nodes_ZH.md)
+1. comfyui 인터페이스에서 마우스 오른쪽 버튼을 클릭한 후, 오른쪽 클릭 메뉴의 `llm`을 선택하면 본 프로젝트의 노드를 찾을 수 있습니다. [노드 사용 방법](https://github.com/heshengtao/Let-LLM-party)
 2. API 접속 또는 로컬 대모델 접속을 지원합니다. 모듈화된 방식으로 도구 호출 기능을 구현하였습니다. base_url을 입력할 때는 `/v1/`로 끝나는 URL을 입력해야 합니다. [ollama](https://github.com/ollama/ollama)를 사용하여 모델을 관리한 후, base_url에 `http://127.0.0.1:11434/v1/`를 입력하고, api_key에 ollama를, model_name에 모델 이름을 입력하십시오. 예: llama3.
    - API 접속 예시 워크플로우: [start_with_LLM_api](workflow/start_with_LLM_api.json)
    - 로컬 모델 접속 예시 워크플로우: [start_with_LLM_local](workflow/start_with_LLM_local.json)

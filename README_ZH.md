@@ -3,7 +3,7 @@
 <div align="center">
   <a href="https://space.bilibili.com/26978344">B站</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
-  <a href="how_to_use_nodes_ZH.md">文字教程</a> ·
+  <a href="https://github.com/heshengtao/Let-LLM-party">文字教程</a> ·
   <a href="workflow_tutorial/">工作流教程</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">度盘链接</a> ·
   <a href="img/Q群.jpg">QQ群</a> ·
@@ -71,7 +71,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 ![workflow_tool](img/workflowtool.png)
 
 ## 使用说明
-1. 节点的使用说明请参考：[怎么使用节点](how_to_use_nodes_ZH.md)
+1. 节点的使用说明请参考：[怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 
 2. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：[931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/bsnMfMAv)
 
@@ -156,7 +156,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 4. 如果你要使用图片输入LLM，推荐使用图床imgbb，在节点上输入你的`imgbb_api_key`。
 
 ## 更新日志
-1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](how_to_use_nodes_ZH.md)
+1. 你可以在comfyui界面里点击右键，选择右键菜单里的`llm`，即可找到本项目的节点。[怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 2. 支持API接入或者本地大模型接入。模块化实现工具调用功能。在填入base_url时，请填入以`/v1/`结尾的网址。你可以用[ollama](https://github.com/ollama/ollama)来管理你的模型，然后在base_url填入`http://127.0.0.1:11434/v1/`，在api_key填入ollama，在model_name填入你的模型名称，例如:llama3。
 - API接入示例工作流：[start_with_LLM_api](workflow/start_with_LLM_api.json)
 - 本地模型接入示例工作流：[start_with_LLM_local](workflow/start_with_LLM_local.json)
