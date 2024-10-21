@@ -9,6 +9,7 @@ import requests
 from PIL import Image
 import numpy as np
 import openai
+from openai import AzureOpenAI
 import base64
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import torch
@@ -108,7 +109,19 @@ class mini_party:
             {"role": "system", "content": prompt},
             {"role": "user", "content": input_str}
         ]
-        response = openai.chat.completions.create(
+        openai_client = openai
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            azure = AzureOpenAI(
+                api_key= self.apikey,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
+            openai_client = azure
+        response = openai_client.chat.completions.create(
                             model=model_name,
                             messages=history,
                         )
@@ -210,7 +223,19 @@ class mini_translate:
                 {"role": "system", "content": sys_prompt},
                 {"role": "user", "content": chunk}
             ]
-            response = openai.chat.completions.create(
+            openai_client = openai
+            if "openai.azure.com" in openai.base_url:
+                # 获取API版本
+                api_version = openai.base_url.split("=")[-1].split("/")[0]
+                # 获取azure_endpoint
+                azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+                azure = AzureOpenAI(
+                    api_key= self.apikey,
+                    api_version=api_version,
+                    azure_endpoint=azure_endpoint,
+                )
+                openai_client = azure
+            response = openai_client.chat.completions.create(
                                 model=model_name,
                                 messages=history,
                             )
@@ -313,7 +338,19 @@ class mini_error_correction:
                 {"role": "system", "content": sys_prompt},
                 {"role": "user", "content": chunk}
             ]
-            response = openai.chat.completions.create(
+            openai_client = openai
+            if "openai.azure.com" in openai.base_url:
+                # 获取API版本
+                api_version = openai.base_url.split("=")[-1].split("/")[0]
+                # 获取azure_endpoint
+                azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+                azure = AzureOpenAI(
+                    api_key= self.apikey,
+                    api_version=api_version,
+                    azure_endpoint=azure_endpoint,
+                )
+                openai_client = azure
+            response = openai_client.chat.completions.create(
                                 model=model_name,
                                 messages=history,
                                 response_format={"type": "json_object"},
@@ -412,7 +449,19 @@ class mini_summary:
                 {"role": "system", "content": sys_prompt},
                 {"role": "user", "content": chunk}
             ]
-            response = openai.chat.completions.create(
+            openai_client = openai
+            if "openai.azure.com" in openai.base_url:
+                # 获取API版本
+                api_version = openai.base_url.split("=")[-1].split("/")[0]
+                # 获取azure_endpoint
+                azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+                azure = AzureOpenAI(
+                    api_key= self.apikey,
+                    api_version=api_version,
+                    azure_endpoint=azure_endpoint,
+                )
+                openai_client = azure
+            response = openai_client.chat.completions.create(
                                 model=model_name,
                                 messages=history,
                             )
@@ -426,7 +475,19 @@ class mini_summary:
             {"role": "system", "content": sys_prompt2},
             {"role": "user", "content": output_text}
         ]
-        response = openai.chat.completions.create(
+        openai_client = openai
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            azure = AzureOpenAI(
+                api_key= self.apikey,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
+            openai_client = azure
+        response = openai_client.chat.completions.create(
                             model=model_name,
                             messages=history,
                         )      
@@ -525,7 +586,19 @@ class mini_story:
             {"role": "system", "content": sys_prompt},
             {"role": "user", "content": theme}
         ]
-        response = openai.chat.completions.create(
+        openai_client = openai
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            azure = AzureOpenAI(
+                api_key= self.apikey,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
+            openai_client = azure
+        response = openai_client.chat.completions.create(
                             model=model_name,
                             messages=history,
                             response_format={"type": "json_object"},
@@ -721,7 +794,19 @@ class mini_ocr:
             {"role": "system", "content": sys_prompt},
             {"role": "user", "content": img_json}
         ]
-        response = openai.chat.completions.create(
+        openai_client = openai
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            azure = AzureOpenAI(
+                api_key= self.apikey,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
+            openai_client = azure
+        response = openai_client.chat.completions.create(
                             model=model_name,
                             messages=history,
                             response_format={"type": "json_object"},
@@ -731,7 +816,19 @@ class mini_ocr:
             {"role": "system", "content": "将这个包含文字坐标信息的json转化成markdown格式，请参照json中的文字位置坐标，安排好markdown中的文字位置，并输出markdown格式的文本。"},
             {"role": "user", "content": output}
         ]
-        response2 = openai.chat.completions.create(
+        openai_client = openai
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            azure = AzureOpenAI(
+                api_key= self.apikey,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
+            openai_client = azure
+        response2 = openai_client.chat.completions.create(
                             model=model_name,
                             messages=history,
                         )
@@ -867,7 +964,19 @@ Stable Diffusion是一款利用深度学习的文生图模型，支持通过使�
             {"role": "system", "content": sys_prompt},
             {"role": "user", "content": prompt}
         ]
-        response = openai.chat.completions.create(
+        openai_client = openai
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            azure = AzureOpenAI(
+                api_key= self.apikey,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
+            openai_client = azure
+        response = openai_client.chat.completions.create(
                             model=model_name,
                             messages=history,
                             response_format={"type": "json_object"},
@@ -982,7 +1091,19 @@ FLUX是一款利用深度学习的文生图模型，支持通过使用 自然语
             {"role": "system", "content": sys_prompt},
             {"role": "user", "content": prompt}
         ]
-        response = openai.chat.completions.create(
+        openai_client = openai
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            azure = AzureOpenAI(
+                api_key= self.apikey,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
+            openai_client = azure
+        response = openai_client.chat.completions.create(
                             model=model_name,
                             messages=history,
                         )
@@ -1144,7 +1265,19 @@ a girl, beautiful detailed eyes, stars in the eyes, messy floating hair, colored
             {"role": "system", "content": sys_prompt},
             {"role": "user", "content": img_json}
         ]
-        response = openai.chat.completions.create(
+        openai_client = openai
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            azure = AzureOpenAI(
+                api_key= self.apikey,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
+            openai_client = azure
+        response = openai_client.chat.completions.create(
                             model=model_name,
                             messages=history,
                         )
@@ -1307,7 +1440,19 @@ A majestic, emerald-scaled dragon with glowing amber eyes, wings outstretched, s
             {"role": "system", "content": sys_prompt},
             {"role": "user", "content": img_json}
         ]
-        response = openai.chat.completions.create(
+        openai_client = openai
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            azure = AzureOpenAI(
+                api_key= self.apikey,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
+            openai_client = azure
+        response = openai_client.chat.completions.create(
                             model=model_name,
                             messages=history,
                         )
