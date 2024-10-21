@@ -116,7 +116,7 @@ class mini_party:
             # 获取azure_endpoint
             azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
             azure = AzureOpenAI(
-                api_key= self.apikey,
+                api_key= openai.api_key,
                 api_version=api_version,
                 azure_endpoint=azure_endpoint,
             )
@@ -230,7 +230,7 @@ class mini_translate:
                 # 获取azure_endpoint
                 azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
                 azure = AzureOpenAI(
-                    api_key= self.apikey,
+                    api_key= openai.api_key,
                     api_version=api_version,
                     azure_endpoint=azure_endpoint,
                 )
@@ -345,7 +345,7 @@ class mini_error_correction:
                 # 获取azure_endpoint
                 azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
                 azure = AzureOpenAI(
-                    api_key= self.apikey,
+                    api_key= openai.api_key,
                     api_version=api_version,
                     azure_endpoint=azure_endpoint,
                 )
@@ -456,7 +456,7 @@ class mini_summary:
                 # 获取azure_endpoint
                 azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
                 azure = AzureOpenAI(
-                    api_key= self.apikey,
+                    api_key= openai.api_key,
                     api_version=api_version,
                     azure_endpoint=azure_endpoint,
                 )
@@ -482,7 +482,7 @@ class mini_summary:
             # 获取azure_endpoint
             azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
             azure = AzureOpenAI(
-                api_key= self.apikey,
+                api_key= openai.api_key,
                 api_version=api_version,
                 azure_endpoint=azure_endpoint,
             )
@@ -593,7 +593,7 @@ class mini_story:
             # 获取azure_endpoint
             azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
             azure = AzureOpenAI(
-                api_key= self.apikey,
+                api_key= openai.api_key,
                 api_version=api_version,
                 azure_endpoint=azure_endpoint,
             )
@@ -801,7 +801,7 @@ class mini_ocr:
             # 获取azure_endpoint
             azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
             azure = AzureOpenAI(
-                api_key= self.apikey,
+                api_key= openai.api_key,
                 api_version=api_version,
                 azure_endpoint=azure_endpoint,
             )
@@ -823,7 +823,7 @@ class mini_ocr:
             # 获取azure_endpoint
             azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
             azure = AzureOpenAI(
-                api_key= self.apikey,
+                api_key= openai.api_key,
                 api_version=api_version,
                 azure_endpoint=azure_endpoint,
             )
@@ -971,7 +971,7 @@ Stable Diffusion是一款利用深度学习的文生图模型，支持通过使�
             # 获取azure_endpoint
             azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
             azure = AzureOpenAI(
-                api_key= self.apikey,
+                api_key= openai.api_key,
                 api_version=api_version,
                 azure_endpoint=azure_endpoint,
             )
@@ -1098,7 +1098,7 @@ FLUX是一款利用深度学习的文生图模型，支持通过使用 自然语
             # 获取azure_endpoint
             azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
             azure = AzureOpenAI(
-                api_key= self.apikey,
+                api_key= openai.api_key,
                 api_version=api_version,
                 azure_endpoint=azure_endpoint,
             )
@@ -1272,7 +1272,7 @@ a girl, beautiful detailed eyes, stars in the eyes, messy floating hair, colored
             # 获取azure_endpoint
             azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
             azure = AzureOpenAI(
-                api_key= self.apikey,
+                api_key= openai.api_key,
                 api_version=api_version,
                 azure_endpoint=azure_endpoint,
             )
@@ -1447,7 +1447,7 @@ A majestic, emerald-scaled dragon with glowing amber eyes, wings outstretched, s
             # 获取azure_endpoint
             azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
             azure = AzureOpenAI(
-                api_key= self.apikey,
+                api_key= openai.api_key,
                 api_version=api_version,
                 azure_endpoint=azure_endpoint,
             )
