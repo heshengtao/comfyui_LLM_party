@@ -37,7 +37,7 @@ class LLMPartyExtension {
         const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
         const initialLeft = savedPosition.left !== undefined ? savedPosition.left : (windowWidth / 2) - 100;
-        const initialTop = savedPosition.top !== undefined ? savedPosition.top : windowHeight - 30;
+        const initialTop = savedPosition.top !== undefined ? savedPosition.top : 0;
 
         this.container.style.cssText = `
             position: fixed;
