@@ -393,11 +393,15 @@ class genChat:
             # Function to convert OpenAI history to Gemini history
             System_prompt= convert_to_gemini(history)
             if images is not None:
-                i = 255.0 * images[0].cpu().numpy()
-                img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
-                new_message = {"role": "user", "parts": [{"text": user_prompt},{"inline_data": img}]}
+                new_parts = [{"text": user_prompt}]
+                for image in images:
+                    i = 255.0 * image.cpu().numpy()
+                    img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+                    new_parts.append({"inline_data": img})
+                new_message = {"role": "user", "parts": new_parts}
             else:
                 new_message = {"role": "user", "parts": [{"text": user_prompt}]}
+
             
             history.append(new_message)
             tools = convert_tool_to_gemini(tools)
@@ -492,50 +496,40 @@ class Chat:
                 if imgbb_api_key == "" or imgbb_api_key is None:
                     imgbb_api_key = api_keys.get("imgbb_api")
                 if imgbb_api_key == "" or imgbb_api_key is None:
-                    i = 255.0 * images[0].cpu().numpy()
-                    img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
-                    # 将图片保存到缓冲区
-                    buffered = io.BytesIO()
-                    img.save(buffered, format="PNG")
-                    # 将图片编码为base64
-                    img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
-                    img_json = [
-                        {"type": "text", "text": user_prompt},
-                        {
+                    img_json = [{"type": "text", "text": user_prompt}]
+                    for image in images:
+                        i = 255.0 * image.cpu().numpy()
+                        img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+                        buffered = io.BytesIO()
+                        img.save(buffered, format="PNG")
+                        img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+                        img_json.append({
                             "type": "image_url",
-                            "image_url": {"url": f"data:image/jpeg;base64,{img_str}"},
-                        },
-                    ]
+                            "image_url": {"url": f"data:image/jpeg;base64,{img_str}"}
+                        })
                     user_prompt = img_json
                 else:
-                    i = 255.0 * images[0].cpu().numpy()
-                    img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
-                    # 将图片保存到缓冲区
-                    buffered = io.BytesIO()
-                    img.save(buffered, format="PNG")
-                    # 将图片编码为base64
-                    img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
-                    url = "https://api.imgbb.com/1/upload"
-                    payload = {"key": imgbb_api_key, "image": img_str}
-                    # 向API发送POST请求
-                    response = requests.post(url, data=payload)
-                    # 检查请求是否成功
-                    if response.status_code == 200:
-                        # 解析响应以获取图片URL
-                        result = response.json()
-                        img_url = result["data"]["url"]
-                    else:
-                        return "Error: " + response.text
-                    img_json = [
-                        {"type": "text", "text": user_prompt},
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": img_url,
-                            },
-                        },
-                    ]
+                    img_json = [{"type": "text", "text": user_prompt}]
+                    for image in images:
+                        i = 255.0 * image.cpu().numpy()
+                        img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+                        buffered = io.BytesIO()
+                        img.save(buffered, format="PNG")
+                        img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+                        url = "https://api.imgbb.com/1/upload"
+                        payload = {"key": imgbb_api_key, "image": img_str}
+                        response = requests.post(url, data=payload)
+                        if response.status_code == 200:
+                            result = response.json()
+                            img_url = result["data"]["url"]
+                            img_json.append({
+                                "type": "image_url",
+                                "image_url": {"url": img_url}
+                            })
+                        else:
+                            return "Error: " + response.text
                     user_prompt = img_json
+
             # 将history中的系统提示词部分如果为空，就剔除
             for i in range(len(history)):
                 if history[i]["role"] == "system" and history[i]["content"] == "":
@@ -1127,7 +1121,7 @@ class LLM:
         ]
 
         llm_tools_json = json.dumps(llm_tools, ensure_ascii=False, indent=4)
-        if (user_prompt is None or user_prompt.strip() == "") and (images is None or images == []):
+        if (user_prompt is None or user_prompt.strip() == "") and (images is None or images == []) and (user_history is None or user_history == [] or user_history.strip() == ""):
             with open(self.prompt_path, "r", encoding="utf-8") as f:
                 history = json.load(f)
             return (
@@ -1155,7 +1149,10 @@ class LLM:
                 with open(self.prompt_path, "r", encoding="utf-8") as f:
                     history = json.load(f)
                 if user_history != "" and user_history is not None:
-                    history=json.loads(user_history)
+                    try:
+                        history = json.loads(user_history)
+                    except:
+                        pass
                 history_temp = [history[0]]
                 elements_to_keep = 2 * conversation_rounds
                 if elements_to_keep < len(history) - 1:
@@ -1766,7 +1763,7 @@ class LLM_local:
             }
         ]
         llm_tools_json = json.dumps(llm_tools, ensure_ascii=False, indent=4)
-        if (user_prompt is None or user_prompt.strip() == "") and (image is None or image == []):
+        if (user_prompt is None or user_prompt.strip() == "") and (image is None or image == []) and (user_history is None or user_history == [] or user_history.strip() == ""):
             with open(self.prompt_path, "r", encoding="utf-8") as f:
                 history = json.load(f)
             return (
@@ -1792,7 +1789,10 @@ class LLM_local:
                 with open(self.prompt_path, "r", encoding="utf-8") as f:
                     history = json.load(f)
                 if user_history != "" and user_history is not None:
-                    history=json.loads(user_history)
+                    try:
+                        history = json.loads(user_history)
+                    except:
+                        pass
                 history_temp = [history[0]]
                 elements_to_keep = 2 * conversation_rounds
                 if elements_to_keep < len(history) - 1:
@@ -1938,19 +1938,21 @@ class LLM_local:
                             )
                 elif model_type == "VLM-GGUF":
                     if image is not None:
-                        pil_image = ToPILImage()(image[0].permute(2, 0, 1))
-                        # Convert the PIL image to a bytes buffer
-                        buffer = io.BytesIO()
-                        pil_image.save(buffer, format="PNG")  # You can change the format if needed
-                        # Encode the bytes to base64
-                        base64_string = base64.b64encode(buffer.getvalue()).decode("utf-8")
                         user_content = {
                             "role": "user",
-                            "content": [
-                                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{base64_string}"}},
-                                {"type": "text", "text": user_prompt},
-                            ],
+                            "content": []
                         }
+                        for img_VLMG in image:
+                            pil_image = ToPILImage()(img_VLMG.permute(2, 0, 1))
+                            buffer = io.BytesIO()
+                            pil_image.save(buffer, format="PNG")
+                            base64_string = base64.b64encode(buffer.getvalue()).decode("utf-8")
+                            user_content["content"].append({
+                                "type": "image_url",
+                                "image_url": {"url": f"data:image/jpeg;base64,{base64_string}"}
+                            })
+                        user_content["content"].append({"type": "text", "text": user_prompt})
+
                         history.append(user_content)
                         if extra_parameters is not None and extra_parameters != {}:
                             response = model.create_chat_completion(
@@ -2042,8 +2044,9 @@ class LLM_local:
                     history.append(assistant_content)    
                 elif model_type =="VLM(testing)":
                     if image is not None:
-                        pil_image = ToPILImage()(image[0].permute(2, 0, 1))
-                        self.images.append(pil_image)
+                        for img_VLM in image:
+                            pil_image = ToPILImage()(img_VLM.permute(2, 0, 1))
+                            self.images.append(pil_image)
                     if extra_parameters is not None and extra_parameters != {}:
                         response, history = vlm_chat(
                             model,
