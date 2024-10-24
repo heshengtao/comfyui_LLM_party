@@ -75,7 +75,7 @@ class FeishuDownloadImage:
 
         if response.status_code == 200:
             image_type = check_image_type(response.content)
-            file_name = f"downloaded_image.{image_type}"  # 你可能需要一个更好的方式来确定文件扩展名
+            file_name = f"{message_id}_{file_key}.{image_type}"  # 你可能需要一个更好的方式来确定文件扩展名
             file_path = os.path.join(os.getcwd(), file_name)
             with open(file_path, "wb") as file:
                 file.write(response.content)
