@@ -1,1 +1,362 @@
-{"last_node_id":24,"last_link_id":27,"nodes":[{"id":11,"type":"extra_parameters","pos":{"0":2453.833251953125,"1":1225.4444580078125},"size":{"0":315,"1":346},"flags":{},"order":0,"mode":0,"inputs":[],"outputs":[{"name":"extra_parameters","type":"DICT","links":[17],"shape":3,"label":"extra_parameters"}],"properties":{"Node name for S&R":"extra_parameters"},"widgets_values":[false,1,"",0,0,1,0,false,false,1,"",1,50]},{"id":17,"type":"LLM_api_loader","pos":{"0":2510,"1":997},"size":{"0":315,"1":130},"flags":{},"order":4,"mode":0,"inputs":[{"name":"api_key","type":"STRING","link":15,"widget":{"name":"api_key"},"label":"api_key"}],"outputs":[{"name":"model","type":"CUSTOM","links":[16],"slot_index":0,"shape":3,"label":"model"}],"properties":{"Node name for S&R":"LLM_api_loader"},"widgets_values":["qwen2.5-32b-instruct","https://dashscope.aliyuncs.com/compatible-mode/v1","",false]},{"id":10,"type":"ShowText|pysssss","pos":{"0":3710.833251953125,"1":989.4444580078125},"size":{"0":378.09503173828125,"1":331.57177734375},"flags":{},"order":6,"mode":0,"inputs":[{"name":"text","type":"STRING","link":10,"widget":{"name":"text"},"label":"文本"}],"outputs":[{"name":"STRING","type":"STRING","links":[],"slot_index":0,"shape":6,"label":"字符串"}],"properties":{"Node name for S&R":"ShowText|pysssss"},"widgets_values":["","🌟好睡眠，从这个枕头开始！🌟\n\n你知道吗？优质的睡眠不仅需要一个好的环境，更需要一个舒适的枕头！今天给大家种草一款来自北欧的睡眠神器——JAHVERY嘉唯安眠枕头！🌿\n\n它采用了空压气感棉，让你的头部仿佛漂浮在云端，轻松找到最适合自己的睡姿。而GEL医疗级凝胶则能有效分散压力，减少颈部负担，让每一个翻身都变得轻盈。✨\n\n更让人惊喜的是，它还使用了罗耶丝皇水晶桑蚕丝和进口三醋酸纤维，这些材质不仅亲肤舒适，还能保持良好的透气性，让你的睡眠更加清爽自然。🍃\n\n还有那层珍稀黑马麂皮和柔软铜氨丝，它们如同婴儿肌肤般细腻，贴合你的每一寸肌肤，给予你最温柔的拥抱。💖\n\nJAHVERY嘉唯安眠枕头，让你每天都能享受北欧般的宁静与舒适。快来试试看，让自己拥有一个高质量的美梦之夜吧！🌙\n\n#JAHVERY #安眠枕头 #北欧品质 #优质睡眠 #舒适体验"]},{"id":22,"type":"Text Multiline","pos":{"0":2138,"1":1750},"size":{"0":400,"1":200},"flags":{},"order":1,"mode":0,"inputs":[],"outputs":[{"name":"STRING","type":"STRING","links":[24],"shape":3,"label":"字符串"}],"properties":{"Node name for S&R":"Text Multiline"},"widgets_values":["JAHVERY是芬兰品牌\n使用了空压气感棉、GEL医疗级凝胶、罗耶丝皇水晶桑蚕丝、进口三醋酸纤维、珍稀黑马麂皮、柔软铜氨丝等材料\n"]},{"id":18,"type":"LLM","pos":{"0":3033,"1":999},"size":{"0":467.313720703125,"1":555.105712890625},"flags":{},"order":5,"mode":0,"inputs":[{"name":"model","type":"CUSTOM","link":16,"label":"model"},{"name":"images","type":"IMAGE","link":null,"label":"images"},{"name":"extra_parameters","type":"DICT","link":17,"label":"extra_parameters"},{"name":"system_prompt_input","type":"STRING","link":25,"widget":{"name":"system_prompt_input"},"label":"system_prompt_input"},{"name":"user_prompt_input","type":"STRING","link":27,"widget":{"name":"user_prompt_input"},"label":"user_prompt_input"},{"name":"tools","type":"STRING","link":null,"widget":{"name":"tools"},"label":"tools"},{"name":"file_content","type":"STRING","link":null,"widget":{"name":"file_content"},"label":"file_content"}],"outputs":[{"name":"assistant_response","type":"STRING","links":[10],"slot_index":0,"shape":3,"label":"assistant_response"},{"name":"history","type":"STRING","links":null,"shape":3,"label":"history"},{"name":"tool","type":"STRING","links":null,"shape":3,"label":"tool"},{"name":"image","type":"IMAGE","links":null,"shape":3,"label":"image"}],"properties":{"Node name for S&R":"LLM"},"widgets_values":["","",0.7,"enable","disable","disable","enable",1920,"","","","","",100,"",true]},{"id":23,"type":"red_book_text_persona","pos":{"0":2619,"1":1753},"size":{"0":315,"1":154},"flags":{},"order":3,"mode":0,"inputs":[{"name":"desc","type":"STRING","link":24,"widget":{"name":"desc"},"label":"desc"}],"outputs":[{"name":"system_prompt","type":"STRING","links":[25],"slot_index":0,"shape":3,"label":"system_prompt"},{"name":"user_prompt","type":"STRING","links":[27],"slot_index":1,"shape":3,"label":"user_prompt"}],"properties":{"Node name for S&R":"red_book_text_persona"},"widgets_values":[true,"JAHVERY嘉唯安眠枕头","产品文案",100,""]},{"id":19,"type":"TextInput_","pos":{"0":2181,"1":1003},"size":{"0":275.067138671875,"1":81},"flags":{"collapsed":false},"order":2,"mode":0,"inputs":[],"outputs":[{"name":"STRING","type":"STRING","links":[15],"shape":3,"label":"字符串"}],"properties":{"Node name for S&R":"TextInput_"},"widgets_values":[""]}],"links":[[10,18,0,10,0,"STRING"],[15,19,0,17,0,"STRING"],[16,17,0,18,0,"CUSTOM"],[17,11,0,18,2,"DICT"],[24,22,0,23,0,"STRING"],[25,23,0,18,3,"STRING"],[27,23,1,18,4,"STRING"]],"groups":[],"config":{},"extra":{"ds":{"scale":0.5989500000000004,"offset":[-1879.7304838465009,-753.5434521557793]},"workspace_info":{"id":"S7su_5_F4f_omK5W3KXBf","saveLock":false,"cloudID":null,"coverMediaPath":null}},"version":0.4}
+{
+  "last_node_id": 27,
+  "last_link_id": 29,
+  "nodes": [
+    {
+      "id": 18,
+      "type": "LLM",
+      "pos": [
+        3033,
+        999
+      ],
+      "size": {
+        "0": 467.313720703125,
+        "1": 555.105712890625
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 28,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 25,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 27,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            10
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "",
+        0.7,
+        "enable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 26,
+      "type": "LLM_api_loader",
+      "pos": [
+        2510,
+        997
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            28
+          ],
+          "shape": 3,
+          "label": "model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 23,
+      "type": "red_book_text_persona",
+      "pos": [
+        2559,
+        1253
+      ],
+      "size": {
+        "0": 315,
+        "1": 174
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "desc",
+          "type": "STRING",
+          "link": 29,
+          "widget": {
+            "name": "desc"
+          },
+          "label": "desc"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt",
+          "type": "STRING",
+          "links": [
+            25
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "system_prompt"
+        },
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "links": [
+            27
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "user_prompt"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "red_book_text_persona"
+      },
+      "widgets_values": [
+        true,
+        "PARTY安眠枕头",
+        "产品文案",
+        100,
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 27,
+      "type": "get_string",
+      "pos": [
+        2482,
+        1530
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            29
+          ],
+          "shape": 3,
+          "label": "string",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "get_string"
+      },
+      "widgets_values": [
+        "LLM-party是中国品牌\\n使用了空压气感棉、GEL医疗级凝胶、罗耶丝皇水晶桑蚕丝、进口三醋酸纤维、珍稀黑马麂皮、柔软铜氨丝等材料"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "ShowText|pysssss",
+      "pos": [
+        3625,
+        1018
+      ],
+      "size": {
+        "0": 378.09503173828125,
+        "1": 331.57177734375
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 10,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 0,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "✨🌙 寻找完美的睡眠伴侣？让我们为你介绍“PARTY安眠枕头”！这款枕头，集合了空压气感棉、GEL医疗级凝胶、罗耶丝皇水晶桑蚕丝等顶级材料，带给你无与伦比的舒适体验！💤\n\n每一次入睡，都是一场奢华的享受。无论是午睡还是夜间深度睡眠，PARTY安眠枕头都能完美支撑你的头颈，让你在梦中畅游。💖✨\n\n告别翻来覆去的夜晚，迎接清新满满的早晨！快来体验这款让你一夜好眠的枕头吧！🌈\n\n#安眠枕头 #优质睡眠 #舒适体验 #奢华睡眠 #健康生活 #深度睡眠"
+      ]
+    }
+  ],
+  "links": [
+    [
+      10,
+      18,
+      0,
+      10,
+      0,
+      "STRING"
+    ],
+    [
+      25,
+      23,
+      0,
+      18,
+      3,
+      "STRING"
+    ],
+    [
+      27,
+      23,
+      1,
+      18,
+      4,
+      "STRING"
+    ],
+    [
+      28,
+      26,
+      0,
+      18,
+      0,
+      "CUSTOM"
+    ],
+    [
+      29,
+      27,
+      0,
+      23,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9646149645000027,
+      "offset": [
+        -2472.5661521962925,
+        -981.810714270714
+      ]
+    },
+    "workspace_info": {
+      "id": "S7su_5_F4f_omK5W3KXBf",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    }
+  },
+  "version": 0.4
+}
