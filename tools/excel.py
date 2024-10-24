@@ -3,6 +3,7 @@ import json
 import os
 import random
 import time
+import datetime
 
 import numpy as np
 import pandas as pd
@@ -10,9 +11,11 @@ import torch
 from PIL import Image, ImageFile, ImageOps, ImageSequence, UnidentifiedImageError
 import signal
 import sys
+
 def interrupt_handler(signum, frame):
     print("Process interrupted")
     sys.exit(0)
+
 def pillow(fn, arg):
     prev_value = None
     try:
@@ -26,6 +29,11 @@ def pillow(fn, arg):
             ImageFile.LOAD_TRUNCATED_IMAGES = prev_value
         return x
 
+class DateTimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, (datetime.datetime, datetime.date)):
+            return obj.isoformat()
+        return super().default(obj)
 
 class load_excel:
     def __init__(self):
@@ -51,11 +59,9 @@ class load_excel:
 
     FUNCTION = "file"
 
-    # OUTPUT_NODE = False
-
     CATEGORY = "大模型派对（llm_party）/迭代器（iterator）"
 
-    def file(self, path,iterator_mode, is_enable=True, is_reload=False,load_all=False):
+    def file(self, path, iterator_mode, is_enable=True, is_reload=False, load_all=False):
         flag_is_end = False
         if not is_enable:
             return (None, flag_is_end,)   
@@ -63,7 +69,7 @@ class load_excel:
             # 返回这个表格，以json字符串格式返回
             df = pd.read_excel(path, header=0)
             data_list = df.to_dict(orient='records')
-            data = json.dumps(data_list, ensure_ascii=False, indent=4)
+            data = json.dumps(data_list, ensure_ascii=False, indent=4, cls=DateTimeEncoder)
             return (data, flag_is_end,)
         if self.path != path or is_reload == True:
             self.index = 0  # 重置索引为0，因为我们要从第二行开始读取数据
@@ -76,15 +82,15 @@ class load_excel:
             if iterator_mode == "sequential":
                 signal.signal(signal.SIGINT, interrupt_handler)
                 signal.raise_signal(signal.SIGINT)  # 直接中断进程
-        if self.index == len(self.data) - 1 and iterator_mode == "sequential_flagout":
+        if self.index == len(df) - 1 and iterator_mode == "sequential_flagout":
             flag_is_end = True
         # 读取第self.index行的数据
         data_row = df.iloc[self.index]
         # 将Series对象转换为字典
         data_dict = data_row.to_dict()
         # 返回JSON格式的数据
-        data = json.dumps(data_dict, ensure_ascii=False,indent=4)
-        if iterator_mode == "sequential" or iterator_mode =="Infinite" or iterator_mode == "sequential_flagout":
+        data = json.dumps(data_dict, ensure_ascii=False, indent=4, cls=DateTimeEncoder)
+        if iterator_mode == "sequential" or iterator_mode == "Infinite" or iterator_mode == "sequential_flagout":
             self.index += 1
         elif iterator_mode == "random":
             self.index = random.randint(0, len(df) - 1)
@@ -95,7 +101,7 @@ class load_excel:
         self.record = self.index
         return self.record
 
-
+# 其他类的定义保持不变
 class image_iterator:
     def __init__(self):
         self.index = 0
