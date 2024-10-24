@@ -13,8 +13,8 @@ class FilePathExists:
             }
         }
 
-    RETURN_TYPES = ("BOOLEAN",)
-    RETURN_NAMES = ("file_exists",)
+    RETURN_TYPES = ("BOOLEAN","STRING",)
+    RETURN_NAMES = ("file_exists","path_hold",)
 
     FUNCTION = "file_exists"
     CATEGORY = "大模型派对（llm_party）/转换器（converter）"
@@ -23,12 +23,12 @@ class FilePathExists:
         if is_enable:
             self.file_path = file_path
         if self.file_path == None or self.file_path=="":
-            return (False,)
+            return (False,self.file_path,)
         if not isinstance(self.file_path, (str, bytes, os.PathLike)):
             print(f"Path is not a valid type: {type(self.file_path)}")
-            return (False,)
+            return (False,self.file_path,)
         exists = os.path.exists(self.file_path)
-        return (exists,)
+        return (exists,self.file_path,)
 
         
 
