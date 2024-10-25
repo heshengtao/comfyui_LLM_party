@@ -7,7 +7,7 @@
   <a href="workflow_tutorial/">workflow tutorial</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baidu cloud</a> ·
   <a href="img/Q群.jpg">QQ group</a> ·
-  <a href="https://discord.gg/bsnMfMAv">discord</a> ·
+  <a href="https://discord.gg/f2dsAKKr2V">discord</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">About us</a>  
 </div>
 
@@ -74,7 +74,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 ## User Guide
 1. For the instructions for using the node, please refer to: [how to use nodes](https://github.com/heshengtao/Let-LLM-party)
 
-2. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/bsnMfMAv).
+2. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/f2dsAKKr2V).
 
 3. Please refer to the workflow tutorial: [Workflow Tutorial](workflow_tutorial/), thanks to [HuangYuChuh](https://github.com/HuangYuChuh) for your contribution!
 
@@ -251,7 +251,7 @@ Some of the nodes in this project have borrowed from the following projects. Tha
 ### Join the community
 If there is a problem with the plugin or you have any other questions, please join our community.
 
-1. discord:[discord link](https://discord.gg/bsnMfMAv)
+1. discord:[discord link](https://discord.gg/f2dsAKKr2V)
 2. QQ group: `931057213`
 
 <div style="display: flex; justify-content: center;">

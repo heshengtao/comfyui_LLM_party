@@ -7,7 +7,7 @@
   <a href="workflow_tutorial/">ワークフローチュートリアル</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">百度リンク</a> ·
   <a href="img/Q群.jpg">QQグループ</a> ·
-  <a href="https://discord.gg/bsnMfMAv">ディスコード</a> ·
+  <a href="https://discord.gg/f2dsAKKr2V">ディスコード</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">私たちについて</a>
 </div>
 
@@ -73,7 +73,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 ## 使用説明
 1. ノードの使用説明については、以下を参照してください：[ノードの使用方法](https://github.com/heshengtao/Let-LLM-party)
 
-2. プラグインに問題がある場合や他に疑問がある場合は、ぜひQQ群にご参加ください：[931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/bsnMfMAv).
+2. プラグインに問題がある場合や他に疑問がある場合は、ぜひQQ群にご参加ください：[931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/f2dsAKKr2V).
 3. ワークフローのチュートリアルについては、[ワークフローのチュートリアル](workflow_tutorial/)をご参照ください。貢献してくださった[HuangYuChuh](https://github.com/HuangYuChuh)に感謝いたします。
 
 4. 高度なワークフローのアカウント：[openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
@@ -258,7 +258,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 
 2. WeChatグループ：`Choo-Yong`（小助手のWeChatを追加した後にグループに参加してください）
 
-3. discord:[discordリンク](https://discord.gg/bsnMfMAv)
+3. discord:[discordリンク](https://discord.gg/f2dsAKKr2V)
 
 ### 私たちをフォローする
 1. このプロジェクトの最新機能を継続的にフォローしたい方は、Bilibiliアカウントをフォローしてください：[派对主持BB机](https://space.bilibili.com/26978344)

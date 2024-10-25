@@ -7,7 +7,7 @@
   <a href="workflow_tutorial/">دليل سير العمل</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">رابط دودة</a> ·
   <a href="img/Q群.jpg">مجموعة QQ</a> ·
-  <a href="https://discord.gg/bsnMfMAv">ديسكورد</a> ·
+  <a href="https://discord.gg/f2dsAKKr2V">ديسكورد</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">معلومات عنا</a>
 </div>
 
@@ -74,7 +74,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 ## تعليمات الاستخدام
 1. يرجى الرجوع إلى تعليمات استخدام العقدة: [怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 
-2. إذا كانت هناك مشاكل في المكون الإضافي أو إذا كان لديك أي استفسارات أخرى، فنحن نرحب بك للانضمام إلى مجموعة QQ: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/bsnMfMAv).
+2. إذا كانت هناك مشاكل في المكون الإضافي أو إذا كان لديك أي استفسارات أخرى، فنحن نرحب بك للانضمام إلى مجموعة QQ: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/f2dsAKKr2V).
 3. يُرجى الرجوع إلى [دليل سير العمل](workflow_tutorial/) ، شكرًا لمساهمة [HuangYuChuh](https://github.com/HuangYuChuh)！
 
 4. حساب لعب سير العمل المتقدم: [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
@@ -259,7 +259,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 
 2. مجموعة وي شات：`Choo-Yong`（أضف مساعدنا إلى وي شات ثم انضم إلى المجموعة）
 
-3. ديسكورد: [رابط الديسكورد](https://discord.gg/bsnMfMAv)
+3. ديسكورد: [رابط الديسكورد](https://discord.gg/f2dsAKKr2V)
 
 ### تابعونا
 1. إذا كنت ترغب في متابعة أحدث ميزات هذا المشروع، ندعوك لمتابعة حسابنا على بلي بلي: [派对主持BB机](https://space.bilibili.com/26978344)

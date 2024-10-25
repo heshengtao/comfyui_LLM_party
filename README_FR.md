@@ -7,7 +7,7 @@
   <a href="workflow_tutorial/">Tutoriel de workflow</a> ·
   <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Lien Baidu</a> ·
   <a href="img/Q群.jpg">Groupe QQ</a> ·
-  <a href="https://discord.gg/bsnMfMAv">Discord</a> ·
+  <a href="https://discord.gg/f2dsAKKr2V">Discord</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">À propos de nous</a>
 </div>
 
@@ -74,7 +74,7 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 ## Instructions d'utilisation
 1. Pour les instructions d'utilisation des nœuds, veuillez consulter : [怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 
-2. Si vous rencontrez des problèmes avec le plugin ou si vous avez d'autres questions, n'hésitez pas à rejoindre le groupe QQ : [931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/bsnMfMAv).
+2. Si vous rencontrez des problèmes avec le plugin ou si vous avez d'autres questions, n'hésitez pas à rejoindre le groupe QQ : [931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/f2dsAKKr2V).
 3. Pour le tutoriel sur les flux de travail, veuillez consulter : [Tutoriel sur les flux de travail](workflow_tutorial/), merci pour la contribution de [HuangYuChuh](https://github.com/HuangYuChuh) !
 
 4. Compte pour les fonctionnalités avancées des flux de travail : [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
@@ -259,7 +259,7 @@ Si vous rencontrez des problèmes avec le plugin ou si vous avez d'autres questi
 
 2. Groupe WeChat : `Choo-Yong` (ajoutez le petit assistant WeChat pour rejoindre le groupe)
 
-3. discord : [lien discord](https://discord.gg/bsnMfMAv)
+3. discord : [lien discord](https://discord.gg/f2dsAKKr2V)
 
 ### Suivez-nous
 1. Si vous souhaitez rester informé des dernières fonctionnalités de ce projet, n'hésitez pas à suivre notre compte Bilibili : [派对主持BB机](https://space.bilibili.com/26978344)
