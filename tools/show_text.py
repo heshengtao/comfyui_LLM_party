@@ -74,7 +74,8 @@ ComfyUI LLM Party is dedicated to creating a powerful LLM Agent ecosystem in the
 · From a single agent pipeline to the construction of complex agent-agent radial interaction mode and circular interaction mode;
 · From individual users' access to their own social apps (QQ, Feishu, Discord), to one-stop LLM + TTS + ComfyUI workflows for streaming media workers.
 · From the simple beginnings of the first LLM application required by ordinary students, to the various parameter debugging interfaces commonly used by researchers, model adaptation.
-
+注意！本项目是基于AGPL协议开源的，请遵守AGPL协议，以避免不必要的法律问题！谢谢您的合作！如果您需要可以闭源商用的版本，请邮箱联系hst97@qq.com
+Attention! This project is open source based on the AGPL agreement, please abide by the AGPL agreement to avoid unnecessary legal problems! Thank you for your cooperation! If you need a closed-source commercial version, please contact hst97@qq.com
         """.strip()
         ]
         if unique_id is not None and extra_pnginfo is not None:

@@ -204,11 +204,14 @@ class LLMPartyExtension {
         const modalContent = document.createElement('div');
         modalContent.style.cssText = `
             background-color: #2c2c2c;
-            margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 300px;
             border-radius: 5px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         `;
 
         const closeBtn = document.createElement('span');
@@ -307,13 +310,16 @@ class LLMPartyExtension {
         const modalContent = document.createElement('div');
         modalContent.style.cssText = `
             background-color: #2c2c2c;
-            margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 60%;
             max-width: 600px;
             border-radius: 5px;
             color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         `;
 
         const closeBtn = document.createElement('span');
@@ -332,6 +338,8 @@ class LLMPartyExtension {
 
         const content = document.createElement('div');
         content.innerHTML = `
+            <p>注意！本项目是基于AGPL协议开源的，请遵守AGPL协议，以避免不必要的法律问题！谢谢您的合作！如果您需要可以闭源商用的版本，请邮箱联系hst97@qq.com</p>
+            <p>Attention! This project is open source based on the AGPL agreement, please abide by the AGPL agreement to avoid unnecessary legal problems! Thank you for your cooperation! If you need a closed-source commercial version, please contact hst97@qq.com</p>
             <p>github: <a href="https://github.com/heshengtao/comfyui_LLM_party" target="_blank" style="color: #4CAF50;">heshengtao/comfyui_LLM_party</a></p>
             <p>bilibili: <a href="https://space.bilibili.com/26978344?spm_id_from=333.1007.0.0" target="_blank" style="color: #4CAF50;">@party host BB machine</a></p>
             <p>youtube: <a href="https://www.youtube.com/@comfyui-LLM-party" target="_blank" style="color: #4CAF50;">@comfyui-LLM-party</a></p>
@@ -350,6 +358,7 @@ class LLMPartyExtension {
 
     showAPIModal() {
         this.apiModal.style.display = 'block';
+        this.centerModalContent(this.apiModal);
     }
 
     hideAPIModal() {
@@ -358,6 +367,7 @@ class LLMPartyExtension {
 
     showAboutModal() {
         this.aboutModal.style.display = 'block';
+        this.centerModalContent(this.aboutModal);
     }
 
     hideAboutModal() {
@@ -512,7 +522,7 @@ makeDraggable(element) {
         document.onmouseup = null;
         document.onmousemove = null;
     }
-}
+    }
 
     createWorkflowModal() {
         this.workflowModal = document.createElement('div');
@@ -531,11 +541,14 @@ makeDraggable(element) {
         const modalContent = document.createElement('div');
         modalContent.style.cssText = `
             background-color: #2c2c2c;
-            margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 300px;
             border-radius: 5px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         `;
 
         const closeBtn = document.createElement('span');
@@ -593,10 +606,25 @@ makeDraggable(element) {
 
     showWorkflowModal() {
         this.workflowModal.style.display = 'block';
+        this.centerModalContent(this.workflowModal);
     }
 
     hideWorkflowModal() {
         this.workflowModal.style.display = 'none';
+    }
+
+    centerModalContent(modal) {
+        const content = modal.querySelector('div');
+        const windowHeight = window.innerHeight;
+        const contentHeight = content.offsetHeight;
+        
+        if (contentHeight > windowHeight) {
+            content.style.top = '0';
+            content.style.transform = 'translateX(-50%)';
+        } else {
+            content.style.top = '50%';
+            content.style.transform = 'translate(-50%, -50%)';
+        }
     }
 
     async loadWorkflowList() {
