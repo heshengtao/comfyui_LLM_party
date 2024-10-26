@@ -1598,17 +1598,7 @@ class mini_intent_recognition:
                         )
         output = response.choices[0].message.content
         output = json.loads(output)
-        out1 = output.get("1","")
-        out2 = output.get("2","")
-        out3 = output.get("3","")
-        out4 = output.get("4","")
-        out5 = output.get("5","")
-        out6 = output.get("6","")
-        out7 = output.get("7","")
-        out8 = output.get("8","")
-        out9 = output.get("9","")
-        out10 = output.get("10","")
-        return (out1,out2,out3,out4,out5,out6,out7,out8,out9,out10,)
+        return tuple(None if output.get(str(i)) == "" else output.get(str(i)) for i in range(1, 11))
 
 NODE_CLASS_MAPPINGS = {
     "mini_party": mini_party,
