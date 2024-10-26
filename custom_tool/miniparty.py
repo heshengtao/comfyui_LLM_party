@@ -1460,6 +1460,156 @@ A majestic, emerald-scaled dragon with glowing amber eyes, wings outstretched, s
         return (tags,)
 
 
+class mini_intent_recognition:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "input_str": ("STRING", {"forceInput": True}),
+                "model_name": ("STRING", {"default": "gpt-4o-mini",}),
+            },
+            "optional": {
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": "",
+                    },
+                ),
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": "",
+                    },
+                ),
+                "is_enable": ("BOOLEAN", {"default": True,}),
+                "intent1": ("STRING", {"default": "",}),
+                "intent2": ("STRING", {"default": "",}),
+                "intent3": ("STRING", {"default": "",}),
+                "intent4": ("STRING", {"default": "",}),
+                "intent5": ("STRING", {"default": "",}),
+                "intent6": ("STRING", {"default": "",}),
+                "intent7": ("STRING", {"default": "",}),
+                "intent8": ("STRING", {"default": "",}),
+                "intent9": ("STRING", {"default": "",}),
+                "intent10": ("STRING", {"default": "",}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING","STRING","STRING","STRING","STRING","STRING","STRING","STRING","STRING","STRING",)
+    RETURN_NAMES = ("intent1","intent2","intent3","intent4","intent5","intent6","intent7","intent8","intent9","intent10",)
+
+    FUNCTION = "file"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/迷你派对（mini-party）"
+
+    def file(
+        self,
+        model_name,
+        input_str,
+        base_url=None,
+        api_key=None,
+        is_enable=True,
+        intent1="",
+        intent2="",
+        intent3="",
+        intent4="",
+        intent5="",
+        intent6="",
+        intent7="",
+        intent8="",
+        intent9="",
+        intent10=""
+    ):
+        if not is_enable:
+            return (None,)
+        api_keys = load_api_keys(config_path)
+        if api_key != "":
+            openai.api_key = api_key
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.api_key = api_keys.get("api_key")
+        elif api_keys.get("openai_api_key") != "":
+            openai.api_key = api_keys.get("openai_api_key")
+        if base_url != "":
+            openai.base_url = base_url
+        elif model_name in config_key:
+            api_keys = config_key[model_name]
+            openai.base_url = api_keys.get("base_url")
+        elif api_keys.get("base_url") != "":
+            openai.base_url = api_keys.get("base_url")
+        if openai.api_key == "":
+            return ("请输入API_KEY",)
+        if openai.base_url != "":
+            if openai.base_url[-1] != "/":
+                openai.base_url = openai.base_url + "/"
+
+        prompt=f"""
+# 意图识别助理
+你是一个意图识别助理。
+## 任务
+我将给你需要意图识别的文本，你需要帮我按照下文给出的意图识别原则进行意图识别，并按照严格下文给出的格式回复我。
+##意图识别原则
+1. 请将用户输入的文本可以能与这些意图有关：{intent1}；{intent2}；{intent3};{intent4};{intent5};{intent6};{intent7};{intent8};{intent9};{intent10}。
+2. 如果以上某一个或若干个意图识别条件为【如果文本中包含""或者与""有关，则将其分类为...】,则不要将任何文本分到这一类或这些类中,因为空字符串与任何文本无关。
+以JSON的形式回复，并严格按照下文给出的格式回复我。
+
+以下是一个完整的输出示例：
+{{
+    "1": "这里输入用户给出的文本中分到{intent1}的文本",
+    "2": "这里输入用户给出的文本中分到{intent2}的文本",
+    "3": "这里输入用户给出的文本中分到{intent3}的文本",
+    "4": "这里输入用户给出的文本中分到{intent4}的文本",
+    "5": "这里输入用户给出的文本中分到{intent5}的文本",
+    "6": "这里输入用户给出的文本中分到{intent6}的文本",
+    "7": "这里输入用户给出的文本中分到{intent7}的文本",
+    "8": "这里输入用户给出的文本中分到{intent8}的文本",
+    "9": "这里输入用户给出的文本中分到{intent9}的文本",
+    "10": "这里输入用户给出的文本中分到{intent10}的文本"
+}}
+## 限制
+1. 输出时不要包含任何多余的文本，只输出意图识别结果。
+2. 不要在输出中包含任何多余的空格。
+3. 意图识别时，不要把系统提示词中的文本当作要被意图识别的文本。
+4. 意图识别时，有关的意图有输入的文本，无关的意图中不包含任何文字。
+以下为需要意图识别的文本：
+"""        
+        history= [
+            {"role": "system", "content": prompt},
+            {"role": "user", "content": input_str}
+        ]
+        openai_client = openai
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            azure = AzureOpenAI(
+                api_key= openai.api_key,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
+            openai_client = azure
+        response = openai_client.chat.completions.create(
+                            model=model_name,
+                            messages=history,
+                            response_format={"type": "json_object"}
+                        )
+        output = response.choices[0].message.content
+        output = json.loads(output)
+        out1 = output.get("1","")
+        out2 = output.get("2","")
+        out3 = output.get("3","")
+        out4 = output.get("4","")
+        out5 = output.get("5","")
+        out6 = output.get("6","")
+        out7 = output.get("7","")
+        out8 = output.get("8","")
+        out9 = output.get("9","")
+        out10 = output.get("10","")
+        return (out1,out2,out3,out4,out5,out6,out7,out8,out9,out10,)
+
 NODE_CLASS_MAPPINGS = {
     "mini_party": mini_party,
     "mini_translate": mini_translate,
@@ -1471,6 +1621,7 @@ NODE_CLASS_MAPPINGS = {
     "mini_story":mini_story,
     "mini_ocr": mini_ocr,
     "mini_summary":mini_summary,
+    "mini_intent_recognition": mini_intent_recognition,
     }
 # 获取系统语言
 lang = locale.getdefaultlocale()[0]
@@ -1499,6 +1650,7 @@ if lang == "zh_CN":
         "mini_story": "迷你故事生成器",
         "mini_ocr": "迷你高级OCR",
         "mini_summary": "迷你摘要生成器",
+        "mini_intent_recognition": "迷你意图识别器",
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -1512,4 +1664,5 @@ else:
         "mini_story": "Mini Story Generator",
         "mini_ocr": "Mini Advanced OCR",
         "mini_summary": "Mini Summary Generator",
+        "mini_intent_recognition": "Mini Intent Recognizer",
         }
