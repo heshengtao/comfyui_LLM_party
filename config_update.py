@@ -14,8 +14,8 @@ import json
 
 config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
 llm_api_keys = load_api_keys(config_path)
-llm_api_key=llm_api_keys.get("openai_api_key").strip()
-llm_base_url=llm_api_keys.get("base_url").strip()
+llm_api_key=llm_api_keys.get("openai_api_key", "").strip()
+llm_base_url=llm_api_keys.get("base_url", "").strip()
 if llm_api_key == "" or llm_api_key =="sk-XXXXX" or llm_base_url == "":
     models_dict =[]
 else:
