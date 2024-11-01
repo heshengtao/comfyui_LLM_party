@@ -106,7 +106,7 @@ class openai_whisper:
         return {
             "required": {
                 "is_enable": ("BOOLEAN", {"default": True}),
-                "audio_path": ("STRING", {}),
+                "audio_path": ("STRING", {"default": ""}),
             },
             "optional": {
                 "base_url": (
@@ -121,6 +121,7 @@ class openai_whisper:
                         "default": "",
                     },
                 ),
+                "audio": ("AUDIO", {"default": ""}),
             },
         }
 
@@ -133,7 +134,7 @@ class openai_whisper:
 
     CATEGORY = "大模型派对（llm_party）/音频（audio）"
 
-    def whisper(self, is_enable=True, audio_path="", base_url=None, api_key=None):
+    def whisper(self, audio,audio_path,is_enable=True,  base_url=None, api_key=None):
         if is_enable == False:
             return (None,)
         if api_key != "":
@@ -155,20 +156,30 @@ class openai_whisper:
         if openai.api_key == "":
             return ("请输入API_KEY",)
 
-        if audio_path != "":
-            client = OpenAI(api_key=openai.api_key, base_url=openai.base_url)
-            if "openai.azure.com" in openai.base_url:
-                # 获取API版本
-                api_version = openai.base_url.split("=")[-1].split("/")[0]
-                # 获取azure_endpoint
-                azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
-                client = AzureOpenAI(
-                    api_key= openai.api_key,
-                    api_version=api_version,
-                    azure_endpoint=azure_endpoint,
-                )
+
+        client = OpenAI(api_key=openai.api_key, base_url=openai.base_url)
+        if "openai.azure.com" in openai.base_url:
+            # 获取API版本
+            api_version = openai.base_url.split("=")[-1].split("/")[0]
+            # 获取azure_endpoint
+            azure_endpoint = "https://"+openai.base_url.split("//")[1].split("/")[0]
+            client = AzureOpenAI(
+                api_key= openai.api_key,
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+            )
+        if audio is not None:
+            # 获得当前时间戳
+            timestamp = str(int(round(time.time() * 1000)))
+            # 保存录音文件的路径
+            audio_path = os.path.join(current_dir_path, "record", f"{timestamp}.wav")
+            torchaudio.save(audio_path, audio["waveform"].squeeze(0), audio["sample_rate"])
             audio_file = open(audio_path, "rb")
             transcription = client.audio.transcriptions.create(model="whisper-1", file=audio_file)
+            out = transcription.text
+        elif audio_path != "" and audio_path is not None:
+            audio_file = open(audio_path, "rb")
+            transcription = client.audio.transcriptions.create(model="whisper-1", file=audio_path)
             out = transcription.text
         else:
             out = None

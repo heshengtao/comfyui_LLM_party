@@ -12,7 +12,8 @@ class whisper_local:
         return {"required": {
             "model_name_or_path": ("STRING", {"default": "openai/whisper-small"}),
             "audio": ("AUDIO", {}),
-            "is_enable": ("BOOLEAN", {"default": True})
+            "is_enable": ("BOOLEAN", {"default": True}),
+            "audio_path": ("STRING", {"default": ""}),
             }}
 
     RETURN_TYPES = ("STRING",)
@@ -22,19 +23,24 @@ class whisper_local:
     OUTPUT_NODE = True
     CATEGORY = "大模型派对（llm_party）/音频（audio）"
 
-    def save(self, model_name_or_path, audio, is_enable=True):
+    def save(self, model_name_or_path, audio,audio_path, is_enable=True):
         if is_enable is False:
             return (None,)
         device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
         pipe = pipeline("automatic-speech-recognition", model=model_name_or_path,device=device)
-        # 获得当前时间戳
-        timestamp = str(int(round(time.time() * 1000)))
-        # 保存录音文件的路径
-        audio_path = os.path.join(current_dir_path, "record", f"{timestamp}.wav")
-        # audio_out再保存回文件
-        torchaudio.save(audio_path, audio["waveform"].squeeze(0), audio["sample_rate"])
-        # Use the pipeline as a function
-        result = pipe(audio_path)
+        if audio is not None:
+            # 获得当前时间戳
+            timestamp = str(int(round(time.time() * 1000)))
+            # 保存录音文件的路径
+            audio_path = os.path.join(current_dir_path, "record", f"{timestamp}.wav")
+            # audio_out再保存回文件
+            torchaudio.save(audio_path, audio["waveform"].squeeze(0), audio["sample_rate"])
+            # Use the pipeline as a function
+            result = pipe(audio_path)
+        elif   audio_path != "" and audio_path is not None:
+            result = pipe(audio_path)
+        else:
+            return (None,)
 
         return (result['text'],)
 
