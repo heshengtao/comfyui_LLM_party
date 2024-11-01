@@ -29,7 +29,7 @@ from transformers import (
     AutoConfig,
 )
 import PIL.Image
-from openai import AzureOpenAI
+from openai import AzureOpenAI,OpenAI
 if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
 from google.protobuf.struct_pb2 import Struct
@@ -542,9 +542,10 @@ class Chat:
                         history[i]["role"] = "user"
                         history.append({"role": "assistant", "content": "好的，我会按照你的指示来操作"})
                         break
-            openai.api_key = self.apikey
-            openai.base_url = self.baseurl
-            openai_client = openai
+            openai_client = OpenAI(
+                    api_key= self.apikey,
+                    base_url=self.baseurl,
+                )
             if "openai.azure.com" in self.baseurl:
                 # 获取API版本
                 api_version = self.baseurl.split("=")[-1].split("/")[0]
