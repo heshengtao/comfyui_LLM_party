@@ -1,77 +1,339 @@
 {
-  "11": {
-    "inputs": {
-      "text": [
-        "28",
-        0
+  "last_node_id": 28,
+  "last_link_id": 4,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1058.4000244140625,
+        130
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 1,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "title": "显示文本(show_text)",
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
       ]
     },
-    "class_type": "show_text_party",
-    "_meta": {
-      "title": "显示文本(show_text)"
-    }
-  },
-  "20": {
-    "inputs": {
-      "model_name": "gpt-4-turbo",
-      "base_url": "",
-      "api_key": ""
-    },
-    "class_type": "LLM_api_loader",
-    "_meta": {
-      "title": "API大语言模型加载器(LLM_api_loader)"
-    }
-  },
-  "21": {
-    "inputs": {
-      "persona_name": "麦洛薇",
-      "is_enable": true
-    },
-    "class_type": "load_persona",
-    "_meta": {
-      "title": "加载人格面具(load_persona)"
-    }
-  },
-  "27": {
-    "inputs": {
-      "absolute_path": "",
-      "relative_path": "麦洛薇.json",
-      "is_enable": true
-    },
-    "class_type": "KG_json_toolkit_developer",
-    "_meta": {
-      "title": "知识图谱JSON工具包开发者版(KG_json_toolkit_developer)"
-    }
-  },
-  "28": {
-    "inputs": {
-      "system_prompt": "",
-      "user_prompt": "请问你毕业于哪里呀",
-      "temperature": 0.7,
-      "is_memory": "disable",
-      "is_tools_in_sys_prompt": "disable",
-      "is_locked": "disable",
-      "main_brain": "enable",
-      "max_length": 1920,
-      "system_prompt_input": [
-        "21",
-        0
+    {
+      "id": 20,
+      "type": "LLM_api_loader",
+      "pos": [
+        100,
+        130
       ],
-      "tools": [
-        "27",
-        0
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "label": "model"
+        }
       ],
-      "imgbb_api_key": "",
-      "conversation_rounds": 100,
-      "historical_record": "",
-      "model": [
-        "20",
-        0
+      "title": "API大语言模型加载器(LLM_api_loader)",
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4-turbo",
+        "",
+        "",
+        false
       ]
     },
-    "class_type": "LLM",
-    "_meta": {
-      "title": "API大语言模型(LLM_api)"
+    {
+      "id": 21,
+      "type": "load_persona",
+      "pos": [
+        100,
+        390
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "label": "system_prompt_input"
+        }
+      ],
+      "title": "加载人格面具(load_persona)",
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "麦洛薇",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 27,
+      "type": "KG_json_toolkit_developer",
+      "pos": [
+        100,
+        626
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "tools",
+          "type": "STRING",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "label": "tools"
+        }
+      ],
+      "title": "知识图谱JSON工具包开发者版(KG_json_toolkit_developer)",
+      "properties": {
+        "Node name for S&R": "KG_json_toolkit_developer"
+      },
+      "widgets_values": [
+        "",
+        "麦洛薇.json",
+        true
+      ]
+    },
+    {
+      "id": 28,
+      "type": "LLM",
+      "pos": [
+        515,
+        130
+      ],
+      "size": [
+        443.4000244140625,
+        502
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 4,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters"
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": 2,
+          "widget": {
+            "name": "system_prompt_input"
+          }
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          }
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 3,
+          "widget": {
+            "name": "tools"
+          }
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          }
+        },
+        {
+          "name": "user_history",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_history"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "title": "API大语言模型(LLM_api)",
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "请问你毕业于哪里呀",
+        0.7000000000000001,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true,
+        ""
+      ]
     }
-  }
+  ],
+  "links": [
+    [
+      1,
+      28,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      21,
+      0,
+      28,
+      3,
+      "STRING"
+    ],
+    [
+      3,
+      27,
+      0,
+      28,
+      5,
+      "STRING"
+    ],
+    [
+      4,
+      20,
+      0,
+      28,
+      0,
+      "CUSTOM"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7513148009015783,
+      "offset": {
+        "0": 273.69307951396144,
+        "1": 55.51009231004649
+      }
+    }
+  },
+  "version": 0.4
 }
