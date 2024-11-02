@@ -47,7 +47,7 @@ class start_dialog:
 
     CATEGORY = "大模型派对（llm_party）/工作流（workflow）"
 
-    def dialog(self, start_dialog,is_reload):
+    def dialog(self, init_dialog,is_reload):
         if is_reload:
             self.start = True
         if self.start == False:
@@ -55,7 +55,7 @@ class start_dialog:
             with open(self.prompt_path, "r", encoding="utf-8") as f:
                 prompt = f.read()
         else:
-            prompt = start_dialog
+            prompt = init_dialog
             self.start = False
         dialog_id = self.id
         return (
