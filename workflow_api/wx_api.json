@@ -1,0 +1,271 @@
+{
+  "24": {
+    "inputs": {
+      "file_path": "",
+      "img_path1": "",
+      "img_path2": "",
+      "system_prompt": "",
+      "user_prompt": "",
+      "positive_prompt": "",
+      "negative_prompt": "",
+      "model_name": ""
+    },
+    "class_type": "start_workflow",
+    "_meta": {
+      "title": "开始工作流(start_workflow)"
+    }
+  },
+  "25": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "text": [
+        "26",
+        0
+      ],
+      "images": [
+        "42",
+        0
+      ]
+    },
+    "class_type": "end_workflow",
+    "_meta": {
+      "title": "结束工作流(end_workflow)"
+    }
+  },
+  "26": {
+    "inputs": {
+      "system_prompt": "你是一个强大的智能助手",
+      "user_prompt": "",
+      "temperature": 0.7000000000000001,
+      "is_memory": "enable",
+      "is_tools_in_sys_prompt": "disable",
+      "is_locked": "disable",
+      "main_brain": "enable",
+      "max_length": 1920,
+      "system_prompt_input": [
+        "31",
+        0
+      ],
+      "user_prompt_input": [
+        "29",
+        1
+      ],
+      "imgbb_api_key": "",
+      "conversation_rounds": 100,
+      "historical_record": "",
+      "is_enable": true,
+      "model": [
+        "27",
+        0
+      ]
+    },
+    "class_type": "LLM",
+    "_meta": {
+      "title": "API大语言模型"
+    }
+  },
+  "27": {
+    "inputs": {
+      "model_name": "gpt-4o-mini",
+      "base_url": "",
+      "api_key": "",
+      "is_ollama": false
+    },
+    "class_type": "LLM_api_loader",
+    "_meta": {
+      "title": "API大语言模型加载器"
+    }
+  },
+  "28": {
+    "inputs": {
+      "system_prompt": "",
+      "user_prompt": "",
+      "temperature": 0.7000000000000001,
+      "is_memory": "disable",
+      "is_tools_in_sys_prompt": "disable",
+      "is_locked": "disable",
+      "main_brain": "enable",
+      "max_length": 1920,
+      "system_prompt_input": [
+        "30",
+        0
+      ],
+      "user_prompt_input": [
+        "29",
+        0
+      ],
+      "imgbb_api_key": "",
+      "conversation_rounds": 100,
+      "historical_record": "",
+      "is_enable": true,
+      "model": [
+        "27",
+        0
+      ]
+    },
+    "class_type": "LLM",
+    "_meta": {
+      "title": "API大语言模型"
+    }
+  },
+  "29": {
+    "inputs": {
+      "option": "A contain B",
+      "stringA": [
+        "24",
+        4
+      ],
+      "stringB": "画"
+    },
+    "class_type": "string_logic",
+    "_meta": {
+      "title": "字符串逻辑"
+    }
+  },
+  "30": {
+    "inputs": {
+      "persona_name": "图片提示词生成器jsonout版",
+      "is_enable": true
+    },
+    "class_type": "load_persona",
+    "_meta": {
+      "title": "加载人格面具"
+    }
+  },
+  "31": {
+    "inputs": {
+      "persona_name": "meeting胡桃",
+      "is_enable": true
+    },
+    "class_type": "load_persona",
+    "_meta": {
+      "title": "加载人格面具"
+    }
+  },
+  "33": {
+    "inputs": {
+      "text": [
+        "28",
+        0
+      ],
+      "key": "positive",
+      "is_enable": true
+    },
+    "class_type": "json_get_value",
+    "_meta": {
+      "title": "JSON取值🐶"
+    }
+  },
+  "34": {
+    "inputs": {
+      "text": [
+        "28",
+        0
+      ],
+      "key": "negative",
+      "is_enable": true
+    },
+    "class_type": "json_get_value",
+    "_meta": {
+      "title": "JSON取值🐶"
+    }
+  },
+  "35": {
+    "inputs": {
+      "text": [
+        "33",
+        0
+      ],
+      "clip": [
+        "38",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode_party",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "36": {
+    "inputs": {
+      "text": [
+        "34",
+        0
+      ],
+      "clip": [
+        "38",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode_party",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "38": {
+    "inputs": {
+      "ckpt_name": "OldFish_236151438.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint加载器(简易)"
+    }
+  },
+  "39": {
+    "inputs": {
+      "seed": 65250139774208,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "38",
+        0
+      ],
+      "positive": [
+        "35",
+        0
+      ],
+      "negative": [
+        "36",
+        0
+      ],
+      "latent_image": [
+        "40",
+        0
+      ]
+    },
+    "class_type": "KSampler_party",
+    "_meta": {
+      "title": "KSampler采样器"
+    }
+  },
+  "40": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent"
+    }
+  },
+  "42": {
+    "inputs": {
+      "samples": [
+        "39",
+        0
+      ],
+      "vae": [
+        "38",
+        2
+      ]
+    },
+    "class_type": "VAEDecode_party",
+    "_meta": {
+      "title": "VAEDecode解码器"
+    }
+  }
+}

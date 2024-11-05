@@ -311,7 +311,7 @@ async def process_request(request_data: CompletionRequest):
                     "finish_reason": "Stop",
                 }
             ],
-            "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
+            "usage": {"prompt_tokens": 10, "completion_tokens": 10, "total_tokens": 10},
         }
     else:
         base64_images = []  # 用于存储Base64编码的图像字符串
@@ -374,7 +374,7 @@ async def process_request(request_data: CompletionRequest):
                     "finish_reason": "Stop",
                 }
             ],
-            "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
+            "usage": {"prompt_tokens": 10, "completion_tokens": 10, "total_tokens": 10},
         }
     return response_data
 
