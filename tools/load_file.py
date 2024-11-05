@@ -302,8 +302,9 @@ class start_workflow:
                     path = os.path.join(file_path, path)
                     file_out += read_one(path) + "/n/n"
             else:
-                path = os.path.join(file_path, path)
-                file_out = read_one(path)
+                print(file_path)
+                file_out = read_one(file_path)
+                print(file_out)
         img_out = []
         if image_input1 is not None:
             img_out=image_input1
