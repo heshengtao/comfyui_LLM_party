@@ -95,6 +95,7 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 * [ollama](https://github.com/ollama/ollama) (Recommandé! Si vous appelez localement, il est fortement recommandé d'utiliser la méthode ollama pour héberger votre modèle local!)
 * [Azure OpenAI](https://azure.microsoft.com/zh-cn/products/ai-services/openai-service/)
 * [llama.cpp](https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#web-server) (Recommandé! Si vous souhaitez utiliser le modèle au format gguf local, vous pouvez utiliser l'API du projet llama.cpp pour accéder à ce projet!)
+* [Grok](https://x.ai/api)
 * [通义千问/qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [智谱清言/glm](https://open.bigmodel.cn/dev/api#http_auth)
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)

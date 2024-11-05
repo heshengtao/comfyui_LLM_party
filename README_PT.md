@@ -94,6 +94,7 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 * [ollama](https://github.com/ollama/ollama) (Recomendado! Se você estiver chamando localmente, é altamente recomendável usar o método ollama para hospedar seu modelo local!)
 * [Azure OpenAI](https://azure.microsoft.com/zh-cn/products/ai-services/openai-service/)
 * [llama.cpp](https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#web-server) (Recomendado! Se você quiser usar o modelo no formato gguf local, pode usar a API do projeto llama.cpp para acessar este projeto!)
+* [Grok](https://x.ai/api)
 * [通义千问/qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [智谱清言/glm](https://open.bigmodel.cn/dev/api#http_auth)
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)

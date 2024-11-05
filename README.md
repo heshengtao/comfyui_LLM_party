@@ -96,6 +96,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 * [ollama](https://github.com/ollama/ollama) (Recommended! If you are calling locally, it is highly recommended to use the ollama method to host your local model!)
 * [Azure OpenAI](https://azure.microsoft.com/zh-cn/products/ai-services/openai-service/)
 * [llama.cpp](https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#web-server) (Recommended! If you want to use the local gguf format model, you can use the llama.cpp project's API to access this project!)
+* [Grok](https://x.ai/api)
 * [Tongyi Qianwen /qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [zhipu qingyan/glm](https://open.bigmodel.cn/dev/api#http_auth)
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)

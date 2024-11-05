@@ -95,6 +95,7 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 * [ollama](https://github.com/ollama/ollama) (Рекомендуется! Если вы вызываете локально, настоятельно рекомендуется использовать метод ollama для размещения вашей локальной модели!)
 * [Azure OpenAI](https://azure.microsoft.com/zh-cn/products/ai-services/openai-service/)
 * [llama.cpp](https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#web-server) (Рекомендуется! Если вы хотите использовать локальную модель формата gguf, вы можете использовать API проекта llama.cpp для доступа к этому проекту!)
+* [Grok](https://x.ai/api)
 * [通义千问/qwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/?spm=a2c4g.11186623.0.0.7b576019xkArPq)
 * [智谱清言/glm](https://open.bigmodel.cn/dev/api#http_auth)
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)
