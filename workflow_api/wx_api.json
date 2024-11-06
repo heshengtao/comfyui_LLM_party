@@ -134,7 +134,7 @@
   },
   "31": {
     "inputs": {
-      "persona_name": "meeting胡桃",
+      "persona_name": "麦洛薇",
       "is_enable": true
     },
     "class_type": "load_persona",
