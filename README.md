@@ -51,6 +51,8 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 5. Due to the high usage threshold of this project, even if you choose the quick start, I hope you can patiently read through the project homepage.
 
 ## Latest update
+1. Forked [chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat), created a new repository [party-on-wechat](https://github.com/heshengtao/party-on-wechat). The installation and usage methods are the same as the original project, no configuration is required, just start the party's FastAPI. By default, it calls the wx_api workflow and supports image output. It will be updated gradually to ensure a smooth experience of party on WeChat.
+2. Added an In-Context-LoRA mask node, used for generating consistent [In-Context-LoRA](https://github.com/ali-vilab/In-Context-LoRA/tree/main) prompts.
 1. We have added a frontend component with features laid out from left to right as follows:
    - Saves your API key and Base URL to the `config.ini` file. When you use the `fix node` function on the API LLM loader node, it will automatically read the updated API key and Base URL from the `config.ini` file.
    - Starts a FastAPI service that can be used to call your ComfyUI workflow. If you run it directly, you get an OpenAI interface at `http://127.0.0.1:8817/v1/`. You need to connect the start and end of your workflow to the 'Start Workflow' and 'End Workflow', then save in API format to the `workflow_api` folder. Then, in any frontend that can call the OpenAI interface, input `model name=<your workflow name without the .json extension>`, `Base URL=http://127.0.0.1:8817/v1/`, and the API key can be filled with any value.

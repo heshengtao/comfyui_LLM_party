@@ -37,12 +37,6 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정을 통해 나만의 AI 도우미를 신속하게 구축하고, 산업에 적용 가능한 단어 벡터 RAG, GraphRAG를 통해 산업 내 지식 관리 시스템을 로컬화합니다. 단일 지능체 파이프라인에서 복잡한 지능체 간의 방사형 상호작용 모드, 순환 상호작용 모드를 구성하는 것까지; 개인 사용자가 자신의 사회적 APP(QQ, Feishu, Discord)에 접속할 필요가 있는 것부터, 스트리밍 작업자가 필요로 하는 원스톱 LLM+TTS+ComfyUI 워크플로우까지; 일반 학생들이 필요로 하는 첫 번째 LLM 응용 프로그램의 간단한 시작부터, 연구자들이 자주 사용하는 다양한 파라미터 조정 인터페이스, 모델 적응까지. 이 모든 것을 ComfyUI LLM Party에서 확인할 수 있습니다.
 
 ## 빠른 시작
-1. 프론트엔드 컴포넌트를 추가했습니다. 기능은 왼쪽에서 오른쪽으로 다음과 같이 배치되어 있습니다:
-  - 당신의 API 키와 Base URL을 `config.ini` 파일에 저장합니다. API LLM 로더 노드에서 `fix node`를 사용하면, 자동으로 변경된 API 키와 Base URL을 `config.ini` 파일에서 읽어옵니다.
-  - FastAPI를 시작하여 ComfyUI 워크플로를 호출할 수 있습니다. 이를 직접 실행하면 `http://127.0.0.1:8817/v1/`에 있는 OpenAI 인터페이스를 얻게 됩니다. 워크플로의 시작과 끝을 워크플로 시작과 종료에 연결하고, API 형식으로 `workflow_api` 폴더에 저장합니다. 그런 다음 OpenAI 인터페이스를 호출할 수 있는 다른 프론트엔드에서 `model name=<워크플로 이름 (.json 확장자 없음)>`, `Base URL=http://127.0.0.1:8817/v1/`을 입력하고, API 키는 아무 값이나 채울 수 있습니다.
-  - Streamlit 애플리케이션을 시작합니다. 워크플로 저장 프로세스는 위와 같습니다. Streamlit 애플리케이션의 '설정'에서 저장한 워크플로를 선택하고, '대화'에서 워크플로 에이전트와 대화할 수 있습니다.
-  - '우리에 대해', 이 프로젝트를 소개합니다.
-2. [searxng](https://github.com/searxng/searxng) 도구를 추가하여 전체 웹에서 검색을 집계할 수 있습니다. Perplexica도 이 집계 검색 도구에 의존하므로 파티에서 Perplexica를 설정할 수 있습니다. Docker에서 searxng/searxng 공용 이미지를 배포한 다음 `docker run -d -p 8080:8080 searxng/searxng`을 사용하여 시작하고 `http://localhost:8080`을 사용하여 액세스할 수 있습니다. 이 URL `http://localhost:8080`을 파티의 searxng 도구에 입력하면 searxng을 LLM의 도구로 사용할 수 있습니다.
 1. 다음 워크플로를 comfyui에 드래그한 다음 [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)를 사용하여 누락된 노드를 설치합니다.
   - API를 사용하여 LLM 호출: [start_with_LLM_api](workflow/start_with_LLM_api.json)
   - ollama를 사용하여 로컬 LLM 관리: [start_with_Ollama](workflow/ollama.json)
@@ -56,6 +50,8 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 5. 이 프로젝트는 사용 임계값이 높기 때문에 빠른 시작을 선택하더라도 프로젝트 홈페이지를 꼼꼼히 읽어주시기 바랍니다.
 
 ## 최신 업데이트
+1. [chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat)을 포크하여 새로운 저장소 [party-on-wechat](https://github.com/heshengtao/party-on-wechat)를 만들었습니다. 설치 및 사용 방법은 원래 프로젝트와 동일하며, 설정이 필요하지 않고 party의 FastAPI만 실행하면 됩니다. 기본적으로 wx_api 워크플로를 호출하고 이미지 출력을 지원합니다. 점진적으로 업데이트되어 WeChat에서 party를 부드럽게 사용할 수 있도록 보장됩니다.
+2. 일관된 [In-Context-LoRA](https://github.com/ali-vilab/In-Context-LoRA/tree/main) 프롬프트를 생성하기 위해 In-Context-LoRA 마스크 노드를 추가했습니다.
 1. 자동 모델 이름 목록 노드는 제거되었으며 config.ini 파일의 구성에서 모델 이름 목록을 자동으로 가져오는 간단한 API LLM 로더 노드로 대체되었습니다. 모델을 로드하려면 이름을 선택하기만 하면 됩니다. 또한 간단한 LLM 로더, 간단한 LLM-GGUF 로더, 간단한 VLM 로더, 간단한 VLM-GGUF 로더, 간단한 LLM lora 로더 노드가 업데이트되었습니다. 이들은 모두 파티 폴더 내의 모델 폴더에서 모델 경로를 자동으로 읽어 다양한 로컬 모델을 더 쉽게 로드할 수 있습니다.
 1. 이제 LLM은 SD 및 FLUX처럼 동적으로 lora를 로드할 수 있습니다. 동일한 LLM에 더 많은 lora를 로드하기 위해 여러 lora를 연결할 수 있습니다. 예제 워크플로: [start_with_LLM_LORA](workflow/LLM_lora.json).
 2. [searxng](https://github.com/searxng/searxng) 도구가 추가되어 전체 웹의 검색을 집계할 수 있습니다. Perplexica도 이 집계된 검색 도구에 의존하므로 파티에서 Perplexica를 설정할 수 있습니다. Docker에서 공개 이미지 searxng/searxng를 배포한 다음 명령 `docker run -d -p 8080:8080 searxng/searxng`을 사용하여 시작한 다음 `http://localhost:8080`을 사용하여 액세스할 수 있습니다. URL `http://localhost:8080`을 party의 searxng 도구에 입력하면 searxng이 LLM의 도구로 사용될 수 있습니다.

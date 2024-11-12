@@ -50,6 +50,8 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 5. このプロジェクトは使用の敷居が高いため、クイックスタートを選択した場合でも、プロジェクトのホームページをじっくり読んでいただけると幸いです。
 
 ## 最新の更新
+1. [chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat)をフォークし、新しいリポジトリ[party-on-wechat](https://github.com/heshengtao/party-on-wechat)を作成しました。インストールと使用方法は元のプロジェクトと同じで、設定は必要なく、partyのFastAPIを起動するだけで済みます。デフォルトではwx_apiワークフローを呼び出し、画像出力をサポートしています。徐々に更新され、WeChat上のpartyのスムーズな使用が保証されます。
+2. 一貫性のある[In-Context-LoRA](https://github.com/ali-vilab/In-Context-LoRA/tree/main)プロンプトを生成するために、In-Context-LoRAマスクノードを追加しました。
 1. フロントエンドコンポーネントを追加しました。その機能は左から右に並んでいます：
   - あなたのAPIキーとBase URLを`config.ini`ファイルに保存します。API LLMローダーノードで`fix node`を使用すると、自動的に`config.ini`ファイルから変更後のAPIキーとBase URLを読み取ります。
   - FastAPIを起動し、これを使用してComfyUIワークフローを呼び出せます。これを直接実行すると、`http://127.0.0.1:8817/v1/`上のOpenAIインターフェースが得られます。ワークフローの開始と終了をワークフローの開始と終了に接続し、API形式で`workflow_api`フォルダに保存します。その後、OpenAIインターフェースを呼び出すことができる他のフロントエンドで`model name=<ワークフローネーム（.json拡張子なし）>`、`Base URL=http://127.0.0.1:8817/v1/`と入力し、APIキーは何でもよいです。

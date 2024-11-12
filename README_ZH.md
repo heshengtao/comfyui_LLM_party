@@ -51,6 +51,8 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 5. 由于本项目有较高的使用门槛，所以即使你选择了快速开始，我也希望你能耐心阅读完本项目主页。
 
 ## 最新更新
+1. fork了[chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat)，新建了一个[party-on-wechat](https://github.com/heshengtao/party-on-wechat)，安装和使用方法与原项目一致，无需配置，只需要启动party的fastapi。默认是调用wx_api工作流，支持图片输出。后续会逐步更新，保证party在微信上的丝滑使用。
+1. 添加了In-Context-LoRA面具节点，用于生成连续一致性的[In-Context-LoRA](https://github.com/ali-vilab/In-Context-LoRA/tree/main)提示词。
 1. 添加了一个前端组件，从左到右的功能分别为：
   - 将你的API key和Base URL保存到config.ini文件，当你对API LLM加载器节点使用fix node后，他会自动读取config.ini文件中你修改后的API key和Base URL。
   - 启动一个fastapi，可以用来调用你的comfyui工作流，如果你直接运行它，你就获得了一个`http://127.0.0.1:8817/v1/`上的openai接口。你需要将你的工作流的开始和结尾连上开始工作流和结束工作流，然后以API格式保存到workflow_api文件夹，然后在其他可以调用openai接口的前端输入model name=<你的工作流名不包含.json后缀名>，Base URL=`http://127.0.0.1:8817/v1/`，API key随便填。
