@@ -36,7 +36,7 @@ class end_workflow:
     def save_all(self, images=None, text=None, filename_prefix="ComfyUI", prompt=None, extra_pnginfo=None):
         results = list()
         all_results = {}
-        if images is not None:
+        if images is not None and len(images) > 0:
             filename_prefix += self.prefix_append
             full_output_folder, filename, counter, subfolder, filename_prefix = folder_paths.get_save_image_path(
                 filename_prefix, self.output_dir, images[0].shape[1], images[0].shape[0]
