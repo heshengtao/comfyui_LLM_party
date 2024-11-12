@@ -130,7 +130,7 @@ from .tools.search_web import (
     search_duckduckgo,
 )
 from .tools.show_text import About_us, show_text_party
-from .tools.smalltool import bool_logic, load_int, none2false,str2float,str2int,any2str
+from .tools.smalltool import bool_logic, load_int, none2false,str2float,str2int,any2str,load_float,load_bool
 from .tools.story import read_story_json, story_json_tool
 from .tools.text_iterator import text_iterator,text_writing,json_writing
 from .tools.tool_combine import tool_combine, tool_combine_plus
@@ -2265,6 +2265,8 @@ NODE_CLASS_MAPPINGS = {
     "start_anything":start_anything,
     "end_anything":end_anything,
     "json_writing":json_writing,
+    "load_float":load_float,
+    "load_bool":load_bool,
 }
 
 
@@ -2379,6 +2381,8 @@ if lang == "zh_CN":
         "start_anything":"开始任意",
         "end_anything": "结束任意",
         "json_writing": "JSON写入",
+        "load_float": "加载浮点数",
+        "load_bool": "加载布尔值",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2486,6 +2490,8 @@ else:
         "start_anything": "Start Anything",
         "end_anything": "End Anything",
         "json_writing": "JSON Writing",
+        "load_float": "Load Float",
+        "load_bool": "Load Boolean",
     }
 
 

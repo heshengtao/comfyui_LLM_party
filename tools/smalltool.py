@@ -20,6 +20,49 @@ class load_int:
         text = int(text)
         return (text,)
 
+class load_float:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "text": ("FLOAT", {"default": 0.0}),
+            },
+        }
+
+    RETURN_TYPES = ("FLOAT",)
+    RETURN_NAMES = ("float",)
+
+    FUNCTION = "tts"
+
+    OUTPUT_NODE = True
+
+    CATEGORY = "大模型派对（llm_party）/文本（text）"
+
+    def tts(self, text):
+        text = float(text)
+        return (text,)
+
+class load_bool:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "text": ("BOOLEAN", {"default": True}),
+            },
+        }
+
+    RETURN_TYPES = ("BOOLEAN",)
+    RETURN_NAMES = ("bool",)
+
+    FUNCTION = "tts"
+
+    OUTPUT_NODE = True
+
+    CATEGORY = "大模型派对（llm_party）/文本（text）"
+
+    def tts(self, text):
+        text = text
+        return (text,)
 
 class AnyType(str):
     """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
