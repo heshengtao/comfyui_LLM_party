@@ -1,3 +1,4 @@
+import json
 class load_int:
     @classmethod
     def INPUT_TYPES(s):
@@ -208,4 +209,19 @@ class any2str:
     CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
     def tts(self,any):
-        return (str(any),)
+        if any is None:
+            return ("None",)
+        # any是字典或者列表，就json.dumps
+        elif isinstance(any, dict):
+            return (json.dumps(any),)
+        elif isinstance(any, list):
+            return (json.dumps(any),)
+        # bool值，就转成str
+        elif isinstance(any, bool):
+            if any:
+                return ("True",)
+            else:
+                return ("False",)
+        else:
+            return (str(any),)
+            
