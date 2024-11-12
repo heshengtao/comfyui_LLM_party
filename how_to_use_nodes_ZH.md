@@ -238,17 +238,17 @@ audio   | 语音文件的保存路径
 **前置工作**
 
 1. 飞书应用建立
-    1.1 https://open.feishu.cn/app?lang=zh-CN 中创建自建应用
-    1.2 进入应用获取app_id与app_secret
-    1.3 添加应用能力 -> 开启机器人应用能力
-    1.4 权限管理 -> 消息与群组 -> 选择需要的权限打开
-    1.5 安全设置 -> 将comfyUI运行的电脑IP加入白名单
-    1.6 发布机器人以应用生效
+    - https://open.feishu.cn/app?lang=zh-CN 中创建自建应用
+    - 进入应用获取app_id与app_secret
+    - 添加应用能力 -> 开启机器人应用能力
+    - 权限管理 -> 消息与群组 -> 选择需要的权限打开
+    - 安全设置 -> 将comfyUI运行的电脑IP加入白名单
+    - 发布机器人以应用生效
 2. 获取群组或用户id
-    2.0 要先把创建的机器人拉到群组中或者拉进私聊
-    2.1 飞书开发平台找到发送消息的开发文档
-    2.2 右侧点击获取token
-    2.3 选择receive id type, chat_id对应群组，open_id与user_id对应个人, 点击选择成员，复制对应的id即可
+    - 要先把创建的机器人拉到群组中或者拉进私聊
+    - 飞书开发平台找到发送消息的[开发文档](https://open.feishu.cn/document/server-docs/im-v1/message/create)
+    - 右侧点击获取token
+    - 选择receive id type, chat_id对应群组，open_id与user_id对应个人, 点击选择成员，复制对应的id即可
 3. 如果需要让机器人发送语音，需要自行在电脑上安装ffmpeg
 
 

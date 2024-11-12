@@ -236,17 +236,17 @@ Note: There are two modes for reading history
 **Prerequisite Work**
 
 1. Create a Feishu Application
-    1.1 Create a self-built application at https://open.feishu.cn/app?lang=zh-CN
-    1.2 Enter the application to get app_id and app_secret
-    1.3 Add application capabilities -> Enable bot application capabilities
-    1.4 Permission management -> Messages and groups -> Select the required permissions to open
-    1.5 Security settings -> Add the IP of the computer running ComfyUI to the whitelist
-    1.6 Publish the bot to make the application effective
+    - Create a self-built application at https://open.feishu.cn/app?lang=zh-CN
+    - Enter the application to get app_id and app_secret
+    - Add application capabilities -> Enable bot application capabilities
+    - Permission management -> Messages and groups -> Select the required permissions to open
+    - Security settings -> Add the IP of the computer running ComfyUI to the whitelist
+    - Publish the bot to make the application effective
 2. Get group or user id
-    2.0 First, add the created bot to the group or private chat
-    2.1 Find the developer documentation for sending messages on the Feishu development platform
-    2.2 Click to get the token on the right
-    2.3 Select receive id type, chat_id corresponds to the group, open_id and user_id correspond to individuals, click to select members, and copy the corresponding id
+    - First, add the created bot to the group or private chat
+    - Find the developer documentation for sending messages on the [Feishu development platform](https://open.feishu.cn/document/server-docs/im-v1/message/create)
+    - Click to get the token on the right
+    - Select receive id type, chat_id corresponds to the group, open_id and user_id correspond to individuals, click to select members, and copy the corresponding id
 3. If you need the bot to send voice messages, you need to install ffmpeg on your computer
 
 ### File Combination, Super Large File Combination Nodes
