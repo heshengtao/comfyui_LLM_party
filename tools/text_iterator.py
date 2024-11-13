@@ -86,6 +86,8 @@ class text_writing:
                 "text": ("STRING", {"forceInput": True}),
                 "file_path": ("STRING", {"default": ""}),
                 "mode": (["a","w"], {"default": "a"}),
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "suffix": ("STRING", {"default": "_processed"}),
             },
         }
 
@@ -98,8 +100,19 @@ class text_writing:
 
     CATEGORY = "大模型派对（llm_party）/迭代器（iterator）"
 
-    def file(self, text, file_path, mode="w"):
+    def file(self, text, file_path,suffix,is_enable=True, mode="w"):
+        if not is_enable:
+            return (None,)
         try:
+            # 获得root目录
+            root_dir = os.path.dirname(file_path)
+            # 如果目录不存在，则创建目录
+            if not os.path.exists(root_dir):
+                os.makedirs(root_dir)
+            # 获取文件名和扩展名
+            file_name, file_extension = os.path.splitext(file_path)
+            # 添加后缀
+            file_path = file_name + suffix + file_extension
             # 根据模式打开文件，并指定编码为UTF-8
             with open(file_path, mode, encoding="utf-8") as f:
                 f.write(text+"\n")

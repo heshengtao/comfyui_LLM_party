@@ -35,7 +35,8 @@ class SpeedChange:
                 "input_audio_path": ("STRING", {}),
                 "output_folder_path": ("STRING", {}),
                 "speed_factor": ("FLOAT", {"default": 1.0, "min": 0.0, "step": 0.1}),
-                "is_enable": ("BOOLEAN", {"default": True})
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "suffix": ("STRING", {"default": "_processed"}),
             }
         }
     
@@ -44,17 +45,20 @@ class SpeedChange:
 
     FUNCTION = "audio_process"
 
-    # OUTPUT_NODE = False
+    OUTPUT_NODE = True
 
     CATEGORY = "大模型派对（llm_party）/音频（audio）"
 
 
-    def audio_process(self, input_audio_path, output_folder_path, speed_factor, is_enable):
+    def audio_process(self, input_audio_path, output_folder_path, speed_factor, is_enable,suffix):
         if not is_enable:
             return (None, None,)
         
         audio_data, original_sr = load_audio(input_audio_path)
-
+        # 获取input_audio_path的文件名
+        filename = os.path.basename(input_audio_path)
+        # 获取文件名和扩展名
+        filename_without_extension, extension = os.path.splitext(filename)
         processed_audio = speed_change(audio_data, speed_factor, original_sr)
         
         if isinstance(processed_audio, np.ndarray):
@@ -62,9 +66,8 @@ class SpeedChange:
 
         if processed_audio.ndim == 1:
             processed_audio = processed_audio.unsqueeze(0)
-            
-        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-        output_audio_filename = f"{timestamp}.wav"
+
+        output_audio_filename = f"{filename_without_extension}_{suffix}{extension}"
         output_audio_path = os.path.join(output_folder_path, output_audio_filename)
         torchaudio.save(output_audio_path, processed_audio, original_sr)
         

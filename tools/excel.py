@@ -195,6 +195,69 @@ class image_iterator:
         self.record = self.index
         return self.record
 
+# 其他类的定义保持不变
+class file_path_iterator:
+    def __init__(self):
+        self.index = 0
+        self.record = 0
+        self.path = None
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "folder_path": ("STRING", {"default": ""}),
+                "extension": ("STRING", {"default": ".png,.jpg,.jpeg,.gif,.bmp"}),
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "is_reload": ("BOOLEAN", {"default": False}),
+                "iterator_mode": (["sequential","random","Infinite", "sequential_flagout"], {"default": "sequential"}),
+            },
+            "optional": {},
+        }
+
+    RETURN_TYPES = ("STRING", "BOOLEAN")
+    RETURN_NAMES = ("file_path", "is_end")
+
+    FUNCTION = "file"
+
+    # OUTPUT_NODE = False
+
+    CATEGORY = "大模型派对（llm_party）/迭代器（iterator）"
+
+    def file(self, folder_path,iterator_mode,extension, is_enable=True, is_reload=False):
+        flag_is_end = False
+        if not is_enable:
+            return (None, flag_is_end,)
+        if self.path != folder_path or is_reload == True:
+            self.index = 0  # 重置索引为0，因为我们要从第二行开始读取数据
+            self.path = folder_path
+        extension = extension.split(",")
+        # 将文件夹里的所有图片按修改时间排序，
+        image_files = sorted(
+            [f for f in os.listdir(folder_path) if f.lower().endswith(tuple(extension))],
+        )
+        # 读取第self.index个图片
+        # 如果没有更多的图片可以读取，返回None
+
+        if self.index >= len(image_files):
+            self.index = 0
+            if iterator_mode == "sequential":
+                signal.signal(signal.SIGINT, interrupt_handler)
+                signal.raise_signal(signal.SIGINT)  # 直接中断进程
+        if self.index == len(image_files) - 1 and iterator_mode == "sequential_flagout":
+            flag_is_end = True
+        image_path = os.path.join(folder_path, image_files[self.index])
+
+        if iterator_mode == "sequential" or iterator_mode =="Infinite" or iterator_mode == "sequential_flagout":
+            self.index += 1
+        elif iterator_mode == "random":
+            self.index = random.randint(0, len(image_files) - 1)
+        return (image_path, flag_is_end,)
+    @classmethod
+    def IS_CHANGED(self, s):
+        self.record = self.index
+        return self.record
+
 
 class json_iterator:
     def __init__(self):

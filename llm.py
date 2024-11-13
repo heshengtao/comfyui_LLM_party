@@ -59,7 +59,7 @@ from .tools.custom_persona import custom_persona
 from .tools.dialog import end_dialog, start_dialog,start_anything,end_anything
 from .tools.dingding import Dingding, Dingding_tool, send_dingding
 from .tools.end_work import end_workflow, img2path
-from .tools.excel import image_iterator, load_excel,json_iterator
+from .tools.excel import image_iterator, load_excel,json_iterator,file_path_iterator
 from .tools.feishu import feishu, feishu_tool, send_feishu
 from .tools.file_combine import file_combine, file_combine_plus
 from .tools.get_time import get_time, time_tool
@@ -2275,6 +2275,7 @@ NODE_CLASS_MAPPINGS = {
     "json_writing":json_writing,
     "load_float":load_float,
     "load_bool":load_bool,
+    "file_path_iterator":file_path_iterator,
 }
 
 
@@ -2391,6 +2392,7 @@ if lang == "zh_CN":
         "json_writing": "JSON写入",
         "load_float": "加载浮点数",
         "load_bool": "加载布尔值",
+        "file_path_iterator": "文件路径迭代器",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
@@ -2500,6 +2502,7 @@ else:
         "json_writing": "JSON Writing",
         "load_float": "Load Float",
         "load_bool": "Load Boolean",
+        "file_path_iterator":"File Path Iterator",
     }
 
 
