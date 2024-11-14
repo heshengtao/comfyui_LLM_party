@@ -97,9 +97,13 @@ class FeishuGetHistory:
             response = requests.get(url=self.url_msg, headers=headers, params=params)
 
         elif mode == "auto":
+            setup_time = int(time.time())
             start_time = int(time.time())
             end_time = int(time.time())
             while True:
+                if setup_time - start_time > 60 *30:
+                    self.tenant_access_token = get_tenant_access_token(self.tenant_access_token_url, self.app_id, self.app_secret)
+                    setup_time= int(time.time())
                 params = {
                     "receive_id_type": self.receive_id_type,
                     "container_id_type": "chat",
