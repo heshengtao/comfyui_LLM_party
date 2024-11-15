@@ -4,6 +4,8 @@ import json
 import locale
 import os
 import time
+import asyncio
+import threading
 
 import requests
 
@@ -12,8 +14,9 @@ def get_tenant_access_token(token_url, app_id, app_secret):
     token_data = {"app_id": app_id, "app_secret": app_secret}
     token_headers = {"Content-Type": "application/json"}
     token_response = requests.post(token_url, data=json.dumps(token_data), headers=token_headers)
+    expire_time = time.time() + token_response.json().get('expire')
     if token_response.status_code == 200:
-        return token_response.json().get("tenant_access_token")
+        return token_response.json().get("tenant_access_token"), expire_time
     else:
         print(token_response.text)
         raise Exception("Failed to get tenant_access_token")
@@ -24,6 +27,7 @@ class FeishuGetHistory:
         self.last_ts = 0
         self.url_msg = "https://open.feishu.cn/open-apis/im/v1/messages"
         self.tenant_access_token_url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/"
+        self.auth_thread_started = False
 
     @classmethod
     def INPUT_TYPES(s):
@@ -60,6 +64,13 @@ class FeishuGetHistory:
 
     CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
+    async def refresh_auth(self):
+        while True:
+            if time.time() >= self.expire_time - 1800:
+                self.tenant_access_token, self.expire_time = get_tenant_access_token(self.tenant_access_token_url, self.app_id, self.app_secret)
+                print(f'auth token refreshed, expired at {self.expire_time}, now: {time.time()}, duration: {self.expire_time - time.time()}')
+            await asyncio.sleep(1)
+
     def get_history(
         self, app_id=None, app_secret=None, chat_type=None, chat_id=None, mode="auto", time_diff_sec=60  # oc_xxx
     ):
@@ -76,7 +87,12 @@ class FeishuGetHistory:
         self.receive_id_type = "chat_id"
         self.receive_id = self.chat_id
 
-        self.tenant_access_token = get_tenant_access_token(self.tenant_access_token_url, self.app_id, self.app_secret)
+        self.tenant_access_token, self.expire_time = get_tenant_access_token(self.tenant_access_token_url, self.app_id, self.app_secret)
+        print(f'auth token init, expired at {self.expire_time}, now: {time.time()}, duration: {self.expire_time - time.time()}')
+
+        if not self.auth_thread_started:
+            threading.Thread(target=lambda: asyncio.run(self.refresh_auth()), daemon=True).start()
+            self.auth_thread_started = True
 
         headers = {
             "Authorization": f"Bearer {self.tenant_access_token}",
@@ -97,13 +113,9 @@ class FeishuGetHistory:
             response = requests.get(url=self.url_msg, headers=headers, params=params)
 
         elif mode == "auto":
-            setup_time = int(time.time())
             start_time = int(time.time())
             end_time = int(time.time())
             while True:
-                if setup_time - start_time > 60 *30:
-                    self.tenant_access_token = get_tenant_access_token(self.tenant_access_token_url, self.app_id, self.app_secret)
-                    setup_time= int(time.time())
                 params = {
                     "receive_id_type": self.receive_id_type,
                     "container_id_type": "chat",
@@ -138,6 +150,7 @@ class FeishuGetHistory:
                 elif response.status_code != 200:
                     break
                 else:
+                    time.sleep(2)
                     start_time = end_time
                     end_time = int(time.time())
 
