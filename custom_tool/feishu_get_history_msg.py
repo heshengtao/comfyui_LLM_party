@@ -4,6 +4,8 @@ import json
 import locale
 import os
 import time
+import asyncio
+import threading
 
 import requests
 
@@ -24,6 +26,7 @@ class FeishuGetHistory:
         self.last_ts = 0
         self.url_msg = "https://open.feishu.cn/open-apis/im/v1/messages"
         self.tenant_access_token_url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/"
+        self.auth_thread_started = False
 
     @classmethod
     def INPUT_TYPES(s):
@@ -60,6 +63,12 @@ class FeishuGetHistory:
 
     CATEGORY = "大模型派对（llm_party）/APP链接（app link）"
 
+    async def refresh_auth(self):
+        while True:
+            self.tenant_access_token = get_tenant_access_token(self.tenant_access_token_url, self.app_id, self.app_secret)
+            print('auth token refreshed')
+            await asyncio.sleep(600)
+
     def get_history(
         self, app_id=None, app_secret=None, chat_type=None, chat_id=None, mode="auto", time_diff_sec=60  # oc_xxx
     ):
@@ -76,6 +85,10 @@ class FeishuGetHistory:
         self.receive_id_type = "chat_id"
         self.receive_id = self.chat_id
 
+        if not self.auth_thread_started:
+            threading.Thread(target=lambda: asyncio.run(self.refresh_auth()), daemon=True).start()
+            self.auth_thread_started = True
+        
         self.tenant_access_token = get_tenant_access_token(self.tenant_access_token_url, self.app_id, self.app_secret)
 
         headers = {
@@ -134,6 +147,7 @@ class FeishuGetHistory:
                 elif response.status_code != 200:
                     break
                 else:
+                    time.sleep(2)
                     start_time = end_time
                     end_time = int(time.time())
 
