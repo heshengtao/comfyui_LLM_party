@@ -90,9 +90,9 @@ class FeishuGetHistory:
         self.tenant_access_token, self.expire_time = get_tenant_access_token(self.tenant_access_token_url, self.app_id, self.app_secret)
         print(f'auth token init, expired at {self.expire_time}, now: {time.time()}, duration: {self.expire_time - time.time()}')
 
-        if not self.auth_thread_started:
-            threading.Thread(target=lambda: asyncio.run(self.refresh_auth()), daemon=True).start()
-            self.auth_thread_started = True
+        # if not self.auth_thread_started:
+        #     threading.Thread(target=lambda: asyncio.run(self.refresh_auth()), daemon=True).start()
+        #     self.auth_thread_started = True
 
         headers = {
             "Authorization": f"Bearer {self.tenant_access_token}",
@@ -113,6 +113,7 @@ class FeishuGetHistory:
             response = requests.get(url=self.url_msg, headers=headers, params=params)
 
         elif mode == "auto":
+            setup_time = int(time.time())
             start_time = int(time.time())
             end_time = int(time.time())
             while True:
@@ -138,6 +139,9 @@ class FeishuGetHistory:
                         show_help,
                     )
                 items = response.json().get("data").get("items")
+                if setup_time - start_time > 60 *30:
+                    self.tenant_access_token = get_tenant_access_token(self.tenant_access_token_url, self.app_id, self.app_secret)
+                    setup_time= int(time.time())
                 if items:
                     if response.json()["data"]["items"][0]["sender"]["sender_type"] == "user":
                         break
