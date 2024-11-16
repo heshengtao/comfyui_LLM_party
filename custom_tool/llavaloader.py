@@ -37,6 +37,7 @@ class LLavaLoader:
                 "max_ctx":  ("INT", {"default": 512, "min": 256, "max": 128000, "step": 128}),
                 "gpu_layers": ("INT", {"default": 31, "min": 0, "max": 100, "step": 1}),
                 "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
+                "chat_format": (["llava-1-5","llava-1-6","llama-3-vision-alpha","minicpm-v-2.6","obsidian","moondream","nanollava"], {"default": "llava-1-5"}),
             }
         }
 
@@ -46,10 +47,24 @@ class LLavaLoader:
 
     CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
-    def load_llava_checkpoint(self, ckpt_path, clip_path, max_ctx, gpu_layers, n_threads):
+    def load_llava_checkpoint(self, ckpt_path, clip_path, max_ctx, gpu_layers, n_threads, chat_format):
+        import llama_cpp
         from llama_cpp import Llama
-        from llama_cpp.llama_chat_format import Llava15ChatHandler
-        clip = Llava15ChatHandler(clip_model_path=clip_path, verbose=False)
+        if chat_format == "llava-1-5":
+            clip = llama_cpp.llama_chat_format.Llava15ChatHandler(clip_model_path=clip_path, verbose=False)
+        elif chat_format == "llava-1-6":
+            clip = llama_cpp.llama_chat_format.Llava16ChatHandler(clip_model_path=clip_path, verbose=False)
+        elif chat_format == "llama-3-vision-alpha":
+            clip = llama_cpp.llama_chat_format.Llama3VisionAlphaChatHandler(clip_model_path=clip_path, verbose=False)
+        elif chat_format == "minicpm-v-2.6":
+            clip = llama_cpp.llama_chat_format.MiniCPMv26ChatHandler(clip_model_path=clip_path, verbose=False)
+        elif chat_format == "obsidian":
+            clip = llama_cpp.llama_chat_format.ObsidianChatHandler(clip_model_path=clip_path, verbose=False)
+        elif chat_format == "moondream":
+            clip = llama_cpp.llama_chat_format.MoondreamChatHandler(clip_model_path=clip_path, verbose=False)
+        elif chat_format == "nanollava":
+            clip = llama_cpp.llama_chat_format.NanoLlavaChatHandler(clip_model_path=clip_path, verbose=False)
+        
         llm = Llama(
             model_path=ckpt_path,
             chat_handler=clip,

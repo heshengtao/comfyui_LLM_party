@@ -10,8 +10,8 @@
         "1": 240
       },
       "size": {
-        "0": 450,
-        "1": 290
+        "0": 470,
+        "1": 360
       },
       "flags": {},
       "order": 3,
@@ -41,52 +41,10 @@
       },
       "widgets_values": [
         "",
-        "antennas, arms, and legs for an alien-like creature with blue eyes and a pink dress."
+        "这幅图片是一幅风格化的数字插图，描绘了一个拟人化的角色，类似于一个女性形象，具有夸张、卡通般的特征。这个角色有大大的蓝色眼睛，一个微笑的嘴巴，黄色的蝴蝶形状的头发，向上延伸并扩散，类似蝴蝶的翅膀。这个角色穿着一件无袖的粉色连衣裙，双臂展开，站在一个绿色背景前，暗示着草地，而背景是蓝色的，表示天空，头顶有白云。这幅图画是扁平的，具有数字艺术的简单、粗犷的外观，颜色鲜明，轮廓明显。"
       ],
       "color": "#233",
       "bgcolor": "#355"
-    },
-    {
-      "id": 27,
-      "type": "LoadImage",
-      "pos": {
-        "0": 520,
-        "1": 360
-      },
-      "size": {
-        "0": 320,
-        "1": 314
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            42
-          ],
-          "slot_index": 0,
-          "shape": 3,
-          "label": "IMAGE"
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null,
-          "shape": 3,
-          "label": "MASK"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LoadImage"
-      },
-      "widgets_values": [
-        "example.png",
-        "image"
-      ]
     },
     {
       "id": 25,
@@ -97,10 +55,10 @@
       },
       "size": {
         "0": 315,
-        "1": 154
+        "1": 178
       },
       "flags": {},
-      "order": 1,
+      "order": 0,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -119,11 +77,12 @@
         "Node name for S&R": "LLavaLoader"
       },
       "widgets_values": [
-        "D:\\AI\\mychat\\model\\llaVa\\llava-llama-3-8b-v1_1-int4.gguf",
-        "D:\\AI\\mychat\\model\\llaVa\\llava-llama-3-8b-v1_1-mmproj-f16.gguf",
+        "D:\\AI\\mychat\\model\\mincpm-gguf\\ggml-model-IQ3_M.gguf",
+        "D:\\AI\\mychat\\model\\mincpm-gguf\\mmproj-model-f16.gguf",
         1836,
         31,
-        8
+        8,
+        "minicpm-v-2.6"
       ]
     },
     {
@@ -135,7 +94,7 @@
       },
       "size": {
         "0": 396.04949951171875,
-        "1": 462
+        "1": 506
       },
       "flags": {},
       "order": 2,
@@ -151,13 +110,15 @@
           "name": "tokenizer",
           "type": "CUSTOM",
           "link": null,
-          "label": "tokenizer"
+          "label": "tokenizer",
+          "shape": 7
         },
         {
           "name": "image",
           "type": "IMAGE",
           "link": 42,
-          "label": "image"
+          "label": "image",
+          "shape": 7
         },
         {
           "name": "system_prompt_input",
@@ -194,6 +155,13 @@
             "name": "file_content"
           },
           "label": "file_content"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "shape": 7,
+          "label": "extra_parameters"
         }
       ],
       "outputs": [
@@ -233,12 +201,12 @@
         "Node name for S&R": "LLM_local"
       },
       "widgets_values": [
-        "",
+        "你可以识别图片中的内容",
         "图中画了什么哇",
         "VLM-GGUF",
         0.7,
         1920,
-        "enable",
+        "disable",
         "disable",
         "enable",
         "",
@@ -247,7 +215,50 @@
         "",
         100,
         "",
-        true
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 27,
+      "type": "LoadImage",
+      "pos": {
+        "0": 520,
+        "1": 380
+      },
+      "size": {
+        "0": 320,
+        "1": 314
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            42
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
       ]
     }
   ],
@@ -281,10 +292,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.8140274938684305,
+      "scale": 0.8954302432552737,
       "offset": [
-        -397.2556050341024,
-        -44.24046684936329
+        -284.7009552669667,
+        45.11122031996807
       ]
     }
   },
