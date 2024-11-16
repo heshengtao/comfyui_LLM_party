@@ -56,3 +56,4 @@ markdownify
 srt
 peft
 scipy
+json-repair
