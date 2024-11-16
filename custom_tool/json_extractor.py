@@ -33,7 +33,7 @@ class json_extractor:
     def INPUT_TYPES(s):
         return {
             "required":  {
-                "input": ("STRING", {}),
+                "input": ("STRING", {"forceInput": True}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 }
             }
