@@ -42,7 +42,7 @@ class json_extractor:
     RETURN_NAMES = ("json_output",)
     FUNCTION = "json_extract"
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/文本（text）"
 
     def json_extract(self, input, is_enable=True):
         
