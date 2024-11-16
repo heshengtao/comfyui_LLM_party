@@ -42,7 +42,7 @@ class json_extractor:
     RETURN_NAMES = ("json_output",)
     FUNCTION = "json_extract"
 
-    CATEGORY = "大模型派对（llm_party）/函数（function）"
+    CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
     def json_extract(self, input, is_enable=True):
         
@@ -134,31 +134,3 @@ if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {"json_extractor": "JSON提取器🐶"}
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {"json_extractor": "JSON Repair🐶"}
-
-
-if __name__ == '__main__':
-    obj = json_extractor()
-    input = '''
-{
-"配料清单":{
-"基酒":"百加得白朗姆 40ml",
-"利口酒":"波士顿蓝橙力娇酒 0ml",
-"调味汁":"莫林甘蔗糖浆 3ml",
-"软饮":"康师傅乌龙茶 57ml"
-},
-"文本信息":{
-"调酒名称":"悠然水瓶梦",
-"用户名称":"张三",
-"MBTI":"INTJ",
-"人格":"I型人格",
-"星座":"水瓶座",
-"当日心情":"放松",
-"酒精偏好":"适当微醺，刚刚好（酒精度12%）"
-}
-}
-###
-'''
-
-    res = obj.json_extract(input=input)
-
-    print(res)
