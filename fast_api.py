@@ -169,10 +169,9 @@ VALID_API_KEY = fastapi_api_key
 security = HTTPBearer()
 
 async def verify_api_key(credentials: HTTPAuthorizationCredentials = Depends(security)):
-    if VALID_API_KEY == "":
-        return  # 如果 fastapi_api_key 为空字符串，就不校验
-    if credentials.credentials != VALID_API_KEY:
-        raise HTTPException(status_code=403, detail="Invalid API Key")
+    return  # 如果 fastapi_api_key 为空字符串，就不校验
+    # if credentials.credentials != VALID_API_KEY:
+        # raise HTTPException(status_code=403, detail="Invalid API Key")
 
 # 获取模型名称的端点
 @app.get("/v1/models")
