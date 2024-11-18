@@ -30,14 +30,18 @@
   },
   "26": {
     "inputs": {
-      "system_prompt": "你是一个强大的智能助手",
+      "system_prompt": "",
       "user_prompt": "",
-      "temperature": 0.7,
+      "temperature": 0.7000000000000001,
       "is_memory": "enable",
       "is_tools_in_sys_prompt": "disable",
       "is_locked": "disable",
       "main_brain": "enable",
       "max_length": 1920,
+      "system_prompt_input": [
+        "24",
+        3
+      ],
       "user_prompt_input": [
         "24",
         4
