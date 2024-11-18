@@ -138,7 +138,9 @@ class image_iterator:
             self.path = folder_path
         # 将文件夹里的所有图片按修改时间排序，
         image_files = sorted(
-            [f for f in os.listdir(folder_path) if f.lower().endswith((".png", ".jpg", ".jpeg", ".gif", ".bmp"))],
+            [f for f in os.listdir(folder_path) if f.lower().endswith((
+                ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tiff", ".tif", ".webp", ".svg", ".ico", ".raw"
+            ))]
         )
         # 读取第self.index个图片
         # 如果没有更多的图片可以读取，返回None
