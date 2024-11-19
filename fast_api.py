@@ -186,15 +186,18 @@ async def get_models():
         raise HTTPException(status_code=500, detail=str(e))
 
 async def stream_response(response_text: str, model_name: str):
-    # 定义一个包含中英文标点符号的正则表达式模式
-    punctuation_pattern = r'[,.:!?;，。；：！？]'
-
-    # 使用正则表达式进行分割，但是保留标点符号
-    words = re.split(punctuation_pattern, response_text)
-    words = [word + punct for word, punct in zip(words, re.findall(punctuation_pattern, response_text) + ['']) if word]
     chunks = []
     current_chunk = []
-    
+    # 如果response_text包含中文字符
+    if re.search(r'[\u4e00-\u9fa5]', response_text):
+        # 定义一个包含中英文标点符号的正则表达式模式
+        punctuation_pattern = r'[，。；：！？]'
+
+        # 使用正则表达式进行分割，但是保留标点符号
+        words = re.split(punctuation_pattern, response_text)
+        words = [word + punct for word, punct in zip(words, re.findall(punctuation_pattern, response_text) + ['']) if word]
+    else:
+        words = response_text.split()
     for word in words:
         current_chunk.append(word)
         if len(current_chunk) >= 1:  # Send 3 words at a time
