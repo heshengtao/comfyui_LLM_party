@@ -257,7 +257,7 @@ class openai_ebd_tool:
                 "type": "function",
                 "function": {
                     "name": "openai_data_base",
-                    "description": "查询用户上传的文件中与用户提问相关的信息。",
+                    "description": "在知识库里查询与用户提问相关的信息。",
                     "parameters": {
                         "type": "object",
                         "properties": {
