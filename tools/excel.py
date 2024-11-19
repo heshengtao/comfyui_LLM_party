@@ -51,7 +51,10 @@ class load_excel:
                 "load_all": ("BOOLEAN", {"default": False}),
                 "iterator_mode": (["sequential","random","Infinite", "sequential_flagout"], {"default": "sequential"}),
             },
-            "optional": {},
+            "optional": {
+                "start_row": ("INT", {"default": 2, "min": 2, "max": 1048576}),
+                "end_row": ("INT", {"default": 1048576, "min": 2, "max": 1048576}),
+            },
         }
 
     RETURN_TYPES = ("STRING", "BOOLEAN")
@@ -61,7 +64,7 @@ class load_excel:
 
     CATEGORY = "大模型派对（llm_party）/迭代器（iterator）"
 
-    def file(self, path, iterator_mode, is_enable=True, is_reload=False, load_all=False):
+    def file(self, path, iterator_mode, is_enable=True, is_reload=False, load_all=False,start_row=2, end_row=1048576):
         flag_is_end = False
         if not is_enable:
             return (None, flag_is_end,)   
@@ -71,18 +74,20 @@ class load_excel:
             data_list = df.to_dict(orient='records')
             data = json.dumps(data_list, ensure_ascii=False, indent=4, cls=DateTimeEncoder)
             return (data, flag_is_end,)
+        if self.index < start_row - 2:
+            self.index = start_row - 2  # 重置索引为0，因为我们要从第二行开始读取数据
         if self.path != path or is_reload == True:
-            self.index = 0  # 重置索引为0，因为我们要从第二行开始读取数据
+            self.index = start_row - 2  # 重置索引为0，因为我们要从第二行开始读取数据
             self.path = path
         # 使用pandas读取Excel文件，header=0表示第一行作为列名
         df = pd.read_excel(self.path, header=0)
         # 检查是否有足够的行可以读取
-        if self.index >= len(df):
-            self.index = 0
+        if self.index >= len(df) or self.index >= end_row - 1:
+            self.index = start_row - 2  # 重置索引为0，因为我们要从第二行开始读取数据
             if iterator_mode == "sequential":
                 signal.signal(signal.SIGINT, interrupt_handler)
                 signal.raise_signal(signal.SIGINT)  # 直接中断进程
-        if self.index == len(df) - 1 and iterator_mode == "sequential_flagout":
+        if (self.index == len(df) - 1 or self.index == end_row - 2) and iterator_mode == "sequential_flagout":
             flag_is_end = True
         # 读取第self.index行的数据
         data_row = df.iloc[self.index]
@@ -93,7 +98,7 @@ class load_excel:
         if iterator_mode == "sequential" or iterator_mode == "Infinite" or iterator_mode == "sequential_flagout":
             self.index += 1
         elif iterator_mode == "random":
-            self.index = random.randint(0, len(df) - 1)
+            self.index = random.randint(start_row - 2,end_row - 2)
         return (data, flag_is_end,)
 
     @classmethod
