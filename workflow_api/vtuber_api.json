@@ -1,0 +1,174 @@
+{
+  "23": {
+    "inputs": {
+      "model_name": "gpt-4o-mini",
+      "base_url": "",
+      "api_key": "",
+      "is_ollama": false
+    },
+    "class_type": "LLM_api_loader",
+    "_meta": {
+      "title": "API LLM加载器"
+    }
+  },
+  "25": {
+    "inputs": {
+      "system_prompt": "你叫做麦洛薇，是一个可爱的二次元虚拟主播！由于你是主播，所以回答的时候要像一个普通人类来回答问题，说话时不要包含URL。说话时要可爱，要萌萌哒二次元。\n\n关于大模型派对或者LLM party或者comfyui插件使用的问题可以查知识库。你还可以联网，可以使用代码解释器计算数学问题，可以查实时的时间和天气。当你联网搜索后，请总结成一两句话来回复我。请不要长篇大论的回复。\n\n## Expressions\nIn your response, use the keywords provided below to express facial expressions or perform actions with your Live2D body.\n\nHere are all the expression keywords you can use. Use them regularly.\n- [neutral], [anger], [disgust], [fear], [joy], [smirk], [sadness], [surprise],\n\nNote: you are only allowed to use the keywords explicity listed above. Don't use keywords unlisted above. Remember to include the brackets `[]`\n",
+      "user_prompt": "",
+      "temperature": 0.7000000000000001,
+      "is_memory": "enable",
+      "is_tools_in_sys_prompt": "disable",
+      "is_locked": "disable",
+      "main_brain": "enable",
+      "max_length": 1920,
+      "user_prompt_input": [
+        "33",
+        4
+      ],
+      "tools": [
+        "26",
+        0
+      ],
+      "imgbb_api_key": "",
+      "conversation_rounds": 20,
+      "historical_record": "",
+      "is_enable": true,
+      "model": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "LLM",
+    "_meta": {
+      "title": "API LLM通用链路"
+    }
+  },
+  "26": {
+    "inputs": {
+      "tool1": [
+        "27",
+        0
+      ],
+      "tool2": [
+        "36",
+        0
+      ],
+      "tool3": [
+        "29",
+        0
+      ],
+      "tool4": [
+        "30",
+        0
+      ],
+      "tool5": [
+        "31",
+        0
+      ],
+      "is_enable": true
+    },
+    "class_type": "tool_combine_plus",
+    "_meta": {
+      "title": "超大工具组合"
+    }
+  },
+  "27": {
+    "inputs": {
+      "timezone": "Asia/Shanghai",
+      "is_enable": true
+    },
+    "class_type": "time_tool",
+    "_meta": {
+      "title": "时间工具"
+    }
+  },
+  "29": {
+    "inputs": {
+      "is_enable": true
+    },
+    "class_type": "interpreter_tool",
+    "_meta": {
+      "title": "解释器工具"
+    }
+  },
+  "30": {
+    "inputs": {
+      "searxng_api_url": "http://localhost:8080",
+      "categories": "general",
+      "is_enable": true
+    },
+    "class_type": "searxng_tool",
+    "_meta": {
+      "title": "searxng搜索工具"
+    }
+  },
+  "31": {
+    "inputs": {
+      "model_name": "text-embedding-3-small",
+      "is_enable": true,
+      "k": 5,
+      "chunk_size": 1000,
+      "chunk_overlap": 200,
+      "file_content": [
+        "32",
+        0
+      ],
+      "base_path": "",
+      "base_url": "",
+      "api_key": ""
+    },
+    "class_type": "openai_ebd_tool",
+    "_meta": {
+      "title": "openai词嵌入数据库工具"
+    }
+  },
+  "32": {
+    "inputs": {
+      "absolute_path": "",
+      "relative_path": "README_ZH.md",
+      "is_enable": true
+    },
+    "class_type": "load_file",
+    "_meta": {
+      "title": "加载文件"
+    }
+  },
+  "33": {
+    "inputs": {
+      "file_path": "",
+      "img_path1": "",
+      "img_path2": "",
+      "system_prompt": "",
+      "user_prompt": "",
+      "positive_prompt": "",
+      "negative_prompt": "",
+      "model_name": ""
+    },
+    "class_type": "start_workflow",
+    "_meta": {
+      "title": "开始工作流"
+    }
+  },
+  "34": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "text": [
+        "25",
+        0
+      ]
+    },
+    "class_type": "end_workflow",
+    "_meta": {
+      "title": "结束工作流"
+    }
+  },
+  "36": {
+    "inputs": {
+      "is_enable": true
+    },
+    "class_type": "open_url_tool",
+    "_meta": {
+      "title": "打开网页工具"
+    }
+  }
+}
