@@ -191,7 +191,7 @@ async def stream_response(response_text: str, model_name: str):
     # 如果response_text包含中文字符
     if re.search(r'[\u4e00-\u9fa5]', response_text):
         # 定义一个包含中英文标点符号的正则表达式模式
-        punctuation_pattern = r'[，。；：！？]'
+        punctuation_pattern = r'[，。；：！？\s]'
 
         # 使用正则表达式进行分割，但是保留标点符号
         words = re.split(punctuation_pattern, response_text)
