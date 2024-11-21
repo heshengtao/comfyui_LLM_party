@@ -51,6 +51,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 5. Due to the high usage threshold of this project, even if you choose the quick start, I hope you can patiently read through the project homepage.
 
 ## Latest update
+1. A local file reading tool has been added. In comparison to the previous local file control tool in ComfyUI LLM Mafia, this tool can only read files or the file tree within a specific folder, thus ensuring greater security.
 1. Forked [chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat), created a new repository [party-on-wechat](https://github.com/heshengtao/party-on-wechat). The installation and usage methods are the same as the original project, no configuration is required, just start the party's FastAPI. By default, it calls the wx_api workflow and supports image output. It will be updated gradually to ensure a smooth experience of party on WeChat.
 2. Added an In-Context-LoRA mask node, used for generating consistent [In-Context-LoRA](https://github.com/ali-vilab/In-Context-LoRA/tree/main) prompts.
 1. We have added a frontend component with features laid out from left to right as follows:

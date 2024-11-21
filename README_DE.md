@@ -50,6 +50,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 5. Aufgrund der hohen Nutzungsschwelle dieses Projekts hoffe ich, dass Sie sich die Zeit nehmen, die Projektseite gründlich zu lesen, auch wenn Sie den Schnellstart gewählt haben.
 
 ## Neueste Updates
+1. Ein lokales Dateilesewerkzeug wurde hinzugefügt. Im Gegensatz zu dem vorherigen lokalen Datei-Tool in ComfyUI LLM Mafia kann dieses Werkzeug nur Dateien oder den Datei-Baum eines bestimmten Ordners lesen, was es erheblich sicherer macht.
 1. Ich habe [chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat) geforkt und ein neues Repository [party-on-wechat](https://github.com/heshengtao/party-on-wechat) erstellt. Die Installations- und Verwendungsmethoden sind identisch mit dem Originalprojekt, keine Konfiguration ist erforderlich, Sie müssen nur das FastAPI von party starten. Standardmäßig wird der wx_api-Arbeitsablauf aufgerufen und es wird eine Bildausgabe unterstützt. Es wird nach und nach aktualisiert, um eine reibungslose Nutzung von party in WeChat sicherzustellen.
 2. Ein In-Context-LoRA-Maskennode wurde hinzugefügt, der zur Generierung konsistenter [In-Context-LoRA](https://github.com/ali-vilab/In-Context-LoRA/tree/main)-Hinweise verwendet wird.
 1. Wir haben eine Frontend-Komponente hinzugefügt, deren Funktionen von links nach rechts angeordnet sind:

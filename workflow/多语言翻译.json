@@ -1,0 +1,597 @@
+{
+  "last_node_id": 46,
+  "last_link_id": 54,
+  "nodes": [
+    {
+      "id": 40,
+      "type": "mini_translate",
+      "pos": {
+        "0": 1060,
+        "1": 590
+      },
+      "size": {
+        "0": 315,
+        "1": 226
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_str",
+          "type": "STRING",
+          "link": 51,
+          "widget": {
+            "name": "input_str"
+          },
+          "label": "input_str"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output_str",
+          "type": "STRING",
+          "links": [
+            47
+          ],
+          "slot_index": 0,
+          "label": "output_str"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_translate"
+      },
+      "widgets_values": [
+        "",
+        "法语，德语",
+        "正式",
+        5,
+        "gpt-4o-mini",
+        "",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 39,
+      "type": "mini_translate",
+      "pos": {
+        "0": 1060,
+        "1": 880
+      },
+      "size": {
+        "0": 315,
+        "1": 226
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_str",
+          "type": "STRING",
+          "link": 52,
+          "widget": {
+            "name": "input_str"
+          },
+          "label": "input_str"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output_str",
+          "type": "STRING",
+          "links": [
+            48
+          ],
+          "slot_index": 0,
+          "label": "output_str"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_translate"
+      },
+      "widgets_values": [
+        "",
+        "日语，韩语",
+        "正式",
+        5,
+        "gpt-4o-mini",
+        "",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 41,
+      "type": "mini_translate",
+      "pos": {
+        "0": 1060,
+        "1": 1190
+      },
+      "size": {
+        "0": 315,
+        "1": 226
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_str",
+          "type": "STRING",
+          "link": 53,
+          "widget": {
+            "name": "input_str"
+          },
+          "label": "input_str"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output_str",
+          "type": "STRING",
+          "links": [
+            49
+          ],
+          "slot_index": 0,
+          "label": "output_str"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_translate"
+      },
+      "widgets_values": [
+        "",
+        "阿拉伯语",
+        "正式",
+        5,
+        "gpt-4o-mini",
+        "",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 42,
+      "type": "mini_translate",
+      "pos": {
+        "0": 1050,
+        "1": 1490
+      },
+      "size": {
+        "0": 315,
+        "1": 226
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_str",
+          "type": "STRING",
+          "link": 54,
+          "widget": {
+            "name": "input_str"
+          },
+          "label": "input_str"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output_str",
+          "type": "STRING",
+          "links": [
+            50
+          ],
+          "slot_index": 0,
+          "label": "output_str"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_translate"
+      },
+      "widgets_values": [
+        "",
+        "西班牙语，葡萄牙语",
+        "正式",
+        5,
+        "gpt-4o-mini",
+        "",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 28,
+      "type": "get_string",
+      "pos": {
+        "0": 470,
+        "1": 310
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            42,
+            51,
+            52,
+            53,
+            54
+          ],
+          "slot_index": 0,
+          "label": "string"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "get_string"
+      },
+      "widgets_values": [
+        "1. 添加了本地文件读取工具，相比于之前在comfyui LLM mafia中的本地文件控制工具，这个工具只能读取文件或某个文件夹下的文件树，所以安全很多。"
+      ]
+    },
+    {
+      "id": 27,
+      "type": "mini_translate",
+      "pos": {
+        "0": 1050,
+        "1": 270
+      },
+      "size": {
+        "0": 315,
+        "1": 226
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_str",
+          "type": "STRING",
+          "link": 42,
+          "widget": {
+            "name": "input_str"
+          },
+          "label": "input_str"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output_str",
+          "type": "STRING",
+          "links": [
+            43
+          ],
+          "slot_index": 0,
+          "label": "output_str"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "mini_translate"
+      },
+      "widgets_values": [
+        "",
+        "英语，俄语",
+        "正式",
+        5,
+        "gpt-4o-mini",
+        "",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 46,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1610,
+        "1": 1530
+      },
+      "size": {
+        "0": 390,
+        "1": 190
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 50,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "1. Se ha añadido una herramienta de lectura de archivos locales; en comparación con la herramienta de control de archivos locales en ComfyUI LLM Mafia, esta herramienta solo puede leer archivos o el árbol de archivos dentro de una carpeta, por lo que es mucho más segura.\n\n1. Foi adicionada uma ferramenta de leitura de arquivos locais; em comparação com a ferramenta de controle de arquivos locais no ComfyUI LLM Mafia, esta ferramenta pode apenas ler arquivos ou a árvore de arquivos dentro de uma pasta, tornando-a muito mais segura."
+      ]
+    },
+    {
+      "id": 44,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1610,
+        "1": 920
+      },
+      "size": [
+        350,
+        180
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 48,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "1. ローカルファイル読み取りツールが追加されました。以前のcomfyui LLM mafiaにおけるローカルファイルコントロールツールと比較して、このツールはファイルまたは特定のフォルダー内のファイルツリーのみを読み取ることができるため、より安全です。\n\n1. 로컬 파일 읽기 도구가 추가되었습니다. 이전의 comfyui LLM mafia에 있는 로컬 파일 제어 도구와 비교했을 때, 이 도구는 파일이나 특정 폴더 내의 파일 트리만 읽을 수 있어 훨씬 더 안전합니다."
+      ]
+    },
+    {
+      "id": 45,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1620,
+        "1": 1230
+      },
+      "size": [
+        400,
+        160
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 49,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "1. تم إضافة أداة لقراءة الملفات المحلية، مقارنةً بالأداة السابقة للتحكم في الملفات المحلية في comfyui LLM mafia، فإن هذه الأداة تستطيع فقط قراءة الملفات أو شجرة الملفات داخل مجلد معين، مما يوفر مستوى أعلى من الأمان."
+      ]
+    },
+    {
+      "id": 43,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1600,
+        "1": 600
+      },
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 47,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "1. Un outil de lecture de fichiers locaux a été ajouté. Contrairement à l'ancien outil de contrôle de fichiers locaux dans ComfyUI LLM Mafia, cet outil ne peut lire que des fichiers ou l'arborescence des fichiers d'un certain dossier, ce qui le rend beaucoup plus sûr.\n\n1. Ein lokales Dateilesewerkzeug wurde hinzugefügt. Im Gegensatz zu dem vorherigen lokalen Datei-Tool in ComfyUI LLM Mafia kann dieses Werkzeug nur Dateien oder den Datei-Baum eines bestimmten Ordners lesen, was es erheblich sicherer macht."
+      ]
+    },
+    {
+      "id": 29,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1590,
+        "1": 190
+      },
+      "size": [
+        400,
+        220
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 43,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "1. A local file reading tool has been added. In comparison to the previous local file control tool in ComfyUI LLM Mafia, this tool can only read files or the file tree within a specific folder, thus ensuring greater security.\n\n1. Добавлен инструмент для чтения локальных файлов. В отличие от предыдущего инструмента управления локальными файлами в ComfyUI LLM Mafia, этот инструмент может читать только файлы или дерево файлов в определенной папке, что обеспечивает большую безопасность."
+      ]
+    }
+  ],
+  "links": [
+    [
+      42,
+      28,
+      0,
+      27,
+      0,
+      "STRING"
+    ],
+    [
+      43,
+      27,
+      0,
+      29,
+      0,
+      "STRING"
+    ],
+    [
+      47,
+      40,
+      0,
+      43,
+      0,
+      "STRING"
+    ],
+    [
+      48,
+      39,
+      0,
+      44,
+      0,
+      "STRING"
+    ],
+    [
+      49,
+      41,
+      0,
+      45,
+      0,
+      "STRING"
+    ],
+    [
+      50,
+      42,
+      0,
+      46,
+      0,
+      "STRING"
+    ],
+    [
+      51,
+      28,
+      0,
+      40,
+      0,
+      "STRING"
+    ],
+    [
+      52,
+      28,
+      0,
+      39,
+      0,
+      "STRING"
+    ],
+    [
+      53,
+      28,
+      0,
+      41,
+      0,
+      "STRING"
+    ],
+    [
+      54,
+      28,
+      0,
+      42,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5644739300537773,
+      "offset": [
+        142.74335940817772,
+        20.598967917471025
+      ]
+    }
+  },
+  "version": 0.4
+}
