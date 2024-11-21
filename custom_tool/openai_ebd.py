@@ -146,7 +146,7 @@ class load_openai_ebd:
 
         docs = base.similarity_search(question, k=k)
         combined_content = "".join(doc.page_content + "\n\n" for doc in docs)
-        output = "文件中的相关信息如下：\n" + combined_content
+        output = combined_content
         return (output,)
 
 

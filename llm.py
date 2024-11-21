@@ -1231,7 +1231,7 @@ class LLM:
 
                 if file_content is not None:
                     user_prompt = (
-                        "文件中相关内容："
+                        "可参考的信息："
                         + file_content
                         + "\n"
                         + "用户提问："
