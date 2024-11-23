@@ -25,7 +25,7 @@ class load_memo:
         if not os.path.exists(self.prompt_path):
             with open(self.prompt_path, "w", encoding="utf-8") as f:
                 json.dump(
-                    [{"role": "system", "content": ""}], f, indent=4, ensure_ascii=False
+                    [], f, indent=4, ensure_ascii=False
                 )
         return {
             "required": {
@@ -51,7 +51,12 @@ class load_memo:
     def memo(self, historical_record=""):
         if historical_record != "":
             temp_path = os.path.join(current_dir_path, "temp")
-            self.prompt_path = os.path.join(temp_path, historical_record)        
+            self.prompt_path = os.path.join(temp_path, historical_record)      
+        if not os.path.exists(self.prompt_path):
+            with open(self.prompt_path, "w", encoding="utf-8") as f:
+                json.dump(
+                    [], f, indent=4, ensure_ascii=False
+                )
         with open(self.prompt_path, "r", encoding="utf-8") as f:
             user_history=f.read()
         return (
