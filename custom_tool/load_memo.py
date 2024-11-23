@@ -82,8 +82,11 @@ class save_memo:
     def memo(self,history, history_path):
         # 最后两个元素
         history=json.loads(history)[1:]
+        with open(history_path, "r", encoding="utf-8") as f:
+            old_history=json.load(f)
+        old_history.extend(history)
         with open(history_path, "w", encoding="utf-8") as f:
-            json.dump(history, f, ensure_ascii=False)
+            json.dump(old_history, f, ensure_ascii=False)
         return ()
 
     @classmethod
