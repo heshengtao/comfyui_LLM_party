@@ -153,7 +153,11 @@ VALID_API_KEY = fastapi_api_key
 security = HTTPBearer()
 
 async def verify_api_key(credentials: HTTPAuthorizationCredentials = Depends(security)):
-    return
+    """
+    不进行实际的API密钥验证，允许任何API密钥通过。
+    """
+    # 这里可以选择性地添加一些日志记录或其他处理逻辑
+    return credentials.credentials
 
 @app.get("/v1/models")
 async def get_models():
