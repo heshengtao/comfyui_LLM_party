@@ -25,7 +25,7 @@ class load_memo:
         if not os.path.exists(self.prompt_path):
             with open(self.prompt_path, "w", encoding="utf-8") as f:
                 json.dump(
-                    [{"role": "system", "content": "你是一个强大的人工智能助手。"}], f, indent=4, ensure_ascii=False
+                    [{"role": "system", "content": ""}], f, indent=4, ensure_ascii=False
                 )
         return {
             "required": {
@@ -88,8 +88,12 @@ class save_memo:
     CATEGORY = "大模型派对（llm_party）/记忆（memory）"
 
     def memo(self,history, history_path):
+        history=json.loads(history)
+        with open(history_path, "r", encoding="utf-8") as f:
+            old_history=json.load(f)
+        old_history.extend(history)
         with open(history_path, "w", encoding="utf-8") as f:
-            f.write(history)
+            json.dump(old_history, f, ensure_ascii=False)
         return ()
 
     @classmethod
