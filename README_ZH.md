@@ -38,6 +38,7 @@ https://github.com/user-attachments/assets/9e627204-4626-479e-8806-cb06cd6157a6
 ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭建自己的专属AI助手、到可以行业落地的词向量RAG、GraphRAG来本地化的管理行业内知识库；从单一的智能体流水线，到复杂的智能体与智能体辐射状交互模式、环形交互模式的构建;从个人用户需要的接入自己的社交APP(QQ、飞书、Discord)，到流媒体工作者需要的一站式LLM+TTS+ComfyUI工作流；从普通学生所需要的第一个LLM应用的简单上手起步，到科研工作者们常用的各类参数调试接口，模型适配。这一切，你都可以在ComfyUI LLM Party中找到答案。
 
 ## 快速开始
+0. 如果你从来没有使用过comfyui，且在comfyui中安装LLM party时出现了一些依赖问题。点击[这里](https://drive.google.com/file/d/1NJSpwEL3FqroKVv5UsrVY3YbCG-9YWmt/view?usp=sharing)，下载包含LLM party的comfyui **windows**便携包。注意！这个便携包里只有party和管理器这两个插件，且只适用于windows系统。
 1. 直接将以下工作流拖入你的comfyui，然后用[comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)安装缺失节点。
   - 使用API调用LLM：[start_with_LLM_api](workflow/start_with_LLM_api.json)
   - 使用ollama管理本地LLM：[start_with_Ollama](workflow/ollama.json)

@@ -37,6 +37,7 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャラクター設定によって、専属のAIアシスタントを迅速に構築することから、業界に適用可能な単語ベクトルRAG、GraphRAGを用いた知識ベースのローカル管理までを行います。単一のエージェントパイプラインから、複雑なエージェント間の放射状および環状の相互作用モードの構築まで、個人ユーザーのためのSNSアプリ（QQ、Feishu、Discord）への接続から、ストリーミングメディアの作業者が必要とするワンストップLLM+TTS+ComfyUIワークフローまで、普通の学生が必要とする最初のLLMアプリケーションの簡単な導入から、研究者が一般的に使用するさまざまなパラメータ調整インターフェースやモデル適応に至るまで、これらすべての答えはComfyUI LLM Partyの中にあります。
 
 ## クイックスタート
+0. もしあなたがcomfyuiを使用したことがなく、comfyuiでLLMパーティをインストールする際に依存関係の問題が発生した場合は、[こちらをクリック](https://drive.google.com/file/d/1NJSpwEL3FqroKVv5UsrVY3YbCG-9YWmt/view?usp=sharing)して、LLMパーティを含むcomfyui **windows** ポータブルパッケージをダウンロードしてください。ご注意ください！このポータブルパッケージにはpartyと管理者の2つのプラグインのみが含まれており、windowsシステム専用となっています。
 1. 以下のワークフローをcomfyuiにドラッグし、[comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)を使用して不足しているノードをインストールします。
   - APIを使用してLLMを呼び出す：[start_with_LLM_api](workflow/start_with_LLM_api.json)
   - ollamaを使用してローカルLLMを管理する：[start_with_Ollama](workflow/ollama.json)

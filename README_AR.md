@@ -37,6 +37,7 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعددة، وإعداد الشخصيات لبناء مساعد AI الخاص بك بسرعة، إلى RAG وGraphRAG القابلة للتطبيق في الصناعة لإدارة قواعد المعرفة المحلية؛ من خط أنابيب وكيل واحد إلى بناء أنماط تفاعل معقدة بين الوكلاء وأنماط تفاعل دائرية؛ من الحاجة الفردية للمستخدمين للوصول إلى تطبيقات التواصل الاجتماعي الخاصة بهم (QQ، Feishu، Discord)، إلى تدفقات العمل الشاملة التي يحتاجها العاملون في وسائل الإعلام LLM+TTS+ComfyUI؛ من بدء استخدام تطبيق LLM الأول للطلاب العاديين، إلى واجهات ضبط المعلمات التي يستخدمها الباحثون. كل هذا يمكنك العثور على إجابات له في ComfyUI LLM Party.
 
 ## بدء سريع
+0. إذا لم تقم باستخدام comfyui من قبل، وواجهت بعض مشاكل الاعتماد عند تثبيت LLM party في comfyui، يرجى النقر على [هنا](https://drive.google.com/file/d/1NJSpwEL3FqroKVv5UsrVY3YbCG-9YWmt/view?usp=sharing) لتحميل حزمة comfyui **windows** المحمولة التي تحتوي على LLM party. ملاحظة! تحتوي هذه الحزمة المحمولة فقط على المكونين الإضافيين party و manager، وهي مناسبة فقط لنظام تشغيل ويندوز.
 1. اسحب سير العمل التالي إلى comfyui الخاص بك، ثم استخدم [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager) لتثبيت العقد المفقودة.
   - استخدم API لاستدعاء LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
   - إدارة LLM المحلي باستخدام ollama: [start_with_Ollama](workflow/ollama.json)
