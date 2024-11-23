@@ -93,7 +93,8 @@ class save_memo:
     CATEGORY = "大模型派对（llm_party）/记忆（memory）"
 
     def memo(self,history, history_path):
-        history=json.loads(history)
+        # 最后两个元素
+        history=json.loads(history)[-2:]
         with open(history_path, "r", encoding="utf-8") as f:
             old_history=json.load(f)
         old_history.extend(history)
