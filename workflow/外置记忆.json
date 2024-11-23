@@ -1,0 +1,595 @@
+{
+  "last_node_id": 38,
+  "last_link_id": 54,
+  "nodes": [
+    {
+      "id": 23,
+      "type": "LLM_api_loader",
+      "pos": {
+        "0": 400,
+        "1": 280
+      },
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            40
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": {
+        "0": 1430,
+        "1": 250
+      },
+      "size": {
+        "0": 450,
+        "1": 290
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "当然记得，亲爱的Ailm！那时我们在校园里一起学习、一起参加活动，真的很开心。你总是那么阳光，我特别喜欢和你在一起的时光。我们一起度过的每一个瞬间都让我感到无比珍贵。你对我们初识的印象是什么呢？"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 32,
+      "type": "load_memo",
+      "pos": {
+        "0": -220,
+        "1": 440
+      },
+      "size": {
+        "0": 315,
+        "1": 78
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "user_history",
+          "type": "STRING",
+          "links": [
+            49
+          ],
+          "slot_index": 0,
+          "label": "user_history"
+        },
+        {
+          "name": "history_path",
+          "type": "STRING",
+          "links": [
+            48
+          ],
+          "slot_index": 1,
+          "label": "history_path"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_memo"
+      },
+      "widgets_values": [
+        "D:\\AI\\AIhuitu\\Blender_ComfyUI\\Blender_ComfyUI_Mini\\ComfyUI\\custom_nodes\\comfyui_LLM_party\\custom_tool\\temp\\2024_11_22_23_15_08760220.json"
+      ]
+    },
+    {
+      "id": 25,
+      "type": "LLM",
+      "pos": {
+        "0": 830,
+        "1": 280
+      },
+      "size": {
+        "0": 454.4823913574219,
+        "1": 557.4664916992188
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 40,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images",
+          "shape": 7
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters",
+          "shape": 7
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": 51,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "user_history",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_history"
+          },
+          "label": "user_history"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            39
+          ],
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你来扮演我的女友，我们将要在下个月结婚。你非常的喜欢我。",
+        "",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        10,
+        "",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 37,
+      "type": "file_combine",
+      "pos": {
+        "0": 450,
+        "1": 860
+      },
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file1",
+          "type": "STRING",
+          "link": 52,
+          "widget": {
+            "name": "file1"
+          },
+          "shape": 7
+        },
+        {
+          "name": "file2",
+          "type": "STRING",
+          "link": 54,
+          "widget": {
+            "name": "file2"
+          },
+          "shape": 7
+        },
+        {
+          "name": "file3",
+          "type": "STRING",
+          "link": 53,
+          "widget": {
+            "name": "file3"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "files",
+          "type": "STRING",
+          "links": [
+            51
+          ],
+          "label": "files",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "file_combine"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 38,
+      "type": "get_string",
+      "pos": {
+        "0": -120,
+        "1": 870
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            54
+          ],
+          "label": "string",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "get_string"
+      },
+      "widgets_values": [
+        "\n以上是之前对话中的相关信息，以下是新的用户输入：\n"
+      ]
+    },
+    {
+      "id": 29,
+      "type": "save_memo",
+      "pos": {
+        "0": 1520,
+        "1": 640
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "history",
+          "type": "STRING",
+          "link": 44,
+          "widget": {
+            "name": "history"
+          },
+          "label": "history"
+        },
+        {
+          "name": "history_path",
+          "type": "STRING",
+          "link": 48,
+          "widget": {
+            "name": "history_path"
+          },
+          "label": "history_path"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "save_memo"
+      },
+      "widgets_values": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 36,
+      "type": "get_string",
+      "pos": {
+        "0": -250,
+        "1": 590
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            50,
+            53
+          ],
+          "label": "string",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "get_string"
+      },
+      "widgets_values": [
+        "亲爱的，我们相识于大学，你还记得吗"
+      ]
+    },
+    {
+      "id": 34,
+      "type": "load_openai_ebd",
+      "pos": {
+        "0": 310,
+        "1": 470
+      },
+      "size": [
+        320,
+        270
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": 49,
+          "widget": {
+            "name": "file_content"
+          },
+          "shape": 7
+        },
+        {
+          "name": "question",
+          "type": "STRING",
+          "link": 50,
+          "widget": {
+            "name": "question"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ebd_response",
+          "type": "STRING",
+          "links": [
+            52
+          ],
+          "label": "ebd_response",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_openai_ebd"
+      },
+      "widgets_values": [
+        "text-embedding-3-small",
+        "question",
+        true,
+        5,
+        200,
+        50,
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  ],
+  "links": [
+    [
+      39,
+      25,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      40,
+      23,
+      0,
+      25,
+      0,
+      "CUSTOM"
+    ],
+    [
+      44,
+      25,
+      1,
+      29,
+      0,
+      "STRING"
+    ],
+    [
+      48,
+      32,
+      1,
+      29,
+      1,
+      "STRING"
+    ],
+    [
+      49,
+      32,
+      0,
+      34,
+      0,
+      "STRING"
+    ],
+    [
+      50,
+      36,
+      0,
+      34,
+      1,
+      "STRING"
+    ],
+    [
+      51,
+      37,
+      0,
+      25,
+      4,
+      "STRING"
+    ],
+    [
+      52,
+      34,
+      0,
+      37,
+      0,
+      "STRING"
+    ],
+    [
+      53,
+      36,
+      0,
+      37,
+      2,
+      "STRING"
+    ],
+    [
+      54,
+      38,
+      0,
+      37,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6830134553650706,
+      "offset": [
+        331.95873172495106,
+        -38.46162237835736
+      ]
+    }
+  },
+  "version": 0.4
+}
