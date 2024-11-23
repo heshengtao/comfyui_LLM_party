@@ -14,22 +14,9 @@ config.read(config_path)
 class load_memo:
     @classmethod
     def INPUT_TYPES(self):
-        current_time = datetime.datetime.now()
-        # 以时间戳作为ID，字符串格式 XX年XX月XX日XX时XX分XX秒并加上一个哈希值防止重复
-        self.id = current_time.strftime("%Y_%m_%d_%H_%M_%S") + str(hash(random.randint(0, 1000000)))
-        # 构建prompt.json的绝对路径，如果temp文件夹不存在就创建
-        current_dir_path = os.path.dirname(os.path.abspath(__file__))
-        os.makedirs(os.path.join(current_dir_path, "temp"), exist_ok=True)
-        self.prompt_path = os.path.join(current_dir_path, "temp", str(self.id) + ".json")
-        # 如果文件不存在，创建prompt.json文件，存在就覆盖文件
-        if not os.path.exists(self.prompt_path):
-            with open(self.prompt_path, "w", encoding="utf-8") as f:
-                json.dump(
-                    [], f, indent=4, ensure_ascii=False
-                )
         return {
             "required": {
-                "historical_record": ("STRING", {"default":self.prompt_path}),
+                "history_path": ("STRING", {"default":"1.json"}),
             },
         }
 
@@ -48,10 +35,10 @@ class load_memo:
 
     CATEGORY = "大模型派对（llm_party）/记忆（memory）"
 
-    def memo(self, historical_record=""):
-        if historical_record != "":
+    def memo(self, history_path=""):
+        if history_path != "":
             temp_path = os.path.join(current_dir_path, "temp")
-            self.prompt_path = os.path.join(temp_path, historical_record)      
+            self.prompt_path = os.path.join(temp_path, history_path)      
         if not os.path.exists(self.prompt_path):
             with open(self.prompt_path, "w", encoding="utf-8") as f:
                 json.dump(
