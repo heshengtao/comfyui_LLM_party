@@ -49,7 +49,7 @@ class LLMPartyExtension {
             border-radius: 5px;
             display: flex;
             align-items: center;
-            z-index: 1000;
+            z-index: 9999;
             transition: width 0.3s ease-in-out;
         `;
 
