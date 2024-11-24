@@ -1230,16 +1230,9 @@ class LLM:
                 max_length = int(max_length)
 
                 if file_content is not None:
-                    user_prompt = (
-                        "文件中相关内容："
-                        + file_content
-                        + "\n"
-                        + "用户提问："
-                        + user_prompt
-                        + "\n"
-                        + "请根据文件内容回答用户问题。\n"
-                        + "如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
-                    )
+                    for message in history:
+                        if message["role"] == "system":
+                            message["content"] += "\n以下是可以参考的已知信息:\n" + file_content
                 if extra_parameters is not None and extra_parameters != {}:
                     response, history = model.send(
                         user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,images,imgbb_api_key, **extra_parameters
@@ -1876,16 +1869,9 @@ class LLM_local:
 
                 max_length = int(max_length)
                 if file_content is not None:
-                    user_prompt = (
-                        "文件中相关内容："
-                        + file_content
-                        + "\n"
-                        + "用户提问："
-                        + user_prompt
-                        + "\n"
-                        + "请根据文件内容回答用户问题。\n"
-                        + "如果无法从文件内容中找到答案，请回答“抱歉，我无法从文件内容中找到答案。”"
-                    )
+                    for message in history:
+                        if message["role"] == "system":
+                            message["content"] += "\n以下是可以参考的已知信息:\n" + file_content
 
                 # 获得model存放的设备
                 if model_type not in ["VLM-GGUF", "LLM-GGUF"]:

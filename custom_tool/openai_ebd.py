@@ -129,14 +129,11 @@ class load_openai_ebd:
                 azure_endpoint=azure_endpoint,
             )
         if not base_path:
-            # 将文件内容按段落分割
-            paragraphs = file_content.split("\n")
-
-            # 根据chunk_size和chunk_overlap处理段落
-            chunks = []
-            for i in range(0, len(paragraphs), chunk_size - chunk_overlap):
-                chunk = "\n".join(paragraphs[i : i + chunk_size])
-                chunks.append(chunk)
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=chunk_size,
+                chunk_overlap=chunk_overlap,
+            )
+            chunks = text_splitter.split_text(file_content)
 
             # 使用FAISS存储嵌入表示
             base = FAISS.from_texts(chunks, embeddings)
@@ -235,14 +232,11 @@ class openai_ebd_tool:
                 azure_endpoint=azure_endpoint,
             )
         if not base_path:
-            # 将文件内容按段落分割
-            paragraphs = file_content.split("\n")
-
-            # 根据chunk_size和chunk_overlap处理段落
-            chunks = []
-            for i in range(0, len(paragraphs), chunk_size - chunk_overlap):
-                chunk = "\n".join(paragraphs[i : i + chunk_size])
-                chunks.append(chunk)
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=chunk_size,
+                chunk_overlap=chunk_overlap,
+            )
+            chunks = text_splitter.split_text(file_content)
 
             # 使用FAISS存储嵌入表示
             base = FAISS.from_texts(chunks, embeddings)
@@ -360,13 +354,11 @@ class save_openai_ebd:
             )
 
         # 将文件内容按段落分割
-        paragraphs = file_content.split("\n")
-
-        # 根据chunk_size和chunk_overlap处理段落
-        chunks = []
-        for i in range(0, len(paragraphs), chunk_size - chunk_overlap):
-            chunk = "\n".join(paragraphs[i : i + chunk_size])
-            chunks.append(chunk)
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+        )
+        chunks = text_splitter.split_text(file_content)
 
         # 使用FAISS存储嵌入表示
         base = FAISS.from_texts(chunks, embeddings)

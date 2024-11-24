@@ -16,6 +16,7 @@ class load_memo:
     def INPUT_TYPES(self):
         return {
             "required": {
+                "system_prompt": ("STRING", {"default": "","multiline": True}),
                 "history_path": ("STRING", {"default":"1.json"}),
             },
         }
@@ -23,8 +24,10 @@ class load_memo:
     RETURN_TYPES = (
         "STRING",
         "STRING",
+        "STRING",
     )
     RETURN_NAMES = (
+        "system_prompt",
         "user_history",
         "history_path",
     )
@@ -35,18 +38,24 @@ class load_memo:
 
     CATEGORY = "大模型派对（llm_party）/记忆（memory）"
 
-    def memo(self, history_path=""):
+    def memo(self,system_prompt="", history_path=""):
         if history_path != "":
             temp_path = os.path.join(current_dir_path, "temp")
             self.prompt_path = os.path.join(temp_path, history_path)      
         if not os.path.exists(self.prompt_path):
             with open(self.prompt_path, "w", encoding="utf-8") as f:
                 json.dump(
-                    [], f, indent=4, ensure_ascii=False
+                    [{"role": "system", "content": system_prompt}], f, indent=4, ensure_ascii=False
                 )
         with open(self.prompt_path, "r", encoding="utf-8") as f:
             user_history=f.read()
+        histories = json.loads(user_history)
+        if system_prompt != "" and system_prompt is not None:
+            for message in histories:
+                if message["role"] == "system":
+                    message["content"] = system_prompt
         return (
+            system_prompt,
             user_history,
             self.prompt_path,
         )
