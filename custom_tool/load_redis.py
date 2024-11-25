@@ -10,7 +10,7 @@ import configparser
 config = configparser.ConfigParser()
 config.read(config_path)
 
-class load_redis:
+class load_redis_memo:
     @classmethod
     def INPUT_TYPES(self):
         return {
@@ -45,11 +45,11 @@ class load_redis:
 
         if clear_memo:
             # 清空并重置为初始数据
-            initial_data = json.dumps([{"role": "system", "content": system_prompt}], ensure_ascii=False)
+            initial_data = json.dumps([{"role": "system", "content": system_prompt}], ensure_ascii=False, indent=4)
             self.redis_client.set(history_key, initial_data)
         elif not self.redis_client.exists(history_key):
             # 如果不存在，初始化一个包含系统提示的JSON字符串并存储到Redis中
-            initial_data = json.dumps([{"role": "system", "content": system_prompt}], ensure_ascii=False)
+            initial_data = json.dumps([{"role": "system", "content": system_prompt}], ensure_ascii=False, indent=4)
             self.redis_client.set(history_key, initial_data)
         
         user_history = self.redis_client.get(history_key).decode('utf-8')
@@ -59,7 +59,7 @@ class load_redis:
             for message in histories:
                 if message["role"] == "system":
                     message["content"] = system_prompt
-            updated_data = json.dumps(histories, ensure_ascii=False)
+            updated_data = json.dumps(histories, ensure_ascii=False, indent=4)
             self.redis_client.set(history_key, updated_data)
         
         return (
@@ -75,7 +75,7 @@ class load_redis:
         return hash_value
     
 
-class save_redis:
+class save_redis_memo:
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -104,7 +104,7 @@ class save_redis:
         new_history = json.loads(history)[1:]
         old_history = json.loads(self.redis_client.get(history_key).decode('utf-8'))
         old_history.extend(new_history)
-        updated_data = json.dumps(old_history, ensure_ascii=False)
+        updated_data = json.dumps(old_history, ensure_ascii=False, indent=4)
         self.redis_client.set(history_key, updated_data)
         return ()
 
@@ -116,8 +116,8 @@ class save_redis:
     
 
 NODE_CLASS_MAPPINGS = {
-    "load_redis": load_redis,
-    "save_redis": save_redis,
+    "load_redis_memo": load_redis_memo,
+    "save_redis_memo": save_redis_memo,
 }
 lang = locale.getdefaultlocale()[0]
 
@@ -131,11 +131,11 @@ if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "load_redis": "加载redis记忆",
-        "save_redis": "保存redis记忆",
+        "load_redis_memo": "加载redis记忆",
+        "save_redis_memo": "保存redis记忆",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "load_redis": "load redis memory",
-        "save_redis": "save redis memory",
+        "load_redis_memo": "load redis memory",
+        "save_redis_memo": "save redis memory",
     }

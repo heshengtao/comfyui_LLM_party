@@ -95,7 +95,7 @@ class save_memo:
             old_history=json.load(f)
         old_history.extend(history)
         with open(history_path, "w", encoding="utf-8") as f:
-            json.dump(old_history, f, ensure_ascii=False)
+            json.dump(old_history, f, ensure_ascii=False, indent=4)
         return ()
 
     @classmethod
