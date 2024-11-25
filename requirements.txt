@@ -57,3 +57,4 @@ srt
 peft
 scipy
 json-repair
+redis
