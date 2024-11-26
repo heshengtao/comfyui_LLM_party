@@ -121,11 +121,11 @@ if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "load_memo": "加载记忆",
-        "save_memo": "保存记忆",
+        "load_memo": "加载json文件记忆",
+        "save_memo": "保存json文件记忆",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "load_memo": "load memory",
-        "save_memo": "save memory",
+        "load_memo": "load json file memory",
+        "save_memo": "save json file memory",
     }

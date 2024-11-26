@@ -52,6 +52,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 5. 由于本项目有较高的使用门槛，所以即使你选择了快速开始，我也希望你能耐心阅读完本项目主页。
 
 ## 最新更新
+1. 添加了新的类目，记忆节点，可以用来管理你的LLM对话历史。记忆节点目前支持本地json文件、Redis和SQL三种模式来管理你的对话历史。将LLM的对话历史与LLM解耦之后，你可以使用词嵌入模型来压缩整理你的对话历史，从而节省LLM的token和上下文窗口。示例工作流：[外置记忆](workflow/外置记忆.json)。
 1. 添加了本地文件读取工具，相比于之前在comfyui LLM mafia中的本地文件控制工具，这个工具只能读取文件或某个文件夹下的文件树，所以安全很多。
 1. fork了[chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat)，新建了一个[party-on-wechat](https://github.com/heshengtao/party-on-wechat)，安装和使用方法与原项目一致，无需配置，只需要启动party的fastapi。默认是调用wx_api工作流，支持图片输出。后续会逐步更新，保证party在微信上的丝滑使用。
 1. 添加了In-Context-LoRA面具节点，用于生成连续一致性的[In-Context-LoRA](https://github.com/ali-vilab/In-Context-LoRA/tree/main)提示词。

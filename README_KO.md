@@ -51,6 +51,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 5. 이 프로젝트는 사용 임계값이 높기 때문에 빠른 시작을 선택하더라도 프로젝트 홈페이지를 꼼꼼히 읽어주시기 바랍니다.
 
 ## 최신 업데이트
+1. 새로운 카테고리가 추가되었습니다. 기억 노드는 귀하의 LLM 대화 기록을 관리하는 데 사용할 수 있습니다. 현재 기억 노드는 로컬 JSON 파일, Redis 및 SQL의 세 가지 모드를 지원하여 대화 기록을 관리합니다. LLM의 대화 기록을 LLM과 분리함으로써, 단어 임베딩 모델을 사용하여 대화 기록을 압축하고 정리하여 LLM의 토큰 및 컨텍스트 창을 절약할 수 있습니다. 샘플 워크플로우: [외부 기억](workflow/外置记忆.json).
 1. 로컬 파일 읽기 도구가 추가되었습니다. 이전의 comfyui LLM mafia에 있는 로컬 파일 제어 도구와 비교했을 때, 이 도구는 파일이나 특정 폴더 내의 파일 트리만 읽을 수 있어 훨씬 더 안전합니다.
 1. [chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat)을 포크하여 새로운 저장소 [party-on-wechat](https://github.com/heshengtao/party-on-wechat)를 만들었습니다. 설치 및 사용 방법은 원래 프로젝트와 동일하며, 설정이 필요하지 않고 party의 FastAPI만 실행하면 됩니다. 기본적으로 wx_api 워크플로를 호출하고 이미지 출력을 지원합니다. 점진적으로 업데이트되어 WeChat에서 party를 부드럽게 사용할 수 있도록 보장됩니다.
 2. 일관된 [In-Context-LoRA](https://github.com/ali-vilab/In-Context-LoRA/tree/main) 프롬프트를 생성하기 위해 In-Context-LoRA 마스크 노드를 추가했습니다.
