@@ -89,6 +89,7 @@ def api(
     negative_prompt="",
     model_name="",
     workflow_path="测试画画api.json",
+    user_history="",
 ):
     global current_dir_path
     workflow_path = workflow_path
@@ -115,6 +116,7 @@ def api(
             prompt[p]["inputs"]["positive_prompt"] = positive_prompt
             prompt[p]["inputs"]["negative_prompt"] = negative_prompt
             prompt[p]["inputs"]["model_name"] = model_name
+            prompt[p]["inputs"]["user_history"] = user_history
 
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
@@ -194,14 +196,18 @@ async def stream_response(response_text: str, model_name: str):
     current_chunk = []
     # 如果response_text包含中文字符
     if re.search(r'[\u4e00-\u9fa5]', response_text):
-        # 定义一个包含中英文标点符号的正则表达式模式
+        # 定义一个包含中文标点符号的正则表达式模式
         punctuation_pattern = r'[，。；：！？\s]'
 
         # 使用正则表达式进行分割，但是保留标点符号
         words = re.split(punctuation_pattern, response_text)
         words = [word + punct for word, punct in zip(words, re.findall(punctuation_pattern, response_text) + ['']) if word]
     else:
-        words = response_text.split()
+        # 定义一个包含英文标点符号的正则表达式模式
+        punctuation_pattern = r'[.,;:!?\s]'
+        # 使用正则表达式进行分割，但是保留标点符号
+        words = re.split(punctuation_pattern, response_text)
+        words = [word + punct for word, punct in zip(words, re.findall(punctuation_pattern, response_text) + ['']) if word]
     for word in words:
         current_chunk.append(word)
         if len(current_chunk) >= 1:  # Send 3 words at a time
@@ -254,34 +260,34 @@ async def process_request(request_data: CompletionRequest):
     print(model_name)
     base64_encoded_list = []
     system_prompt = ""
-    
+    user_histories = []
     for message in request_data.messages:
-        if isinstance(message.content, str):
-            if message.role == "system":
-                system_prompt = message.content
-            elif message.role == "user":
-                user_prompt = message.content
-            elif message.role == "assistant":
-                assistant_prompt = message.content
-        elif isinstance(message.content, list):
-            for content in message.content:
-                if isinstance(content, dict) and "type" in content:
-                    if content["type"] == "text":
-                        user_prompt = content["text"]
-                    elif content["type"] == "image_url":
-                        if isinstance(content["image_url"], str):
-                            if content["image_url"].startswith("data:image/jpeg;base64,"):
-                                base64_data = content["image_url"].split("data:image/jpeg;base64,")[1]
-                                base64_encoded_list.append(base64_data)
-                            else:
-                                async with httpx.AsyncClient() as client:
-                                    response = await client.get(content["image_url"])
-                                    if response.status_code == 200:
-                                        image_bytes = BytesIO(response.content)
-                                        base64_encoded = base64.b64encode(image_bytes.read()).decode("utf-8")
-                                        base64_encoded_list.append(base64_encoded)
-                                    else:
-                                        raise HTTPException(status_code=400, detail="Image could not be retrieved.")
+        user_histories.append({"role": message.role, "content": message.content})
+    msg = request_data.messages[-1]
+    if isinstance(msg.content, str):
+        if msg.role == "system":
+            system_prompt = msg.content
+        elif msg.role == "user":
+            user_prompt = msg.content
+    elif isinstance(msg.content, list):
+        for content in msg.content:
+            if isinstance(content, dict) and "type" in content:
+                if content["type"] == "text":
+                    user_prompt = content["text"]
+                elif content["type"] == "image_url":
+                    if isinstance(content["image_url"], str):
+                        if content["image_url"].startswith("data:image/jpeg;base64,"):
+                            base64_data = content["image_url"].split("data:image/jpeg;base64,")[1]
+                            base64_encoded_list.append(base64_data)
+                        else:
+                            async with httpx.AsyncClient() as client:
+                                response = await client.get(content["image_url"])
+                                if response.status_code == 200:
+                                    image_bytes = BytesIO(response.content)
+                                    base64_encoded = base64.b64encode(image_bytes.read()).decode("utf-8")
+                                    base64_encoded_list.append(base64_encoded)
+                                else:
+                                    raise HTTPException(status_code=400, detail="Image could not be retrieved.")
 
     img_out = []
     for base64_encoded in base64_encoded_list:
@@ -298,6 +304,7 @@ async def process_request(request_data: CompletionRequest):
         img_out.append(image_tensor)
 
     workflow_path = model_name + ".json"
+    user_histories = json.dumps(user_histories, ensure_ascii=False)
     images, response = api(
         "",
         img_out,
@@ -309,6 +316,7 @@ async def process_request(request_data: CompletionRequest):
         "",
         "",
         workflow_path,
+        user_histories,
     )
     
     if images is None or images == []:

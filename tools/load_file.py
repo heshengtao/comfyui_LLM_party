@@ -249,6 +249,7 @@ class start_workflow:
                 "positive_prompt": ("STRING", {"default": ""}),
                 "negative_prompt": ("STRING", {"default": ""}),
                 "model_name": ("STRING", {"default": ""}),
+                "user_history": ("STRING", {"default": ""}),
             },
         }
 
@@ -256,6 +257,7 @@ class start_workflow:
         "STRING",
         "IMAGE",
         "IMAGE",
+        "STRING",
         "STRING",
         "STRING",
         "STRING",
@@ -271,6 +273,7 @@ class start_workflow:
         "positive_prompt",
         "negative_prompt",
         "model_name",
+        "user_history",
     )
 
     FUNCTION = "load_all"
@@ -292,6 +295,7 @@ class start_workflow:
         positive_prompt="",
         negative_prompt="",
         model_name="",
+        user_history="",
     ):
         file_out = ""
         if file_content is not None and file_content != "":
@@ -382,6 +386,7 @@ class start_workflow:
         positive_out = positive_prompt
         negative_out = negative_prompt
         model_name_out = model_name
+        user_history_out = user_history
         return (
             file_out,
             img_out,
@@ -391,6 +396,7 @@ class start_workflow:
             positive_out,
             negative_out,
             model_name_out,
+            user_history_out,
         )
 
 
