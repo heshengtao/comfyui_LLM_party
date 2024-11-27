@@ -358,19 +358,26 @@ async def process_request(request_data: CompletionRequest):
             print(imgbb_key)
 
             if imgbb_key is None or imgbb_key == "":
-                return {"error": "imgbb_api key is missing in config.ini"}
-
-            url = "https://api.imgbb.com/1/upload"
-            payload = {"key": imgbb_key, "image": img_base64}
-            response0 = requests.post(url, data=payload)
-            if response0.status_code == 200:
-                result = response0.json()
-                img_url = result["data"]["url"]
+                # 把img_base64保存到当前目录下的output文件夹
+                output_dir = os.path.join(current_dir_path, "output")
+                os.makedirs(output_dir, exist_ok=True)
+                # 时间戳
+                timestamp = int(time.time())
+                filename = os.path.join(output_dir, f"{timestamp}.png")
+                with open(filename, "wb") as f:
+                    f.write(base64.b64decode(img_base64))
+                base64_images.append(filename)
             else:
-                return "Error: " + response0.text
-            print(img_url)
-            base64_images.append(img_url)
-            print("1" + img_url)
+                url = "https://api.imgbb.com/1/upload"
+                payload = {"key": imgbb_key, "image": img_base64}
+                response0 = requests.post(url, data=payload)
+                if response0.status_code == 200:
+                    result = response0.json()
+                    img_url = result["data"]["url"]
+                else:
+                    return "Error: " + response0.text
+                print(img_url)
+                base64_images.append(img_url)
             
         if response is None:
             response = ""

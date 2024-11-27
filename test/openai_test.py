@@ -7,17 +7,15 @@ openai.base_url = 'http://127.0.0.1:8187/v1/'
 
 
 # Define the prompt
-prompt = '你叫什么名字？'
+prompt = '画一个美女吧'
 
 # Generate a response
 response = openai.chat.completions.create(
-    model='fastapi',
+    model='draw',
     messages=[
         {"role": "user", "content": prompt}
-    ],
-    stream=True
+    ]
 )
 
-# 流式
-for chunk in response:
-    print(chunk.choices[0].delta.content)
+# Print the generated image URL
+print(response.choices[0].message.content)
