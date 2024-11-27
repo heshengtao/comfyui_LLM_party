@@ -278,6 +278,11 @@ async def process_request(request_data: CompletionRequest):
                             base64_data = content["image_url"].split("data:image/jpeg;base64,")[1]
                             base64_encoded_list.append(base64_data)
                         else:
+                            # allowed_domains包含你所有的可信域名
+                            # allowed_domains = ["trusteddomain.com", "anothertrusteddomain.com"]
+                            # parsed_url = urllib.parse.urlparse(content["image_url"])
+                            # if parsed_url.netloc not in allowed_domains:
+                            #     raise HTTPException(status_code=400, detail="Image URL domain is not allowed.")
                             async with httpx.AsyncClient() as client:
                                 response = await client.get(content["image_url"])
                                 if response.status_code == 200:
