@@ -50,7 +50,7 @@ def get_history(prompt_id):
         return json.loads(response.read())
 
 
-def get_all(ws, prompt):
+def get_all(prompt):
     prompt_id = queue_prompt(prompt)["prompt_id"]
     output_images = {}
     output_text = ""
@@ -118,9 +118,7 @@ def api(
             prompt[p]["inputs"]["model_name"] = model_name
             prompt[p]["inputs"]["user_history"] = user_history
 
-    ws = websocket.WebSocket()
-    ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
-    images, res = get_all(ws, prompt)
+    images, res = get_all(prompt)
     return images, res
 
 
