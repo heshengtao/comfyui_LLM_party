@@ -40,6 +40,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 0. 만약 당신이 comfyu를 사용해 본 적이 없고, comfyui에서 LLM 파티를 설치할 때 의존성 문제가 발생했다면, [여기를 클릭](https://drive.google.com/file/d/1NJSpwEL3FqroKVv5UsrVY3YbCG-9YWmt/view?usp=sharing) 하여 LLM 파티가 포함된 comfyui **windows** 휴대용 패키지를 다운로드하십시오. 주의하십시오! 이 휴대용 패키지에는 party와 관리자라는 두 개의 플러그인만 포함되어 있으며, 오직 windows 시스템에만 적합합니다.(기존의 comfyui에 LLM party를 설치해야 하는 경우, 이 단계를 건너뛸 수 있습니다.)
 1. 다음 워크플로를 comfyui에 드래그한 다음 [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)를 사용하여 누락된 노드를 설치합니다.
   - API를 사용하여 LLM 호출: [start_with_LLM_api](workflow/start_with_LLM_api.json)
+  - aisuite를 사용하여 LLM을 호출합니다：[start_with_aisuite](workflow/start_with_aisuite.json)
   - ollama를 사용하여 로컬 LLM 관리: [start_with_Ollama](workflow/ollama.json)
   - 분산 형식의 로컬 LLM 사용: [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - GGUF 형식의 로컬 LLM 사용: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
@@ -51,6 +52,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 5. 이 프로젝트는 사용 임계값이 높기 때문에 빠른 시작을 선택하더라도 프로젝트 홈페이지를 꼼꼼히 읽어주시기 바랍니다.
 
 ## 최신 업데이트
+1. aisuite 로더 노드가 추가되어 aisuite와 호환될 수 있는 모든 API, 포함하여 다음과 같은 API를 지원합니다：["openai","anthropic","aws","azure","vertex","huggingface"]。예시 워크플로우：[start_with_aisuite](workflow/start_with_aisuite.json)。 
 1. 새로운 카테고리가 추가되었습니다. 기억 노드는 귀하의 LLM 대화 기록을 관리하는 데 사용할 수 있습니다. 현재 기억 노드는 로컬 JSON 파일, Redis 및 SQL의 세 가지 모드를 지원하여 대화 기록을 관리합니다. LLM의 대화 기록을 LLM과 분리함으로써, 단어 임베딩 모델을 사용하여 대화 기록을 압축하고 정리하여 LLM의 토큰 및 컨텍스트 창을 절약할 수 있습니다. 샘플 워크플로우: [외부 기억](workflow/外置记忆.json).
 1. 로컬 파일 읽기 도구가 추가되었습니다. 이전의 comfyui LLM mafia에 있는 로컬 파일 제어 도구와 비교했을 때, 이 도구는 파일이나 특정 폴더 내의 파일 트리만 읽을 수 있어 훨씬 더 안전합니다.
 1. [chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat)을 포크하여 새로운 저장소 [party-on-wechat](https://github.com/heshengtao/party-on-wechat)를 만들었습니다. 설치 및 사용 방법은 원래 프로젝트와 동일하며, 설정이 필요하지 않고 party의 FastAPI만 실행하면 됩니다. 기본적으로 wx_api 워크플로를 호출하고 이미지 출력을 지원합니다. 점진적으로 업데이트되어 WeChat에서 party를 부드럽게 사용할 수 있도록 보장됩니다.

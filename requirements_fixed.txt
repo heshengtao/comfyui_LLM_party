@@ -58,3 +58,4 @@ peft
 scipy
 json-repair
 redis
+aisuite[all]

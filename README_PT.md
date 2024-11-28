@@ -40,6 +40,7 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 0. Se você nunca usou o ComfyUI e encontrou alguns problemas de dependência ao instalar o LLM party no ComfyUI, clique [aqui](https://drive.google.com/file/d/1NJSpwEL3FqroKVv5UsrVY3YbCG-9YWmt/view?usp=sharing) para baixar o pacote portátil do ComfyUI **windows** que inclui o LLM party. Atenção! Este pacote portátil contém apenas os dois plugins: party e manager, e é exclusivo para sistemas Windows.(Se você precisar instalar o LLM party em um comfyui existente, esta etapa pode ser pulada.)
 1. Arraste os seguintes fluxos de trabalho para o seu comfyui e use [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager) para instalar os nós ausentes.
   - Use a API para chamar LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
+  - Chamando o LLM com aisuite: [iniciar_com_aisuite](workflow/start_with_aisuite.json)
   - Gerencie LLM local com ollama: [start_with_Ollama](workflow/ollama.json)
   - Use LLM local em formato distribuído: [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - Use LLM local em formato GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
@@ -51,6 +52,7 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 5. Devido ao alto limiar de uso deste projeto, mesmo que você escolha o início rápido, espero que possa ler pacientemente a página inicial do projeto.
 
 ## Atualizações Recentes
+1. Foi adicionado um nó carregador do aisuite, tornando o aisuite compatível com todas as APIs que ele pode gerenciar, incluindo: ["openai","anthropic","aws","azure","vertex","huggingface"], fluxo de trabalho de exemplo: [iniciar_com_aisuite](workflow/start_with_aisuite.json).
 1. Foi adicionada uma nova categoria, "nodos de memória", que pode ser utilizada para gerenciar o histórico de conversas do seu LLM. Os nodos de memória atualmente suportam três modos para gerenciar seu histórico de conversas: arquivo json local, Redis e SQL. Ao desacoplar o histórico de conversas do LLM, você pode utilizar modelos de incorporação de palavras para comprimir e organizar seu histórico de conversas, economizando assim tokens e janela de contexto do LLM. Exemplo de fluxo de trabalho: [Memória externa](workflow/外置记忆.json).
 1. Foi adicionada uma ferramenta de leitura de arquivos locais, em comparação com a ferramenta de controle de arquivos locais anterior no comfyui LLM mafia, esta ferramenta só pode ler arquivos ou a árvore de arquivos dentro de uma pasta específica, tornando-se assim muito mais segura.
 1. Fiz um fork de [chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat) e criei um novo repositório [party-on-wechat](https://github.com/heshengtao/party-on-wechat). Os métodos de instalação e uso são os mesmos do projeto original, não é necessária configuração, basta iniciar o FastAPI da party. Por padrão, ele chama o fluxo de trabalho wx_api e suporta a saída de imagens. Será atualizado gradualmente para garantir uma experiência suave do party no WeChat.

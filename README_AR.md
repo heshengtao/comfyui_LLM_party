@@ -40,6 +40,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 0. إذا لم تقم باستخدام comfyui من قبل، وواجهت بعض مشاكل الاعتماد عند تثبيت LLM party في comfyui، يرجى النقر على [هنا](https://drive.google.com/file/d/1NJSpwEL3FqroKVv5UsrVY3YbCG-9YWmt/view?usp=sharing) لتحميل حزمة comfyui **windows** المحمولة التي تحتوي على LLM party. ملاحظة! تحتوي هذه الحزمة المحمولة فقط على المكونين الإضافيين party و manager، وهي مناسبة فقط لنظام تشغيل ويندوز.(إذا كنت بحاجة لتثبيت LLM party على comfyui القائم، يمكن تخطي هذه الخطوة.)
 1. اسحب سير العمل التالي إلى comfyui الخاص بك، ثم استخدم [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager) لتثبيت العقد المفقودة.
   - استخدم API لاستدعاء LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
+  - استخدام aisuite لاستدعاء LLM: [بدء_باستخدام_aisuite](workflow/start_with_aisuite.json)
   - إدارة LLM المحلي باستخدام ollama: [start_with_Ollama](workflow/ollama.json)
   - استخدم LLM المحلي بتنسيق موزع: [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - استخدم LLM المحلي بتنسيق GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
@@ -51,6 +52,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 5. نظرًا للعتبة العالية لاستخدام هذا المشروع، حتى إذا اخترت البدء السريع، آمل أن تتمكن من قراءة الصفحة الرئيسية للمشروع بصبر.
 
 ## التحديثات الأخيرة
+1. تمت إضافة عقدة محمل aisuite، التي تتوافق مع جميع واجهات البرمجة المتاحة لـ aisuite، بما في ذلك: ["openai","anthropic","aws","azure","vertex","huggingface"]، نموذج سير العمل: [بدء_باستخدام_aisuite](workflow/start_with_aisuite.json).
 1. تم إضافة فئة جديدة تُعرف بـ "نقاط الذاكرة"، والتي يمكن استخدامها لإدارة تاريخ محادثاتك مع نموذج اللغة الكبير (LLM). تدعم نقاط الذاكرة حاليًا ثلاثة أوضاع لإدارة تاريخ المحادثات، وهي الملفات المحلية بتنسيق JSON وRedis وSQL. بعد فصل تاريخ محادثات LLM عن النموذج، يمكنك استخدام نماذج تضمين الكلمات لتنظيم وضغط تاريخ محادثاتك، مما يوفر لك Tokens وسياقات لنموذج اللغة الكبير. نموذج سير العمل: [ذاكرة خارجية](workflow/外置记忆.json).
 1. تم إضافة أداة لقراءة الملفات المحلية، مقارنةً بالأداة السابقة للتحكم في الملفات المحلية في comfyui LLM mafia، فإن هذه الأداة تستطيع فقط قراءة الملفات أو شجرة الملفات داخل مجلد معين، مما يوفر مستوى أعلى من الأمان.
 1. قمت بنسخ [chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat)، وأنشأت مستودعًا جديدًا [party-on-wechat](https://github.com/heshengtao/party-on-wechat). طرق التثبيت والاستخدام متطابقة مع المشروع الأصلي، ولا يتطلب الأمر أي تكوين، فقط قم بتشغيل FastAPI لـ party. بشكل افتراضي، يتم استدعاء سير العمل wx_api ويدعم إخراج الصور. سيتم تحديثه تدريجيًا لضمان استخدام سلس لـ party على WeChat.

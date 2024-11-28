@@ -41,6 +41,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 0. 如果你从来没有使用过comfyui，且在comfyui中安装LLM party时出现了一些依赖问题。点击[这里](https://drive.google.com/file/d/1NJSpwEL3FqroKVv5UsrVY3YbCG-9YWmt/view?usp=sharing)，下载包含LLM party的comfyui **windows**便携包。注意！这个便携包里只有party和管理器这两个插件，且只适用于windows系统。（如果你需要将LLM party安装到已有的comfyui，该步骤可以跳过。）
 1. 直接将以下工作流拖入你的comfyui，然后用[comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)安装缺失节点。
   - 使用API调用LLM：[start_with_LLM_api](workflow/start_with_LLM_api.json)
+  - 使用aisuite调用LLM：[start_with_aisuite](workflow/start_with_aisuite.json)
   - 使用ollama管理本地LLM：[start_with_Ollama](workflow/ollama.json)
   - 使用分散格式的本地LLM：[start_with_LLM_local](workflow/start_with_LLM_local.json)
   - 使用GGUF格式的本地LLM：[start_with_LLM_GGUF](workflow/start_with_GGUF.json)
@@ -52,6 +53,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 5. 由于本项目有较高的使用门槛，所以即使你选择了快速开始，我也希望你能耐心阅读完本项目主页。
 
 ## 最新更新
+1. 添加了aisuite加载器节点，兼容了aisuite可以兼容的所有API，包含：["openai","anthropic","aws","azure","vertex","huggingface"]，示例工作流：[start_with_aisuite](workflow/start_with_aisuite.json)。
 1. 添加了新的类目，记忆节点，可以用来管理你的LLM对话历史。记忆节点目前支持本地json文件、Redis和SQL三种模式来管理你的对话历史。将LLM的对话历史与LLM解耦之后，你可以使用词嵌入模型来压缩整理你的对话历史，从而节省LLM的token和上下文窗口。示例工作流：[外置记忆](workflow/外置记忆.json)。
 1. 添加了本地文件读取工具，相比于之前在comfyui LLM mafia中的本地文件控制工具，这个工具只能读取文件或某个文件夹下的文件树，所以安全很多。
 1. fork了[chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat)，新建了一个[party-on-wechat](https://github.com/heshengtao/party-on-wechat)，安装和使用方法与原项目一致，无需配置，只需要启动party的fastapi。默认是调用wx_api工作流，支持图片输出。后续会逐步更新，保证party在微信上的丝滑使用。

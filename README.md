@@ -41,6 +41,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 0. If you have never used ComfyUI and encounter some dependency issues while installing the LLM party in ComfyUI, please click [here](https://drive.google.com/file/d/1NJSpwEL3FqroKVv5UsrVY3YbCG-9YWmt/view?usp=sharing) to download the **Windows** portable package that includes the LLM party. Please note that this portable package contains only the party and manager plugins, and is exclusively compatible with the Windows operating system.(If you need to install LLM party into an existing comfyui, this step can be skipped.) 
 1. Drag the following workflows into your comfyui, then use [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager) to install the missing nodes.
   - Use API to call LLM: [start_with_LLM_api](workflow/start_with_LLM_api.json)
+  - Using aisuite to call LLM: [start_with_aisuite](workflow/start_with_aisuite.json)
   - Manage local LLM with ollama: [start_with_Ollama](workflow/ollama.json)
   - Use local LLM in distributed format: [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - Use local LLM in GGUF format: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
@@ -52,6 +53,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 5. Due to the high usage threshold of this project, even if you choose the quick start, I hope you can patiently read through the project homepage.
 
 ## Latest update
+1. Added the aisuite loader node, which is compatible with all APIs that aisuite can accommodate, including: ["openai", "anthropic", "aws", "azure", "vertex", "huggingface"]. Example workflow: [start_with_aisuite](workflow/start_with_aisuite.json).
 1. A new category has been added: memory nodes, which can be utilized to manage your LLM conversation history. Currently, memory nodes support three modes for managing your conversation history: local JSON files, Redis, and SQL. By decoupling the LLM's conversation history from the LLM itself, you can employ word embedding models to compress and organize your conversation history, thus saving tokens and context windows for the LLM. Example workflow: [External Memory](workflow/外置记忆.json).
 1. A local file reading tool has been added. In comparison to the previous local file control tool in ComfyUI LLM Mafia, this tool can only read files or the file tree within a specific folder, thus ensuring greater security.
 1. Forked [chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat), created a new repository [party-on-wechat](https://github.com/heshengtao/party-on-wechat). The installation and usage methods are the same as the original project, no configuration is required, just start the party's FastAPI. By default, it calls the wx_api workflow and supports image output. It will be updated gradually to ensure a smooth experience of party on WeChat.
