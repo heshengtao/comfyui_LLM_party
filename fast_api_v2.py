@@ -1,9 +1,12 @@
+# 更新后的 fast_api_v2.py 内容
 import argparse
+import atexit
 import base64
 import configparser
 import json
 import os
 import re
+import sys
 import time
 import urllib.parse
 import urllib.request
@@ -27,9 +30,38 @@ config = configparser.ConfigParser()
 config.read(os.path.join(current_dir_path, "config.ini"))
 # 获取配置文件中的参数
 fastapi_api_key = config.get("API_KEYS", "fastapi_api_key", fallback="")
-server_address = "127.0.0.1:8188"
 client_id = str(uuid.uuid4())
+import uvicorn
+import asyncio
+import subprocess
+import logging
 
+parser = argparse.ArgumentParser(description="Run the server with specified host and port.")
+parser.add_argument("--port", type=str, default=8188, help="Server address to connect to.")
+args = parser.parse_args()
+server_address = f"127.0.0.1:{args.port}"
+# 默认的端口是server_address的端口+10000
+fastapi_port = int(args.port) + 10000
+
+# current_dir_path上两级目录下的main.py文件
+main_path = os.path.join(current_dir_path, "..", "..", "main.py")
+
+# 全局变量来存储ComfyUI进程
+comfyui_process = None
+
+def cleanup():
+    global comfyui_process
+    if comfyui_process:
+        logging.info("正在关闭ComfyUI进程...")
+        comfyui_process.terminate()
+        try:
+            comfyui_process.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            comfyui_process.kill()
+        logging.info("ComfyUI进程已关闭")
+
+# 注册清理函数
+atexit.register(cleanup)
 
 def queue_prompt(prompt):
     p = {"prompt": prompt, "client_id": client_id}
@@ -37,18 +69,15 @@ def queue_prompt(prompt):
     req = urllib.request.Request("http://{}/prompt".format(server_address), data=data)
     return json.loads(urllib.request.urlopen(req).read())
 
-
 def get_image(filename, subfolder, folder_type):
     data = {"filename": filename, "subfolder": subfolder, "type": folder_type}
     url_values = urllib.parse.urlencode(data)
     with urllib.request.urlopen("http://{}/view?{}".format(server_address, url_values)) as response:
         return response.read()
 
-
 def get_history(prompt_id):
     with urllib.request.urlopen("http://{}/history/{}".format(server_address, prompt_id)) as response:
         return json.loads(response.read())
-
 
 def get_all(prompt):
     prompt_id = queue_prompt(prompt)["prompt_id"]
@@ -77,20 +106,7 @@ def get_all(prompt):
 
     return output_images, output_text
 
-
-def api(
-    file_content="",
-    image_input=None,
-    file_path="",
-    img_path="",
-    system_prompt="你是一个强大的智能助手",
-    user_prompt="",
-    positive_prompt="",
-    negative_prompt="",
-    model_name="",
-    workflow_path="测试画画api.json",
-    user_history="",
-):
+def api(file_content="", image_input=None, file_path="", img_path="", system_prompt="你是一个强大的智能助手", user_prompt="", positive_prompt="", negative_prompt="", model_name="", workflow_path="测试画画api.json", user_history=""):
     global current_dir_path
     workflow_path = workflow_path
     WF_path = os.path.join(current_dir_path, "workflow_api", workflow_path)
@@ -121,7 +137,6 @@ def api(
     images, res = get_all(prompt)
     return images, res
 
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -135,18 +150,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 class Message(BaseModel):
     role: str
     content: Any
-
 
 class CompletionRequest(BaseModel):
     model: str
     messages: List[Message]
     max_tokens: int = 150
     stream: bool = False
-
 
 VALID_API_KEY = fastapi_api_key
 
@@ -211,7 +223,7 @@ async def stream_response(response_text: str, model_name: str):
         if len(current_chunk) >= 1:  # Send 3 words at a time
             chunks.append(" ".join(current_chunk))
             current_chunk = []
-    
+
     if current_chunk:  # Add any remaining words
         chunks.append(" ".join(current_chunk))
 
@@ -221,18 +233,20 @@ async def stream_response(response_text: str, model_name: str):
             "object": "chat.completion.chunk",
             "created": int(time.time()),
             "model": model_name,
-            "choices": [{
-                "delta": {
-                    "role": "assistant" if i == 0 else None,
-                    "content": chunk
-                },
-                "index": 0,
-                "finish_reason": "stop" if i == len(chunks) - 1 else None
-            }]
+            "choices": [
+                {
+                    "delta": {
+                        "role": "assistant" if i == 0 else None,
+                        "content": chunk
+                    },
+                    "index": 0,
+                    "finish_reason": "stop" if i == len(chunks) - 1 else None
+                }
+            ]
         }
         yield f"data: {json.dumps(response_chunk)}\n\n"
         await asyncio.sleep(0.1)  # Add small delay between chunks
-    
+
     yield "data: [DONE]\n\n"
 
 @app.post("/v1/chat/completions")
@@ -248,7 +262,7 @@ async def create_completion(request_data: CompletionRequest, dependency=Depends(
                 )
         else:
             response = await process_request(request_data)
-        
+
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -321,7 +335,7 @@ async def process_request(request_data: CompletionRequest):
         workflow_path,
         user_histories,
     )
-    
+
     if images is None or images == []:
         response_data = {
             "id": "0",
@@ -377,14 +391,14 @@ async def process_request(request_data: CompletionRequest):
                     return "Error: " + response0.text
                 print(img_url)
                 base64_images.append(img_url)
-            
+
         if response is None:
             response = ""
-            
+
         for img in base64_images:
             response_url = f"![image]({img})"
             response += "\n" + response_url + "\n"
-            
+
         print(response)
         response_data = {
             "id": "0",
@@ -404,15 +418,28 @@ async def process_request(request_data: CompletionRequest):
         }
     return response_data
 
+async def start_comfyui_server():
+    # 构建启动 ComfyUI 的命令
+    comfyui_cmd = [
+        sys.executable,
+        "-s",
+        main_path,
+        "--port",
+        str(args.port)
+    ]
+
+    global comfyui_process
+    try:
+        comfyui_process = subprocess.Popen(comfyui_cmd, cwd=os.path.dirname(main_path))
+        logging.info(f"ComfyUI 服务器已在 {server_address} 启动")
+    except Exception as e:
+        logging.error(f"启动ComfyUI服务器时发生错误: {e}")
+
+async def run_server():
+    await start_comfyui_server()
+    config = uvicorn.Config(app, host="127.0.0.1", port=fastapi_port, log_level="info")
+    server = uvicorn.Server(config)
+    await server.serve()
 
 if __name__ == "__main__":
-    import uvicorn
-    import asyncio
-    parser = argparse.ArgumentParser(description="Run the server with specified host and port.")
-    parser.add_argument("--host", type=str, default="127.0.0.1", help="Host address to bind the server.")
-    # 默认的端口是server_address的端口+1000
-    fastapi_port= int(server_address.split(":")[1]) + 10000
-    parser.add_argument("--port", type=int, default=fastapi_port, help="Port number to bind the server.")
-    
-    args = parser.parse_args()
-    uvicorn.run(app, host=args.host, port=args.port)
+    asyncio.run(run_server())
