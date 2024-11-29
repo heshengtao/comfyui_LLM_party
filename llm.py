@@ -13,7 +13,7 @@ import re
 import sys
 import time
 import traceback
-import google.generativeai as genai
+# import google.generativeai as genai
 import numpy as np
 import openai
 import aisuite as ai
@@ -371,6 +371,7 @@ def convert_tool_to_gemini(openai_tools):
         gemini_tools.append(gemini_tool)
     return gemini_tools
 
+"""
 class genChat:
     def __init__(self, model_name, apikey) -> None:
         self.model_name = model_name
@@ -471,7 +472,7 @@ class genChat:
         except Exception as e:
             return str(e), history
         return text, history
-
+"""
 
 class Chat:
     def __init__(self, model_name, apikey, baseurl) -> None:
@@ -1109,7 +1110,9 @@ class LLM_api_loader:
             elif api_keys.get("base_url") != "":
                 openai.base_url = api_keys.get("base_url")
             if openai.api_key == "":
-                return ("请输入API_KEY",)
+                api_keys = load_api_keys(config_path)
+                openai.api_key = api_keys.get("openai_api_key")
+                openai.base_url = api_keys.get("base_url")
             if openai.base_url != "":
                 if openai.base_url[-1] != "/":
                     openai.base_url = openai.base_url + "/"
@@ -1212,7 +1215,9 @@ class aisuite_loader:
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         if openai.api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
@@ -1249,7 +1254,7 @@ class easy_LLM_api_loader:
                 openai.base_url = openai.base_url + "/"
         chat = Chat(model_name, openai.api_key, openai.base_url)
         return (chat,)
-
+"""
 class genai_api_loader:
     def __init__(self):
         pass
@@ -1289,11 +1294,13 @@ class genai_api_loader:
         elif api_keys.get("openai_api_key") != "":
             api_key = api_keys.get("openai_api_key")
         if api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
 
         chat = genChat(model_name, api_key)
         return (chat,)
-
+"""
 class LLM:
     def __init__(self):
         current_time = datetime.datetime.now()
@@ -2512,7 +2519,7 @@ NODE_CLASS_MAPPINGS = {
     "LLM": LLM,
     "LLM_local": LLM_local,
     "LLM_api_loader": LLM_api_loader,
-    "genai_api_loader":genai_api_loader,
+    # "genai_api_loader":genai_api_loader,
     "LLM_local_loader": LLM_local_loader,
     "easy_LLM_local_loader": easy_LLM_local_loader,
     "easy_LLM_api_loader":easy_LLM_api_loader,
@@ -2631,7 +2638,7 @@ if lang == "zh_CN":
         "LLM_local": "本地LLM通用链路",
         "LLM_api_loader": "API LLM加载器",
         "easy_LLM_api_loader": "简易API LLM加载器",
-        "genai_api_loader":"Gemini API LLM加载器",
+        # "genai_api_loader":"Gemini API LLM加载器",
         "LLM_local_loader": "本地LLM加载器",
         "easy_LLM_local_loader": "简易本地LLM加载器",
         "load_ebd": "加载词嵌入模型",
@@ -2742,7 +2749,7 @@ else:
         "LLM_local": "Local LLM general link",
         "LLM_api_loader": "API LLM Loader",
         "easy_LLM_api_loader": "Easy API LLM Loader",
-        "genai_api_loader":"Gemini API LLM Loader",
+        # "genai_api_loader":"Gemini API LLM Loader",
         "LLM_local_loader": "Local LLM Loader",
         "easy_LLM_local_loader": "Easy Local LLM Loader",
         "load_ebd": "Load Embeddings",

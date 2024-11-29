@@ -52,3 +52,7 @@ api_key=
 [grok-beta]
 base_url=https://api.x.ai/v1/
 api_key=
+
+[gemini-1.5-flash]
+base_url=https://generativelanguage.googleapis.com/v1beta/
+api_key=

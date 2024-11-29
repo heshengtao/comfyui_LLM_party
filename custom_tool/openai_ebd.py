@@ -114,7 +114,9 @@ class load_openai_ebd:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
 
         if not openai.api_key:
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
 
         embeddings = OpenAIEmbeddings(model=model_name, api_key=openai.api_key, base_url=openai.base_url)
         if "openai.azure.com" in openai.base_url:
@@ -217,7 +219,9 @@ class openai_ebd_tool:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
 
         if not openai.api_key:
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
 
         embeddings = OpenAIEmbeddings(model=model_name, api_key=openai.api_key, base_url=openai.base_url)
         if "openai.azure.com" in openai.base_url:

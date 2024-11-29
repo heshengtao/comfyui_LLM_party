@@ -104,8 +104,6 @@ class check_text():
             openai.base_url = config.get("API_KEYS", "base_url")
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
-        if openai.api_key == "":
-            return ("请输入API_KEY",)
 
         flag,flagged_categories = check_text_legality(text)
         if flag == False:

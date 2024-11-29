@@ -107,18 +107,15 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [doubao](https://www.volcengine.com/docs/82379/1263482)
-* [讯飞星火/spark](https://xinghuo.xfyun.cn/sparkapi?scr=price)
+* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(Исходный узел загрузчика API LLM Gemini был устаревшим в новой версии. Пожалуйста, используйте узел загрузчика API LLM, выбрав base_url: https://generativelanguage.googleapis.com/v1beta/)
 
-2. Поддержка API-вызовов формата Gemini:
-* [Gemini](https://aistudio.google.com/app/prompts/new_chat)
-
-3. Поддержка всех вызовов API, совместимых с [aisuite](https://github.com/andrewyng/aisuite):
-* [anthropic](https://www.anthropic.com/)
+2. Поддержка всех API вызовов, совместимых с [aisuite](https://github.com/andrewyng/aisuite):
+* [anthropic/claude](https://www.anthropic.com/)
 * [aws](https://docs.aws.amazon.com/solutions/latest/generative-ai-application-builder-on-aws/api-reference.html)
 * [vertex](https://cloud.google.com/vertex-ai/docs/reference/rest)
 * [huggingface](https://huggingface.co/)
 
-4. Совместим с большинством локальных моделей в библиотеке transformer (тип модели на узле цепочки локальных моделей LLM изменен на LLM, VLM-GGUF и LLM-GGUF, что соответствует прямой загрузке моделей LLM, загрузке моделей VLM и загрузке моделей LLM в формате GGUF). Если ваша модель LLM в формате VLM или GGUF выдает ошибку, пожалуйста, загрузите последнюю версию llama-cpp-python с [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases). В настоящее время протестированные модели включают:
+3. Совместим с большинством локальных моделей в библиотеке transformer (тип модели на узле цепочки локальных моделей LLM изменен на LLM, VLM-GGUF и LLM-GGUF, что соответствует прямой загрузке моделей LLM, загрузке моделей VLM и загрузке моделей LLM в формате GGUF). Если ваша модель LLM в формате VLM или GGUF выдает ошибку, пожалуйста, загрузите последнюю версию llama-cpp-python с [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases). В настоящее время протестированные модели включают:
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay) (рекомендуется! Модель для ролевых игр)
 * [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (рекомендуется! Модель с богатым набором подсказок)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
@@ -127,7 +124,7 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
-5. Загрузка моделей:
+4. Загрузка моделей:
 * [Ссылка на Baidu Cloud](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), код для извлечения: qyhu
 
 ## Загрузка

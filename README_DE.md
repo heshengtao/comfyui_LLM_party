@@ -108,17 +108,15 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [doubao](https://www.volcengine.com/docs/82379/1263482)
 * [讯飞星火/spark](https://xinghuo.xfyun.cn/sparkapi?scr=price)
+* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/) (Der ursprüngliche Gemini API LLM Ladepunkt wurde in der neuen Version eingestellt, bitte verwenden Sie den LLM API Ladepunkt mit der gewählten Basis-URL: https://generativelanguage.googleapis.com/v1beta/)
 
-2. Unterstützung von API-Aufrufen im Gemini-Format:
-* [Gemini](https://aistudio.google.com/app/prompts/new_chat)
-
-3. Unterstützung aller API-Aufrufe, die mit [aisuite](https://github.com/andrewyng/aisuite) kompatibel sind:
-* [anthropic](https://www.anthropic.com/)
+2. Unterstützung aller API-Aufrufe, die mit [aisuite](https://github.com/andrewyng/aisuite) kompatibel sind:
+* [anthropic/claude](https://www.anthropic.com/) 
 * [aws](https://docs.aws.amazon.com/solutions/latest/generative-ai-application-builder-on-aws/api-reference.html)
 * [vertex](https://cloud.google.com/vertex-ai/docs/reference/rest)
 * [huggingface](https://huggingface.co/)
 
-4. Kompatibel mit den meisten lokalen Modellen in der Transformer-Bibliothek (der Modelltyp auf dem lokalen LLM-Modellkettenknoten wurde in LLM, VLM-GGUF und LLM-GGUF geändert, was dem direkten Laden von LLM-Modellen, dem Laden von VLM-Modellen und dem Laden von LLM-Modellen im GGUF-Format entspricht). Wenn Ihr VLM- oder GGUF-Format-LLM-Modell einen Fehler meldet, laden Sie bitte die neueste Version von llama-cpp-python von [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases) herunter. Derzeit getestete Modelle umfassen:
+3. Kompatibel mit den meisten lokalen Modellen in der Transformer-Bibliothek (der Modelltyp auf dem lokalen LLM-Modellkettenknoten wurde in LLM, VLM-GGUF und LLM-GGUF geändert, was dem direkten Laden von LLM-Modellen, dem Laden von VLM-Modellen und dem Laden von LLM-Modellen im GGUF-Format entspricht). Wenn Ihr VLM- oder GGUF-Format-LLM-Modell einen Fehler meldet, laden Sie bitte die neueste Version von llama-cpp-python von [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases) herunter. Derzeit getestete Modelle umfassen:
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay) (empfohlen! Rollenspiel-Modell)
 * [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (empfohlen! Reichhaltiges Prompt-Modell)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
@@ -127,7 +125,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
-5. Modells download:
+4. Modells download:
 * [Baidu Cloud Adresse](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), Entnahmecode: qyhu
 
 ## Download

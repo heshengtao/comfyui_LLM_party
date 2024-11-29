@@ -101,7 +101,9 @@ class mini_party:
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         if openai.api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
@@ -196,7 +198,9 @@ class mini_translate:
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         if openai.api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
@@ -304,7 +308,9 @@ class mini_error_correction:
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         if openai.api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
@@ -425,7 +431,9 @@ class mini_summary:
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         if openai.api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
@@ -555,7 +563,9 @@ class mini_story:
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         if openai.api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
@@ -733,7 +743,9 @@ class mini_ocr:
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         if openai.api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
@@ -896,7 +908,9 @@ class mini_sd_prompt:
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         if openai.api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
@@ -1048,7 +1062,9 @@ class mini_flux_prompt:
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         if openai.api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
@@ -1178,7 +1194,9 @@ class mini_sd_tag:
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         if openai.api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
@@ -1352,13 +1370,12 @@ class mini_flux_tag:
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         if openai.api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"
-
-        if not openai.api_key:
-            return ("请输入API_KEY",)
         sys_prompt = f'''# FLUX prompt 助理
 
 你来充当一位图片反推prompt助理。
@@ -1540,7 +1557,9 @@ class mini_intent_recognition:
         elif api_keys.get("base_url") != "":
             openai.base_url = api_keys.get("base_url")
         if openai.api_key == "":
-            return ("请输入API_KEY",)
+            api_keys = load_api_keys(config_path)
+            openai.api_key = api_keys.get("openai_api_key")
+            openai.base_url = api_keys.get("base_url")
         if openai.base_url != "":
             if openai.base_url[-1] != "/":
                 openai.base_url = openai.base_url + "/"

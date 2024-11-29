@@ -104,17 +104,15 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [doubao](https://www.volcengine.com/docs/82379/1263482)
 * [讯飞星火/spark](https://xinghuo.xfyun.cn/sparkapi?scr=price)
+* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(기존 Gemini API LLM 로더 노드는 새 버전에서 폐기되었습니다. LLM API 로더 노드를 사용하시고, base_url로 다음을 선택해 주십시오: https://generativelanguage.googleapis.com/v1beta/)
 
-2. Gemini 형식의 API 호출을 지원합니다:
-* [Gemini](https://aistudio.google.com/app/prompts/new_chat)
-
-3. 모든 [aisuite](https://github.com/andrewyng/aisuite) 호환 API 호출을 지원합니다:
-* [anthropic](https://www.anthropic.com/)
+2. [aisuite](https://github.com/andrewyng/aisuite)와 호환되는 모든 API 호출을 지원합니다：
+* [anthropic/claude](https://www.anthropic.com/)
 * [aws](https://docs.aws.amazon.com/solutions/latest/generative-ai-application-builder-on-aws/api-reference.html)
 * [vertex](https://cloud.google.com/vertex-ai/docs/reference/rest)
 * [huggingface](https://huggingface.co/)
 
-4. transformer 라이브러리의 대부분의 로컬 모델과 호환됩니다 (로컬 LLM 모델 체인 노드의 모델 유형이 LLM, VLM-GGUF 및 LLM-GGUF로 변경되어 LLM 모델을 직접 로드하고, VLM 모델을 로드하고, GGUF 형식의 LLM 모델을 로드할 수 있습니다). VLM 또는 GGUF 형식의 LLM 모델에서 오류가 발생하면 [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases)에서 최신 버전의 llama-cpp-python을 다운로드하십시오. 현재 테스트된 모델에는 다음이 포함됩니다:
+3. transformer 라이브러리의 대부분의 로컬 모델과 호환됩니다 (로컬 LLM 모델 체인 노드의 모델 유형이 LLM, VLM-GGUF 및 LLM-GGUF로 변경되어 LLM 모델을 직접 로드하고, VLM 모델을 로드하고, GGUF 형식의 LLM 모델을 로드할 수 있습니다). VLM 또는 GGUF 형식의 LLM 모델에서 오류가 발생하면 [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases)에서 최신 버전의 llama-cpp-python을 다운로드하십시오. 현재 테스트된 모델에는 다음이 포함됩니다:
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay) (추천! 역할극 모델)
 * [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (추천! 풍부한 프롬프트 모델)
 * [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
@@ -123,7 +121,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
-5. 모델 다운로드:
+4. 모델 다운로드:
 * [百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu
 
 ## 다운로드

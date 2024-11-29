@@ -219,8 +219,6 @@ class openai_dall_e:
             openai.base_url = config.get("API_KEYS", "base_url")
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
-        if openai.api_key == "":
-            return ("请输入API_KEY",)
         openai_dall_e = OpenAI(api_key=openai.api_key, base_url=openai.base_url)
         if "openai.azure.com" in openai.base_url:
             # 获取API版本
@@ -325,8 +323,6 @@ class dall_e_tool:
             openai.base_url = config.get("API_KEYS", "base_url")
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
-        if openai.api_key == "":
-            return ("请输入API_KEY",)
         global_dall_e = OpenAI(api_key=openai.api_key, base_url=openai.base_url)
         if "openai.azure.com" in openai.base_url:
             # 获取API版本
