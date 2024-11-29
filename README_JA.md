@@ -113,6 +113,12 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 2. Gemini形式のAPI呼び出しをサポートしています：
 * [Gemini](https://aistudio.google.com/app/prompts/new_chat)
 
+3. [aisuite](https://github.com/andrewyng/aisuite) に対応するすべてのAPI呼び出しをサポートします：
+* [anthropic](https://www.anthropic.com/)
+* [aws](https://docs.aws.amazon.com/solutions/latest/generative-ai-application-builder-on-aws/api-reference.html)
+* [vertex](https://cloud.google.com/vertex-ai/docs/reference/rest)
+* [huggingface](https://huggingface.co/) 
+
 3. トランスフォーマーライブラリのほとんどのローカルモデルと互換性があります（ローカルLLMモデルチェーンノードのモデルタイプは、LLM、VLM-GGUF、およびLLM-GGUFに変更され、LLMモデルの直接ロード、VLMモデルのロード、およびGGUF形式のLLMモデルのロードに対応します）。VLMまたはGGUF形式のLLMモデルでエラーが発生した場合は、[llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases)から最新バージョンのllama-cpp-pythonをダウンロードしてください。現在テストされているモデルには次のものが含まれます：
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay)(推奨！ロールプレイモデル)
 * [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(推奨！豊富なプロンプトモデル)

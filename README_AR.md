@@ -112,6 +112,12 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 2. يدعم استدعاءات واجهة برمجة التطبيقات بتنسيق Gemini:
 * [Gemini](https://aistudio.google.com/app/prompts/new_chat)
 
+3. دعم جميع استدعاءات واجهة برمجة التطبيقات المتوافقة مع [aisuite](https://github.com/andrewyng/aisuite):
+* [anthropic](https://www.anthropic.com/)
+* [aws](https://docs.aws.amazon.com/solutions/latest/generative-ai-application-builder-on-aws/api-reference.html)
+* [vertex](https://cloud.google.com/vertex-ai/docs/reference/rest)
+* [huggingface](https://huggingface.co/)
+
 3. متوافق مع معظم النماذج المحلية في مكتبة transformer (تم تغيير نوع النموذج على عقدة سلسلة نماذج LLM المحلية إلى LLM وVLM-GGUF وLLM-GGUF، مما يتوافق مع تحميل نماذج LLM مباشرة، وتحميل نماذج VLM، وتحميل نماذج LLM بتنسيق GGUF). إذا أبلغ نموذج LLM بتنسيق VLM أو GGUF عن خطأ، فيرجى تنزيل أحدث إصدار من llama-cpp-python من [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases). النماذج التي تم اختبارها حاليًا تشمل:
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay) (موصى به! نموذج لعب الأدوار)
 * [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (موصى به! نموذج غني بالكلمات الرئيسية)

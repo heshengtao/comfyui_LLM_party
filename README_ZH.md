@@ -113,6 +113,12 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 2. 支持Gemini格式的API调用：
 * [Gemini](https://aistudio.google.com/app/prompts/new_chat)
 
+3. 支持[aisuite](https://github.com/andrewyng/aisuite)兼容的所有API调用：
+* [anthropic](https://www.anthropic.com/)
+* [aws](https://docs.aws.amazon.com/solutions/latest/generative-ai-application-builder-on-aws/api-reference.html)
+* [vertex](https://cloud.google.com/vertex-ai/docs/reference/rest)
+* [huggingface](https://huggingface.co/)
+
 3. 兼容transformer库的大部分本地模型（本地LLM模型链节点上的model type已改成LLM、VLM-GGUF、LLM-GGUF三个选项，对应了直接加载LLM模型、加载VLM模型和加载GGUF格式的LLM模型），如果你的VLM或GGUF格式的LLM模型报错了，请在[llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases)下载最新版本的llama-cpp-python，目前已测试的有：
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay)(推荐！角色扮演模型)
 * [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits)(推荐！丰富提示词模型)

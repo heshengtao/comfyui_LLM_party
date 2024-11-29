@@ -112,6 +112,12 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 2. Prise en charge des appels API au format Gemini :
 * [Gemini](https://aistudio.google.com/app/prompts/new_chat)
 
+3. Prise en charge de tous les appels API compatibles avec [aisuite](https://github.com/andrewyng/aisuite) :
+* [anthropic](https://www.anthropic.com/)
+* [aws](https://docs.aws.amazon.com/solutions/latest/generative-ai-application-builder-on-aws/api-reference.html)
+* [vertex](https://cloud.google.com/vertex-ai/docs/reference/rest)
+* [huggingface](https://huggingface.co/)  
+
 3. Compatible avec la plupart des modèles locaux dans la bibliothèque transformer (le type de modèle sur le nœud de chaîne de modèles LLM local a été changé en LLM, VLM-GGUF et LLM-GGUF, correspondant au chargement direct des modèles LLM, au chargement des modèles VLM et au chargement des modèles LLM au format GGUF). Si votre modèle LLM au format VLM ou GGUF signale une erreur, veuillez télécharger la dernière version de llama-cpp-python depuis [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases). Les modèles actuellement testés incluent :
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay) (recommandé ! Modèle de jeu de rôle)
 * [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (recommandé ! Modèle avec des invites riches)

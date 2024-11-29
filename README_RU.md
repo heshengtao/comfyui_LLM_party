@@ -112,6 +112,12 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 2. Поддержка API-вызовов формата Gemini:
 * [Gemini](https://aistudio.google.com/app/prompts/new_chat)
 
+3. Поддержка всех вызовов API, совместимых с [aisuite](https://github.com/andrewyng/aisuite):
+* [anthropic](https://www.anthropic.com/)
+* [aws](https://docs.aws.amazon.com/solutions/latest/generative-ai-application-builder-on-aws/api-reference.html)
+* [vertex](https://cloud.google.com/vertex-ai/docs/reference/rest)
+* [huggingface](https://huggingface.co/)
+
 3. Совместим с большинством локальных моделей в библиотеке transformer (тип модели на узле цепочки локальных моделей LLM изменен на LLM, VLM-GGUF и LLM-GGUF, что соответствует прямой загрузке моделей LLM, загрузке моделей VLM и загрузке моделей LLM в формате GGUF). Если ваша модель LLM в формате VLM или GGUF выдает ошибку, пожалуйста, загрузите последнюю версию llama-cpp-python с [llama-cpp-python](https://github.com/abetlen/llama-cpp-python/releases). В настоящее время протестированные модели включают:
 * [ClosedCharacter/Peach-9B-8k-Roleplay](https://huggingface.co/ClosedCharacter/Peach-9B-8k-Roleplay) (рекомендуется! Модель для ролевых игр)
 * [lllyasviel/omost-llama-3-8b-4bits](https://huggingface.co/lllyasviel/omost-llama-3-8b-4bits) (рекомендуется! Модель с богатым набором подсказок)
