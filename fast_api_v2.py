@@ -291,6 +291,10 @@ async def process_request(request_data: CompletionRequest):
                         if content["image_url"].startswith("data:image/jpeg;base64,"):
                             base64_data = content["image_url"].split("data:image/jpeg;base64,")[1]
                             base64_encoded_list.append(base64_data)
+                        # 如果是本地文件路径
+                        elif os.path.isfile(content["image_url"]):
+                            with open(content["image_url"], "rb") as image_file:
+                                base64_encoded = base64.b64encode(image_file.read()).decode("utf-8")
                         else:
                             # allowed_domains包含你所有的可信域名
                             # allowed_domains = ["trusteddomain.com", "anothertrusteddomain.com"]
