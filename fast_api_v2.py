@@ -339,25 +339,8 @@ async def process_request(request_data: CompletionRequest):
         workflow_path,
         user_histories,
     )
-
-    if images is None or images == []:
-        response_data = {
-            "id": "0",
-            "object": "text_completion",
-            "created": int(time.time()),
-            "model": model_name,
-            "system_fingerprint": "fp_0",
-            "choices": [
-                {
-                    "message": {"role": "assistant", "content": response},
-                    "index": 0,
-                    "logprobs": None,
-                    "finish_reason": "stop",
-                }
-            ],
-            "usage": {"prompt_tokens": 10, "completion_tokens": 10, "total_tokens": 10},
-        }
-    else:
+    all_response = {"text":"", "image_urls":[],"audio_url":"","vedio_url":""}
+    if images is not None or images != []:
         base64_images = []
 
         for node_id in images:
@@ -396,30 +379,26 @@ async def process_request(request_data: CompletionRequest):
                 print(img_url)
                 base64_images.append(img_url)
 
-        if response is None:
-            response = ""
+        all_response["image_urls"]= base64_images
+    elif response is not None:
+        all_response["text"]= response
+    response_data = {
+        "id": "0",
+        "object": "text_completion",
+        "created": int(time.time()),
+        "model": model_name,
+        "system_fingerprint": "fp_0",
+        "choices": [
+            {
+                "message": {"role": "assistant", "content": all_response},
+                "index": 0,
+                "logprobs": None,
+                "finish_reason": "stop",
+            }
+        ],
+        "usage": {"prompt_tokens": 10, "completion_tokens": 10, "total_tokens": 10},
+    }
 
-        for img in base64_images:
-            response_url = f"![image]({img})"
-            response += "\n" + response_url + "\n"
-
-        print(response)
-        response_data = {
-            "id": "0",
-            "object": "text_completion",
-            "created": int(time.time()),
-            "model": model_name,
-            "system_fingerprint": "fp_0",
-            "choices": [
-                {
-                    "message": {"role": "assistant", "content": response},
-                    "index": 0,
-                    "logprobs": None,
-                    "finish_reason": "stop",
-                }
-            ],
-            "usage": {"prompt_tokens": 10, "completion_tokens": 10, "total_tokens": 10},
-        }
     return response_data
 
 async def start_comfyui_server():

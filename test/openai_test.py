@@ -3,7 +3,7 @@ import openai
 # Replace 'your-api-key' with your actual OpenAI API key
 openai.api_key = 'your-api-key'
 
-openai.base_url = 'http://127.0.0.1:8187/v1/'
+openai.base_url = 'http://127.0.0.1:18188/v1/'
 
 
 # Define the prompt
@@ -18,4 +18,4 @@ response = openai.chat.completions.create(
 )
 
 # Print the generated image URL
-print(response.choices[0].message.content)
+print(response.choices[0].message.content["image_urls"])
