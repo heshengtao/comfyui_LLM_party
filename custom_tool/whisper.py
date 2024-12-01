@@ -153,10 +153,6 @@ class openai_whisper:
             openai.base_url = config.get("API_KEYS", "base_url")
         else:
             openai.base_url = os.environ.get("OPENAI_API_BASE")
-        if openai.api_key == "":
-            api_keys = load_api_keys(config_path)
-            openai.api_key = api_keys.get("openai_api_key")
-            openai.base_url = api_keys.get("base_url")
 
 
         client = OpenAI(api_key=openai.api_key, base_url=openai.base_url)
