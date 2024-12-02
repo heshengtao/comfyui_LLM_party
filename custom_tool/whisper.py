@@ -134,7 +134,7 @@ class openai_whisper:
 
     CATEGORY = "大模型派对（llm_party）/音频（audio）"
 
-    def whisper(self, audio,audio_path,is_enable=True,  base_url=None, api_key=None):
+    def whisper(self,audio_path,is_enable=True,  base_url=None, api_key=None, audio=None):
         if is_enable == False:
             return (None,)
         if api_key != "":

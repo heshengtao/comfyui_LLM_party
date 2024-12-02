@@ -58,3 +58,4 @@ scipy
 json-repair
 redis
 aisuite[all]
+fish_audio_sdk
