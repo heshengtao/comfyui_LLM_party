@@ -207,5 +207,5 @@ if lang == "zh_CN":
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
         "listen_audio": "Listen Audio",
-        "openai_whisper": "OpenAI Whisper",
+        "openai_whisper": "OpenAI ASR",
     }

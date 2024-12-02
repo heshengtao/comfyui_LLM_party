@@ -115,10 +115,8 @@ class openai_tts:
             # 将响应内容写入MP3文件
             with open(full_audio_path, "wb") as f:
                 f.write(response.content)
-
             out = full_audio_path
-            audio_path = folder_paths.get_annotated_filepath(out)
-            waveform, sample_rate = torchaudio.load(audio_path)
+            waveform, sample_rate = torchaudio.load(full_audio_path)
             audio_out = {"waveform": waveform.unsqueeze(0), "sample_rate": sample_rate}
         else:
             out = None
