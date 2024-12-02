@@ -52,6 +52,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 5. Aufgrund der hohen Nutzungsschwelle dieses Projekts hoffe ich, dass Sie sich die Zeit nehmen, die Projektseite gründlich zu lesen, auch wenn Sie den Schnellstart gewählt haben.
 
 ## Neueste Updates
+1. Ein lokales Sprach-zu-Text-Modellwerkzeug wurde hinzugefügt, theoretisch sind alle ASR-Modelle auf HF mit diesem Knoten kompatibel. Zum Beispiel: [openai/whisper-small](https://huggingface.co/openai/whisper-small), [nyrahealth/CrisperWhisper](https://huggingface.co/nyrahealth/CrisperWhisper) usw.
 1. ASR- und TTS-Knoten für [fish audio](https://docs.fish.audio/introduction) hinzugefügt, bitte beziehen Sie sich auf die API-Dokumentation von fish audio für die Verwendungshinweise.
 1. Ein aisuite-Ladeknoten wurde hinzugefügt, der mit allen APIs kompatibel ist, die aisuite unterstützt, einschließlich: ["openai","anthropic","aws","azure","vertex","huggingface"], Beispiel-Workflow: [start_with_aisuite](workflow/start_with_aisuite.json).
 1. Neue Kategorien wurden hinzugefügt, darunter Gedächtnisknoten, die zur Verwaltung Ihres LLM-Dialogverlaufs verwendet werden können. Gedächtnisknoten unterstützen derzeit drei Modi zur Verwaltung Ihres Dialogverlaufs: lokale Json-Dateien, Redis und SQL. Durch die Entkopplung des Dialogverlaufs vom LLM können Sie Wort Einbettungsmodelle verwenden, um Ihren Dialogverlauf zu komprimieren und zu organisieren, was die Token und das Kontextfenster des LLM spart. Beispiel-Workflow: [Externe Erinnerung](workflow/外置记忆.json).

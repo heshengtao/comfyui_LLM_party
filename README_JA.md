@@ -52,6 +52,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 5. このプロジェクトは使用の敷居が高いため、クイックスタートを選択した場合でも、プロジェクトのホームページをじっくり読んでいただけると幸いです。
 
 ## 最新の更新
+1. 音声から文字へのローカルモデルツールが追加されました。理論的には、HF上のすべてのASRモデルがこのノードに互換性があります。例えば：[openai/whisper-small](https://huggingface.co/openai/whisper-small)、[nyrahealth/CrisperWhisper](https://huggingface.co/nyrahealth/CrisperWhisper)などです。  
 1. [fish audio](https://docs.fish.audio/introduction)のASRおよびTTSノードが追加されました。使用方法については、fish audioのAPIドキュメントを参照してください。  
 1. aisuiteローダーノードが追加され、aisuiteが互換性を持つすべてのAPI、以下を含むことをサポートしています：["openai","anthropic","aws","azure","vertex","huggingface"]。例のワークフロー：[start_with_aisuite](workflow/start_with_aisuite.json)。 
 1. 新しいカテゴリを追加しました。記憶ノードは、あなたのLLMの対話履歴を管理するために使用できます。記憶ノードは、現在、ローカルJSONファイル、Redis、およびSQLの3つのモードをサポートしており、対話履歴を管理します。LLMの対話履歴をLLMから分離することで、語彙埋め込みモデルを使用して対話履歴を圧縮して整理し、LLMのトークンとコンテキストウィンドウを節約することができます。サンプルワークフロー： [外部記憶](workflow/外置记忆.json)。

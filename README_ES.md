@@ -52,6 +52,7 @@ ComfyUI LLM Party permite desde la llamada a múltiples herramientas LLM desde l
 5. Debido al alto umbral de uso de este proyecto, incluso si eliges el inicio rápido, espero que puedas leer pacientemente la página principal del proyecto.
 
 ## Últimas Actualizaciones
+1. Se ha añadido una herramienta de modelo local de conversión de voz a texto, teóricamente todos los modelos ASR en HF son compatibles con este nodo. Por ejemplo: [openai/whisper-small](https://huggingface.co/openai/whisper-small), [nyrahealth/CrisperWhisper](https://huggingface.co/nyrahealth/CrisperWhisper), entre otros.
 1. Se han añadido nodos ASR y TTS de [fish audio](https://docs.fish.audio/introduction), consulte la documentación API de fish audio para su uso.
 1. Se ha añadido un nodo de cargador de aisuite, lo que hace compatible aisuite con todas las API que puede manejar, incluyendo: ["openai","anthropic","aws","azure","vertex","huggingface"], flujo de trabajo de ejemplo: [iniciar_con_aisuite](workflow/start_with_aisuite.json). 
 1. Se ha añadido una nueva categoría, "nodos de memoria", que puede ser utilizada para gestionar el historial de conversaciones de tu LLM. Los nodos de memoria actualmente soportan tres modos para gestionar tu historial de conversaciones: archivo json local, Redis y SQL. Al desacoplar el historial de conversaciones del LLM, puedes utilizar modelos de incrustación de palabras para comprimir y organizar tu historial de conversaciones, ahorrando así tokens y ventana de contexto del LLM. Ejemplo de flujo de trabajo: [Memoria externa](workflow/外置记忆.json).

@@ -53,6 +53,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 5. Due to the high usage threshold of this project, even if you choose the quick start, I hope you can patiently read through the project homepage.
 
 ## Latest update
+1. A local model tool for speech-to-text has been added, which is theoretically compatible with all ASR models on HF. For example: [openai/whisper-small](https://huggingface.co/openai/whisper-small), [nyrahealth/CrisperWhisper](https://huggingface.co/nyrahealth/CrisperWhisper), and so forth.
 1. Added ASR and TTS nodes for [fish audio](https://docs.fish.audio/introduction), please refer to the API documentation of fish audio for usage instructions.
 1. Added the aisuite loader node, which is compatible with all APIs that aisuite can accommodate, including: ["openai", "anthropic", "aws", "azure", "vertex", "huggingface"]. Example workflow: [start_with_aisuite](workflow/start_with_aisuite.json).
 1. A new category has been added: memory nodes, which can be utilized to manage your LLM conversation history. Currently, memory nodes support three modes for managing your conversation history: local JSON files, Redis, and SQL. By decoupling the LLM's conversation history from the LLM itself, you can employ word embedding models to compress and organize your conversation history, thus saving tokens and context windows for the LLM. Example workflow: [External Memory](workflow/外置记忆.json).
