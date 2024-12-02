@@ -52,6 +52,7 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 5. Devido ao alto limiar de uso deste projeto, mesmo que você escolha o início rápido, espero que possa ler pacientemente a página inicial do projeto.
 
 ## Atualizações Recentes
+1. Foram adicionados nós ASR e TTS de [fish audio](https://docs.fish.audio/introduction), consulte a documentação da API do fish audio para seu uso.
 1. Foi adicionado um nó carregador do aisuite, tornando o aisuite compatível com todas as APIs que ele pode gerenciar, incluindo: ["openai","anthropic","aws","azure","vertex","huggingface"], fluxo de trabalho de exemplo: [iniciar_com_aisuite](workflow/start_with_aisuite.json).
 1. Foi adicionada uma nova categoria, "nodos de memória", que pode ser utilizada para gerenciar o histórico de conversas do seu LLM. Os nodos de memória atualmente suportam três modos para gerenciar seu histórico de conversas: arquivo json local, Redis e SQL. Ao desacoplar o histórico de conversas do LLM, você pode utilizar modelos de incorporação de palavras para comprimir e organizar seu histórico de conversas, economizando assim tokens e janela de contexto do LLM. Exemplo de fluxo de trabalho: [Memória externa](workflow/外置记忆.json).
 1. Foi adicionada uma ferramenta de leitura de arquivos locais, em comparação com a ferramenta de controle de arquivos locais anterior no comfyui LLM mafia, esta ferramenta só pode ler arquivos ou a árvore de arquivos dentro de uma pasta específica, tornando-se assim muito mais segura.
