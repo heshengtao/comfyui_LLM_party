@@ -175,11 +175,11 @@ class google_loader:
 api_keys = load_api_keys(config_path)
 b_api_key = api_keys.get("bing_api_key")
 b_searchType = "web"
-
+b_config_id=""
 
 def search_web_bing(keywords, paper_num):
     today = str(date.today())
-    global b_api_key, b_searchType
+    global b_api_key, b_searchType,b_config_id
     num_results = 10
     start = num_results * (int(paper_num) - 1) + 1
     try:
@@ -193,11 +193,19 @@ def search_web_bing(keywords, paper_num):
         elif b_searchType == "news":
             base_url = "https://api.bing.microsoft.com/v7.0/news/search"
         headers = {"Ocp-Apim-Subscription-Key": b_api_key}
-        params = {
-            "q": keywords if isinstance(keywords, str) else " ".join(keywords),
-            "count": num_results,
-            "offset": start,
-        }
+        if b_config_id != "":
+            params = {
+                "q": keywords if isinstance(keywords, str) else " ".join(keywords),
+                "count": num_results,
+                "offset": start,
+                "customConfig": b_config_id
+            }
+        else:
+            params = {
+                "q": keywords if isinstance(keywords, str) else " ".join(keywords),
+                "count": num_results,
+                "offset": start,
+            }
 
         response = requests.get(base_url, headers=headers, params=params, timeout=10)
         # 打印HTTP状态码和响应内容以供调试
@@ -240,6 +248,7 @@ class bing_tool:
             },
             "optional": {
                 "bing_api_key": ("STRING", {}),
+                "custom_config_id": ("STRING", {})
             },
         }
 
@@ -252,10 +261,11 @@ class bing_tool:
 
     CATEGORY = "大模型派对（llm_party）/工具（tools）/联网（Networking）"
 
-    def web(self, searchType="web", bing_api_key=None, is_enable=True):
+    def web(self, searchType="web", bing_api_key=None, is_enable=True,custom_config_id=""):
         if is_enable == False:
             return (None,)
-        global b_api_key, b_searchType
+        global b_api_key, b_searchType,b_config_id
+        b_config_id = custom_config_id
         b_searchType = searchType
         if bing_api_key is not None and bing_api_key != "":
             b_api_key = bing_api_key
@@ -298,6 +308,7 @@ class bing_loader:
             },
             "optional": {
                 "bing_api_key": ("STRING", {}),
+                "custom_config_id": ("STRING", {})
             },
         }
 
@@ -310,10 +321,11 @@ class bing_loader:
 
     CATEGORY = "大模型派对（llm_party）/知识库（knowbase）"
 
-    def web(self, keywords, paper_num=1, searchType="web", bing_api_key=None, is_enable=True):
+    def web(self, keywords, paper_num=1, searchType="web", bing_api_key=None, is_enable=True,custom_config_id=""):
         if is_enable == False:
             return (None,)
-        global b_api_key, b_searchType
+        global b_api_key, b_searchType,b_config_id
+        b_config_id = custom_config_id
         b_searchType = searchType
         if bing_api_key is not None and bing_api_key != "":
             b_api_key = bing_api_key
