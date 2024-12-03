@@ -1061,28 +1061,31 @@ class LLM_api_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name": ("STRING", {"default": "gpt-4o-mini"}),
+                "model_name": ("STRING", {"default": "gpt-4o-mini","tooltip": "The name of the model, such as gpt-4o-mini."}),
             },
             "optional": {
                 "base_url": (
                     "STRING",
                     {
                         "default": "",
+                        "tooltip": "The base URL of the API, such as https://api.openai.com/v1.",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
                         "default": "",
+                        "tooltip": "The API key for the API."
                     },
                 ),
-                "is_ollama": ("BOOLEAN", {"default": False}),
+                "is_ollama": ("BOOLEAN", {"default": False, "tooltip": "Whether to use ollama."}),
             },
         }
 
     RETURN_TYPES = ("CUSTOM",)
     RETURN_NAMES = ("model",)
-
+    OUTPUT_TOOLTIPS = ("The loaded model.")
+    DESCRIPTION = "Load the model in openai format."
     FUNCTION = "chatbot"
 
     # OUTPUT_NODE = False
@@ -1128,62 +1131,71 @@ class aisuite_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "provider": (["openai","anthropic","aws","azure","vertex","huggingface"], {"default": "openai"}),
-                "model_name": ("STRING", {"default": "gpt-4o-mini"}),
+                "provider": (["openai","anthropic","aws","azure","vertex","huggingface"], {"default": "openai","tooltip": "API interface type"}),
+                "model_name": ("STRING", {"default": "gpt-4o-mini", "tooltip": "The name of the model, such as gpt-4o-mini."}),
             },
             "optional": {
                 "base_url": (
                     "STRING",
                     {
                         "default": "",
+                        "tooltip": "The base URL of the API, such as https://api.openai.com/v1.",
                     },
                 ),
                 "api_key": (
                     "STRING",
                     {
                         "default": "",
+                        "tooltip": "The API key for the API."
                     },
                 ),
                 "aws_access_key_id":(
                     "STRING",
                     {
                         "default": "",
+                        "tooltip": "The AWS access key ID."
                     }
                 ),
                 "aws_secret_access_key":(
                     "STRING",
                     {
                         "default": "",
+                        "tooltip": "The AWS secret access key."
                     }
                 ),
                 "aws_region_name":(
                     "STRING",
                     {
                         "default": "",
+                        "tooltip": "The AWS region name."
                     }
                 ),
                 "google_project_id":(
                     "STRING",
                     {
                         "default": "",
+                        "tooltip": "The Google project ID."
                     }
                 ),
                 "google_region":(
                     "STRING",
                     {
                         "default": "",
+                        "tooltip": "The Google region."
                     }
                 ),
                 "google_application_credentials":(
                     "STRING",
                     {
                         "default": "",
+                        "tooltip": "The Google application credentials."
                     }
                 ),
                 "hf_api_token":(
                     "STRING",
                     {
                         "default": "",
+                        "tooltip": "The Hugging Face API token."
                     }
                 ),
             },
@@ -1191,7 +1203,8 @@ class aisuite_loader:
 
     RETURN_TYPES = ("CUSTOM",)
     RETURN_NAMES = ("model",)
-
+    OUTPUT_TOOLTIPS = ("The loaded model.")
+    DESCRIPTION = "Load the model in aisuite format."
     FUNCTION = "chatbot"
 
     # OUTPUT_NODE = False
@@ -1234,15 +1247,15 @@ class easy_LLM_api_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name": (models_dict, {"default": ""}),
+                "model_name": (models_dict, {"default": "", "tooltip": "The model name."}),
             },
         }
 
     RETURN_TYPES = ("CUSTOM",)
     RETURN_NAMES = ("model",)
-
+    OUTPUT_TOOLTIPS = ("The loaded model.")
     FUNCTION = "chatbot"
-
+    DESCRIPTION = "Load a model from the Easy mode."
     # OUTPUT_NODE = False
 
     CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
@@ -1332,39 +1345,41 @@ class LLM:
         paths.insert(0, "")
         return {
             "required": {
-                "system_prompt": ("STRING", {"multiline": True, "default": "你一个强大的人工智能助手。"}),
+                "system_prompt": ("STRING", {"multiline": True, "default": "你一个强大的人工智能助手。","tooltip": "System prompt, used to describe the behavior of the model and the expected output format."}),
                 "user_prompt": (
                     "STRING",
                     {
                         "multiline": True,
                         "default": "你好",
+                        "tooltip": "User prompt, used to describe the user's request and the expected output format."
                     },
                 ),
-                "model": ("CUSTOM", {}),
-                "temperature": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0, "step": 0.1}),
-                "is_memory": (["enable", "disable"], {"default": "enable"}),
-                "is_tools_in_sys_prompt": (["enable", "disable"], {"default": "disable"}),
-                "is_locked": (["enable", "disable"], {"default": "disable"}),
-                "main_brain": (["enable", "disable"], {"default": "enable"}),
-                "max_length": ("INT", {"default": 1920, "min": 256, "max": 128000, "step": 128}),
+                "model": ("CUSTOM", {"tooltip": "The model to use for the LLM."}),
+                "temperature": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0, "step": 0.1,"tooltip": "The temperature parameter controls the randomness of the model's output. A higher temperature will result in more random and diverse responses, while a lower temperature will result in more focused and deterministic responses."}),
+                "is_memory": (["enable", "disable"], {"default": "enable", "tooltip": "Whether to enable memory for the LLM."}),
+                "is_tools_in_sys_prompt": (["enable", "disable"], {"default": "disable", "tooltip": "Integrate the tool list into the system prompt, thereby granting some models temporary capability to invoke tools."}),
+                "is_locked": (["enable", "disable"], {"default": "disable", "tooltip": "Whether to directly output the result from the last output."}),
+                "main_brain": (["enable", "disable"], {"default": "enable", "tooltip": "If this option is disabled, the LLM will become a tool that can be invoked by other LLMs."}),
+                "max_length": ("INT", {"default": 1920, "min": 256, "max": 128000, "step": 128, "tooltip": "The maximum length of the output text."}),
             },
             "optional": {
-                "system_prompt_input": ("STRING", {"forceInput": True}),
-                "user_prompt_input": ("STRING", {"forceInput": True}),
-                "tools": ("STRING", {"forceInput": True}),
-                "file_content": ("STRING", {"forceInput": True}),
-                "images": ("IMAGE", {"forceInput": True}),
+                "system_prompt_input": ("STRING", {"forceInput": True, "tooltip": "System prompt input, used to describe the system's request and the expected output format."}),
+                "user_prompt_input": ("STRING", {"forceInput": True, "tooltip": "User prompt input, used to describe the user's request and the expected output format."}),
+                "tools": ("STRING", {"forceInput": True, "tooltip": "Tool list, used to describe the tools that the model can invoke."}),
+                "file_content": ("STRING", {"forceInput": True, "tooltip": "Input the contents of the file here."}),
+                "images": ("IMAGE", {"forceInput": True, "tooltip": "Upload images here."}),
                 "imgbb_api_key": (
                     "STRING",
                     {
                         "default": "",
+                        "tooltip": "Optional, if not filled out, it will be passed to the LLM in the form of a base64 encoded string. API key for ImgBB, used to upload images to ImgBB and get the image URL."
                     },
                 ),
-                "conversation_rounds": ("INT", {"default": 100, "min": 1, "max": 10000}),
-                "historical_record": (paths, {"default": ""}),
-                "is_enable": ("BOOLEAN", {"default": True}),
-                "extra_parameters": ("DICT", {"forceInput": True}),
-                "user_history": ("STRING", {"forceInput": True}),
+                "conversation_rounds": ("INT", {"default": 100, "min": 1, "max": 10000, "step": 1, "tooltip": "The maximum number of dialogue turns that the LLM can see in the history records, where one question and one answer constitute one turn."}),
+                "historical_record": (paths, {"default": "", "tooltip": "The dialogue history file is optional; if not selected and left empty, a new dialogue history file will be automatically created."}),
+                "is_enable": ("BOOLEAN", {"default": True, "tooltip": "Whether to enable the LLM."}),
+                "extra_parameters": ("DICT", {"forceInput": True, "tooltip": "Extra parameters for the LLM."}),
+                "user_history": ("STRING", {"forceInput": True, "tooltip": "User history, you can directly input a JSON string containing multiple rounds of dialogue here."}),
             },
         }
 
@@ -1380,7 +1395,13 @@ class LLM:
         "tool",
         "image",
     )
-
+    OUTPUT_TOOLTIPS = (
+        "The assistant's response to the user's request.",
+        "The dialogue history",
+        "This interface will connect this LLM as a tool to other LLMs.",
+        "Images generated or fetched by the LLM.",
+    )
+    DESCRIPTION = "The API version of the model chain, compatible with all API interfaces."
     FUNCTION = "chatbot"
 
     # OUTPUT_NODE = False
@@ -1733,20 +1754,22 @@ class LLM_local_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name_or_path": ("STRING", {"default": ""}),
+                "model_name_or_path": ("STRING", {"default": "","tooltip": "You can provide the absolute path to the model folder, or you can enter the repo ID from Hugging Face, for example: lllyasviel/omost-llama-3-8b-4bits."}),
                 "device": (
                     ["auto", "cuda", "cpu", "mps"],
                     {
                         "default": "auto",
+                        "tooltip": "The device to use for the model. If 'auto', it will use 'cuda' if available, otherwise 'mps' if available, otherwise 'cpu'.",
                     },
                 ),
                 "dtype": (
                     ["float32", "float16","bfloat16", "int8", "int4"],
                     {
                         "default": "float32",
+                        "tooltip": "The data type to use for the model. If 'float32', it will use 'float32', otherwise 'float16', 'bfloat16', 'int8', 'int4'.",
                     },
                 ),
-                "is_locked": ("BOOLEAN", {"default": True}),
+                "is_locked": ("BOOLEAN", {"default": True, "tooltip": "Whether the model is locked or not.When enabled, it prevents the model from being loaded multiple times. When disabled, it can be used in conjunction with clearing the GPU memory node to reload the model."}),
             }
         }
 
@@ -1758,8 +1781,12 @@ class LLM_local_loader:
         "model",
         "tokenizer",
     )
-
+    OUTPUT_TOOLTIPS = (
+        "The loaded model.",
+        "The loaded tokenizer.",
+    )
     FUNCTION = "chatbot"
+    DESCRIPTION = "Load a local model from a given path or Hugging Face repo ID.The model must not be in GGUF format but instead be an LLM model stored in a folder."
 
     # OUTPUT_NODE = False
 
@@ -1844,20 +1871,22 @@ class easy_LLM_local_loader:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model_name_or_path": (LLM_list, {"default": ""}),
+                "model_name_or_path": (LLM_list, {"default": "","tooltip": "Select your model files from custom_nodes\comfyui_LLM_party\model\LLM."}),
                 "device": (
                     ["auto", "cuda", "cpu", "mps"],
                     {
                         "default": "auto",
+                        "tooltip": "Select the device to load the model on. 'auto' will use the best available device.",
                     },
                 ),
                 "dtype": (
                     ["float32", "float16","bfloat16", "int8", "int4"],
                     {
                         "default": "float32",
+                        "tooltip": "The data type to use for the model. If 'float32', it will use 'float32', otherwise 'float16', 'bfloat16', 'int8', 'int4'.",
                     },
                 ),
-                "is_locked": ("BOOLEAN", {"default": True}),
+                "is_locked": ("BOOLEAN", {"default": True, "tooltip": "Whether the model is locked or not.When enabled, it prevents the model from being loaded multiple times. When disabled, it can be used in conjunction with clearing the GPU memory node to reload the model."}),
             }
         }
 
@@ -1869,6 +1898,11 @@ class easy_LLM_local_loader:
         "model",
         "tokenizer",
     )
+    OUTPUT_TOOLTIPS = (
+        "The loaded model.",
+        "The loaded tokenizer."
+    )
+    DESCRIPTION = "Load a local model from custom_nodes\comfyui_LLM_party\model\LLM."
 
     FUNCTION = "chatbot"
 
@@ -1972,39 +2006,41 @@ class LLM_local:
         paths.insert(0, "")
         return {
             "required": {
-                "model": ("CUSTOM", {}),
-                "system_prompt": ("STRING", {"multiline": True, "default": "你一个强大的人工智能助手。"}),
+                "model": ("CUSTOM", {"tooltip": "The model to use for the LLM."}),
+                "system_prompt": ("STRING", {"multiline": True, "default": "你一个强大的人工智能助手。","tooltip": "System prompt, used to describe the behavior of the model and the expected output format."}),
                 "user_prompt": (
                     "STRING",
                     {
                         "multiline": True,
                         "default": "你好",
+                        "tooltip": "User prompt, used to describe the user's request and the expected output format.",
                     },
                 ),
                 "model_type": (
                     ["LLM","LLM-GGUF", "VLM-GGUF", "VLM(testing)"],
                     {
                         "default": "LLM",
+                        "tooltip": "The type of model to use for the LLM. LLM: Language Model, VLM: Vision Language Model, GGUF: Generalized GPT-4 Unified Framework",
                     },
                 ),
-                "temperature": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0, "step": 0.1}),
-                "max_length":("INT", {"default": 512, "min": 256, "max": 128000, "step": 128}),
-                "is_memory": (["enable", "disable"], {"default": "enable"}),
-                "is_locked": (["enable", "disable"], {"default": "disable"}),
-                "main_brain": (["enable", "disable"], {"default": "enable"}),
+                "temperature": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0, "step": 0.1,"tooltip": "The temperature parameter controls the randomness of the model's output. A higher temperature will result in more random and diverse responses, while a lower temperature will result in more focused and deterministic responses."}),
+                "max_length":("INT", {"default": 512, "min": 256, "max": 128000, "step": 128,"tooltip": "The maximum length of the output text."}),
+                "is_memory": (["enable", "disable"], {"default": "enable","tooltip": "Whether to enable memory for the LLM."}),
+                "is_locked": (["enable", "disable"], {"default": "disable", "tooltip": "Whether to directly output the result from the last output."}),
+                "main_brain": (["enable", "disable"], {"default": "enable", "tooltip": "If this option is disabled, the LLM will become a tool that can be invoked by other LLMs."}),
             },
             "optional": {
-                "tokenizer": ("CUSTOM", {}),
-                "image": ("IMAGE", {"forceInput": True}),
-                "system_prompt_input": ("STRING", {"forceInput": True}),
-                "user_prompt_input": ("STRING", {"forceInput": True}),
-                "tools": ("STRING", {"forceInput": True}),
-                "file_content": ("STRING", {"forceInput": True}),
-                "conversation_rounds": ("INT", {"default": 100, "min": 1, "max": 10000}),
-                "historical_record": (paths, {"default": ""}),
-                "is_enable": ("BOOLEAN", {"default": True}),
-                "extra_parameters": ("DICT", {"forceInput": True}),
-                "user_history": ("STRING", {"forceInput": True}),
+                "tokenizer": ("CUSTOM", {"tooltip":"The tokenizer to use for the LLM."}),
+                "image": ("IMAGE", {"forceInput": True, "tooltip": "Upload images here."}),
+                "system_prompt_input": ("STRING", {"forceInput": True, "tooltip": "System prompt input, used to describe the system's request and the expected output format."}),
+                "user_prompt_input": ("STRING", {"forceInput": True, "tooltip": "User prompt input, used to describe the user's request and the expected output format."}),
+                "tools": ("STRING", {"forceInput": True,"tooltip": "Tool list, used to describe the tools that the model can invoke."}),
+                "file_content": ("STRING", {"forceInput": True, "tooltip": "Input the contents of the file here."}),
+                "conversation_rounds": ("INT", {"default": 100, "min": 1, "max": 10000, "step": 1, "tooltip": "The maximum number of dialogue turns that the LLM can see in the history records, where one question and one answer constitute one turn."}),
+                "historical_record": (paths, {"default": "", "tooltip": "The dialogue history file is optional; if not selected and left empty, a new dialogue history file will be automatically created."}),
+                "is_enable": ("BOOLEAN", {"default": True, "tooltip": "Whether to enable the LLM."}),
+                "extra_parameters": ("DICT", {"forceInput": True, "tooltip": "Extra parameters for the LLM."}),
+                "user_history": ("STRING", {"forceInput": True, "tooltip": "User history, you can directly input a JSON string containing multiple rounds of dialogue here."}),
             },
         }
 
@@ -2020,6 +2056,13 @@ class LLM_local:
         "tool",
         "image",
     )
+    OUTPUT_TOOLTIPS = (
+        "The assistant's response to the user's request.",
+        "The dialogue history",
+        "This interface will connect this LLM as a tool to other LLMs.",
+        "Images generated or fetched by the LLM.",
+    )
+    DESCRIPTION = "The local version of the model chain, compatible with all local interfaces."
 
     FUNCTION = "chatbot"
 
