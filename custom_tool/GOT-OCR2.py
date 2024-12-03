@@ -104,6 +104,6 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"got_ocr": "GOT-OCR2"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"got_ocr": "🖥️GOT-OCR2"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"got_ocr": "GOT-OCR2"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"got_ocr": "🖥️GOT-OCR2"}

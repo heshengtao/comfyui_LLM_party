@@ -133,6 +133,6 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"gpt_sovits": "GPT-SoVITS"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"gpt_sovits": "🖥️GPT-SoVITS"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"gpt_sovits": "GPT-SoVITS"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"gpt_sovits": "🖥️GPT-SoVITS"}

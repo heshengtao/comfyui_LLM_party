@@ -286,11 +286,11 @@ if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "EasyOCR_advance": "EasyOCR高级",
-        "EasyOCR_choose": "EasyOCR",
+        "EasyOCR_advance": "💻EasyOCR高级",
+        "EasyOCR_choose": "💻EasyOCR",
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "EasyOCR_advance": "EasyOCR advance",
-        "EasyOCR_choose": "EasyOCR",
+        "EasyOCR_advance": "💻EasyOCR advance",
+        "EasyOCR_choose": "💻EasyOCR",
         }

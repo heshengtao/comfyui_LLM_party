@@ -201,11 +201,11 @@ if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "listen_audio": "监听音频",
-        "openai_whisper": "OpenAI语音识别",
+        "listen_audio": "☁️监听音频",
+        "openai_whisper": "☁️OpenAI语音识别",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "listen_audio": "Listen Audio",
-        "openai_whisper": "OpenAI ASR",
+        "listen_audio": "☁️Listen Audio",
+        "openai_whisper": "☁️OpenAI ASR",
     }

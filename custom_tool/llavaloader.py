@@ -292,19 +292,19 @@ if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "LLavaLoader": "VLM-GGUF加载器",
-        "GGUFLoader": "LLM-GGUF加载器",
-        "vlmLoader": "VLM本地加载器",
-        "easy_LLavaLoader": "简易VLM-GGUF加载器",
-        "easy_GGUFLoader": "简易LLM-GGUF加载器",
-        "easy_vlmLoader": "简易VLM本地加载器",
+        "LLavaLoader": "🖥️VLM-GGUF加载器",
+        "GGUFLoader": "🖥️LLM-GGUF加载器",
+        "vlmLoader": "🖥️VLM本地加载器",
+        "easy_LLavaLoader": "🖥️简易VLM-GGUF加载器",
+        "easy_GGUFLoader": "🖥️简易LLM-GGUF加载器",
+        "easy_vlmLoader": "🖥️简易VLM本地加载器",
         }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "LLavaLoader": "VLM-GGUF Loader",
-        "GGUFLoader": "LLM-GGUF Loader",
-        "vlmLoader": "VLM local Loader",
-        "easy_LLavaLoader": "Easy VLM-GGUF Loader",
-        "easy_GGUFLoader": "Easy LLM-GGUF Loader",
-        "easy_vlmLoader": "Easy VLM local Loader",
+        "LLavaLoader": "🖥️VLM-GGUF Loader",
+        "GGUFLoader": "🖥️LLM-GGUF Loader",
+        "vlmLoader": "🖥️VLM local Loader",
+        "easy_LLavaLoader": "🖥️Easy VLM-GGUF Loader",
+        "easy_GGUFLoader": "🖥️Easy LLM-GGUF Loader",
+        "easy_vlmLoader": "🖥️Easy VLM local Loader",
         }

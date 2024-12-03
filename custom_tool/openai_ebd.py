@@ -395,13 +395,13 @@ if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "load_openai_ebd": "openai词向量搜索",
-        "save_openai_ebd": "保存openai词嵌入数据库",
-        "openai_ebd_tool": "openai词嵌入数据库工具",
+        "load_openai_ebd": "☁️openai词向量搜索",
+        "save_openai_ebd": "☁️保存openai词嵌入数据库",
+        "openai_ebd_tool": "☁️openai词嵌入数据库工具",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "load_openai_ebd": "OpenAI Word Vector Search",
-        "save_openai_ebd": "Save OpenAI Embeddings database",
-        "openai_ebd_tool": "OpenAI Embeddings database Tool",
+        "load_openai_ebd": "☁️OpenAI Word Vector Search",
+        "save_openai_ebd": "☁️Save OpenAI Embeddings database",
+        "openai_ebd_tool": "☁️OpenAI Embeddings database Tool",
     }

@@ -165,11 +165,11 @@ if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "fish_whisper": "Fish语音识别",
-        "fish_tts": "Fish语音合成",
+        "fish_whisper": "☁️Fish语音识别",
+        "fish_tts": "☁️Fish语音合成",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "fish_whisper": "Fish ASR",
-        "fish_tts": "Fish TTS",
+        "fish_whisper": "☁️Fish ASR",
+        "fish_tts": "☁️Fish TTS",
     }

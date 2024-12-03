@@ -373,15 +373,15 @@ if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "openai_dall_e": "dall_e文生图",
-        "dall_e_tool": "dall_e文生图工具",
+        "openai_dall_e": "☁️dall_e文生图",
+        "dall_e_tool": "☁️dall_e文生图工具",
         "url2img_tool": "url转图片工具",
         "path2img_tool": "路径转图片工具",
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "openai_dall_e": "Dall_e text2Image",
-        "dall_e_tool": "Dall_e text2Image tool",
+        "openai_dall_e": "☁️Dall_e text2Image",
+        "dall_e_tool": "☁️Dall_e text2Image tool",
         "url2img_tool": "url2img tool",
         "path2img_tool": "path2img tool",
     }

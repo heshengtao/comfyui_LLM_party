@@ -93,6 +93,6 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"load_llm_lora": "加载LLM LoRA", "easy_load_llm_lora": "简易加载LLM LoRA"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"load_llm_lora": "🖥️加载LLM LoRA", "easy_load_llm_lora": "🖥️简易加载LLM LoRA"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"load_llm_lora": "Load LLM LoRA", "easy_load_llm_lora": "Easy Load LLM LoRA"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"load_llm_lora": "🖥️Load LLM LoRA", "easy_load_llm_lora": "🖥️Easy Load LLM LoRA"}

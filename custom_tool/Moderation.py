@@ -130,6 +130,6 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"check_text": "审核文本"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"check_text": "☁️审核文本"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"check_text": "moderation text"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"check_text": "☁️moderation text"}

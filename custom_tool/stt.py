@@ -61,6 +61,6 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"whisper_local": "语音转文字本地模型"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"whisper_local": "🖥️语音转文字本地模型"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"whisper_local": "Speech to Text Local Model"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"whisper_local": "🖥️Speech to Text Local Model"}
