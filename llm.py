@@ -1084,7 +1084,7 @@ class LLM_api_loader:
 
     RETURN_TYPES = ("CUSTOM",)
     RETURN_NAMES = ("model",)
-    OUTPUT_TOOLTIPS = ("The loaded model.")
+    OUTPUT_TOOLTIPS = ("The loaded model.",)
     DESCRIPTION = "Load the model in openai format."
     FUNCTION = "chatbot"
 
@@ -1203,7 +1203,7 @@ class aisuite_loader:
 
     RETURN_TYPES = ("CUSTOM",)
     RETURN_NAMES = ("model",)
-    OUTPUT_TOOLTIPS = ("The loaded model.")
+    OUTPUT_TOOLTIPS = ("The loaded model.",)
     DESCRIPTION = "Load the model in aisuite format."
     FUNCTION = "chatbot"
 
@@ -1253,7 +1253,7 @@ class easy_LLM_api_loader:
 
     RETURN_TYPES = ("CUSTOM",)
     RETURN_NAMES = ("model",)
-    OUTPUT_TOOLTIPS = ("The loaded model.")
+    OUTPUT_TOOLTIPS = ("The loaded model.",)
     FUNCTION = "chatbot"
     DESCRIPTION = "Load a model from the Easy mode."
     # OUTPUT_NODE = False
