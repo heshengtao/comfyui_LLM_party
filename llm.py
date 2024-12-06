@@ -62,7 +62,7 @@ from .tools.dingding import Dingding, Dingding_tool, send_dingding
 from .tools.end_work import end_workflow, img2path
 from .tools.excel import image_iterator, load_excel,json_iterator,file_path_iterator
 from .tools.feishu import feishu, feishu_tool, send_feishu
-from .tools.file_combine import file_combine, file_combine_plus
+from .tools.file_combine import file_combine, file_combine_plus,string_combine, string_combine_plus
 from .tools.get_time import get_time, time_tool
 from .tools.get_weather import (
     accuweather_tool,
@@ -2583,6 +2583,8 @@ NODE_CLASS_MAPPINGS = {
     "check_web_tool": check_web_tool,
     "file_combine": file_combine,
     "file_combine_plus": file_combine_plus,
+    "string_combine": string_combine,
+    "string_combine_plus": string_combine_plus,
     "start_dialog": start_dialog,
     "end_dialog": end_dialog,
     "interpreter_tool": interpreter_tool,
@@ -2699,8 +2701,10 @@ if lang == "zh_CN":
         "google_tool": "谷歌搜索工具",
         "bing_tool": "必应搜索工具",
         "check_web_tool": "检视网页工具",
-        "file_combine": "文本组合",
-        "file_combine_plus": "超大文本组合",
+        "file_combine": "文件组合",
+        "file_combine_plus": "超大文件组合",
+        "string_combine": "字符串组合",
+        "string_combine_plus": "超大字符串组合",
         "start_dialog": "开始对话",
         "end_dialog": "结束对话",
         "interpreter_tool": "代码执行工具",
@@ -2810,8 +2814,10 @@ else:
         "google_tool": "Google Search Tool",
         "bing_tool": "Bing Search Tool",
         "check_web_tool": "Check Web Tool",
-        "file_combine": "Text Combine",
-        "file_combine_plus": "Large Text Combine",
+        "file_combine": "File Combine",
+        "file_combine_plus": "Large File Combine",
+        "string_combine": "String Combine",
+        "string_combine_plus": "Large String Combine",
         "start_dialog": "Start Dialog",
         "end_dialog": "End Dialog",
         "interpreter_tool": "Code Execution Tool",

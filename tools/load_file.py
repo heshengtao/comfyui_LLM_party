@@ -89,8 +89,8 @@ def read_one(path):
         except UnicodeDecodeError:
             with open(path, "r", encoding="latin-1") as file:
                 text += file.read()
-
-    return text
+    out = [{"source": path,"paragraph_index":"full text" , "file_content": text}]
+    return out
 
 
 file_path = os.path.join(current_dir_path, "file")
@@ -126,6 +126,7 @@ class load_file:
         else:
             path = os.path.join(file_path, relative_path)
         out = read_one(path)
+        out = json.dumps(out, ensure_ascii=False, indent=4)
         return (out,)
 
 
@@ -137,7 +138,9 @@ class load_file_folder:
                 "folder_path": ("STRING", {"default": "C://Users/"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
             },
-            "optional": {},
+            "optional": {
+                "related_characters": ("STRING", {"default": ""}),
+            },
         }
 
     RETURN_TYPES = ("STRING",)
@@ -149,15 +152,23 @@ class load_file_folder:
 
     CATEGORY = "大模型派对（llm_party）/知识库（knowbase）"
 
-    def file(self, folder_path, is_enable=True):
+    def file(self, folder_path, related_characters="", is_enable=True):
         if is_enable == False:
             return (None,)
         # 获取文件夹中的所有文件，并读取到字符串中
-        out = ""
+        out = []
         for root, dirs, files in os.walk(folder_path):
-            for file in files:
-                file_path = os.path.join(root, file)
-                out += read_one(file_path)
+            if related_characters != "":
+                for file in files:
+                    # 如果文件名包含相关字符
+                    if related_characters in file:
+                        file_path = os.path.join(root, file)
+                        out.extend(read_one(file_path))
+            else:
+                for file in files:
+                    file_path = os.path.join(root, file)
+                    out.extend(read_one(file_path))
+        out = json.dumps(out, ensure_ascii=False, indent=4)
         return (out,)
 
 
@@ -213,7 +224,8 @@ class load_url:
             out = md(main_content, convert=['p', 'h1', 'h2', 'h3', 'a', 'img'], heading_style="ATX", bullets="*+-", strong_em_symbol="ASTERISK")
             # 去掉多余的换行符
             out = re.sub(r'\n+', '\n', out)
-        
+        out = [{"source": url,"paragraph_index":"full text" , "file_content": out}]
+        out = json.dumps(out, ensure_ascii=False, indent=4)
         return (out,)
 
 
@@ -297,18 +309,19 @@ class start_workflow:
         model_name="",
         user_history="",
     ):
-        file_out = ""
+        file_out = []
         if file_content is not None and file_content != "":
             file_out += file_content
         if file_path is not None and file_path != "":
             if os.path.isdir(file_path):
                 for path in os.listdir(file_path):
                     path = os.path.join(file_path, path)
-                    file_out += read_one(path) + "/n/n"
+                    file_out.extend(read_one(path))
             else:
                 print(file_path)
                 file_out = read_one(file_path)
                 print(file_out)
+        file_out = json.dumps(file_out, ensure_ascii=False, indent=4)
         img_out = []
         if image_input1 is not None:
             img_out=image_input1

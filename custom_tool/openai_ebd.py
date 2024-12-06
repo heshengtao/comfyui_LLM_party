@@ -135,8 +135,24 @@ class load_openai_ebd:
                 chunk_size=chunk_size,
                 chunk_overlap=chunk_overlap,
             )
-            chunks = text_splitter.split_text(file_content)
-
+            # 判断file_content是否可以被json load
+            try:
+                files_load = json.loads(file_content)
+            except json.JSONDecodeError:
+                files_load = file_content
+            
+            if isinstance(files_load, str):
+                chunks = text_splitter.split_text(files_load)
+            elif isinstance(files_load, list):
+                chunks = []
+                for file in files_load:
+                    content= file["file_content"]
+                    chunks_list = text_splitter.split_text(content)
+                    i = 1
+                    for chunk in chunks_list:
+                        new_chunk = {"source": file["source"],"paragraph_index":str(i) , "file_content": chunk}
+                        chunks.append(json.dumps(new_chunk, ensure_ascii=False))
+                        i += 1
             # 使用FAISS存储嵌入表示
             base = FAISS.from_texts(chunks, embeddings)
         else:
@@ -240,7 +256,24 @@ class openai_ebd_tool:
                 chunk_size=chunk_size,
                 chunk_overlap=chunk_overlap,
             )
-            chunks = text_splitter.split_text(file_content)
+            # 判断file_content是否可以被json load
+            try:
+                files_load = json.loads(file_content)
+            except json.JSONDecodeError:
+                files_load = file_content
+            
+            if isinstance(files_load, str):
+                chunks = text_splitter.split_text(files_load)
+            elif isinstance(files_load, list):
+                chunks = []
+                for file in files_load:
+                    content= file["file_content"]
+                    chunks_list = text_splitter.split_text(content)
+                    i = 1
+                    for chunk in chunks_list:
+                        new_chunk = {"source": file["source"],"paragraph_index":str(i) , "file_content": chunk}
+                        chunks.append(json.dumps(new_chunk, ensure_ascii=False))
+                        i += 1
 
             # 使用FAISS存储嵌入表示
             base = FAISS.from_texts(chunks, embeddings)
@@ -362,7 +395,24 @@ class save_openai_ebd:
             chunk_size=chunk_size,
             chunk_overlap=chunk_overlap,
         )
-        chunks = text_splitter.split_text(file_content)
+        # 判断file_content是否可以被json load
+        try:
+            files_load = json.loads(file_content)
+        except json.JSONDecodeError:
+            files_load = file_content
+        
+        if isinstance(files_load, str):
+            chunks = text_splitter.split_text(files_load)
+        elif isinstance(files_load, list):
+            chunks = []
+            for file in files_load:
+                content= file["file_content"]
+                chunks_list = text_splitter.split_text(content)
+                i = 1
+                for chunk in chunks_list:
+                    new_chunk = {"source": file["source"],"paragraph_index":str(i) , "file_content": chunk}
+                    chunks.append(json.dumps(new_chunk, ensure_ascii=False))
+                    i += 1
 
         # 使用FAISS存储嵌入表示
         base = FAISS.from_texts(chunks, embeddings)

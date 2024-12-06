@@ -60,7 +60,6 @@ class ebd_tool:
             device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
         c_size = chunk_size
         c_overlap = chunk_overlap
-        files_load = file_content
         if bge_embeddings == "":
             if ebd_model is None:
                 model_kwargs = {"device": device}
@@ -77,7 +76,24 @@ class ebd_tool:
                 chunk_size=c_size,
                 chunk_overlap=c_overlap,
             )
-            chunks = text_splitter.split_text(files_load)
+            # 判断file_content是否可以被json load
+            try:
+                files_load = json.loads(file_content)
+            except json.JSONDecodeError:
+                files_load = file_content
+            
+            if isinstance(files_load, str):
+                chunks = text_splitter.split_text(files_load)
+            elif isinstance(files_load, list):
+                chunks = []
+                for file in files_load:
+                    content= file["file_content"]
+                    chunks_list = text_splitter.split_text(content)
+                    i = 1
+                    for chunk in chunks_list:
+                        new_chunk = {"source": file["source"],"paragraph_index":str(i) , "file_content": chunk}
+                        chunks.append(json.dumps(new_chunk, ensure_ascii=False))
+                        i += 1
             knowledge_base = FAISS.from_texts(chunks, bge_embeddings)
         output = [
             {
@@ -192,7 +208,24 @@ class embeddings_function:
                 chunk_size=chunk_size,
                 chunk_overlap=chunk_overlap,
             )
-            chunks = text_splitter.split_text(file_content)
+            # 判断file_content是否可以被json load
+            try:
+                files_load = json.loads(file_content)
+            except json.JSONDecodeError:
+                files_load = file_content
+            
+            if isinstance(files_load, str):
+                chunks = text_splitter.split_text(files_load)
+            elif isinstance(files_load, list):
+                chunks = []
+                for file in files_load:
+                    content= file["file_content"]
+                    chunks_list = text_splitter.split_text(content)
+                    i = 1
+                    for chunk in chunks_list:
+                        new_chunk = {"source": file["source"],"paragraph_index":str(i) , "file_content": chunk}
+                        chunks.append(json.dumps(new_chunk, ensure_ascii=False))
+                        i += 1
             base = FAISS.from_texts(chunks, self.bge_embeddings)
         docs = base.similarity_search(question, k=k)
         combined_content = "".join(doc.page_content + "\n\n" for doc in docs)
@@ -249,7 +282,24 @@ class save_ebd_database:
             chunk_size=chunk_size,
             chunk_overlap=chunk_overlap,
         )
-        chunks = text_splitter.split_text(file_content)
+        # 判断file_content是否可以被json load
+        try:
+            files_load = json.loads(file_content)
+        except json.JSONDecodeError:
+            files_load = file_content
+        
+        if isinstance(files_load, str):
+            chunks = text_splitter.split_text(files_load)
+        elif isinstance(files_load, list):
+            chunks = []
+            for file in files_load:
+                content= file["file_content"]
+                chunks_list = text_splitter.split_text(content)
+                i = 1
+                for chunk in chunks_list:
+                    new_chunk = {"source": file["source"],"paragraph_index":str(i) , "file_content": chunk}
+                    chunks.append(json.dumps(new_chunk, ensure_ascii=False))
+                    i += 1
         base = FAISS.from_texts(chunks, self.bge_embeddings)
         # 保存 FAISS 数据库到本地 save_path
         base.save_local(save_path)
