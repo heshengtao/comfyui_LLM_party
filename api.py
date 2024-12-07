@@ -302,8 +302,6 @@ if get_current_page() == "settings":
     # 设置系统提示词system_prompt
     system_prompt = st.text_area("系统提示词", height=100, placeholder="请输入你的系统提示词")
     path1 = st.session_state["wf_path"]
-    # 添加下拉菜单，选项为WF_path=os.path.join(current_dir_path,"workflow")文件夹下的json文件
-    st.markdown(f"当前工作流文件（workflow）:{path1}")
     _path = st.selectbox(
         "选择一个包含start_workflow & end_workflow的工作流文件",
         [f for f in os.listdir(os.path.join(current_dir_path, "workflow_api")) if f.endswith(".json")],
@@ -315,3 +313,4 @@ if get_current_page() == "settings":
         print(st.session_state["wf_path"])
         # 保存system_prompt到session_state
         st.session_state["system_prompt"] = system_prompt
+        st.success("保存成功！")
