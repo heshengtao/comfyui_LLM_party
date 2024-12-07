@@ -52,6 +52,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 5. Aufgrund der hohen Nutzungsschwelle dieses Projekts hoffe ich, dass Sie sich die Zeit nehmen, die Projektseite gründlich zu lesen, auch wenn Sie den Schnellstart gewählt haben.
 
 ## Neueste Updates
+1. Die Knoten zum Laden von Dateien, zum Laden von Ordnern, zum Laden von Webseiteninhalten sowie alle mit Wort-Embeddings zusammenhängenden Knoten wurden aktualisiert. Ihre Dateiinhalte enthalten nun immer den Dateinamen und den Absatzindex. Die Knoten zum Laden von Ordnern können mithilfe von `related_characters` gefiltert werden, um die gewünschten Dateien auszuwählen.
 1. Ein lokales Sprach-zu-Text-Modellwerkzeug wurde hinzugefügt, theoretisch sind alle ASR-Modelle auf HF mit diesem Knoten kompatibel. Zum Beispiel: [openai/whisper-small](https://huggingface.co/openai/whisper-small), [nyrahealth/CrisperWhisper](https://huggingface.co/nyrahealth/CrisperWhisper) usw.
 1. ASR- und TTS-Knoten für [fish audio](https://docs.fish.audio/introduction) hinzugefügt, bitte beziehen Sie sich auf die API-Dokumentation von fish audio für die Verwendungshinweise.
 1. Ein aisuite-Ladeknoten wurde hinzugefügt, der mit allen APIs kompatibel ist, die aisuite unterstützt, einschließlich: ["openai","anthropic","aws","azure","vertex","huggingface"], Beispiel-Workflow: [start_with_aisuite](workflow/start_with_aisuite.json).

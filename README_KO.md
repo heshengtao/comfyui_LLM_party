@@ -52,6 +52,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 5. 이 프로젝트는 사용 임계값이 높기 때문에 빠른 시작을 선택하더라도 프로젝트 홈페이지를 꼼꼼히 읽어주시기 바랍니다.
 
 ## 최신 업데이트
+1. 파일 로딩, 폴더 로딩, 웹 페이지 내용 로딩, 그리고 모든 단어 임베딩 관련 노드가 업그레이드되었습니다. 이제 파일의 내용은 항상 파일 이름과 단락 인덱스를 포함합니다. 폴더 노드는 `related_characters`를 통해 로딩할 파일을 필터링할 수 있습니다.
 1. 음성에서 텍스트로 변환하는 로컬 모델 도구가 추가되었습니다. 이론적으로 HF에서 모든 ASR 모델이 이 노드와 호환됩니다. 예를 들면: [openai/whisper-small](https://huggingface.co/openai/whisper-small), [nyrahealth/CrisperWhisper](https://huggingface.co/nyrahealth/CrisperWhisper) 등입니다.
 1. [fish audio](https://docs.fish.audio/introduction)의 ASR 및 TTS 노드가 추가되었습니다. 사용 방법은 fish audio의 API 문서를 참조하시기 바랍니다.
 1. aisuite 로더 노드가 추가되어 aisuite와 호환될 수 있는 모든 API, 포함하여 다음과 같은 API를 지원합니다：["openai","anthropic","aws","azure","vertex","huggingface"]。예시 워크플로우：[start_with_aisuite](workflow/start_with_aisuite.json)。 

@@ -52,6 +52,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 5. このプロジェクトは使用の敷居が高いため、クイックスタートを選択した場合でも、プロジェクトのホームページをじっくり読んでいただけると幸いです。
 
 ## 最新の更新
+1. ファイルの読み込み、フォルダーの読み込み、ウェブページの内容の読み込み、及び全ての語彙埋め込みに関連するノードがアップグレードされました。これにより、あなたのファイルの内容は常にファイル名と段落インデックスを含むことになります。フォルダーノードは、`related_characters`を使用して、読み込むファイルをフィルタリングすることができます。
 1. 音声から文字へのローカルモデルツールが追加されました。理論的には、HF上のすべてのASRモデルがこのノードに互換性があります。例えば：[openai/whisper-small](https://huggingface.co/openai/whisper-small)、[nyrahealth/CrisperWhisper](https://huggingface.co/nyrahealth/CrisperWhisper)などです。  
 1. [fish audio](https://docs.fish.audio/introduction)のASRおよびTTSノードが追加されました。使用方法については、fish audioのAPIドキュメントを参照してください。  
 1. aisuiteローダーノードが追加され、aisuiteが互換性を持つすべてのAPI、以下を含むことをサポートしています：["openai","anthropic","aws","azure","vertex","huggingface"]。例のワークフロー：[start_with_aisuite](workflow/start_with_aisuite.json)。 

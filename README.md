@@ -53,6 +53,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 5. Due to the high usage threshold of this project, even if you choose the quick start, I hope you can patiently read through the project homepage.
 
 ## Latest update
+1. The nodes for loading files, loading folders, loading web content, and all word embedding-related nodes have been upgraded. Now, the file content you load will always include the file name and paragraph index. The loading folder node can filter the files you wish to load through `related_characters`.
 1. A local model tool for speech-to-text has been added, which is theoretically compatible with all ASR models on HF. For example: [openai/whisper-small](https://huggingface.co/openai/whisper-small), [nyrahealth/CrisperWhisper](https://huggingface.co/nyrahealth/CrisperWhisper), and so forth.
 1. Added ASR and TTS nodes for [fish audio](https://docs.fish.audio/introduction), please refer to the API documentation of fish audio for usage instructions.
 1. Added the aisuite loader node, which is compatible with all APIs that aisuite can accommodate, including: ["openai", "anthropic", "aws", "azure", "vertex", "huggingface"]. Example workflow: [start_with_aisuite](workflow/start_with_aisuite.json).

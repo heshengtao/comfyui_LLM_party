@@ -52,6 +52,7 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 5. Devido ao alto limiar de uso deste projeto, mesmo que você escolha o início rápido, espero que possa ler pacientemente a página inicial do projeto.
 
 ## Atualizações Recentes
+1. Foi atualizado o carregamento de arquivos, o carregamento de pastas, o carregamento de conteúdo da web e todos os nós relacionados a incorporações de palavras. Agora, o conteúdo do seu arquivo sempre inclui o nome do arquivo e o índice do parágrafo. Os nós de carregamento de pastas podem ser filtrados por meio de `related_characters` para selecionar os arquivos que você deseja carregar.
 1. Foi adicionada uma ferramenta de modelo local para conversão de voz em texto, teoricamente todos os modelos ASR no HF são compatíveis com este nó. Por exemplo: [openai/whisper-small](https://huggingface.co/openai/whisper-small), [nyrahealth/CrisperWhisper](https://huggingface.co/nyrahealth/CrisperWhisper) etc.
 1. Foram adicionados nós ASR e TTS de [fish audio](https://docs.fish.audio/introduction), consulte a documentação da API do fish audio para seu uso.
 1. Foi adicionado um nó carregador do aisuite, tornando o aisuite compatível com todas as APIs que ele pode gerenciar, incluindo: ["openai","anthropic","aws","azure","vertex","huggingface"], fluxo de trabalho de exemplo: [iniciar_com_aisuite](workflow/start_with_aisuite.json).
