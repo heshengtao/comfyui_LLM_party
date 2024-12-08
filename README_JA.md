@@ -5,7 +5,7 @@
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">テキストチュートリアル</a> ·
   <a href="workflow_tutorial/">ワークフローチュートリアル</a> ·
-  <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">百度リンク</a> ·
+  <a href="https://pan.quark.cn/s/190b41f3bbdb">クラウドディスクのアドレス</a> ·
   <a href="img/Q群.jpg">QQグループ</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">ディスコード</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">私たちについて</a>
@@ -130,6 +130,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
 4. モデルのダウンロード：
+* [クォーククラウドアドレス](https://pan.quark.cn/s/190b41f3bbdb)
 * [百度云アドレス](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)、抽出コード：qyhu
 
 ## ダウンロード

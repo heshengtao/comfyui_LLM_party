@@ -5,7 +5,7 @@
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">دليل النص</a> ·
   <a href="workflow_tutorial/">دليل سير العمل</a> ·
-  <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">رابط دودة</a> ·
+  <a href="https://pan.quark.cn/s/190b41f3bbdb">عنوان القرص السحابي</a> ·
   <a href="img/Q群.jpg">مجموعة QQ</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">ديسكورد</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">معلومات عنا</a>
@@ -129,6 +129,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
 4. تحميل النموذج:
+* [عنوان سحابة كوارك](https://pan.quark.cn/s/190b41f3bbdb)
 * [رابط بايدو السحابي](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)، رمز الاستخراج: qyhu
 
 ## تحميل

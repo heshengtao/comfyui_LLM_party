@@ -5,7 +5,7 @@
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">文字教程</a> ·
   <a href="workflow_tutorial/">工作流教程</a> ·
-  <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">度盘链接</a> ·
+  <a href="https://pan.quark.cn/s/190b41f3bbdb">网盘链接</a> ·
   <a href="img/Q群.jpg">QQ群</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">discord</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">关于我们</a>
@@ -130,6 +130,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
 4. 模型下载：
+* [夸克云地址](https://pan.quark.cn/s/190b41f3bbdb)
 * [百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu
 
 ## 下载

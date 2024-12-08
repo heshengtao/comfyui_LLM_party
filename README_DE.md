@@ -5,7 +5,7 @@
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">Texttutorial</a> ·
   <a href="workflow_tutorial/">Workflow-Tutorial</a> ·
-  <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baudisk-Link</a> ·
+  <a href="https://pan.quark.cn/s/190b41f3bbdb">Cloud-Disk-Adresse</a> ·
   <a href="img/Q群.jpg">QQ-Gruppe</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">Discord</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">Über uns</a>
@@ -129,6 +129,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
 4. Modells download:
+* [Quark Cloud Adresse](https://pan.quark.cn/s/190b41f3bbdb)
 * [Baidu Cloud Adresse](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), Entnahmecode: qyhu
 
 ## Download

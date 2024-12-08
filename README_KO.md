@@ -5,7 +5,7 @@
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">텍스트 튜토리얼</a> ·
   <a href="workflow_tutorial/">작업 흐름 튜토리얼</a> ·
-  <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">바이두 링크</a> ·
+  <a href="https://pan.quark.cn/s/190b41f3bbdb">클라우드 디스크 주소</a> ·
   <a href="img/Q群.jpg">QQ 그룹</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">디스코드</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">우리에 관하여</a>
@@ -125,6 +125,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
 4. 모델 다운로드:
+* [Quark 클라우드 주소](https://pan.quark.cn/s/190b41f3bbdb)
 * [百度云地址](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu)，提取码：qyhu
 
 ## 다운로드

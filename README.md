@@ -5,7 +5,7 @@
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">text tutorial</a> ·
   <a href="workflow_tutorial/">workflow tutorial</a> ·
-  <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Baidu cloud</a> ·
+  <a href="https://pan.quark.cn/s/190b41f3bbdb">Cloud disk address</a> ·
   <a href="img/Q群.jpg">QQ group</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">discord</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">About us</a>  
@@ -131,6 +131,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
 4. Model download
+* [Quark cloud address](https://pan.quark.cn/s/190b41f3bbdb)
 * [Baidu cloud address](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), extraction code: qyhu
 
 ## Download

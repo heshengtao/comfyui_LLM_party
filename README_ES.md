@@ -5,7 +5,7 @@
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">Tutorial escrito</a> ·
   <a href="workflow_tutorial/">Tutorial de flujo de trabajo</a> ·
-  <a href="https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu">Enlace de Baidu</a> ·
+  <a href="https://pan.quark.cn/s/190b41f3bbdb">Dirección de disco en la nube</a> ·
   <a href="img/Q群.jpg">Grupo QQ</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">Discord</a> ·
   <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf">Sobre nosotros</a>
@@ -129,6 +129,7 @@ ComfyUI LLM Party permite desde la llamada a múltiples herramientas LLM desde l
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 
 4. Descarga del modelo:
+* [Dirección de nube Quark](https://pan.quark.cn/s/190b41f3bbdb)
 * [Dirección de Baidu Cloud](https://pan.baidu.com/share/init?surl=T4aEB4HumdJ7iVbvsv1vzA&pwd=qyhu), código de extracción: qyhu
 
 ## Descarga
