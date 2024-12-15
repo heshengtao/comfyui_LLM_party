@@ -140,8 +140,12 @@ class save_SQL_memo:
             },
         }
 
-    RETURN_TYPES = ()
-    RETURN_NAMES = ()
+    RETURN_TYPES = (
+        "INT",
+    )
+    RETURN_NAMES = (
+        "history_id",
+    )
 
     FUNCTION = "memo"
 
@@ -187,7 +191,7 @@ class save_SQL_memo:
         finally:
             session.close()
 
-        return ()
+        return (history_id,)
 
     @classmethod
     def IS_CHANGED(cls):

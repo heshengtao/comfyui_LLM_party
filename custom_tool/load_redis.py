@@ -88,8 +88,10 @@ class save_redis_memo:
         }
 
     RETURN_TYPES = (
+        "STRING",
     )
     RETURN_NAMES = (
+        "history_key",
     )
 
     FUNCTION = "memo"
@@ -106,7 +108,7 @@ class save_redis_memo:
         old_history.extend(new_history)
         updated_data = json.dumps(old_history, ensure_ascii=False, indent=4)
         self.redis_client.set(history_key, updated_data)
-        return ()
+        return (history_key,)
 
     @classmethod
     def IS_CHANGED(s):

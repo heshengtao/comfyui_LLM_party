@@ -78,8 +78,10 @@ class save_memo:
         }
 
     RETURN_TYPES = (
+        "STRING",
     )
     RETURN_NAMES = (
+        "history_path",
     )
 
     FUNCTION = "memo"
@@ -96,7 +98,7 @@ class save_memo:
         old_history.extend(history)
         with open(history_path, "w", encoding="utf-8") as f:
             json.dump(old_history, f, ensure_ascii=False, indent=4)
-        return ()
+        return (history_path,)
 
     @classmethod
     def IS_CHANGED(s):
