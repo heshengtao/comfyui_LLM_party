@@ -3,7 +3,7 @@ docx2txt
 langchain
 langchain_community
 langchain_text_splitters
-openai
+openai>=1.57.4
 openpyxl
 pandas
 pytz
@@ -59,4 +59,4 @@ json-repair
 redis
 aisuite[all]
 fish_audio_sdk
-httpx<=0.27.2
+httpx
