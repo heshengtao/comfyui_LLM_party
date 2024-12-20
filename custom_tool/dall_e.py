@@ -21,48 +21,51 @@ config = configparser.ConfigParser()
 config.read(config_path)
 
 def process_images(url):
-    if url is None or "http" not in url:
-        return (None, None, "URL is None")
+    try:
+        # 检查URL是否有效
+        if not url or not url.startswith(('http://', 'https://')):
+            return "Invalid URL", None
 
-    context = ssl.create_default_context()
-    context.set_ciphers('DEFAULT@SECLEVEL=1')
-    http = urllib3.PoolManager(ssl_context=context)
+        # 发送GET请求获取图片数据
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()  # 如果响应包含一个HTTP错误状态码，则抛出异常
+        
+        # 检查图片格式
+        image_data = response.content
+        ext = 'JPG' if image_data.startswith(b'\xff\xd8') else ('PNG' if image_data.startswith(b'\x89PNG\r\n\x1a\n') else None)
+        if ext is None:
+            return "Unknown image extension", None
+        
+        # 创建临时目录保存图片
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        img_temp_dir = os.path.join(current_dir, 'img_temp')
+        os.makedirs(img_temp_dir, exist_ok=True)
 
-    response = http.request('GET', url)
-    if response.status >= 300:
-        return (None, None, "Failed to get data from URL")
+        # 生成唯一的文件名并保存图片
+        timestamp = int(time.time())
+        img_path = os.path.join(img_temp_dir, f'image-{timestamp}.{ext}')
+        with open(img_path, 'wb') as f:
+            f.write(image_data)
 
-    first_bytes = response.data[:8]
-    if first_bytes.startswith(b'\x89PNG\r\n\x1a\n'):
-        ext = 'PNG'
-    elif first_bytes.startswith(b'\xff\xd8'):
-        ext = 'JPG'
-    else:
-        return (None, None, "Unknown image extension based on base64")
-    # 当前脚本目录
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    # 构建img_temp目录路径
-    img_temp_dir = os.path.join(current_dir, 'img_temp')
-    # 如果img_temp目录不存在，则创建
-    os.makedirs(img_temp_dir, exist_ok=True)
-    # 时间戳
-    timestamp = int(time.time())
-    img_path = os.path.join(img_temp_dir,f'image-{timestamp}.{ext}')
-    with open(img_path, 'wb') as f:
-        f.write(response.data)
+        # 加载图片并进行预处理
+        img = Image.open(img_path)
+        img_out = []
+        for frame in ImageSequence.Iterator(img):
+            frame = ImageOps.exif_transpose(frame)
+            if frame.mode == "I":
+                frame = frame.point(lambda i: i * (1 / 256)).convert("L")
+            image = frame.convert("RGB")
+            image = np.array(image).astype(np.float32) / 255.0
+            image = torch.from_numpy(image).unsqueeze(0)
+            img_out.append(image)
+        
+        # 返回字符串消息和处理后的图像张量列表中的第一个元素
+        return "已经将图片在前端展示", img_out[0] if img_out else None
 
-    img = Image.open(img_path)
-    img_out = []
-    for frame in ImageSequence.Iterator(img):
-        frame = ImageOps.exif_transpose(frame)
-        if frame.mode == "I":
-            frame = frame.point(lambda i: i * (1 / 256)).convert("L")
-        image = frame.convert("RGB")
-        image = np.array(image).astype(np.float32) / 255.0
-        image = torch.from_numpy(image).unsqueeze(0)
-        img_out.append(image)
-    img_out = img_out[0]
-    return "已经将图片在前端展示",img_out
+    except requests.exceptions.RequestException as e:
+        return f"Error fetching the image: {e}", None
+    except Exception as e:
+        return f"An error occurred: {e}", None
 
 class url2img_tool:
     @classmethod
