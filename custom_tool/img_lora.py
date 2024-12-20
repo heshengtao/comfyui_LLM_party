@@ -15,7 +15,7 @@ class LorapathLoader:
             "required": { 
                 "model": ("MODEL", {"tooltip": "The diffusion model the LoRA will be applied to."}),
                 "clip": ("CLIP", {"tooltip": "The CLIP model the LoRA will be applied to."}),
-                "lora_path": ("STRING", {"default":"D:\LORA","tooltip": "The model path of the LoRA."}),
+                "lora_path": ("STRING", {"default": "D:/LORA", "tooltip": "The model path of the LoRA."}),
                 "lora_name": ("STRING", {"default":"lora.pt","tooltip": "The file name of the LoRA."}),
                 "strength_model": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01, "tooltip": "How strongly to modify the diffusion model. This value can be negative."}),
                 "strength_clip": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01, "tooltip": "How strongly to modify the CLIP model. This value can be negative."}),
