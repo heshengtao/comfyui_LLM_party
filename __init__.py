@@ -2,6 +2,8 @@ import inspect
 import os
 import re
 import shutil
+import subprocess
+import sys
 from .install import (
     check_and_uninstall_websocket,
     get_system_info,
@@ -85,6 +87,23 @@ def get_latest_version_folder(directory):
 
     return latest_folder
 
+def install_playwright_browsers():
+    python_executable = sys.executable
+    try:
+        result = subprocess.run(
+            [python_executable, "-m", "playwright", "install"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=True
+        )
+        if "already up-to-date" in result.stderr or "already up-to-date" in result.stdout:
+            print("Playwright browsers are already installed. Skipping installation.")
+        else:
+            print("Playwright browsers installed.")
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to install Playwright browsers: {e.stderr}")
+
 
 try:
     install_portaudio()
@@ -116,6 +135,11 @@ except Exception as e:
     print(f"Error: {e}")
 try:
     manage_discord_packages()
+except Exception as e:
+    print(f"Error: {e}")
+
+try:
+    install_playwright_browsers()
 except Exception as e:
     print(f"Error: {e}")
 

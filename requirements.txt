@@ -60,3 +60,4 @@ redis
 aisuite[all]
 fish_audio_sdk
 httpx
+browser_use

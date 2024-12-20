@@ -142,9 +142,9 @@ if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "sql_tool": "SQL工具"
+        "sql_tool": "☁️SQL工具"
     }
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
-        "sql_tool": "SQL tool"
+        "sql_tool": "☁️SQL tool"
     }
