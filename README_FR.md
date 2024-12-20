@@ -52,6 +52,7 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 5. En raison du seuil d'utilisation élevé de ce projet, même si vous choisissez le démarrage rapide, j'espère que vous pourrez lire attentivement la page d'accueil du projet.
 
 ## Dernières mises à jour
+1. Un nouvel outil de navigateur a été développé sur la base de [browser-use](https://github.com/gregpr07/browser-use), permettant à LLM d'exécuter automatiquement les tâches de navigateur que vous publiez.
 1. Les nœuds liés au chargement de fichiers, au chargement de dossiers, au chargement de contenu de pages web et à tous les aspects des embeddings de mots ont été mis à jour. Désormais, le contenu de vos fichiers inclut toujours le nom du fichier et l'index des paragraphes. Les nœuds de chargement de dossiers peuvent être filtrés à l'aide de `related_characters` pour sélectionner les fichiers que vous souhaitez charger.
 1. Un outil de modèle local de transcription vocale a été ajouté, théoriquement, tous les modèles ASR sur HF sont compatibles avec ce nœud. Par exemple : [openai/whisper-small](https://huggingface.co/openai/whisper-small), [nyrahealth/CrisperWhisper](https://huggingface.co/nyrahealth/CrisperWhisper), etc.
 1. Ajouté des nœuds ASR et TTS pour [fish audio](https://docs.fish.audio/introduction), veuillez vous référer à la documentation de l'API de fish audio pour les instructions d'utilisation.

@@ -52,6 +52,7 @@ ComfyUI LLM Party permite desde la llamada a múltiples herramientas LLM desde l
 5. Debido al alto umbral de uso de este proyecto, incluso si eliges el inicio rápido, espero que puedas leer pacientemente la página principal del proyecto.
 
 ## Últimas Actualizaciones
+1. Se ha desarrollado una nueva herramienta de navegador basada en [browser-use](https://github.com/gregpr07/browser-use), que permite a LLM ejecutar automáticamente las tareas de navegador que usted publica.  
 1. Se ha actualizado la carga de archivos, la carga de carpetas, la carga de contenido web y todos los nodos relacionados con incrustaciones de palabras. Ahora el contenido de su archivo siempre contiene el nombre del archivo y el índice de párrafo. Los nodos de carga de carpetas pueden filtrarse mediante `related_characters` para seleccionar los archivos que desea cargar.
 1. Se ha añadido una herramienta de modelo local de conversión de voz a texto, teóricamente todos los modelos ASR en HF son compatibles con este nodo. Por ejemplo: [openai/whisper-small](https://huggingface.co/openai/whisper-small), [nyrahealth/CrisperWhisper](https://huggingface.co/nyrahealth/CrisperWhisper), entre otros.
 1. Se han añadido nodos ASR y TTS de [fish audio](https://docs.fish.audio/introduction), consulte la documentación API de fish audio para su uso.

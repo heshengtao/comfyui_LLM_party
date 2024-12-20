@@ -53,6 +53,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 5. 由于本项目有较高的使用门槛，所以即使你选择了快速开始，我也希望你能耐心阅读完本项目主页。
 
 ## 最新更新
+1. 基于[browser-use](https://github.com/gregpr07/browser-use)开发了一个新的浏览器工具节点，可以让LLM自动执行你发布的浏览器任务。
 1. 升级了加载文件、加载文件夹、加载网页内容以及所有的词嵌入相关的节点，现在你的文件内容永远包含文件的文件名和段落索引。加载文件夹节点可以通过`related_characters`来筛选出你要加载的文件。
 1. 添加了语音转文字本地模型工具，理论上HF上所有的ASR模型都被这个节点兼容。例如：[openai/whisper-small](https://huggingface.co/openai/whisper-small)、[nyrahealth/CrisperWhisper](https://huggingface.co/nyrahealth/CrisperWhisper)等等。
 1. 添加了[fish audio](https://docs.fish.audio/introduction)的ASR和TTS节点，使用方法参考fish audio的API文档。
