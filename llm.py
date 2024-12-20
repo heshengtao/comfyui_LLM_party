@@ -1633,7 +1633,7 @@ class LLM:
                     json.dump(history, f, indent=4, ensure_ascii=False)
                 history = json.dumps(history, ensure_ascii=False,indent=4)
                 global image_buffer
-                if image_buffer != []:
+                if image_buffer != [] and image_buffer is not None:
                     image_out = image_buffer.clone()
                 else:
                     image_out = None
