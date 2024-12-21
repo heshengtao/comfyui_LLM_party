@@ -365,7 +365,7 @@ class mini_error_correction:
             output = json.loads(output)
             input_text += output["input_str"]
             output_text += output["output_str"]
-            error += output["error"]
+            error += output["error"] + "\n"
             time.sleep(0.5)
         return (input_text,output_text,error,)
 
