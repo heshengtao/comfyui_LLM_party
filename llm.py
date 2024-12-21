@@ -2949,7 +2949,7 @@ def load_custom_tools():
 
         except Exception as e:
             # 处理导入错误（例如，跳过文件）
-            print(f"Optional node {name} import failed with error: {e}")
+            print(f"Optional node {name} import failed with error: {e}.If you don't need to use this optional node, this reminder can be ignored.")
 
 
 # 调用函数来加载 custom_tool 文件夹下的模块
