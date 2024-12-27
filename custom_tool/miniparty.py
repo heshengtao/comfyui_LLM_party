@@ -870,6 +870,7 @@ class mini_sd_prompt:
                     },
                 ),
                 "is_enable": ("BOOLEAN", {"default": True,}),
+                "seed": ("INT", {"default": 42,}),
             },
         }
 
@@ -889,6 +890,7 @@ class mini_sd_prompt:
         base_url=None,
         api_key=None,
         is_enable=True,
+        seed=42,
     ):
         if not is_enable:
             return (None,)
@@ -994,6 +996,7 @@ Stable Diffusion是一款利用深度学习的文生图模型，支持通过使�
                             model=model_name,
                             messages=history,
                             response_format={"type": "json_object"},
+                            seed=seed,
                         )
         output = response.choices[0].message.content
         output = json.loads(output)
@@ -1024,6 +1027,7 @@ class mini_flux_prompt:
                     },
                 ),
                 "is_enable": ("BOOLEAN", {"default": True,}),
+                "seed": ("INT", {"default": 42,}),
             },
         }
 
@@ -1043,6 +1047,7 @@ class mini_flux_prompt:
         base_url=None,
         api_key=None,
         is_enable=True,
+        seed=42,
     ):
         if not is_enable:
             return (None,)
@@ -1122,6 +1127,7 @@ FLUX是一款利用深度学习的文生图模型，支持通过使用 自然语
         response = openai_client.chat.completions.create(
                             model=model_name,
                             messages=history,
+                            seed=seed,
                         )
         flux_prompt = response.choices[0].message.content
         return (flux_prompt,)

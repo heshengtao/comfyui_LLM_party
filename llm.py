@@ -343,6 +343,9 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
     except:
         ret = traceback.format_exc()
     return str(ret)
+
+
+"""
 def convert_to_gemini(openai_history):
     for entry in openai_history:
         role = entry["role"]
@@ -371,7 +374,7 @@ def convert_tool_to_gemini(openai_tools):
         gemini_tools.append(gemini_tool)
     return gemini_tools
 
-"""
+
 class genChat:
     def __init__(self, model_name, apikey) -> None:
         self.model_name = model_name
@@ -537,7 +540,7 @@ class Chat:
                 if history[i]["role"] == "system" and history[i]["content"] == "":
                     history.pop(i)
                     break
-            if "o1" in self.model_name:
+            if re.search(r'o[1-3]', self.model_name):
                 # 将history中的系统提示词部分的角色换成user
                 for i in range(len(history)):
                     if history[i]["role"] == "system":

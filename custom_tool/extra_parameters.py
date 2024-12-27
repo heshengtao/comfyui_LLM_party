@@ -19,6 +19,7 @@ class extra_parameters:
                 "user": ("STRING", {"default": ""}),
                 "top_p": ("FLOAT", {"default": 1.0,"min": 0.0, "max": 1.0,"step": 0.1}),
                 "top_k": ("INT", {"default": 50}),
+                "seed": ("INT", {"default": 42}),
             }
         }
 
@@ -44,6 +45,7 @@ class extra_parameters:
         top_k=50,
         min_length=0,
         repetition_penalty=1.0,
+        seed=42,
     ):
         json_data = {}
         if top_p != 1.0:
@@ -72,6 +74,8 @@ class extra_parameters:
             json_data["min_length"] = min_length
         if repetition_penalty != 1.0:
             json_data["repetition_penalty"] = repetition_penalty
+        if seed != 42:
+            json_data["seed"] = seed
 
         return (json_data,)
 
