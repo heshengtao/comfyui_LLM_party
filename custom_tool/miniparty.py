@@ -1161,6 +1161,7 @@ class mini_sd_tag:
                     }
                 ),
                 "is_enable": ("BOOLEAN", {"default": True,}),
+                "seed": ("INT", {"default": 42,}),
             },
         }
 
@@ -1181,6 +1182,7 @@ class mini_sd_tag:
         api_key=None,
         is_enable=True,
         imgbb_api_key=None,
+        seed=42,
     ):
         if not is_enable:
             return (None,)
@@ -1304,6 +1306,7 @@ a girl, beautiful detailed eyes, stars in the eyes, messy floating hair, colored
         response = openai_client.chat.completions.create(
                             model=model_name,
                             messages=history,
+                            seed=seed,
                         )
         tags = response.choices[0].message.content
         return (tags,)
@@ -1337,6 +1340,7 @@ class mini_flux_tag:
                     }
                 ),
                 "is_enable": ("BOOLEAN", {"default": True,}),
+                "seed": ("INT", {"default": 42,}),
             },
         }
 
@@ -1357,6 +1361,7 @@ class mini_flux_tag:
         api_key=None,
         is_enable=True,
         imgbb_api_key=None,
+        seed=42,
     ):
         if not is_enable:
             return (None,)
@@ -1478,6 +1483,7 @@ A majestic, emerald-scaled dragon with glowing amber eyes, wings outstretched, s
         response = openai_client.chat.completions.create(
                             model=model_name,
                             messages=history,
+                            seed=seed,
                         )
         tags = response.choices[0].message.content
         return (tags,)
