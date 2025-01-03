@@ -89,6 +89,27 @@ def get_latest_version_folder(directory):
 
 def install_playwright_browsers():
     python_executable = sys.executable
+    # 检查python版本>=3.11
+    if sys.version_info < (3, 11):
+        print("Python version must be 3.11 or higher to install browser_use.")
+        return
+    else:
+        # 安装browser_use，如果已经安装就跳过
+        try:
+            result = subprocess.run(
+                [python_executable, "-m", "pip", "install", "browser_use"],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                check=True
+            )
+            if "already up-to-date" in result.stderr or "already up-to-date" in result.stdout:
+                print("browser_use is already installed. Skipping installation.")
+            else:
+                print("browser_use installed.")
+        except subprocess.CalledProcessError as e:
+            print(f"Failed to install Playwright browsers: {e.stderr}")
+        
     try:
         result = subprocess.run(
             [python_executable, "-m", "playwright", "install"],
