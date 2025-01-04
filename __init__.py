@@ -91,7 +91,7 @@ def install_playwright_browsers():
     python_executable = sys.executable
     # 检查python版本>=3.11
     if sys.version_info < (3, 11):
-        print("Python version must be 3.11 or higher to install browser_use.")
+        print("Python version must be 3.11 or higher to install browser_use.If you don't need to use browser_use, you can ignore this warning.")
         return
     else:
         # 安装browser_use，如果已经安装就跳过
