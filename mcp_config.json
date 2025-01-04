@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+      "everything": {
+        "command": "D:/nodejs/npx.cmd",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-everything"
+        ]
+      }
+    }
+}

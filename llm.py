@@ -1,3 +1,4 @@
+import asyncio
 import base64
 import datetime
 import gc
@@ -327,6 +328,23 @@ llm_tools = [
 def dispatch_tool(tool_name: str, tool_params: dict) -> str:
     if "multi_tool_use." in tool_name:
         tool_name = tool_name.replace("multi_tool_use.", "")
+    if '-' in tool_name and tool_name not in _TOOL_HOOKS:
+        from .custom_tool.mcp_cli import mcp_client as client
+        
+        async def run_client():
+            try:
+                # Initialize the client (if necessary)
+                if client.is_initialized is False:
+                    await client.initialize()
+                functions = await client.get_openai_functions()
+                # Call the tool and get the result
+                result = await client.call_tool(tool_name, tool_params)
+                return str(result)
+            except Exception as e:
+                return str(e)
+
+        # Run the async function using asyncio.run
+        return asyncio.run(run_client())
     if tool_name not in _TOOL_HOOKS:
         return f"Tool `{tool_name}` not found. Please use a provided tool."
     tool_call = globals().get(tool_name)

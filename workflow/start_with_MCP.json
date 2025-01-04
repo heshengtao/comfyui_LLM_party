@@ -1,0 +1,355 @@
+{
+  "last_node_id": 27,
+  "last_link_id": 42,
+  "nodes": [
+    {
+      "id": 23,
+      "type": "LLM_api_loader",
+      "pos": [
+        513,
+        287
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            40
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 26,
+      "type": "Mcp_tool",
+      "pos": [
+        490,
+        470
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": [
+            41,
+            42
+          ],
+          "slot_index": 0,
+          "label": "tool"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mcp_tool"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 11,
+      "type": "show_text_party",
+      "pos": [
+        1385,
+        280
+      ],
+      "size": [
+        454.6876220703125,
+        290.2985534667969
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "Echo: 用echo返回我说的话"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 27,
+      "type": "show_text_party",
+      "pos": [
+        380,
+        610
+      ],
+      "size": [
+        454.6876220703125,
+        290.2985534667969
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 42,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "[{\"type\": \"function\", \"function\": {\"name\": \"everything-echo\", \"description\": \"Echoes back the input\", \"parameters\": {\"type\": \"object\", \"properties\": {\"message\": {\"type\": \"string\", \"description\": \"Message to echo\"}}, \"required\": [\"message\"], \"additionalProperties\": false, \"$schema\": \"http://json-schema.org/draft-07/schema#\"}}}, {\"type\": \"function\", \"function\": {\"name\": \"everything-add\", \"description\": \"Adds two numbers\", \"parameters\": {\"type\": \"object\", \"properties\": {\"a\": {\"type\": \"number\", \"description\": \"First number\"}, \"b\": {\"type\": \"number\", \"description\": \"Second number\"}}, \"required\": [\"a\", \"b\"], \"additionalProperties\": false, \"$schema\": \"http://json-schema.org/draft-07/schema#\"}}}, {\"type\": \"function\", \"function\": {\"name\": \"everything-longRunningOperation\", \"description\": \"Demonstrates a long running operation with progress updates\", \"parameters\": {\"type\": \"object\", \"properties\": {\"duration\": {\"type\": \"number\", \"default\": 10, \"description\": \"Duration of the operation in seconds\"}, \"steps\": {\"type\": \"number\", \"default\": 5, \"description\": \"Number of steps in the operation\"}}, \"additionalProperties\": false, \"$schema\": \"http://json-schema.org/draft-07/schema#\"}}}, {\"type\": \"function\", \"function\": {\"name\": \"everything-sampleLLM\", \"description\": \"Samples from an LLM using MCP's sampling feature\", \"parameters\": {\"type\": \"object\", \"properties\": {\"prompt\": {\"type\": \"string\", \"description\": \"The prompt to send to the LLM\"}, \"maxTokens\": {\"type\": \"number\", \"default\": 100, \"description\": \"Maximum number of tokens to generate\"}}, \"required\": [\"prompt\"], \"additionalProperties\": false, \"$schema\": \"http://json-schema.org/draft-07/schema#\"}}}, {\"type\": \"function\", \"function\": {\"name\": \"everything-getTinyImage\", \"description\": \"Returns the MCP_TINY_IMAGE\", \"parameters\": {\"type\": \"object\", \"properties\": {}, \"additionalProperties\": false, \"$schema\": \"http://json-schema.org/draft-07/schema#\"}}}]"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 25,
+      "type": "LLM",
+      "pos": [
+        887,
+        278
+      ],
+      "size": [
+        454.4823913574219,
+        557.4664916992188
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 40,
+          "label": "model"
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "images",
+          "shape": 7
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "label": "extra_parameters",
+          "shape": 7
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": 41,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "user_history",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_history"
+          },
+          "label": "user_history"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            39
+          ],
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "",
+        "用echo返回我说的话",
+        0.7,
+        "disable",
+        "disable",
+        "disable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true,
+        "",
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ]
+      ]
+    }
+  ],
+  "links": [
+    [
+      39,
+      25,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      40,
+      23,
+      0,
+      25,
+      0,
+      "CUSTOM"
+    ],
+    [
+      41,
+      26,
+      0,
+      25,
+      5,
+      "STRING"
+    ],
+    [
+      42,
+      26,
+      0,
+      27,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": [
+        -267.62164039148115,
+        -95.65760318644364
+      ]
+    }
+  },
+  "version": 0.4
+}
