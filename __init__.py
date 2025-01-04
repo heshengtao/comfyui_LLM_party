@@ -110,20 +110,20 @@ def install_playwright_browsers():
         except subprocess.CalledProcessError as e:
             print(f"Failed to install Playwright browsers: {e.stderr}")
         
-    try:
-        result = subprocess.run(
-            [python_executable, "-m", "playwright", "install"],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            check=True
-        )
-        if "already up-to-date" in result.stderr or "already up-to-date" in result.stdout:
-            print("Playwright browsers are already installed. Skipping installation.")
-        else:
-            print("Playwright browsers installed.")
-    except subprocess.CalledProcessError as e:
-        print(f"Failed to install Playwright browsers: {e.stderr}")
+        try:
+            result = subprocess.run(
+                [python_executable, "-m", "playwright", "install"],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                check=True
+            )
+            if "already up-to-date" in result.stderr or "already up-to-date" in result.stdout:
+                print("Playwright browsers are already installed. Skipping installation.")
+            else:
+                print("Playwright browsers installed.")
+        except subprocess.CalledProcessError as e:
+            print(f"Failed to install Playwright browsers: {e.stderr}")
 
 
 try:
