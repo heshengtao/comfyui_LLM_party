@@ -21,6 +21,8 @@ def data_base(question):
 
 
 class ebd_tool:
+    def __init__(self):
+        self.file_content = ""
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -71,7 +73,8 @@ class ebd_tool:
                 bge_embeddings = ebd_model
         if base_path != "":
             knowledge_base = FAISS.load_local(base_path, bge_embeddings, allow_dangerous_deserialization=True)
-        elif knowledge_base == "":
+        else:
+            self.file_content = file_content
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size=c_size,
                 chunk_overlap=c_overlap,
