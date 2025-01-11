@@ -62,9 +62,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 
 3. Please refer to the workflow tutorial: [Workflow Tutorial](workflow_tutorial/), thanks to [HuangYuChuh](https://github.com/HuangYuChuh) for your contribution!
 
-4. Advanced workflow gameplay account:[openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
-
-5. More workflows please refer to the [workflow](workflow) folder.
+4. More workflows please refer to the [workflow](workflow) folder.
 
 ## Vedio tutorial
 <a href="https://space.bilibili.com/26978344">
@@ -191,11 +189,10 @@ If there is a problem with the plugin or you have any other questions, please jo
     <img src="img/Q群.jpg" style="width: 48%;" />
 </div>
 
-3. WeChat group: `Choo-Yong` (enter the group after adding the small assistant WeChat)
+3. WeChat group: `we_glm` (enter the group after adding the small assistant WeChat)
 
 ### Follow us
 1. If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [Party host BB machine](https://space.bilibili.com/26978344)
-2. The OpenArt account is continuously updated with the most useful party workflows:[openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
 
 ### Donation support
 If my work has brought value to your day, consider fueling it with a coffee! Your support not only energizes the project but also warms the heart of the creator. ☕💖 Every cup makes a difference!

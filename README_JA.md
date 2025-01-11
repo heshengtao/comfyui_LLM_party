@@ -60,8 +60,6 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 2. プラグインに問題がある場合や他に疑問がある場合は、ぜひQQ群にご参加ください：[931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/f2dsAKKr2V).
 3. ワークフローのチュートリアルについては、[ワークフローのチュートリアル](workflow_tutorial/)をご参照ください。貢献してくださった[HuangYuChuh](https://github.com/HuangYuChuh)に感謝いたします。
 
-4. 高度なワークフローのアカウント：[openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
-
 4. さらに多くのワークフローは[workflow](workflow)フォルダーをご覧ください。
 
 ## 動画チュートリアル
@@ -184,13 +182,12 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
     <img src="img/Q群.jpg" style="width: 48%;" />
 </div>
 
-2. WeChatグループ：`Choo-Yong`（小助手のWeChatを追加した後にグループに参加してください）
+2. WeChatグループ：`we_glm`（小助手のWeChatを追加した後にグループに参加してください）
 
 3. discord:[discordリンク](https://discord.gg/f2dsAKKr2V)
 
 ### 私たちをフォローする
 1. このプロジェクトの最新機能を継続的にフォローしたい方は、Bilibiliアカウントをフォローしてください：[派对主持BB机](https://space.bilibili.com/26978344)
-2. OpenArtアカウントは、最も便利なパーティーのワークフローを継続的に更新しています：[openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
 
 ### 寄付のサポート
 私の仕事があなたに価値をもたらしたなら、ぜひ私にコーヒーをおごってください！あなたのサポートはプロジェクトに活力を与えるだけでなく、クリエイターの心を温めます。☕💖 一杯一杯が意義深いです！

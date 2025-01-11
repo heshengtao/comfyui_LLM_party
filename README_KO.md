@@ -60,8 +60,6 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 2. 플러그인에 문제가 있거나 다른 질문이 있으시면 QQ 그룹에 참여해 주십시오: [931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/f2dsAKKr2V).
 3. 워크플로우 튜토리얼은 다음을 참조하시기 바랍니다: [워크플로우 튜토리얼](workflow_tutorial/), [HuangYuChuh](https://github.com/HuangYuChuh)님의 기여에 감사드립니다!
 
-4. 고급 워크플로우 플레이 계정: [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
-
 4. 더 많은 워크플로우는 [workflow](workflow) 폴더를 참조하시기 바랍니다.
 
 ## 비디오 튜토리얼
@@ -184,13 +182,12 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
     <img src="img/Q群.jpg" style="width: 48%;" />
 </div>
 
-2. 웨이신 그룹：`Choo-Yong`（소助手의 웨이신을 추가한 후 그룹에 가입하세요）
+2. 웨이신 그룹：`we_glm`（소助手의 웨이신을 추가한 후 그룹에 가입하세요）
 
 3. 디스코드:[discord 링크](https://discord.gg/f2dsAKKr2V)
 
 ### 저희를 팔로우하세요
 1. 본 프로젝트의 최신 기능을 지속적으로 관심 가져주시길 원하신다면, B站 계정에 팔로우해 주세요：[파티 호스트 BB기](https://space.bilibili.com/26978344)
-2. OpenArt 계정은 가장 유용한 파티 워크플로우를 지속적으로 업데이트합니다：[openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
 
 ### 기부 지원
 저의 작업이 여러분께 가치를 드렸다면, 커피 한 잔을 사주시는 것을 고려해 주세요! 여러분의 지원은 프로젝트에 활력을 불어넣을 뿐만 아니라 창작자에게도 따뜻함을 전해줍니다.☕💖 모든 한 잔이 의미가 있습니다!

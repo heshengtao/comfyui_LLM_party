@@ -60,8 +60,6 @@ ComfyUI LLM Party permite desde la llamada a múltiples herramientas LLM desde l
 2. Si hay problemas con el plugin o tienes otras dudas, no dudes en unirte a nuestro grupo de QQ: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/f2dsAKKr2V).
 3. Para el tutorial de flujos de trabajo, consulte: [工作流教程](workflow_tutorial/)，agradecemos la contribución de [HuangYuChuh](https://github.com/HuangYuChuh).
 
-4. Cuenta para funciones avanzadas de flujos de trabajo: [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
-
 4. Para más flujos de trabajo, puede consultar la carpeta [workflow](workflow).
 
 ## Tutoriales en video
@@ -183,13 +181,12 @@ Si hay problemas con el complemento o si tiene alguna otra pregunta, le damos la
     <img src="img/Q群.jpg" style="width: 48%;" />
 </div>
 
-2. Grupo de WeChat: `Choo-Yong` (una vez que añada a la asistente de WeChat, podrá unirse al grupo)
+2. Grupo de WeChat: `we_glm` (una vez que añada a la asistente de WeChat, podrá unirse al grupo)
 
 3. Discord: [enlace de discord](https://discord.gg/f2dsAKKr2V)
 
 ### Síguenos
 1. Si desea mantenerse informado sobre las últimas funciones de este proyecto, le invitamos a seguir nuestra cuenta de Bilibili: [主持BB机](https://space.bilibili.com/26978344)
-2. La cuenta de OpenArt se actualiza continuamente con los flujos de trabajo de fiesta más útiles: [openart](https://openart.ai/workflows/profile/comfyui_llm_party?sort=latest&tab=creation)
 
 ### Apoyo a donaciones
 Si mi trabajo le ha aportado valor, ¡considere invitarme a un café! Su apoyo no solo revitaliza el proyecto, sino que también calienta el corazón del creador.☕💖 ¡Cada taza cuenta!

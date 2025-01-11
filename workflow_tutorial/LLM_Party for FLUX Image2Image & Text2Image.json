@@ -1422,7 +1422,7 @@
         "text": ""
       },
       "widgets_values": [
-        "#文件位置：\n - 如果在上述任何节点中遇到错误，请确保文件位于正确的目录中。\n\n·flux1-schnell.safetensors 应放在：ComfyUI/models/unet/\n·t5xxl_fp16.safetensors 和 clip_l.safetensors 应放在：ComfyUI/models/clip/\n·ae.safetensors 应放在：ComfyUI/models/vae/\n\n#提示：\n - 如果遇到内存问题，可以将上面的 weight_dtype 设置为 fp8 类型之一。\n - 将【图像重缩放】中的宽度和高度修改成512即可（但是512尺寸的图片质量会下降，可以在最终生成的图片后加一个放大图像的工作流）。\n\n—————————————————\n#图生图（Image2Image）：\n - 该模式下文本切换需要选择【1】，Latent选择【1】；\n - 降噪参数推荐0.5～0.8之间\n\n#文生图（Text2Image）：\n - 该模式下文本切换需要选择【2】，Latent选择【2】；\n - 降噪参数推荐1.00\n\n—————————————————\n#写在最后：\n·LLM_Party正在用心经营一片AI时代的后花园，我们希望能够在AI时代下成为众多参与者的一员，我们从开源社区中走来，也希望回到社区中去。\n·欢迎大家来到我们用心经营的后花园：\n - QQ交流群：931057213\n - 微信交流群：Choo-Yong（添加小助理微信，统一通过后会添加至交流群）"
+        "#文件位置：\n - 如果在上述任何节点中遇到错误，请确保文件位于正确的目录中。\n\n·flux1-schnell.safetensors 应放在：ComfyUI/models/unet/\n·t5xxl_fp16.safetensors 和 clip_l.safetensors 应放在：ComfyUI/models/clip/\n·ae.safetensors 应放在：ComfyUI/models/vae/\n\n#提示：\n - 如果遇到内存问题，可以将上面的 weight_dtype 设置为 fp8 类型之一。\n - 将【图像重缩放】中的宽度和高度修改成512即可（但是512尺寸的图片质量会下降，可以在最终生成的图片后加一个放大图像的工作流）。\n\n—————————————————\n#图生图（Image2Image）：\n - 该模式下文本切换需要选择【1】，Latent选择【1】；\n - 降噪参数推荐0.5～0.8之间\n\n#文生图（Text2Image）：\n - 该模式下文本切换需要选择【2】，Latent选择【2】；\n - 降噪参数推荐1.00\n\n—————————————————\n#写在最后：\n·LLM_Party正在用心经营一片AI时代的后花园，我们希望能够在AI时代下成为众多参与者的一员，我们从开源社区中走来，也希望回到社区中去。\n·欢迎大家来到我们用心经营的后花园：\n - QQ交流群：931057213\n - 微信交流群：we_glm（添加小助理微信，统一通过后会添加至交流群）"
       ],
       "color": "#432",
       "bgcolor": "#653",
