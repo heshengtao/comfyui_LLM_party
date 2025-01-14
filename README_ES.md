@@ -187,6 +187,7 @@ Si hay problemas con el complemento o si tiene alguna otra pregunta, le damos la
 
 ### Síguenos
 1. Si desea mantenerse informado sobre las últimas funciones de este proyecto, le invitamos a seguir nuestra cuenta de Bilibili: [主持BB机](https://space.bilibili.com/26978344)
+2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
 
 ### Apoyo a donaciones
 Si mi trabajo le ha aportado valor, ¡considere invitarme a un café! Su apoyo no solo revitaliza el proyecto, sino que también calienta el corazón del creador.☕💖 ¡Cada taza cuenta!

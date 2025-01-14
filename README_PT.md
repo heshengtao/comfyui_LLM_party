@@ -187,6 +187,7 @@ Se houver problemas com o plugin ou se você tiver outras dúvidas, sinta-se à 
 
 ### Siga-nos
 1. Se desejar acompanhar as últimas funcionalidades deste projeto, fique à vontade para seguir nossa conta no Bilibili: [派对主持BB机](https://space.bilibili.com/26978344)
+2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
 
 ### Apoio à doação
 Se meu trabalho lhe trouxe valor, considere me convidar para um café! Seu apoio não apenas energiza o projeto, mas também aquece o coração do criador.☕💖 Cada xícara conta!

@@ -186,6 +186,7 @@ Wenn es Probleme mit dem Plugin gibt oder Sie andere Fragen haben, sind Sie herz
 
 ### Folgen Sie uns
 1. Wenn Sie die neuesten Funktionen dieses Projekts kontinuierlich verfolgen möchten, heißen wir Sie herzlich willkommen, unseren Bilibili-Account zu abonnieren: [派对主持BB机](https://space.bilibili.com/26978344)
+2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
 
 ### Unterstützung durch Spenden
 Wenn meine Arbeit Ihnen einen Mehrwert bietet, ziehen Sie bitte in Betracht, mir einen Kaffee auszugeben! Ihre Unterstützung belebt nicht nur das Projekt, sondern erwärmt auch das Herz der Kreatoren.☕💖 Jede Tasse zählt!
