@@ -37,7 +37,7 @@ https://github.com/user-attachments/assets/945493c0-92b3-4244-ba8f-0c4b2ad4eba6
 ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정을 통해 나만의 AI 도우미를 신속하게 구축하고, 산업에 적용 가능한 단어 벡터 RAG, GraphRAG를 통해 산업 내 지식 관리 시스템을 로컬화합니다. 단일 지능체 파이프라인에서 복잡한 지능체 간의 방사형 상호작용 모드, 순환 상호작용 모드를 구성하는 것까지; 개인 사용자가 자신의 사회적 APP(QQ, Feishu, Discord)에 접속할 필요가 있는 것부터, 스트리밍 작업자가 필요로 하는 원스톱 LLM+TTS+ComfyUI 워크플로우까지; 일반 학생들이 필요로 하는 첫 번째 LLM 응용 프로그램의 간단한 시작부터, 연구자들이 자주 사용하는 다양한 파라미터 조정 인터페이스, 모델 적응까지. 이 모든 것을 ComfyUI LLM Party에서 확인할 수 있습니다.
 
 ## 빠른 시작
-0. 만약 당신이 comfyu를 사용해 본 적이 없고, comfyui에서 LLM 파티를 설치할 때 의존성 문제가 발생했다면, [여기를 클릭](https://drive.google.com/file/d/1NJSpwEL3FqroKVv5UsrVY3YbCG-9YWmt/view?usp=sharing) 하여 LLM 파티가 포함된 comfyui **windows** 휴대용 패키지를 다운로드하십시오. 주의하십시오! 이 휴대용 패키지에는 party와 관리자라는 두 개의 플러그인만 포함되어 있으며, 오직 windows 시스템에만 적합합니다.(기존의 comfyui에 LLM party를 설치해야 하는 경우, 이 단계를 건너뛸 수 있습니다.)
+0. 만약 당신이 comfyu를 사용해 본 적이 없고, comfyui에서 LLM 파티를 설치할 때 의존성 문제가 발생했다면, [여기를 클릭](https://drive.google.com/file/d/1T9C7gEbd-w_zf9GqZO1VeI3z8ek8clpX/view?usp=sharing) 하여 LLM 파티가 포함된 comfyui **windows** 휴대용 패키지를 다운로드하십시오. 주의하십시오! 이 휴대용 패키지에는 party와 관리자라는 두 개의 플러그인만 포함되어 있으며, 오직 windows 시스템에만 적합합니다.(기존의 comfyui에 LLM party를 설치해야 하는 경우, 이 단계를 건너뛸 수 있습니다.)
 1. 다음 워크플로를 comfyui에 드래그한 다음 [comfyui-Manager](https://github.com/ltdrdata/ComfyUI-Manager)를 사용하여 누락된 노드를 설치합니다.
   - API를 사용하여 LLM 호출: [start_with_LLM_api](workflow/start_with_LLM_api.json)
   - aisuite를 사용하여 LLM을 호출합니다：[start_with_aisuite](workflow/start_with_aisuite.json)
