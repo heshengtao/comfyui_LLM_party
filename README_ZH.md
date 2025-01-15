@@ -4,7 +4,6 @@
   <a href="https://space.bilibili.com/26978344">B站</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">文字教程</a> ·
-  <a href="workflow_tutorial/">工作流教程</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">网盘链接</a> ·
   <a href="img/Q群.jpg">QQ群</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">discord</a> ·
@@ -45,7 +44,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
   - 使用ollama管理本地LLM：[start_with_Ollama](workflow/ollama.json)
   - 使用分散格式的本地LLM：[start_with_LLM_local](workflow/start_with_LLM_local.json)
   - 使用GGUF格式的本地LLM：[start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-  - 使用分散格式的本地VLM：[start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json)（测试中，目前只支持[Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)）
+  - 使用分散格式的本地VLM：[start_with_VLM_local](workflow/start_with_VLM_local.json)（测试中，目前只支持[Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)）
   - 使用GGUF格式的本地VLM：[start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. 如果你是使用API，在API LLM加载器节点上填入你的`base_url`（可以是中转API，注意结尾要用`/v1/`），例如：`https://api.openai.com/v1/` 以及`api_key`。
 3. 如果你是使用ollama，在API LLM加载器节点上打开`is_ollama`选项，无需填写`base_url`和`api_key`。
@@ -60,9 +59,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 2. 如果插件存在问题或者您有其他的疑问，欢迎加入QQ群：[931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/f2dsAKKr2V)
 
-3. 工作流教程请参考：[工作流教程](workflow_tutorial/)，感谢[HuangYuChuh](https://github.com/HuangYuChuh)的贡献！
-
-4. 更多的工作流可以参考[workflow](workflow)文件夹
+3. 更多的工作流可以参考[workflow](workflow)文件夹
 
 ## 视频教程
 <a href="https://space.bilibili.com/26978344">

@@ -4,7 +4,6 @@
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">Tutorial em texto</a> ·
-  <a href="workflow_tutorial/">Tutorial de fluxo de trabalho</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">Endereço do disco em nuvem</a> ·
   <a href="img/Q群.jpg">Grupo do QQ</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">Discord</a> ·
@@ -44,7 +43,7 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
   - Gerencie LLM local com ollama: [start_with_Ollama](workflow/ollama.json)
   - Use LLM local em formato distribuído: [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - Use LLM local em formato GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-  - Use VLM local em formato distribuído: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (em teste, atualmente suporta apenas [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
+  - Use VLM local em formato distribuído: [start_with_VLM_local](workflow/start_with_VLM_local.json) (em teste, atualmente suporta apenas [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
   - Use VLM local em formato GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. Se você estiver usando a API, preencha seu `base_url` (pode ser uma API de retransmissão, certifique-se de que termine com `/v1/`) e `api_key` no nó de carregamento da API LLM. Exemplo: `https://api.openai.com/v1/`
 3. Se você estiver usando ollama, ative a opção `is_ollama` no nó de carregamento da API LLM, não é necessário preencher `base_url` e `api_key`.
@@ -58,7 +57,6 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 1. Para instruções sobre o uso dos nós, consulte: [怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 
 2. Se houver problemas com o plugin ou se você tiver outras dúvidas, sinta-se à vontade para entrar no grupo QQ: [931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/f2dsAKKr2V).
-3. Para o tutorial de fluxo de trabalho, por favor, consulte: [工作流教程](workflow_tutorial/)，agradecemos a contribuição de [HuangYuChuh](https://github.com/HuangYuChuh)!
 
 4. Para mais fluxos de trabalho, você pode consultar a pasta [workflow](workflow).
 

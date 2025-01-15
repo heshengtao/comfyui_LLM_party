@@ -4,7 +4,6 @@
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">텍스트 튜토리얼</a> ·
-  <a href="workflow_tutorial/">작업 흐름 튜토리얼</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">클라우드 디스크 주소</a> ·
   <a href="img/Q群.jpg">QQ 그룹</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">디스코드</a> ·
@@ -44,7 +43,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
   - ollama를 사용하여 로컬 LLM 관리: [start_with_Ollama](workflow/ollama.json)
   - 분산 형식의 로컬 LLM 사용: [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - GGUF 형식의 로컬 LLM 사용: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-  - 분산 형식의 로컬 VLM 사용: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (테스트 중, 현재는 [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)만 지원)
+  - 분산 형식의 로컬 VLM 사용: [start_with_VLM_local](workflow/start_with_VLM_local.json) (테스트 중, 현재는 [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)만 지원)
   - GGUF 형식의 로컬 VLM 사용: [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. API를 사용하는 경우, API LLM 로더 노드에 `base_url`(릴레이 API일 수 있으며, 끝이 `/v1/`로 끝나는지 확인)과 `api_key`를 입력합니다. 예: `https://api.openai.com/v1/`
 3. ollama를 사용하는 경우, API LLM 로더 노드에서 `is_ollama` 옵션을 켜고 `base_url` 및 `api_key`를 입력할 필요가 없습니다.
@@ -58,7 +57,6 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 1. 노드 사용 설명서는 다음을 참고하십시오: [노드 사용 방법](https://github.com/heshengtao/Let-LLM-party)
 
 2. 플러그인에 문제가 있거나 다른 질문이 있으시면 QQ 그룹에 참여해 주십시오: [931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/f2dsAKKr2V).
-3. 워크플로우 튜토리얼은 다음을 참조하시기 바랍니다: [워크플로우 튜토리얼](workflow_tutorial/), [HuangYuChuh](https://github.com/HuangYuChuh)님의 기여에 감사드립니다!
 
 4. 더 많은 워크플로우는 [workflow](workflow) 폴더를 참조하시기 바랍니다.
 

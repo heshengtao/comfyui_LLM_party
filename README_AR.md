@@ -4,7 +4,6 @@
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">دليل النص</a> ·
-  <a href="workflow_tutorial/">دليل سير العمل</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">عنوان القرص السحابي</a> ·
   <a href="img/Q群.jpg">مجموعة QQ</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">ديسكورد</a> ·
@@ -44,7 +43,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
   - إدارة LLM المحلي باستخدام ollama: [start_with_Ollama](workflow/ollama.json)
   - استخدم LLM المحلي بتنسيق موزع: [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - استخدم LLM المحلي بتنسيق GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-  - استخدم VLM المحلي بتنسيق موزع: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (تحت الاختبار، يدعم حاليًا فقط [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
+  - استخدم VLM المحلي بتنسيق موزع: [start_with_VLM_local](workflow/start_with_VLM_local.json) (تحت الاختبار، يدعم حاليًا فقط [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
   - استخدم VLM المحلي بتنسيق GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. إذا كنت تستخدم API، فاملأ `base_url` (يمكن أن يكون API وسيط، تأكد من أنه ينتهي بـ `/v1/`) و`api_key` في عقدة تحميل API LLM. مثال: `https://api.openai.com/v1/`
 3. إذا كنت تستخدم ollama، فقم بتشغيل خيار `is_ollama` في عقدة تحميل API LLM، ولا حاجة لملء `base_url` و`api_key`.
@@ -58,7 +57,6 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 1. يرجى الرجوع إلى تعليمات استخدام العقدة: [怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 
 2. إذا كانت هناك مشاكل في المكون الإضافي أو إذا كان لديك أي استفسارات أخرى، فنحن نرحب بك للانضمام إلى مجموعة QQ: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/f2dsAKKr2V).
-3. يُرجى الرجوع إلى [دليل سير العمل](workflow_tutorial/) ، شكرًا لمساهمة [HuangYuChuh](https://github.com/HuangYuChuh)！
 
 4. يمكن الاطلاع على المزيد من سير العمل في مجلد [workflow](workflow)
 

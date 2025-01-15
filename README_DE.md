@@ -4,7 +4,6 @@
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">Texttutorial</a> ·
-  <a href="workflow_tutorial/">Workflow-Tutorial</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">Cloud-Disk-Adresse</a> ·
   <a href="img/Q群.jpg">QQ-Gruppe</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">Discord</a> ·
@@ -44,7 +43,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
   - Verwalten Sie lokale LLMs mit ollama: [start_with_Ollama](workflow/ollama.json)
   - Verwenden Sie lokale LLMs im verteilten Format: [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - Verwenden Sie lokale LLMs im GGUF-Format: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-  - Verwenden Sie lokale VLMs im verteilten Format: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (Testphase, derzeit nur [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct) unterstützt)
+  - Verwenden Sie lokale VLMs im verteilten Format: [start_with_VLM_local](workflow/start_with_VLM_local.json) (Testphase, derzeit nur [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct) unterstützt)
   - Verwenden Sie lokale VLMs im GGUF-Format: [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. Wenn Sie die API verwenden, füllen Sie im API LLM-Ladeknoten Ihre `base_url` (es kann eine Relay-API sein, stellen Sie sicher, dass sie mit `/v1/` endet) und `api_key` aus. Beispiel: `https://api.openai.com/v1/`
 3. Wenn Sie ollama verwenden, aktivieren Sie die Option `is_ollama` im API LLM-Ladeknoten, ohne `base_url` und `api_key` auszufüllen.
@@ -58,7 +57,6 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 1. Bitte beziehen Sie sich auf die Anweisungen zur Verwendung der Knoten: [怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 
 2. Bei Problemen mit dem Plugin oder anderen Fragen freuen wir uns über Ihren Beitritt zur QQ-Gruppe: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/f2dsAKKr2V).
-3. Für das Workflow-Tutorial siehe bitte: [Workflow-Tutorial](workflow_tutorial/). Vielen Dank an [HuangYuChuh](https://github.com/HuangYuChuh) für seinen Beitrag!
 
 4. Weitere Workflows finden Sie im Ordner [workflow](workflow).
 

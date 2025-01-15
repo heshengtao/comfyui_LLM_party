@@ -4,7 +4,6 @@
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">text tutorial</a> ·
-  <a href="workflow_tutorial/">workflow tutorial</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">Cloud disk address</a> ·
   <a href="img/Q群.jpg">QQ group</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">discord</a> ·
@@ -45,7 +44,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
   - Manage local LLM with ollama: [start_with_Ollama](workflow/ollama.json)
   - Use local LLM in distributed format: [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - Use local LLM in GGUF format: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-  - Use local VLM in distributed format: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (testing, currently only supports [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
+  - Use local VLM in distributed format: [start_with_VLM_local](workflow/start_with_VLM_local.json) (testing, currently only supports [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
   - Use local VLM in GGUF format: [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. If you are using API, fill in your `base_url` (it can be a relay API, make sure it ends with `/v1/`), for example: `https://api.openai.com/v1/` and `api_key` in the API LLM loader node.
 3. If you are using ollama, turn on the `is_ollama` option in the API LLM loader node, no need to fill in `base_url` and `api_key`.
@@ -59,8 +58,6 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 1. For the instructions for using the node, please refer to: [how to use nodes](https://github.com/heshengtao/Let-LLM-party)
 
 2. If there are any issues with the plugin or you have other questions, feel free to join the QQ group: [931057213](img/Q群.jpg) | discord：[discord](https://discord.gg/f2dsAKKr2V).
-
-3. Please refer to the workflow tutorial: [Workflow Tutorial](workflow_tutorial/), thanks to [HuangYuChuh](https://github.com/HuangYuChuh) for your contribution!
 
 4. More workflows please refer to the [workflow](workflow) folder.
 

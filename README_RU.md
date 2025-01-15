@@ -4,7 +4,6 @@
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">Текстовые инструкции</a> ·
-  <a href="workflow_tutorial/">Инструкции по работе с потоками</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">Адрес облачного диска</a> ·
   <a href="img/Q群.jpg">QQ группа</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">Discord</a> ·
@@ -44,7 +43,7 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
   - Управляйте локальным LLM с помощью ollama: [start_with_Ollama](workflow/ollama.json)
   - Используйте локальный LLM в распределенном формате: [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - Используйте локальный LLM в формате GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-  - Используйте локальный VLM в распределенном формате: [start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json) (тестирование, в настоящее время поддерживает только [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
+  - Используйте локальный VLM в распределенном формате: [start_with_VLM_local](workflow/start_with_VLM_local.json) (тестирование, в настоящее время поддерживает только [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
   - Используйте локальный VLM в формате GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. Если вы используете API, заполните `base_url` (это может быть промежуточный API, убедитесь, что он заканчивается на `/v1/`), например: `https://api.openai.com/v1/` и `api_key` в узле загрузчика API LLM.
 3. Если вы используете ollama, включите опцию `is_ollama` в узле загрузчика API LLM, не нужно заполнять `base_url` и `api_key`.
@@ -58,7 +57,6 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 1. Пожалуйста, обратитесь к инструкции по использованию узлов: [怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 
 2. Если у вас возникли проблемы с плагином или у вас есть другие вопросы, присоединяйтесь к нашей группе QQ: [931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/f2dsAKKr2V).
-3. Пожалуйста, обратитесь к [учебнику по рабочим процессам](workflow_tutorial/), благодарим за вклад [HuangYuChuh](https://github.com/HuangYuChuh)!
 
 4. Дополнительные рабочие процессы можно найти в папке [workflow](workflow).
 

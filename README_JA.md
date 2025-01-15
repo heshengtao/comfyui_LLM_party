@@ -4,7 +4,6 @@
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
   <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">テキストチュートリアル</a> ·
-  <a href="workflow_tutorial/">ワークフローチュートリアル</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">クラウドディスクのアドレス</a> ·
   <a href="img/Q群.jpg">QQグループ</a> ·
   <a href="https://discord.gg/f2dsAKKr2V">ディスコード</a> ·
@@ -44,7 +43,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
   - ollamaを使用してローカルLLMを管理する：[start_with_Ollama](workflow/ollama.json)
   - 分散形式のローカルLLMを使用する：[start_with_LLM_local](workflow/start_with_LLM_local.json)
   - GGUF形式のローカルLLMを使用する：[start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-  - 分散形式のローカルVLMを使用する：[start_with_VLM_local](https://github.com/heshengtao/comfyui_LLM_party/blob/main/workflow_tutorial/LLM_Party%20for%20Llama3.2%20-Vision%EF%BC%88%E5%B8%A6%E8%AE%B0%E5%BF%86%EF%BC%89.json)（テスト中、現在は[Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)のみサポート）
+  - 分散形式のローカルVLMを使用する：[start_with_VLM_local](workflow/start_with_VLM_local.json)（テスト中、現在は[Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)のみサポート）
   - GGUF形式のローカルVLMを使用する：[start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. APIを使用する場合、API LLMローダーノードに`base_url`（リレーAPIでも可、末尾は`/v1/`であることを確認）と`api_key`を入力します。例：`https://api.openai.com/v1/`
 3. ollamaを使用する場合、API LLMローダーノードで`is_ollama`オプションをオンにし、`base_url`と`api_key`を入力する必要はありません。
@@ -58,7 +57,6 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 1. ノードの使用説明については、以下を参照してください：[ノードの使用方法](https://github.com/heshengtao/Let-LLM-party)
 
 2. プラグインに問題がある場合や他に疑問がある場合は、ぜひQQ群にご参加ください：[931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/f2dsAKKr2V).
-3. ワークフローのチュートリアルについては、[ワークフローのチュートリアル](workflow_tutorial/)をご参照ください。貢献してくださった[HuangYuChuh](https://github.com/HuangYuChuh)に感謝いたします。
 
 4. さらに多くのワークフローは[workflow](workflow)フォルダーをご覧ください。
 
