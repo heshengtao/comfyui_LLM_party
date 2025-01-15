@@ -161,9 +161,6 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 <a href="https://github.com/guobalove">
   <img src="https://avatars.githubusercontent.com/u/171540731?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
-<a href="https://github.com/HuangYuChuh">
-  <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
-</a>
 <a href="https://github.com/SpenserCai">
   <img src="https://avatars.githubusercontent.com/u/25168945?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>

@@ -57,7 +57,6 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 1. Pour les instructions d'utilisation des nœuds, veuillez consulter : [怎么使用节点](https://github.com/heshengtao/Let-LLM-party)
 
 2. Si vous rencontrez des problèmes avec le plugin ou si vous avez d'autres questions, n'hésitez pas à rejoindre le groupe QQ : [931057213](img/Q群.jpg) |discord：[discord](https://discord.gg/f2dsAKKr2V).
-3. Pour le tutoriel sur les flux de travail, veuillez consulter : [Tutoriel sur les flux de travail](workflow_tutorial/), merci pour la contribution de [HuangYuChuh](https://github.com/HuangYuChuh) !
 
 4. Pour plus de flux de travail, veuillez consulter le dossier [workflow](workflow).
 
@@ -157,9 +156,6 @@ Ce projet open source et son contenu (ci-après dénommé "projet") sont fournis
 </a>
 <a href="https://github.com/guobalove">
   <img src="https://avatars.githubusercontent.com/u/171540731?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
-</a>
-<a href="https://github.com/HuangYuChuh">
-  <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
 <a href="https://github.com/SpenserCai">
   <img src="https://avatars.githubusercontent.com/u/25168945?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>

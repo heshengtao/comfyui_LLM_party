@@ -157,9 +157,6 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 <a href="https://github.com/guobalove">
   <img src="https://avatars.githubusercontent.com/u/171540731?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
-<a href="https://github.com/HuangYuChuh">
-  <img src="https://avatars.githubusercontent.com/u/167663109?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
-</a>
 <a href="https://github.com/SpenserCai">
   <img src="https://avatars.githubusercontent.com/u/25168945?v=4" width="50" height="50" style="border-radius: 50%; overflow: hidden;" alt="octocat"/>
 </a>
