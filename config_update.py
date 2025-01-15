@@ -162,8 +162,8 @@ async def start_streamlit(request):
 # 修改获取工作流列表的函数
 def get_workflow_list():
     workflow_dirs = [
-        os.path.join(os.path.dirname(__file__), 'workflow_tutorial'),
-        os.path.join(os.path.dirname(__file__), 'workflow')
+        os.path.join(os.path.dirname(__file__), 'workflow'),
+        os.path.join(os.path.dirname(__file__), 'workflow_api')
     ]
     workflows = []
     for workflow_dir in workflow_dirs:
@@ -176,8 +176,8 @@ def get_workflow_list():
 # 修改加载工作流的函数
 def load_workflow(workflow_name):
     workflow_dirs = [
-        os.path.join(os.path.dirname(__file__), 'workflow_tutorial'),
-        os.path.join(os.path.dirname(__file__), 'workflow')
+        os.path.join(os.path.dirname(__file__), 'workflow'),
+        os.path.join(os.path.dirname(__file__), 'workflow_api')
     ]
     for workflow_dir in workflow_dirs:
         workflow_path = os.path.join(workflow_dir, workflow_name)
