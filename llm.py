@@ -274,6 +274,7 @@ def another_llm(id, type, question):
             is_enable,
             extra_parameters,
             user_history,
+            is_enable_system_role,
         ) = llm.list
         res, _, _, _ = llm.chatbot(
             question,
@@ -296,6 +297,7 @@ def another_llm(id, type, question):
             is_enable,
             extra_parameters,
             user_history,
+            is_enable_system_role,
         )
     else:
         return "type参数错误，请使用api或local"
@@ -2062,6 +2064,7 @@ class LLM_local:
                 "is_enable": ("BOOLEAN", {"default": True, "tooltip": "Whether to enable the LLM."}),
                 "extra_parameters": ("DICT", {"forceInput": True, "tooltip": "Extra parameters for the LLM."}),
                 "user_history": ("STRING", {"forceInput": True, "tooltip": "User history, you can directly input a JSON string containing multiple rounds of dialogue here."}),
+                "is_enable_system_role": (["enable", "disable"], {"default": "enable","tooltip": "Whether to enable the system role for the LLM."}),
             },
         }
 
@@ -2113,6 +2116,7 @@ class LLM_local:
         is_enable=True,
         extra_parameters=None,
         user_history=None,
+        is_enable_system_role="enable",
     ):
         if not is_enable:
             return (
@@ -2141,6 +2145,7 @@ class LLM_local:
             is_enable,
             extra_parameters,
             user_history,
+            is_enable_system_role,
         ]
         if user_prompt is None:
             user_prompt = user_prompt_input
@@ -2280,7 +2285,6 @@ class LLM_local:
                         if tools_list != []:
                             if model_type in ["LLM", "VLM(testing)"]:
                                 message["content"] += "\n" + TOOL_EAXMPLE + "\n" + GPT_INSTRUCTION + "\n"
-                                
                 if tools is not None:
                     print(tools)
                     tools = json.loads(tools)
@@ -2297,7 +2301,9 @@ class LLM_local:
                     for message in history:
                         if message["role"] == "system":
                             message["content"] += "\n以下是可以参考的已知信息:\n" + file_content
-
+                if is_enable_system_role == "disable":
+                    if history[0]["role"] == "system":
+                        history[0]["role"]= "user"
                 # 获得model存放的设备
                 if model_type not in ["VLM-GGUF", "LLM-GGUF"]:
                     device = next(model.parameters()).device
@@ -2522,6 +2528,9 @@ class LLM_local:
                 history_get.extend(history_copy)
                 history_get.extend(history[1:])
                 history = history_get
+                if is_enable_system_role == "disable":
+                    if history[0]["role"] == "user":
+                        history[0]["role"]= "system"
                 with open(self.prompt_path, "w", encoding="utf-8") as f:
                     json.dump(history, f, indent=4, ensure_ascii=False)
                 for his in history:
