@@ -51,6 +51,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 5. このプロジェクトは使用の敷居が高いため、クイックスタートを選択した場合でも、プロジェクトのホームページをじっくり読んでいただけると幸いです。
 
 ## 最新の更新
+1. partyがデフォルトで対応しているimgbbの画像ホスティングサービスが[imgbb](https://imgbb.io)のドメインに更新されました。以前の画像ホスティングは中国本土のユーザーにとって便利ではなかったため、置き換えられました。  
 1. 更新された[MCP](https://modelcontextprotocol.io/introduction)ツールでは、partyプロジェクトフォルダ内の'[mcp_config.json](mcp_config.json)'ファイルの設定を変更することで、接続するMCPサーバーを調整できます。さまざまなMCPサーバーの設定パラメーターは、こちらでご確認いただけます：[modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)。本プロジェクトでは、デフォルト設定としてEverythingサーバーが用意されており、MCPサーバーが正常に機能するかのテストに使用されます。ワークフローの参照：[start_with_MCP](workflow/start_with_MCP.json)。開発者向けの注意：MCPツールノードは、設定済みのMCPサーバーに接続でき、その後サーバー内のtoolsをLLMが直接使用可能なツールに変換します。異なるローカルサーバーやクラウドサーバーを設定することで、世界中のすべてのLLMツールを体験することができます。
 
 ## 使用説明

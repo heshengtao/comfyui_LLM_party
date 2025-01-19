@@ -541,12 +541,13 @@ class Chat:
                         buffered = io.BytesIO()
                         img.save(buffered, format="PNG")
                         img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
-                        url = "https://api.imgbb.com/1/upload"
-                        payload = {"key": imgbb_api_key, "image": img_str}
-                        response = requests.post(url, data=payload)
+                        url = "https://imgbb.io/api/1/upload"
+                        headers = {'X-API-Key': imgbb_api_key}
+                        payload = {'source': img_str}
+                        response = requests.post(url, headers=headers, data=payload)
                         if response.status_code == 200:
                             result = response.json()
-                            img_url = result["data"]["url"]
+                            img_url = result.get('image').get('url')
                             img_json.append({
                                 "type": "image_url",
                                 "image_url": {"url": img_url}
@@ -898,12 +899,13 @@ class aisuite_Chat:
                         buffered = io.BytesIO()
                         img.save(buffered, format="PNG")
                         img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
-                        url = "https://api.imgbb.com/1/upload"
-                        payload = {"key": imgbb_api_key, "image": img_str}
-                        response = requests.post(url, data=payload)
+                        url = "https://imgbb.io/api/1/upload"
+                        headers = {'X-API-Key': imgbb_api_key}
+                        payload = {'source': img_str}
+                        response = requests.post(url, headers=headers, data=payload)
                         if response.status_code == 200:
                             result = response.json()
-                            img_url = result["data"]["url"]
+                            img_url = result.get('image').get('url')
                             img_json.append({
                                 "type": "image_url",
                                 "image_url": {"url": img_url}

@@ -51,6 +51,7 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 5. En raison du seuil d'utilisation élevé de ce projet, même si vous choisissez le démarrage rapide, j'espère que vous pourrez lire attentivement la page d'accueil du projet.
 
 ## Dernières mises à jour
+1. Le serveur d'images par défaut de party, qui est compatible avec imgbb, a été mis à jour vers le domaine [imgbb](https://imgbb.io). L'ancien serveur d'images, peu convivial pour les utilisateurs de la Chine continentale, a donc été remplacé.
 1. L'outil [MCP](https://modelcontextprotocol.io/introduction) a été mis à jour, vous pouvez modifier la configuration dans le fichier '[mcp_config.json](mcp_config.json)' situé dans le dossier du projet party pour ajuster la connexion au serveur MCP souhaité. Vous pouvez trouver ici divers paramètres de configuration des serveurs MCP que vous souhaitez ajouter : [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers). La configuration par défaut de ce projet est le serveur Everything, qui sert à tester si le serveur MCP fonctionne correctement. Workflow de référence : [start_with_MCP](workflow/start_with_MCP.json). Note pour les développeurs : le nœud d'outil MCP peut se connecter au serveur MCP que vous avez configuré, puis transformer les outils du serveur en outils directement utilisables par LLM. En configurant différents serveurs locaux ou cloud, vous pouvez expérimenter tous les outils LLM disponibles dans le monde.
 
 ## Instructions d'utilisation

@@ -22,7 +22,7 @@
   - history：为LLM的对话记录
   - Tool :当LLM作为另一个LLM的工具时，启用这个输出。大部分情况下可以无视。
   - Image: 在施工中，未来有用。
-8. LLM适配GPT4的视觉功能，imgbb_api_key可以输入imgbb的api_key，填入之后你的图片会以url格式传入GPT，如果不填，就是以图片编码的形式传入。
+8. LLM适配GPT4的视觉功能，imgbb_api_key可以输入[imgbb](https://imgbb.io)的api_key，填入之后你的图片会以url格式传入GPT，如果不填，就是以图片编码的形式传入。
 9. 大模型节点可以自定义模型名称、API_KEY、base_url，目前暂时只支持openai类型的API接口调用。可以结合one api 转接任意大模型API
 
 ### 本地LLM节点及其加载节点

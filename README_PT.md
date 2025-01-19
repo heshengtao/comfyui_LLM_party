@@ -51,6 +51,7 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 5. Devido ao alto limiar de uso deste projeto, mesmo que você escolha o início rápido, espero que possa ler pacientemente a página inicial do projeto.
 
 ## Atualizações Recentes
+1. A opção de imagem compatível por padrão do party foi atualizada para o domínio [imgbb](https://imgbb.io), uma vez que o anterior serviço de hospedagem de imagens não era amigável para os usuários da China continental e foi substituído.
 1. A ferramenta [MCP](https://modelcontextprotocol.io/introduction) foi atualizada, você pode modificar a configuração no arquivo '[mcp_config.json](mcp_config.json)' na pasta do projeto party para ajustar o servidor MCP ao qual deseja se conectar. Você pode encontrar aqui vários parâmetros de configuração dos servidores MCP que deseja adicionar: [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers). A configuração padrão deste projeto é o servidor Everything, um servidor utilizado para testar se o servidor MCP opera corretamente. Fluxo de trabalho de referência: [start_with_MCP](workflow/start_with_MCP.json). Nota para desenvolvedores: o nó da ferramenta MCP pode se conectar ao servidor MCP configurado e, em seguida, converter as ferramentas do servidor em ferramentas que o LLM pode usar diretamente. Ao configurar diferentes servidores locais ou em nuvem, você pode experimentar todas as ferramentas LLM disponíveis no mundo.
 
 ## Instruções de Uso

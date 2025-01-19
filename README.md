@@ -52,6 +52,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 5. Due to the high usage threshold of this project, even if you choose the quick start, I hope you can patiently read through the project homepage.
 
 ## Latest update
+1. The default compatible image hosting service of party has been updated to the domain [imgbb](https://imgbb.io), as the previous image hosting service was not user-friendly for users in mainland China and has therefore been replaced.
 1. The [MCP](https://modelcontextprotocol.io/introduction) tool has been updated. You can modify the configuration in the '[mcp_config.json](mcp_config.json)' file located in the party project folder to connect to your desired MCP server. You can find various MCP server configuration parameters that you may want to add here: [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers). The default configuration for this project is the Everything server, which serves as a testing MCP server to verify its functionality. Reference workflow: [start_with_MCP](workflow/start_with_MCP.json). Developer note: The MCP tool node can connect to the MCP server you have configured and convert the tools from the server into tools that can be directly used by LLMs. By configuring different local or cloud servers, you can experience all LLM tools available in the world.
 
 ## User Guide

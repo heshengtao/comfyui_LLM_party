@@ -781,16 +781,13 @@ class mini_ocr:
             img.save(buffered, format="PNG")
             # 将图片编码为base64
             img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
-            url = "https://api.imgbb.com/1/upload"
-            payload = {"key": imgbb_api_key, "image": img_str}
-            # 向API发送POST请求
-            response = requests.post(url, data=payload)
-            # 检查请求是否成功
+            url = "https://imgbb.io/api/1/upload"
+            headers = {'X-API-Key': imgbb_api_key}
+            payload = {'source': img_str}
+            response = requests.post(url, headers=headers, data=payload)
             if response.status_code == 200:
-                # 解析响应以获取图片URL
                 result = response.json()
-                img_url = result["data"]["url"]
-                print(img_url)
+                img_url = result.get('image').get('url')
             else:
                 return "Error: " + response.text
             img_json = [
@@ -1266,16 +1263,13 @@ a girl, beautiful detailed eyes, stars in the eyes, messy floating hair, colored
             img.save(buffered, format="PNG")
             # 将图片编码为base64
             img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
-            url = "https://api.imgbb.com/1/upload"
-            payload = {"key": imgbb_api_key, "image": img_str}
-            # 向API发送POST请求
-            response = requests.post(url, data=payload)
-            # 检查请求是否成功
+            url = "https://imgbb.io/api/1/upload"
+            headers = {'X-API-Key': imgbb_api_key}
+            payload = {'source': img_str}
+            response = requests.post(url, headers=headers, data=payload)
             if response.status_code == 200:
-                # 解析响应以获取图片URL
                 result = response.json()
-                img_url = result["data"]["url"]
-                print(img_url)
+                img_url = result.get('image').get('url')
             else:
                 return "Error: " + response.text
             img_json = [
@@ -1443,16 +1437,13 @@ A majestic, emerald-scaled dragon with glowing amber eyes, wings outstretched, s
             img.save(buffered, format="PNG")
             # 将图片编码为base64
             img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
-            url = "https://api.imgbb.com/1/upload"
-            payload = {"key": imgbb_api_key, "image": img_str}
-            # 向API发送POST请求
-            response = requests.post(url, data=payload)
-            # 检查请求是否成功
+            url = "https://imgbb.io/api/1/upload"
+            headers = {'X-API-Key': imgbb_api_key}
+            payload = {'source': img_str}
+            response = requests.post(url, headers=headers, data=payload)
             if response.status_code == 200:
-                # 解析响应以获取图片URL
                 result = response.json()
-                img_url = result["data"]["url"]
-                print(img_url)
+                img_url = result.get('image').get('url')
             else:
                 return "Error: " + response.text
             img_json = [

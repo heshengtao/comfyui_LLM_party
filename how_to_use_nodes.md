@@ -22,7 +22,7 @@
    - `history`: Conversation records of the LLM
    - `Tool`: Enabled when the LLM is used as a tool for another LLM. In most cases, it can be ignored.
    - `Image`: Under construction, useful in the future.
-8. The LLM adapts to GPT-4's visual functions. You can input the `imgbb_api_key` into the imgbb API key. After filling it in, your image will be passed to GPT in URL format. If not filled, it will be passed in image encoding format.
+8. The LLM adapts to GPT-4's visual functions. You can input the `imgbb_api_key` into the [imgbb](https://imgbb.io) API key. After filling it in, your image will be passed to GPT in URL format. If not filled, it will be passed in image encoding format.
 9. The large model node can customize the model name, API_KEY, and base_url. Currently, only OpenAI type API interface calls are supported. It can be combined with One API to connect to any large model API.
 
 ### Local LLM Nodes and Their Loading Nodes
