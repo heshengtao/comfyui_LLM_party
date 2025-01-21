@@ -368,15 +368,14 @@ async def process_request(request_data: CompletionRequest):
                     f.write(base64.b64decode(img_base64))
                 base64_images.append(filename)
             else:
-                url = "https://imgbb.io/api/1/upload"
-                headers = {'X-API-Key': imgbb_key}
-                payload = {'source': img_base64}
-                response = requests.post(url, headers=headers, data=payload)
-                if response.status_code == 200:
-                    result = response.json()
-                    img_url = result.get('image').get('url')
+                url = "https://api.imgbb.com/1/upload"
+                payload = {"key": imgbb_key, "image": img_base64}
+                response0 = requests.post(url, data=payload)
+                if response0.status_code == 200:
+                    result = response0.json()
+                    img_url = result["data"]["url"]
                 else:
-                    return "Error: " + response.text
+                    return "Error: " + response0.text
                 print(img_url)
                 base64_images.append(img_url)
 
