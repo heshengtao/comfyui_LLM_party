@@ -52,6 +52,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 5. 由于本项目有较高的使用门槛，所以即使你选择了快速开始，我也希望你能耐心阅读完本项目主页。
 
 ## 最新更新
+1. 添加了一个全新的图床节点，目前支持了 https://sm.ms 图床(中国地区域名为 https://smms.app)以及 https://imgbb.com 图床，未来会支持更多的图床，示例工作流：[图床](workflow/图床.json) 
 1. ~~party默认兼容的imgbb图床已更新到[imgbb](https://imgbb.io)这一域名上，之前的图床由于对于中国大陆用户不友好，所以已经更换。~~ 非常不好意思，https://imgbb.io 的图床API服务似乎已经停止了，所以代码回滚到了原先的  https://imgbb.com，感谢大家的理解。未来我会更新一个支持更多图床的节点。
 1. 更新了[MCP](https://modelcontextprotocol.io/introduction)工具，你可以修改party项目文件夹下的'[mcp_config.json](mcp_config.json)'中的配置来调整你要连接上的MCP服务器。你可以在这里找到你想要添加的各种MCP服务器配置参数：[modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)。本项目中默认配置为Everything服务器，一个用于测试MCP服务器是否可以正常使用的服务器。参考工作流：[start_with_MCP](workflow/start_with_MCP.json)。开发者注：MCP工具节点可以连接上你配置好的MCP服务器，然后将服务器中的tools转换成LLM可以直接使用的工具。通过配置不同的本地服务器或者云服务器，你可以体验到这个世界上所有LLM工具。
 
