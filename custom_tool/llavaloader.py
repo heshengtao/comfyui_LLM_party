@@ -1,3 +1,5 @@
+import datetime
+import hashlib
 import locale
 import os
 import sys
@@ -38,6 +40,7 @@ class LLavaLoader:
                 "gpu_layers": ("INT", {"default": 31, "min": 0, "max": 100, "step": 1}),
                 "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
                 "chat_format": (["llava-1-5","llava-1-6","llama-3-vision-alpha","minicpm-v-2.6","obsidian","moondream","nanollava"], {"default": "llava-1-5"}),
+                "is_locked": ("BOOLEAN", {"default": True}),
             }
         }
 
@@ -47,7 +50,14 @@ class LLavaLoader:
 
     CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
-    def load_llava_checkpoint(self, ckpt_path, clip_path, max_ctx, gpu_layers, n_threads, chat_format):
+    def load_llava_checkpoint(self, ckpt_path, clip_path, max_ctx, gpu_layers, n_threads, chat_format, is_locked):
+        self.is_locked = is_locked
+        if self.is_locked == False:
+            setattr(LLavaLoader, "IS_CHANGED", LLavaLoader.original_IS_CHANGED)
+        else:
+            # 如果方法存在，则删除
+            if hasattr(LLavaLoader, "IS_CHANGED"):
+                delattr(LLavaLoader, "IS_CHANGED")
         import llama_cpp
         from llama_cpp import Llama
         if chat_format == "llava-1-5":
@@ -73,7 +83,11 @@ class LLavaLoader:
             n_threads=n_threads,
         )
         return (llm,)
-
+    @classmethod
+    def original_IS_CHANGED(s):
+        # 生成当前时间的哈希值
+        hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+        return hash_value
 class easy_LLavaLoader:
     @classmethod
     def INPUT_TYPES(s):
@@ -84,6 +98,7 @@ class easy_LLavaLoader:
                 "max_ctx":  ("INT", {"default": 512, "min": 256, "max": 128000, "step": 128}),
                 "gpu_layers": ("INT", {"default": 31, "min": 0, "max": 100, "step": 1}),
                 "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
+                "is_locked": ("BOOLEAN", {"default": True}),
             }
         }
 
@@ -93,7 +108,14 @@ class easy_LLavaLoader:
 
     CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
-    def load_llava_checkpoint(self, ckpt_path, clip_path, max_ctx, gpu_layers, n_threads):
+    def load_llava_checkpoint(self, ckpt_path, clip_path, max_ctx, gpu_layers, n_threads, is_locked):
+        self.is_locked = is_locked
+        if self.is_locked == False:
+            setattr(easy_LLavaLoader, "IS_CHANGED", easy_LLavaLoader.original_IS_CHANGED)
+        else:
+            # 如果方法存在，则删除
+            if hasattr(easy_LLavaLoader, "IS_CHANGED"):
+                delattr(easy_LLavaLoader, "IS_CHANGED")        
         from llama_cpp import Llama
         from llama_cpp.llama_chat_format import Llava15ChatHandler
         ckpt_path=os.path.join(VLM_GGUF_dir, ckpt_path)
@@ -107,7 +129,11 @@ class easy_LLavaLoader:
             n_threads=n_threads,
         )
         return (llm,)
-
+    @classmethod
+    def original_IS_CHANGED(s):
+        # 生成当前时间的哈希值
+        hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+        return hash_value
 class GGUFLoader:
     @classmethod
     def INPUT_TYPES(s):
@@ -117,6 +143,7 @@ class GGUFLoader:
                 "max_ctx": ("INT", {"default": 512, "min": 256, "max": 128000, "step": 128}),
                 "gpu_layers": ("INT", {"default": 31, "min": 0, "max": 100, "step": 1}),
                 "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
+                "is_locked": ("BOOLEAN", {"default": True}),
             }
         }
 
@@ -126,7 +153,14 @@ class GGUFLoader:
 
     CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
-    def load_GGUF_checkpoint(self, model_path, max_ctx, gpu_layers, n_threads):
+    def load_GGUF_checkpoint(self, model_path, max_ctx, gpu_layers, n_threads,is_locked):
+        self.is_locked = is_locked
+        if self.is_locked == False:
+            setattr(GGUFLoader, "IS_CHANGED", GGUFLoader.original_IS_CHANGED)
+        else:
+            # 如果方法存在，则删除
+            if hasattr(GGUFLoader, "IS_CHANGED"):
+                delattr(GGUFLoader, "IS_CHANGED")
         from llama_cpp import Llama
         llm = Llama(
             model_path,
@@ -135,6 +169,11 @@ class GGUFLoader:
             n_threads=n_threads,
         )
         return (llm,)
+    @classmethod
+    def original_IS_CHANGED(s):
+        # 生成当前时间的哈希值
+        hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+        return hash_value
 
 class easy_GGUFLoader:
     @classmethod
@@ -145,6 +184,7 @@ class easy_GGUFLoader:
                 "max_ctx": ("INT", {"default": 512, "min": 256, "max": 128000, "step": 128}),
                 "gpu_layers": ("INT", {"default": 31, "min": 0, "max": 100, "step": 1}),
                 "n_threads": ("INT", {"default": 8, "min": 1, "max": 100, "step": 1}),
+                "is_locked": ("BOOLEAN", {"default": True}),
             }
         }
 
@@ -154,7 +194,14 @@ class easy_GGUFLoader:
 
     CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
-    def load_GGUF_checkpoint(self, model_path, max_ctx, gpu_layers, n_threads):
+    def load_GGUF_checkpoint(self, model_path, max_ctx, gpu_layers, n_threads, is_locked):
+        self.is_locked = is_locked
+        if self.is_locked == False:
+            setattr(easy_GGUFLoader, "IS_CHANGED", easy_GGUFLoader.original_IS_CHANGED)
+        else:
+            # 如果方法存在，则删除
+            if hasattr(easy_GGUFLoader, "IS_CHANGED"):
+                delattr(easy_GGUFLoader, "IS_CHANGED")
         from llama_cpp import Llama
         model_path=os.path.join(LLM_GGUF_dir, model_path)
         llm = Llama(
@@ -164,7 +211,11 @@ class easy_GGUFLoader:
             n_threads=n_threads,
         )
         return (llm,)
-
+    @classmethod
+    def original_IS_CHANGED(s):
+        # 生成当前时间的哈希值
+        hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+        return hash_value
 class vlmLoader:
     @classmethod
     def INPUT_TYPES(s):
@@ -183,6 +234,7 @@ class vlmLoader:
                         "default": "float32",
                     },
                 ),
+                "is_locked": ("BOOLEAN", {"default": True}),
             }
         }
 
@@ -198,7 +250,14 @@ class vlmLoader:
 
     CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
-    def load_VLM(self, model_name_or_path, device, dtype):
+    def load_VLM(self, model_name_or_path, device, dtype, is_locked):
+        self.is_locked = is_locked
+        if self.is_locked == False:
+            setattr(vlmLoader, "IS_CHANGED", vlmLoader.original_IS_CHANGED)
+        else:
+            # 如果方法存在，则删除
+            if hasattr(vlmLoader, "IS_CHANGED"):
+                delattr(vlmLoader, "IS_CHANGED")
         model_kwargs = {
             'device_map': device,
         }
@@ -218,7 +277,11 @@ class vlmLoader:
             model,
             processor,
         )
-
+    @classmethod
+    def original_IS_CHANGED(s):
+        # 生成当前时间的哈希值
+        hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+        return hash_value
 class easy_vlmLoader:
     @classmethod
     def INPUT_TYPES(s):
@@ -237,6 +300,7 @@ class easy_vlmLoader:
                         "default": "float32",
                     },
                 ),
+                "is_locked": ("BOOLEAN", {"default": True}),
             }
         }
 
@@ -252,7 +316,14 @@ class easy_vlmLoader:
 
     CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
-    def load_VLM(self, model_name_or_path, device, dtype):
+    def load_VLM(self, model_name_or_path, device, dtype, is_locked):
+        self.is_locked = is_locked
+        if self.is_locked == False:
+            setattr(easy_vlmLoader, "IS_CHANGED", easy_vlmLoader.original_IS_CHANGED)
+        else:
+            # 如果方法存在，则删除
+            if hasattr(easy_vlmLoader, "IS_CHANGED"):
+                delattr(easy_vlmLoader, "IS_CHANGED")
         model_name_or_path=os.path.join(VLM_dir, model_name_or_path)
         model_kwargs = {
             'device_map': device,
@@ -273,7 +344,11 @@ class easy_vlmLoader:
             model,
             processor,
         )
-
+    @classmethod
+    def original_IS_CHANGED(s):
+        # 生成当前时间的哈希值
+        hash_value = hashlib.md5(str(datetime.datetime.now()).encode()).hexdigest()
+        return hash_value
 NODE_CLASS_MAPPINGS = {
     "LLavaLoader":LLavaLoader,
     "GGUFLoader":GGUFLoader,
