@@ -184,7 +184,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 3. 디스코드:[discord 링크](https://discord.gg/f2dsAKKr2V)
 
 ### 저희를 팔로우하세요
-1. 본 프로젝트의 최신 기능을 지속적으로 관심 가져주시길 원하신다면, B站 계정에 팔로우해 주세요：[파티 호스트 BB기](https://space.bilibili.com/26978344)
+1. 본 프로젝트의 최신 기능을 지속적으로 관심 가져주시길 원하신다면, B站 계정에 팔로우해 주세요：[派酱](https://space.bilibili.com/26978344)
 2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
 
 ### 기부 지원

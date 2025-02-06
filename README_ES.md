@@ -183,7 +183,7 @@ Si hay problemas con el complemento o si tiene alguna otra pregunta, le damos la
 3. Discord: [enlace de discord](https://discord.gg/f2dsAKKr2V)
 
 ### Síguenos
-1. Si desea mantenerse informado sobre las últimas funciones de este proyecto, le invitamos a seguir nuestra cuenta de Bilibili: [主持BB机](https://space.bilibili.com/26978344)
+1. Si desea mantenerse informado sobre las últimas funciones de este proyecto, le invitamos a seguir nuestra cuenta de Bilibili: [派酱](https://space.bilibili.com/26978344)
 2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
 
 ### Apoyo a donaciones

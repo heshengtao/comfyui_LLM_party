@@ -183,7 +183,7 @@ Si vous rencontrez des problèmes avec le plugin ou si vous avez d'autres questi
 3. discord : [lien discord](https://discord.gg/f2dsAKKr2V)
 
 ### Suivez-nous
-1. Si vous souhaitez rester informé des dernières fonctionnalités de ce projet, n'hésitez pas à suivre notre compte Bilibili : [派对主持BB机](https://space.bilibili.com/26978344)
+1. Si vous souhaitez rester informé des dernières fonctionnalités de ce projet, n'hésitez pas à suivre notre compte Bilibili : [派酱](https://space.bilibili.com/26978344)
 2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
 
 ### Soutien par don

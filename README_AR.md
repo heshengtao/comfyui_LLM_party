@@ -184,7 +184,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 3. ديسكورد: [رابط الديسكورد](https://discord.gg/f2dsAKKr2V)
 
 ### تابعونا
-1. إذا كنت ترغب في متابعة أحدث ميزات هذا المشروع، ندعوك لمتابعة حسابنا على بلي بلي: [派对主持BB机](https://space.bilibili.com/26978344)
+1. إذا كنت ترغب في متابعة أحدث ميزات هذا المشروع، ندعوك لمتابعة حسابنا على بلي بلي: [派酱](https://space.bilibili.com/26978344)
 2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
 
 ### دعم التبرعات

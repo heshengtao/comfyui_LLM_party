@@ -185,7 +185,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 3. discord:[discordリンク](https://discord.gg/f2dsAKKr2V)
 
 ### 私たちをフォローする
-1. このプロジェクトの最新機能を継続的にフォローしたい方は、Bilibiliアカウントをフォローしてください：[派对主持BB机](https://space.bilibili.com/26978344)
+1. このプロジェクトの最新機能を継続的にフォローしたい方は、Bilibiliアカウントをフォローしてください：[派酱](https://space.bilibili.com/26978344)
 2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
 
 ### 寄付のサポート

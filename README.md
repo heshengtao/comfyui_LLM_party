@@ -188,7 +188,7 @@ If there is a problem with the plugin or you have any other questions, please jo
 3. WeChat group: `we_glm` (enter the group after adding the small assistant WeChat)
 
 ### Follow us
-1. If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [Party host BB machine](https://space.bilibili.com/26978344)
+1. If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [派酱](https://space.bilibili.com/26978344)
 2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
 
 ### Donation support
