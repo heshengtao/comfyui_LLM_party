@@ -15,6 +15,7 @@ from .install import (
 from .config_update import update_config
 from .llm import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 from server import PromptServer
+from .config import copy_config
 
 
 def get_comfy_dir(subpath=None, mkdir=False):
@@ -161,6 +162,11 @@ except Exception as e:
 
 try:
     install_playwright_browsers()
+except Exception as e:
+    print(f"Error: {e}")
+
+try:
+    copy_config()
 except Exception as e:
     print(f"Error: {e}")
 
