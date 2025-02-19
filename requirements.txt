@@ -57,7 +57,7 @@ peft
 scipy
 json-repair
 redis
-aisuite[all]
+aisuite[all] == 0.1.6
 fish_audio_sdk
 httpx
 mcp
