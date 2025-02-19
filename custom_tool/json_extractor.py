@@ -58,9 +58,6 @@ class json_extractor:
         except json.JSONDecodeError:
             print("Warning: Error decoding faulty json, attempting repair")
 
-        if result:
-            return input, result
-
         _pattern = r"\{(.*)\}"
         _match = re.search(_pattern, input)
         input = "{" + _match.group(1) + "}" if _match else input
@@ -79,15 +76,17 @@ class json_extractor:
         )
 
         # Remove JSON Markdown Frame
-        if input.startswith("```"):
-            input = input[len("```"):]
         if input.startswith("```json"):
             input = input[len("```json"):]
+        if input.startswith("```"):
+            input = input[len("```"):]
         if input.endswith("```"):
             input = input[: len(input) - len("```")]
-
+        print("input=%s", input)
         try:
             result = json.loads(input)
+            result = json.dumps(result, ensure_ascii=False, indent=4)
+            return (result,)
         except json.JSONDecodeError:
             # Fixup potentially malformed json string using json_repair.
             
@@ -110,8 +109,6 @@ class json_extractor:
                     return ("not expected dict type. type=%s:", type(result),)
                 result = json.dumps(result, ensure_ascii=False, indent=4)
                 return (result,)
-        else:
-            return (result,)
         
 
 NODE_CLASS_MAPPINGS = {
