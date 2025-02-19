@@ -52,6 +52,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 5. Due to the high usage threshold of this project, even if you choose the quick start, I hope you can patiently read through the project homepage.
 
 ## Latest update
+1. The VLM local loader node now supports [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct), but you will need to update the transformers to the version on GitHub (```pip install git+https://github.com/huggingface/transformers```), example workflow: [qwen-vl](workflow/qwen-vl.json) 
 1. A brand new image hosting node has been added, currently supporting the image hosting services at https://sm.ms (with the regional domain for China being https://smms.app) and https://imgbb.com. More image hosting services will be supported in the future. Sample workflow: [Image Hosting](workflow/图床.json)
 1. ~~The imgbb image hosting service, which is compatible by default with the party, has been updated to the domain [imgbb](https://imgbb.io). The previous image hosting service was replaced due to its unfriendliness towards users in mainland China.~~ I sincerely apologize, as it seems that the API service for the image hosting at https://imgbb.io has been discontinued. Therefore, the code has reverted to the original https://imgbb.com. Thank you for your understanding. In the future, I will update a node that supports more image hosting services.
 1. The [MCP](https://modelcontextprotocol.io/introduction) tool has been updated. You can modify the configuration in the '[mcp_config.json](mcp_config.json)' file located in the party project folder to connect to your desired MCP server. You can find various MCP server configuration parameters that you may want to add here: [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers). The default configuration for this project is the Everything server, which serves as a testing MCP server to verify its functionality. Reference workflow: [start_with_MCP](workflow/start_with_MCP.json). Developer note: The MCP tool node can connect to the MCP server you have configured and convert the tools from the server into tools that can be directly used by LLMs. By configuring different local or cloud servers, you can experience all LLM tools available in the world.
@@ -100,6 +101,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 * [openbmb/MiniCPM-V-2_6-gguf](https://huggingface.co/openbmb/MiniCPM-V-2_6-gguf/tree/main)
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
+* [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)
 
 4. Model download
 * [Quark cloud address](https://pan.quark.cn/s/190b41f3bbdb)

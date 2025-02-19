@@ -51,6 +51,7 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 5. Devido ao alto limiar de uso deste projeto, mesmo que você escolha o início rápido, espero que possa ler pacientemente a página inicial do projeto.
 
 ## Atualizações Recentes
+1. O nó de carregador local VLM já é compatível com [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct), entretanto, você precisa atualizar o transformador para a versão do GitHub (```pip install git+https://github.com/huggingface/transformers```), exemplo de fluxo de trabalho: [qwen-vl](workflow/qwen-vl.json)
 1. Foi adicionado um novo nó de hospedagem de imagens, que atualmente suporta a hospedagem de imagens de https://sm.ms (o domínio na região da China é https://smms.app) e https://imgbb.com. No futuro, mais serviços de hospedagem de imagens serão suportados. Exemplo de fluxo de trabalho: [Hospedagem de Imagens](workflow/图床.json)
 1. ~~O serviço de hospedagem de imagens imgbb, que é compatível por padrão com party, foi atualizado para o domínio [imgbb](https://imgbb.io). O serviço anterior não era amigável para usuários da China continental, por isso foi alterado.~~ Sinto muito informar que o serviço API de hospedagem de imagens em https://imgbb.io parece ter sido descontinuado, portanto, o código voltou para o original https://imgbb.com. Agradeço a compreensão de todos. No futuro, atualizarei um nó que suporte mais serviços de hospedagem de imagens.
 1. A ferramenta [MCP](https://modelcontextprotocol.io/introduction) foi atualizada, você pode modificar a configuração no arquivo '[mcp_config.json](mcp_config.json)' na pasta do projeto party para ajustar o servidor MCP ao qual deseja se conectar. Você pode encontrar aqui vários parâmetros de configuração dos servidores MCP que deseja adicionar: [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers). A configuração padrão deste projeto é o servidor Everything, um servidor utilizado para testar se o servidor MCP opera corretamente. Fluxo de trabalho de referência: [start_with_MCP](workflow/start_with_MCP.json). Nota para desenvolvedores: o nó da ferramenta MCP pode se conectar ao servidor MCP configurado e, em seguida, converter as ferramentas do servidor em ferramentas que o LLM pode usar diretamente. Ao configurar diferentes servidores locais ou em nuvem, você pode experimentar todas as ferramentas LLM disponíveis no mundo.
@@ -99,6 +100,7 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
 * [openbmb/MiniCPM-V-2_6-gguf](https://huggingface.co/openbmb/MiniCPM-V-2_6-gguf/tree/main)
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
+* [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)
 
 4. Download do modelo:
 * [Endereço da nuvem Quark](https://pan.quark.cn/s/190b41f3bbdb)

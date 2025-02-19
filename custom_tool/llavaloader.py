@@ -229,12 +229,13 @@ class vlmLoader:
                     },
                 ),
                 "dtype": (
-                    ["float32", "float16","bfloat16", "int8", "int4"],
+                    ["auto","float32", "float16","bfloat16", "int8", "int4"],
                     {
-                        "default": "float32",
+                        "default": "auto",
                     },
                 ),
                 "is_locked": ("BOOLEAN", {"default": True}),
+                "type": (["llama-v","qwen-vl"], {"default": "llama-v"}),
             }
         }
 
@@ -250,7 +251,7 @@ class vlmLoader:
 
     CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
-    def load_VLM(self, model_name_or_path, device, dtype, is_locked):
+    def load_VLM(self, model_name_or_path, device, dtype, is_locked,type):
         self.is_locked = is_locked
         if self.is_locked == False:
             setattr(vlmLoader, "IS_CHANGED", vlmLoader.original_IS_CHANGED)
@@ -268,10 +269,16 @@ class vlmLoader:
             model_kwargs['torch_dtype'] = torch.bfloat16
         elif dtype in ["int8", "int4"]:
             model_kwargs['quantization_config'] = BitsAndBytesConfig(load_in_8bit=(dtype == "int8"), load_in_4bit=(dtype == "int4"))
-
-        config = AutoConfig.from_pretrained(model_name_or_path, **model_kwargs)
-        processor = AutoProcessor.from_pretrained(model_name_or_path)
-        model = AutoModelForPreTraining.from_pretrained(model_name_or_path, **model_kwargs)
+        if type == "llama-v":
+            processor = AutoProcessor.from_pretrained(model_name_or_path)
+            model = AutoModelForPreTraining.from_pretrained(model_name_or_path, **model_kwargs)
+        elif type == "qwen-vl":
+            from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
+            model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+                model_name_or_path,
+                **model_kwargs
+            )
+            processor = AutoProcessor.from_pretrained(model_name_or_path)
         model = model.eval()
         return (
             model,
@@ -295,12 +302,13 @@ class easy_vlmLoader:
                     },
                 ),
                 "dtype": (
-                    ["float32", "float16","bfloat16", "int8", "int4"],
+                    ["auto","float32", "float16","bfloat16", "int8", "int4"],
                     {
-                        "default": "float32",
+                        "default": "auto",
                     },
                 ),
                 "is_locked": ("BOOLEAN", {"default": True}),
+                "type": (["llama-v","qwen-vl"], {"default": "llama-v"}),
             }
         }
 
@@ -336,9 +344,16 @@ class easy_vlmLoader:
         elif dtype in ["int8", "int4"]:
             model_kwargs['quantization_config'] = BitsAndBytesConfig(load_in_8bit=(dtype == "int8"), load_in_4bit=(dtype == "int4"))
 
-        config = AutoConfig.from_pretrained(model_name_or_path, **model_kwargs)
-        processor = AutoProcessor.from_pretrained(model_name_or_path)
-        model = AutoModelForPreTraining.from_pretrained(model_name_or_path, **model_kwargs)
+        if type == "llama-v":
+            processor = AutoProcessor.from_pretrained(model_name_or_path)
+            model = AutoModelForPreTraining.from_pretrained(model_name_or_path, **model_kwargs)
+        elif type == "qwen-vl":
+            from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
+            model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+                model_name_or_path,
+                **model_kwargs
+            )
+            processor = AutoProcessor.from_pretrained(model_name_or_path)
         model = model.eval()
         return (
             model,

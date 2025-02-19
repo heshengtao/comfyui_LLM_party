@@ -52,6 +52,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 5. 由于本项目有较高的使用门槛，所以即使你选择了快速开始，我也希望你能耐心阅读完本项目主页。
 
 ## 最新更新
+1. VLM本地加载器节点已经支持[Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)，但是你需要将transformer更新到github的版本（```pip install git+https://github.com/huggingface/transformers```），示例工作流：[qwen-vl](workflow/qwen-vl.json)
 1. 添加了一个全新的图床节点，目前支持了 https://sm.ms 图床(中国地区域名为 https://smms.app)以及 https://imgbb.com 图床，未来会支持更多的图床，示例工作流：[图床](workflow/图床.json) 
 1. ~~party默认兼容的imgbb图床已更新到[imgbb](https://imgbb.io)这一域名上，之前的图床由于对于中国大陆用户不友好，所以已经更换。~~ 非常不好意思，https://imgbb.io 的图床API服务似乎已经停止了，所以代码回滚到了原先的  https://imgbb.com ，感谢大家的理解。未来我会更新一个支持更多图床的节点。
 1. 更新了[MCP](https://modelcontextprotocol.io/introduction)工具，你可以修改party项目文件夹下的'[mcp_config.json](mcp_config.json)'中的配置来调整你要连接上的MCP服务器。你可以在这里找到你想要添加的各种MCP服务器配置参数：[modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)。本项目中默认配置为Everything服务器，一个用于测试MCP服务器是否可以正常使用的服务器。参考工作流：[start_with_MCP](workflow/start_with_MCP.json)。开发者注：MCP工具节点可以连接上你配置好的MCP服务器，然后将服务器中的tools转换成LLM可以直接使用的工具。通过配置不同的本地服务器或者云服务器，你可以体验到这个世界上所有LLM工具。
@@ -100,6 +101,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 * [openbmb/MiniCPM-V-2_6-gguf](https://huggingface.co/openbmb/MiniCPM-V-2_6-gguf/tree/main)
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
+* [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)
 
 4. 模型下载：
 * [夸克云地址](https://pan.quark.cn/s/190b41f3bbdb)
