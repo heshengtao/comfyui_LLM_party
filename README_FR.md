@@ -43,7 +43,7 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
   - Gérez les LLM locaux avec ollama : [start_with_Ollama](workflow/ollama.json)
   - Utilisez des LLM locaux au format distribué : [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - Utilisez des LLM locaux au format GGUF : [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-  - Utilisez des VLM locaux au format distribué : [start_with_VLM_local](workflow/start_with_VLM_local.json) (en test, actuellement uniquement [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct) pris en charge)
+  - Utilisez des VLM locaux au format distribué : [start_with_VLM_local](workflow/start_with_VLM_local.json) （Actuellement, le support est disponible pour [Llama-3.2-Vision](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)/[Qwen/Qwen2.5-VL](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)/[deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)）
   - Utilisez des VLM locaux au format GGUF : [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. Si vous utilisez l'API, remplissez votre `base_url` (cela peut être une API relais, assurez-vous qu'elle se termine par `/v1/`) et `api_key` dans le nœud de chargement de l'API LLM. Exemple : `https://api.openai.com/v1/`
 3. Si vous utilisez ollama, activez l'option `is_ollama` dans le nœud de chargement de l'API LLM, sans remplir `base_url` et `api_key`.

@@ -43,7 +43,7 @@ ComfyUI LLM Party permite desde la llamada a múltiples herramientas LLM desde l
   - Gestiona LLM local con ollama: [start_with_Ollama](workflow/ollama.json)
   - Usa LLM local en formato distribuido: [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - Usa LLM local en formato GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-  - Usa VLM local en formato distribuido: [start_with_VLM_local](workflow/start_with_VLM_local.json) (en prueba, actualmente solo admite [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
+  - Usa VLM local en formato distribuido: [start_with_VLM_local](workflow/start_with_VLM_local.json) Actualmente se admite [Llama-3.2-Vision](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)/[Qwen/Qwen2.5-VL](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)/[deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)
   - Usa VLM local en formato GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. Si estás usando la API, completa tu `base_url` (puede ser una API de retransmisión, asegúrate de que termine con `/v1/`) y `api_key` en el nodo de carga de API LLM. Ejemplo: `https://api.openai.com/v1/`
 3. Si estás usando ollama, activa la opción `is_ollama` en el nodo de carga de API LLM, no es necesario completar `base_url` y `api_key`.

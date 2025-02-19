@@ -43,7 +43,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
   - إدارة LLM المحلي باستخدام ollama: [start_with_Ollama](workflow/ollama.json)
   - استخدم LLM المحلي بتنسيق موزع: [start_with_LLM_local](workflow/start_with_LLM_local.json)
   - استخدم LLM المحلي بتنسيق GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
-  - استخدم VLM المحلي بتنسيق موزع: [start_with_VLM_local](workflow/start_with_VLM_local.json) (تحت الاختبار، يدعم حاليًا فقط [Llama-3.2-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct))
+  - استخدم VLM المحلي بتنسيق موزع: [start_with_VLM_local](workflow/start_with_VLM_local.json) (تدعم حاليًا [Llama-3.2-Vision](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)/[Qwen/Qwen2.5-VL](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)/[deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B))
   - استخدم VLM المحلي بتنسيق GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
 2. إذا كنت تستخدم API، فاملأ `base_url` (يمكن أن يكون API وسيط، تأكد من أنه ينتهي بـ `/v1/`) و`api_key` في عقدة تحميل API LLM. مثال: `https://api.openai.com/v1/`
 3. إذا كنت تستخدم ollama، فقم بتشغيل خيار `is_ollama` في عقدة تحميل API LLM، ولا حاجة لملء `base_url` و`api_key`.
