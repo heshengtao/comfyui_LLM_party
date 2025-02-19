@@ -51,6 +51,7 @@ ComfyUI LLM Party permite desde la llamada a múltiples herramientas LLM desde l
 5. Debido al alto umbral de uso de este proyecto, incluso si eliges el inicio rápido, espero que puedas leer pacientemente la página principal del proyecto.
 
 ## Últimas Actualizaciones
+1. El nodo cargador local de VLM ya admite [deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B), flujo de trabajo de ejemplo: [Janus-Pro](workflow/deepseek-janus-pro.json)  
 1. El nodo de cargador local VLM ya es compatible con [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct), sin embargo, es necesario que actualices el transformador a la versión de GitHub (```pip install git+https://github.com/huggingface/transformers```), ejemplo de flujo de trabajo: [qwen-vl](workflow/qwen-vl.json)  
 1. Se ha añadido un nuevo nodo de alojamiento de imágenes, que actualmente admite el alojamiento de imágenes de https://sm.ms (el dominio en la región de China es https://smms.app) y https://imgbb.com. En el futuro, se admitirán más alojamientos de imágenes. Ejemplo de flujo de trabajo: [Alojamiento de imágenes](workflow/图床.json)  
 1. ~~El servicio de alojamiento de imágenes imgbb, que es compatible de manera predeterminada con party, se ha actualizado al dominio [imgbb](https://imgbb.io). El alojamiento anterior no era amigable para los usuarios de China continental, por lo que se ha cambiado.~~ Lamento informar que el servicio API de alojamiento de imágenes en https://imgbb.io parece haber sido descontinuado, por lo que el código ha vuelto a la original https://imgbb.com. Agradezco su comprensión. En el futuro, actualizaré un nodo que soporte más servicios de alojamiento de imágenes. 
@@ -101,6 +102,7 @@ ComfyUI LLM Party permite desde la llamada a múltiples herramientas LLM desde l
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 * [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)
+* [deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)
 
 4. Descarga del modelo:
 * [Dirección de nube Quark](https://pan.quark.cn/s/190b41f3bbdb)

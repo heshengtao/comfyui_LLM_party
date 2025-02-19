@@ -51,6 +51,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 5. نظرًا للعتبة العالية لاستخدام هذا المشروع، حتى إذا اخترت البدء السريع، آمل أن تتمكن من قراءة الصفحة الرئيسية للمشروع بصبر.
 
 ## التحديثات الأخيرة
+1. لقد دعم العقدة المحلية لمحمّل VLM [deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)، مثال على سير العمل: [Janus-Pro](workflow/deepseek-janus-pro.json)
 1. إن عقدة تحميل VLM المحلية تدعم الآن [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)، ولكن يجب عليك تحديث مكتبة transformer إلى الإصدار الموجود على GitHub (```pip install git+https://github.com/huggingface/transformers```)، نموذج سير العمل: [qwen-vl](workflow/qwen-vl.json)
 1. لقد تم إضافة نقطة استضافة صور جديدة تمامًا، والتي تدعم حاليًا خدمة استضافة الصور https://sm.ms (النطاق في مناطق الصين هو https://smms.app) بالإضافة إلى خدمة استضافة الصور https://imgbb.com، وسيتم دعم المزيد من خدمات استضافة الصور في المستقبل. نموذج سير العمل: [استضافة الصور](workflow/图床.json)
 1. ~~لقد تم تحديث خدمة استضافة الصور الافتراضية المستخدمة في party إلى [imgbb](https://imgbb.io) على هذا النطاق، حيث كانت الخدمة السابقة غير مرحب بها لمستخدمي البر الرئيسي الصيني، لذا تم تغييرها.~~ أعتذر بشدة، يبدو أن خدمة واجهة برمجة التطبيقات لاستضافة الصور على https://imgbb.io قد توقفت، لذلك تم الرجوع إلى https://imgbb.com. أشكر الجميع على تفهمهم. سأقوم في المستقبل بتحديث خادم يدعم المزيد من خدمات استضافة الصور.
@@ -101,6 +102,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 * [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)
+* [deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)
 
 4. تحميل النموذج:
 * [عنوان سحابة كوارك](https://pan.quark.cn/s/190b41f3bbdb)

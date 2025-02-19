@@ -51,6 +51,7 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 5. En raison du seuil d'utilisation élevé de ce projet, même si vous choisissez le démarrage rapide, j'espère que vous pourrez lire attentivement la page d'accueil du projet.
 
 ## Dernières mises à jour
+1. Le nœud de chargeur local VLM prend désormais en charge [deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B), exemple de flux de travail : [Janus-Pro](workflow/deepseek-janus-pro.json)  
 1. Le nœud de chargeur local VLM prend désormais en charge [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct), cependant, vous devez mettre à jour le transformateur vers la version de GitHub (```pip install git+https://github.com/huggingface/transformers```), exemple de flux de travail : [qwen-vl](workflow/qwen-vl.json)
 1. Un nouveau nœud de stockage d'images a été ajouté, prenant en charge le service d'hébergement d'images https://sm.ms (le domaine pour la Chine est https://smms.app) ainsi que https://imgbb.com. D'autres services d'hébergement d'images seront pris en charge à l'avenir. Exemple de flux de travail : [Hébergement d'images](workflow/图床.json)  
 1. ~~L'hébergement d'images compatible par défaut pour party a été mis à jour vers le domaine [imgbb](https://imgbb.io). L'ancien hébergement n'était pas convivial pour les utilisateurs de la Chine continentale, il a donc été remplacé.~~ Je suis désolé, le service API d'hébergement d'images de https://imgbb.io semble avoir été interrompu, donc le code a été rétabli à l'original https://imgbb.com. Merci pour votre compréhension. À l'avenir, je vais mettre à jour un nœud qui supportera davantage d'hébergements d'images.
@@ -101,6 +102,7 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 * [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)
+* [deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)
 
 4. Téléchargement des modèles :
 * [Adresse du cloud Quark](https://pan.quark.cn/s/190b41f3bbdb)  

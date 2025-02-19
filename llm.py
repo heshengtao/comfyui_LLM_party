@@ -1753,19 +1753,21 @@ def qwen_chat(
                 "content": image_content,
             }
         ]
+        history.extend(user_content)
     else:
-        user_content = {
+        user_content = [{
             "role": role,
             "content": [
                 {"type": "text", "text": user_prompt},
             ],
-        }
+        }]
+        history.extend(user_content)
     # 准备推理输入
     text = processor.apply_chat_template(
-        user_content, tokenize=False, add_generation_prompt=True
+        history, tokenize=False, add_generation_prompt=True
     )
     from qwen_vl_utils import process_vision_info
-    image_inputs, video_inputs = process_vision_info(user_content)
+    image_inputs, video_inputs = process_vision_info(history)
     inputs = processor(
         text=[text],
         images=image_inputs,
@@ -1775,10 +1777,18 @@ def qwen_chat(
     )
     inputs = inputs.to(device)
     
+    # 移除历史中的图片
+    for i in range(len(history)-1, -1, -1):
+        if history[i].get("role") == "user":
+            for content in history[i]["content"]:
+                if content.get("type") == "image":
+                    history.pop(i)
+                    history.append({"role": "user", "content": [{"type": "text", "text": user_prompt}]})
+                    break
 
     # 生成输出
     with torch.no_grad():
-        generated_ids = model.generate(**inputs, max_new_tokens=128)
+        generated_ids = model.generate(**inputs, max_new_tokens=max_length, temperature=temperature, **extra_parameters)
         generated_ids_trimmed = [
             out_ids[len(in_ids):] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
         ]
@@ -1797,6 +1807,79 @@ def qwen_chat(
     history.append({"role": "assistant", "content":assistant_output})
     
     return assistant_output, history
+
+def convert_pil_images_to_base64(pil_images):
+    base64_images = []
+    for pil_img in pil_images:
+        # 确保图像格式为PNG或其他你想要转换的格式
+        buffer = io.BytesIO()
+        pil_img.save(buffer, format="PNG")
+        buffer.seek(0)  # 移动到字节流的开始
+        
+        # 将字节流转换为Base64字符串
+        img_str = base64.b64encode(buffer.getvalue()).decode('utf-8')
+        
+        # 构造data URL scheme格式（可选）
+        img_base64 = f"data:image/png;base64,{img_str}"
+        base64_images.append(img_base64)
+    
+    return base64_images
+
+def ds_chat(
+    model, processor, image, user_prompt, history, device, max_length, role="<|User|>", temperature=0.7, **extra_parameters
+):
+    tokenizer = processor.tokenizer
+    if image !=[]:
+        base64_images = convert_pil_images_to_base64(image)
+        user_content = [
+            {
+                "role": "<|User|>",
+                "content": f"<image_placeholder>\n{user_prompt}",
+                "images": base64_images,
+            },
+            {"role": "<|Assistant|>", "content": ""},
+        ]
+    else:
+        user_content = [
+            {
+                "role": "<|User|>",
+                "content": f"{user_prompt}",
+            },
+            {"role": "<|Assistant|>", "content": ""},
+        ]
+    try :
+        from janus.utils.io import load_pil_images
+        # specify the path to the model
+        # load images and prepare for inputs
+        pil_images = load_pil_images(user_content)
+        prepare_inputs = processor(
+            conversations=user_content, images=pil_images, force_batchify=True
+        ).to(device)
+
+        # # run image encoder to get the image embeddings
+        inputs_embeds = model.prepare_inputs_embeds(**prepare_inputs)
+        # # run the model to get the response
+        outputs = model.language_model.generate(
+            inputs_embeds=inputs_embeds,
+            attention_mask=prepare_inputs.attention_mask,
+            pad_token_id=tokenizer.eos_token_id,
+            bos_token_id=tokenizer.bos_token_id,
+            eos_token_id=tokenizer.eos_token_id,
+            max_new_tokens=max_length, 
+            temperature=temperature,
+            do_sample=False,
+            use_cache=True,
+            **extra_parameters,
+        )
+
+        answer = tokenizer.decode(outputs[0].cpu().tolist(), skip_special_tokens=True)
+        clean_pattern = r'<\|.*?\|>'
+        clean_answer = re.sub(clean_pattern, '', answer).strip()
+        history.append({"role": "assistant", "content":clean_answer})
+    except Exception as e:
+        print(e)
+    
+    return clean_answer, history
 
 class LLM_local_loader:
     def __init__(self):
@@ -2075,7 +2158,7 @@ class LLM_local:
                     },
                 ),
                 "model_type": (
-                    ["LLM","LLM-GGUF", "VLM-GGUF", "VLM(llama-v)", "VLM(qwen-vl)"],
+                    ["LLM","LLM-GGUF", "VLM-GGUF", "VLM(llama-v)", "VLM(qwen-vl)","VLM(deepseek-janus-pro)"],
                     {
                         "default": "LLM",
                         "tooltip": "The type of model to use for the LLM. LLM: Language Model, VLM: Vision Language Model, GGUF: Generalized GPT-4 Unified Framework",
@@ -2605,6 +2688,64 @@ class LLM_local:
                             )
                         else:
                             response, history = qwen_chat(
+                                model,
+                                tokenizer,
+                                self.images, # image,
+                                results,
+                                history,
+                                device,
+                                max_length,
+                                role="observation",
+                                temperature=temperature,
+                            )    
+                elif model_type =="VLM(deepseek-janus-pro)":
+                    if image is not None:
+                        for img_VLM in image:
+                            pil_image = ToPILImage()(img_VLM.permute(2, 0, 1))
+                            self.images.append(pil_image)
+                    if extra_parameters is not None and extra_parameters != {}:
+                        response, history = ds_chat(
+                            model,
+                            tokenizer,
+                            self.images,
+                            user_prompt,
+                            history,
+                            device,
+                            max_length,
+                            temperature=temperature,
+                            **extra_parameters,
+                        )
+                    else:
+                        response, history = ds_chat(
+                            model, tokenizer, self.images, user_prompt, history, device, max_length, temperature=temperature
+                        )
+                    # 正则表达式匹配
+                    pattern = r'\{\s*"tool":\s*"(.*?)",\s*"parameters":\s*\{(.*?)\}\s*\}'
+                    while re.search(pattern, response, re.DOTALL) != None:
+                        match = re.search(pattern, response, re.DOTALL)
+                        tool = match.group(1)
+                        parameters = match.group(2)
+                        json_str = '{"tool": "' + tool + '", "parameters": {' + parameters + "}}"
+                        history.append({"role": "function_call", "content": json_str})
+                        print("正在调用" + tool + "工具")
+                        parameters = json.loads("{" + parameters + "}")
+                        results = dispatch_tool(tool, parameters)
+                        print(results)
+                        if extra_parameters is not None and extra_parameters != {}:
+                            response, history = ds_chat(
+                                model,
+                                tokenizer,
+                                self.images, # image,
+                                results,
+                                history,
+                                device,
+                                max_length,
+                                role="observation",
+                                temperature=temperature,
+                                **extra_parameters,
+                            )
+                        else:
+                            response, history = ds_chat(
                                 model,
                                 tokenizer,
                                 self.images, # image,

@@ -62,3 +62,4 @@ fish_audio_sdk
 httpx
 mcp
 qwen-vl-utils[decord]
+attrdict

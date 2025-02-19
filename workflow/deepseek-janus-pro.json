@@ -1,0 +1,378 @@
+{
+  "last_node_id": 13,
+  "last_link_id": 20,
+  "nodes": [
+    {
+      "id": 3,
+      "type": "show_text_party",
+      "pos": [
+        1151,
+        110
+      ],
+      "size": [
+        370.8948974609375,
+        325.14776611328125
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 15,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "这张图画的是一个卡通风格的人物形象。这个人物有着大大的黄色耳朵，蓝色的眼睛，以及穿着粉红色连衣裙。背景是蓝天和绿色的草地，整体风格非常简单和童趣。"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 4,
+      "type": "show_text_party",
+      "pos": [
+        1141,
+        479
+      ],
+      "size": [
+        371.6002502441406,
+        226.88002014160156
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 16,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "**System:** \n\n**Assistant:** 这张图画的是一个卡通风格的人物形象。这个人物有着大大的黄色耳朵，蓝色的眼睛，以及穿着粉红色连衣裙。背景是蓝天和绿色的草地，整体风格非常简单和童趣。\n\n"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 10,
+      "type": "LLM_local",
+      "pos": [
+        678,
+        173
+      ],
+      "size": [
+        402.38287353515625,
+        530
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 18,
+          "label": "model"
+        },
+        {
+          "name": "tokenizer",
+          "type": "CUSTOM",
+          "link": 19,
+          "label": "tokenizer",
+          "shape": 7
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 20,
+          "label": "image",
+          "shape": 7
+        },
+        {
+          "name": "system_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "label": "system_prompt_input"
+        },
+        {
+          "name": "user_prompt_input",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "label": "user_prompt_input"
+        },
+        {
+          "name": "tools",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "tools"
+          },
+          "label": "tools"
+        },
+        {
+          "name": "file_content",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "file_content"
+          },
+          "label": "file_content"
+        },
+        {
+          "name": "extra_parameters",
+          "type": "DICT",
+          "link": null,
+          "shape": 7,
+          "label": "extra_parameters"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "type": "STRING",
+          "links": [
+            15
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "assistant_response"
+        },
+        {
+          "name": "history",
+          "type": "STRING",
+          "links": [
+            16
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "history"
+        },
+        {
+          "name": "tool",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "tool"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local"
+      },
+      "widgets_values": [
+        "",
+        "这张图画了什么",
+        "VLM(deepseek-janus-pro)",
+        0.7,
+        512,
+        "enable",
+        "disable",
+        "enable",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true,
+        "",
+        "enable",
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 13,
+      "type": "LoadImage",
+      "pos": [
+        270,
+        300
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            20
+          ],
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "vlmLoader",
+      "pos": [
+        290,
+        20
+      ],
+      "size": [
+        315,
+        174
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            18
+          ],
+          "slot_index": 0,
+          "label": "model"
+        },
+        {
+          "name": "tokenizer(processor)",
+          "type": "CUSTOM",
+          "links": [
+            19
+          ],
+          "label": "tokenizer(processor)"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "vlmLoader"
+      },
+      "widgets_values": [
+        "D:\\AI\\mychat\\model\\Janus-Pro-1B",
+        "auto",
+        "bfloat16",
+        true,
+        "deepseek-janus-pro"
+      ]
+    }
+  ],
+  "links": [
+    [
+      15,
+      10,
+      0,
+      3,
+      0,
+      "STRING"
+    ],
+    [
+      16,
+      10,
+      1,
+      4,
+      0,
+      "STRING"
+    ],
+    [
+      18,
+      12,
+      0,
+      10,
+      0,
+      "CUSTOM"
+    ],
+    [
+      19,
+      12,
+      1,
+      10,
+      1,
+      "CUSTOM"
+    ],
+    [
+      20,
+      13,
+      0,
+      10,
+      2,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": [
+        -139.17004750490048,
+        88.96774143524063
+      ]
+    }
+  },
+  "version": 0.4
+}

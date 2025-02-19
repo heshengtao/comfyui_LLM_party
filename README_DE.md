@@ -51,6 +51,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 5. Aufgrund der hohen Nutzungsschwelle dieses Projekts hoffe ich, dass Sie sich die Zeit nehmen, die Projektseite gründlich zu lesen, auch wenn Sie den Schnellstart gewählt haben.
 
 ## Neueste Updates
+1. Der VLM lokale Ladegerät-Knoten unterstützt nun [deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B), Beispiel-Workflow : [Janus-Pro](workflow/deepseek-janus-pro.json)
 1. Der lokale VLM-Ladepunkt unterstützt nun [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct), jedoch müssen Sie den Transformator auf die GitHub-Version aktualisieren (```pip install git+https://github.com/huggingface/transformers```), Beispielworkflow: [qwen-vl](workflow/qwen-vl.json)
 1. Es wurde ein neuer Bildspeicher-Knoten hinzugefügt, der den Bildhosting-Dienst https://sm.ms (das Domain für China ist https://smms.app) sowie https://imgbb.com unterstützt. In Zukunft werden weitere Bildhosting-Dienste unterstützt. Beispiel-Workflow: [Bildhosting](workflow/图床.json)
 1. ~~Der standardmäßig kompatible Bildhosting-Dienst für party wurde auf die Domain [imgbb](https://imgbb.io) aktualisiert. Der vorherige Dienst war für Nutzer aus dem chinesischen Festland nicht benutzerfreundlich, daher wurde er ersetzt.~~ Es tut mir leid, der API-Dienst für Bildhosting von https://imgbb.io scheint eingestellt worden zu sein, weshalb der Code auf das ursprüngliche https://imgbb.com zurückgesetzt wurde. Vielen Dank für Ihr Verständnis. In Zukunft werde ich einen Knoten aktualisieren, der mehr Bildhosting-Dienste unterstützt.
@@ -101,6 +102,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 * [lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main)
 * [meta-llama/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)
 * [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)
+* [deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)
 
 4. Modells download:
 * [Quark Cloud Adresse](https://pan.quark.cn/s/190b41f3bbdb)

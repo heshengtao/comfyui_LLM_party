@@ -4,9 +4,10 @@ import locale
 import os
 import sys
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, current_dir) 
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
-from transformers import AutoProcessor, AutoModelForPreTraining,AutoConfig
+from transformers import AutoModelForPreTraining,AutoModelForCausalLM
 import torch
 if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
@@ -235,7 +236,7 @@ class vlmLoader:
                     },
                 ),
                 "is_locked": ("BOOLEAN", {"default": True}),
-                "type": (["llama-v","qwen-vl"], {"default": "llama-v"}),
+                "type": (["llama-v","qwen-vl","deepseek-janus-pro"], {"default": "llama-v"}),
             }
         }
 
@@ -279,6 +280,12 @@ class vlmLoader:
                 **model_kwargs
             )
             processor = AutoProcessor.from_pretrained(model_name_or_path)
+        elif type == "deepseek-janus-pro":
+            from janus.models import MultiModalityCausalLM, VLChatProcessor
+            processor: VLChatProcessor = VLChatProcessor.from_pretrained(model_name_or_path)
+            model: MultiModalityCausalLM = AutoModelForCausalLM.from_pretrained(
+                model_name_or_path, trust_remote_code=True,**model_kwargs
+            )
         model = model.eval()
         return (
             model,
@@ -308,7 +315,7 @@ class easy_vlmLoader:
                     },
                 ),
                 "is_locked": ("BOOLEAN", {"default": True}),
-                "type": (["llama-v","qwen-vl"], {"default": "llama-v"}),
+                "type": (["llama-v","qwen-vl","deepseek-janus-pro"], {"default": "llama-v"}),
             }
         }
 
@@ -354,6 +361,12 @@ class easy_vlmLoader:
                 **model_kwargs
             )
             processor = AutoProcessor.from_pretrained(model_name_or_path)
+        elif type == "deepseek-janus-pro":
+            from janus.models import MultiModalityCausalLM, VLChatProcessor
+            processor: VLChatProcessor = VLChatProcessor.from_pretrained(model_name_or_path)
+            model: MultiModalityCausalLM = AutoModelForCausalLM.from_pretrained(
+                model_name_or_path, trust_remote_code=True,**model_kwargs
+            )
         model = model.eval()
         return (
             model,
