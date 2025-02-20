@@ -57,9 +57,10 @@ peft
 scipy
 json-repair
 redis
-aisuite[all] == 0.1.6
+aisuite[all]
 fish_audio_sdk
 httpx
 mcp
 qwen-vl-utils[decord]
 attrdict
+docstring_parser
