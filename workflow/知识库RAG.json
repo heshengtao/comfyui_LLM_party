@@ -1,88 +1,7 @@
 {
-  "last_node_id": 79,
-  "last_link_id": 104,
+  "last_node_id": 80,
+  "last_link_id": 105,
   "nodes": [
-    {
-      "id": 72,
-      "type": "show_text_party",
-      "pos": [
-        1219,
-        343
-      ],
-      "size": {
-        "0": 320,
-        "1": 60
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 100,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6,
-          "label": "STRING"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        ""
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 74,
-      "type": "LLM_api_loader",
-      "pos": [
-        391,
-        165
-      ],
-      "size": {
-        "0": 315,
-        "1": 130
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            98
-          ],
-          "slot_index": 0,
-          "shape": 3,
-          "label": "model"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "gpt-3.5-turbo-1106",
-        "https://api.openai.com/v1",
-        "sk-XXXXX",
-        false
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
     {
       "id": 77,
       "type": "LLM",
@@ -90,94 +9,102 @@
         740,
         330
       ],
-      "size": {
-        "0": 404.95623779296875,
-        "1": 466
-      },
+      "size": [
+        404.95623779296875,
+        534
+      ],
       "flags": {},
       "order": 3,
       "mode": 0,
       "inputs": [
         {
           "name": "model",
+          "label": "model",
           "type": "CUSTOM",
-          "link": 98,
-          "label": "model"
+          "link": 105
         },
         {
           "name": "images",
+          "label": "images",
           "type": "IMAGE",
-          "link": null,
-          "label": "images"
+          "shape": 7,
+          "link": null
         },
         {
           "name": "system_prompt_input",
+          "label": "system_prompt_input",
           "type": "STRING",
-          "link": null,
           "widget": {
             "name": "system_prompt_input"
           },
-          "label": "system_prompt_input"
+          "link": null
         },
         {
           "name": "user_prompt_input",
+          "label": "user_prompt_input",
           "type": "STRING",
-          "link": null,
           "widget": {
             "name": "user_prompt_input"
           },
-          "label": "user_prompt_input"
+          "link": null
         },
         {
           "name": "tools",
+          "label": "tools",
           "type": "STRING",
-          "link": 104,
           "widget": {
             "name": "tools"
           },
-          "label": "tools"
+          "link": 104
         },
         {
           "name": "file_content",
+          "label": "file_content",
           "type": "STRING",
-          "link": null,
           "widget": {
             "name": "file_content"
           },
-          "label": "file_content"
+          "link": null
+        },
+        {
+          "name": "extra_parameters",
+          "label": "extra_parameters",
+          "type": "DICT",
+          "shape": 7,
+          "link": null
         }
       ],
       "outputs": [
         {
           "name": "assistant_response",
+          "label": "assistant_response",
           "type": "STRING",
+          "shape": 3,
           "links": [
             100
           ],
-          "slot_index": 0,
-          "shape": 3,
-          "label": "assistant_response"
+          "slot_index": 0
         },
         {
           "name": "history",
+          "label": "history",
           "type": "STRING",
-          "links": null,
           "shape": 3,
-          "label": "history"
+          "links": null
         },
         {
           "name": "tool",
+          "label": "tool",
           "type": "STRING",
-          "links": null,
           "shape": 3,
-          "label": "tool"
+          "links": null
         },
         {
           "name": "image",
+          "label": "image",
           "type": "IMAGE",
-          "links": null,
           "shape": 3,
-          "label": "image"
+          "links": null
         }
       ],
       "properties": {
@@ -199,33 +126,80 @@
         "",
         100,
         "",
-        true
+        true,
+        "",
+        "",
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 80,
+      "type": "LLM_api_loader",
+      "pos": [
+        390,
+        150
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "label": "model",
+          "type": "CUSTOM",
+          "links": [
+            105
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "gpt-4o-mini",
+        "",
+        "",
+        false
       ]
     },
     {
       "id": 76,
       "type": "load_file",
       "pos": [
-        30,
-        370
+        0,
+        410
       ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
+      "size": [
+        315,
+        106
+      ],
       "flags": {},
       "order": 1,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "file_content",
+          "label": "file_content",
           "type": "STRING",
+          "shape": 3,
           "links": [
             103
           ],
-          "slot_index": 0,
-          "shape": 3,
-          "label": "file_content"
+          "slot_index": 0
         }
       ],
       "properties": {
@@ -235,9 +209,7 @@
         "",
         "test.txt",
         true
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
+      ]
     },
     {
       "id": 79,
@@ -256,28 +228,30 @@
       "inputs": [
         {
           "name": "ebd_model",
+          "label": "ebd_model",
           "type": "EBD_MODEL",
-          "link": null,
-          "label": "ebd_model"
+          "shape": 7,
+          "link": null
         },
         {
           "name": "file_content",
+          "label": "file_content",
           "type": "STRING",
-          "link": 103,
           "widget": {
             "name": "file_content"
-          }
+          },
+          "link": 103
         }
       ],
       "outputs": [
         {
           "name": "tool",
+          "label": "tool",
           "type": "STRING",
+          "shape": 3,
           "links": [
             104
           ],
-          "shape": 3,
-          "label": "tool",
           "slot_index": 0
         }
       ],
@@ -285,7 +259,7 @@
         "Node name for S&R": "ebd_tool"
       },
       "widgets_values": [
-        "",
+        "D:\\AI\\mychat\\model\\bge-large-zh",
         "enable",
         5,
         "auto",
@@ -294,17 +268,50 @@
         "",
         ""
       ]
+    },
+    {
+      "id": 72,
+      "type": "show_text_party",
+      "pos": [
+        1230,
+        350
+      ],
+      "size": [
+        320,
+        60
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "label": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 100
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "label": "STRING",
+          "type": "STRING",
+          "shape": 6,
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        ""
+      ]
     }
   ],
   "links": [
-    [
-      98,
-      74,
-      0,
-      77,
-      0,
-      "CUSTOM"
-    ],
     [
       100,
       77,
@@ -328,6 +335,14 @@
       77,
       4,
       "STRING"
+    ],
+    [
+      105,
+      80,
+      0,
+      77,
+      0,
+      "CUSTOM"
     ]
   ],
   "groups": [],
@@ -336,8 +351,8 @@
     "ds": {
       "scale": 0.8264462809917354,
       "offset": [
-        -172.77484216981674,
-        106.24984110491718
+        37.34497838682364,
+        -36.01684285504388
       ]
     }
   },
