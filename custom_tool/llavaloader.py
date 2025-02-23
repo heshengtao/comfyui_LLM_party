@@ -331,7 +331,7 @@ class easy_vlmLoader:
 
     CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
-    def load_VLM(self, model_name_or_path, device, dtype, is_locked):
+    def load_VLM(self, model_name_or_path, device, dtype, is_locked,type):
         self.is_locked = is_locked
         if self.is_locked == False:
             setattr(easy_vlmLoader, "IS_CHANGED", easy_vlmLoader.original_IS_CHANGED)

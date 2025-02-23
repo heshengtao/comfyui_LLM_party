@@ -1878,6 +1878,7 @@ def ds_chat(
         history.append({"role": "assistant", "content":clean_answer})
     except Exception as e:
         print(e)
+        clean_answer = str(e)
     
     return clean_answer, history
 
