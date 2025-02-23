@@ -7,7 +7,7 @@ import pickle
 import openai
 import requests
 import torch
-from langchain_community.embeddings import HuggingFaceBgeEmbeddings
+from langchain_ollama import OllamaEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings,AzureOpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -69,6 +69,7 @@ class load_openai_ebd:
                         "default": "",
                     },
                 ),
+                "is_ollama": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -93,6 +94,7 @@ class load_openai_ebd:
         base_path="",
         base_url=None,
         api_key=None,
+        is_ollama=False,
     ):
         os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
         if not is_enable:
@@ -130,6 +132,12 @@ class load_openai_ebd:
                 api_version=api_version,
                 azure_endpoint=azure_endpoint,
             )
+        if is_ollama:
+            if base_url:
+                openai.base_url = base_url.rstrip("/") + "/"
+            else:
+                openai.base_url = "http://127.0.0.1:11434/"
+            embeddings = OllamaEmbeddings(model=model_name, base_url=openai.base_url)
         if not base_path:
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size=chunk_size,
@@ -191,6 +199,7 @@ class openai_ebd_tool:
                         "default": "",
                     },
                 ),
+                "is_ollama": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -214,6 +223,7 @@ class openai_ebd_tool:
         base_path="",
         base_url=None,
         api_key=None,
+        is_ollama=False,
     ):
         os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
         if not is_enable:
@@ -251,6 +261,12 @@ class openai_ebd_tool:
                 api_version=api_version,
                 azure_endpoint=azure_endpoint,
             )
+        if is_ollama:
+            if base_url:
+                openai.base_url = base_url.rstrip("/") + "/"
+            else:
+                openai.base_url = "http://127.0.0.1:11434/"
+            embeddings = OllamaEmbeddings(model=model_name, base_url=openai.base_url)
         if not base_path:
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size=chunk_size,
@@ -332,6 +348,7 @@ class save_openai_ebd:
                         "default": "",
                     },
                 ),
+                "is_ollama": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -354,6 +371,7 @@ class save_openai_ebd:
         save_path="",
         base_url=None,
         api_key=None,
+        is_ollama=False,
     ):
         os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
         if not is_enable:
@@ -389,7 +407,12 @@ class save_openai_ebd:
                 api_version=api_version,
                 azure_endpoint=azure_endpoint,
             )
-
+        if is_ollama:
+            if base_url:
+                openai.base_url = base_url.rstrip("/") + "/"
+            else:
+                openai.base_url = "http://127.0.0.1:11434/"
+            embeddings = OllamaEmbeddings(model=model_name, base_url=openai.base_url)
         # 将文件内容按段落分割
         text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=chunk_size,

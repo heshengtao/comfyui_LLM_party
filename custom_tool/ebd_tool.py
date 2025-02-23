@@ -126,6 +126,6 @@ except:
 if language == "zh_CN" or language=="en_US":
     lang=language
 if lang == "zh_CN":
-    NODE_DISPLAY_NAME_MAPPINGS = {"advance_ebd_tool": "☁️💻高级词嵌入工具"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"advance_ebd_tool": "💻高级词嵌入工具"}
 else:
-    NODE_DISPLAY_NAME_MAPPINGS = {"advance_ebd_tool": "☁️💻Advanced Embedding Tool"}
+    NODE_DISPLAY_NAME_MAPPINGS = {"advance_ebd_tool": "💻Advanced Embedding Tool"}
