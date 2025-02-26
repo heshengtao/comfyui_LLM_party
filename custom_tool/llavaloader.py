@@ -7,7 +7,7 @@ current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, current_dir) 
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
-from transformers import AutoModelForPreTraining,AutoModelForCausalLM
+from transformers import AutoModelForPreTraining,AutoModelForCausalLM, AutoProcessor
 import torch
 if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
