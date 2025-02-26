@@ -101,7 +101,11 @@ def get_system_info():
         system_info["gpu"] = torch.cuda.is_available()
         if system_info["gpu"]:
             system_info["cuda_version"] = "cu" + torch.version.cuda.replace(".", "").strip()
-
+            # 如果cuda_version高于cu124,则使用cu124
+            # 提取cuda_version中的数字部分
+            cuda_version_number = int("".join(filter(str.isdigit, system_info["cuda_version"])))
+            if cuda_version_number > 124:
+                system_info["cuda_version"] = "cu124"
     # 检查AVX2支持
     if importlib.util.find_spec("cpuinfo"):
         try:
