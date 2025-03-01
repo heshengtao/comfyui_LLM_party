@@ -24,6 +24,9 @@ def copy_config():
 copy_config()
 config_key = configparser.ConfigParser()
 config_key.read(config_path, encoding="utf-8")
+# 获取config_key中的API_KEYS部分
+api_keys = config_key["API_KEYS"]
+
 
 # 获取config_key中的所有部分
 config_keys = config_key.sections()

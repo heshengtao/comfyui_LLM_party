@@ -7,7 +7,7 @@ import sys
 
 import packaging.tags
 from requests import get
-
+from .config import api_keys
 
 def get_python_version():
     """Return the Python version in a concise format, e.g., '39' for Python 3.9."""
@@ -62,8 +62,11 @@ def package_is_installed(package_name):
 def install_llama(system_info):
     try:
         imported = package_is_installed("llama-cpp-python") or package_is_installed("llama_cpp")
+
         if imported:
-            print("llama-cpp installed")
+            print("llama-cpp-python installed")
+        elif "fast_installed" in api_keys and api_keys["fast_installed"]:
+            print("The installation of llama-cpp-python was skipped")
         else:
             
             if system_info.get("gpu", False):

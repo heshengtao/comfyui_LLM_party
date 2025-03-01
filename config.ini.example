@@ -13,6 +13,7 @@ feishu_url=feishu_url_put_here
 language=#zh_CN or en_US
 fastapi_api_key=
 fish_api_key= fish_api_key_put_here
+fast_installed= False  # True or False
 
 [your_model_name]
 base_url=
