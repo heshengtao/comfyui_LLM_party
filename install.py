@@ -76,7 +76,9 @@ def install_llama(system_info):
             else:
                 custom_command = f"--index-url  https://abetlen.github.io/llama-cpp-python/whl/cpu/"
                 print("cpu:" +f" pip install llama-cpp-python --no-cache-dir {custom_command}"+"\n如果下载速度太慢，请直接到这个链接里下载轮子，然后手动安装。\nIf the download speed is too slow, please go directly to this link to download the wheel and install it manually.")
-            
+            print("如果你选择手动下载llama-cpp-python，请确保下载的版本与你的系统匹配。然后使用以下命令手动安装：\nIf you choose to download llama-cpp-python manually, please make sure that the version you download matches your system. Then use the following command to manually install:")
+            print("pip install <path_to_wheel_file> --no-cache-dir")
+            print("请将 <path_to_wheel_file> 替换为你下载的轮子文件的路径。\nPlease replace <path_to_wheel_file> with the path to the wheel file you downloaded.")
             install_llama_package("llama-cpp-python", custom_command=custom_command)
     except Exception as e:
         print(f"Error installing llama-cpp-python: {e}")
