@@ -132,7 +132,9 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 4. If you have some environment configuration problems, you can try to use the dependencies in `requirements_fixed.txt`.
 
 ## Configuration
-APIKEY can be configured using one of the following methods
+* The language can be configured in `config.ini`, currently only Chinese (zh_CN) and English (en_US) are available, with the default set to your system language.
+* In `config.ini`, you can configure whether to enable fast installation. The `fast_installed` option defaults to `False`, and if you do not require the usage of the GGUF model, it can be set to `True`.
+* APIKEY can be configured using one of the following methods
 ### Method 1:
 1. Open the `config.ini` file in the project folder of the `comfyui_LLM_party`.
 2. Enter your openai_api_key, base_url in `config.ini`.

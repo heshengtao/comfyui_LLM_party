@@ -129,7 +129,8 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 3. comfyui 실행기를 사용하는 경우, 터미널에 `실행기 구성의 경로\python_embeded\python.exe -m pip install -r requirements.txt`를 입력하여 설치합니다. `python_embeded` 폴더는 일반적으로 `ComfyUI` 폴더와 같은 수준에 있습니다.
 4. 환경 구성 문제 발생 시, `requirements_fixed.txt`에 있는 의존성을 사용해 볼 수 있습니다.
 ## 구성
-* 언어는 `config.ini`에서 설정할 수 있으며, 현재 중국어(zh_CN)와 영어(en_US) 두 가지가 지원되며, 기본값은 시스템 언어입니다.
+* `config.ini`에서 언어를 설정할 수 있습니다. 현재 지원되는 언어는 중국어(zh_CN)와 영어(en_US) 두 가지이며, 기본값은 시스템 언어입니다.
+* `config.ini`에서 빠른 설치 여부를 설정할 수 있습니다. `fast_installed`의 기본값은 `False`이며, GGUF 모델을 사용하지 않는 경우 `True`로 설정할 수 있습니다.
 * 다음 방법 중 하나로 APIKEY를 설정할 수 있습니다.
 ### 방법 1:
 1. `comfyui_LLM_party` 프로젝트 폴더 내의 `config.ini` 파일을 엽니다.

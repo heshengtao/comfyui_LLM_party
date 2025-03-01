@@ -132,6 +132,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 ## 配置
 * 可以在`config.ini`中配置语言，目前只有中文（zh_CN）和英文（en_US）两种，默认为你的系统语言。
+* 可以在`config.ini`中配置是否快速安装，`fast_installed`默认为`False`，如果不需要使用GGUF模型，可以设置为`True`。
 * 可以使用以下方法之一配置APIKEY
 ### 方法一：
 1. 打开`comfyui_LLM_party`的项目文件夹下的`config.ini`文件。

@@ -128,7 +128,8 @@ Instale utilizando uno de los siguientes métodos:
 3. Si está utilizando el lanzador de comfyui, deberá ingresar en la terminal `ruta en la configuración del lanzador\python_embeded\python.exe -m pip install -r requirements.txt` para realizar la instalación. La carpeta `python_embeded` generalmente está al mismo nivel que su carpeta `ComfyUI`.
 4. Si encuentra problemas con la configuración del entorno, puede intentar usar las dependencias del archivo `requirements_fixed.txt`.
 ## Configuración
-* Puede configurar el idioma en `config.ini`, actualmente solo hay dos opciones: chino (zh_CN) e inglés (en_US), siendo el predeterminado el idioma de su sistema.
+* Se puede configurar el idioma en `config.ini`, actualmente solo hay dos opciones: chino (zh_CN) e inglés (en_US), siendo el idioma predeterminado el de tu sistema.
+* Se puede configurar en `config.ini` si se desea una instalación rápida; `fast_installed` está configurado por defecto como `False`. Si no necesitas utilizar el modelo GGUF, puedes establecerlo en `True`.
 * Puede utilizar uno de los siguientes métodos para configurar el APIKEY.
 ### Método uno:
 1. Abra el archivo `config.ini` en la carpeta del proyecto `comfyui_LLM_party`.

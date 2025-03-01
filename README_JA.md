@@ -129,7 +129,8 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 3. comfyuiランチャーを使用している場合は、ターミナルに`ランチャー設定のパス\python_embeded\python.exe -m pip install -r requirements.txt`を入力してインストールを行ってください。`python_embeded`フォルダーは通常`ComfyUI`フォルダーと同じ階層にあります。
 4. 環境設定に関する問題が発生した場合は、`requirements_fixed.txt`内の依存関係を使用することを検討してください。
 ## 設定
-* `config.ini`において言語を設定できます。現在は中国語（zh_CN）と英語（en_US）の2種類があり、デフォルトはシステム言語です。
+* `config.ini`に言語を設定することが可能です。現在は中国語（zh_CN）と英語（en_US）の2種類のみがサポートされています。デフォルトはお使いのシステム言語です。
+* `config.ini`に迅速インストールの設定が可能です。`fast_installed`のデフォルトは`False`であり、GGUFモデルを使用しない場合は`True`に設定できます。
 * 以下のいずれかの方法でAPIKEYを設定できます。
 ### 方法一：
 1. `comfyui_LLM_party`のプロジェクトフォルダ内の`config.ini`ファイルを開きます。
