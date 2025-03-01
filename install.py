@@ -7,7 +7,7 @@ import sys
 
 import packaging.tags
 from requests import get
-from .config import api_keys
+from .config import api_keys,config_path
 
 def get_python_version():
     """Return the Python version in a concise format, e.g., '39' for Python 3.9."""
@@ -82,6 +82,7 @@ def install_llama(system_info):
             print("如果你选择手动下载llama-cpp-python，请确保下载的版本与你的系统匹配。然后使用以下命令手动安装：\nIf you choose to download llama-cpp-python manually, please make sure that the version you download matches your system. Then use the following command to manually install:")
             print("pip install <path_to_wheel_file> --no-cache-dir")
             print("请将 <path_to_wheel_file> 替换为你下载的轮子文件的路径。\nPlease replace <path_to_wheel_file> with the path to the wheel file you downloaded.")
+            print(f"如果你想要跳过llama-cpp-python的安装，请在{api_keys}中的[API_KEYS]添加或者修改fast_installed= True，然后重新运行程序。\nIf you want to skip the installation of llama-cpp-python, please add or modify fast_installed= True in {api_keys} in [API_KEYS], and then run the program again.")
             install_llama_package("llama-cpp-python", custom_command=custom_command)
     except Exception as e:
         print(f"Error installing llama-cpp-python: {e}")
