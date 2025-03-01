@@ -65,11 +65,10 @@ def install_llama(system_info):
 
         if imported:
             print("llama-cpp-python installed")
-        elif "fast_installed" in api_keys and api_keys["fast_installed"]:
+        elif "fast_installed" in api_keys and api_keys["fast_installed"] == "True":
             print("The installation of llama-cpp-python was skipped")
             print(f"如果你想要安装llama-cpp-python，请在{config_path}中的[API_KEYS]添加或者修改fast_installed= False,然后然后重新运行程序。\nIf you want to install llama-cpp-python, please add or modify fast_installed= False in {config_path} in [API_KEYS] and then run the program again.")
         else:
-            
             if system_info.get("gpu", False):
                 cuda_version = system_info["cuda_version"]
                 custom_command = f"--index-url  https://abetlen.github.io/llama-cpp-python/whl/{cuda_version}/"
