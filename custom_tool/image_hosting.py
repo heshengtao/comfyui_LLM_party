@@ -191,27 +191,28 @@ class img_hosting:
             }
             }
 
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("img_URL",)
+    RETURN_TYPES = ("STRING","STRING",)
+    RETURN_NAMES = ("img_URL","is_help",)
 
     FUNCTION = "convert"
 
     CATEGORY = "大模型派对（llm_party）/转换器（converter）"
 
     def convert(self,image, api_key, img_hosting, is_enable=True,img_hosting_url=""):
+        is_help = "选择chevereto时，需要填入img_hosting_url，这是你自己部署的chevereto的api地址，如果选择其他图床，则不需要填入，需要去对应的图床官网申请api_key\nSelect chevereto, you need to fill in img_hosting_url, which is your own deployment of chevereto API address, if you choose other map, you do not need to fill in, you need to go to the corresponding map official website application api_key"
         if is_enable:
             if img_hosting == "sm.ms":
-                return (tensor_to_url_sm(image[0], api_key),)
+                return (tensor_to_url_sm(image[0], api_key),is_help,)
             elif img_hosting == "imgbb.com":
-                return (tensor_to_url_imgbb(image[0], api_key),)
+                return (tensor_to_url_imgbb(image[0], api_key),is_help,)
             elif img_hosting == "imagehub.cc":
-                return (tensor_to_url_imagehub(image[0], api_key),)
+                return (tensor_to_url_imagehub(image[0], api_key),is_help,)
             elif img_hosting == "chevereto":
-                return (tensor_to_url_chevereto(image[0], api_key,img_hosting_url),)
+                return (tensor_to_url_chevereto(image[0], api_key,img_hosting_url),is_help,)
             else:
-                return (None,)
+                return (None,is_help,)
         else:
-            return (None,)
+            return (None,is_help,)
         
 NODE_CLASS_MAPPINGS = {"img_hosting": img_hosting}
 lang = locale.getdefaultlocale()[0]
