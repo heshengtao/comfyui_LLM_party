@@ -88,7 +88,54 @@ def tensor_to_url_imgbb(image_tensor, api_key):
         return "Error: " + response.text
 
     
+def tensor_to_url_imagehub(image_tensor, api_key):
+    """
+    将PyTorch张量转换为PNG格式并上传至指定图床，返回上传后的图片URL。
 
+    参数:
+    - image_tensor: PyTorch张量。
+    - api_key: 自定义图床API密钥。
+
+    返回:
+    - 图片上传成功后的URL或已存在的图片URL，如果失败则返回错误信息。
+    """
+    # 确保张量在CPU上，并将其转换为NumPy数组
+    if isinstance(image_tensor, torch.Tensor):
+        i = 255.0 * image_tensor.cpu().numpy()
+    else:
+        raise TypeError("Input should be a PyTorch Tensor.")
+
+    # 创建PIL Image对象并保存到内存中的字节流
+    img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    buffered.seek(0)  # 移动到数据的开头
+
+    url = "https://www.imagehub.cc/api/1/upload"
+    headers = {
+        "X-API-Key": api_key,
+    }
+    
+    files = {
+        'source': ('image.png', buffered.getvalue(), 'image/png'),
+    }
+    data = {
+        "key": api_key,
+        "title": "Uploaded Image",
+        "format": "json"
+    }
+
+    response = requests.post(url, headers=headers, files=files, data=data)
+    
+    if response.status_code == 200:
+        result = response.json()
+        if 'success' in result and result['success']['code'] == 200:
+            img_url = result['image']['url']
+            return img_url
+        else:
+            return "Error: Upload failed with message - {}".format(result.get('status_txt', 'Unknown error'))
+    else:
+        return "Error: HTTP request failed with status code - {}, message - {}".format(response.status_code, response.text)
 
 
 class img_hosting:
@@ -98,7 +145,7 @@ class img_hosting:
             "required": {
                 "image": ("IMAGE", {}),
                 "api_key": ("STRING", {"default":""}), 
-                "img_hosting": (["sm.ms", "imgbb.com"], {"default": "sm.ms"}),
+                "img_hosting": (["sm.ms", "imgbb.com","imagehub.cc"], {"default": "sm.ms"}),
                 "is_enable": ("BOOLEAN", {"default": True}),
                 }
             }
@@ -116,6 +163,8 @@ class img_hosting:
                 return (tensor_to_url_sm(image[0], api_key),)
             elif img_hosting == "imgbb.com":
                 return (tensor_to_url_imgbb(image[0], api_key),)
+            elif img_hosting == "imagehub.cc":
+                return (tensor_to_url_imagehub(image[0], api_key),)
             else:
                 return (None,)
         else:
