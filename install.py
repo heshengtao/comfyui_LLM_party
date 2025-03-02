@@ -2,6 +2,7 @@ import importlib
 import os
 import platform
 import re
+import shutil
 import subprocess
 import sys
 
@@ -17,6 +18,14 @@ current_dir_path = os.path.dirname(current_file_path)
 
 # 构建config.ini的绝对路径
 config_path = os.path.join(current_dir_path, "config.ini")
+def copy_config():
+    config_path = os.path.join(current_dir_path, "config.ini")
+    config_example_path = os.path.join(current_dir_path, "config.ini.example")
+    # 判断config.ini是否存在
+    if not os.path.exists(config_path):
+        # 如果不存在用config_example_path的副本创建config.ini
+        shutil.copyfile(config_example_path, config_path)
+copy_config()
 config_key = configparser.ConfigParser()
 config_key.read(config_path, encoding="utf-8")
 # 获取config_key中的API_KEYS部分
