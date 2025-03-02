@@ -2756,7 +2756,8 @@ class LLM_local:
                                 max_length,
                                 role="observation",
                                 temperature=temperature,
-                            )    
+                            )   
+                    self.images = []
                 print(response)
                 # 修改prompt.json文件
                 history_get = [history[0]]
