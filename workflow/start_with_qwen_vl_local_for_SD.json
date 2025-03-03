@@ -1,0 +1,969 @@
+{
+  "last_node_id": 202,
+  "last_link_id": 208,
+  "nodes": [
+    {
+      "id": 189,
+      "type": "show_text_party",
+      "pos": [
+        1896,
+        -9
+      ],
+      "size": [
+        396.90191650390625,
+        295.5406494140625
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "label": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 207
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "label": "STRING",
+          "type": "STRING",
+          "shape": 6,
+          "links": [
+            186
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "A cute, anthropomorphic fox with large, pointed ears, wearing a pink dress, standing on a grassy hill under a blue sky with fluffy white clouds, cheerful expression, vibrant colors, cartoon style, high resolution, photorealistic, professional, vivid colors, sharp focus, physically based rendering, extreme detail description, studio lighting."
+      ]
+    },
+    {
+      "id": 192,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2430,
+        -20
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "label": "CLIP",
+          "type": "CLIP",
+          "link": 192
+        },
+        {
+          "name": "text",
+          "label": "文本",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 186
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "label": "条件",
+          "type": "CONDITIONING",
+          "links": [
+            188
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 193,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2430,
+        400
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "label": "CLIP",
+          "type": "CLIP",
+          "link": 193
+        },
+        {
+          "name": "text",
+          "label": "文本",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 187
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "label": "条件",
+          "type": "CONDITIONING",
+          "links": [
+            189
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 195,
+      "type": "EmptyLatentImage",
+      "pos": [
+        2480,
+        700
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "label": "Latent",
+          "type": "LATENT",
+          "links": [
+            190
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 194,
+      "type": "KSampler",
+      "pos": [
+        3070,
+        110
+      ],
+      "size": [
+        315,
+        262
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "label": "模型",
+          "type": "MODEL",
+          "link": 191
+        },
+        {
+          "name": "positive",
+          "label": "正面条件",
+          "type": "CONDITIONING",
+          "link": 188
+        },
+        {
+          "name": "negative",
+          "label": "负面条件",
+          "type": "CONDITIONING",
+          "link": 189
+        },
+        {
+          "name": "latent_image",
+          "label": "Latent",
+          "type": "LATENT",
+          "link": 190
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "label": "Latent",
+          "type": "LATENT",
+          "links": [
+            194
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        80655756978502,
+        "randomize",
+        20,
+        8,
+        "euler",
+        "normal",
+        1
+      ]
+    },
+    {
+      "id": 197,
+      "type": "VAEDecode",
+      "pos": [
+        3484.382568359375,
+        137.69595336914062
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "label": "Latent",
+          "type": "LATENT",
+          "link": 194
+        },
+        {
+          "name": "vae",
+          "label": "VAE",
+          "type": "VAE",
+          "link": 195
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "label": "图像",
+          "type": "IMAGE",
+          "links": [
+            196
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 196,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        1930,
+        -240
+      ],
+      "size": [
+        315,
+        98
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "label": "模型",
+          "type": "MODEL",
+          "links": [
+            191
+          ]
+        },
+        {
+          "name": "CLIP",
+          "label": "CLIP",
+          "type": "CLIP",
+          "links": [
+            192,
+            193
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "label": "VAE",
+          "type": "VAE",
+          "links": [
+            195
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "meinamix_v12Final.safetensors"
+      ]
+    },
+    {
+      "id": 198,
+      "type": "PreviewImage",
+      "pos": [
+        3900,
+        120
+      ],
+      "size": [
+        520,
+        550
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "label": "图像",
+          "type": "IMAGE",
+          "link": 196
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 190,
+      "type": "show_text_party",
+      "pos": [
+        1888,
+        396
+      ],
+      "size": [
+        396.90191650390625,
+        295.5406494140625
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "label": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 208,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "label": "STRING",
+          "type": "STRING",
+          "shape": 6,
+          "links": [
+            187
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "nsfw, low quality, normal quality, worst quality, jpeg artifacts, cropped, monochrome, low res, low saturation, watermark, white letters, skin spots, acnes, skin blemishes, age spot, mutated hands, mutated fingers, deformed, bad anatomy, disfigured, poorly drawn face, extra limb, ugly, poorly drawn hands, missing limb, floating limbs, disconnected limbs, out of focus, long neck, long body, extra fingers, fewer fingers, multi nipples, bad hands, signature, username, bad feet, blurry, bad body."
+      ]
+    },
+    {
+      "id": 201,
+      "type": "vlmLoader",
+      "pos": [
+        -430,
+        -120
+      ],
+      "size": [
+        315,
+        174
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "label": "model",
+          "type": "CUSTOM",
+          "links": [
+            204
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "tokenizer(processor)",
+          "label": "tokenizer(processor)",
+          "type": "CUSTOM",
+          "links": [
+            205
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "vlmLoader"
+      },
+      "widgets_values": [
+        "D:\\AI\\mychat\\model\\Qwen2.5-VL-3B-Instruct",
+        "auto",
+        "bfloat16",
+        true,
+        "qwen-vl"
+      ]
+    },
+    {
+      "id": 191,
+      "type": "LoadImage",
+      "pos": [
+        -500,
+        420
+      ],
+      "size": [
+        500,
+        580
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "label": "图像",
+          "type": "IMAGE",
+          "links": [
+            201
+          ]
+        },
+        {
+          "name": "MASK",
+          "label": "遮罩",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
+      ]
+    },
+    {
+      "id": 172,
+      "type": "load_persona",
+      "pos": [
+        -450,
+        170
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "label": "file_content",
+          "type": "STRING",
+          "widget": {
+            "name": "file_content"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt_input",
+          "label": "system_prompt_input",
+          "type": "STRING",
+          "shape": 3,
+          "links": [
+            202
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "图片提示词生成器",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 179,
+      "type": "show_text_party",
+      "pos": [
+        760,
+        80
+      ],
+      "size": [
+        450,
+        340
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "label": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 203
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "label": "STRING",
+          "type": "STRING",
+          "shape": 6,
+          "links": [
+            206
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "**Positive Prompt:** A cute, anthropomorphic fox with large, pointed ears, wearing a pink dress, standing on a grassy hill under a blue sky with fluffy white clouds, cheerful expression, vibrant colors, cartoon style, high resolution, photorealistic, professional, vivid colors, sharp focus, physically based rendering, extreme detail description, studio lighting.\n\n**Negative Prompt:** nsfw, low quality, normal quality, worst quality, jpeg artifacts, cropped, monochrome, low res, low saturation, watermark, white letters, skin spots, acnes, skin blemishes, age spot, mutated hands, mutated fingers, deformed, bad anatomy, disfigured, poorly drawn face, extra limb, ugly, poorly drawn hands, missing limb, floating limbs, disconnected limbs, out of focus, long neck, long body, extra fingers, fewer fingers, multi nipples, bad hands, signature, username, bad feet, blurry, bad body."
+      ]
+    },
+    {
+      "id": 202,
+      "type": "substring",
+      "pos": [
+        1320,
+        100
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "widget": {
+            "name": "input_string"
+          },
+          "link": 206
+        }
+      ],
+      "outputs": [
+        {
+          "name": "substring",
+          "label": "substring",
+          "type": "STRING",
+          "links": [
+            207
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "remaining_string",
+          "label": "remaining_string",
+          "type": "STRING",
+          "links": [
+            208
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "substring"
+      },
+      "widgets_values": [
+        "",
+        "**Positive Prompt:**",
+        "**Negative Prompt:**",
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 200,
+      "type": "LLM_local",
+      "pos": [
+        190,
+        110
+      ],
+      "size": [
+        460,
+        600
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "label": "model",
+          "type": "CUSTOM",
+          "link": 204
+        },
+        {
+          "name": "tokenizer",
+          "label": "tokenizer",
+          "type": "CUSTOM",
+          "shape": 7,
+          "link": 205
+        },
+        {
+          "name": "image",
+          "label": "image",
+          "type": "IMAGE",
+          "shape": 7,
+          "link": 201
+        },
+        {
+          "name": "extra_parameters",
+          "label": "extra_parameters",
+          "type": "DICT",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "system_prompt_input",
+          "label": "system_prompt_input",
+          "type": "STRING",
+          "shape": 7,
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "link": 202
+        },
+        {
+          "name": "user_prompt_input",
+          "label": "user_prompt_input",
+          "type": "STRING",
+          "shape": 7,
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "link": null
+        },
+        {
+          "name": "tools",
+          "label": "tools",
+          "type": "STRING",
+          "shape": 7,
+          "widget": {
+            "name": "tools"
+          },
+          "link": null
+        },
+        {
+          "name": "file_content",
+          "label": "file_content",
+          "type": "STRING",
+          "shape": 7,
+          "widget": {
+            "name": "file_content"
+          },
+          "link": null
+        },
+        {
+          "name": "user_history",
+          "label": "user_history",
+          "type": "STRING",
+          "shape": 7,
+          "widget": {
+            "name": "user_history"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "label": "assistant_response",
+          "type": "STRING",
+          "links": [
+            203
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "label": "history",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "tool",
+          "label": "tool",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "image",
+          "label": "image",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_local"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "根据图片生成提示词",
+        "VLM(qwen-vl)",
+        0.7000000000000001,
+        512,
+        "disable",
+        "enable",
+        "enable",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true,
+        "",
+        "enable",
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ]
+      ]
+    }
+  ],
+  "links": [
+    [
+      186,
+      189,
+      0,
+      192,
+      1,
+      "STRING"
+    ],
+    [
+      187,
+      190,
+      0,
+      193,
+      1,
+      "STRING"
+    ],
+    [
+      188,
+      192,
+      0,
+      194,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      189,
+      193,
+      0,
+      194,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      190,
+      195,
+      0,
+      194,
+      3,
+      "LATENT"
+    ],
+    [
+      191,
+      196,
+      0,
+      194,
+      0,
+      "MODEL"
+    ],
+    [
+      192,
+      196,
+      1,
+      192,
+      0,
+      "CLIP"
+    ],
+    [
+      193,
+      196,
+      1,
+      193,
+      0,
+      "CLIP"
+    ],
+    [
+      194,
+      194,
+      0,
+      197,
+      0,
+      "LATENT"
+    ],
+    [
+      195,
+      196,
+      2,
+      197,
+      1,
+      "VAE"
+    ],
+    [
+      196,
+      197,
+      0,
+      198,
+      0,
+      "IMAGE"
+    ],
+    [
+      201,
+      191,
+      0,
+      200,
+      2,
+      "IMAGE"
+    ],
+    [
+      202,
+      172,
+      0,
+      200,
+      4,
+      "STRING"
+    ],
+    [
+      203,
+      200,
+      0,
+      179,
+      0,
+      "STRING"
+    ],
+    [
+      204,
+      201,
+      0,
+      200,
+      0,
+      "CUSTOM"
+    ],
+    [
+      205,
+      201,
+      1,
+      200,
+      1,
+      "CUSTOM"
+    ],
+    [
+      206,
+      179,
+      0,
+      202,
+      0,
+      "STRING"
+    ],
+    [
+      207,
+      202,
+      0,
+      189,
+      0,
+      "STRING"
+    ],
+    [
+      208,
+      202,
+      1,
+      190,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.751314800901578,
+      "offset": [
+        441.8680339595903,
+        221.07701347984357
+      ]
+    }
+  },
+  "version": 0.4
+}
