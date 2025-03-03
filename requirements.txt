@@ -14,8 +14,6 @@ websocket-client
 streamlit
 virtualenv
 tiktoken
-transformers
-transformers_stream_generator
 optimum
 pdfplumber
 wikipedia

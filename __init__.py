@@ -126,27 +126,6 @@ def install_playwright_browsers():
         except subprocess.CalledProcessError as e:
             print(f"Failed to install Playwright browsers: {e.stderr}")
 
-
-try:
-    install_portaudio()
-except Exception as e:
-    print(f"Error: {e}")
-'''
-try:
-    dir = get_comfy_dir("web_custom_versions/Comfy-Org_ComfyUI_frontend")
-    if os.path.exists(dir):
-        latest_folder = get_latest_version_folder(dir)
-        party_path= os.path.join(latest_folder,"extensions", "party")
-        copy_js_files(party_path)
-    copy_js_files("web/extensions/party")
-except Exception as e:
-    print(f"Error: {e}")
-'''
-try:
-    system_info = get_system_info()
-    install_llama(system_info)
-except Exception as e:
-    print(f"Error: {e}")
 try:
     check_and_uninstall_websocket()
 except Exception as e:
@@ -159,12 +138,6 @@ try:
     manage_discord_packages()
 except Exception as e:
     print(f"Error: {e}")
-
-try:
-    install_playwright_browsers()
-except Exception as e:
-    print(f"Error: {e}")
-
 try:
     copy_config()
 except Exception as e:
