@@ -770,7 +770,7 @@ class mini_ocr:
                 {"type": "text", "text": out_json},
                 {
                     "type": "image_url",
-                    "image_url": {"url": f"data:image/jpeg;base64,{img_str}"},
+                    "image_url": {"url": f"data:image/png;base64,{img_str}"},
                 },
             ]
         else:
@@ -1255,7 +1255,7 @@ a girl, beautiful detailed eyes, stars in the eyes, messy floating hair, colored
                 {"type": "text", "text": "请生成这张图片的prompt"},
                 {
                     "type": "image_url",
-                    "image_url": {"url": f"data:image/jpeg;base64,{img_str}"},
+                    "image_url": {"url": f"data:image/png;base64,{img_str}"},
                 },
             ]
         else:

@@ -903,7 +903,7 @@ class aisuite_Chat:
                         img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
                         img_json.append({
                             "type": "image_url",
-                            "image_url": {"url": f"data:image/jpeg;base64,{img_str}"}
+                            "image_url": {"url": f"data:image/png;base64,{img_str}"}
                         })
                     user_prompt = img_json
                 else:
@@ -2490,7 +2490,7 @@ class LLM_local:
                             base64_string = base64.b64encode(buffer.getvalue()).decode("utf-8")
                             user_content["content"].append({
                                 "type": "image_url",
-                                "image_url": {"url": f"data:image/jpeg;base64,{base64_string}"}
+                                "image_url": {"url": f"data:image/png;base64,{base64_string}"}
                             })
                         user_content["content"].append({"type": "text", "text": user_prompt})
 

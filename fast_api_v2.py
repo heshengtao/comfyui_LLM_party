@@ -288,8 +288,8 @@ async def process_request(request_data: CompletionRequest):
                     user_prompt = content["text"]
                 elif content["type"] == "image_url":
                     if isinstance(content["image_url"], str):
-                        if content["image_url"].startswith("data:image/jpeg;base64,"):
-                            base64_data = content["image_url"].split("data:image/jpeg;base64,")[1]
+                        if content["image_url"].startswith("data:image/png;base64,"):
+                            base64_data = content["image_url"].split("data:image/png;base64,")[1]
                             base64_encoded_list.append(base64_data)
                         # 如果是本地文件路径
                         elif os.path.isfile(content["image_url"]):
