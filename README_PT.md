@@ -45,6 +45,9 @@ ComfyUI LLM Party permite desde a chamada de múltiplas ferramentas LLM, configu
   - Use LLM local em formato GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
   - Use VLM local em formato distribuído: [start_with_VLM_local](workflow/start_with_VLM_local.json) Atualmente, já é suportado [Llama-3.2-Vision](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)/[Qwen/Qwen2.5-VL](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)/[deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)
   - Use VLM local em formato GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
+  - Utilizar a API para invocar LLM e gerar palavras-chave para SD, bem como criar imagens: [start_with_VLM_API_for_SD](workflow/start_with_VLM_API_for_SD.json)
+  - Utilizar ollama para invocar minicpm e gerar palavras-chave para SD, bem como criar imagens: [start_with_ollama_minicpm_for_SD](workflow/start_with_ollama_minicpm_for_SD.json)
+  - Utilizar o qwen-vl local para gerar palavras-chave para SD e criar imagens: [start_with_qwen_vl_local_for_SD](workflow/start_with_qwen_vl_local_for_SD.json)
 2. Se você estiver usando a API, preencha seu `base_url` (pode ser uma API de retransmissão, certifique-se de que termine com `/v1/`) e `api_key` no nó de carregamento da API LLM. Exemplo: `https://api.openai.com/v1/`
 3. Se você estiver usando ollama, ative a opção `is_ollama` no nó de carregamento da API LLM, não é necessário preencher `base_url` e `api_key`.
 4. Se você estiver usando um modelo local, preencha o caminho do seu modelo no nó de carregamento do modelo local, por exemplo: `E:\model\Llama-3.2-1B-Instruct`. Você também pode preencher o ID do repositório do modelo no Huggingface no nó de carregamento do modelo local, por exemplo: `lllyasviel/omost-llama-3-8b-4bits`.

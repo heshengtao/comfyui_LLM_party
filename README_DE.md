@@ -45,6 +45,9 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
   - Verwenden Sie lokale LLMs im GGUF-Format: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
   - Verwenden Sie lokale VLMs im verteilten Format: [start_with_VLM_local](workflow/start_with_VLM_local.json) （Derzeit wird Unterstützung für [Llama-3.2-Vision](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)/[Qwen/Qwen2.5-VL](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)/[deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B) geboten）
   - Verwenden Sie lokale VLMs im GGUF-Format: [start_with_VLM_GGUF](workflow/start_with_llava.json)
+  - Verwenden Sie die API, um LLM aufzurufen, um SD-Stichwörter zu generieren und Bilder zu erstellen: [beginnen_mit_VLM_API_für_SD](workflow/start_with_VLM_API_for_SD.json)
+  - Verwenden Sie ollama, um minicpm aufzurufen, um SD-Stichwörter zu generieren und Bilder zu erstellen: [beginnen_mit_ollama_minicpm_für_SD](workflow/start_with_ollama_minicpm_for_SD.json)
+  - Verwenden Sie qwen-vl lokal, um SD-Stichwörter zu generieren und Bilder zu erstellen: [beginnen_mit_qwen_vl_lokal_für_SD](workflow/start_with_qwen_vl_local_for_SD.json)
 2. Wenn Sie die API verwenden, füllen Sie im API LLM-Ladeknoten Ihre `base_url` (es kann eine Relay-API sein, stellen Sie sicher, dass sie mit `/v1/` endet) und `api_key` aus. Beispiel: `https://api.openai.com/v1/`
 3. Wenn Sie ollama verwenden, aktivieren Sie die Option `is_ollama` im API LLM-Ladeknoten, ohne `base_url` und `api_key` auszufüllen.
 4. Wenn Sie ein lokales Modell verwenden, geben Sie im lokalen Modell-Ladeknoten Ihren Modellpfad ein, z.B.: `E:\model\Llama-3.2-1B-Instruct`. Sie können auch die Huggingface Modell-Repo-ID im lokalen Modell-Ladeknoten eingeben, z.B.: `lllyasviel/omost-llama-3-8b-4bits`.

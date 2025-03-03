@@ -46,6 +46,9 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
   - 使用GGUF格式的本地LLM：[start_with_LLM_GGUF](workflow/start_with_GGUF.json)
   - 使用分散格式的本地VLM：[start_with_VLM_local](workflow/start_with_VLM_local.json)（目前已经支持[Llama-3.2-Vision](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)/[Qwen/Qwen2.5-VL](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)/[deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)）
   - 使用GGUF格式的本地VLM：[start_with_VLM_GGUF](workflow/start_with_llava.json)
+  - 使用API调用LLM生成SD提示词并生成图片：[start_with_VLM_API_for_SD](workflow/start_with_VLM_API_for_SD.json)
+  - 使用ollama调用minicpm生成SD提示词并生成图片：[start_with_ollama_minicpm_for_SD](workflow/start_with_ollama_minicpm_for_SD.json)
+  - 使用本地的qwen-vl生成SD提示词并生成图片：[start_with_qwen_vl_local_for_SD](workflow/start_with_qwen_vl_local_for_SD.json)
 2. 如果你是使用API，在API LLM加载器节点上填入你的`base_url`（可以是中转API，注意结尾要用`/v1/`），例如：`https://api.openai.com/v1/` 以及`api_key`。
 3. 如果你是使用ollama，在API LLM加载器节点上打开`is_ollama`选项，无需填写`base_url`和`api_key`。
 4. 如果你是使用本地模型，在本地模型加载器节点上填入你的模型路径，例如：`E:\model\Llama-3.2-1B-Instruct`。也可以在本地模型加载器节点上填入hunggingface的模型repo id，例如：`lllyasviel/omost-llama-3-8b-4bits`。

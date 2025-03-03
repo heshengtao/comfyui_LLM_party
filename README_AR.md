@@ -45,6 +45,9 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
   - استخدم LLM المحلي بتنسيق GGUF: [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
   - استخدم VLM المحلي بتنسيق موزع: [start_with_VLM_local](workflow/start_with_VLM_local.json) (تدعم حاليًا [Llama-3.2-Vision](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)/[Qwen/Qwen2.5-VL](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)/[deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B))
   - استخدم VLM المحلي بتنسيق GGUF: [start_with_VLM_GGUF](workflow/start_with_llava.json)
+  - استخدام واجهة برمجة التطبيقات لاستدعاء LLM لتوليد كلمات مفتاحية لـ SD وتوليد الصورة: [start_with_VLM_API_for_SD](workflow/start_with_VLM_API_for_SD.json)
+  - استخدام ollama لاستدعاء minicpm لتوليد كلمات مفتاحية لـ SD وتوليد الصورة: [start_with_ollama_minicpm_for_SD](workflow/start_with_ollama_minicpm_for_SD.json)
+  - استخدام qwen-vl المحلي لتوليد كلمات مفتاحية لـ SD وتوليد الصورة: [start_with_qwen_vl_local_for_SD](workflow/start_with_qwen_vl_local_for_SD.json)
 2. إذا كنت تستخدم API، فاملأ `base_url` (يمكن أن يكون API وسيط، تأكد من أنه ينتهي بـ `/v1/`) و`api_key` في عقدة تحميل API LLM. مثال: `https://api.openai.com/v1/`
 3. إذا كنت تستخدم ollama، فقم بتشغيل خيار `is_ollama` في عقدة تحميل API LLM، ولا حاجة لملء `base_url` و`api_key`.
 4. إذا كنت تستخدم نموذجًا محليًا، فاملأ مسار النموذج الخاص بك في عقدة تحميل النموذج المحلي، على سبيل المثال: `E:\model\Llama-3.2-1B-Instruct`. يمكنك أيضًا ملء معرف مستودع النموذج في Huggingface في عقدة تحميل النموذج المحلي، على سبيل المثال: `lllyasviel/omost-llama-3-8b-4bits`.

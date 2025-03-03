@@ -45,6 +45,9 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
   - Utilisez des LLM locaux au format GGUF : [start_with_LLM_GGUF](workflow/start_with_GGUF.json)
   - Utilisez des VLM locaux au format distribué : [start_with_VLM_local](workflow/start_with_VLM_local.json) （Actuellement, le support est disponible pour [Llama-3.2-Vision](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct)/[Qwen/Qwen2.5-VL](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)/[deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)）
   - Utilisez des VLM locaux au format GGUF : [start_with_VLM_GGUF](workflow/start_with_llava.json)
+  - Utiliser l'API pour appeler LLM afin de générer des mots-clés SD et produire des images : [commencer_avec_VLM_API_pour_SD](workflow/start_with_VLM_API_for_SD.json)
+  - Utiliser ollama pour appeler minicpm afin de générer des mots-clés SD et produire des images : [commencer_avec_ollama_minicpm_pour_SD](workflow/start_with_ollama_minicpm_for_SD.json)
+  - Utiliser le qwen-vl local pour générer des mots-clés SD et produire des images : [commencer_avec_qwen_vl_local_pour_SD](workflow/start_with_qwen_vl_local_for_SD.json)
 2. Si vous utilisez l'API, remplissez votre `base_url` (cela peut être une API relais, assurez-vous qu'elle se termine par `/v1/`) et `api_key` dans le nœud de chargement de l'API LLM. Exemple : `https://api.openai.com/v1/`
 3. Si vous utilisez ollama, activez l'option `is_ollama` dans le nœud de chargement de l'API LLM, sans remplir `base_url` et `api_key`.
 4. Si vous utilisez un modèle local, remplissez le chemin de votre modèle dans le nœud de chargement du modèle local, par exemple : `E:\model\Llama-3.2-1B-Instruct`. Vous pouvez également remplir l'ID du dépôt du modèle Huggingface dans le nœud de chargement du modèle local, par exemple : `lllyasviel/omost-llama-3-8b-4bits`.
