@@ -1,0 +1,1045 @@
+{
+  "last_node_id": 198,
+  "last_link_id": 196,
+  "nodes": [
+    {
+      "id": 187,
+      "type": "json_get_value",
+      "pos": [
+        1490,
+        380
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "label": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 182,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "any",
+          "label": "any",
+          "type": "*",
+          "shape": 3,
+          "links": [
+            184
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "negative",
+        true
+      ]
+    },
+    {
+      "id": 179,
+      "type": "show_text_party",
+      "pos": [
+        1001,
+        235
+      ],
+      "size": [
+        396.90191650390625,
+        295.5406494140625
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "label": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 177
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "label": "STRING",
+          "type": "STRING",
+          "shape": 6,
+          "links": [
+            181,
+            182
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "{\n\"positive\":\"A cartoon-style illustration of a girl with blonde hair and large, yellow butterfly wings. She is wearing a pink dress standing on green grass under a blue sky with white clouds.\",\n\"negative\":\"nsfw,(low quality,normal quality,worst quality,jpeg artifacts),cropped,monochrome,lowres,low saturation,((watermark)),(white letters)\"}\n"
+      ]
+    },
+    {
+      "id": 186,
+      "type": "json_get_value",
+      "pos": [
+        1484,
+        196
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "label": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 181,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "any",
+          "label": "any",
+          "type": "*",
+          "shape": 3,
+          "links": [
+            183
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "json_get_value"
+      },
+      "widgets_values": [
+        "",
+        "positive",
+        true
+      ]
+    },
+    {
+      "id": 189,
+      "type": "show_text_party",
+      "pos": [
+        1896,
+        -9
+      ],
+      "size": [
+        396.90191650390625,
+        295.5406494140625
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "label": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 183
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "label": "STRING",
+          "type": "STRING",
+          "shape": 6,
+          "links": [
+            186
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "A cartoon-style illustration of a girl with blonde hair and large, yellow butterfly wings. She is wearing a pink dress standing on green grass under a blue sky with white clouds."
+      ]
+    },
+    {
+      "id": 185,
+      "type": "extra_parameters",
+      "pos": [
+        47,
+        457
+      ],
+      "size": [
+        342.5999755859375,
+        394
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "logit_bias",
+          "label": "logit_bias",
+          "type": "DICT",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "extra_parameters",
+          "label": "extra_parameters",
+          "type": "DICT",
+          "shape": 3,
+          "links": [
+            178
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "extra_parameters"
+      },
+      "widgets_values": [
+        true,
+        1,
+        "",
+        0,
+        0,
+        1,
+        0,
+        false,
+        false,
+        1,
+        "",
+        1,
+        50,
+        1183,
+        "randomize"
+      ]
+    },
+    {
+      "id": 172,
+      "type": "load_persona",
+      "pos": [
+        62,
+        266
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file_content",
+          "label": "file_content",
+          "type": "STRING",
+          "widget": {
+            "name": "file_content"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "system_prompt_input",
+          "label": "system_prompt_input",
+          "type": "STRING",
+          "shape": 3,
+          "links": [
+            176
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "load_persona"
+      },
+      "widgets_values": [
+        "图片提示词生成器jsonout版",
+        true,
+        ""
+      ]
+    },
+    {
+      "id": 192,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2430,
+        -20
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "label": "CLIP",
+          "type": "CLIP",
+          "link": 192
+        },
+        {
+          "name": "text",
+          "label": "文本",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 186
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "label": "条件",
+          "type": "CONDITIONING",
+          "links": [
+            188
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 193,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2430,
+        400
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "label": "CLIP",
+          "type": "CLIP",
+          "link": 193
+        },
+        {
+          "name": "text",
+          "label": "文本",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 187
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "label": "条件",
+          "type": "CONDITIONING",
+          "links": [
+            189
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 195,
+      "type": "EmptyLatentImage",
+      "pos": [
+        2480,
+        700
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "label": "Latent",
+          "type": "LATENT",
+          "links": [
+            190
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 194,
+      "type": "KSampler",
+      "pos": [
+        3070,
+        110
+      ],
+      "size": [
+        315,
+        262
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "label": "模型",
+          "type": "MODEL",
+          "link": 191
+        },
+        {
+          "name": "positive",
+          "label": "正面条件",
+          "type": "CONDITIONING",
+          "link": 188
+        },
+        {
+          "name": "negative",
+          "label": "负面条件",
+          "type": "CONDITIONING",
+          "link": 189
+        },
+        {
+          "name": "latent_image",
+          "label": "Latent",
+          "type": "LATENT",
+          "link": 190
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "label": "Latent",
+          "type": "LATENT",
+          "links": [
+            194
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        365480508966076,
+        "randomize",
+        20,
+        8,
+        "euler",
+        "normal",
+        1
+      ]
+    },
+    {
+      "id": 197,
+      "type": "VAEDecode",
+      "pos": [
+        3484.382568359375,
+        137.69595336914062
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "label": "Latent",
+          "type": "LATENT",
+          "link": 194
+        },
+        {
+          "name": "vae",
+          "label": "VAE",
+          "type": "VAE",
+          "link": 195
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "label": "图像",
+          "type": "IMAGE",
+          "links": [
+            196
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 196,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        1930,
+        -240
+      ],
+      "size": [
+        315,
+        98
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "label": "模型",
+          "type": "MODEL",
+          "links": [
+            191
+          ]
+        },
+        {
+          "name": "CLIP",
+          "label": "CLIP",
+          "type": "CLIP",
+          "links": [
+            192,
+            193
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "label": "VAE",
+          "type": "VAE",
+          "links": [
+            195
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "meinamix_v12Final.safetensors"
+      ]
+    },
+    {
+      "id": 184,
+      "type": "LLM",
+      "pos": [
+        460,
+        210
+      ],
+      "size": [
+        454.5297546386719,
+        586.8365478515625
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "label": "model",
+          "type": "CUSTOM",
+          "link": 175
+        },
+        {
+          "name": "images",
+          "label": "images",
+          "type": "IMAGE",
+          "shape": 7,
+          "link": 185
+        },
+        {
+          "name": "extra_parameters",
+          "label": "extra_parameters",
+          "type": "DICT",
+          "shape": 7,
+          "link": 178
+        },
+        {
+          "name": "system_prompt_input",
+          "label": "system_prompt_input",
+          "type": "STRING",
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "link": 176
+        },
+        {
+          "name": "user_prompt_input",
+          "label": "user_prompt_input",
+          "type": "STRING",
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "link": null
+        },
+        {
+          "name": "tools",
+          "label": "tools",
+          "type": "STRING",
+          "widget": {
+            "name": "tools"
+          },
+          "link": null
+        },
+        {
+          "name": "file_content",
+          "label": "file_content",
+          "type": "STRING",
+          "widget": {
+            "name": "file_content"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "label": "assistant_response",
+          "type": "STRING",
+          "shape": 3,
+          "links": [
+            177
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "label": "history",
+          "type": "STRING",
+          "shape": 3,
+          "links": null
+        },
+        {
+          "name": "tool",
+          "label": "tool",
+          "type": "STRING",
+          "shape": 3,
+          "links": null
+        },
+        {
+          "name": "image",
+          "label": "image",
+          "type": "IMAGE",
+          "shape": 3,
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "根据我传入的图片，生成提示词",
+        0.7,
+        "disable",
+        "disable",
+        "enable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true,
+        "",
+        "",
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 198,
+      "type": "PreviewImage",
+      "pos": [
+        3900,
+        120
+      ],
+      "size": [
+        520,
+        550
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "label": "图像",
+          "type": "IMAGE",
+          "link": 196
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 191,
+      "type": "LoadImage",
+      "pos": [
+        -660,
+        240
+      ],
+      "size": [
+        500,
+        580
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "label": "图像",
+          "type": "IMAGE",
+          "links": [
+            185
+          ]
+        },
+        {
+          "name": "MASK",
+          "label": "遮罩",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
+      ]
+    },
+    {
+      "id": 176,
+      "type": "LLM_api_loader",
+      "pos": [
+        71,
+        63
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "label": "model",
+          "type": "CUSTOM",
+          "shape": 3,
+          "links": [
+            175
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "minicpm-v:8b",
+        "",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 190,
+      "type": "show_text_party",
+      "pos": [
+        1888,
+        396
+      ],
+      "size": [
+        396.90191650390625,
+        295.5406494140625
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "label": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 184,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "label": "STRING",
+          "type": "STRING",
+          "shape": 6,
+          "links": [
+            187
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "show_text_party"
+      },
+      "widgets_values": [
+        "",
+        "nsfw,(low quality,normal quality,worst quality,jpeg artifacts),cropped,monochrome,lowres,low saturation,((watermark)),(white letters)"
+      ]
+    }
+  ],
+  "links": [
+    [
+      175,
+      176,
+      0,
+      184,
+      0,
+      "CUSTOM"
+    ],
+    [
+      176,
+      172,
+      0,
+      184,
+      3,
+      "STRING"
+    ],
+    [
+      177,
+      184,
+      0,
+      179,
+      0,
+      "STRING"
+    ],
+    [
+      178,
+      185,
+      0,
+      184,
+      2,
+      "DICT"
+    ],
+    [
+      181,
+      179,
+      0,
+      186,
+      0,
+      "STRING"
+    ],
+    [
+      182,
+      179,
+      0,
+      187,
+      0,
+      "STRING"
+    ],
+    [
+      183,
+      186,
+      0,
+      189,
+      0,
+      "STRING"
+    ],
+    [
+      184,
+      187,
+      0,
+      190,
+      0,
+      "STRING"
+    ],
+    [
+      185,
+      191,
+      0,
+      184,
+      1,
+      "IMAGE"
+    ],
+    [
+      186,
+      189,
+      0,
+      192,
+      1,
+      "STRING"
+    ],
+    [
+      187,
+      190,
+      0,
+      193,
+      1,
+      "STRING"
+    ],
+    [
+      188,
+      192,
+      0,
+      194,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      189,
+      193,
+      0,
+      194,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      190,
+      195,
+      0,
+      194,
+      3,
+      "LATENT"
+    ],
+    [
+      191,
+      196,
+      0,
+      194,
+      0,
+      "MODEL"
+    ],
+    [
+      192,
+      196,
+      1,
+      192,
+      0,
+      "CLIP"
+    ],
+    [
+      193,
+      196,
+      1,
+      193,
+      0,
+      "CLIP"
+    ],
+    [
+      194,
+      194,
+      0,
+      197,
+      0,
+      "LATENT"
+    ],
+    [
+      195,
+      196,
+      2,
+      197,
+      1,
+      "VAE"
+    ],
+    [
+      196,
+      197,
+      0,
+      198,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7513148009015783,
+      "offset": [
+        360.035654068834,
+        91.91304109928903
+      ]
+    }
+  },
+  "version": 0.4
+}
