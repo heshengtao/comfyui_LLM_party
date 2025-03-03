@@ -1432,7 +1432,7 @@ A majestic, emerald-scaled dragon with glowing amber eyes, wings outstretched, s
                 {"type": "text", "text": "请生成这张图片的prompt"},
                 {
                     "type": "image_url",
-                    "image_url": {"url": f"data:image/jpeg;base64,{img_str}"},
+                    "image_url": {"url": f"data:image/png;base64,{img_str}"},
                 },
             ]
         else:
