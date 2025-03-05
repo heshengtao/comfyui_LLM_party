@@ -42,7 +42,6 @@ markdown
 selenium
 librosa
 ffmpeg-python
-moviepy==1.0.3
 html5lib
 easyocr
 feedparser
