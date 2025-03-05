@@ -1731,12 +1731,8 @@ if lang == "zh_CN":
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
         "LLM": "☁️API LLM general link",
-        "LLM_local": "🖥️Local LLM general link",
         "LLM_api_loader": "☁️API LLM Loader",
         "easy_LLM_api_loader": "☁️Easy API LLM Loader",
-        # "genai_api_loader":"Gemini API LLM Loader",
-        "LLM_local_loader": "🖥️Local LLM Loader",
-        "easy_LLM_local_loader": "🖥️Easy Local LLM Loader",
         "load_ebd": "🖥️Load Embeddings",
         "embeddings_function": "🖥️Word Vector Search",
         "load_file": "Load File",
