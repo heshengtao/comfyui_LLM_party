@@ -104,7 +104,6 @@ from .tools.load_file import (
 from .tools.load_model_name import load_name
 from .tools.load_persona import load_persona
 from .tools.logic import get_string, replace_string, string_logic, substring
-from .tools.omost import omost_decode, omost_setting
 from .tools.search_web import (
     bing_loader,
     bing_tool,
@@ -1562,8 +1561,6 @@ NODE_CLASS_MAPPINGS = {
     "substring": substring,
     "openai_tts": openai_tts,
     "load_name": load_name,
-    "omost_decode": omost_decode,
-    "omost_setting": omost_setting,
     "keyword_tool": keyword_tool,
     "load_keyword": load_keyword,
     "story_json_tool": story_json_tool,
@@ -1678,8 +1675,6 @@ if lang == "zh_CN":
         "substring": "提取字符串",
         "openai_tts": "☁️OpenAI语音合成",
         "load_name": "加载config.ini中的模型名称",
-        "omost_decode": "omost解码器",
-        "omost_setting": "omost设置",
         "keyword_tool": "搜索关键词工具",
         "load_keyword": "加载关键词检索器",
         "story_json_tool": "故事JSON工具",
@@ -1791,8 +1786,6 @@ else:
         "substring": "Extract Substring",
         "openai_tts": "☁️OpenAI TTS",
         "load_name": "Load Model Name in config.ini",
-        "omost_decode": "omost Decoder",
-        "omost_setting": "omost Setting",
         "keyword_tool": "Search Keyword Tool",
         "load_keyword": "Load Keyword Searcher",
         "story_json_tool": "Story JSON Tool",
