@@ -207,6 +207,7 @@ def another_llm(id, type, question):
             extra_parameters,
             user_history,
             img_URL,
+            stream,
         ) = llm.list
         res, _, _, _ = llm.chatbot(
             question,
@@ -230,6 +231,7 @@ def another_llm(id, type, question):
             extra_parameters,
             user_history,
             img_URL,
+            stream,
         )
     elif type == "local":
         try:
@@ -381,6 +383,7 @@ class Chat:
         images=None,
         imgbb_api_key="",
         img_URL=None,
+        stream=False,
         **extra_parameters,
     ):
         try:
@@ -453,14 +456,93 @@ class Chat:
             new_message = {"role": "user", "content": user_prompt}
             history.append(new_message)
             print(history)
-            if "o1" in self.model_name:
-                if tools is not None:
-                    response = openai_client.chat.completions.create(
-                        model=self.model_name,
-                        messages=history,
-                        tools=tools,
-                        **extra_parameters,
-                    )
+            if tools is not None:
+                response = openai_client.chat.completions.create(
+                    model=self.model_name,
+                    messages=history,
+                    temperature=temperature,
+                    tools=tools,
+                    max_tokens=max_length,
+                    stream=stream,
+                    **extra_parameters,
+                )
+                if stream:
+                    tool_calls = []
+                    response_content = ""
+                    for chunk in response:
+                        if chunk.choices:
+                            choice = chunk.choices[0]
+                            if choice.delta.tool_calls:  # function_calling
+                                for idx, tool_call in enumerate(choice.delta.tool_calls):
+                                    tool = choice.delta.tool_calls[idx]
+                                    if len(tool_calls) <= idx:
+                                        tool_calls.append(tool)
+                                        continue
+                                    if tool.function.arguments:
+                                        # function参数为流式响应，需要拼接
+                                        tool_calls[idx].function.arguments += tool.function.arguments
+                            else:                              
+                                print(chunk.choices[0].delta.content, end="", flush=True)
+                                response_content = response_content + chunk.choices[0].delta.content
+                    while tool_calls:
+                        response_content = tool_calls[0].function
+                        print("正在调用" + response_content.name + "工具")
+                        print(response_content.arguments)
+                        results = dispatch_tool(response_content.name, json.loads(response_content.arguments))
+                        print(results)
+                        history.append(
+                            {
+                                "tool_calls": [
+                                    {
+                                        "id": tool_calls[0].id,
+                                        "function": {
+                                            "arguments": response_content.arguments,
+                                            "name": response_content.name,
+                                        },
+                                        "type": tool_calls[0].type,
+                                    }
+                                ],
+                                "role": "assistant",
+                                "content": str(response_content),
+                            }
+                        )
+                        history.append(
+                            {
+                                "role": "tool",
+                                "tool_call_id": tool_calls[0].id,
+                                "name": response_content.name,
+                                "content": results,
+                            }
+                        )
+                        response = openai_client.chat.completions.create(
+                            model=self.model_name,
+                            messages=history,
+                            tools=tools,
+                            temperature=temperature,
+                            max_tokens=max_length,
+                            stream=stream,
+                            **extra_parameters,
+                        )
+                        tool_calls = []
+                        response_content = ""
+                        for chunk in response:
+                            if chunk.choices:
+                                choice = chunk.choices[0]
+                                if choice.delta.tool_calls:  # function_calling
+                                    for idx, tool_call in enumerate(choice.delta.tool_calls):
+                                        tool = choice.delta.tool_calls[idx]
+                                        if len(tool_calls) <= idx:
+                                            tool_calls.append(tool)
+                                            continue
+                                        if tool.function.arguments:
+                                            # function参数为流式响应，需要拼接
+                                            tool_calls[idx].function.arguments += tool.function.arguments
+                                else:                              
+                                    print(chunk.choices[0].delta.content, end="", flush=True)
+                                    response_content = response_content + chunk.choices[0].delta.content
+                else:
+                    response_content = response.choices[0].message.content
+                    print(response_content)
                     while response.choices[0].message.tool_calls:
                         assistant_message = response.choices[0].message
                         response_content = assistant_message.tool_calls[0].function
@@ -496,152 +578,12 @@ class Chat:
                             model=self.model_name,
                             messages=history,
                             tools=tools,
-                            **extra_parameters,
-                        )
-                        print(response)
-                elif is_tools_in_sys_prompt == "enable":
-                    response = openai_client.chat.completions.create(
-                        model=self.model_name,
-                        messages=history,
-                        **extra_parameters,
-                    )
-                    response_content = response.choices[0].message.content
-                    # 正则表达式匹配
-                    pattern = r'\{\s*"tool":\s*"(.*?)",\s*"parameters":\s*\{(.*?)\}\s*\}'
-                    while re.search(pattern, response_content, re.DOTALL) != None:
-                        match = re.search(pattern, response_content, re.DOTALL)
-                        tool = match.group(1)
-                        parameters = match.group(2)
-                        json_str = '{"tool": "' + tool + '", "parameters": {' + parameters + "}}"
-                        print("正在调用" + tool + "工具")
-                        parameters = json.loads("{" + parameters + "}")
-                        results = dispatch_tool(tool, parameters)
-                        print(results)
-                        history.append({"role": "assistant", "content": json_str})
-                        history.append(
-                            {
-                                "role": "user",
-                                "content": "调用"
-                                + tool
-                                + "工具返回的结果为："
-                                + results
-                                + "。请根据工具返回的结果继续回答我之前提出的问题。",
-                            }
-                        )
-                        response = openai_client.chat.completions.create(
-                            model=self.model_name,
-                            messages=history,
+                            temperature=temperature,
+                            max_tokens=max_length,
                             **extra_parameters,
                         )
                         response_content = response.choices[0].message.content
-                else:
-                    response = openai_client.chat.completions.create(
-                        model=self.model_name,
-                        messages=history,
-                        **extra_parameters,
-                    )
-                    print(response)
-            elif tools is not None:
-                response = openai_client.chat.completions.create(
-                    model=self.model_name,
-                    messages=history,
-                    temperature=temperature,
-                    tools=tools,
-                    max_tokens=max_length,
-                    **extra_parameters,
-                )
-                while response.choices[0].message.tool_calls:
-                    assistant_message = response.choices[0].message
-                    response_content = assistant_message.tool_calls[0].function
-                    print("正在调用" + response_content.name + "工具")
-                    print(response_content.arguments)
-                    results = dispatch_tool(response_content.name, json.loads(response_content.arguments))
-                    print(results)
-                    history.append(
-                        {
-                            "tool_calls": [
-                                {
-                                    "id": assistant_message.tool_calls[0].id,
-                                    "function": {
-                                        "arguments": response_content.arguments,
-                                        "name": response_content.name,
-                                    },
-                                    "type": assistant_message.tool_calls[0].type,
-                                }
-                            ],
-                            "role": "assistant",
-                            "content": str(response_content),
-                        }
-                    )
-                    history.append(
-                        {
-                            "role": "tool",
-                            "tool_call_id": assistant_message.tool_calls[0].id,
-                            "name": response_content.name,
-                            "content": results,
-                        }
-                    )
-                    try:
-                        response = openai_client.chat.completions.create(
-                            model=self.model_name,
-                            messages=history,
-                            tools=tools,
-                            temperature=temperature,
-                            max_tokens=max_length,
-                            **extra_parameters,
-                        )
-                        print(response)
-                    except Exception as e:
-                        print("tools calling失败，尝试使用function calling" + str(e))
-                        # 删除history最后两个元素
-                        history.pop()
-                        history.pop()
-                        history.append(
-                            {
-                                "role": "assistant",
-                                "content": str(response_content),
-                                "function_call": {
-                                    "name": response_content.name,
-                                    "arguments": response_content.arguments,
-                                },
-                            }
-                        )
-                        history.append({"role": "function", "name": response_content.name, "content": results})
-                        response = openai_client.chat.completions.create(
-                            model=self.model_name,
-                            messages=history,
-                            tools=tools,
-                            temperature=temperature,
-                            max_tokens=max_length,
-                            **extra_parameters,
-                        )
-                        print(response)
-                while response.choices[0].message.function_call:
-                    assistant_message = response.choices[0].message
-                    function_call = assistant_message.function_call
-                    function_name = function_call.name
-                    function_arguments = json.loads(function_call.arguments)
-                    print("正在调用" + function_name + "工具")
-                    results = dispatch_tool(function_name, function_arguments)
-                    print(results)
-                    history.append(
-                        {
-                            "role": "assistant",
-                            "content": str(function_call),
-                            "function_call": {"name": function_name, "arguments": function_arguments},
-                        }
-                    )
-                    history.append({"role": "function", "name": function_name, "content": results})
-                    response = openai_client.chat.completions.create(
-                        model=self.model_name,
-                        messages=history,
-                        tools=tools,
-                        temperature=temperature,
-                        max_tokens=max_length,
-                        **extra_parameters,
-                    )
-                response_content = response.choices[0].message.content
-                print(response)
+                        print(response_content)
             elif is_tools_in_sys_prompt == "enable":
                 response = openai_client.chat.completions.create(
                     model=self.model_name,
@@ -687,13 +629,33 @@ class Chat:
                     messages=history,
                     temperature=temperature,
                     max_tokens=max_length,
+                    stream=stream,
                     **extra_parameters,
                 )
-            response_content = response.choices[0].message.content
+                if stream:
+                    response_content = ""
+                    for chunk in response:
+                        print(chunk.choices[0].delta.content, end="", flush=True)
+                        response_content = response_content + chunk.choices[0].delta.content
+                else:
+                    response_content = response.choices[0].message.content
+                    print(response_content)
+            try:
+                reasoning_content = response.choices[0].message.reasoning_content
+            except:
+                reasoning_content = ""
+            # 使用正则表达式，提取response_content中<think>到</think>之间的内容到reasoning_content，之外的内容到response_content
+            pattern = r'<think>(.*?)</think>'
+            match = re.search(pattern, response_content, re.DOTALL)
+            if match:
+                reasoning_content = match.group(1).strip()
+                response_content = response_content.replace(match.group(0), "").strip() 
             history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
             response_content = str(ex)
-        return response_content, history
+            reasoning_content = ""
+        return response_content, history,reasoning_content
+
 
 
 class aisuite_Chat:
@@ -738,9 +700,62 @@ class aisuite_Chat:
         is_tools_in_sys_prompt="disable",
         images=None,
         imgbb_api_key="",
+        img_URL=None,
+        stream=False,
         **extra_parameters,
     ):
         try:
+            if images is not None and (img_URL is None or img_URL == ""):
+                if imgbb_api_key == "" or imgbb_api_key is None:
+                    imgbb_api_key = api_keys.get("imgbb_api")
+                if imgbb_api_key == "" or imgbb_api_key is None:
+                    img_json = [{"type": "text", "text": user_prompt}]
+                    for image in images:
+                        i = 255.0 * image.cpu().numpy()
+                        img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+                        buffered = io.BytesIO()
+                        img.save(buffered, format="PNG")
+                        img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+                        img_json.append({
+                            "type": "image_url",
+                            "image_url": {"url": f"data:image/png;base64,{img_str}"}
+                        })
+                    user_prompt = img_json
+                else:
+                    img_json = [{"type": "text", "text": user_prompt}]
+                    for image in images:
+                        i = 255.0 * image.cpu().numpy()
+                        img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+                        buffered = io.BytesIO()
+                        img.save(buffered, format="PNG")
+                        img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+                        url = "https://api.imgbb.com/1/upload"
+                        payload = {"key": imgbb_api_key, "image": img_str}
+                        response = requests.post(url, data=payload)
+                        if response.status_code == 200:
+                            result = response.json()
+                            img_url = result["data"]["url"]
+                            img_json.append({
+                                "type": "image_url",
+                                "image_url": {"url": img_url}
+                            })
+                        else:
+                            return "Error: " + response.text
+                    user_prompt = img_json
+            elif img_URL is not None and img_URL != "":
+                user_prompt = [{"type": "text", "text": user_prompt}, {"type": "image_url", "image_url": {"url": img_URL}}]
+            # 将history中的系统提示词部分如果为空，就剔除
+            for i in range(len(history)):
+                if history[i]["role"] == "system" and history[i]["content"] == "":
+                    history.pop(i)
+                    break
+            if re.search(r'o[1-3]', self.model_name):
+                # 将history中的系统提示词部分的角色换成user
+                for i in range(len(history)):
+                    if history[i]["role"] == "system":
+                        history[i]["role"] = "user"
+                        history.append({"role": "assistant", "content": "好的，我会按照你的指示来操作"})
+                        break
             openai_client = ai.Client(self.provider_configs)
             if images is not None:
                 if imgbb_api_key == "" or imgbb_api_key is None:
@@ -795,65 +810,117 @@ class aisuite_Chat:
                     temperature=temperature,
                     tools=tools,
                     max_tokens=max_length,
+                    stream=stream,
                     **extra_parameters,
                 )
-                while response.choices[0].message.tool_calls:
-                    assistant_message = response.choices[0].message
-                    response_content = assistant_message.tool_calls[0].function
-                    print("正在调用" + response_content.name + "工具")
-                    print(response_content.arguments)
-                    results = dispatch_tool(response_content.name, json.loads(response_content.arguments))
-                    print(results)
-                    history.append(
-                        {
-                            "tool_calls": [
-                                {
-                                    "id": assistant_message.tool_calls[0].id,
-                                    "function": {
-                                        "arguments": response_content.arguments,
-                                        "name": response_content.name,
-                                    },
-                                    "type": assistant_message.tool_calls[0].type,
-                                }
-                            ],
-                            "role": "assistant",
-                            "content": str(response_content),
-                        }
-                    )
-                    history.append(
-                        {
-                            "role": "tool",
-                            "tool_call_id": assistant_message.tool_calls[0].id,
-                            "name": response_content.name,
-                            "content": results,
-                        }
-                    )
-                    try:
-                        response = openai_client.chat.completions.create(
-                            model=self.model_name,
-                            messages=history,
-                            tools=tools,
-                            temperature=temperature,
-                            max_tokens=max_length,
-                            **extra_parameters,
-                        )
-                        print(response)
-                    except Exception as e:
-                        print("tools calling失败，尝试使用function calling" + str(e))
-                        # 删除history最后两个元素
-                        history.pop()
-                        history.pop()
+                if stream:
+                    tool_calls = []
+                    response_content = ""
+                    for chunk in response:
+                        if chunk.choices:
+                            choice = chunk.choices[0]
+                            if choice.delta.tool_calls:  # function_calling
+                                for idx, tool_call in enumerate(choice.delta.tool_calls):
+                                    tool = choice.delta.tool_calls[idx]
+                                    if len(tool_calls) <= idx:
+                                        tool_calls.append(tool)
+                                        continue
+                                    if tool.function.arguments:
+                                        # function参数为流式响应，需要拼接
+                                        tool_calls[idx].function.arguments += tool.function.arguments
+                            else:                              
+                                print(chunk.choices[0].delta.content, end="", flush=True)
+                                response_content = response_content + chunk.choices[0].delta.content
+                    while tool_calls:
+                        response_content = tool_calls[0].function
+                        print("正在调用" + response_content.name + "工具")
+                        print(response_content.arguments)
+                        results = dispatch_tool(response_content.name, json.loads(response_content.arguments))
+                        print(results)
                         history.append(
                             {
+                                "tool_calls": [
+                                    {
+                                        "id": tool_calls[0].id,
+                                        "function": {
+                                            "arguments": response_content.arguments,
+                                            "name": response_content.name,
+                                        },
+                                        "type": tool_calls[0].type,
+                                    }
+                                ],
                                 "role": "assistant",
                                 "content": str(response_content),
-                                "function_call": {
-                                    "name": response_content.name,
-                                    "arguments": response_content.arguments,
-                                },
                             }
                         )
-                        history.append({"role": "function", "name": response_content.name, "content": results})
+                        history.append(
+                            {
+                                "role": "tool",
+                                "tool_call_id": tool_calls[0].id,
+                                "name": response_content.name,
+                                "content": results,
+                            }
+                        )
+                        response = openai_client.chat.completions.create(
+                            model=self.model_name,
+                            messages=history,
+                            tools=tools,
+                            temperature=temperature,
+                            max_tokens=max_length,
+                            stream=stream,
+                            **extra_parameters,
+                        )
+                        tool_calls = []
+                        response_content = ""
+                        for chunk in response:
+                            if chunk.choices:
+                                choice = chunk.choices[0]
+                                if choice.delta.tool_calls:  # function_calling
+                                    for idx, tool_call in enumerate(choice.delta.tool_calls):
+                                        tool = choice.delta.tool_calls[idx]
+                                        if len(tool_calls) <= idx:
+                                            tool_calls.append(tool)
+                                            continue
+                                        if tool.function.arguments:
+                                            # function参数为流式响应，需要拼接
+                                            tool_calls[idx].function.arguments += tool.function.arguments
+                                else:                              
+                                    print(chunk.choices[0].delta.content, end="", flush=True)
+                                    response_content = response_content + chunk.choices[0].delta.content
+                else:
+                    response_content = response.choices[0].message.content
+                    print(response_content)
+                    while response.choices[0].message.tool_calls:
+                        assistant_message = response.choices[0].message
+                        response_content = assistant_message.tool_calls[0].function
+                        print("正在调用" + response_content.name + "工具")
+                        print(response_content.arguments)
+                        results = dispatch_tool(response_content.name, json.loads(response_content.arguments))
+                        print(results)
+                        history.append(
+                            {
+                                "tool_calls": [
+                                    {
+                                        "id": assistant_message.tool_calls[0].id,
+                                        "function": {
+                                            "arguments": response_content.arguments,
+                                            "name": response_content.name,
+                                        },
+                                        "type": assistant_message.tool_calls[0].type,
+                                    }
+                                ],
+                                "role": "assistant",
+                                "content": str(response_content),
+                            }
+                        )
+                        history.append(
+                            {
+                                "role": "tool",
+                                "tool_call_id": assistant_message.tool_calls[0].id,
+                                "name": response_content.name,
+                                "content": results,
+                            }
+                        )
                         response = openai_client.chat.completions.create(
                             model=self.model_name,
                             messages=history,
@@ -862,33 +929,8 @@ class aisuite_Chat:
                             max_tokens=max_length,
                             **extra_parameters,
                         )
-                        print(response)
-                while response.choices[0].message.function_call:
-                    assistant_message = response.choices[0].message
-                    function_call = assistant_message.function_call
-                    function_name = function_call.name
-                    function_arguments = json.loads(function_call.arguments)
-                    print("正在调用" + function_name + "工具")
-                    results = dispatch_tool(function_name, function_arguments)
-                    print(results)
-                    history.append(
-                        {
-                            "role": "assistant",
-                            "content": str(function_call),
-                            "function_call": {"name": function_name, "arguments": function_arguments},
-                        }
-                    )
-                    history.append({"role": "function", "name": function_name, "content": results})
-                    response = openai_client.chat.completions.create(
-                        model=self.model_name,
-                        messages=history,
-                        tools=tools,
-                        temperature=temperature,
-                        max_tokens=max_length,
-                        **extra_parameters,
-                    )
-                response_content = response.choices[0].message.content
-                print(response)
+                        response_content = response.choices[0].message.content
+                        print(response_content)
             elif is_tools_in_sys_prompt == "enable":
                 response = openai_client.chat.completions.create(
                     model=self.model_name,
@@ -934,13 +976,32 @@ class aisuite_Chat:
                     messages=history,
                     temperature=temperature,
                     max_tokens=max_length,
+                    stream=stream,
                     **extra_parameters,
                 )
-            response_content = response.choices[0].message.content
+                if stream:
+                    response_content = ""
+                    for chunk in response:
+                        print(chunk.choices[0].delta.content, end="", flush=True)
+                        response_content = response_content + chunk.choices[0].delta.content
+                else:
+                    response_content = response.choices[0].message.content
+                    print(response_content)
+            try:
+                reasoning_content = response.choices[0].message.reasoning_content
+            except:
+                reasoning_content = ""
+            # 使用正则表达式，提取response_content中<think>到</think>之间的内容到reasoning_content，之外的内容到response_content
+            pattern = r'<think>(.*?)</think>'
+            match = re.search(pattern, response_content, re.DOTALL)
+            if match:
+                reasoning_content = match.group(1).strip()
+                response_content = response_content.replace(match.group(0), "").strip() 
             history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
             response_content = str(ex)
-        return response_content, history
+            reasoning_content = ""
+        return response_content, history,reasoning_content
 
 
 
@@ -1226,6 +1287,7 @@ class LLM:
                 "extra_parameters": ("DICT", {"forceInput": True, "tooltip": "Extra parameters for the LLM."}),
                 "user_history": ("STRING", {"forceInput": True, "tooltip": "User history, you can directly input a JSON string containing multiple rounds of dialogue here."}),
                 "img_URL": ("STRING", {"forceInput": True, "tooltip": "The URL of the image."}),
+                "stream": ("BOOLEAN", {"default": False, "tooltip": "Whether to enable streaming output."}),
             },
         }
 
@@ -1234,18 +1296,21 @@ class LLM:
         "STRING",
         "STRING",
         "IMAGE",
+        "STRING",
     )
     RETURN_NAMES = (
         "assistant_response",
         "history",
         "tool",
         "image",
+        "reasoning_content",
     )
     OUTPUT_TOOLTIPS = (
         "The assistant's response to the user's request.",
         "The dialogue history",
         "This interface will connect this LLM as a tool to other LLMs.",
         "Images generated or fetched by the LLM.",
+        "The assistant's reasoning process."
     )
     DESCRIPTION = "The API version of the model chain, compatible with all API interfaces."
     FUNCTION = "chatbot"
@@ -1277,13 +1342,15 @@ class LLM:
         extra_parameters=None,
         user_history=None,
         img_URL=None,
+        stream=False,
     ):
         if not is_enable:
             return (
                 None,
                 None,
                 None,
-                [],
+                None,
+                "",
             )
         self.list = [
             main_brain,
@@ -1306,6 +1373,7 @@ class LLM:
             extra_parameters,
             user_history,
             img_URL,
+            stream,
         ]
         if user_prompt is None:
             user_prompt = user_prompt_input
@@ -1360,6 +1428,7 @@ class LLM:
                 str(history),
                 llm_tools_json,
                 None,
+                "",
             )
         else:
             try:
@@ -1374,6 +1443,7 @@ class LLM:
                             str(history),
                             llm_tools_json,
                             None,
+                            "",
                         )
                 api_keys = load_api_keys(config_path)
 
@@ -1464,14 +1534,13 @@ class LLM:
                         if message["role"] == "system":
                             message["content"] += "\n以下是可以参考的已知信息:\n" + file_content
                 if extra_parameters is not None and extra_parameters != {}:
-                    response, history = model.send(
-                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,images,imgbb_api_key,img_URL, **extra_parameters
+                    response, history,reasoning_content = model.send(
+                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,images,imgbb_api_key,img_URL,stream, **extra_parameters
                     )
                 else:
-                    response, history = model.send(
-                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,images,imgbb_api_key,img_URL,
+                    response, history,reasoning_content = model.send(
+                        user_prompt, temperature, max_length, history, tools, is_tools_in_sys_prompt,images,imgbb_api_key,img_URL,stream,
                     )
-                print(response)
                 # 修改prompt.json文件
                 history_get = [history[0]]
                 history_get.extend(history_copy)
@@ -1491,6 +1560,7 @@ class LLM:
                     history,
                     llm_tools_json,
                     image_out,
+                    reasoning_content,
                 )
             except Exception as ex:
                 print(ex)
@@ -1499,6 +1569,7 @@ class LLM:
                     str(ex),
                     llm_tools_json,
                     None,
+                    "",
                 )
 
     @classmethod
