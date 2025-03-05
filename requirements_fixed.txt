@@ -18,8 +18,6 @@ optimum
 pdfplumber
 wikipedia
 arxiv
-bitsandbytes==0.43.1
-accelerate==0.30.1
 fastapi
 py-cpuinfo
 diskcache
