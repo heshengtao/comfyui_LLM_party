@@ -50,7 +50,6 @@ verovio
 mdtex2html
 markdownify
 srt
-peft
 scipy
 json-repair
 redis
