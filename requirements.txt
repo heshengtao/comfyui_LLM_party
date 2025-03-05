@@ -55,7 +55,5 @@ aisuite[all]
 fish_audio_sdk
 httpx<=0.27.2
 mcp
-qwen-vl-utils[decord]
-attrdict
 docstring_parser
 langchain_ollama
