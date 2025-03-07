@@ -5,35 +5,39 @@
     {
       "id": 11,
       "type": "show_text_party",
-      "pos": {
-        "0": 1385,
-        "1": 280
-      },
-      "size": {
-        "0": 450,
-        "1": 290
-      },
+      "pos": [
+        1385,
+        280
+      ],
+      "size": [
+        450,
+        290
+      ],
       "flags": {},
       "order": 2,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
+          "label": "text",
           "type": "STRING",
-          "link": 39,
+          "pos": [
+            10,
+            60
+          ],
           "widget": {
             "name": "text"
           },
-          "label": "text"
+          "link": 39
         }
       ],
       "outputs": [
         {
           "name": "STRING",
+          "label": "STRING",
           "type": "STRING",
-          "links": null,
           "shape": 6,
-          "label": "STRING"
+          "links": null
         }
       ],
       "properties": {
@@ -49,14 +53,14 @@
     {
       "id": 27,
       "type": "aisuite_loader",
-      "pos": {
-        "0": 490,
-        "1": 280
-      },
-      "size": {
-        "0": 315,
-        "1": 298
-      },
+      "pos": [
+        490,
+        280
+      ],
+      "size": [
+        315,
+        298
+      ],
       "flags": {},
       "order": 0,
       "mode": 0,
@@ -64,12 +68,12 @@
       "outputs": [
         {
           "name": "model",
+          "label": "model",
           "type": "CUSTOM",
           "links": [
             42
           ],
-          "slot_index": 0,
-          "label": "model"
+          "slot_index": 0
         }
       ],
       "properties": {
@@ -92,114 +96,139 @@
     {
       "id": 25,
       "type": "LLM",
-      "pos": {
-        "0": 880,
-        "1": 280
-      },
-      "size": {
-        "0": 454.4823913574219,
-        "1": 557.4664916992188
-      },
+      "pos": [
+        880,
+        280
+      ],
+      "size": [
+        454.4823913574219,
+        690
+      ],
       "flags": {},
       "order": 1,
       "mode": 0,
       "inputs": [
         {
           "name": "model",
+          "label": "model",
           "type": "CUSTOM",
-          "link": 42,
-          "label": "model"
+          "link": 42
         },
         {
           "name": "images",
-          "type": "IMAGE",
-          "link": null,
           "label": "images",
-          "shape": 7
+          "type": "IMAGE",
+          "shape": 7,
+          "link": null
         },
         {
           "name": "extra_parameters",
-          "type": "DICT",
-          "link": null,
           "label": "extra_parameters",
-          "shape": 7
+          "type": "DICT",
+          "shape": 7,
+          "link": null
         },
         {
           "name": "system_prompt_input",
+          "label": "system_prompt_input",
           "type": "STRING",
-          "link": null,
+          "pos": [
+            10,
+            426
+          ],
           "widget": {
             "name": "system_prompt_input"
           },
-          "label": "system_prompt_input"
+          "link": null
         },
         {
           "name": "user_prompt_input",
+          "label": "user_prompt_input",
           "type": "STRING",
-          "link": null,
+          "pos": [
+            10,
+            450
+          ],
           "widget": {
             "name": "user_prompt_input"
           },
-          "label": "user_prompt_input"
+          "link": null
         },
         {
           "name": "tools",
+          "label": "tools",
           "type": "STRING",
-          "link": null,
+          "pos": [
+            10,
+            474
+          ],
           "widget": {
             "name": "tools"
           },
-          "label": "tools"
+          "link": null
         },
         {
           "name": "file_content",
+          "label": "file_content",
           "type": "STRING",
-          "link": null,
+          "pos": [
+            10,
+            498
+          ],
           "widget": {
             "name": "file_content"
           },
-          "label": "file_content"
+          "link": null
         },
         {
           "name": "user_history",
+          "label": "user_history",
           "type": "STRING",
-          "link": null,
+          "pos": [
+            10,
+            618
+          ],
           "widget": {
             "name": "user_history"
           },
-          "label": "user_history"
+          "link": null
         }
       ],
       "outputs": [
         {
           "name": "assistant_response",
+          "label": "assistant_response",
           "type": "STRING",
+          "shape": 3,
           "links": [
             39
-          ],
-          "shape": 3,
-          "label": "assistant_response"
+          ]
         },
         {
           "name": "history",
+          "label": "history",
           "type": "STRING",
-          "links": null,
           "shape": 3,
-          "label": "history"
+          "links": null
         },
         {
           "name": "tool",
+          "label": "tool",
           "type": "STRING",
-          "links": null,
           "shape": 3,
-          "label": "tool"
+          "links": null
         },
         {
           "name": "image",
+          "label": "image",
           "type": "IMAGE",
-          "links": null,
           "shape": 3,
-          "label": "image"
+          "links": null
+        },
+        {
+          "name": "reasoning_content",
+          "type": "STRING",
+          "links": null
         }
       ],
       "properties": {
@@ -222,7 +251,17 @@
         100,
         "",
         true,
-        ""
+        "",
+        "",
+        true,
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ]
       ]
     }
   ],
@@ -248,10 +287,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1,
+      "scale": 0.8264462809917354,
       "offset": [
-        -418.71552969157983,
-        -152.33396160337344
+        -152.20552969157973,
+        -138.57396160337342
       ]
     }
   },
