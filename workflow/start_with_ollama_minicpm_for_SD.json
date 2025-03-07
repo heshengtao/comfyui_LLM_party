@@ -21,6 +21,10 @@
           "name": "text",
           "label": "text",
           "type": "STRING",
+          "pos": [
+            10,
+            36
+          ],
           "widget": {
             "name": "text"
           },
@@ -67,6 +71,10 @@
           "name": "text",
           "label": "text",
           "type": "STRING",
+          "pos": [
+            10,
+            60
+          ],
           "widget": {
             "name": "text"
           },
@@ -112,6 +120,10 @@
           "name": "text",
           "label": "text",
           "type": "STRING",
+          "pos": [
+            10,
+            36
+          ],
           "widget": {
             "name": "text"
           },
@@ -159,6 +171,10 @@
           "name": "text",
           "label": "text",
           "type": "STRING",
+          "pos": [
+            10,
+            60
+          ],
           "widget": {
             "name": "text"
           },
@@ -258,6 +274,10 @@
           "name": "file_content",
           "label": "file_content",
           "type": "STRING",
+          "pos": [
+            10,
+            84
+          ],
           "widget": {
             "name": "file_content"
           },
@@ -310,6 +330,10 @@
           "name": "text",
           "label": "文本",
           "type": "STRING",
+          "pos": [
+            10,
+            36
+          ],
           "widget": {
             "name": "text"
           },
@@ -362,6 +386,10 @@
           "name": "text",
           "label": "文本",
           "type": "STRING",
+          "pos": [
+            10,
+            36
+          ],
           "widget": {
             "name": "text"
           },
@@ -582,143 +610,6 @@
       ]
     },
     {
-      "id": 184,
-      "type": "LLM",
-      "pos": [
-        460,
-        210
-      ],
-      "size": [
-        454.5297546386719,
-        586.8365478515625
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "label": "model",
-          "type": "CUSTOM",
-          "link": 175
-        },
-        {
-          "name": "images",
-          "label": "images",
-          "type": "IMAGE",
-          "shape": 7,
-          "link": 185
-        },
-        {
-          "name": "extra_parameters",
-          "label": "extra_parameters",
-          "type": "DICT",
-          "shape": 7,
-          "link": 178
-        },
-        {
-          "name": "system_prompt_input",
-          "label": "system_prompt_input",
-          "type": "STRING",
-          "widget": {
-            "name": "system_prompt_input"
-          },
-          "link": 176
-        },
-        {
-          "name": "user_prompt_input",
-          "label": "user_prompt_input",
-          "type": "STRING",
-          "widget": {
-            "name": "user_prompt_input"
-          },
-          "link": null
-        },
-        {
-          "name": "tools",
-          "label": "tools",
-          "type": "STRING",
-          "widget": {
-            "name": "tools"
-          },
-          "link": null
-        },
-        {
-          "name": "file_content",
-          "label": "file_content",
-          "type": "STRING",
-          "widget": {
-            "name": "file_content"
-          },
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "label": "assistant_response",
-          "type": "STRING",
-          "shape": 3,
-          "links": [
-            177
-          ],
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "label": "history",
-          "type": "STRING",
-          "shape": 3,
-          "links": null
-        },
-        {
-          "name": "tool",
-          "label": "tool",
-          "type": "STRING",
-          "shape": 3,
-          "links": null
-        },
-        {
-          "name": "image",
-          "label": "image",
-          "type": "IMAGE",
-          "shape": 3,
-          "links": null
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。",
-        "根据我传入的图片，生成提示词",
-        0.7,
-        "disable",
-        "disable",
-        "enable",
-        "enable",
-        1920,
-        "",
-        "",
-        "",
-        "",
-        "",
-        100,
-        "",
-        true,
-        "",
-        "",
-        [
-          false,
-          true
-        ],
-        [
-          false,
-          true
-        ]
-      ]
-    },
-    {
       "id": 198,
       "type": "PreviewImage",
       "pos": [
@@ -841,6 +732,10 @@
           "name": "text",
           "label": "text",
           "type": "STRING",
+          "pos": [
+            10,
+            60
+          ],
           "widget": {
             "name": "text"
           },
@@ -865,6 +760,165 @@
       "widgets_values": [
         "",
         "nsfw,(low quality,normal quality,worst quality,jpeg artifacts),cropped,monochrome,lowres,low saturation,((watermark)),(white letters)"
+      ]
+    },
+    {
+      "id": 184,
+      "type": "LLM",
+      "pos": [
+        460,
+        210
+      ],
+      "size": [
+        454.5297546386719,
+        670
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "label": "model",
+          "type": "CUSTOM",
+          "link": 175
+        },
+        {
+          "name": "images",
+          "label": "images",
+          "type": "IMAGE",
+          "shape": 7,
+          "link": 185
+        },
+        {
+          "name": "extra_parameters",
+          "label": "extra_parameters",
+          "type": "DICT",
+          "shape": 7,
+          "link": 178
+        },
+        {
+          "name": "system_prompt_input",
+          "label": "system_prompt_input",
+          "type": "STRING",
+          "pos": [
+            10,
+            406
+          ],
+          "widget": {
+            "name": "system_prompt_input"
+          },
+          "link": 176
+        },
+        {
+          "name": "user_prompt_input",
+          "label": "user_prompt_input",
+          "type": "STRING",
+          "pos": [
+            10,
+            430
+          ],
+          "widget": {
+            "name": "user_prompt_input"
+          },
+          "link": null
+        },
+        {
+          "name": "tools",
+          "label": "tools",
+          "type": "STRING",
+          "pos": [
+            10,
+            454
+          ],
+          "widget": {
+            "name": "tools"
+          },
+          "link": null
+        },
+        {
+          "name": "file_content",
+          "label": "file_content",
+          "type": "STRING",
+          "pos": [
+            10,
+            478
+          ],
+          "widget": {
+            "name": "file_content"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "assistant_response",
+          "label": "assistant_response",
+          "type": "STRING",
+          "shape": 3,
+          "links": [
+            177
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "history",
+          "label": "history",
+          "type": "STRING",
+          "shape": 3,
+          "links": null
+        },
+        {
+          "name": "tool",
+          "label": "tool",
+          "type": "STRING",
+          "shape": 3,
+          "links": null
+        },
+        {
+          "name": "image",
+          "label": "image",
+          "type": "IMAGE",
+          "shape": 3,
+          "links": null
+        },
+        {
+          "name": "reasoning_content",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM"
+      },
+      "widgets_values": [
+        "你一个强大的人工智能助手。",
+        "根据我传入的图片，生成提示词",
+        0.7,
+        "disable",
+        "disable",
+        "enable",
+        "enable",
+        1920,
+        "",
+        "",
+        "",
+        "",
+        "",
+        100,
+        "",
+        true,
+        "",
+        "",
+        true,
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ]
       ]
     }
   ],

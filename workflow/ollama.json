@@ -9,31 +9,35 @@
         1311,
         321
       ],
-      "size": {
-        "0": 339.77325439453125,
-        "1": 117.2219009399414
-      },
+      "size": [
+        339.77325439453125,
+        117.2219009399414
+      ],
       "flags": {},
       "order": 2,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
+          "label": "text",
           "type": "STRING",
-          "link": 47,
+          "pos": [
+            10,
+            60
+          ],
           "widget": {
             "name": "text"
           },
-          "label": "text"
+          "link": 47
         }
       ],
       "outputs": [
         {
           "name": "STRING",
+          "label": "STRING",
           "type": "STRING",
-          "links": null,
           "shape": 6,
-          "label": "STRING"
+          "links": null
         }
       ],
       "properties": {
@@ -47,6 +51,47 @@
       "bgcolor": "#355"
     },
     {
+      "id": 80,
+      "type": "LLM_api_loader",
+      "pos": [
+        429,
+        320
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "label": "model",
+          "type": "CUSTOM",
+          "shape": 3,
+          "links": [
+            46
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "qwen2",
+        "http://localhost:11434/v1/",
+        "ollama",
+        false
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
       "id": 82,
       "type": "LLM",
       "pos": [
@@ -54,8 +99,8 @@
         314
       ],
       "size": [
-        437.31617037776914,
-        486
+        437.316162109375,
+        670
       ],
       "flags": {},
       "order": 1,
@@ -69,73 +114,96 @@
         {
           "name": "images",
           "type": "IMAGE",
+          "shape": 7,
           "link": null
         },
         {
           "name": "extra_parameters",
           "type": "DICT",
+          "shape": 7,
           "link": null
         },
         {
           "name": "system_prompt_input",
           "type": "STRING",
-          "link": null,
+          "pos": [
+            10,
+            406
+          ],
           "widget": {
             "name": "system_prompt_input"
-          }
+          },
+          "link": null
         },
         {
           "name": "user_prompt_input",
           "type": "STRING",
-          "link": null,
+          "pos": [
+            10,
+            430
+          ],
           "widget": {
             "name": "user_prompt_input"
-          }
+          },
+          "link": null
         },
         {
           "name": "tools",
           "type": "STRING",
-          "link": null,
+          "pos": [
+            10,
+            454
+          ],
           "widget": {
             "name": "tools"
-          }
+          },
+          "link": null
         },
         {
           "name": "file_content",
           "type": "STRING",
-          "link": null,
+          "pos": [
+            10,
+            478
+          ],
           "widget": {
             "name": "file_content"
-          }
+          },
+          "link": null
         }
       ],
       "outputs": [
         {
           "name": "assistant_response",
           "type": "STRING",
+          "shape": 3,
           "links": [
             47
           ],
-          "shape": 3,
           "slot_index": 0
         },
         {
           "name": "history",
           "type": "STRING",
-          "links": null,
-          "shape": 3
+          "shape": 3,
+          "links": null
         },
         {
           "name": "tool",
           "type": "STRING",
-          "links": null,
-          "shape": 3
+          "shape": 3,
+          "links": null
         },
         {
           "name": "image",
           "type": "IMAGE",
-          "links": null,
-          "shape": 3
+          "shape": 3,
+          "links": null
+        },
+        {
+          "name": "reasoning_content",
+          "type": "STRING",
+          "links": null
         }
       ],
       "properties": {
@@ -157,47 +225,19 @@
         "",
         100,
         "",
-        true
+        true,
+        "",
+        "",
+        true,
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ]
       ]
-    },
-    {
-      "id": 80,
-      "type": "LLM_api_loader",
-      "pos": [
-        429,
-        320
-      ],
-      "size": {
-        "0": 315,
-        "1": 106
-      },
-      "flags": {
-        "pinned": false
-      },
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "model",
-          "type": "CUSTOM",
-          "links": [
-            46
-          ],
-          "shape": 3,
-          "label": "model",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "qwen2",
-        "http://localhost:11434/v1/",
-        "ollama"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
     }
   ],
   "links": [
@@ -222,11 +262,11 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1,
-      "offset": {
-        "0": -269.1161581707379,
-        "1": -163.79469863719808
-      }
+      "scale": 0.9090909090909091,
+      "offset": [
+        -271.28941988948804,
+        -176.10800735301828
+      ]
     }
   },
   "version": 0.4
