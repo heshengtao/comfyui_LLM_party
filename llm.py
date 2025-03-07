@@ -373,8 +373,8 @@ def ensure_version_suffix(base_url):
     确保 base_url 以 '/v<n>/' 结尾，其中 n 是数字。
     如果不是这样，则添加 '/v1/' 到末尾。
     """
-    # 正则表达式匹配 '/v<n>/' 其中 <n> 是数字
-    match = re.search(r'/v(\d+)/$', base_url)
+    # 正则表达式匹配 '/v<n>/' 其中 <n> 是任意字符
+    match = re.search(r'/v(.+)/$', base_url)
     
     if not match:
         # 如果没有匹配到，则添加 '/v1/'
@@ -382,6 +382,7 @@ def ensure_version_suffix(base_url):
             base_url += '/'
         base_url += 'v1/'
     return base_url
+
 class Chat:
     def __init__(self, model_name, apikey, baseurl) -> None:
         self.model_name = model_name
