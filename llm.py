@@ -486,6 +486,7 @@ class Chat:
                 if stream:
                     tool_calls = []
                     response_content = ""
+                    reasoning_content = ""
                     for chunk in response:
                         if chunk.choices:
                             choice = chunk.choices[0]
@@ -498,9 +499,13 @@ class Chat:
                                     if tool.function.arguments:
                                         # function参数为流式响应，需要拼接
                                         tool_calls[idx].function.arguments += tool.function.arguments
-                            else:                              
-                                print(chunk.choices[0].delta.content, end="", flush=True)
-                                response_content = response_content + chunk.choices[0].delta.content
+                            else:          
+                                    if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
+                                        print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
+                                        reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
+                                    else:
+                                        print(chunk.choices[0].delta.content, end="", flush=True)
+                                        response_content = response_content + chunk.choices[0].delta.content
                     while tool_calls:
                         response_content = tool_calls[0].function
                         print("正在调用" + response_content.name + "工具")
@@ -542,6 +547,7 @@ class Chat:
                         )
                         tool_calls = []
                         response_content = ""
+                        reasoning_content = ""
                         for chunk in response:
                             if chunk.choices:
                                 choice = chunk.choices[0]
@@ -555,8 +561,12 @@ class Chat:
                                             # function参数为流式响应，需要拼接
                                             tool_calls[idx].function.arguments += tool.function.arguments
                                 else:                              
-                                    print(chunk.choices[0].delta.content, end="", flush=True)
-                                    response_content = response_content + chunk.choices[0].delta.content
+                                    if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
+                                        print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
+                                        reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
+                                    else:
+                                        print(chunk.choices[0].delta.content, end="", flush=True)
+                                        response_content = response_content + chunk.choices[0].delta.content
                 else:
                     response_content = response.choices[0].message.content
                     print(response_content)
@@ -599,6 +609,9 @@ class Chat:
                             max_tokens=max_length,
                             **extra_parameters,
                         )
+                        if hasattr(response.choices[0].message, 'reasoning_content') and response.choices[0].message.reasoning_content:
+                            reasoning_content = response.choices[0].message.reasoning_content
+                            print(reasoning_content)
                         response_content = response.choices[0].message.content
                         print(response_content)
             elif is_tools_in_sys_prompt == "enable":
@@ -639,7 +652,11 @@ class Chat:
                         max_tokens=max_length,
                         **extra_parameters,
                     )
+                    if hasattr(response.choices[0].message, 'reasoning_content') and response.choices[0].message.reasoning_content:
+                        reasoning_content = response.choices[0].message.reasoning_content
+                        print(reasoning_content)
                     response_content = response.choices[0].message.content
+                    print(response_content)
             else:
                 response = openai_client.chat.completions.create(
                     model=self.model_name,
@@ -649,18 +666,22 @@ class Chat:
                     stream=stream,
                     **extra_parameters,
                 )
+                response_content = ""
+                reasoning_content = ""
                 if stream:
-                    response_content = ""
                     for chunk in response:
-                        print(chunk.choices[0].delta.content, end="", flush=True)
-                        response_content = response_content + chunk.choices[0].delta.content
+                        if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
+                            print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
+                            reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
+                        else:
+                            print(chunk.choices[0].delta.content, end="", flush=True)
+                            response_content = response_content + chunk.choices[0].delta.content
                 else:
+                    if hasattr(response.choices[0].message, 'reasoning_content') and response.choices[0].message.reasoning_content:
+                        reasoning_content = response.choices[0].message.reasoning_content
+                        print(reasoning_content)
                     response_content = response.choices[0].message.content
                     print(response_content)
-            try:
-                reasoning_content = response.choices[0].message.reasoning_content
-            except:
-                reasoning_content = ""
             # 使用正则表达式，提取response_content中<think>到</think>之间的内容到reasoning_content，之外的内容到response_content
             pattern = r'<think>(.*?)</think>'
             match = re.search(pattern, response_content, re.DOTALL)
@@ -670,7 +691,7 @@ class Chat:
             history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
             response_content = str(ex)
-            reasoning_content = ""
+            reasoning_content = str(ex)
         return response_content, history,reasoning_content
 
 
@@ -833,6 +854,7 @@ class aisuite_Chat:
                 if stream:
                     tool_calls = []
                     response_content = ""
+                    reasoning_content = ""
                     for chunk in response:
                         if chunk.choices:
                             choice = chunk.choices[0]
@@ -845,9 +867,13 @@ class aisuite_Chat:
                                     if tool.function.arguments:
                                         # function参数为流式响应，需要拼接
                                         tool_calls[idx].function.arguments += tool.function.arguments
-                            else:                              
-                                print(chunk.choices[0].delta.content, end="", flush=True)
-                                response_content = response_content + chunk.choices[0].delta.content
+                            else:          
+                                    if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
+                                        print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
+                                        reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
+                                    else:
+                                        print(chunk.choices[0].delta.content, end="", flush=True)
+                                        response_content = response_content + chunk.choices[0].delta.content
                     while tool_calls:
                         response_content = tool_calls[0].function
                         print("正在调用" + response_content.name + "工具")
@@ -889,6 +915,7 @@ class aisuite_Chat:
                         )
                         tool_calls = []
                         response_content = ""
+                        reasoning_content = ""
                         for chunk in response:
                             if chunk.choices:
                                 choice = chunk.choices[0]
@@ -902,8 +929,12 @@ class aisuite_Chat:
                                             # function参数为流式响应，需要拼接
                                             tool_calls[idx].function.arguments += tool.function.arguments
                                 else:                              
-                                    print(chunk.choices[0].delta.content, end="", flush=True)
-                                    response_content = response_content + chunk.choices[0].delta.content
+                                    if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
+                                        print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
+                                        reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
+                                    else:
+                                        print(chunk.choices[0].delta.content, end="", flush=True)
+                                        response_content = response_content + chunk.choices[0].delta.content
                 else:
                     response_content = response.choices[0].message.content
                     print(response_content)
@@ -946,6 +977,9 @@ class aisuite_Chat:
                             max_tokens=max_length,
                             **extra_parameters,
                         )
+                        if hasattr(response.choices[0].message, 'reasoning_content') and response.choices[0].message.reasoning_content:
+                            reasoning_content = response.choices[0].message.reasoning_content
+                            print(reasoning_content)
                         response_content = response.choices[0].message.content
                         print(response_content)
             elif is_tools_in_sys_prompt == "enable":
@@ -986,7 +1020,11 @@ class aisuite_Chat:
                         max_tokens=max_length,
                         **extra_parameters,
                     )
+                    if hasattr(response.choices[0].message, 'reasoning_content') and response.choices[0].message.reasoning_content:
+                        reasoning_content = response.choices[0].message.reasoning_content
+                        print(reasoning_content)
                     response_content = response.choices[0].message.content
+                    print(response_content)
             else:
                 response = openai_client.chat.completions.create(
                     model=self.model_name,
@@ -996,18 +1034,22 @@ class aisuite_Chat:
                     stream=stream,
                     **extra_parameters,
                 )
+                response_content = ""
+                reasoning_content = ""
                 if stream:
-                    response_content = ""
                     for chunk in response:
-                        print(chunk.choices[0].delta.content, end="", flush=True)
-                        response_content = response_content + chunk.choices[0].delta.content
+                        if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
+                            print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
+                            reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
+                        else:
+                            print(chunk.choices[0].delta.content, end="", flush=True)
+                            response_content = response_content + chunk.choices[0].delta.content
                 else:
+                    if hasattr(response.choices[0].message, 'reasoning_content') and response.choices[0].message.reasoning_content:
+                        reasoning_content = response.choices[0].message.reasoning_content
+                        print(reasoning_content)
                     response_content = response.choices[0].message.content
                     print(response_content)
-            try:
-                reasoning_content = response.choices[0].message.reasoning_content
-            except:
-                reasoning_content = ""
             # 使用正则表达式，提取response_content中<think>到</think>之间的内容到reasoning_content，之外的内容到response_content
             pattern = r'<think>(.*?)</think>'
             match = re.search(pattern, response_content, re.DOTALL)
@@ -1017,7 +1059,7 @@ class aisuite_Chat:
             history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
             response_content = str(ex)
-            reasoning_content = ""
+            reasoning_content = str(ex)
         return response_content, history,reasoning_content
 
 
