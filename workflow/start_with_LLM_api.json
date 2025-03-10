@@ -3,43 +3,6 @@
   "last_link_id": 44,
   "nodes": [
     {
-      "id": 23,
-      "type": "LLM_api_loader",
-      "pos": [
-        460,
-        290
-      ],
-      "size": [
-        315,
-        130
-      ],
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "model",
-          "label": "model",
-          "type": "CUSTOM",
-          "shape": 3,
-          "links": [
-            41
-          ],
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "deepseek-r1:14b",
-        "",
-        "",
-        true
-      ]
-    },
-    {
       "id": 29,
       "type": "show_text_party",
       "pos": [
@@ -311,6 +274,43 @@
           true
         ]
       ]
+    },
+    {
+      "id": 23,
+      "type": "LLM_api_loader",
+      "pos": [
+        460,
+        290
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "label": "model",
+          "type": "CUSTOM",
+          "shape": 3,
+          "links": [
+            41
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LLM_api_loader"
+      },
+      "widgets_values": [
+        "deepseek-r1:14b",
+        "",
+        "",
+        false
+      ]
     }
   ],
   "links": [
@@ -345,8 +345,8 @@
     "ds": {
       "scale": 0.8264462809917354,
       "offset": [
-        -350.9124688597686,
-        -123.20020043092484
+        -224.2657037230501,
+        -81.7668178625654
       ]
     }
   },
