@@ -473,6 +473,7 @@ class Chat:
             new_message = {"role": "user", "content": user_prompt}
             history.append(new_message)
             print(history)
+            reasoning_content = ""
             if tools is not None:
                 response = openai_client.chat.completions.create(
                     model=self.model_name,
@@ -841,6 +842,7 @@ class aisuite_Chat:
             new_message = {"role": "user", "content": user_prompt}
             history.append(new_message)
             print(history)
+            reasoning_content = ""
             if tools is not None:
                 response = openai_client.chat.completions.create(
                     model=self.model_name,
