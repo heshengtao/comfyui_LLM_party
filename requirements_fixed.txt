@@ -65,3 +65,4 @@ qwen-vl-utils[decord]
 attrdict
 docstring_parser
 langchain_ollama
+timm
