@@ -91,7 +91,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [doubao](https://www.volcengine.com/docs/82379/1263482)
 * [讯飞星火/spark](https://xinghuo.xfyun.cn/sparkapi?scr=price)
-* [جيميناي](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(تم إهمال عقدة محمل API LLM الأصلية لجيميناي في الإصدار الجديد، يرجى استخدام عقدة محمل LLM API، واختر base_url ليكون: https://generativelanguage.googleapis.com/v1beta/)
+* [جيميناي](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(تم إهمال عقدة محمل API LLM الأصلية لجيميناي في الإصدار الجديد، يرجى استخدام عقدة محمل LLM API، واختر base_url ليكون: https://generativelanguage.googleapis.com/v1beta/openai/)
 
 2. دعم جميع استدعاءات واجهة برمجة التطبيقات المتوافقة مع [aisuite](https://github.com/andrewyng/aisuite):
 * [anthropic/claude](https://www.anthropic.com/)

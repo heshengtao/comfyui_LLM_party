@@ -92,7 +92,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [doubao](https://www.volcengine.com/docs/82379/1263482)
 * [讯飞星火/spark](https://xinghuo.xfyun.cn/sparkapi?scr=price)
-* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(従来のGemini API LLM ローダーノードは新しいバージョンで廃止されましたので、LLM APIローダーノードをご利用ください。base_urlは以下を選択してください：https://generativelanguage.googleapis.com/v1beta/)
+* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(従来のGemini API LLM ローダーノードは新しいバージョンで廃止されましたので、LLM APIローダーノードをご利用ください。base_urlは以下を選択してください：https://generativelanguage.googleapis.com/v1beta/openai/)
 
 2. [aisuite](https://github.com/andrewyng/aisuite)互換のすべてのAPI呼び出しをサポート：
 * [anthropic/claude](https://www.anthropic.com/)  

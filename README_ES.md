@@ -91,7 +91,7 @@ ComfyUI LLM Party permite desde la llamada a múltiples herramientas LLM desde l
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [doubao](https://www.volcengine.com/docs/82379/1263482)
 * [讯飞星火/spark](https://xinghuo.xfyun.cn/sparkapi?scr=price)
-* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(El nodo cargador de la API LLM original de Gemini ha sido descontinuado en la nueva versión, por favor utilice el nodo cargador de la API LLM, seleccionando base_url como: https://generativelanguage.googleapis.com/v1beta/)
+* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(El nodo cargador de la API LLM original de Gemini ha sido descontinuado en la nueva versión, por favor utilice el nodo cargador de la API LLM, seleccionando base_url como: https://generativelanguage.googleapis.com/v1beta/openai/)
 
 2. Soporte para todas las llamadas a la API compatibles con [aisuite](https://github.com/andrewyng/aisuite):
 * [anthropic/claude](https://www.anthropic.com/)

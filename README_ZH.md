@@ -92,7 +92,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [豆包](https://www.volcengine.com/docs/82379/1263482)
 * [讯飞星火/spark](https://xinghuo.xfyun.cn/sparkapi?scr=price)
-* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(原本的Gemini API LLM 加载器节点在新版本的已被弃用，请使用LLM API加载器节点，base_url选择为：https://generativelanguage.googleapis.com/v1beta/)
+* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(原本的Gemini API LLM 加载器节点在新版本的已被弃用，请使用LLM API加载器节点，base_url选择为：https://generativelanguage.googleapis.com/v1beta/openai/)
 
 2. 支持[aisuite](https://github.com/andrewyng/aisuite)兼容的所有API调用：
 * [anthropic/claude](https://www.anthropic.com/)

@@ -92,7 +92,7 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [doubao](https://www.volcengine.com/docs/82379/1263482)
 * [spark](https://xinghuo.xfyun.cn/sparkapi?scr=price)
-* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(The original Gemini API LLM loader node has been deprecated in the new version. Please use the LLM API loader node, with the base_url selected as: https://generativelanguage.googleapis.com/v1beta/)
+* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(The original Gemini API LLM loader node has been deprecated in the new version. Please use the LLM API loader node, with the base_url selected as: https://generativelanguage.googleapis.com/v1beta/openai/)
 
 2. Support for all API calls compatible with [aisuite](https://github.com/andrewyng/aisuite):
 * [anthropic/claude](https://www.anthropic.com/) 

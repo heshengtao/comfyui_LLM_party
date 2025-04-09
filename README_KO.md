@@ -92,7 +92,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [doubao](https://www.volcengine.com/docs/82379/1263482)
 * [讯飞星火/spark](https://xinghuo.xfyun.cn/sparkapi?scr=price)
-* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(기존 Gemini API LLM 로더 노드는 새 버전에서 폐기되었습니다. LLM API 로더 노드를 사용하시고, base_url로 다음을 선택해 주십시오: https://generativelanguage.googleapis.com/v1beta/)
+* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(기존 Gemini API LLM 로더 노드는 새 버전에서 폐기되었습니다. LLM API 로더 노드를 사용하시고, base_url로 다음을 선택해 주십시오: https://generativelanguage.googleapis.com/v1beta/openai/)
 
 2. [aisuite](https://github.com/andrewyng/aisuite)와 호환되는 모든 API 호출을 지원합니다：
 * [anthropic/claude](https://www.anthropic.com/)

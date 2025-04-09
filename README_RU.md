@@ -90,7 +90,7 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 * [deepseek](https://platform.deepseek.com/api-docs/zh-cn/)
 * [kimi/moonshot](https://platform.moonshot.cn/docs/api/chat#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF)
 * [doubao](https://www.volcengine.com/docs/82379/1263482)
-* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(Исходный узел загрузчика API LLM Gemini был устаревшим в новой версии. Пожалуйста, используйте узел загрузчика API LLM, выбрав base_url: https://generativelanguage.googleapis.com/v1beta/)
+* [Gemini](https://developers.googleblog.com/zh-hans/gemini-is-now-accessible-from-the-openai-library/)(Исходный узел загрузчика API LLM Gemini был устаревшим в новой версии. Пожалуйста, используйте узел загрузчика API LLM, выбрав base_url: https://generativelanguage.googleapis.com/v1beta/openai/)
 
 2. Поддержка всех API вызовов, совместимых с [aisuite](https://github.com/andrewyng/aisuite):
 * [anthropic/claude](https://www.anthropic.com/)
