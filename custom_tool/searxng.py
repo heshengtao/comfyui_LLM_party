@@ -136,7 +136,11 @@ _TOOL_HOOKS = ["search_searxng"]
 NODE_CLASS_MAPPINGS = {
     "searxng_tool": searxng_tool,
 }
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 import configparser
 config = configparser.ConfigParser()
 config.read(config_path)

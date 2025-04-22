@@ -121,7 +121,11 @@ NODE_CLASS_MAPPINGS = {
     "load_redis_memo": load_redis_memo,
     "save_redis_memo": save_redis_memo,
 }
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 
 
 

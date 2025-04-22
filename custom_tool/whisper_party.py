@@ -188,7 +188,11 @@ NODE_CLASS_MAPPINGS = {
     "listen_audio": listen_audio,
     "openai_whisper": openai_whisper,
 }
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 import os
 import sys
 

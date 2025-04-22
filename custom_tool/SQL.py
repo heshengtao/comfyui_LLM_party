@@ -130,7 +130,11 @@ _TOOL_HOOKS = ["query_database"]
 NODE_CLASS_MAPPINGS = {
     "sql_tool": sql_tool,
 }
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 import configparser
 config = configparser.ConfigParser()
 config.read(config_path)

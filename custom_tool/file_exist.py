@@ -35,7 +35,11 @@ class FilePathExists:
 NODE_CLASS_MAPPINGS = {
     "FilePathExists": FilePathExists,
 }
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 import os
 import sys
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

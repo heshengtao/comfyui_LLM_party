@@ -203,7 +203,11 @@ NODE_CLASS_MAPPINGS = {
     "load_SQL_memo": load_SQL_memo,
     "save_SQL_memo": save_SQL_memo,
 }
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 
 try:
     language = config.get("API_KEYS", "language")

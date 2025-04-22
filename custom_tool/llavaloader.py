@@ -385,7 +385,11 @@ NODE_CLASS_MAPPINGS = {
     "easy_GGUFLoader":easy_GGUFLoader,
     "easy_vlmLoader":easy_vlmLoader,
     }
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 
 try:
     language = config.get("API_KEYS", "language")

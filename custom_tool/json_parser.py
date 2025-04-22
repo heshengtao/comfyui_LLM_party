@@ -132,7 +132,11 @@ NODE_CLASS_MAPPINGS = {
     "json_parser": json_parser,
     "json_get_value": json_get_value,
 }
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 import os
 import sys
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

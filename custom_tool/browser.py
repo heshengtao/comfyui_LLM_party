@@ -145,7 +145,11 @@ _TOOL_HOOKS = ["browser_use"]
 NODE_CLASS_MAPPINGS = {
     "browser_use_tool": browser_use_tool,
 }
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 
 
 

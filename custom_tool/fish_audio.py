@@ -154,7 +154,11 @@ NODE_CLASS_MAPPINGS = {
     "fish_whisper": fish_whisper,
     "fish_tts": fish_tts,
 }
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 
 
 try:

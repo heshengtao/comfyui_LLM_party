@@ -52,7 +52,11 @@ class custom_string_format:
         return (format_string,)
     
 NODE_CLASS_MAPPINGS = {"custom_string_format": custom_string_format}
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 
 import os
 import sys

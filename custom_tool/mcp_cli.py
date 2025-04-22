@@ -177,7 +177,11 @@ class Mcp_tool:
 NODE_CLASS_MAPPINGS = {
     "Mcp_tool": Mcp_tool,
 }
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 import configparser
 config = configparser.ConfigParser()
 config.read(config_path)

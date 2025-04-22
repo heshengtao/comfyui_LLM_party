@@ -78,7 +78,11 @@ class SpeedChange:
 
 NODE_CLASS_MAPPINGS = {"SpeedChange": SpeedChange}
 
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
+if 'Chinese' in lang:
+   lang = 'zh_CN'
+else:
+   lang = 'en_US'
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(current_dir, "config.ini")
 config = configparser.ConfigParser()
