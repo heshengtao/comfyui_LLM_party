@@ -1,3 +1,5 @@
+[![MseeP Badge](https://mseep.net/pr/heshengtao-comfyui-llm-party-badge.jpg)](https://mseep.ai/app/heshengtao-comfyui-llm-party)
+
 ![图片](img/封面.png)
 
 <div align="center">
