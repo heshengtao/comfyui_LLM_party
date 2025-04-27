@@ -562,13 +562,14 @@ class Chat:
                                         if tool.function.arguments:
                                             # function参数为流式响应，需要拼接
                                             tool_calls[idx].function.arguments += tool.function.arguments
-                                else:                              
-                                    if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
-                                        print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
-                                        reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
-                                    elif hasattr(chunk.choices[0].delta, 'content') and chunk.choices[0].delta.content:
-                                        print(chunk.choices[0].delta.content, end="", flush=True)
-                                        response_content = response_content + chunk.choices[0].delta.content
+                                else:          
+                                    if chunk.choices[0]:                   
+                                        if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
+                                            print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
+                                            reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
+                                        elif hasattr(chunk.choices[0].delta, 'content') and chunk.choices[0].delta.content:
+                                            print(chunk.choices[0].delta.content, end="", flush=True)
+                                            response_content = response_content + chunk.choices[0].delta.content
                 else:
                     response_content = response.choices[0].message.content
                     print(response_content)
@@ -672,12 +673,14 @@ class Chat:
                 reasoning_content = ""
                 if stream:
                     for chunk in response:
-                        if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
-                            print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
-                            reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
-                        elif hasattr(chunk.choices[0].delta, 'content') and chunk.choices[0].delta.content:
-                            print(chunk.choices[0].delta.content, end="", flush=True)
-                            response_content = response_content + chunk.choices[0].delta.content
+                        if chunk.choices[0]:
+                            if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
+                                print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
+                                reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
+                            elif hasattr(chunk.choices[0].delta, 'content') and chunk.choices[0].delta.content:
+                                print(chunk.choices[0].delta.content, end="", flush=True)
+                                response_content = response_content + chunk.choices[0].delta.content
+                    print(response_content)
                 else:
                     if hasattr(response.choices[0].message, 'reasoning_content') and response.choices[0].message.reasoning_content:
                         reasoning_content = response.choices[0].message.reasoning_content
@@ -870,7 +873,8 @@ class aisuite_Chat:
                                     if tool.function.arguments:
                                         # function参数为流式响应，需要拼接
                                         tool_calls[idx].function.arguments += tool.function.arguments
-                            else:          
+                            else:     
+                                if chunk.choices[0]:     
                                     if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
                                         print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
                                         reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
@@ -931,13 +935,14 @@ class aisuite_Chat:
                                         if tool.function.arguments:
                                             # function参数为流式响应，需要拼接
                                             tool_calls[idx].function.arguments += tool.function.arguments
-                                else:                              
-                                    if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
-                                        print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
-                                        reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
-                                    elif hasattr(chunk.choices[0].delta, 'content') and chunk.choices[0].delta.content:
-                                        print(chunk.choices[0].delta.content, end="", flush=True)
-                                        response_content = response_content + chunk.choices[0].delta.content
+                                else:    
+                                    if chunk.choices[0]:                          
+                                        if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
+                                            print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
+                                            reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
+                                        elif hasattr(chunk.choices[0].delta, 'content') and chunk.choices[0].delta.content:
+                                            print(chunk.choices[0].delta.content, end="", flush=True)
+                                            response_content = response_content + chunk.choices[0].delta.content
                 else:
                     response_content = response.choices[0].message.content
                     print(response_content)
@@ -1041,12 +1046,13 @@ class aisuite_Chat:
                 reasoning_content = ""
                 if stream:
                     for chunk in response:
-                        if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
-                            print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
-                            reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
-                        elif hasattr(chunk.choices[0].delta, 'content') and chunk.choices[0].delta.content:
-                            print(chunk.choices[0].delta.content, end="", flush=True)
-                            response_content = response_content + chunk.choices[0].delta.content
+                        if chunk.choices[0]:
+                            if hasattr(chunk.choices[0].delta, 'reasoning_content') and chunk.choices[0].delta.reasoning_content:
+                                print(chunk.choices[0].delta.reasoning_content, end="", flush=True)
+                                reasoning_content = reasoning_content + chunk.choices[0].delta.reasoning_content
+                            elif hasattr(chunk.choices[0].delta, 'content') and chunk.choices[0].delta.content:
+                                print(chunk.choices[0].delta.content, end="", flush=True)
+                                response_content = response_content + chunk.choices[0].delta.content
                 else:
                     if hasattr(response.choices[0].message, 'reasoning_content') and response.choices[0].message.reasoning_content:
                         reasoning_content = response.choices[0].message.reasoning_content
