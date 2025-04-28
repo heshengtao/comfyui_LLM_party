@@ -12,6 +12,7 @@ from io import BytesIO
 from typing import Any, List, Optional
 
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from fastapi.staticfiles import StaticFiles
 import httpx
 import numpy as np
 import requests
@@ -21,7 +22,12 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from PIL import Image, ImageOps
 from pydantic import BaseModel
+import asyncio
+parser = argparse.ArgumentParser(description="Run the server with specified host and port.")
+parser.add_argument("--host", type=str, default="127.0.0.1", help="Host address to bind the server.")
+parser.add_argument("--port", type=int, default=8187, help="Port number to bind the server.")
 
+args = parser.parse_args()
 current_dir_path = os.path.dirname(os.path.realpath(__file__))
 config = configparser.ConfigParser()
 config.read(os.path.join(current_dir_path, "config.ini"))
@@ -134,7 +140,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+output_dir = os.path.join(current_dir_path, "output")
+os.makedirs(output_dir, exist_ok=True)
+app.mount("/images", StaticFiles(directory=output_dir), name="images")
 
 class Message(BaseModel):
     role: str
@@ -365,12 +373,15 @@ async def process_request(request_data: CompletionRequest):
                 # 把img_base64保存到当前目录下的output文件夹
                 output_dir = os.path.join(current_dir_path, "output")
                 os.makedirs(output_dir, exist_ok=True)
-                # 时间戳
                 timestamp = int(time.time())
-                filename = os.path.join(output_dir, f"{timestamp}.png")
-                with open(filename, "wb") as f:
+                filename = f"{timestamp}.png"
+                file_path = os.path.join(output_dir, filename)
+                with open(file_path, "wb") as f:
                     f.write(base64.b64decode(img_base64))
-                base64_images.append(filename)
+                # 生成可访问的URL（需要获取当前服务的host和port）
+                base_url = f"http://{args.host}:{args.port}"
+                image_url = f"{base_url}/images/{filename}"
+                base64_images.append(image_url)
             else:
                 url = "https://api.imgbb.com/1/upload"
                 payload = {"key": imgbb_key, "image": img_base64}
@@ -412,10 +423,4 @@ async def process_request(request_data: CompletionRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    import asyncio
-    parser = argparse.ArgumentParser(description="Run the server with specified host and port.")
-    parser.add_argument("--host", type=str, default="127.0.0.1", help="Host address to bind the server.")
-    parser.add_argument("--port", type=int, default=8187, help="Port number to bind the server.")
-    
-    args = parser.parse_args()
     uvicorn.run(app, host=args.host, port=args.port)
