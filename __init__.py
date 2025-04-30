@@ -159,12 +159,12 @@ try:
     manage_discord_packages()
 except Exception as e:
     print(f"Error: {e}")
-
+"""
 try:
     install_playwright_browsers()
 except Exception as e:
     print(f"Error: {e}")
-
+"""
 try:
     copy_config()
 except Exception as e:
