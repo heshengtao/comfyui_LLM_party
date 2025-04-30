@@ -125,8 +125,8 @@ class image_iterator:
             "optional": {},
         }
 
-    RETURN_TYPES = ("IMAGE", "BOOLEAN")
-    RETURN_NAMES = ("image", "is_end")
+    RETURN_TYPES = ("IMAGE", "BOOLEAN","STRING","STRING")
+    RETURN_NAMES = ("image", "is_end","image_name","image_path")
 
     FUNCTION = "file"
 
@@ -196,7 +196,9 @@ class image_iterator:
             self.index += 1
         elif iterator_mode == "random":
             self.index = random.randint(0, len(image_files) - 1)
-        return (output_image, flag_is_end,)
+        image_name = image_files[self.index]
+        image_path = os.path.join(folder_path, image_name)
+        return (output_image, flag_is_end,image_name,image_path)
     @classmethod
     def IS_CHANGED(self, s):
         self.record = self.index
