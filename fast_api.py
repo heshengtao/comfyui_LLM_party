@@ -353,46 +353,46 @@ async def process_request(request_data: CompletionRequest):
         }
     else:
         base64_images = []
+        config_path = os.path.join(current_dir_path, "config.ini")
+        print(config_path)
+        config = configparser.ConfigParser()
+        config.read(config_path, encoding="utf-8")
+        api_keys = {}
+        if "API_KEYS" in config:
+            api_keys = config["API_KEYS"]
 
+        imgbb_key = api_keys.get("imgbb_api")
+        print(imgbb_key)
+        counter = 0
         for node_id in images:
             for image_data in images[node_id]:
+                counter += 1
                 img_base64 = base64.b64encode(image_data).decode("utf-8")
 
-            config_path = os.path.join(current_dir_path, "config.ini")
-            print(config_path)
-            config = configparser.ConfigParser()
-            config.read(config_path, encoding="utf-8")
-            api_keys = {}
-            if "API_KEYS" in config:
-                api_keys = config["API_KEYS"]
-
-            imgbb_key = api_keys.get("imgbb_api")
-            print(imgbb_key)
-
-            if imgbb_key is None or imgbb_key == "":
-                # 把img_base64保存到当前目录下的output文件夹
-                output_dir = os.path.join(current_dir_path, "output")
-                os.makedirs(output_dir, exist_ok=True)
-                timestamp = int(time.time())
-                filename = f"{timestamp}.png"
-                file_path = os.path.join(output_dir, filename)
-                with open(file_path, "wb") as f:
-                    f.write(base64.b64decode(img_base64))
-                # 生成可访问的URL（需要获取当前服务的host和port）
-                base_url = f"http://{args.host}:{args.port}"
-                image_url = f"{base_url}/images/{filename}"
-                base64_images.append(image_url)
-            else:
-                url = "https://api.imgbb.com/1/upload"
-                payload = {"key": imgbb_key, "image": img_base64}
-                response0 = requests.post(url, data=payload)
-                if response0.status_code == 200:
-                    result = response0.json()
-                    img_url = result["data"]["url"]
+                if imgbb_key is None or imgbb_key == "":
+                    # 把img_base64保存到当前目录下的output文件夹
+                    output_dir = os.path.join(current_dir_path, "output")
+                    os.makedirs(output_dir, exist_ok=True)
+                    timestamp = int(time.time())
+                    filename = f"{timestamp}_{counter}.png"
+                    file_path = os.path.join(output_dir, filename)
+                    with open(file_path, "wb") as f:
+                        f.write(base64.b64decode(img_base64))
+                    # 生成可访问的URL（需要获取当前服务的host和port）
+                    base_url = f"http://{args.host}:{args.port}"
+                    image_url = f"{base_url}/images/{filename}"
+                    base64_images.append(image_url)
                 else:
-                    return "Error: " + response0.text
-                print(img_url)
-                base64_images.append(img_url)
+                    url = "https://api.imgbb.com/1/upload"
+                    payload = {"key": imgbb_key, "image": img_base64}
+                    response0 = requests.post(url, data=payload)
+                    if response0.status_code == 200:
+                        result = response0.json()
+                        img_url = result["data"]["url"]
+                    else:
+                        return "Error: " + response0.text
+                    print(img_url)
+                    base64_images.append(img_url)
             
         if response is None:
             response = ""
