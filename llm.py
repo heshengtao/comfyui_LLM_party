@@ -3168,7 +3168,7 @@ else:
         "aisuite_loader":"☁️Aisuite Loader"
     }
     if enable_interpreter:
-        NODE_CLASS_MAPPINGS["interpreter_tool"] = "Code Execution Tool"
+        NODE_DISPLAY_NAME_MAPPINGS["interpreter_tool"] = "Code Execution Tool"
         NODE_DISPLAY_NAME_MAPPINGS["interpreter_function"] = "Interpreter Function"
 
 def load_custom_tools():
