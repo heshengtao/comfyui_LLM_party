@@ -144,12 +144,14 @@ from .tools.workflow import work_flow, workflow_tool, workflow_transfer
 from .tools.flux_persona import flux_persona
 from .tools.workflow_V2 import workflow_transfer_v2
 os.environ["no_proxy"] = "localhost,127.0.0.1"
+enable_interpreter = False
+
 _TOOL_HOOKS = [
     "get_time",
     "search_web",
     "search_web_bing",
     "check_web",
-    "interpreter",
+    # "interpreter",
     "data_base",
     "another_llm",
     "use_api_tool",
@@ -187,6 +189,8 @@ _TOOL_HOOKS = [
     "Inquire_entity_list_neo4j",
     "search_duckduckgo",
 ]
+if enable_interpreter:
+    _TOOL_HOOKS.append("interpreter")
 instances = []
 image_buffer = []
 
@@ -2842,7 +2846,7 @@ NODE_CLASS_MAPPINGS = {
     "string_combine_plus": string_combine_plus,
     "start_dialog": start_dialog,
     "end_dialog": end_dialog,
-    "interpreter_tool": interpreter_tool,
+    # "interpreter_tool": interpreter_tool,
     "ebd_tool": ebd_tool,
     "custom_persona": custom_persona,
     "start_workflow": start_workflow,
@@ -2900,7 +2904,7 @@ NODE_CLASS_MAPPINGS = {
     "clear_model": clear_model,
     "save_ebd_database": save_ebd_database,
     "json2text": json2text,
-    "interpreter_function": interpreter_function,
+    # "interpreter_function": interpreter_function,
     "load_img_path": load_img_path,
     "img2path": img2path,
     "load_int": load_int,
@@ -2925,7 +2929,9 @@ NODE_CLASS_MAPPINGS = {
     "file_path_iterator":file_path_iterator,
     "aisuite_loader":aisuite_loader,
 }
-
+if enable_interpreter:
+    NODE_CLASS_MAPPINGS["interpreter_tool"] = interpreter_tool
+    NODE_CLASS_MAPPINGS["interpreter_function"] = interpreter_function
 
 lang = locale.getdefaultlocale()[0]
 api_keys = load_api_keys(config_path)
@@ -2962,7 +2968,7 @@ if lang == "zh_CN":
         "string_combine_plus": "超大字符串组合",
         "start_dialog": "开始对话",
         "end_dialog": "结束对话",
-        "interpreter_tool": "代码执行工具",
+        # "interpreter_tool": "代码执行工具",
         "ebd_tool": "🖥️词嵌入模型工具",
         "custom_persona": "自定义面具",
         "start_workflow": "开始工作流",
@@ -3020,7 +3026,7 @@ if lang == "zh_CN":
         "clear_model": "清空模型",
         "save_ebd_database": "🖥️保存向量数据库",
         "json2text": "JSON转文本",
-        "interpreter_function": "解释器函数",
+        # "interpreter_function": "解释器函数",
         "load_img_path": "从图片路径加载",
         "img2path": "图片存至路径",
         "load_int": "加载整数",
@@ -3045,6 +3051,9 @@ if lang == "zh_CN":
         "file_path_iterator": "文件路径迭代器",
         "aisuite_loader": "☁️AISuite加载器",
     }
+    if enable_interpreter:
+        NODE_DISPLAY_NAME_MAPPINGS["interpreter_tool"] = "代码执行工具"
+        NODE_DISPLAY_NAME_MAPPINGS["interpreter_function"] = "解释器函数"
 else:
     NODE_DISPLAY_NAME_MAPPINGS = {
         "LLM": "☁️API LLM general link",
@@ -3075,7 +3084,7 @@ else:
         "string_combine_plus": "Large String Combine",
         "start_dialog": "Start Dialog",
         "end_dialog": "End Dialog",
-        "interpreter_tool": "Code Execution Tool",
+        # "interpreter_tool": "Code Execution Tool",
         "ebd_tool": "🖥️Embeddings Tool",
         "custom_persona": "Custom Persona",
         "start_workflow": "Start Workflow",
@@ -3133,7 +3142,7 @@ else:
         "clear_model": "Clear Model",
         "save_ebd_database": "🖥️Save Embeddings Database",
         "json2text": "JSON to Text",
-        "interpreter_function": "Interpreter Function",
+        # "interpreter_function": "Interpreter Function",
         "load_img_path": "Load Image from Path",
         "img2path": "Image to Path",
         "load_int": "Load Integer",
@@ -3158,7 +3167,9 @@ else:
         "file_path_iterator":"File Path Iterator",
         "aisuite_loader":"☁️Aisuite Loader"
     }
-
+    if enable_interpreter:
+        NODE_CLASS_MAPPINGS["interpreter_tool"] = "Code Execution Tool"
+        NODE_DISPLAY_NAME_MAPPINGS["interpreter_function"] = "Interpreter Function"
 
 def load_custom_tools():
     # 获取 custom_tool 文件夹的路径
