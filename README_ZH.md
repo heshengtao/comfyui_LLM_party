@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://space.bilibili.com/26978344">B站</a> ·
-  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
+  <a href="https://www.youtube.com/@LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">文字教程</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">网盘链接</a> ·
   <a href="img/Q群.jpg">QQ群</a> ·
@@ -75,7 +75,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 <a href="https://space.bilibili.com/26978344">
   <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
-<a href="https://www.youtube.com/@comfyui-LLM-party">
+<a href="https://www.youtube.com/@LLM-party">
   <img src="img/YT.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
 
@@ -200,7 +200,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 ### 关注我们
 1. 如果想持续关注本项目的最新功能，欢迎关注B站账号：[派酱](https://space.bilibili.com/26978344)
-2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
+2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)
 
 ### 捐赠支持
 如果我的工作给您带来了价值，请考虑请我喝一杯咖啡吧！您的支持不仅为项目注入活力，也温暖了创作者的心。☕💖 每一杯都有意义！

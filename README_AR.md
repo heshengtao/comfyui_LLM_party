@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
-  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
+  <a href="https://www.youtube.com/@LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">دليل النص</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">عنوان القرص السحابي</a> ·
   <a href="img/Q群.jpg">مجموعة QQ</a> ·
@@ -74,7 +74,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 <a href="https://space.bilibili.com/26978344">
   <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
-<a href="https://www.youtube.com/@comfyui-LLM-party">
+<a href="https://www.youtube.com/@LLM-party">
   <img src="img/YT.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
 
@@ -196,7 +196,7 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 
 ### تابعونا
 1. إذا كنت ترغب في متابعة أحدث ميزات هذا المشروع، ندعوك لمتابعة حسابنا على بلي بلي: [派酱](https://space.bilibili.com/26978344)
-2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
+2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)
 
 ### دعم التبرعات
 إذا كانت أعمالي قد جلبت لك قيمة، يرجى التفكير في دعوتي لتناول فنجان من القهوة! دعمك لا ينعش المشروع فحسب، بل يدفئ قلب المبدع أيضًا.☕💖 كل فنجان له معنى!

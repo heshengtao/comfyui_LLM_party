@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
-  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
+  <a href="https://www.youtube.com/@LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">テキストチュートリアル</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">クラウドディスクのアドレス</a> ·
   <a href="img/Q群.jpg">QQグループ</a> ·
@@ -74,7 +74,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 <a href="https://space.bilibili.com/26978344">
   <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
-<a href="https://www.youtube.com/@comfyui-LLM-party">
+<a href="https://www.youtube.com/@LLM-party">
   <img src="img/YT.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
 
@@ -196,7 +196,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 
 ### 私たちをフォローする
 1. このプロジェクトの最新機能を継続的にフォローしたい方は、Bilibiliアカウントをフォローしてください：[派酱](https://space.bilibili.com/26978344)
-2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
+2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)
 
 ### 寄付のサポート
 私の仕事があなたに価値をもたらしたなら、ぜひ私にコーヒーをおごってください！あなたのサポートはプロジェクトに活力を与えるだけでなく、クリエイターの心を温めます。☕💖 一杯一杯が意義深いです！

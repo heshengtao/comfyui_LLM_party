@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
-  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
+  <a href="https://www.youtube.com/@LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">Tutoriel écrit</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">Adresse du disque cloud</a> ·
   <a href="img/Q群.jpg">Groupe QQ</a> ·
@@ -74,7 +74,7 @@ ComfyUI LLM Party permet de construire rapidement votre propre assistant AI pers
 <a href="https://space.bilibili.com/26978344">
   <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
-<a href="https://www.youtube.com/@comfyui-LLM-party">
+<a href="https://www.youtube.com/@LLM-party">
   <img src="img/YT.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
 
@@ -195,7 +195,7 @@ Si vous rencontrez des problèmes avec le plugin ou si vous avez d'autres questi
 
 ### Suivez-nous
 1. Si vous souhaitez rester informé des dernières fonctionnalités de ce projet, n'hésitez pas à suivre notre compte Bilibili : [派酱](https://space.bilibili.com/26978344)
-2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
+2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)
 
 ### Soutien par don
 Si mon travail vous apporte de la valeur, veuillez envisager de m'offrir un café ! Votre soutien insuffle non seulement de la vitalité au projet, mais réchauffe également le cœur des créateurs.☕💖 Chaque tasse compte !

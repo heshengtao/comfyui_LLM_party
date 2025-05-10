@@ -342,7 +342,7 @@ class LLMPartyExtension {
             <p>Attention! This project is open source based on the AGPL agreement, please abide by the AGPL agreement to avoid unnecessary legal problems! Thank you for your cooperation! If you need a closed-source commercial version, please contact hst97@qq.com</p>
             <p>github: <a href="https://github.com/heshengtao/comfyui_LLM_party" target="_blank" style="color: #4CAF50;">heshengtao/comfyui_LLM_party</a></p>
             <p>bilibili: <a href="https://space.bilibili.com/26978344?spm_id_from=333.1007.0.0" target="_blank" style="color: #4CAF50;">@派酱llm-party</a></p>
-            <p>youtube: <a href="https://www.youtube.com/@comfyui-LLM-party" target="_blank" style="color: #4CAF50;">@comfyui-LLM-party</a></p>
+            <p>youtube: <a href="https://www.youtube.com/@LLM-party" target="_blank" style="color: #4CAF50;">@LLM-party</a></p>
             <p>QQ: <a href="https://github.com/heshengtao/comfyui_LLM_party/blob/main/img/Q%E7%BE%A4.jpg" target="_blank" style="color: #4CAF50;">931057213</a></p>
             <p>feishu: <a href="https://dcnsxxvm4zeq.feishu.cn/wiki/IyUowXNj9iH0vzk68cpcLnZXnYf?fromScene=spaceOverview" target="_blank" style="color: #4CAF50;">use document</a></p>
         `;

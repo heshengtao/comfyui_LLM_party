@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
-  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
+  <a href="https://www.youtube.com/@LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">Texttutorial</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">Cloud-Disk-Adresse</a> ·
   <a href="img/Q群.jpg">QQ-Gruppe</a> ·
@@ -74,7 +74,7 @@ ComfyUI LLM Party bietet Ihnen von den grundlegendsten LLM-Multitoolaufrufen und
 <a href="https://space.bilibili.com/26978344">
   <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
-<a href="https://www.youtube.com/@comfyui-LLM-party">
+<a href="https://www.youtube.com/@LLM-party">
   <img src="img/YT.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
 
@@ -194,7 +194,7 @@ Wenn es Probleme mit dem Plugin gibt oder Sie andere Fragen haben, sind Sie herz
 
 ### Folgen Sie uns
 1. Wenn Sie die neuesten Funktionen dieses Projekts kontinuierlich verfolgen möchten, heißen wir Sie herzlich willkommen, unseren Bilibili-Account zu abonnieren: [派酱](https://space.bilibili.com/26978344)
-2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
+2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)
 
 ### Unterstützung durch Spenden
 Wenn meine Arbeit Ihnen einen Mehrwert bietet, ziehen Sie bitte in Betracht, mir einen Kaffee auszugeben! Ihre Unterstützung belebt nicht nur das Projekt, sondern erwärmt auch das Herz der Kreatoren.☕💖 Jede Tasse zählt!

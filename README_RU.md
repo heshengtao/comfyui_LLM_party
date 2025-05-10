@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://space.bilibili.com/26978344">bilibili</a> ·
-  <a href="https://www.youtube.com/@comfyui-LLM-party">youtube</a> ·
+  <a href="https://www.youtube.com/@LLM-party">youtube</a> ·
   <a href="https://github.com/heshengtao/Let-LLM-party">Текстовые инструкции</a> ·
   <a href="https://pan.quark.cn/s/190b41f3bbdb">Адрес облачного диска</a> ·
   <a href="img/Q群.jpg">QQ группа</a> ·
@@ -74,7 +74,7 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 <a href="https://space.bilibili.com/26978344">
   <img src="img/B.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
-<a href="https://www.youtube.com/@comfyui-LLM-party">
+<a href="https://www.youtube.com/@LLM-party">
   <img src="img/YT.png" width="100" height="100" style="border-radius: 80%; overflow: hidden;" alt="octocat"/>
 </a>
 
@@ -195,7 +195,7 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 
 ### Следите за нами
 1. Если вы хотите оставаться в курсе последних функций этого проекта, пожалуйста, подпишитесь на аккаунт B站: [派酱](https://space.bilibili.com/26978344)
-2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
+2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)
 
 ### Поддержка пожертвований
 Если моя работа принесла вам ценность, пожалуйста, подумайте о том, чтобы угостить меня чашечкой кофе! Ваша поддержка не только придаёт проекту жизнь, но и согревает сердце создателя.☕💖 Каждая чашка имеет значение!
