@@ -39,7 +39,7 @@ langchain_openai
 sentence_transformers
 uvicorn
 llama_index
-html2image
+html2image==2.0.3 
 markdown
 selenium
 librosa
