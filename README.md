@@ -166,6 +166,9 @@ ComfyUI LLM Party, from the most basic LLM multi-tool call, role setting to quic
 4. More knowledge base management features;
 5. More tools, more personas.
 
+## Another useful open-source project of mine:
+[super-agent-party](https://github.com/heshengtao/super-agent-party) is a new generation of intelligent entity management platform! With just one click, you can upgrade your LLM API to Agent API! And you can deploy it to social software in just one click!
+
 ## Disclaimer:
 This open-source project and its contents (hereinafter referred to as "Project") are provided for reference purposes only and do not imply any form of warranty, either expressed or implied. The contributors of the Project shall not be held responsible for the completeness, accuracy, reliability, or suitability of the Project. Any reliance you place on the Project is strictly at your own risk. In no event shall the contributors of the Project be liable for any indirect, special, or consequential damages or any damages whatsoever resulting from the use of the Project.
 

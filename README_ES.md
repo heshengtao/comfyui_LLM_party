@@ -161,6 +161,9 @@ Instale utilizando uno de los siguientes métodos:
 4. Más funciones de gestión de bases de conocimiento;
 5. Más herramientas, más personajes.
 
+## Otro proyecto de código abierto útil mío:
+[super-agent-party](https://github.com/heshengtao/super-agent-party) es una nueva generación de plataforma de gestión de entidades inteligentes. ¡Con solo un clic, puedes actualizar tu API LLM a API de Agente! ¡Y puedes implementarlo en software social con solo un clic!
+
 ## Aviso legal:
 Este proyecto de código abierto y su contenido (en adelante, "el proyecto") son solo para fines de referencia y no implican ninguna garantía expresa o implícita. Los contribuyentes del proyecto no asumen ninguna responsabilidad por la integridad, precisión, fiabilidad o aplicabilidad del proyecto. Cualquier acción que dependa del contenido del proyecto debe asumir el riesgo por su cuenta. En ningún caso, los contribuyentes del proyecto serán responsables de cualquier pérdida o daño indirecto, especial o incidental que surja del uso del contenido del proyecto.
 ## Agradecimientos especiales
