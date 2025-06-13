@@ -271,6 +271,7 @@ class vlmLoader:
         elif dtype in ["int8", "int4"]:
             model_kwargs['quantization_config'] = BitsAndBytesConfig(load_in_8bit=(dtype == "int8"), load_in_4bit=(dtype == "int4"))
         if type == "llama-v":
+            from transformers import AutoProcessor
             processor = AutoProcessor.from_pretrained(model_name_or_path)
             model = AutoModelForPreTraining.from_pretrained(model_name_or_path, **model_kwargs)
         elif type == "qwen-vl":
