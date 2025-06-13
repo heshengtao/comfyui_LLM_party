@@ -163,6 +163,7 @@ Installez en utilisant l'une des méthodes suivantes
 
 ## Un autre projet open-source utile que j'ai réalisé :
 [super-agent-party](https://github.com/heshengtao/super-agent-party) est une nouvelle génération de plateforme de gestion d'entités intelligentes ! En un clic, vous pouvez mettre à niveau votre API LLM vers l'API Agent ! Et vous pouvez le déployer sur des logiciels sociaux en un simple clic !
+![image](img/demo.png)
 
 ## Avertissement :
 Ce projet open source et son contenu (ci-après dénommé "projet") sont fournis uniquement à titre de référence et ne constituent en aucun cas une garantie expresse ou implicite. Les contributeurs du projet ne sauraient être tenus responsables de l'intégrité, de l'exactitude, de la fiabilité ou de l'applicabilité du projet. Toute action reposant sur le contenu du projet se fait à vos propres risques. En aucun cas, les contributeurs du projet ne sauraient être tenus responsables des pertes ou dommages indirects, spéciaux ou consécutifs résultant de l'utilisation du contenu du projet.

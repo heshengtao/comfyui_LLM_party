@@ -163,6 +163,7 @@ Utilize um dos métodos abaixo para instalar
 
 ## Outro projeto de código aberto útil meu:
 [super-agent-party](https://github.com/heshengtao/super-agent-party) é uma nova geração de plataforma de gerenciamento de entidades inteligentes! Com apenas um clique, você pode atualizar sua API LLM para API de Agente! E você pode implantá-la em software social com apenas um clique!
+![image](img/demo.png)
 
 ## Isenção de responsabilidade:
 Este projeto de código aberto e seu conteúdo (doravante denominado "projeto") são fornecidos apenas para fins de referência e não implicam em qualquer garantia expressa ou implícita. Os contribuintes do projeto não assumem qualquer responsabilidade pela integridade, precisão, confiabilidade ou adequação do projeto. Qualquer ação que dependa do conteúdo do projeto deve ser realizada por sua própria conta e risco. Em nenhuma circunstância os contribuintes do projeto serão responsáveis por quaisquer perdas ou danos indiretos, especiais ou consequenciais decorrentes do uso do conteúdo do projeto.
