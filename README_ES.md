@@ -162,8 +162,8 @@ Instale utilizando uno de los siguientes métodos:
 5. Más herramientas, más personajes.
 
 ## Otro proyecto de código abierto útil mío:
-[super-agent-party](https://github.com/heshengtao/super-agent-party) es una nueva generación de plataforma de gestión de entidades inteligentes. ¡Con solo un clic, puedes actualizar tu API LLM a API de Agente! ¡Y puedes implementarlo en software social con solo un clic!
-![image](img/demo.png)
+[super-agent-party](https://github.com/heshengtao/super-agent-party) es una aplicación de compañero de escritorio en 3D con IA que ofrece posibilidades infinitas. ¡Ya incluye soporte para RAG, búsqueda en la web, memoria a largo plazo, intérprete de código, MCP, A2A, Comfyui, bots de QQ y muchas más funciones!
+![image](img/vrmbot.jpeg)
 
 ## Aviso legal:
 Este proyecto de código abierto y su contenido (en adelante, "el proyecto") son solo para fines de referencia y no implican ninguna garantía expresa o implícita. Los contribuyentes del proyecto no asumen ninguna responsabilidad por la integridad, precisión, fiabilidad o aplicabilidad del proyecto. Cualquier acción que dependa del contenido del proyecto debe asumir el riesgo por su cuenta. En ningún caso, los contribuyentes del proyecto serán responsables de cualquier pérdida o daño indirecto, especial o incidental que surja del uso del contenido del proyecto.

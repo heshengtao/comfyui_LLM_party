@@ -165,8 +165,8 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 5. 更多的工具、更多的人格面具。
 
 ## 我的另一个好用的开源项目：
-[super-agent-party](https://github.com/heshengtao/super-agent-party)是新一代智能体管理中台 ！一键将你的LLM API升级为Agent API ！一键部署到社交软件上！
-![image](img/demo.png)
+[super-agent-party](https://github.com/heshengtao/super-agent-party)是一个拥有无限可能的3D AI桌面伴侣应用！已支持RAG、网络搜索、长期记忆、代码解释器、MCP、A2A、Comfyui、QQ 机器人以及更多功能！
+![image](img/vrmbot.jpeg)
 
 
 ## 免责声明：
