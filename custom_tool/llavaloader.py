@@ -7,7 +7,7 @@ current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, current_dir) 
 config_path = os.path.join(current_dir, "config.ini")
 import configparser
-from transformers import AutoModelForPreTraining,AutoModelForCausalLM, AutoProcessor
+from transformers import AutoModelForPreTraining,AutoModelForCausalLM
 import torch
 if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
@@ -353,6 +353,7 @@ class easy_vlmLoader:
             model_kwargs['quantization_config'] = BitsAndBytesConfig(load_in_8bit=(dtype == "int8"), load_in_4bit=(dtype == "int4"))
 
         if type == "llama-v":
+            from transformers import AutoProcessor
             processor = AutoProcessor.from_pretrained(model_name_or_path)
             model = AutoModelForPreTraining.from_pretrained(model_name_or_path, **model_kwargs)
         elif type == "qwen-vl":
