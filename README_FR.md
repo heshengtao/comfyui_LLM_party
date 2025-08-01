@@ -201,13 +201,6 @@ Si vous rencontrez des problèmes avec le plugin ou si vous avez d'autres questi
 1. Si vous souhaitez rester informé des dernières fonctionnalités de ce projet, n'hésitez pas à suivre notre compte Bilibili : [派酱](https://space.bilibili.com/26978344)
 2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)
 
-### Soutien par don
-Si mon travail vous apporte de la valeur, veuillez envisager de m'offrir un café ! Votre soutien insuffle non seulement de la vitalité au projet, mais réchauffe également le cœur des créateurs.☕💖 Chaque tasse compte !
-<div style="display:flex; justify-content:space-between;">
-    <img src="img/zhifubao.jpg" style="width: 48%;" />
-    <img src="img/wechat.jpg" style="width: 48%;" />
-</div>
-
 ## Historique des étoiles
 
 [![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)

@@ -202,13 +202,6 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 1. このプロジェクトの最新機能を継続的にフォローしたい方は、Bilibiliアカウントをフォローしてください：[派酱](https://space.bilibili.com/26978344)
 2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)
 
-### 寄付のサポート
-私の仕事があなたに価値をもたらしたなら、ぜひ私にコーヒーをおごってください！あなたのサポートはプロジェクトに活力を与えるだけでなく、クリエイターの心を温めます。☕💖 一杯一杯が意義深いです！
-<div style="display:flex; justify-content:space-between;">
-    <img src="img/zhifubao.jpg" style="width: 48%;" />
-    <img src="img/wechat.jpg" style="width: 48%;" />
-</div>
-
 ## スター履歴
 
 [![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)

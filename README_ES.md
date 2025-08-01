@@ -201,13 +201,6 @@ Si hay problemas con el complemento o si tiene alguna otra pregunta, le damos la
 1. Si desea mantenerse informado sobre las últimas funciones de este proyecto, le invitamos a seguir nuestra cuenta de Bilibili: [派酱](https://space.bilibili.com/26978344)
 2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)
 
-### Apoyo a donaciones
-Si mi trabajo le ha aportado valor, ¡considere invitarme a un café! Su apoyo no solo revitaliza el proyecto, sino que también calienta el corazón del creador.☕💖 ¡Cada taza cuenta!
-<div style="display:flex; justify-content:space-between;">
-    <img src="img/zhifubao.jpg" style="width: 48%;" />
-    <img src="img/wechat.jpg" style="width: 48%;" />
-</div>
-
 ## Historial de estrellas
 
 [![Gráfico de Historial de Estrellas](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)

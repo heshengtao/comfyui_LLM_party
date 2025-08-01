@@ -202,13 +202,6 @@ ComfyUI LLM Party، من أبسط استدعاءات أدوات LLM المتعد
 1. إذا كنت ترغب في متابعة أحدث ميزات هذا المشروع، ندعوك لمتابعة حسابنا على بلي بلي: [派酱](https://space.bilibili.com/26978344)
 2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)
 
-### دعم التبرعات
-إذا كانت أعمالي قد جلبت لك قيمة، يرجى التفكير في دعوتي لتناول فنجان من القهوة! دعمك لا ينعش المشروع فحسب، بل يدفئ قلب المبدع أيضًا.☕💖 كل فنجان له معنى!
-<div style="display:flex; justify-content:space-between;">
-    <img src="img/zhifubao.jpg" style="width: 48%;" />
-    <img src="img/wechat.jpg" style="width: 48%;" />
-</div>
-
 ## تاريخ النجوم
 
 [![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)
