@@ -193,13 +193,6 @@ Wenn es Probleme mit dem Plugin gibt oder Sie andere Fragen haben, sind Sie herz
 1. Wenn Sie die neuesten Funktionen dieses Projekts kontinuierlich verfolgen möchten, heißen wir Sie herzlich willkommen, unseren Bilibili-Account zu abonnieren: [派酱](https://space.bilibili.com/26978344)
 2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
 
-### Unterstützung durch Spenden
-Wenn meine Arbeit Ihnen einen Mehrwert bietet, ziehen Sie bitte in Betracht, mir einen Kaffee auszugeben! Ihre Unterstützung belebt nicht nur das Projekt, sondern erwärmt auch das Herz der Kreatoren.☕💖 Jede Tasse zählt!
-<div style="display:flex; justify-content:space-between;">
-    <img src="img/zhifubao.jpg" style="width: 48%;" />
-    <img src="img/wechat.jpg" style="width: 48%;" />
-</div>
-
 ## Sternenverlauf
 
 [![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)

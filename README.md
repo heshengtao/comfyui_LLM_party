@@ -200,13 +200,6 @@ If there is a problem with the plugin or you have any other questions, please jo
 1. If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [派酱](https://space.bilibili.com/26978344)
 2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)
 
-### Donation support
-If my work has brought value to your day, consider fueling it with a coffee! Your support not only energizes the project but also warms the heart of the creator. ☕💖 Every cup makes a difference!
-<div style="display:flex; justify-content:space-between;">
-    <img src="img/zhifubao.jpg" style="width: 48%;" />
-    <img src="img/wechat.jpg" style="width: 48%;" />
-</div>
-
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)
