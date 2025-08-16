@@ -1,354 +1,65 @@
 {
-  "last_node_id": 29,
-  "last_link_id": 44,
-  "nodes": [
-    {
-      "id": 29,
-      "type": "show_text_party",
-      "pos": [
-        1480,
-        470
-      ],
-      "size": [
-        390,
-        330
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "pos": [
-            10,
-            60
-          ],
-          "widget": {
-            "name": "text"
-          },
-          "link": 44
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "shape": 6,
-          "links": null
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        "",
-        "好的，用户让我帮他写一首古诗。首先，我需要确定他想要什么样的风格和主题。古诗有很多种类型，比如山水、爱情、边塞等等，所以得先了解他的偏好。\n\n可能他对自然景色感兴趣，或者想表达某种情感。考虑到他没有具体说明，我会选择一个常见的主题，比如春天的景色，这样比较容易引起共鸣。\n\n接下来，我需要考虑诗的结构。古诗通常有五言或七言绝句、律诗等。这里选五言律诗，因为结构紧凑，适合表达简洁的画面。\n\n然后，我要构思每一联的内容。首联可以描绘一个宁静的清晨，WithPath露水和微风，营造出清新的氛围。颔联描绘具体的自然景象，比如孤松和乱石，增加画面感。颈联加入一些动态元素，如鸟鸣和流水声，让诗更有生气。尾联则表达一种超脱的情感，比如远离尘嚣，享受自然的宁静。\n\n在用词上，要选择简练而富有意境的词汇，避免过于直白。同时，注意押韵和对仗，使整首诗读起来顺畅和谐美。\n\n最后，写完后加上注释，解释创作思路，这样用户能更好地理解诗中的意象和情感表达。"
-      ]
+  "23": {
+    "inputs": {
+      "model_name": "deepseek-r1:14b",
+      "base_url": "",
+      "api_key": "",
+      "is_ollama": false
     },
-    {
-      "id": 27,
-      "type": "show_text_party",
-      "pos": [
-        1500,
-        250
-      ],
-      "size": [
-        360,
-        140
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "pos": [
-            10,
-            60
-          ],
-          "widget": {
-            "name": "text"
-          },
-          "link": 42
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "label": "STRING",
-          "type": "STRING",
-          "shape": 6,
-          "links": null
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "show_text_party"
-      },
-      "widgets_values": [
-        "",
-        "《感遇·其一》\n兰叶春不荣，\n高树结疏阴。\n幽虫寻声息，\n寒鸟重哀吟。\n独坐空宇间，\n幽音鸣素琴。\n\n这首作品描绘了一个寂静的环境，通过细腻的自然描写和内心感受的抒发，展现了孤独与忧思的主题。诗中，“幽虫”、“寒鸟”的哀鸣与“独坐空宇间”的诗人形成呼应，表达了深沉的感慨。最后，以“幽音鸣素琴”作结，既是对前面哀音的回应，也是对内心情感的抒发，营造出一种孤寂而深远的意境。"
-      ]
-    },
-    {
-      "id": 26,
-      "type": "LLM",
-      "pos": [
-        900,
-        280
-      ],
-      "size": [
-        443.4000244140625,
-        710
-      ],
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "label": "model",
-          "type": "CUSTOM",
-          "link": 41
-        },
-        {
-          "name": "images",
-          "label": "images",
-          "type": "IMAGE",
-          "shape": 7,
-          "link": null
-        },
-        {
-          "name": "extra_parameters",
-          "label": "extra_parameters",
-          "type": "DICT",
-          "shape": 7,
-          "link": null
-        },
-        {
-          "name": "system_prompt_input",
-          "type": "STRING",
-          "shape": 7,
-          "pos": [
-            10,
-            446
-          ],
-          "widget": {
-            "name": "system_prompt_input"
-          },
-          "link": null
-        },
-        {
-          "name": "user_prompt_input",
-          "type": "STRING",
-          "shape": 7,
-          "pos": [
-            10,
-            470
-          ],
-          "widget": {
-            "name": "user_prompt_input"
-          },
-          "link": null
-        },
-        {
-          "name": "tools",
-          "type": "STRING",
-          "shape": 7,
-          "pos": [
-            10,
-            494
-          ],
-          "widget": {
-            "name": "tools"
-          },
-          "link": null
-        },
-        {
-          "name": "file_content",
-          "type": "STRING",
-          "shape": 7,
-          "pos": [
-            10,
-            518
-          ],
-          "widget": {
-            "name": "file_content"
-          },
-          "link": null
-        },
-        {
-          "name": "user_history",
-          "type": "STRING",
-          "shape": 7,
-          "pos": [
-            10,
-            638
-          ],
-          "widget": {
-            "name": "user_history"
-          },
-          "link": null
-        },
-        {
-          "name": "img_URL",
-          "type": "STRING",
-          "shape": 7,
-          "pos": [
-            10,
-            662
-          ],
-          "widget": {
-            "name": "img_URL"
-          },
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "assistant_response",
-          "label": "assistant_response",
-          "type": "STRING",
-          "links": [
-            42
-          ],
-          "slot_index": 0
-        },
-        {
-          "name": "history",
-          "label": "history",
-          "type": "STRING",
-          "links": null
-        },
-        {
-          "name": "tool",
-          "label": "tool",
-          "type": "STRING",
-          "links": null
-        },
-        {
-          "name": "image",
-          "label": "image",
-          "type": "IMAGE",
-          "links": null
-        },
-        {
-          "name": "reasoning_content",
-          "type": "STRING",
-          "links": [
-            44
-          ],
-          "slot_index": 4
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM"
-      },
-      "widgets_values": [
-        "你一个强大的人工智能助手。",
-        "你好，帮我写一首古诗吧",
-        0.7,
-        "enable",
-        "disable",
-        "disable",
-        "enable",
-        1920,
-        "",
-        "",
-        "",
-        "",
-        "",
-        100,
-        "",
-        true,
-        "",
-        "",
-        true,
-        [
-          false,
-          true
-        ],
-        [
-          false,
-          true
-        ]
-      ]
-    },
-    {
-      "id": 23,
-      "type": "LLM_api_loader",
-      "pos": [
-        460,
-        290
-      ],
-      "size": [
-        315,
-        130
-      ],
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "model",
-          "label": "model",
-          "type": "CUSTOM",
-          "shape": 3,
-          "links": [
-            41
-          ],
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LLM_api_loader"
-      },
-      "widgets_values": [
-        "deepseek-r1:14b",
-        "",
-        "",
-        false
-      ]
-    }
-  ],
-  "links": [
-    [
-      41,
-      23,
-      0,
-      26,
-      0,
-      "CUSTOM"
-    ],
-    [
-      42,
-      26,
-      0,
-      27,
-      0,
-      "STRING"
-    ],
-    [
-      44,
-      26,
-      4,
-      29,
-      0,
-      "STRING"
-    ]
-  ],
-  "groups": [],
-  "config": {},
-  "extra": {
-    "ds": {
-      "scale": 0.8264462809917354,
-      "offset": [
-        -224.2657037230501,
-        -81.7668178625654
-      ]
+    "class_type": "LLM_api_loader",
+    "_meta": {
+      "title": "☁️API LLM加载器"
     }
   },
-  "version": 0.4
+  "30": {
+    "inputs": {
+      "system_prompt": "你一个强大的人工智能助手。",
+      "user_prompt": "你好，帮我写一首古诗吧",
+      "temperature": 0.7,
+      "is_memory": "enable",
+      "is_tools_in_sys_prompt": "disable",
+      "is_locked": "disable",
+      "main_brain": "enable",
+      "max_length": 1920,
+      "imgbb_api_key": "",
+      "conversation_rounds": 100,
+      "historical_record": "",
+      "is_enable": true,
+      "stream": false,
+      "model": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "LLM",
+    "_meta": {
+      "title": "☁️API LLM通用链路"
+    }
+  },
+  "31": {
+    "inputs": {
+      "preview": "",
+      "source": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "PreviewAny",
+    "_meta": {
+      "title": "预览任意"
+    }
+  },
+  "32": {
+    "inputs": {
+      "preview": "",
+      "source": [
+        "30",
+        4
+      ]
+    },
+    "class_type": "PreviewAny",
+    "_meta": {
+      "title": "预览任意"
+    }
+  }
 }

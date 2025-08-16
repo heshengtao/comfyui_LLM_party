@@ -23,7 +23,10 @@ class show_text_party:
         if unique_id is not None and extra_pnginfo is not None:
             if not isinstance(extra_pnginfo, list):
                 print("Error: extra_pnginfo is not a list")
-            elif not isinstance(extra_pnginfo[0], dict) or "workflow" not in extra_pnginfo[0]:
+            elif (
+                not isinstance(extra_pnginfo[0], dict)
+                or "workflow" not in extra_pnginfo[0]
+            ):
                 print("Error: extra_pnginfo[0] is not a dict or missing 'workflow' key")
             else:
                 workflow = extra_pnginfo[0]["workflow"]
