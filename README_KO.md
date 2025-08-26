@@ -56,7 +56,7 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 ## 최신 업데이트
 1. LLM API 노드는 스트리밍 출력 모드를 지원하게 되며, 콘솔에서 API가 반환하는 텍스트를 실시간으로 스트리밍 표시할 수 있습니다. 이를 통해 요청이 완료될 때까지 기다리지 않고도 API의 출력을 즉시 확인할 수 있습니다.
 2. LLM API 노드에 reasoning_content 출력이 추가되어 R1 모델의 reasoning과 response를 자동으로 분리할 수 있게 되었습니다.
-3. only_api라는 리포지토리 브랜치가 새로 추가되었으며, 이 브랜치에는 API 호출 부분만 포함되어 있어 API 호출만 필요한 사용자에게 매우 편리합니다. `comfyui`의 `custom tool` 폴더에서 `git clone -b only_api https://github.com/heshengtao/comfyui_LLM_party.git` 명령어를 사용하신 후, 본 프로젝트의 홈페이지에 따라 환경을 구축하시면 이 브랜치를 사용할 수 있습니다. 주의! `custom tool` 폴더에 `comfyui_LLM_party`라는 다른 폴더가 존재하지 않도록 확인해 주시기 바랍니다.
+3. only_api라는 리포지토리 브랜치가 새로 추가되었으며, 이 브랜치에는 API 호출 부분만 포함되어 있어 API 호출만 필요한 사용자에게 매우 편리합니다. `comfyui`의 `custom node` 폴더에서 `git clone -b only_api https://github.com/heshengtao/comfyui_LLM_party.git` 명령어를 사용하신 후, 본 프로젝트의 홈페이지에 따라 환경을 구축하시면 이 브랜치를 사용할 수 있습니다. 주의! `custom node` 폴더에 `comfyui_LLM_party`라는 다른 폴더가 존재하지 않도록 확인해 주시기 바랍니다.
 1. VLM 로컬 로드 노드는 이미 [deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)를 지원하고 있습니다. 예제 워크플로우: [Janus-Pro](workflow/deepseek-janus-pro.json)
 1. VLM 로컬 로더 노드는 이미 [Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)를 지원하고 있으나, transformer를 최신 버전으로 업데이트해야 합니다（```pip install -U transformers```）。샘플 워크플로우：[qwen-vl](workflow/qwen-vl.json)
 1. 새로운 이미지 호스팅 노드가 추가되었습니다. 현재 https://sm.ms 이미지 호스팅(중국 도메인은 https://smms.app)과 https://imgbb.com 이미지 호스팅을 지원하고 있습니다. 앞으로 더 많은 이미지 호스팅이 지원될 예정입니다. 예시 작업 흐름: [이미지 호스팅](workflow/图床.json)

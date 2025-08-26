@@ -57,7 +57,7 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 ## 最新更新
 1. LLM API节点已支持流式输出模式，会在控制台流式显示输出API返回的文本，这样你就可以实时看到API的输出，而不用等待整个请求完成。
 2. LLM API节点添加了reasoning_content输出，可以自动分离出R1模型的reasoning和response。
-3. 新增了only_api的仓库分支，该分支只包含调用API的部分，方便只需要API调用的用户，只需要在`comfyui`的`custom tool`文件夹中使用命令行`git clone -b only_api https://github.com/heshengtao/comfyui_LLM_party.git`，然后按照本项目主页的环境部署方案，即可使用这个分支。注意！如果你需要保证`custom tool`文件夹中没有其他叫`comfyui_LLM_party`的文件夹。
+3. 新增了only_api的仓库分支，该分支只包含调用API的部分，方便只需要API调用的用户，只需要在`comfyui`的`custom node`文件夹中使用命令行`git clone -b only_api https://github.com/heshengtao/comfyui_LLM_party.git`，然后按照本项目主页的环境部署方案，即可使用这个分支。注意！如果你需要保证`custom node`文件夹中没有其他叫`comfyui_LLM_party`的文件夹。
 1. VLM本地加载器节点已经支持[deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)，示例工作流：[Janus-Pro](workflow/deepseek-janus-pro.json) 
 1. VLM本地加载器节点已经支持[Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)，但是你需要将transformer更新到最新版本（```pip install -U transformers```），示例工作流：[qwen-vl](workflow/qwen-vl.json)
 1. 添加了一个全新的图床节点，目前支持了 https://sm.ms 图床(中国地区域名为 https://smms.app)以及 https://imgbb.com 图床，未来会支持更多的图床，示例工作流：[图床](workflow/图床.json) 
