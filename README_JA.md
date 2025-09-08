@@ -56,7 +56,7 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 ## 最新の更新
 1. LLM APIノードはストリーミング出力モードをサポートするようになり、コントロールパネルでAPIが返すテキストをリアルタイムでストリーム表示することが可能になりました。これにより、リクエストが完了するのを待つ必要なく、APIの出力を即座に確認できます。
 2. LLM APIノードにreasoning_content出力が追加され、R1モデルのreasoningとresponseを自動的に分離することができます。
-3. only_apiというリポジトリのブランチが新たに追加され、このブランチにはAPI呼び出しの部分のみが含まれており、API呼び出しのみを必要とするユーザーに便利です。`comfyui`の`custom tool`フォルダで、次のコマンドを使用して`git clone -b only_api https://github.com/heshengtao/comfyui_LLM_party.git`を実行してください。そして、本プロジェクトのホームページに従って環境を構築すれば、このブランチを使用できます。注意！`custom tool`フォルダ内に`comfyui_LLM_party`という名前の他のフォルダが存在しないことを確認する必要があります。
+3. only_apiというリポジトリのブランチが新たに追加され、このブランチにはAPI呼び出しの部分のみが含まれており、API呼び出しのみを必要とするユーザーに便利です。`comfyui`の`custom_nodes`フォルダで、次のコマンドを使用して`git clone -b only_api https://github.com/heshengtao/comfyui_LLM_party.git`を実行してください。そして、本プロジェクトのホームページに従って環境を構築すれば、このブランチを使用できます。注意！`custom_nodes`フォルダ内に`comfyui_LLM_party`という名前の他のフォルダが存在しないことを確認する必要があります。
 1. VLMローカルロードノードはすでに[deepseek-ai/Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-1B)をサポートしています。サンプルワークフロー：[Janus-Pro](workflow/deepseek-janus-pro.json)  
 1. VLMローカルローダーノードは既に[Qwen/Qwen2.5-VL-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)をサポートしていますが、transformerを最新バージョンに更新する必要があります（```pip install -U transformers```）。サンプルワークフロー：[qwen-vl](workflow/qwen-vl.json)  
 1. 新しい画像ホスティングノードが追加されました。現在、https://sm.ms の画像ホスティング（中国のドメインは https://smms.app）および https://imgbb.com の画像ホスティングをサポートしています。将来的には、より多くの画像ホスティングをサポートする予定です。サンプルワークフロー：[画像ホスティング](workflow/图床.json)
