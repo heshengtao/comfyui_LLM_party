@@ -1,4 +1,13 @@
 class show_text_party:
+    @staticmethod
+    def _latest_scalar_text(value):
+        # UI should render only the latest item when list payloads are provided.
+        while isinstance(value, list) and len(value) > 0:
+            value = value[-1]
+        if value is None:
+            return ""
+        return str(value)
+
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -20,6 +29,7 @@ class show_text_party:
     CATEGORY = "大模型派对（llm_party）/文本（text）"
 
     def notify(self, text, unique_id=None, extra_pnginfo=None):
+        ui_text = self._latest_scalar_text(text)
         if unique_id is not None and extra_pnginfo is not None:
             if not isinstance(extra_pnginfo, list):
                 print("Error: extra_pnginfo is not a list")
@@ -35,9 +45,9 @@ class show_text_party:
                     None,
                 )
                 if node:
-                    node["widgets_values"] = [text]
+                    node["widgets_values"] = [ui_text]
 
-        return {"ui": {"text": text}, "result": (text,)}
+        return {"ui": {"text": [ui_text]}, "result": (text,)}
 
 
 class About_us:
