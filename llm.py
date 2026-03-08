@@ -395,6 +395,19 @@ def ensure_version_suffix(base_url):
         base_url += 'v1/'
     return base_url
 
+def normalize_openai_chat_kwargs(kwargs):
+    normalized = dict(kwargs)
+    model_name = str(normalized.get("model", "") or "").strip().lower()
+
+    # GPT-5 chat/completions expects max_completion_tokens instead of max_tokens.
+    if model_name.startswith("gpt-5") and "max_completion_tokens" not in normalized and "max_tokens" in normalized:
+        normalized["max_completion_tokens"] = normalized.pop("max_tokens")
+
+    return normalized
+
+
+def create_openai_chat_completion(openai_client, **kwargs):
+    return openai_client.chat.completions.create(**normalize_openai_chat_kwargs(kwargs))
 
 async def get_models_list(api_key: str, base_url: str) -> tuple[list[str], int | None]:
     """
@@ -598,7 +611,7 @@ class Chat:
             print(history)
             reasoning_content = ""
             if tools is not None:
-                response = openai_client.chat.completions.create(
+                response = create_openai_chat_completion(openai_client, 
                     model=self.model_name,
                     messages=history,
                     temperature=temperature,
@@ -660,7 +673,7 @@ class Chat:
                                 "content": results,
                             }
                         )
-                        response = openai_client.chat.completions.create(
+                        response = create_openai_chat_completion(openai_client, 
                             model=self.model_name,
                             messages=history,
                             tools=tools,
@@ -725,7 +738,7 @@ class Chat:
                                 "content": results,
                             }
                         )
-                        response = openai_client.chat.completions.create(
+                        response = create_openai_chat_completion(openai_client, 
                             model=self.model_name,
                             messages=history,
                             tools=tools,
@@ -739,7 +752,7 @@ class Chat:
                         response_content = response.choices[0].message.content
                         print(response_content)
             elif is_tools_in_sys_prompt == "enable":
-                response = openai_client.chat.completions.create(
+                response = create_openai_chat_completion(openai_client, 
                     model=self.model_name,
                     messages=history,
                     temperature=temperature,
@@ -769,7 +782,7 @@ class Chat:
                             + "。请根据工具返回的结果继续回答我之前提出的问题。",
                         }
                     )
-                    response = openai_client.chat.completions.create(
+                    response = create_openai_chat_completion(openai_client, 
                         model=self.model_name,
                         messages=history,
                         temperature=temperature,
@@ -782,7 +795,7 @@ class Chat:
                     response_content = response.choices[0].message.content
                     print(response_content)
             else:
-                response = openai_client.chat.completions.create(
+                response = create_openai_chat_completion(openai_client, 
                     model=self.model_name,
                     messages=history,
                     temperature=temperature,
@@ -969,7 +982,7 @@ class aisuite_Chat:
             print(history)
             reasoning_content = ""
             if tools is not None:
-                response = openai_client.chat.completions.create(
+                response = create_openai_chat_completion(openai_client, 
                     model=self.model_name,
                     messages=history,
                     temperature=temperature,
@@ -1031,7 +1044,7 @@ class aisuite_Chat:
                                 "content": results,
                             }
                         )
-                        response = openai_client.chat.completions.create(
+                        response = create_openai_chat_completion(openai_client, 
                             model=self.model_name,
                             messages=history,
                             tools=tools,
@@ -1096,7 +1109,7 @@ class aisuite_Chat:
                                 "content": results,
                             }
                         )
-                        response = openai_client.chat.completions.create(
+                        response = create_openai_chat_completion(openai_client, 
                             model=self.model_name,
                             messages=history,
                             tools=tools,
@@ -1110,7 +1123,7 @@ class aisuite_Chat:
                         response_content = response.choices[0].message.content
                         print(response_content)
             elif is_tools_in_sys_prompt == "enable":
-                response = openai_client.chat.completions.create(
+                response = create_openai_chat_completion(openai_client, 
                     model=self.model_name,
                     messages=history,
                     temperature=temperature,
@@ -1140,7 +1153,7 @@ class aisuite_Chat:
                             + "。请根据工具返回的结果继续回答我之前提出的问题。",
                         }
                     )
-                    response = openai_client.chat.completions.create(
+                    response = create_openai_chat_completion(openai_client, 
                         model=self.model_name,
                         messages=history,
                         temperature=temperature,
@@ -1153,7 +1166,7 @@ class aisuite_Chat:
                     response_content = response.choices[0].message.content
                     print(response_content)
             else:
-                response = openai_client.chat.completions.create(
+                response = create_openai_chat_completion(openai_client, 
                     model=self.model_name,
                     messages=history,
                     temperature=temperature,
