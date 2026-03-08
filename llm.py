@@ -1,3 +1,4 @@
+import aiohttp
 import asyncio
 import base64
 import datetime
@@ -14,6 +15,9 @@ import re
 import sys
 import time
 import traceback
+from aiohttp import web
+from comfy_api.latest import io as comfy_io
+from server import PromptServer
 # import google.generativeai as genai
 import numpy as np
 import openai
@@ -375,14 +379,17 @@ def dispatch_tool(tool_name: str, tool_params: dict) -> str:
 
 def ensure_version_suffix(base_url):
     """
-    确保 base_url 以 '/v<n>/' 结尾，其中 n 是数字。
-    如果不是这样，则添加 '/v1/' 到末尾。
+    Ensures base_url is properly formatted for the API provider.
     """
-    # 正则表达式匹配 '/v<n>/' 其中 <n> 是任意字符
-    match = re.search(r'/v(.+)/$', base_url)
+    # Special case for Perplexity API
+    if "api.perplexity.ai" in base_url:
+        # Return a fixed URL with no manipulation
+        return "https://api.perplexity.ai"
     
+    # Original logic for OpenAI and other APIs
+    match = re.search(r'/v(.+)/$', base_url)
     if not match:
-        # 如果没有匹配到，则添加 '/v1/'
+        # If no version suffix, add '/v1/'
         if not base_url.endswith('/'):
             base_url += '/'
         base_url += 'v1/'
@@ -401,6 +408,100 @@ def normalize_openai_chat_kwargs(kwargs):
 
 def create_openai_chat_completion(openai_client, **kwargs):
     return openai_client.chat.completions.create(**normalize_openai_chat_kwargs(kwargs))
+
+async def get_models_list(api_key: str, base_url: str) -> tuple[list[str], int | None]:
+    """
+    Get the list of available models from OpenAI API
+    No caching - always fetch fresh data
+    Returns: tuple of (models_list, error_status_code)
+    - error_status_code is None if successful
+    - error_status_code is the HTTP status code if failed
+    """
+    print(f"[LLM Party] === get_models_list Called ===")
+    print(f"[LLM Party] api_key provided: {bool(api_key)}")
+    print(f"[LLM Party] base_url: '{base_url}'")
+
+    url = f"{base_url}/models"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+
+    print(f"[LLM Party] Fetching models from: {url}")
+    print(f"[LLM Party] Request headers: Authorization: Bearer {'*' * len(api_key) if api_key else 'None'}, Content-Type: application/json")
+
+    async with aiohttp.ClientSession() as session:
+        try:
+            print(f"[LLM Party] Sending GET request...")
+            async with session.get(url, headers=headers) as response:
+                print(f"[LLM Party] Response status: {response.status}")
+                print(f"[LLM Party] Response headers: {dict(response.headers)}")
+
+                if response.status == 200:
+                    data = await response.json()
+                    print(f"[LLM Party] Response data keys: {list(data.keys())}")
+                    print(f"[LLM Party] Response 'data' array length: {len(data.get('data', []))}")
+                    if data.get('data'):
+                        print(f"[LLM Party] First item in 'data': {data['data'][0] if data['data'] else 'empty'}")
+                    # Extract model IDs from the response
+                    models = [model["id"] for model in data.get("data", []) if model.get("id")]
+                    print(f"[LLM Party] Found {len(models)} models")
+                    print(f"[LLM Party] Models list: {models}")
+                    return (models, None)
+                else:
+                    # Return error status code for 401 and other errors
+                    error_text = await response.text()
+                    print(f"[LLM Party] API call failed with status {response.status}")
+                    print(f"[LLM Party] Error response body: {error_text}")
+                    return ([], response.status)
+        except Exception as e:
+            print(f"[LLM Party] Exception during API call: {e}")
+            import traceback
+            print(f"[LLM Party] Traceback: {traceback.format_exc()}")
+            return ([], 500)
+
+
+# Function to register routes for LLM Party
+def _register_llmparty_routes():
+    """Register the routes for the LLM Party nodes"""
+
+    @PromptServer.instance.routes.post("/llmparty/refresh_models")
+    async def refresh_models_route(request):
+        """Handle the refresh models request from the UI"""
+        try:
+            # Get JSON data from request
+            data = await request.json()
+            base_url = data.get("base_url", "https://api.openai.com/v1")
+            api_key = data.get("api_key", "")
+
+            # Print debug information
+            print(f"[LLM Party] === Refresh Models Request ===")
+            print(f"[LLM Party] Raw request data: {data}")
+            print(f"[LLM Party] Received Base URL: '{base_url}'")
+            print(f"[LLM Party] Received API Key: {'*' * len(api_key) if api_key else 'None'}")
+
+            # Get models list (no caching)
+            models, error_status = await get_models_list(api_key, base_url)
+
+            print(f"[LLM Party] Returning {len(models)} models, error_status: {error_status}")
+
+            # If there was an error, return the error status
+            if error_status is not None:
+                print(f"[LLM Party] Returning error status: {error_status}")
+                return web.json_response(
+                    {"models": models, "error": f"API returned status {error_status}"},
+                    status=error_status
+                )
+
+            # Return the models as JSON
+            return web.json_response({"models": models})
+        except Exception as e:
+            print(f"[LLM Party] Error refreshing models: {e}")
+            return web.json_response({"models": [], "error": str(e)}, status=500)
+
+
+# Register the routes when the module is imported
+_register_llmparty_routes()
 
 class Chat:
     def __init__(self, model_name, apikey, baseurl) -> None:
@@ -474,11 +575,22 @@ class Chat:
                         history[i]["role"] = "user"
                         history.append({"role": "assistant", "content": "好的，我会按照你的指示来操作"})
                         break
-            openai_client = OpenAI(
-                    api_key= self.apikey,
-                    base_url=self.baseurl,
-                )
-            if "openai.azure.com" in self.baseurl:
+            # Create the OpenAI client
+            if "api.perplexity.ai" in self.baseurl:
+                try:
+                    # Use the simplest possible client initialization for Perplexity
+                    openai_client = OpenAI(
+                        api_key=self.apikey,
+                        base_url="https://api.perplexity.ai"
+                    )
+                except Exception as e:
+                    print(f"Error initializing Perplexity client: {e}")
+                    # Fallback to standard initialization
+                    openai_client = OpenAI(
+                        api_key=self.apikey,
+                        base_url=self.baseurl
+                    )
+            elif "openai.azure.com" in self.baseurl:
                 # 获取API版本
                 api_version = self.baseurl.split("=")[-1].split("/")[0]
                 # 获取azure_endpoint
@@ -489,6 +601,11 @@ class Chat:
                     azure_endpoint=azure_endpoint,
                 )
                 openai_client = azure
+            else:
+                openai_client = OpenAI(
+                    api_key=self.apikey,
+                    base_url=self.baseurl,
+                )
             new_message = {"role": "user", "content": user_prompt}
             history.append(new_message)
             print(history)
@@ -1128,7 +1245,12 @@ class LLM_api_loader:
     CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def chatbot(self, model_name, base_url=None, api_key=None, is_ollama=False):
-        if is_ollama:
+        if "api.perplexity.ai" in (base_url or ""):
+            # For Perplexity API, simplify the base URL
+            openai.base_url = ensure_version_suffix(base_url)
+            openai.api_key = api_key
+            print(f"Using Perplexity API with base_url: {openai.base_url}")
+        elif is_ollama:
             openai.api_key = "ollama"
             openai.base_url = "http://127.0.0.1:11434/v1/"
         else:
@@ -1151,7 +1273,7 @@ class LLM_api_loader:
                 api_keys = load_api_keys(config_path)
                 openai.api_key = api_keys.get("openai_api_key")
                 openai.base_url = api_keys.get("base_url")
-            if openai.base_url != "":
+            if openai.base_url != "" and "api.perplexity.ai" not in openai.base_url:
                 if openai.base_url[-1] != "/":
                     openai.base_url = openai.base_url + "/"
 
@@ -1986,7 +2108,7 @@ class LLM_local_loader:
 
             if config.model_type == "t5":
                 self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, **model_kwargs)
-            elif config.model_type in ["gpt2", "gpt_refact", "gemma", "llama", "mistral", "qwen2", "chatglm"]:
+            elif config.model_type in ["gpt2", "gpt_refact", "gemma", "llama", "mistral", "qwen2", "qwen3", "chatglm"]:
                 self.model = AutoModelForCausalLM.from_pretrained(model_name_or_path, **model_kwargs)
             else:
                 raise ValueError(f"Unsupported model type: {config.model_type}")
@@ -2105,7 +2227,7 @@ class easy_LLM_local_loader:
 
             if config.model_type == "t5":
                 self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, **model_kwargs)
-            elif config.model_type in ["gpt2", "gpt_refact", "gemma", "llama", "mistral", "qwen2", "chatglm"]:
+            elif config.model_type in ["gpt2", "gpt_refact", "gemma", "llama", "mistral", "qwen2", "qwen3", "chatglm"]:
                 self.model = AutoModelForCausalLM.from_pretrained(model_name_or_path, **model_kwargs)
             else:
                 raise ValueError(f"Unsupported model type: {config.model_type}")
@@ -3238,4 +3360,5 @@ load_custom_tools()
 
 if __name__ == "__main__":
     print("hello llm party!")
+
 
