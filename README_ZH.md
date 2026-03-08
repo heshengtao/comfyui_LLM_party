@@ -190,19 +190,6 @@ ComfyUI LLM Party，从最基础的 LLM 多工具调用、角色设定快速搭�
 
 ## 支持：
 
-### 加入社群
-如果插件存在问题或者您有其他的疑问，欢迎加入我们的社群。
-
-1. QQ群：`931057213`
-
-<div style="display: flex; justify-content: center;">
-    <img src="img/Q群.jpg" style="width: 48%;" />
-</div>
-
-2. 微信群：`we_glm`（添加小助手微信后进群）
-
-3. discord:[discord链接](https://discord.gg/f2dsAKKr2V)
-
 ### 关注我们
 1. 如果想持续关注本项目的最新功能，欢迎关注B站账号：[派酱](https://space.bilibili.com/26978344)
 2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)

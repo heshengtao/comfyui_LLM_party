@@ -185,18 +185,6 @@ Algunos nodos en este proyecto se han inspirado en los siguientes proyectos. ¡A
 
 ## Soporte:
 
-### Únete a la comunidad
-Si hay problemas con el complemento o si tiene alguna otra pregunta, le damos la bienvenida a unirse a nuestra comunidad.
-
-1. Grupo de QQ: `931057213`
-<div style="display: flex; justify-content: center;">
-    <img src="img/Q群.jpg" style="width: 48%;" />
-</div>
-
-2. Grupo de WeChat: `we_glm` (una vez que añada a la asistente de WeChat, podrá unirse al grupo)
-
-3. Discord: [enlace de discord](https://discord.gg/f2dsAKKr2V)
-
 ### Síguenos
 1. Si desea mantenerse informado sobre las últimas funciones de este proyecto, le invitamos a seguir nuestra cuenta de Bilibili: [派酱](https://space.bilibili.com/26978344)
 2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)

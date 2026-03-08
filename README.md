@@ -191,18 +191,6 @@ Some of the nodes in this project have borrowed from the following projects. Tha
 
 ## Support:
 
-### Join the community
-If there is a problem with the plugin or you have any other questions, please join our community.
-
-1. discord:[discord link](https://discord.gg/f2dsAKKr2V)
-2. QQ group: `931057213`
-
-<div style="display: flex; justify-content: center;">
-    <img src="img/Q群.jpg" style="width: 48%;" />
-</div>
-
-3. WeChat group: `we_glm` (enter the group after adding the small assistant WeChat)
-
 ### Follow us
 1. If you want to continue to pay attention to the latest features of this project, please follow the Bilibili account: [派酱](https://space.bilibili.com/26978344)
 2. [youtube@comfyui-LLM-party](https://www.youtube.com/@comfyui-LLM-party)

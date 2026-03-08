@@ -186,18 +186,6 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 
 ## サポート：
 
-### コミュニティに参加
-プラグインに問題がある場合や他の質問がある場合は、ぜひ私たちのコミュニティに参加してください。
-
-1. QQグループ：`931057213`
-<div style="display: flex; justify-content: center;">
-    <img src="img/Q群.jpg" style="width: 48%;" />
-</div>
-
-2. WeChatグループ：`we_glm`（小助手のWeChatを追加した後にグループに参加してください）
-
-3. discord:[discordリンク](https://discord.gg/f2dsAKKr2V)
-
 ### 私たちをフォローする
 1. このプロジェクトの最新機能を継続的にフォローしたい方は、Bilibiliアカウントをフォローしてください：[派酱](https://space.bilibili.com/26978344)
 2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)

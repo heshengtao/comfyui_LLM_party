@@ -184,18 +184,6 @@ Einige Knoten in diesem Projekt basieren auf den folgenden Projekten. Wir danken
 
 ## Unterstützung:
 
-### Treten Sie der Gemeinschaft bei
-Wenn es Probleme mit dem Plugin gibt oder Sie andere Fragen haben, sind Sie herzlich eingeladen, unserer Gemeinschaft beizutreten.
-
-1. QQ-Gruppe: `931057213`
-<div style="display: flex; justify-content: center;">
-    <img src="img/Q群.jpg" style="width: 48%;" />
-</div>
-
-2. WeChat-Gruppe: `we_glm` (Fügen Sie den kleinen Assistenten zu WeChat hinzu, um der Gruppe beizutreten)
-
-3. Discord:[discord链接](https://discord.gg/f2dsAKKr2V)
-
 ### Folgen Sie uns
 1. Wenn Sie die neuesten Funktionen dieses Projekts kontinuierlich verfolgen möchten, heißen wir Sie herzlich willkommen, unseren Bilibili-Account zu abonnieren: [派酱](https://space.bilibili.com/26978344)
 2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)

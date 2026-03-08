@@ -186,18 +186,6 @@ ComfyUI LLM Party는 가장 기본적인 LLM 다중 도구 호출, 역할 설정
 
 ## 지원:
 
-### 커뮤니티 가입
-플러그인에 문제가 있거나 다른 질문이 있으신 경우, 저희 커뮤니티에 가입해 주시기 바랍니다.
-
-1. QQ 그룹: `931057213`
-<div style="display: flex; justify-content: center;">
-    <img src="img/Q群.jpg" style="width: 48%;" />
-</div>
-
-2. 웨이신 그룹：`we_glm`（소助手의 웨이신을 추가한 후 그룹에 가입하세요）
-
-3. 디스코드:[discord 링크](https://discord.gg/f2dsAKKr2V)
-
 ### 저희를 팔로우하세요
 1. 본 프로젝트의 최신 기능을 지속적으로 관심 가져주시길 원하신다면, B站 계정에 팔로우해 주세요：[派酱](https://space.bilibili.com/26978344)
 2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)

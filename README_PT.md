@@ -185,18 +185,6 @@ Alguns nós deste projeto foram inspirados pelos seguintes projetos, agradecemos
 
 ## Suporte:
 
-### Junte-se à Comunidade
-Se houver problemas com o plugin ou se você tiver outras dúvidas, sinta-se à vontade para se juntar à nossa comunidade.
-
-1. Grupo QQ: `931057213`
-<div style="display: flex; justify-content: center;">
-    <img src="img/Q群.jpg" style="width: 48%;" />
-</div>
-
-2. Grupo WeChat: `we_glm` (adicione o assistente no WeChat antes de entrar no grupo)
-
-3. Discord: [discord链接](https://discord.gg/f2dsAKKr2V)
-
 ### Siga-nos
 1. Se desejar acompanhar as últimas funcionalidades deste projeto, fique à vontade para seguir nossa conta no Bilibili: [派酱](https://space.bilibili.com/26978344)
 2. [youtube@LLM-party](https://www.youtube.com/@LLM-party)
