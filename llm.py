@@ -1,3 +1,4 @@
+import aiohttp
 import asyncio
 import base64
 import datetime
@@ -14,6 +15,9 @@ import re
 import sys
 import time
 import traceback
+from aiohttp import web
+from comfy_api.latest import io as comfy_io
+from server import PromptServer
 # import google.generativeai as genai
 import numpy as np
 import openai
@@ -390,6 +394,101 @@ def ensure_version_suffix(base_url):
             base_url += '/'
         base_url += 'v1/'
     return base_url
+
+
+async def get_models_list(api_key: str, base_url: str) -> tuple[list[str], int | None]:
+    """
+    Get the list of available models from OpenAI API
+    No caching - always fetch fresh data
+    Returns: tuple of (models_list, error_status_code)
+    - error_status_code is None if successful
+    - error_status_code is the HTTP status code if failed
+    """
+    print(f"[LLM Party] === get_models_list Called ===")
+    print(f"[LLM Party] api_key provided: {bool(api_key)}")
+    print(f"[LLM Party] base_url: '{base_url}'")
+
+    url = f"{base_url}/models"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+
+    print(f"[LLM Party] Fetching models from: {url}")
+    print(f"[LLM Party] Request headers: Authorization: Bearer {'*' * len(api_key) if api_key else 'None'}, Content-Type: application/json")
+
+    async with aiohttp.ClientSession() as session:
+        try:
+            print(f"[LLM Party] Sending GET request...")
+            async with session.get(url, headers=headers) as response:
+                print(f"[LLM Party] Response status: {response.status}")
+                print(f"[LLM Party] Response headers: {dict(response.headers)}")
+
+                if response.status == 200:
+                    data = await response.json()
+                    print(f"[LLM Party] Response data keys: {list(data.keys())}")
+                    print(f"[LLM Party] Response 'data' array length: {len(data.get('data', []))}")
+                    if data.get('data'):
+                        print(f"[LLM Party] First item in 'data': {data['data'][0] if data['data'] else 'empty'}")
+                    # Extract model IDs from the response
+                    models = [model["id"] for model in data.get("data", []) if model.get("id")]
+                    print(f"[LLM Party] Found {len(models)} models")
+                    print(f"[LLM Party] Models list: {models}")
+                    return (models, None)
+                else:
+                    # Return error status code for 401 and other errors
+                    error_text = await response.text()
+                    print(f"[LLM Party] API call failed with status {response.status}")
+                    print(f"[LLM Party] Error response body: {error_text}")
+                    return ([], response.status)
+        except Exception as e:
+            print(f"[LLM Party] Exception during API call: {e}")
+            import traceback
+            print(f"[LLM Party] Traceback: {traceback.format_exc()}")
+            return ([], 500)
+
+
+# Function to register routes for LLM Party
+def _register_llmparty_routes():
+    """Register the routes for the LLM Party nodes"""
+
+    @PromptServer.instance.routes.post("/llmparty/refresh_models")
+    async def refresh_models_route(request):
+        """Handle the refresh models request from the UI"""
+        try:
+            # Get JSON data from request
+            data = await request.json()
+            base_url = data.get("base_url", "https://api.openai.com/v1")
+            api_key = data.get("api_key", "")
+
+            # Print debug information
+            print(f"[LLM Party] === Refresh Models Request ===")
+            print(f"[LLM Party] Raw request data: {data}")
+            print(f"[LLM Party] Received Base URL: '{base_url}'")
+            print(f"[LLM Party] Received API Key: {'*' * len(api_key) if api_key else 'None'}")
+
+            # Get models list (no caching)
+            models, error_status = await get_models_list(api_key, base_url)
+
+            print(f"[LLM Party] Returning {len(models)} models, error_status: {error_status}")
+
+            # If there was an error, return the error status
+            if error_status is not None:
+                print(f"[LLM Party] Returning error status: {error_status}")
+                return web.json_response(
+                    {"models": models, "error": f"API returned status {error_status}"},
+                    status=error_status
+                )
+
+            # Return the models as JSON
+            return web.json_response({"models": models})
+        except Exception as e:
+            print(f"[LLM Party] Error refreshing models: {e}")
+            return web.json_response({"models": [], "error": str(e)}, status=500)
+
+
+# Register the routes when the module is imported
+_register_llmparty_routes()
 
 class Chat:
     def __init__(self, model_name, apikey, baseurl) -> None:
