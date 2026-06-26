@@ -8,6 +8,32 @@ import requests
 from PIL import Image
 
 
+def _format_litellm_error(ex):
+    """Return a user-facing error string with actionable guidance based on the litellm exception type."""
+    qualname = f"{type(ex).__module__}.{type(ex).__qualname__}"
+    msg = str(ex)
+
+    if "AuthenticationError" in qualname:
+        return f"[LiteLLM Auth Error] Invalid or missing API key. Check your api_key or provider env var. Detail: {msg}"
+    if "NotFoundError" in qualname:
+        return f"[LiteLLM Model Not Found] Model name may be wrong or unsupported. Use provider/model format (e.g. openai/gpt-4o-mini). Detail: {msg}"
+    if "RateLimitError" in qualname:
+        return (
+            f"[LiteLLM Rate Limit] Provider rate limit hit. Wait and retry, or use a different model/key. Detail: {msg}"
+        )
+    if "Timeout" in qualname:
+        return f"[LiteLLM Timeout] Request timed out. Check your network or increase timeout. Detail: {msg}"
+    if "ContextWindowExceededError" in qualname or "context_length_exceeded" in msg.lower():
+        return f"[LiteLLM Context Overflow] Input exceeds model's context window. Reduce message history or max_tokens. Detail: {msg}"
+    if "ServiceUnavailableError" in qualname or "InternalServerError" in qualname:
+        return f"[LiteLLM Server Error] Provider returned a server error. Try again later. Detail: {msg}"
+    if "BadRequestError" in qualname:
+        return f"[LiteLLM Bad Request] The request was rejected by the provider. Detail: {msg}"
+    if "APIConnectionError" in qualname:
+        return f"[LiteLLM Connection Error] Could not connect to the provider API. Check base_url and network. Detail: {msg}"
+    return f"[LiteLLM Error] {msg}"
+
+
 class litellm_Chat:
     def __init__(self, model_name, api_key="", base_url="") -> None:
         self.model_name = model_name
@@ -69,9 +95,9 @@ class litellm_Chat:
                         img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
                         url = "https://api.imgbb.com/1/upload"
                         payload = {"key": imgbb_api_key, "image": img_str}
-                        response = requests.post(url, data=payload)
-                        if response.status_code == 200:
-                            result = response.json()
+                        resp = requests.post(url, data=payload)
+                        if resp.status_code == 200:
+                            result = resp.json()
                             img_url = result["data"]["url"]
                             img_json.append(
                                 {
@@ -80,7 +106,11 @@ class litellm_Chat:
                                 }
                             )
                         else:
-                            return "Error: " + response.text
+                            return (
+                                "Error uploading image to imgbb: " + resp.text,
+                                history,
+                                "",
+                            )
                     user_prompt = img_json
             elif img_URL is not None and img_URL != "":
                 user_prompt = [
@@ -199,7 +229,7 @@ class litellm_Chat:
                                         print(chunk.choices[0].delta.content, end="", flush=True)
                                         response_content += chunk.choices[0].delta.content
                 else:
-                    response_content = response.choices[0].message.content
+                    response_content = response.choices[0].message.content or ""
                     print(response_content)
                     while response.choices[0].message.tool_calls:
                         assistant_message = response.choices[0].message
@@ -243,12 +273,12 @@ class litellm_Chat:
                         ):
                             reasoning_content = response.choices[0].message.reasoning_content
                             print(reasoning_content)
-                        response_content = response.choices[0].message.content
+                        response_content = response.choices[0].message.content or ""
                         print(response_content)
             elif is_tools_in_sys_prompt == "enable":
                 del completion_kwargs["stream"]
                 response = litellm.completion(**completion_kwargs)
-                response_content = response.choices[0].message.content
+                response_content = response.choices[0].message.content or ""
                 pattern = r'\{\s*"tool":\s*"(.*?)",\s*"parameters":\s*\{(.*?)\}\s*\}'
                 while re.search(pattern, response_content, re.DOTALL) is not None:
                     match = re.search(pattern, response_content, re.DOTALL)
@@ -282,7 +312,7 @@ class litellm_Chat:
                     ):
                         reasoning_content = response.choices[0].message.reasoning_content
                         print(reasoning_content)
-                    response_content = response.choices[0].message.content
+                    response_content = response.choices[0].message.content or ""
                     print(response_content)
             else:
                 response = litellm.completion(**completion_kwargs)
@@ -308,18 +338,19 @@ class litellm_Chat:
                     ):
                         reasoning_content = response.choices[0].message.reasoning_content
                         print(reasoning_content)
-                    response_content = response.choices[0].message.content
+                    response_content = response.choices[0].message.content or ""
                     print(response_content)
 
-            pattern = r"<think>(.*?)</think>"
-            match = re.search(pattern, response_content, re.DOTALL)
-            if match:
-                reasoning_content = match.group(1).strip()
-                response_content = response_content.replace(match.group(0), "").strip()
-            history.append({"role": "assistant", "content": response_content})
+            if isinstance(response_content, str):
+                pattern = r"<think>(.*?)</think>"
+                match = re.search(pattern, response_content, re.DOTALL)
+                if match:
+                    reasoning_content = match.group(1).strip()
+                    response_content = response_content.replace(match.group(0), "").strip()
+            history.append({"role": "assistant", "content": str(response_content)})
         except Exception as ex:
-            response_content = str(ex)
-            reasoning_content = str(ex)
+            response_content = _format_litellm_error(ex)
+            reasoning_content = response_content
         return response_content, history, reasoning_content
 
 
