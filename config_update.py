@@ -6,6 +6,7 @@ import openai
 import server
 from aiohttp import web
 from .config import load_api_keys
+from .atlascloud_config import resolve_atlascloud_request, resolve_env_reference
 import subprocess
 import sys
 import asyncio
@@ -14,8 +15,9 @@ import json
 
 config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
 llm_api_keys = load_api_keys(config_path)
-llm_api_key=llm_api_keys.get("openai_api_key", "").strip()
-llm_base_url=llm_api_keys.get("base_url", "").strip()
+llm_api_key=resolve_env_reference(llm_api_keys.get("openai_api_key", "").strip())
+llm_base_url=resolve_env_reference(llm_api_keys.get("base_url", "").strip())
+_, llm_api_key, llm_base_url = resolve_atlascloud_request("", llm_api_key, llm_base_url)
 if llm_api_key == "" or llm_api_key =="sk-XXXXX" or llm_base_url == "":
     models_dict =[]
 else:
@@ -49,8 +51,9 @@ async def update_config(request):
         with open(config_path, 'w') as configfile:
             config.write(configfile)
         llm_api_keys = load_api_keys(config_path)
-        llm_api_key=llm_api_keys.get("openai_api_key").strip()
-        llm_base_url=llm_api_keys.get("base_url").strip()
+        llm_api_key=resolve_env_reference(llm_api_keys.get("openai_api_key").strip())
+        llm_base_url=resolve_env_reference(llm_api_keys.get("base_url").strip())
+        _, llm_api_key, llm_base_url = resolve_atlascloud_request("", llm_api_key, llm_base_url)
         global models_dict
         if llm_api_key == "" or llm_api_key =="sk-XXXXX" or llm_base_url == "":
             models_dict =[]

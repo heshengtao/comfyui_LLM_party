@@ -40,6 +40,12 @@ if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
 from google.protobuf.struct_pb2 import Struct
 from torchvision.transforms import ToPILImage
+from .atlascloud_config import (
+    is_atlascloud_base_url,
+    is_atlascloud_model_alias,
+    resolve_atlascloud_request,
+    resolve_env_reference,
+)
 from .config_update import models_dict
 from .config import config_key, config_path, current_dir_path, load_api_keys
 from .tools.lorebook import Lorebook
@@ -417,11 +423,13 @@ async def get_models_list(api_key: str, base_url: str) -> tuple[list[str], int |
     - error_status_code is None if successful
     - error_status_code is the HTTP status code if failed
     """
+    _, api_key, base_url = resolve_atlascloud_request("", api_key, base_url)
+
     print(f"[LLM Party] === get_models_list Called ===")
     print(f"[LLM Party] api_key provided: {bool(api_key)}")
     print(f"[LLM Party] base_url: '{base_url}'")
 
-    url = f"{base_url}/models"
+    url = f"{str(base_url).rstrip('/')}/models"
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json"
@@ -1245,6 +1253,9 @@ class LLM_api_loader:
     CATEGORY = "大模型派对（llm_party）/模型加载器（model loader）"
 
     def chatbot(self, model_name, base_url=None, api_key=None, is_ollama=False):
+        base_url = base_url or ""
+        api_key = api_key or ""
+
         if "api.perplexity.ai" in (base_url or ""):
             # For Perplexity API, simplify the base URL
             openai.base_url = ensure_version_suffix(base_url)
@@ -1253,26 +1264,43 @@ class LLM_api_loader:
         elif is_ollama:
             openai.api_key = "ollama"
             openai.base_url = "http://127.0.0.1:11434/v1/"
+        elif is_atlascloud_model_alias(model_name) or is_atlascloud_base_url(base_url):
+            if model_name in config_key:
+                api_keys = config_key[model_name]
+                model_name = api_keys.get("model_name", model_name).strip() or model_name
+                api_key = api_key or api_keys.get("api_key", "")
+                base_url = base_url or api_keys.get("base_url", "")
+            model_name, openai.api_key, openai.base_url = resolve_atlascloud_request(
+                model_name,
+                api_key,
+                base_url,
+            )
         else:
             api_keys = load_api_keys(config_path)
+            model_config = config_key[model_name] if model_name in config_key else None
             if api_key != "":
-                openai.api_key = api_key
-            elif model_name in config_key:
-                api_keys = config_key[model_name]
-                openai.api_key = api_keys.get("api_key")
+                openai.api_key = resolve_env_reference(api_key)
+            elif model_config is not None:
+                openai.api_key = resolve_env_reference(model_config.get("api_key"))
             elif api_keys.get("openai_api_key") != "":
-                openai.api_key = api_keys.get("openai_api_key")
+                openai.api_key = resolve_env_reference(api_keys.get("openai_api_key"))
             if base_url != "":
-                openai.base_url = base_url
-            elif model_name in config_key:
-                api_keys = config_key[model_name]
-                openai.base_url = api_keys.get("base_url")
+                openai.base_url = resolve_env_reference(base_url)
+            elif model_config is not None:
+                openai.base_url = resolve_env_reference(model_config.get("base_url"))
             elif api_keys.get("base_url") != "":
-                openai.base_url = api_keys.get("base_url")
+                openai.base_url = resolve_env_reference(api_keys.get("base_url"))
+            if model_config is not None:
+                model_name = model_config.get("model_name", model_name).strip() or model_name
+            model_name, openai.api_key, openai.base_url = resolve_atlascloud_request(
+                model_name,
+                openai.api_key,
+                openai.base_url,
+            )
             if openai.api_key == "":
                 api_keys = load_api_keys(config_path)
-                openai.api_key = api_keys.get("openai_api_key")
-                openai.base_url = api_keys.get("base_url")
+                openai.api_key = resolve_env_reference(api_keys.get("openai_api_key"))
+                openai.base_url = resolve_env_reference(api_keys.get("base_url"))
             if openai.base_url != "" and "api.perplexity.ai" not in openai.base_url:
                 if openai.base_url[-1] != "/":
                     openai.base_url = openai.base_url + "/"

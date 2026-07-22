@@ -43,6 +43,16 @@ api_key=
 base_url=https://ark.cn-beijing.volces.com/api/v3/
 api_key=
 
+[atlascloud]
+base_url=https://api.atlascloud.ai/v1/
+api_key=env:ATLASCLOUD_API_KEY
+model_name=qwen/qwen3.5-flash
+
+[atlascloud-reasoning]
+base_url=https://api.atlascloud.ai/v1/
+api_key=env:ATLASCLOUD_API_KEY
+model_name=deepseek-ai/deepseek-v4-pro
+
 [your_ollama_model_name]
 base_url=http://127.0.0.1:11434/v1/
 api_key=ollama
