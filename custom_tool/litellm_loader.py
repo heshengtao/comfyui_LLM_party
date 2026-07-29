@@ -265,7 +265,6 @@ class litellm_Chat:
                             }
                         )
                         completion_kwargs["messages"] = history
-                        del completion_kwargs["tools"]
                         response = litellm.completion(**completion_kwargs)
                         if (
                             hasattr(response.choices[0].message, "reasoning_content")
