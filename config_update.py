@@ -179,10 +179,13 @@ def load_workflow(workflow_name):
         os.path.join(os.path.dirname(__file__), 'workflow'),
         os.path.join(os.path.dirname(__file__), 'workflow_api')
     ]
+    # Securely get only the filename to prevent path traversal
+    safe_workflow_name = os.path.basename(workflow_name)
     for workflow_dir in workflow_dirs:
-        workflow_path = os.path.join(workflow_dir, workflow_name)
+        workflow_path = os.path.join(workflow_dir, safe_workflow_name)
         if os.path.exists(workflow_path):
             logging.info(f"尝试加载工作流: {workflow_path}")
+
             try:
                 with open(workflow_path, 'r', encoding='utf-8') as f:
                     workflow_data = json.load(f)
