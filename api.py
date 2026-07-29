@@ -1,10 +1,12 @@
 import io
 import json
+import locale
 import os
 import time
 import urllib.parse
 import urllib.request
 import uuid
+from configparser import ConfigParser
 
 import pandas as pd
 import pygments
@@ -16,6 +18,59 @@ from pygments.lexers import get_lexer_by_name
 
 server_address = "127.0.0.1:8188"
 client_id = str(uuid.uuid4())
+
+
+def load_ui_language():
+    config = ConfigParser()
+    config_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.ini")
+    config.read(config_path, encoding="utf-8")
+
+    language = config.get("API_KEYS", "language", fallback="").split("#", 1)[0].strip()
+    if language in {"zh_CN", "en_US"}:
+        return language
+
+    system_language = None
+    try:
+        system_language = locale.getlocale()[0]
+    except Exception:
+        pass
+
+    if system_language and system_language.lower().startswith("en"):
+        return "en_US"
+    return "zh_CN"
+
+
+UI_LANGUAGE = load_ui_language()
+
+I18N = {
+    "chat_button": {"zh_CN": "聊天", "en_US": "Chat"},
+    "settings_button": {"zh_CN": "设置", "en_US": "Settings"},
+    "default_system_prompt": {"zh_CN": "你是一个强大的智能助手", "en_US": "You are a powerful AI assistant"},
+    "assistant_greeting": {"zh_CN": "你好哇~", "en_US": "Hello there~"},
+    "user_prefix": {"zh_CN": "你", "en_US": "You"},
+    "chat_placeholder": {"zh_CN": "让我们开始聊天吧...", "en_US": "Let's start chatting..."},
+    "upload_label": {"zh_CN": "上传文件或图片", "en_US": "Upload a file or image"},
+    "send_button": {"zh_CN": "发送", "en_US": "Send"},
+    "clear_button": {"zh_CN": "清空", "en_US": "Clear"},
+    "settings_title": {"zh_CN": "设置", "en_US": "Settings"},
+    "settings_description": {"zh_CN": "在这里可以设置你的设置。", "en_US": "Configure your app settings here."},
+    "current_system_prompt": {
+        "zh_CN": "当前系统提示词（system_prompt）:",
+        "en_US": "Current system prompt (system_prompt): ",
+    },
+    "system_prompt_label": {"zh_CN": "系统提示词", "en_US": "System prompt"},
+    "system_prompt_placeholder": {"zh_CN": "请输入你的系统提示词", "en_US": "Enter your system prompt"},
+    "workflow_select_label": {
+        "zh_CN": "选择一个包含start_workflow & end_workflow的工作流文件",
+        "en_US": "Select a workflow file that contains start_workflow & end_workflow",
+    },
+    "save_button": {"zh_CN": "保存", "en_US": "Save"},
+    "save_success": {"zh_CN": "保存成功！", "en_US": "Saved successfully!"},
+}
+
+
+def t(key):
+    return I18N[key].get(UI_LANGUAGE, I18N[key]["zh_CN"])
 
 
 def queue_prompt(prompt):
@@ -168,7 +223,7 @@ if "wf_path" not in st.session_state:
     st.session_state["wf_path"] = "fastapi.json"
 # 如果没有'system_prompt'就创造
 if "system_prompt" not in st.session_state:
-    st.session_state["system_prompt"] = "你是一个强大的智能助手"
+    st.session_state["system_prompt"] = t("default_system_prompt")
 
 
 def get_current_page():
@@ -185,18 +240,18 @@ def set_current_page(page_name):
 set_current_page(get_current_page())
 current_dir_path = os.path.dirname(os.path.realpath(__file__))
 # 创建侧边栏按钮
-if st.sidebar.button("聊天"):
+if st.sidebar.button(t("chat_button")):
     set_current_page("chat")
-if st.sidebar.button("设置"):
+if st.sidebar.button(t("settings_button")):
     set_current_page("settings")
 if "chat_history" not in st.session_state:
     st.session_state["chat_history"] = []
 # 使用函数来访问 'current_page'
 if get_current_page() == "chat":
-    response = "你好哇~"
+    response = t("assistant_greeting")
     ai_name = st.session_state["wf_path"]
     ai_name = ai_name.replace(".json", "")
-    st.markdown(f"{ai_name}: 你好哇~")
+    st.markdown(f"{ai_name}: {t('assistant_greeting')}")
     chat_history_container = st.container()  # Use a container to hold the chat history
     # 更新对话记录容器
     chat_history_container.empty()
@@ -210,7 +265,7 @@ if get_current_page() == "chat":
                     if message["content"] is not None and message["content"] != "" and message["content"] != "empty":
                         st.markdown(f"{ai_name}: {message['content']}")
                 elif message["role"] == "user":
-                    st.markdown(f"你: {message['content']}")
+                    st.markdown(f"{t('user_prefix')}: {message['content']}")
                 elif message["role"] == "image":
                     if message["content"] is not None:
                         st.markdown(f"{ai_name}:")
@@ -218,10 +273,10 @@ if get_current_page() == "chat":
 
     with st.form("Question", clear_on_submit=True):
         # 用户输入
-        user_input = st.text_area("", height=100, placeholder="让我们开始聊天吧...")
+        user_input = st.text_area("", height=100, placeholder=t("chat_placeholder"))
         # 文件上传
         uploaded_file = st.file_uploader(
-            "上传文件或图片",
+            t("upload_label"),
             type=[
                 "png",
                 "jpg",
@@ -247,7 +302,7 @@ if get_current_page() == "chat":
         )
         col3, col4 = st.columns(2)
         with col3:
-            if st.form_submit_button("发送"):
+            if st.form_submit_button(t("send_button")):
                 st.session_state["chat_history"].append({"role": "user", "content": user_input})
                 file_path = ""
                 img_path = ""
@@ -291,26 +346,26 @@ if get_current_page() == "chat":
                 display_chat_history()
 
         with col4:
-            if st.form_submit_button("清空"):
+            if st.form_submit_button(t("clear_button")):
                 st.session_state["chat_history"] = []
                 # 更新对话记录容器
                 chat_history_container.empty()
 if get_current_page() == "settings":
-    st.title("设置")
-    st.markdown("在这里可以设置你的设置。")
-    st.markdown("当前系统提示词（system_prompt）:" + st.session_state["system_prompt"])
+    st.title(t("settings_title"))
+    st.markdown(t("settings_description"))
+    st.markdown(t("current_system_prompt") + st.session_state["system_prompt"])
     # 设置系统提示词system_prompt
-    system_prompt = st.text_area("系统提示词", height=100, placeholder="请输入你的系统提示词")
+    system_prompt = st.text_area(t("system_prompt_label"), height=100, placeholder=t("system_prompt_placeholder"))
     path1 = st.session_state["wf_path"]
     _path = st.selectbox(
-        "选择一个包含start_workflow & end_workflow的工作流文件",
+        t("workflow_select_label"),
         [f for f in os.listdir(os.path.join(current_dir_path, "workflow_api")) if f.endswith(".json")],
     )
     # 保存按钮
-    if st.button("保存"):
+    if st.button(t("save_button")):
         # 保存_path到session_state
         st.session_state["wf_path"] = _path
         print(st.session_state["wf_path"])
         # 保存system_prompt到session_state
         st.session_state["system_prompt"] = system_prompt
-        st.success("保存成功！")
+        st.success(t("save_success"))
