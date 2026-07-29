@@ -40,113 +40,36 @@ const getWidgetValue = (node, widgetName) => {
 };
 
 // Helper function to safely update combo widget options
-const updateComboWidgetOptions = async (node, widgetName, newOptions) => {
-  if (!node) return false;
+const updateComboWidgetOptions = (node, widgetName, newOptions) => {
+  if (!node || !newOptions || newOptions.length === 0) return false;
   try {
-    const widget = node.widgets.find(w => w.name === widgetName);
-    if (!widget) {
+    const oldWidgetIndex = node.widgets.findIndex(w => w.name === widgetName);
+    if (oldWidgetIndex === -1) {
       console.error(`[LLM Party] Widget '${widgetName}' not found`);
       return false;
     }
 
-    console.log(`[LLM Party] === UpdateComboWidgetOptions START ===`);
-    console.log(`[LLM Party] Widget name: ${widgetName}`);
-    console.log(`[LLM Party] Current widget type: ${widget.type}`);
-    console.log(`[LLM Party] Current widget value: ${widget.value}`);
-    console.log(`[LLM Party] Current widget options:`, JSON.stringify(widget.options));
-    console.log(`[LLM Party] New options count: ${newOptions.length}`);
-    console.log(`[LLM Party] New options:`, newOptions);
+    const oldWidget = node.widgets[oldWidgetIndex];
+    const currentValue = oldWidget.value;
+    const defaultValue = newOptions.includes(currentValue) ? currentValue : newOptions[0];
 
-    const currentValue = widget.value;
+    // Remove old widget
+    oldWidget.onRemove?.();
+    node.widgets.splice(oldWidgetIndex, 1);
 
-    // Method 1: Try converting STRING widget to COMBO type
-    if (widget.type === "string" || widget.type === "text") {
-      console.log(`[LLM Party] Attempting to convert widget from '${widget.type}' to 'combo'`);
+    // Create new COMBO widget (insert at the same position to preserve order)
+    const newWidget = node.addWidget("combo", widgetName, defaultValue, () => {}, { values: newOptions });
+    node.widgets.splice(node.widgets.indexOf(newWidget), 1);
+    node.widgets.splice(oldWidgetIndex, 0, newWidget);
 
-      // Store original properties
-      const originalCallback = widget.callback;
-
-      // Change type to combo
-      widget.type = "combo";
-      widget.options = { values: [...newOptions] };
-
-      console.log(`[LLM Party] After conversion - widget type: ${widget.type}`);
-      console.log(`[LLM Party] After conversion - widget options.values:`, widget.options?.values);
-
-      // Try to force LiteGraph to recognize the change
-      if (widget.callback) {
-        widget.callback(widget.value);
-      }
-    } else if (widget.type === "combo") {
-      console.log(`[LLM Party] Widget is already combo type, updating options`);
-      widget.options = widget.options || {};
-      widget.options.values = [...newOptions];
-    } else {
-      console.warn(`[LLM Party] Unknown widget type: ${widget.type}, cannot convert`);
-      console.log(`[LLM Party] Available widget types in LiteGraph: "boolean", "number", "string", "combo", "button", "slider"`);
-    }
-
-    // Keep current value if it's in the new options, otherwise use first option
-    if (newOptions.length > 0) {
-      if (!newOptions.includes(currentValue)) {
-        widget.value = newOptions[0];
-        console.log(`[LLM Party] Setting value to first option: ${newOptions[0]}`);
-      } else {
-        widget.value = currentValue;
-        console.log(`[LLM Party] Keeping current value: ${currentValue}`);
-      }
-    }
-
-    // Method 2: Force UI refresh using multiple approaches
-    console.log(`[LLM Party] Triggering UI refresh...`);
-
-    // Approach 1: Mark canvas as dirty
     node.setDirtyCanvas(true, true);
     if (node.graph) {
       node.graph.setDirtyCanvas(true, true);
     }
-
-    // Approach 2: Trigger widget change event
-    if (app.canvas) {
-      app.canvas.dirty = true;
-    }
-
-    // Approach 3: Force node resize
-    const oldSize = node.size;
-    node.size = [oldSize[0] + 1, oldSize[1]];
-    setTimeout(() => {
-      node.size = oldSize;
-      node.setDirtyCanvas(true, true);
-    }, 10);
-
-    // Multiple refresh attempts
-    for (let i = 50; i <= 200; i += 50) {
-      setTimeout(() => {
-        console.log(`[LLM Party] Refresh attempt at ${i}ms`);
-        node.setDirtyCanvas(true, true);
-        if (node.graph) {
-          node.graph.setDirtyCanvas(true, true);
-        }
-        if (app.canvas) {
-          app.canvas.dirty = true;
-        }
-      }, i);
-    }
-
-    // Final status log
-    setTimeout(() => {
-      console.log(`[LLM Party] === Final Status ===`);
-      console.log(`[LLM Party] Final widget type: ${widget.type}`);
-      console.log(`[LLM Party] Final widget options.values count: ${widget.options?.values?.length || 0}`);
-      console.log(`[LLM Party] Final widget value: ${widget.value}`);
-      console.log(`[LLM Party] === UpdateComboWidgetOptions END ===`);
-    }, 300);
-
-    console.log(`[LLM Party] Widget update completed, type: ${widget.type}, options: ${widget.options?.values?.length || 0} items`);
+    console.log(`[LLM Party] Replaced '${widgetName}' widget with combo (${newOptions.length} items)`);
     return true;
   } catch (e) {
     console.error(`[LLM Party] Error updating widget options:`, e);
-    console.error(`[LLM Party] Stack trace:`, e.stack);
     return false;
   }
 };
@@ -227,12 +150,8 @@ function createOrUpdateButton(node, buttonText) {
       createOrUpdateButton(node, "Updating...");
 
       // Get widget values
-      let baseUrl = getWidgetValue(node, "base_url");
-      let apiKey = getWidgetValue(node, "api_key");
-
-      // Fallback values
-      baseUrl = baseUrl || "https://api.openai.com/v1";
-      apiKey = apiKey || "";
+      const baseUrl = getWidgetValue(node, "base_url");
+      const apiKey = getWidgetValue(node, "api_key");
 
       // Send request to our custom endpoint
       const response = await api.fetchApi("/llmparty/refresh_models", {

@@ -471,14 +471,21 @@ def _register_llmparty_routes():
         try:
             # Get JSON data from request
             data = await request.json()
-            base_url = data.get("base_url", "https://api.openai.com/v1")
+            base_url = data.get("base_url", "")
             api_key = data.get("api_key", "")
+
+            # Fall back to config file defaults if fields are empty
+            api_keys = load_api_keys(config_path)
+            if not api_key:
+                api_key = api_keys.get("openai_api_key", "")
+            if not base_url:
+                base_url = api_keys.get("base_url", "https://api.openai.com/v1")
 
             # Print debug information
             print(f"[LLM Party] === Refresh Models Request ===")
             print(f"[LLM Party] Raw request data: {data}")
-            print(f"[LLM Party] Received Base URL: '{base_url}'")
-            print(f"[LLM Party] Received API Key: {'*' * len(api_key) if api_key else 'None'}")
+            print(f"[LLM Party] Using Base URL: '{base_url}'")
+            print(f"[LLM Party] Using API Key: {'*' * len(api_key) if api_key else 'None'}")
 
             # Get models list (no caching)
             models, error_status = await get_models_list(api_key, base_url)
@@ -1467,7 +1474,7 @@ class LLM:
                 ),
                 "model": ("CUSTOM", {"tooltip": "The model to use for the LLM."}),
                 "temperature": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0, "step": 0.1,"tooltip": "The temperature parameter controls the randomness of the model's output. A higher temperature will result in more random and diverse responses, while a lower temperature will result in more focused and deterministic responses."}),
-                "is_memory": (["enable", "disable"], {"default": "enable", "tooltip": "Whether to enable memory for the LLM."}),
+                "is_memory": (["enable", "disable"], {"default": "disable", "tooltip": "Whether to enable memory for the LLM."}),
                 "is_tools_in_sys_prompt": (["enable", "disable"], {"default": "disable", "tooltip": "Integrate the tool list into the system prompt, thereby granting some models temporary capability to invoke tools."}),
                 "is_locked": (["enable", "disable"], {"default": "disable", "tooltip": "Whether to directly output the result from the last output."}),
                 "main_brain": (["enable", "disable"], {"default": "enable", "tooltip": "If this option is disabled, the LLM will become a tool that can be invoked by other LLMs."}),
@@ -2295,7 +2302,7 @@ class LLM_local:
                 ),
                 "temperature": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 1.0, "step": 0.1,"tooltip": "The temperature parameter controls the randomness of the model's output. A higher temperature will result in more random and diverse responses, while a lower temperature will result in more focused and deterministic responses."}),
                 "max_length":("INT", {"default": 512, "min": 256, "max": 128000, "step": 128,"tooltip": "The maximum length of the output text."}),
-                "is_memory": (["enable", "disable"], {"default": "enable","tooltip": "Whether to enable memory for the LLM."}),
+                "is_memory": (["enable", "disable"], {"default": "disable","tooltip": "Whether to enable memory for the LLM."}),
                 "is_locked": (["enable", "disable"], {"default": "disable", "tooltip": "Whether to directly output the result from the last output."}),
                 "main_brain": (["enable", "disable"], {"default": "enable", "tooltip": "If this option is disabled, the LLM will become a tool that can be invoked by other LLMs."}),
             },
