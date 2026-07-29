@@ -422,11 +422,13 @@ class TavernStyleLLM:
 
 NODE_CLASS_MAPPINGS = {"TavernStyleLLM": TavernStyleLLM}
 
-lang = locale.getlocale()[0]
-if lang and "Chinese" in lang:
-    lang = "zh_CN"
-else:
-    lang = "en_US"
+lang = "zh_CN"
+try:
+    system_lang = locale.getlocale()[0]
+    if system_lang and system_lang.lower().startswith("en"):
+        lang = "en_US"
+except Exception:
+    pass
 
 config = configparser.ConfigParser()
 config.read(config_path)
