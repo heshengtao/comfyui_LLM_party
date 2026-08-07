@@ -316,7 +316,12 @@ class MiniMaxH3SkillsTool:
                     {
                         "default": str(DEFAULT_SKILLS_ROOT),
                         "multiline": False,
-                        "tooltip": "MiniMax-H3 仓库中的 skills 目录",
+                        "tooltip": (
+                            "MiniMax H3 技能目录的绝对路径。"
+                            "默认指向仓库内置目录；如需使用官方技能库，"
+                            "请先 git clone https://github.com/MiniMax-AI/MiniMax-H3，"
+                            "然后把路径填到这里。"
+                        ),
                     },
                 ),
                 "is_enable": ("BOOLEAN", {"default": True}),
