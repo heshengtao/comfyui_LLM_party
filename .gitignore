@@ -183,3 +183,5 @@ chatTTS_node.py
 file_control.py
 new_interpreter.py
 node.zip
+# MiniMax-H3 skill references end in "-template.md", which the *temp* rule above matches
+!custom_tool/MiniMax-H3/**
