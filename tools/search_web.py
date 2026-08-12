@@ -353,6 +353,7 @@ class bing_loader:
 
 ddg_searchType = "web"
 
+
 def search_duckduckgo(keywords, paper_num=1):
     if paper_num == "":
         paper_num = 1
@@ -380,7 +381,8 @@ def search_duckduckgo(keywords, paper_num=1):
 
         data = response.json()
         all_content = ""
-        if response.status_code == 200:
+        # DDG 的 Instant Answer API 对很多查询返回 202（含有效结果），仅 200 会误判为失败
+        if response.status_code in (200, 202):
             if "RelatedTopics" in data:
                 for item in data["RelatedTopics"]:
                     if "Text" in item and "FirstURL" in item:
@@ -481,4 +483,131 @@ class duckduckgo_loader:
         global ddg_searchType
         ddg_searchType = searchType
         out = search_duckduckgo(keywords, paper_num)
+        return (out,)
+
+
+# ============ Tavily API 搜索（独立节点，2026-08-12 新增，与 duckduckgo 无关） ============
+# Tavily 是商业搜索 API（api.tavily.com），返回结构化 JSON，无爬虫反爬问题。
+# key 从 config.ini [API_KEYS] tavily_api_key 读取（模块加载时读取，改完需重启 ComfyUI）。
+# 支持中英文；offset 实测 0-10 有效（第 2 页），超出范围 Tavily 静默返回第 1 页。
+tavily_api_key = api_keys.get("tavily_api_key")
+
+
+def search_web_tavily(keywords, paper_num=1):
+    if paper_num == "":
+        paper_num = 1
+    today = str(date.today())
+    num_results = 10
+    offset = num_results * (int(paper_num) - 1)
+    query = keywords if isinstance(keywords, str) else " ".join(keywords)
+    try:
+        payload = {
+            "api_key": tavily_api_key,
+            "query": query,
+            "search_depth": "basic",
+            "max_results": num_results,
+            "offset": offset,
+        }
+        resp = requests.post(
+            "https://api.tavily.com/search",
+            json=payload,
+            headers={"Content-Type": "application/json"},
+            timeout=15,
+        )
+        if resp.status_code != 200:
+            return f"搜索失败：Tavily HTTP {resp.status_code}: {resp.text[:200]}"
+        data = resp.json()
+        results = data.get("results") or []
+        all_content = ""
+        for item in results:
+            all_content += "\n\n" + json.dumps(
+                {
+                    "title": item.get("title", ""),
+                    "link": item.get("url", ""),
+                    "snippet": item.get("content", ""),
+                },
+                ensure_ascii=False,
+                indent=4,
+            )
+    except Exception as e:
+        return f"Exception occurred: {e}"
+
+    if not all_content.strip():
+        return f"今天的日期是{today}，搜索关键词“{query}”没有返回任何结果。"
+    print(all_content)
+    return (
+        "今天的日期是"
+        + today
+        + "，当前网络的信息和信息来源的网址为：“"
+        + str(all_content)
+        + "”。\n如果以上信息中没有相关信息，你可以改变paper_num，查看下一页的信息。"
+    )
+
+
+class tavily_tool:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "is_enable": ("BOOLEAN", {"default": True}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("tool",)
+
+    FUNCTION = "web"
+
+    CATEGORY = "大模型派对（llm_party）/工具（tools）/联网（Networking）"
+
+    def web(self, is_enable=True):
+        if is_enable == False:
+            return (None,)
+        output = [
+            {
+                "type": "function",
+                "function": {
+                    "name": "search_web_tavily",
+                    "description": "通过关键词获得网络搜索信息（支持中英文，无需代理直连限制）。搜索技巧：①关键词要简短，多个概念要拆开多次调用；②动漫/游戏角色资料优先使用英文名（Danbooru 标准名，如 Corsola），效果最精准；中文名次之（如 希娜狄雅）；不要用罗马音（如 senadina 可，但 niwatari kutaka 搜不到）；③不确定原名时先用作品名+中文描述搜一次。",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "keywords": {
+                                "type": "string",
+                                "description": "需要搜索的关键词，简短准确；动漫/游戏角色优先英文名（Danbooru 名），其次中文名，不要用罗马音。",
+                            },
+                            "paper_num": {"type": "string", "description": "搜索的页码，可以改变paper_num用于翻页"},
+                        },
+                        "required": ["keywords", "paper_num"],
+                    },
+                },
+            }
+        ]
+
+        out = json.dumps(output, ensure_ascii=False)
+        return (out,)
+
+
+class tavily_loader:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "is_enable": ("BOOLEAN", {"default": True}),
+                "keywords": ("STRING", {}),
+                "paper_num": ("INT", {"default": 1}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("text",)
+
+    FUNCTION = "web"
+
+    CATEGORY = "大模型派对（llm_party）/知识库（knowbase）"
+
+    def web(self, keywords, paper_num=1, is_enable=True):
+        if is_enable == False:
+            return (None,)
+        out = search_web_tavily(keywords, paper_num)
         return (out,)

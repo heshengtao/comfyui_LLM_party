@@ -134,6 +134,9 @@ from .tools.search_web import (
     duckduckgo_tool,
     duckduckgo_loader,
     search_duckduckgo,
+    tavily_tool,
+    tavily_loader,
+    search_web_tavily,
 )
 from .tools.show_text import About_us, show_text_party
 from .tools.smalltool import bool_logic, load_int, none2false,str2float,str2int,any2str,load_float,load_bool
@@ -147,7 +150,6 @@ from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import work_flow, workflow_tool, workflow_transfer
 from .tools.flux_persona import flux_persona
 from .tools.workflow_V2 import workflow_transfer_v2
-os.environ["no_proxy"] = "localhost,127.0.0.1"
 enable_interpreter = True
 
 _TOOL_HOOKS = [
@@ -192,6 +194,7 @@ _TOOL_HOOKS = [
     "Inquire_entity_relationships_neo4j",
     "Inquire_entity_list_neo4j",
     "search_duckduckgo",
+    "search_web_tavily",
 ]
 if enable_interpreter:
     _TOOL_HOOKS.append("interpreter")
@@ -670,6 +673,7 @@ class Chat:
                                 ],
                                 "role": "assistant",
                                 "content": str(response_content),
+                                **({"reasoning_content": reasoning_content} if reasoning_content else {}),
                             }
                         )
                         history.append(
@@ -735,6 +739,7 @@ class Chat:
                                 ],
                                 "role": "assistant",
                                 "content": str(response_content),
+                                **({"reasoning_content": getattr(assistant_message, 'reasoning_content', '')} if getattr(assistant_message, 'reasoning_content', '') else {}),
                             }
                         )
                         history.append(
@@ -834,7 +839,11 @@ class Chat:
             if match:
                 reasoning_content = match.group(1).strip()
                 response_content = response_content.replace(match.group(0), "").strip() 
-            history.append({"role": "assistant", "content": response_content})
+            # 思考模式的 reasoning_content 必须随 assistant 消息原样带回，否则 DeepSeek 等 API 会报 400
+            if reasoning_content:
+                history.append({"role": "assistant", "content": response_content, "reasoning_content": reasoning_content})
+            else:
+                history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
             response_content = str(ex)
             reasoning_content = str(ex)
@@ -1041,6 +1050,7 @@ class aisuite_Chat:
                                 ],
                                 "role": "assistant",
                                 "content": str(response_content),
+                                **({"reasoning_content": reasoning_content} if reasoning_content else {}),
                             }
                         )
                         history.append(
@@ -1106,6 +1116,7 @@ class aisuite_Chat:
                                 ],
                                 "role": "assistant",
                                 "content": str(response_content),
+                                **({"reasoning_content": getattr(assistant_message, 'reasoning_content', '')} if getattr(assistant_message, 'reasoning_content', '') else {}),
                             }
                         )
                         history.append(
@@ -1204,7 +1215,11 @@ class aisuite_Chat:
             if match:
                 reasoning_content = match.group(1).strip()
                 response_content = response_content.replace(match.group(0), "").strip() 
-            history.append({"role": "assistant", "content": response_content})
+            # 思考模式的 reasoning_content 必须随 assistant 消息原样带回，否则 DeepSeek 等 API 会报 400
+            if reasoning_content:
+                history.append({"role": "assistant", "content": response_content, "reasoning_content": reasoning_content})
+            else:
+                history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
             response_content = str(ex)
             reasoning_content = str(ex)
@@ -3055,6 +3070,8 @@ NODE_CLASS_MAPPINGS = {
     "bool_logic": bool_logic,
     "duckduckgo_tool":duckduckgo_tool,
     "duckduckgo_loader":duckduckgo_loader,
+    "tavily_tool":tavily_tool,
+    "tavily_loader":tavily_loader,
     "flux_persona":flux_persona,
     "clear_file":clear_file,
     "workflow_transfer_v2":workflow_transfer_v2,
@@ -3177,6 +3194,8 @@ if lang == "zh_CN":
         "bool_logic": "布尔逻辑",
         "duckduckgo_tool": "DuckDuckGo工具",
         "duckduckgo_loader": "DuckDuckGo加载器",
+        "tavily_tool": "Tavily搜索工具",
+        "tavily_loader": "Tavily搜索加载器",
         "flux_persona":"flux提示词生成器面具",
         "clear_file":"清理文件",
         "workflow_transfer_v2":"工作流中转器V2",
@@ -3293,6 +3312,8 @@ else:
         "bool_logic": "Boolean Logic",
         "duckduckgo_tool": "DuckDuckGo Tool",
         "duckduckgo_loader":"DuckDuckGo Loader",
+        "tavily_tool": "Tavily Search Tool",
+        "tavily_loader": "Tavily Search Loader",
         "flux_persona":"flux prompt word generator",
         "clear_file":"clear file",
         "workflow_transfer_v2": "Workflow Transfer V2",
