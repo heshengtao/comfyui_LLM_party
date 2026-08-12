@@ -150,7 +150,6 @@ from .tools.wikipedia import get_wikipedia, load_wikipedia, wikipedia_tool
 from .tools.workflow import work_flow, workflow_tool, workflow_transfer
 from .tools.flux_persona import flux_persona
 from .tools.workflow_V2 import workflow_transfer_v2
-os.environ["no_proxy"] = "localhost,127.0.0.1"
 enable_interpreter = True
 
 _TOOL_HOOKS = [

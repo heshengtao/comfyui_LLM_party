@@ -512,7 +512,6 @@ def search_web_tavily(keywords, paper_num=1):
             "https://api.tavily.com/search",
             json=payload,
             headers={"Content-Type": "application/json"},
-            proxies=PROXIES,
             timeout=15,
         )
         if resp.status_code != 200:
