@@ -134,6 +134,9 @@ from .tools.search_web import (
     duckduckgo_tool,
     duckduckgo_loader,
     search_duckduckgo,
+    tavily_tool,
+    tavily_loader,
+    search_web_tavily,
 )
 from .tools.show_text import About_us, show_text_party
 from .tools.smalltool import bool_logic, load_int, none2false,str2float,str2int,any2str,load_float,load_bool
@@ -192,6 +195,7 @@ _TOOL_HOOKS = [
     "Inquire_entity_relationships_neo4j",
     "Inquire_entity_list_neo4j",
     "search_duckduckgo",
+    "search_web_tavily",
 ]
 if enable_interpreter:
     _TOOL_HOOKS.append("interpreter")
@@ -3067,6 +3071,8 @@ NODE_CLASS_MAPPINGS = {
     "bool_logic": bool_logic,
     "duckduckgo_tool":duckduckgo_tool,
     "duckduckgo_loader":duckduckgo_loader,
+    "tavily_tool":tavily_tool,
+    "tavily_loader":tavily_loader,
     "flux_persona":flux_persona,
     "clear_file":clear_file,
     "workflow_transfer_v2":workflow_transfer_v2,
@@ -3189,6 +3195,8 @@ if lang == "zh_CN":
         "bool_logic": "布尔逻辑",
         "duckduckgo_tool": "DuckDuckGo工具",
         "duckduckgo_loader": "DuckDuckGo加载器",
+        "tavily_tool": "Tavily搜索工具",
+        "tavily_loader": "Tavily搜索加载器",
         "flux_persona":"flux提示词生成器面具",
         "clear_file":"清理文件",
         "workflow_transfer_v2":"工作流中转器V2",
@@ -3305,6 +3313,8 @@ else:
         "bool_logic": "Boolean Logic",
         "duckduckgo_tool": "DuckDuckGo Tool",
         "duckduckgo_loader":"DuckDuckGo Loader",
+        "tavily_tool": "Tavily Search Tool",
+        "tavily_loader": "Tavily Search Loader",
         "flux_persona":"flux prompt word generator",
         "clear_file":"clear file",
         "workflow_transfer_v2": "Workflow Transfer V2",
