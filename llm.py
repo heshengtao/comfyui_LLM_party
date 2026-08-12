@@ -670,6 +670,7 @@ class Chat:
                                 ],
                                 "role": "assistant",
                                 "content": str(response_content),
+                                **({"reasoning_content": reasoning_content} if reasoning_content else {}),
                             }
                         )
                         history.append(
@@ -735,6 +736,7 @@ class Chat:
                                 ],
                                 "role": "assistant",
                                 "content": str(response_content),
+                                **({"reasoning_content": getattr(assistant_message, 'reasoning_content', '')} if getattr(assistant_message, 'reasoning_content', '') else {}),
                             }
                         )
                         history.append(
@@ -834,7 +836,11 @@ class Chat:
             if match:
                 reasoning_content = match.group(1).strip()
                 response_content = response_content.replace(match.group(0), "").strip() 
-            history.append({"role": "assistant", "content": response_content})
+            # 思考模式的 reasoning_content 必须随 assistant 消息原样带回，否则 DeepSeek 等 API 会报 400
+            if reasoning_content:
+                history.append({"role": "assistant", "content": response_content, "reasoning_content": reasoning_content})
+            else:
+                history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
             response_content = str(ex)
             reasoning_content = str(ex)
@@ -1041,6 +1047,7 @@ class aisuite_Chat:
                                 ],
                                 "role": "assistant",
                                 "content": str(response_content),
+                                **({"reasoning_content": reasoning_content} if reasoning_content else {}),
                             }
                         )
                         history.append(
@@ -1106,6 +1113,7 @@ class aisuite_Chat:
                                 ],
                                 "role": "assistant",
                                 "content": str(response_content),
+                                **({"reasoning_content": getattr(assistant_message, 'reasoning_content', '')} if getattr(assistant_message, 'reasoning_content', '') else {}),
                             }
                         )
                         history.append(
@@ -1204,7 +1212,11 @@ class aisuite_Chat:
             if match:
                 reasoning_content = match.group(1).strip()
                 response_content = response_content.replace(match.group(0), "").strip() 
-            history.append({"role": "assistant", "content": response_content})
+            # 思考模式的 reasoning_content 必须随 assistant 消息原样带回，否则 DeepSeek 等 API 会报 400
+            if reasoning_content:
+                history.append({"role": "assistant", "content": response_content, "reasoning_content": reasoning_content})
+            else:
+                history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
             response_content = str(ex)
             reasoning_content = str(ex)

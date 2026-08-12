@@ -353,6 +353,7 @@ class bing_loader:
 
 ddg_searchType = "web"
 
+
 def search_duckduckgo(keywords, paper_num=1):
     if paper_num == "":
         paper_num = 1
@@ -380,7 +381,8 @@ def search_duckduckgo(keywords, paper_num=1):
 
         data = response.json()
         all_content = ""
-        if response.status_code == 200:
+        # DDG 的 Instant Answer API 对很多查询返回 202（含有效结果），仅 200 会误判为失败
+        if response.status_code in (200, 202):
             if "RelatedTopics" in data:
                 for item in data["RelatedTopics"]:
                     if "Text" in item and "FirstURL" in item:
