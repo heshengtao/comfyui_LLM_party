@@ -191,4 +191,4 @@ ComfyUI LLM Party предлагает от самых основ LLM, вклю�
 
 ## История звёзд
 
-[![График истории звёзд](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)
+[![График истории звёзд](https://star-history.dera.page/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.dera.page/#heshengtao/comfyui_LLM_party&Date)

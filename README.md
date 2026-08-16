@@ -197,4 +197,4 @@ Some of the nodes in this project have borrowed from the following projects. Tha
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.dera.page/#heshengtao/comfyui_LLM_party&Date)

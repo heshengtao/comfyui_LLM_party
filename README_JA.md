@@ -192,4 +192,4 @@ ComfyUI LLM Partyは、最も基本的なLLMの多ツール呼び出しやキャ
 
 ## スター履歴
 
-[![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.dera.page/#heshengtao/comfyui_LLM_party&Date)

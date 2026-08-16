@@ -276,4 +276,4 @@ If my work has brought value to your day, consider fueling it with a coffee! You
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.dera.page/#heshengtao/comfyui_LLM_party&Date)

@@ -191,4 +191,4 @@ Algunos nodos en este proyecto se han inspirado en los siguientes proyectos. ¡A
 
 ## Historial de estrellas
 
-[![Gráfico de Historial de Estrellas](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)
+[![Gráfico de Historial de Estrellas](https://star-history.dera.page/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.dera.page/#heshengtao/comfyui_LLM_party&Date)
