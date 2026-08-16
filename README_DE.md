@@ -191,4 +191,4 @@ Einige Knoten in diesem Projekt basieren auf den folgenden Projekten. Wir danken
 
 ## Sternenverlauf
 
-[![Star History Chart](https://api.star-history.com/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.com/#heshengtao/comfyui_LLM_party&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=heshengtao/comfyui_LLM_party&type=Date)](https://star-history.dera.page/#heshengtao/comfyui_LLM_party&Date)
