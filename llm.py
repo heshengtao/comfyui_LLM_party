@@ -17,6 +17,7 @@ import time
 import traceback
 from aiohttp import web
 from comfy_api.latest import io as comfy_io
+from comfy.model_management import throw_exception_if_processing_interrupted
 from server import PromptServer
 # import google.generativeai as genai
 import numpy as np
@@ -406,8 +407,22 @@ def normalize_openai_chat_kwargs(kwargs):
     return normalized
 
 
+def interruptible_stream(stream):
+    """throw InterruptProcessingException if ComfyUI processing is interrupted during streaming."""
+    for chunk in stream:
+        throw_exception_if_processing_interrupted()
+        yield chunk
+
+
 def create_openai_chat_completion(openai_client, **kwargs):
-    return openai_client.chat.completions.create(**normalize_openai_chat_kwargs(kwargs))
+    # check for interrupt first
+    throw_exception_if_processing_interrupted()
+    normalized = normalize_openai_chat_kwargs(kwargs)
+    response = openai_client.chat.completions.create(**normalized)
+    if normalized.get("stream", False):
+        return interruptible_stream(response)  # for stream mode
+    throw_exception_if_processing_interrupted()  # for non-stream mode, check after response is received
+    return response
 
 async def get_models_list(api_key: str, base_url: str) -> tuple[list[str], int | None]:
     """
