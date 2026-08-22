@@ -36,7 +36,7 @@ from transformers import (
     AutoConfig,
 )
 import PIL.Image
-from openai import AzureOpenAI,OpenAI
+from openai import AsyncAzureOpenAI, AsyncOpenAI, AzureOpenAI, OpenAI
 if torch.cuda.is_available():
     from transformers import BitsAndBytesConfig
 from google.protobuf.struct_pb2 import Struct
@@ -414,14 +414,49 @@ def interruptible_stream(stream):
         yield chunk
 
 
+async def _create_openai_chat_completion(async_client, normalized):
+    request_task = asyncio.create_task(
+        async_client.chat.completions.create(**normalized)
+    )
+    try:
+        while not request_task.done():
+            throw_exception_if_processing_interrupted()
+            await asyncio.sleep(0.05)
+        return await request_task
+    except BaseException:
+        if not request_task.done():
+            request_task.cancel()
+            await asyncio.gather(request_task, return_exceptions=True)
+        raise
+    finally:
+        await async_client.close()
+
+
 def create_openai_chat_completion(openai_client, **kwargs):
-    # check for interrupt first
     throw_exception_if_processing_interrupted()
     normalized = normalize_openai_chat_kwargs(kwargs)
-    response = openai_client.chat.completions.create(**normalized)
+
+    # Keep the existing synchronous iterator contract for streaming callers.
     if normalized.get("stream", False):
-        return interruptible_stream(response)  # for stream mode
-    throw_exception_if_processing_interrupted()  # for non-stream mode, check after response is received
+        response = openai_client.chat.completions.create(**normalized)
+        return interruptible_stream(response)
+
+    if isinstance(openai_client, AzureOpenAI):
+        async_client = AsyncAzureOpenAI(
+            api_key=openai_client.api_key,
+            api_version=openai_client._api_version,
+            azure_endpoint=str(openai_client._azure_endpoint),
+        )
+    else:
+        async_client = AsyncOpenAI(
+            api_key=openai_client.api_key,
+            base_url=str(openai_client.base_url),
+        )
+
+    response = asyncio.run(
+        _create_openai_chat_completion(async_client, normalized)
+    )
+    throw_exception_if_processing_interrupted()
     return response
 
 async def get_models_list(api_key: str, base_url: str) -> tuple[list[str], int | None]:
