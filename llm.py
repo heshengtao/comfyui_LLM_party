@@ -836,8 +836,8 @@ class Chat:
                 response_content = response_content.replace(match.group(0), "").strip() 
             history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
-            response_content = str(ex)
-            reasoning_content = str(ex)
+            # Preserve API failures as real ComfyUI execution failures.
+            raise RuntimeError(f"LLM API 调用失败：{ex}") from ex
         return response_content, history,reasoning_content
 
 
@@ -1206,8 +1206,8 @@ class aisuite_Chat:
                 response_content = response_content.replace(match.group(0), "").strip() 
             history.append({"role": "assistant", "content": response_content})
         except Exception as ex:
-            response_content = str(ex)
-            reasoning_content = str(ex)
+            # Preserve API failures as real ComfyUI execution failures.
+            raise RuntimeError(f"LLM API 调用失败：{ex}") from ex
         return response_content, history,reasoning_content
 
 
@@ -1775,14 +1775,8 @@ class LLM:
                     reasoning_content,
                 )
             except Exception as ex:
-                print(ex)
-                return (
-                    str(ex),
-                    str(ex),
-                    llm_tools_json,
-                    None,
-                    "",
-                )
+                # Preserve API failures as real ComfyUI execution failures.
+                raise RuntimeError(f"LLM 节点执行失败：{ex}") from ex
 
     @classmethod
     def original_IS_CHANGED(s):
