@@ -409,6 +409,47 @@ def normalize_openai_chat_kwargs(kwargs):
 def create_openai_chat_completion(openai_client, **kwargs):
     return openai_client.chat.completions.create(**normalize_openai_chat_kwargs(kwargs))
 
+# 文生图模型关键词（OpenAI 兼容的 /v1/images/generations 接口）
+IMAGE_GENERATION_MODEL_KEYWORDS = (
+    "dall-e",
+    "dall_e",
+    "gpt-image",
+    "seedream",
+    "cogview",
+    "flux",
+    "sdxl",
+    "stable-diffusion",
+    "imagen",
+    "midjourney",
+    "kolors",
+    "hunyuan-image",
+    "qwen-image",
+    "janus-pro",
+)
+
+
+def is_image_generation_model(model_name) -> bool:
+    """判断模型是否为文生图模型，使用 OpenAI 兼容的 images.generate 接口调用。"""
+    name = str(model_name or "").strip().lower()
+    return any(keyword in name for keyword in IMAGE_GENERATION_MODEL_KEYWORDS)
+
+
+def _b64_json_to_image_tensor(b64_str) -> torch.Tensor:
+    """将 base64 编码的图片字符串转换为 ComfyUI 图像张量 [1, H, W, 3]。"""
+    img = Image.open(io.BytesIO(base64.b64decode(b64_str)))
+    img = img.convert("RGB")
+    return torch.from_numpy(np.array(img).astype(np.float32) / 255.0).unsqueeze(0)
+
+
+def _image_url_to_image_tensor(url: str) -> torch.Tensor:
+    """下载图片 URL 并转换为 ComfyUI 图像张量 [1, H, W, 3]。"""
+    response = requests.get(url, timeout=30)
+    response.raise_for_status()
+    img = Image.open(io.BytesIO(response.content))
+    img = img.convert("RGB")
+    return torch.from_numpy(np.array(img).astype(np.float32) / 255.0).unsqueeze(0)
+
+
 async def get_models_list(api_key: str, base_url: str) -> tuple[list[str], int | None]:
     """
     Get the list of available models from OpenAI API
@@ -516,6 +557,53 @@ class Chat:
         self.apikey = apikey
         self.baseurl = ensure_version_suffix(baseurl)
 
+    def _generate_image(self, openai_client, user_prompt, extra_parameters):
+        """调用 OpenAI 兼容的文生图接口 images.generate，并将结果写入全局 image_buffer。"""
+        global image_buffer
+        if isinstance(user_prompt, list):
+            prompt = ""
+            for item in user_prompt:
+                if isinstance(item, dict) and item.get("type") == "text" and item.get("text"):
+                    prompt = item["text"]
+                    break
+            if not prompt:
+                prompt = str(user_prompt)
+        else:
+            prompt = str(user_prompt)
+        image_params = {
+            "model": self.model_name,
+            "prompt": prompt,
+            "n": 1,
+            "response_format": "b64_json",
+        }
+        # 透传文生图接口支持的额外参数
+        for key in ("size", "quality", "style", "n", "output_format", "background", "moderation", "user"):
+            if key in extra_parameters and extra_parameters[key] is not None:
+                image_params[key] = extra_parameters[key]
+        try:
+            response = openai_client.images.generate(**image_params)
+        except Exception as ex:
+            # 部分中转/服务商不支持 b64_json，回退到 url 格式
+            print("[LLM Party] b64_json 格式不被支持，回退到 url 格式:", ex)
+            image_params["response_format"] = "url"
+            response = openai_client.images.generate(**image_params)
+        img_tensors = []
+        for item in response.data:
+            try:
+                if getattr(item, "b64_json", None):
+                    img_tensors.append(_b64_json_to_image_tensor(item.b64_json))
+                elif getattr(item, "url", None):
+                    img_tensors.append(_image_url_to_image_tensor(item.url))
+            except Exception as ex:
+                print("[LLM Party] 解析图片失败:", ex)
+        if img_tensors:
+            if len(img_tensors) == 1 or all(t.shape == img_tensors[0].shape for t in img_tensors):
+                image_buffer = torch.cat(img_tensors, dim=0)
+            else:
+                image_buffer = img_tensors[0]
+            return "图片已生成，并展示在本节点的image输出中。"
+        return "图片已生成：" + str(response)
+
     def send(
         self,
         user_prompt,
@@ -617,6 +705,11 @@ class Chat:
             history.append(new_message)
             print(history)
             reasoning_content = ""
+            # 文生图模型：调用 images.generate 接口并返回生成的图片
+            if is_image_generation_model(self.model_name):
+                response_content = self._generate_image(openai_client, user_prompt, extra_parameters)
+                history.append({"role": "assistant", "content": response_content})
+                return response_content, history, reasoning_content
             if tools is not None:
                 response = create_openai_chat_completion(openai_client, 
                     model=self.model_name,
