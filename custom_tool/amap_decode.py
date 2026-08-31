@@ -44,7 +44,7 @@ class AmapRegeoTool:
             return (None,)
         global amap_api_key
         amap_api_key = api_key
-        regeo_info = get_amap_regeo(location, api_key, extensions, radius)
+        regeo_info = get_amap_regeo(location, extensions, radius)
         if regeo_info:
             output = [
                 {

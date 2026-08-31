@@ -40,7 +40,7 @@ class AmapWeatherTool:
             return (None,)
         global amap_api_key
         amap_api_key = api_key
-        weather_info = get_amap_weather(city_code, api_key)
+        weather_info = get_amap_weather(city_code)
         if weather_info:
             output = [
                 {
