@@ -59,7 +59,7 @@ config = configparser.ConfigParser()
 config.read(config_path)
 try:
     language = config.get("API_KEYS", "language")
-except:
+except Exception:
     language = ""
 if language == "zh_CN" or language=="en_US":
     lang=language
